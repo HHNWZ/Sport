@@ -9,8 +9,7 @@ public class  MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int a;
-        int 幹=0;
-        幹=幹+1;
+        int abc;
+
     }
 }
