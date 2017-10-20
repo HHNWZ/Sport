@@ -11,6 +11,8 @@ public class  MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         int abc;
         int abcd;
-
+abc=3;
+        abcd=4;
+        int cba=abc+abcd;
     }
 }
