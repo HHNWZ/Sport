@@ -49,9 +49,9 @@
         android:id="@+id/button4"
         android:layout_width="110dp"
         android:layout_height="100dp"
-        android:text="Button"
         android:layout_below="@+id/button"
-        android:layout_toEndOf="@+id/button" />
+        android:layout_toEndOf="@+id/button"
+        android:text="運動" />
 
     <ImageView
         android:id="@+id/imageView"
