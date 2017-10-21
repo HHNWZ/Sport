@@ -1,7 +1,10 @@
 package com.example.a888888888.sport;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -41,10 +44,15 @@ public class  MainActivity extends AppCompatActivity {
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,over.class);
-                startActivity(intent);
-                MainActivity.this.finish();
+                over overs=new over();
+                FragmentManager manager=getSupportFragmentManager();
+                FragmentTransaction transaction;
+                transaction =manager.beginTransaction();
+                transaction.replace(
+                        R.id.cent,
+                        overs
+                ).commit();
+
             }
         });
         sport.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +61,13 @@ public class  MainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,sport.class);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
     }
+
+
+
+
+
 }
