@@ -1,7 +1,7 @@
 package com.example.a888888888.sport;
 
 import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -49,7 +49,7 @@ public class  MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction;
                 transaction =manager.beginTransaction();
                 transaction.replace(
-                        R.id.cent,
+                        R.id.content_main,
                         overs
                 ).commit();
 
