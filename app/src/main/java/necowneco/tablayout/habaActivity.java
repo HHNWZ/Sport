@@ -22,7 +22,8 @@ import com.example.a888888888.sport.R;
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
-        Airsport.OnFragmentInteractionListener{
+        Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
+        Pushsport.OnFragmentInteractionListener{
 
 
     @Override
@@ -99,6 +100,13 @@ public class habaActivity extends AppCompatActivity
             public void onClick(View v) {
                 selsport.setText("仰仰臥起坐坐");
                 onBackPressed();
+                Sitsport sit=Sitsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        sit,
+                        sit.getTag()
+                ).commit();
             }
         });
         sppush.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +114,13 @@ public class habaActivity extends AppCompatActivity
             public void onClick(View v) {
                 selsport.setText("伏地地挺身身");
                 onBackPressed();
+                Pushsport push=Pushsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        push,
+                        push.getTag()
+                ).commit();
             }
         });
 
