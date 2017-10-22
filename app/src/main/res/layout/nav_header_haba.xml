@@ -31,7 +31,7 @@
                     android:text="跑步"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ap_run"
+                    android:id="@+id/sp_run"
                     android:background="@android:color/transparent" />
 
                 <Button
