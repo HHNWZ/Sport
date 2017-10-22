@@ -1,10 +1,10 @@
 package com.example.a888888888.sport;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link over.OnFragmentInteractionListener} interface
+ * {@link Over.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link over#newInstance} factory method to
+ * Use the {@link Over#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class over extends Fragment {
+public class Over extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class over extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public over() {
+    public Over() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class over extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment over.
+     * @return A new instance of fragment Over.
      */
     // TODO: Rename and change types and number of parameters
-    public static over newInstance(String param1, String param2) {
-        over fragment = new over();
+    public static Over newInstance(String param1, String param2) {
+        Over fragment = new Over();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,9 @@ public class over extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.over, container, false);
+        View view = inflater.inflate(R.layout.fragment_over, null);
+        view.setOnTouchListener(this);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -73,6 +75,7 @@ public class over extends Fragment {
             mListener.onFragmentInteraction(Tag,number);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -91,6 +94,11 @@ public class over extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -105,5 +113,4 @@ public class over extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(String Tag, String number);
     }
-
 }

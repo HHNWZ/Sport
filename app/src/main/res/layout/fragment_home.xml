@@ -2,13 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a888888888.sport.over">
+    tools:context="kelvin.tablayout.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Home Fragment"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+
+        />
 
 </FrameLayout>
