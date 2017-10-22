@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.a888888888.sport.R;
 
-
 public class kelvin_tab_layout extends AppCompatActivity {
 
     Toolbar toolbar;

@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 
 import kelvin.tablayout.kelvin_tab_layout;
-import qwer.dietcontrol;
+import qwer.Dietcontrol;
 
 public class  MainActivity extends AppCompatActivity
-        implements Over.OnFragmentInteractionListener{
+        implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,13 @@ public class  MainActivity extends AppCompatActivity
         del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, dietcontrol.class);
-                startActivity(intent);
-                MainActivity.this.finish();
+                Dietcontrol del = new Dietcontrol();
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.content_main,
+                        del,
+                        del.getTag()
+                ).commit();
             }
         });
         over.setOnClickListener(new View.OnClickListener() {
@@ -55,11 +60,14 @@ public class  MainActivity extends AppCompatActivity
         sport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,sport.class);
-                startActivity(intent);
-
-            }
+                    Sport sport=Sport.newInstance("param1","param2");
+                    FragmentManager manager=getSupportFragmentManager();
+                    manager.beginTransaction().replace(
+                            R.id.content_main,
+                            sport,
+                            sport.getTag()
+                    ).commit();
+                }
         });
     }
     @Override
