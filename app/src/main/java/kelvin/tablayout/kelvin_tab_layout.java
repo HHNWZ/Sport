@@ -28,6 +28,6 @@ public class kelvin_tab_layout extends AppCompatActivity {
        viewPagerAdapter.addFragments(new TopFreeFragment(),"Top Free");
         viewPagerAdapter.addFragments(new TopPaidFragment(),"Top Paid");
         viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);//aaa
     }
 }
