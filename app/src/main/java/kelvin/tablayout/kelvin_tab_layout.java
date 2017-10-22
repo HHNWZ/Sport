@@ -23,9 +23,13 @@ public class kelvin_tab_layout extends AppCompatActivity {
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragments(new HomeFragment(),"Home");
-       viewPagerAdapter.addFragments(new TopFreeFragment(),"Top Free");
-        viewPagerAdapter.addFragments(new TopPaidFragment(),"Top Paid");
+        viewPagerAdapter.addFragments(new RunningFragment(),"跑步");
+        viewPagerAdapter.addFragments(new WalkingFragment(),"走路");
+        viewPagerAdapter.addFragments(new AerobicExerciseFragment(),"有氧運動");
+        viewPagerAdapter.addFragments(new SitUpsFragment(),"仰臥起坐");
+        viewPagerAdapter.addFragments(new PushUpFragment(),"伏地挺身 ");
+
+
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
