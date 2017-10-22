@@ -62,8 +62,6 @@ public class  MainActivity extends AppCompatActivity
             }
         });
     }
-
-
     @Override
     public void onFragmentInteraction(String Tag, String number) {
 
