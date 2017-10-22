@@ -2,6 +2,7 @@ package com.example.a888888888.sport;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,8 @@ import android.widget.Button;
 import kelvin.tablayout.kelvin_tab_layout;
 import qwer.dietcontrol;
 
-public class  MainActivity extends AppCompatActivity {
+public class  MainActivity extends AppCompatActivity
+        implements Over.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,13 @@ public class  MainActivity extends AppCompatActivity {
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,over.class);
-                startActivity(intent);
-                MainActivity.this.finish();
+                Over overs=Over.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.content_main,
+                        overs,
+                        overs.getTag()
+                ).commit();
             }
         });
         sport.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +58,12 @@ public class  MainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,sport.class);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
+    }
+    @Override
+    public void onFragmentInteraction(String Tag, String number) {
+
     }
 }
