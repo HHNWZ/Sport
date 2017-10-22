@@ -12,10 +12,10 @@ import com.example.a888888888.sport.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopPaidFragment extends Fragment {
+public class KelvinRunningFragment extends Fragment {
 
 
-    public TopPaidFragment() {
+    public KelvinRunningFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class TopPaidFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_paid, container, false);
+        return inflater.inflate(R.layout.fragment_kelvin_running, container, false);
     }
 
 }
