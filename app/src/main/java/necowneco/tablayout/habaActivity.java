@@ -21,7 +21,8 @@ import com.example.a888888888.sport.R;
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
-        Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener{
+        Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
+        Airsport.OnFragmentInteractionListener{
 
 
     @Override
@@ -84,6 +85,13 @@ public class habaActivity extends AppCompatActivity
             public void onClick(View v) {
                 selsport.setText("有有有氧氧");
                 onBackPressed();
+                Airsport air=Airsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        air,
+                        air.getTag()
+                ).commit();
             }
         });
         spsit.setOnClickListener(new View.OnClickListener() {
