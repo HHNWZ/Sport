@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import kelvin.tablayout.HomeFragment;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -17,6 +18,7 @@ import qwer.Dietcontrol;
 
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment1.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
+        ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener
 {
 
 
