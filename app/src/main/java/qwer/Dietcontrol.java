@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.a888888888.sport.R;
 
-public class dietcontrol extends Fragment {
+public class Dietcontrol extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,5 +23,4 @@ public class dietcontrol extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.qwer_dietcontrol, container, false);
     }
-
 }
