@@ -8,7 +8,8 @@ import com.example.a888888888.sport.R;
 
 public class kelvin_tab_layout extends AppCompatActivity {
 
-    Toolbar toolbar
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
