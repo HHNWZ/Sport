@@ -9,10 +9,15 @@ import android.widget.Button;
 
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
+import qwer.BlankFragment;
+import qwer.BlankFragment1;
+import qwer.BlankFragment2;
+import qwer.BlankFragment3;
 import qwer.Dietcontrol;
 
 public class  MainActivity extends AppCompatActivity
-        implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener{
+        implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment1.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
+{
 
 
 

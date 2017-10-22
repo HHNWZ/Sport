@@ -6,9 +6,9 @@
     <gradient
         android:angle="45"
         android:centerX="49%"
-        android:centerColor="#A8968A"
+        android:centerColor="#224AA8"
         android:startColor="#E8E8E8"
-        android:endColor="#87FFF3"
+        android:endColor="#FF80F7"
         android:type="linear"
         />
     <padding
@@ -18,8 +18,8 @@
         android:bottom="0dp"
         />
     <size
-        android:width="190dp"
-        android:height="200dp"
+        android:width="290dp"
+        android:height="300dp"
         />
     <stroke
         android:width="3dp"
