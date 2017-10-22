@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,7 +20,8 @@ import com.example.a888888888.sport.R;
 
 
 public class habaActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
+        Runsport.OnFragmentInteractionListener{
 
 
     @Override
@@ -30,16 +32,23 @@ public class habaActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         final TextView selsport=(TextView)findViewById(R.id.sel_sport);
         final Button spall = (Button)findViewById(R.id.sp_all);
-        final Button sprun = (Button)findViewById(R.id.sp_all);
-        final Button spwalk = (Button)findViewById(R.id.sp_all);
-        final Button spair = (Button)findViewById(R.id.sp_all);
-        final Button spsit = (Button)findViewById(R.id.sp_all);
-        final Button sppush = (Button)findViewById(R.id.sp_all);
+        final Button sprun = (Button)findViewById(R.id.sp_run);
+        final Button spwalk = (Button)findViewById(R.id.sp_walk);
+        final Button spair = (Button)findViewById(R.id.sp_air);
+        final Button spsit = (Button)findViewById(R.id.sp_sit);
+        final Button sppush = (Button)findViewById(R.id.sp_push);
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("所有運動動");
                 onBackPressed();
+                Allsport all=Allsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        all,
+                        all.getTag()
+                ).commit();
             }
         });
         sprun.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +56,13 @@ public class habaActivity extends AppCompatActivity
             public void onClick(View v) {
                 selsport.setText("跑跑跑跑步");
                 onBackPressed();
+                Runsport run=Runsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        run,
+                        run.getTag()
+                ).commit();
             }
         });
         spwalk.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +109,6 @@ public class habaActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -152,5 +166,10 @@ public class habaActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(String Tag, String number) {
+
     }
 }

@@ -13,13 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.NavigationView
+    <LinearLayout
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_haba"
-        app:menu="@menu/activity_haba_neco_drawer" />
+        android:layout_gravity="left">
+
+        <include
+            layout="@layout/nav_header_haba"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
