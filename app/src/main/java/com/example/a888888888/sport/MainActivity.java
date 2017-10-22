@@ -13,6 +13,8 @@ import qwer.dietcontrol;
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener{
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
