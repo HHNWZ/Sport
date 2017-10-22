@@ -21,7 +21,7 @@ import com.example.a888888888.sport.R;
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
-        Runsport.OnFragmentInteractionListener{
+        Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener{
 
 
     @Override
@@ -70,6 +70,13 @@ public class habaActivity extends AppCompatActivity
             public void onClick(View v) {
                 selsport.setText("走走走走路");
                 onBackPressed();
+                Walksport walk=Walksport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        walk,
+                        walk.getTag()
+                ).commit();
             }
         });
         spair.setOnClickListener(new View.OnClickListener() {
