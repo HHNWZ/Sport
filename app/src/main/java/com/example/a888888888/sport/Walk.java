@@ -7,18 +7,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Sport.OnFragmentInteractionListener} interface
+ * {@link Walk.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Sport#newInstance} factory method to
+ * Use the {@link Walk#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Sport extends Fragment implements View.OnTouchListener {
+public class Walk extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +29,7 @@ public class Sport extends Fragment implements View.OnTouchListener {
 
     private OnFragmentInteractionListener mListener;
 
-    public Sport() {
+    public Walk() {
         // Required empty public constructor
     }
 
@@ -40,11 +39,11 @@ public class Sport extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Sport.
+     * @return A new instance of fragment Walk.
      */
     // TODO: Rename and change types and number of parameters
-    public static Sport newInstance(String param1, String param2) {
-        Sport fragment = new Sport();
+    public static Walk newInstance(String param1, String param2) {
+        Walk fragment = new Walk();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,63 +64,8 @@ public class Sport extends Fragment implements View.OnTouchListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sport, null);
+        View view = inflater.inflate(R.layout.fragment_walk, null);
         view.setOnTouchListener(this);
-        Button run = (Button) view.findViewById(R.id.button5);
-        Button walk = (Button) view.findViewById(R.id.button6);
-        Button air = (Button) view.findViewById(R.id.button7);
-        Button sit = (Button) view.findViewById(R.id.button8);
-        Button push = (Button) view.findViewById(R.id.button9);
-        run.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Run(),null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        walk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Walk(),null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        air.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Air(),null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        sit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Sit(),null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        push.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Push(),null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
         return view;
     }
 
