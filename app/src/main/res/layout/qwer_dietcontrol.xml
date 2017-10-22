@@ -18,73 +18,101 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/angry_btn"
 
-        android:layout_width="190dp"
-        android:layout_height="200dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        android:background="@drawable/buttonshape"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="常見食物熱量"
-        android:textColor="#FFDB29"
-        android:textSize="30sp"
-        android:layout_above="@+id/angry_bt2"
-        android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/angry_bt1"
+            <Button
+                android:id="@+id/angry_btn"
 
-        android:layout_width="190dp"
-        android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-        android:background="@drawable/buttonshape1"
-        android:shadowColor="#A8A319"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="熱量計算"
-        android:textColor="#FFDB29"
-        android:textSize="32sp"
-        android:layout_alignTop="@+id/angry_btn"
-        android:layout_alignParentEnd="true" />
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#86A89B"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="常見食物熱量"
+                android:textColor="#FFDB29"
+                android:textSize="32sp" />
 
-    <Button
-        android:id="@+id/angry_bt2"
+            <Button
+                android:id="@+id/angry_bt2"
 
-        android:layout_width="190dp"
-        android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-        android:background="@drawable/buttonshape2"
-        android:shadowColor="#86A89B"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="營養師諮詢"
-        android:textColor="#FFDB29"
-        android:textSize="32sp"
-        android:layout_alignTop="@+id/angry_btn3"
-        android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/angry_bt1"
+                android:layout_toStartOf="@+id/angry_bt1"
+                android:layout_weight="1"
+                android:background="@drawable/buttonshape2"
+                android:shadowColor="#86A89B"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="營養師諮詢"
+                android:textColor="#FFDB29"
+                android:textSize="32sp" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/angry_btn3"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        android:layout_width="190dp"
-        android:layout_height="200dp"
-        android:background="@drawable/buttonshape3"
+            <Button
+                android:id="@+id/angry_bt1"
 
-        android:shadowColor="#86A89B"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:text="攝取建議"
-        android:textColor="#FFDB29"
-        android:textSize="32sp"
-        android:layout_marginBottom="52dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_alignBottom="@+id/angry_btn"
+                android:layout_toEndOf="@+id/angry_btn"
+                android:layout_weight="1"
+                android:background="@drawable/buttonshape1"
+                android:shadowColor="#A8A319"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="熱量計算"
+                android:textColor="#FFDB29"
+                android:textSize="32sp" />
+
+            <Button
+                android:id="@+id/angry_btn3"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/angry_bt1"
+                android:layout_toEndOf="@+id/angry_bt2"
+                android:layout_weight="1"
+                android:background="@drawable/buttonshape3"
+                android:shadowColor="#86A89B"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="攝取建議"
+                android:textColor="#FFDB29"
+                android:textSize="32sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
