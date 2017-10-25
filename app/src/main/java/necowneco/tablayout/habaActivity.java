@@ -25,7 +25,6 @@ public class habaActivity extends AppCompatActivity
         Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
         Pushsport.OnFragmentInteractionListener{
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
