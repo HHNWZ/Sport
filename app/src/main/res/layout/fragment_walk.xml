@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/white"
+
     android:clickable="true"
     tools:context="com.example.a888888888.sport.Walk">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="走路暫定" />
+
 
 </RelativeLayout>
