@@ -158,6 +158,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:id="@+id/content_main"></LinearLayout>
+        android:id="@+id/content_main"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"></LinearLayout>
 
 </RelativeLayout>
