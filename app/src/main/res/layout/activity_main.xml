@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
+    android:background="@drawable/sports"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.a888888888.sport.MainActivity">
@@ -158,6 +158,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:id="@+id/content_main"></LinearLayout>
+        android:id="@+id/content_main"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"></LinearLayout>
+
 
 </RelativeLayout>

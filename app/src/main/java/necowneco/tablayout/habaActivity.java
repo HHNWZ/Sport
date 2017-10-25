@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,14 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 
 
 public class habaActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+        implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
+        Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
+        Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
+        Pushsport.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,46 +32,94 @@ public class habaActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final TextView selsport=(TextView)findViewById(R.id.sel_sport);
-        findViewById(R.id.sp_all).setOnClickListener(new View.OnClickListener() {
+        final Button spall = (Button)findViewById(R.id.sp_all);
+        final Button sprun = (Button)findViewById(R.id.sp_run);
+        final Button spwalk = (Button)findViewById(R.id.sp_walk);
+        final Button spair = (Button)findViewById(R.id.sp_air);
+        final Button spsit = (Button)findViewById(R.id.sp_sit);
+        final Button sppush = (Button)findViewById(R.id.sp_push);
+        spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("所有運動動");
                 onBackPressed();
+                Allsport all=Allsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        all,
+                        all.getTag()
+                ).commit();
             }
         });
-        findViewById(R.id.sp_run).setOnClickListener(new View.OnClickListener() {
+        sprun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("跑跑跑跑步");
                 onBackPressed();
+                Runsport run=Runsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        run,
+                        run.getTag()
+                ).commit();
             }
         });
-        findViewById(R.id.sp_walk).setOnClickListener(new View.OnClickListener() {
+        spwalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("走走走走路");
                 onBackPressed();
+                Walksport walk=Walksport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        walk,
+                        walk.getTag()
+                ).commit();
             }
         });
-        findViewById(R.id.sp_air).setOnClickListener(new View.OnClickListener() {
+        spair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("有有有氧氧");
                 onBackPressed();
+                Airsport air=Airsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        air,
+                        air.getTag()
+                ).commit();
             }
         });
-        findViewById(R.id.sp_sit).setOnClickListener(new View.OnClickListener() {
+        spsit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("仰仰臥起坐坐");
                 onBackPressed();
+                Sitsport sit=Sitsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        sit,
+                        sit.getTag()
+                ).commit();
             }
         });
-        findViewById(R.id.sp_push).setOnClickListener(new View.OnClickListener() {
+        sppush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selsport.setText("伏地地挺身身");
                 onBackPressed();
+                Pushsport push=Pushsport.newInstance("param1","param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        push,
+                        push.getTag()
+                ).commit();
             }
         });
 
@@ -86,8 +138,6 @@ public class habaActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -145,5 +195,10 @@ public class habaActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(String Tag, String number) {
+
     }
 }
