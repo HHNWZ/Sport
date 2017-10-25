@@ -13,7 +13,7 @@ public class kelvin_tab_layout extends AppCompatActivity {
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+    ViewPagerAdapter viewPagerAdapter;//kkkkkkkkkkkkkkk
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
