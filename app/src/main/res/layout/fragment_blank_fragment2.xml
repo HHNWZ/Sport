@@ -15,18 +15,17 @@
         android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:text="熱量計算"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="116dp" />
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/calorie"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="31dp" />
+        android:layout_alignParentBottom="true" />
+
 </RelativeLayout>

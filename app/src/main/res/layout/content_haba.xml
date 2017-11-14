@@ -9,11 +9,12 @@
     tools:showIn="@layout/app_bar_haba">
 
     <RelativeLayout
-        android:layout_width="368dp"
-        android:layout_height="479dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:id="@+id/haba">
+        android:id="@+id/haba"
+        android:layout_width="384dp"
+        android:layout_height="487dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:background="@drawable/talking">
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

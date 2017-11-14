@@ -6,61 +6,62 @@
     android:orientation="vertical">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:orientation="vertical"
+            <Button
+                android:id="@+id/sp_all"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="所有運動" />
 
-                <Button
-                    android:text="所有運動"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_all"
-                    android:background="@android:color/transparent" />
+            <Button
+                android:id="@+id/sp_run"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="跑步" />
 
-                <Button
-                    android:text="跑步"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_run"
-                    android:background="@android:color/transparent" />
+            <Button
+                android:id="@+id/sp_walk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="走路" />
 
-                <Button
-                    android:text="走路"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_walk"
-                    android:background="@android:color/transparent" />
-                <Button
-                    android:text="有氧"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_air"
-                    android:background="@android:color/transparent" />
-                <Button
-                    android:text="仰臥起坐"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_sit"
-                    android:background="@android:color/transparent" />
-                <Button
-                    android:text="伏地挺身"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/sp_push"
-                    android:background="@android:color/transparent" />
+            <Button
+                android:id="@+id/sp_air"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="有氧" />
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/sp_sit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="仰臥起坐" />
+
+            <Button
+                android:id="@+id/sp_push"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="伏地挺身" />
 
         </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
