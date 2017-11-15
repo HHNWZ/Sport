@@ -1,13 +1,16 @@
 package kelvin.tablayout;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 /**
@@ -35,6 +38,13 @@ public class KelvinRunningFragment extends Fragment {
         text_view_of_highest_record_data.setText("200米");
         text_view_of_lowest_record_data.setText("50米");
         return rootView;
+
+
+
+
     }
 
-}
+
+    }
+
+
