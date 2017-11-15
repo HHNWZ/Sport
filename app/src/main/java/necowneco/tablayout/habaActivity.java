@@ -154,7 +154,6 @@ public class habaActivity extends AppCompatActivity
         }
         return super.onKeyDown(keyCode, event);
     }//返回鍵的設定
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
