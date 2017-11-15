@@ -1,11 +1,14 @@
 package kelvin.tablayout;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 public class kelvin_tab_layout extends AppCompatActivity {
@@ -33,4 +36,17 @@ public class kelvin_tab_layout extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+// Do something.
+            Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);
+            startActivity(intentHome);
+            this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }//返回鍵的設定
+
 }

@@ -54,11 +54,12 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Dietcontrol del = new Dietcontrol();
                 FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction().replace(
+                manager.beginTransaction().addToBackStack(null).replace(
                         R.id.content_main,
                         del,
                         del.getTag()
                 ).commit();
+
             }
         });
         over.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Over overs=Over.newInstance("param1","param2");
                 FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
+                manager.beginTransaction().addToBackStack(null).replace(
                         R.id.content_main,
                         overs,
                         overs.getTag()
@@ -78,7 +79,7 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                     Sport sport=Sport.newInstance("param1","param2");
                     FragmentManager manager=getSupportFragmentManager();
-                    manager.beginTransaction().replace(
+                    manager.beginTransaction().addToBackStack(null).replace(
                             R.id.content_main,
                             sport,
                             sport.getTag()
@@ -86,6 +87,19 @@ public class  MainActivity extends AppCompatActivity
                 }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+    }
+
     @Override
     public void onFragmentInteraction(String Tag, String number) {
 
