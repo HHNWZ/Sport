@@ -4,9 +4,24 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_haba">habaActivity</string>
+    <string name="text1">Copyright 2014 Manabu Shimobe
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</string>
+    <string name="text2">一道強光在墓穴通道內劃過,手持強光手電的男子四處照射,探尋通道的石壁和拱頂,還有那黑黝黝的前方.
+強光近距離照射石壁時,黑暗中輝映出了男子的模樣.中年男子,清瘦,背頭發絲不亂,面容白淨,精氣神十足,兩眼十分有神,神態淡定從容.
+整個人打理的干乾淨淨,穿戴也很整齊,一身黑色唐裝,手持一根筆挺的手杖.如此整潔妝容出現在這種墓穴環境下,不認識的覺得少見,認識的則會覺得很正常.這是位
+手抓了手杖又杵在身邊靜候,翻湧的灰塵難近其身,強光手電朝著掌風刮開積塵的地面看去,可以判斷出,前方十幾米的半徑內的地面都是金屬鋪就的,並非只是腳下一小塊地方</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
 </resources>

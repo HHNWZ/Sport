@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a888888888.sport.R;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,6 +61,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -68,7 +70,15 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment4, null);
         view.setOnTouchListener(this);
+        // sample code snippet to set the text content on the ExpandableTextView
+        ExpandableTextView expTv1 = (ExpandableTextView)view.findViewById(R.id.expand_text_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv1.setText(getString(R.string.text1));
+        ExpandableTextView expTv2 = (ExpandableTextView)view.findViewById(R.id.expand_text2_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv2.setText(getString(R.string.text2));
         return view;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
