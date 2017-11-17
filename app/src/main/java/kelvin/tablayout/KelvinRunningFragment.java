@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +45,11 @@ public class KelvinRunningFragment extends Fragment {
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoDownloadFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_invitation(),null)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         return rootView;
@@ -55,11 +59,12 @@ public class KelvinRunningFragment extends Fragment {
 
     }
     public void gotoDownloadFragment() {    //去跑步邀請內容
-        fmanager = getActivity().getSupportFragmentManager() ;
-        ftransaction = fmanager.beginTransaction();
         kelvin_running_invitation f1 = new kelvin_running_invitation(); //要跳去的頁面
-        ftransaction.replace(R.id.fragment_kelvin_running_invitation, f1);
+        fmanager =getFragmentManager() ;
+        ftransaction = fmanager.beginTransaction();
+        ftransaction.replace(R.id.content_main, f1);
         ftransaction.commit();
+        fmanager.executePendingTransactions();
     }
 
 

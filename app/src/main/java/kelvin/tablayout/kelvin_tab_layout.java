@@ -11,7 +11,8 @@ import android.view.KeyEvent;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
-public class kelvin_tab_layout extends AppCompatActivity {
+public class kelvin_tab_layout extends AppCompatActivity
+        implements kelvin_running_invitation.OnFragmentInteractionListener{
 
     Toolbar toolbar;
     TabLayout tabLayout;
@@ -49,4 +50,8 @@ public class kelvin_tab_layout extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }//返回鍵的設定
 
+    @Override
+    public void onFragmentInteraction(String Tag, String number) {
+
+    }
 }

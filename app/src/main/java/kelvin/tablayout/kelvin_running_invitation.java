@@ -1,10 +1,10 @@
 package kelvin.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,10 +16,10 @@ import com.example.a888888888.sport.R;
  * Activities that contain this fragment must implement the
  * {@link kelvin_running_invitation.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link kelvin_running_invitation#newInstance} factory method to
+ * Use the {@linkkelvin_running_invitation#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class kelvin_running_invitation extends Fragment {
+public class kelvin_running_invitation extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,15 +66,18 @@ public class kelvin_running_invitation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kelvin_running_invitation, container, false);
+        View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
+        view.setOnTouchListener(this);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(String Tag, String number) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(Tag,number);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -93,6 +96,11 @@ public class kelvin_running_invitation extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -105,6 +113,6 @@ public class kelvin_running_invitation extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String Tag, String number);
     }
 }
