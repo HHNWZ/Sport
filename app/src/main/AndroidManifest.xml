@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name="kelvin.tablayout.kelvin_tab_layout" />
-        <activity android:name="kelvin.tablayout.kelvin_running_invitation_content_activity"/>
+
         <activity
             android:name="necowneco.tablayout.habaActivity"
             android:label="@string/title_activity_haba"
