@@ -1,5 +1,6 @@
 package necowneco.tablayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,12 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 
@@ -140,6 +143,17 @@ public class habaActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+// Do something.
+            Intent intentHome= new Intent(habaActivity.this,MainActivity.class);
+            startActivity(intentHome);
+            this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }//返回鍵的設定
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
