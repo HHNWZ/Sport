@@ -1,7 +1,6 @@
-package qwer;
+package kelvin.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,17 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.a888888888.sport.R;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlankFragment3.OnFragmentInteractionListener} interface
+ * {@link kelvin_running_invitation.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BlankFragment3#newInstance} factory method to
+ * Use the {@linkkelvin_running_invitation#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment3 extends Fragment implements View.OnTouchListener {
+public class kelvin_running_invitation extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +31,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
     private OnFragmentInteractionListener mListener;
 
-    public BlankFragment3() {
+    public kelvin_running_invitation() {
         // Required empty public constructor
     }
 
@@ -42,11 +41,11 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment3.
+     * @return A new instance of fragment kelvin_running_invitation.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment3 newInstance(String param1, String param2) {
-        BlankFragment3 fragment = new BlankFragment3();
+    public static kelvin_running_invitation newInstance(String param1, String param2) {
+        kelvin_running_invitation fragment = new kelvin_running_invitation();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,17 +66,9 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_blank_fragment4, null);
+        View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
-        // sample code snippet to set the text content on the ExpandableTextView
-        ExpandableTextView expTv1 = (ExpandableTextView)view.findViewById(R.id.expand_text_view);
-        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv1.setText(getString(R.string.text1));
-        ExpandableTextView expTv2 = (ExpandableTextView)view.findViewById(R.id.expand_text2_view);
-        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv2.setText(getString(R.string.text2));
         return view;
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -86,6 +77,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
             mListener.onFragmentInteraction(Tag,number);
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -105,7 +97,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
+    public boolean onTouch(View v, MotionEvent event) {
         return false;
     }
 
