@@ -5,8 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.a888888888.sport.R;
 
@@ -18,7 +21,7 @@ import com.example.a888888888.sport.R;
  * Use the {@link AddArt#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddArt extends Fragment {
+public class AddArt extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,6 +67,14 @@ public class AddArt extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_add_art, null);
+        view.setOnTouchListener(this);
+        Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
+        final String[] SportList = {"雞腿飯", "魯肉飯", "排骨飯", "水餃", "陽春麵"};
+        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(this.getContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                SportList);
+        spinner.setAdapter(sportlist);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_art, container, false);
     }
@@ -90,6 +101,11 @@ public class AddArt extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
 
     /**
