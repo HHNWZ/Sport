@@ -1,13 +1,17 @@
 package qwer;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
@@ -67,15 +71,93 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_blank_fragment4, null);
         view.setOnTouchListener(this);
-        // sample code snippet to set the text content on the ExpandableTextView
+        TextView textView1=(TextView)view.findViewById(R.id.textView15);
+        textView1.setText("攝取建議");//主標題
+
+
         ExpandableTextView expTv1 = (ExpandableTextView)view.findViewById(R.id.expand_text_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
         expTv1.setText(getString(R.string.text1));
+        TextView textView=(TextView)view.findViewById(R.id.textView14);
+        textView.setText("維他命A");
+        textView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewa=(TextView)view.findViewById(R.id.textView16);
+        textViewa.setText(getString(R.string.textA));
+
         ExpandableTextView expTv2 = (ExpandableTextView)view.findViewById(R.id.expand_text2_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
         expTv2.setText(getString(R.string.text2));
+        TextView textViewb1=(TextView)view.findViewById(R.id.textViewb1);
+        textViewb1.setText("維他命B1");
+        textViewb1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewb1a2=(TextView)view.findViewById(R.id.textViewb1a2);
+        textViewb1a2.setText(getString(R.string.textB1));
+
+        ExpandableTextView expTv3 = (ExpandableTextView)view.findViewById(R.id.expand_text3_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv3.setText(getString(R.string.text2));
+        TextView textViewb2=(TextView)view.findViewById(R.id.textViewb2);
+        textViewb2.setText("維他命B2");
+        textViewb2.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewb2a2=(TextView)view.findViewById(R.id.textViewb2a2);
+        textViewb2a2.setText(getString(R.string.textB2));
+
+        ExpandableTextView expTv4 = (ExpandableTextView)view.findViewById(R.id.expand_text4_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv4.setText(getString(R.string.text2));
+        TextView textViewb6=(TextView)view.findViewById(R.id.textViewb6);
+        textViewb6.setText("維他命B6");
+        textViewb6.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewb6a2=(TextView)view.findViewById(R.id.textViewb6a2);
+        textViewb6a2.setText(getString(R.string.textB6));
+
+        ExpandableTextView expTv5 = (ExpandableTextView)view.findViewById(R.id.expand_text5_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv5.setText(getString(R.string.text2));
+        TextView textViewb12=(TextView)view.findViewById(R.id.textViewb12);
+        textViewb12.setText("維他命B12");
+        textViewb12.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewb12a2=(TextView)view.findViewById(R.id.textViewb12a2);
+        textViewb12a2.setText(getString(R.string.textB12));
+
+        ExpandableTextView expTv6 = (ExpandableTextView)view.findViewById(R.id.expand_text6_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv6.setText(getString(R.string.text2));
+        TextView textViewc=(TextView)view.findViewById(R.id.textViewc);
+        textViewc.setText("維他命C");
+        textViewc.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewca2=(TextView)view.findViewById(R.id.textViewca2);
+        textViewca2.setText(getString(R.string.textC));
+
+        ExpandableTextView expTv7 = (ExpandableTextView)view.findViewById(R.id.expand_text7_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv7.setText(getString(R.string.text2));
+        TextView textViewd=(TextView)view.findViewById(R.id.textViewd);
+        textViewd.setText("維他命D");
+        textViewd.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewda2=(TextView)view.findViewById(R.id.textViewda2);
+        textViewda2.setText(getString(R.string.textD));
+
+        ExpandableTextView expTv8 = (ExpandableTextView)view.findViewById(R.id.expand_text8_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv8.setText(getString(R.string.text2));
+        TextView textViewe=(TextView)view.findViewById(R.id.textViewe);
+        textViewe.setText("維他命E");
+        textViewe.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewea2=(TextView)view.findViewById(R.id.textViewea2);
+        textViewea2.setText(getString(R.string.textE));
+
+        ExpandableTextView expTv9 = (ExpandableTextView)view.findViewById(R.id.expand_text9_view);
+        // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
+        expTv9.setText(getString(R.string.text2));
+        TextView textViewk=(TextView)view.findViewById(R.id.textViewk);
+        textViewk.setText("維他命K");
+        textViewk.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
+        TextView textViewka2=(TextView)view.findViewById(R.id.textViewka2);
+        textViewka2.setText(getString(R.string.textK));
         return view;
 
     }

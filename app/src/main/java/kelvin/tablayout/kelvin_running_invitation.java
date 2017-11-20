@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.a888888888.sport.R;
 
@@ -60,6 +63,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -68,6 +72,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
+
         return view;
     }
 
