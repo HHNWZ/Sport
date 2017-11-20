@@ -26,7 +26,7 @@ public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
         Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener{
+        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
