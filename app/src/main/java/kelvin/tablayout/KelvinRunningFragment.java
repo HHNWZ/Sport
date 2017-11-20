@@ -64,14 +64,8 @@ public class KelvinRunningFragment extends Fragment {
 
 
     }
-    /*public void gotoDownloadFragment() {    //去跑步邀請內容
-        kelvin_running_invitation f1 = new kelvin_running_invitation(); //要跳去的頁面
-        fmanager =getFragmentManager() ;
-        ftransaction = fmanager.beginTransaction();
-        ftransaction.replace(R.id.content_main, f1);
-        ftransaction.commit();
-        fmanager.executePendingTransactions();
-    }*/
+
+
 
 
 }
