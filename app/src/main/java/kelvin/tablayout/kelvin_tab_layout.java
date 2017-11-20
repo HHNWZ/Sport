@@ -14,7 +14,9 @@ import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 public class kelvin_tab_layout extends AppCompatActivity
-        implements kelvin_running_invitation.OnFragmentInteractionListener,kelvin_walking_invitation.OnFragmentInteractionListener{
+        implements kelvin_running_invitation.OnFragmentInteractionListener,kelvin_walking_invitation.OnFragmentInteractionListener,
+        kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
+        kelvin_push_up_invitation.OnFragmentInteractionListener{
 
     Toolbar toolbar;
     TabLayout tabLayout;
@@ -43,12 +45,11 @@ public class kelvin_tab_layout extends AppCompatActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int count = getFragmentManager().getBackStackEntryCount();
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && fc !=0) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && fc !=0 && count!=0) {
 // Do something.
             Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);
             startActivity(intentHome);
-            Button button_of_invitation=(Button)findViewById(R.id.button_of_invitation);
-            button_of_invitation.setVisibility(View.VISIBLE);
+
             this.finish();
             return true;
         }

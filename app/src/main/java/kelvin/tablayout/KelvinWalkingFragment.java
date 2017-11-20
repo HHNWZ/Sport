@@ -44,8 +44,6 @@ public class KelvinWalkingFragment extends Fragment {
                         .replace(R.id.fragment_kelvin_running_invitation,new kelvin_walking_invitation(),null)
                         .addToBackStack(null)
                         .commit();
-                button_of_invitation.setVisibility(View.INVISIBLE);
-                //Toolbar_of_app.setVisibility(View.INVISIBLE);
             }
 
         });
