@@ -39,8 +39,7 @@ public class KelvinRunningFragment extends Fragment {
         TextView text_view_of_lowest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_data) ;
         TextView text_view_of_highest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_data);
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
-        final Toolbar Toolbar_of_app=(Toolbar)rootView.findViewById(R.id.toolBar);
-
+        //button_of_invitation.setVisibility(View.VISIBLE);
         text_View_of_exercise_title.setText("跑步個人記錄");
         text_view_of_today_record_data.setText("100米");
         text_view_of_highest_record_data.setText("200米");
@@ -53,8 +52,6 @@ public class KelvinRunningFragment extends Fragment {
                         .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_invitation(),null)
                         .addToBackStack(null)
                         .commit();
-                        button_of_invitation.setVisibility(View.INVISIBLE);
-                        //Toolbar_of_app.setVisibility(View.INVISIBLE);
             }
 
         });
@@ -64,14 +61,8 @@ public class KelvinRunningFragment extends Fragment {
 
 
     }
-    /*public void gotoDownloadFragment() {    //去跑步邀請內容
-        kelvin_running_invitation f1 = new kelvin_running_invitation(); //要跳去的頁面
-        fmanager =getFragmentManager() ;
-        ftransaction = fmanager.beginTransaction();
-        ftransaction.replace(R.id.content_main, f1);
-        ftransaction.commit();
-        fmanager.executePendingTransactions();
-    }*/
+
+
 
 
 }
