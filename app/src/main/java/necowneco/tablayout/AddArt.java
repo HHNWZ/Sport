@@ -4,6 +4,9 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,7 +39,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
     public AddArt() {
         // Required empty public constructor
     }
@@ -72,14 +74,15 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_add_art, null);
+        final View view = inflater.inflate(R.layout.fragment_add_art, null);
         view.setOnTouchListener(this);
-        Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
+        final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
-        EditText ct=(EditText)view.findViewById(R.id.ConTitle);
-        EditText cc=(EditText)view.findViewById(R.id.Concon);
+        final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
+        final EditText cc=(EditText)view.findViewById(R.id.Concon);
         final TextView test = (TextView)view.findViewById(R.id.testtext);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
+        final String nowuser=mParam1;
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 SportList);
@@ -88,7 +91,13 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 test.setText("按下送出");
-                Toast.makeText(getContext(),test.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"使用者"+nowuser+test.getText(), Toast.LENGTH_SHORT).show();
+                onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.haba,new Allsport(),null)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         // Inflate the layout for this fragment
