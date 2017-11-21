@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
@@ -34,6 +35,18 @@ public class KelvinSitUpsFragment extends Fragment {
         text_view_of_today_record_data.setText("10分鐘");
         text_view_of_highest_record_data.setText("15分鐘");
         text_view_of_lowest_record_data.setText("5分鐘");
+        final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
+        button_of_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_sit_up_invitation(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+        });
         return rootView;
     }
 
