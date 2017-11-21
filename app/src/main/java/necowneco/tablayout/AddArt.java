@@ -9,7 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -67,19 +71,32 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_add_art, null);
         view.setOnTouchListener(this);
         Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
-        final String[] SportList = {"雞腿飯", "魯肉飯", "排骨飯", "水餃", "陽春麵"};
-        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(this.getContext(),
+        Button submitArt=(Button)view.findViewById(R.id.inputart);
+        EditText ct=(EditText)view.findViewById(R.id.ConTitle);
+        EditText cc=(EditText)view.findViewById(R.id.Concon);
+        final TextView test = (TextView)view.findViewById(R.id.testtext);
+        final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
+        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 SportList);
         spinner.setAdapter(sportlist);
+        submitArt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test.setText("按下送出");
+                Toast.makeText(getContext(),test.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_art, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(String Tag,String number) {
         if (mListener != null) {
             mListener.onFragmentInteraction(Tag,number);
@@ -122,4 +139,5 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(String Tag,String number);
     }
+
 }
