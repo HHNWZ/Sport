@@ -71,6 +71,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_add_art, null);
         view.setOnTouchListener(this);
         Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
