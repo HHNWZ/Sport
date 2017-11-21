@@ -5,9 +5,32 @@
     tools:context="kelvin.tablayout.kelvin_sit_up_invitation">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/title_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="仰臥起坐邀請內容"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/text_of_running_invitation_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/title_of_running_invitation"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="次數:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
 </FrameLayout>
