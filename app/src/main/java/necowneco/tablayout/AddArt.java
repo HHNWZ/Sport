@@ -100,6 +100,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
                         .commit();
             }
         });
+
         // Inflate the layout for this fragment
         return view;
     }
