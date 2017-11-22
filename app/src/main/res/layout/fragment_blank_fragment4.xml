@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,7 +51,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -70,8 +70,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:text="TextView" />
+                        android:text="TextView"
+                        android:textColor="#CC0000"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -99,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,7 +116,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -135,6 +136,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -163,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -179,7 +181,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -199,6 +201,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -227,7 +230,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -243,7 +246,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -263,6 +266,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -291,7 +295,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -307,7 +311,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -327,6 +331,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -355,7 +360,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -371,7 +376,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -391,6 +396,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -419,7 +425,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -435,7 +441,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -455,6 +461,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -483,7 +490,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -499,7 +506,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -519,6 +526,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
@@ -547,7 +555,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDuration="200"
-            app:maxCollapsedLines="4">
+            app:maxCollapsedLines="5">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -563,7 +571,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -583,6 +591,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="TextView"
+                        android:textColor="#CC0000"
                         android:textSize="12sp" />
                 </LinearLayout>
 
