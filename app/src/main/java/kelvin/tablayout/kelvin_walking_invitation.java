@@ -1,29 +1,25 @@
 package kelvin.tablayout;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toolbar;
 
 import com.example.a888888888.sport.R;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link kelvin_running_invitation.OnFragmentInteractionListener} interface
+ * {@link kelvin_walking_invitation.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@linkkelvin_running_invitation#newInstance} factory method to
+ * Use the {@link kelvin_walking_invitation#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class kelvin_running_invitation extends Fragment implements View.OnTouchListener {
+public class kelvin_walking_invitation extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,7 +31,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
     private OnFragmentInteractionListener mListener;
 
-    public kelvin_running_invitation() {
+    public kelvin_walking_invitation() {
         // Required empty public constructor
     }
 
@@ -45,11 +41,11 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment kelvin_running_invitation.
+     * @return A new instance of fragment kelvin_walking_invitation.
      */
     // TODO: Rename and change types and number of parameters
-    public static kelvin_running_invitation newInstance(String param1, String param2) {
-        kelvin_running_invitation fragment = new kelvin_running_invitation();
+    public static kelvin_walking_invitation newInstance(String param1, String param2) {
+        kelvin_walking_invitation fragment = new kelvin_walking_invitation();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,27 +60,26 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
+        // Inflate the layout for this
+        View view = inflater.inflate(R.layout.fragment_kelvin_walking_invitation, null);
         view.setOnTouchListener(this);
 
 
         return view;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String Tag, String number) {
+    public void onButtonPressed(String Tag, String number) {//要從kelvin_tab_layout.java拿onFragmentInteraction的(String Tag, String number) 貼到這裡來
         if (mListener != null) {
             mListener.onFragmentInteraction(Tag,number);
         }
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -104,7 +99,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View view, MotionEvent motionEvent) {
         return false;
     }
 
@@ -120,7 +115,6 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(String Tag, String number);
+        void onFragmentInteraction(String Tag, String number);//要從kelvin_tab_layout.java拿onFragmentInteraction的(String Tag, String number) 貼到這裡來
     }
-
 }

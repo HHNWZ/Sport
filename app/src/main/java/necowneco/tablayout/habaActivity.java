@@ -17,17 +17,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+
+import java.util.ArrayList;
 
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
         Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener{
+        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener{
 
+    final ArrayList<String> artID=new ArrayList<String>();
+    final ArrayList<String> userID=new ArrayList<String>();
+    final ArrayList<String> artTitle=new ArrayList<String>();
+    final String nowuser="369";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,17 @@ public class habaActivity extends AppCompatActivity
         final Button spair = (Button)findViewById(R.id.sp_air);
         final Button spsit = (Button)findViewById(R.id.sp_sit);
         final Button sppush = (Button)findViewById(R.id.sp_push);
+        artID.add("001");
+        artID.add("002");
+        artID.add("003");
+        userID.add("123");
+        userID.add("456");
+        userID.add("789");
+        artTitle.add("幹什麼");
+        artTitle.add("幹三小");
+        artTitle.add("幹朋友");
+
+
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,8 +148,13 @@ public class habaActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AddArt addart=AddArt.newInstance(nowuser,"param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        addart,
+                        addart.getTag()
+                ).commit();
             }
         });
 
@@ -213,6 +236,12 @@ public class habaActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
-
+        artID.add("00"+artID.size());
+        userID.add(nowuser);
+        artTitle.add(number);
+        Toast.makeText(this,
+                "使用者"+userID.get(userID.size()-1)+"新增"+artID.get(artID.size()-1)+"號"+artTitle.get(artTitle.size()-1),
+                Toast.LENGTH_SHORT).
+                show();
     }
 }
