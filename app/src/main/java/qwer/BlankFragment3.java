@@ -80,7 +80,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv1 = (ExpandableTextView)view.findViewById(R.id.expand_text_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv1.setText(getString(R.string.text1));
+        expTv1.setText(getString(R.string.texta));
         TextView textView=(TextView)view.findViewById(R.id.textView14);
         textView.setText("維他命A");
         textView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -89,7 +89,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv2 = (ExpandableTextView)view.findViewById(R.id.expand_text2_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv2.setText(getString(R.string.text2));
+        expTv2.setText(getString(R.string.textb1));
         TextView textViewb1=(TextView)view.findViewById(R.id.textViewb1);
         textViewb1.setText("維他命B1");
         textViewb1.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -98,7 +98,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv3 = (ExpandableTextView)view.findViewById(R.id.expand_text3_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv3.setText(getString(R.string.text2));
+        expTv3.setText(getString(R.string.textb2));
         TextView textViewb2=(TextView)view.findViewById(R.id.textViewb2);
         textViewb2.setText("維他命B2");
         textViewb2.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -107,7 +107,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv4 = (ExpandableTextView)view.findViewById(R.id.expand_text4_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv4.setText(getString(R.string.text2));
+        expTv4.setText(getString(R.string.textb6));
         TextView textViewb6=(TextView)view.findViewById(R.id.textViewb6);
         textViewb6.setText("維他命B6");
         textViewb6.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -116,7 +116,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv5 = (ExpandableTextView)view.findViewById(R.id.expand_text5_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv5.setText(getString(R.string.text2));
+        expTv5.setText(getString(R.string.textb12));
         TextView textViewb12=(TextView)view.findViewById(R.id.textViewb12);
         textViewb12.setText("維他命B12");
         textViewb12.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -125,7 +125,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv6 = (ExpandableTextView)view.findViewById(R.id.expand_text6_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv6.setText(getString(R.string.text2));
+        expTv6.setText(getString(R.string.textc));
         TextView textViewc=(TextView)view.findViewById(R.id.textViewc);
         textViewc.setText("維他命C");
         textViewc.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -134,7 +134,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv7 = (ExpandableTextView)view.findViewById(R.id.expand_text7_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv7.setText(getString(R.string.text2));
+        expTv7.setText(getString(R.string.textd));
         TextView textViewd=(TextView)view.findViewById(R.id.textViewd);
         textViewd.setText("維他命D");
         textViewd.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -143,7 +143,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv8 = (ExpandableTextView)view.findViewById(R.id.expand_text8_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv8.setText(getString(R.string.text2));
+        expTv8.setText(getString(R.string.texte));
         TextView textViewe=(TextView)view.findViewById(R.id.textViewe);
         textViewe.setText("維他命E");
         textViewe.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
@@ -152,7 +152,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         ExpandableTextView expTv9 = (ExpandableTextView)view.findViewById(R.id.expand_text9_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
-        expTv9.setText(getString(R.string.text2));
+        expTv9.setText(getString(R.string.textk));
         TextView textViewk=(TextView)view.findViewById(R.id.textViewk);
         textViewk.setText("維他命K");
         textViewk.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),"fonts/asd.TTF"));// 更改字型
