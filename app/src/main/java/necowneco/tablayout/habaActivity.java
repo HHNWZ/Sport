@@ -29,7 +29,8 @@ public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
         Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener{
+        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener,
+        theArt.OnFragmentInteractionListener{
 
     final ArrayList<String> artID=new ArrayList<String>();
     final ArrayList<String> userID=new ArrayList<String>();
@@ -239,9 +240,17 @@ public class habaActivity extends AppCompatActivity
         artID.add("00"+artID.size());
         userID.add(nowuser);
         artTitle.add(number);
+        int addid=artID.size()-1;
         Toast.makeText(this,
-                "使用者"+userID.get(userID.size()-1)+"新增"+artID.get(artID.size()-1)+"號"+artTitle.get(artTitle.size()-1),
+                "使用者"+userID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
                 Toast.LENGTH_SHORT).
                 show();
+        theArt theart=theArt.newInstance(artTitle.get(addid),userID.get(addid));
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.haba,new theArt(),null)
+                .addToBackStack(null)
+                .commit();
+
     }
 }
