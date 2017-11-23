@@ -248,8 +248,7 @@ public class habaActivity extends AppCompatActivity
         theArt theart=theArt.newInstance(artTitle.get(addid),userID.get(addid));
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
-                .replace(R.id.haba,new theArt(),null)
-                .addToBackStack(null)
+                .replace(R.id.haba,theart,null)
                 .commit();
 
     }

@@ -91,7 +91,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 test.setText("按下送出");
-                Toast.makeText(getContext(),"使用者"+nowuser+test.getText(), Toast.LENGTH_SHORT).show();
                 onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
                 /*getActivity().getSupportFragmentManager()
                         .beginTransaction()

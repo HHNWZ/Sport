@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -72,6 +73,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final TextView thearyAut=(TextView)view.findViewById(R.id.theAut);
         thearyTitle.setText(mParam1);
         thearyAut.setText(mParam2);
+        Toast.makeText(getContext(), mParam1, Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         return view;
     }
