@@ -1,5 +1,7 @@
 package kelvin.tablayout;
 
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,10 +17,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.a888888888.sport.R;
+
+import java.util.GregorianCalendar;
 
 
 /**
@@ -34,12 +40,17 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Button doSetTime;
+    private TextView textDate;
+    private TimePickerDialog timePickerDialog;
+
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    String placeOfrunning;
+    int distance_of_running;
     private OnFragmentInteractionListener mListener;
 
     public kelvin_running_invitation() {
@@ -80,6 +91,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
+        doSetTime=(Button)view.findViewById(R.id.buttonTime);
+
         Spinner spinner_of_running_place =(Spinner)view.findViewById(R.id.spinner_of_running_place);
         String[]list_of_running_place=getResources().getStringArray(R.array.spinner_of_running_place);
         ArrayAdapter<String>adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,list_of_running_place);
@@ -90,7 +103,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[]place_of_running=getResources().getStringArray(R.array.spinner_of_running_place);
-                Toast.makeText(getActivity(),"你點擊的是"+place_of_running[position], Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"你點擊的是"+place_of_running[position], Toast.LENGTH_LONG).show();
+                placeOfrunning=place_of_running[position];
             }
 
             @Override
@@ -113,12 +127,14 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
                 if("".equals(edit_text_on_distance.getText().toString().trim())){
                     Toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
                 }else{
-                    final int distance_of_running=Integer.parseInt(edit_text_on_distance.getText().toString());
+                    distance_of_running=Integer.parseInt(edit_text_on_distance.getText().toString());
                         if(distance_of_running<100||distance_of_running>5000){
                             Toast.makeText(getActivity(), getResources().getString(R.string.value_maximum_and_minimum_of_running_distance), Toast.LENGTH_SHORT).show();
                         }
                 }
+                Toast.makeText(getActivity(), "場地是:"+placeOfrunning+"距離是:"+distance_of_running, Toast.LENGTH_SHORT).show();
             }
+
 
         });
 

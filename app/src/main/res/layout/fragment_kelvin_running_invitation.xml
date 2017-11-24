@@ -103,6 +103,27 @@
           android:layout_toRightOf="@+id/text_of_running_invitation_place"
           android:layout_marginTop="20dp"
           ></Spinner>
+        <TextView
+            android:id="@+id/time_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="時間:"
+            android:layout_below="@id/spinner_of_running_place"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/buttonTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="請選擇時間"
+            android:layout_below="@id/spinner_of_running_place"
+            android:layout_toRightOf="@+id/time_of_invitation_for_running"
+            android:layout_marginTop="25dp"
+            />
+
+
     </RelativeLayout>
 
 
