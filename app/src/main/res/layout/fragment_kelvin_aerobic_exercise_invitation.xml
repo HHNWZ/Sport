@@ -11,7 +11,7 @@
         android:background="@android:color/white">
 
         <TextView
-            android:id="@+id/title_of_running_invitation"
+            android:id="@+id/title_of_aerobic_exercise_invitation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="有氧運動邀請內容"
@@ -21,16 +21,37 @@
             android:textSize="30sp"/>
 
         <TextView
-            android:id="@+id/text_of_running_invitation_distance"
+            android:id="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/title_of_running_invitation"
+            android:layout_below="@+id/title_of_aerobic_exercise_invitation"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="時間:"
+            android:text="挑戰時間:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text_of_aerobic_exercise_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
+            android:layout_below="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
+            android:layout_marginTop="20dp"
+            android:text="挑戰開始時間:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/button_of_aerobic_exercise_invitation_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="41dp"
+            android:text="確認" />
+
     </RelativeLayout>
 
 </FrameLayout>

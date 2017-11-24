@@ -24,10 +24,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
+            android:focusableInTouchMode="true"
             android:text="跑步邀請內容"
             android:textColor="@android:color/black"
-            android:textSize="30sp"
-            android:focusableInTouchMode="true"/>
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/text_of_running_invitation_distance"
@@ -83,6 +83,7 @@
             android:layout_marginBottom="22dp"
             android:layout_marginEnd="41dp"
             android:text="確認" />
+
         <TextView
             android:id="@+id/text_of_running_invitation_place"
             android:layout_width="wrap_content"
@@ -94,34 +95,35 @@
             android:text="距離:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
+
         <Spinner
-          android:id="@+id/spinner_of_running_place"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:entries="@array/spinner_of_running_place"
-          android:layout_below="@+id/editText_of_distance"
-          android:layout_toRightOf="@+id/text_of_running_invitation_place"
-          android:layout_marginTop="20dp"
-          ></Spinner>
+            android:id="@+id/spinner_of_running_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/text_of_running_invitation_place"
+            android:layout_alignBottom="@+id/text_of_running_invitation_place"
+            android:layout_toEndOf="@+id/text_of_running_invitation_place"
+            android:entries="@array/spinner_of_running_place"></Spinner>
+
         <TextView
             android:id="@+id/time_of_invitation_for_running"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/buttonTime"
+            android:layout_alignBottom="@+id/buttonTime"
+            android:layout_alignStart="@+id/text_of_running_invitation_place"
             android:text="時間:"
-            android:layout_below="@id/spinner_of_running_place"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
+
         <Button
             android:id="@+id/buttonTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="請選擇時間"
             android:layout_below="@id/spinner_of_running_place"
-            android:layout_toRightOf="@+id/time_of_invitation_for_running"
             android:layout_marginTop="25dp"
-            />
+            android:layout_toRightOf="@+id/time_of_invitation_for_running"
+            android:text="請選擇時間" />
 
 
     </RelativeLayout>
