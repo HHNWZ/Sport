@@ -7,9 +7,15 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.a888888888.sport.R;
@@ -28,6 +34,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,7 +80,47 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
+        Spinner spinner_of_running_place =(Spinner)view.findViewById(R.id.spinner_of_running_place);
+        String[]list_of_running_place=getResources().getStringArray(R.array.spinner_of_running_place);
+        ArrayAdapter<String>adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,list_of_running_place);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_of_running_place.setAdapter(adapter);
+        spinner_of_running_place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[]place_of_running=getResources().getStringArray(R.array.spinner_of_running_place);
+                Toast.makeText(getActivity(),"你點擊的是"+place_of_running[position], Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        final EditText edit_text_on_distance=(EditText)view.findViewById(R.id.editText_of_distance);
+        Button button_of_running_invitation_confirm=(Button)view.findViewById(R.id.button_of_running_invitation_confirm);
+
+
+
+
+
+        button_of_running_invitation_confirm.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                if("".equals(edit_text_on_distance.getText().toString().trim())){
+                    Toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
+                }else{
+                    final int distance_of_running=Integer.parseInt(edit_text_on_distance.getText().toString());
+                        if(distance_of_running<100||distance_of_running>5000){
+                            Toast.makeText(getActivity(), getResources().getString(R.string.value_maximum_and_minimum_of_running_distance), Toast.LENGTH_SHORT).show();
+                        }
+                }
+            }
+
+        });
 
         return view;
     }
