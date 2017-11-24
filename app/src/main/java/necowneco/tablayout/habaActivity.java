@@ -64,21 +64,12 @@ public class habaActivity extends AppCompatActivity
         resList.get(0).add("以下為留言");
         resList.get(1).add("以下為留言");
         resList.get(2).add("以下為留言");
-
-
+        BackArtList();
 
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("所有運動動");
-                onBackPressed();
-                Allsport all=Allsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        all,
-                        all.getTag()
-                ).commit();
+                BackArtList();
             }
         });
         sprun.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +163,16 @@ public class habaActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+    }
+
+    private void BackArtList(){
+        Allsport all=Allsport.newInstance(artTitle,"param2");
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                all,
+                all.getTag()
+        ).commit();
     }
 
 
