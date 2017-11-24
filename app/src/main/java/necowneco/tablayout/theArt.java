@@ -1,7 +1,6 @@
 package necowneco.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,11 +32,13 @@ public class theArt extends Fragment implements View.OnTouchListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
+    private static final String THEART_ID = "param4";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ArrayList<String> mParam3;
+    private int mParam4;
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,15 +53,17 @@ public class theArt extends Fragment implements View.OnTouchListener {
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @param param3 Parameter 3.
+     * @param param4 Parameter 4.
      * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
-    public static theArt newInstance(String param1, String param2, ArrayList param3) {
+    public static theArt newInstance(String param1, String param2, ArrayList param3, int param4) {
         theArt fragment = new theArt();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         args.putStringArrayList(ARG_PARAM3, param3);
+        args.putInt(THEART_ID,param4);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,6 +75,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
             mParam3 = getArguments().getStringArrayList(ARG_PARAM3);
+            mParam4 = getArguments().getInt(THEART_ID);
         }
     }
 
@@ -94,6 +97,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 mParam3
                 );
         theartReslist.setAdapter(theartreslist);
+        addartNewres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
         // Inflate the layout for this fragment
 
         return view;

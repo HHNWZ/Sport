@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -175,6 +174,7 @@ public class habaActivity extends AppCompatActivity
 
     }
 
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -245,21 +245,30 @@ public class habaActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
+        addartDATA(number);
+    }
+    private void addartDATA(String number){
         artID.add("00"+artID.size());
         int addid=artID.size()-1;
         userID.add(nowuser);
         artTitle.add(number);
         resList.add(new ArrayList<String>());
-        resList.get(addid).add("以下為留言");
+        addRes(addid,"以下為留言");
         Toast.makeText(this,
                 "使用者"+userID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
                 Toast.LENGTH_SHORT).
                 show();
-        theArt theart=theArt.newInstance(artTitle.get(addid),userID.get(addid),resList.get(addid));
+        toArtcon(addid);
+    }
+
+    private void toArtcon(int TargetID){
+        theArt theart=theArt.newInstance(artTitle.get(TargetID),userID.get(TargetID),resList.get(TargetID),TargetID);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.haba,theart,null)
                 .commit();
-
+    }
+    private void addRes(int TargetID,String resCon){
+        resList.get(TargetID).add(resCon);
     }
 }
