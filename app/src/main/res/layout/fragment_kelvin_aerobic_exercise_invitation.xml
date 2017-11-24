@@ -39,7 +39,7 @@
             android:layout_alignStart="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
             android:layout_below="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
             android:layout_marginTop="20dp"
-            android:text="挑戰開始時間:"
+            android:text="挑戰開始時間1:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
         <Button
