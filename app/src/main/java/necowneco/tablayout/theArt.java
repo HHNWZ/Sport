@@ -8,7 +8,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -17,24 +21,28 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Allsport.OnFragmentInteractionListener} interface
+ * {@link theArt.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Allsport#newInstance} factory method to
+ * Use the {@link theArt#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Allsport extends Fragment implements View.OnTouchListener {
+public class theArt extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+    private static final String THEART_ID = "param4";
 
     // TODO: Rename and change types of parameters
-    private ArrayList mParam1;
+    private String mParam1;
     private String mParam2;
+    private ArrayList<String> mParam3;
+    private int mParam4;
 
     private OnFragmentInteractionListener mListener;
 
-    public Allsport() {
+    public theArt() {
         // Required empty public constructor
     }
 
@@ -44,14 +52,18 @@ public class Allsport extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Allsport.
+     * @param param3 Parameter 3.
+     * @param param4 Parameter 4.
+     * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
-    public static Allsport newInstance(ArrayList<String> param1, String param2) {
-        Allsport fragment = new Allsport();
+    public static theArt newInstance(String param1, String param2, ArrayList param3, int param4) {
+        theArt fragment = new theArt();
         Bundle args = new Bundle();
-        args.putStringArrayList(String.valueOf(ARG_PARAM1), param1);
+        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putStringArrayList(ARG_PARAM3, param3);
+        args.putInt(THEART_ID,param4);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,31 +72,44 @@ public class Allsport extends Fragment implements View.OnTouchListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getStringArrayList(String.valueOf(ARG_PARAM1));
+            mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getStringArrayList(ARG_PARAM3);
+            mParam4 = getArguments().getInt(THEART_ID);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final View view = inflater.inflate(R.layout.fragment_allsport, null);
+        final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
         view.setOnTouchListener(this);
-        ListView Myartlist=(ListView)view.findViewById(R.id.myArtList);
-
-        ArrayAdapter<String> myartlist=new ArrayAdapter<String>(
+        final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
+        final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
+        final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
+        final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
+        final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
+        theartTitle.setText("貼文標題："+mParam1);
+        theartAut.setText("貼文作者："+mParam2);
+        ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
-                mParam1
-        );
-        Myartlist.setAdapter(myartlist);
+                mParam3
+                );
+        theartReslist.setAdapter(theartreslist);
+        addartNewres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+            }
+        });
         // Inflate the layout for this fragment
+
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String Tag, String number) {
+    public void onButtonPressed(String Tag,String number) {
         if (mListener != null) {
             mListener.onFragmentInteraction(Tag,number);
         }
@@ -124,6 +149,6 @@ public class Allsport extends Fragment implements View.OnTouchListener {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(String Tag, String number);
+        void onFragmentInteraction(String Tag,String number);
     }
 }

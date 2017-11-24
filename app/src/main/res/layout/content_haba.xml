@@ -13,8 +13,7 @@
         android:layout_width="384dp"
         android:layout_height="487dp"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        android:background="@drawable/talking">
+        tools:layout_editor_absoluteY="0dp">
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

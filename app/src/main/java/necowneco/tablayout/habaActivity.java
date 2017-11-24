@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,17 +16,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+
+import java.util.ArrayList;
 
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
         Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener{
+        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener,
+        theArt.OnFragmentInteractionListener{
 
+    final ArrayList<String> artID=new ArrayList<String>();
+    final ArrayList<String> userID=new ArrayList<String>();
+    final ArrayList<String> artTitle=new ArrayList<String>();
+    final ArrayList<ArrayList> resList=new ArrayList<>();
+    final String nowuser="369";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +49,27 @@ public class habaActivity extends AppCompatActivity
         final Button spair = (Button)findViewById(R.id.sp_air);
         final Button spsit = (Button)findViewById(R.id.sp_sit);
         final Button sppush = (Button)findViewById(R.id.sp_push);
+        artID.add("001");
+        artID.add("002");
+        artID.add("003");
+        userID.add("123");
+        userID.add("456");
+        userID.add("789");
+        artTitle.add("幹什麼");
+        artTitle.add("幹三小");
+        artTitle.add("幹朋友");
+        resList.add(new ArrayList<String>());
+        resList.add(new ArrayList<String>());
+        resList.add(new ArrayList<String>());
+        resList.get(0).add("以下為留言");
+        resList.get(1).add("以下為留言");
+        resList.get(2).add("以下為留言");
+        BackArtList();
+
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("所有運動動");
-                onBackPressed();
-                Allsport all=Allsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        all,
-                        all.getTag()
-                ).commit();
+                BackArtList();
             }
         });
         sprun.setOnClickListener(new View.OnClickListener() {
@@ -130,8 +147,13 @@ public class habaActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AddArt addart=AddArt.newInstance(nowuser,"param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        addart,
+                        addart.getTag()
+                ).commit();
             }
         });
 
@@ -142,6 +164,17 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
+
+    private void BackArtList(){
+        Allsport all=Allsport.newInstance(artTitle,"param2");
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                all,
+                all.getTag()
+        ).commit();
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -213,6 +246,30 @@ public class habaActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
+        addartDATA(number);
+    }
+    private void addartDATA(String number){
+        artID.add("00"+artID.size());
+        int addid=artID.size()-1;
+        userID.add(nowuser);
+        artTitle.add(number);
+        resList.add(new ArrayList<String>());
+        addRes(addid,"以下為留言");
+        Toast.makeText(this,
+                "使用者"+userID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
+                Toast.LENGTH_SHORT).
+                show();
+        toArtcon(addid);
+    }
 
+    private void toArtcon(int TargetID){
+        theArt theart=theArt.newInstance(artTitle.get(TargetID),userID.get(TargetID),resList.get(TargetID),TargetID);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.haba,theart,null)
+                .commit();
+    }
+    private void addRes(int TargetID,String resCon){
+        resList.get(TargetID).add(resCon);
     }
 }
