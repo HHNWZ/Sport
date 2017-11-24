@@ -1,6 +1,8 @@
 package kelvin.tablayout;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
+
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -20,10 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v4.app.FragmentManager;
+
+import android.support.v4.app.Fragment;
 
 import com.example.a888888888.sport.R;
-
+import java.lang.String;
 import java.util.GregorianCalendar;
 
 
@@ -43,6 +47,9 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     private Button doSetTime;
     private TextView textDate;
     private TimePickerDialog timePickerDialog;
+    static  String apple;
+    int hour_x;
+    int minute_x;
 
 
 
@@ -92,6 +99,16 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
         doSetTime=(Button)view.findViewById(R.id.buttonTime);
+        doSetTime.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DialogFragment newFragment=new TimePickerFragment();
+                        android.support.v4.app.FragmentManager fm =getActivity().getSupportFragmentManager();
+                        //newFragment.show(fm,"timePicker");要怎樣呼叫TimePickerFragment
+                    }
+                }
+        );
 
         Spinner spinner_of_running_place =(Spinner)view.findViewById(R.id.spinner_of_running_place);
         String[]list_of_running_place=getResources().getStringArray(R.array.spinner_of_running_place);
@@ -140,6 +157,11 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
         return view;
     }
+
+
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String Tag, String number) {

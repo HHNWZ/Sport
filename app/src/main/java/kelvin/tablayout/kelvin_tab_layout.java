@@ -42,11 +42,11 @@ public class kelvin_tab_layout extends AppCompatActivity
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
-    private int fc = 0; //fragment次數暫存
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int count = getFragmentManager().getBackStackEntryCount();
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && fc !=0 && count!=0) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 // Do something.
             Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);//kk
             startActivity(intentHome);
@@ -56,7 +56,6 @@ public class kelvin_tab_layout extends AppCompatActivity
         }
         if (count == 0) {
             super.onBackPressed();
-            fc=1;
             return true;
         }
         return super.onKeyDown(keyCode, event);
