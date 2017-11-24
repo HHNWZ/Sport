@@ -48,7 +48,7 @@ public class kelvin_tab_layout extends AppCompatActivity
         int count = getFragmentManager().getBackStackEntryCount();
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && fc !=0 && count!=0) {
 // Do something.
-            Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);
+            Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);//kk
             startActivity(intentHome);
 
             this.finish();
