@@ -8,10 +8,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,10 +33,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<String> mParam3;
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,14 +52,16 @@ public class theArt extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
+     * @param param3 Parameter 3.
      * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
-    public static theArt newInstance(String param1, String param2) {
+    public static theArt newInstance(String param1, String param2, ArrayList param3) {
         theArt fragment = new theArt();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putStringArrayList(ARG_PARAM3, param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,6 +72,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getStringArrayList(ARG_PARAM3);
         }
     }
 
@@ -69,11 +81,19 @@ public class theArt extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
         view.setOnTouchListener(this);
-        final TextView thearyTitle=(TextView)view.findViewById(R.id.theTitle);
-        final TextView thearyAut=(TextView)view.findViewById(R.id.theAut);
-        thearyTitle.setText(mParam1);
-        thearyAut.setText(mParam2);
-        Toast.makeText(getContext(), mParam1, Toast.LENGTH_SHORT).show();
+        final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
+        final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
+        final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
+        final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
+        final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
+        theartTitle.setText("貼文標題："+mParam1);
+        theartAut.setText("貼文作者："+mParam2);
+        ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
+                view.getContext(),
+                android.R.layout.simple_expandable_list_item_1,
+                mParam3
+                );
+        theartReslist.setAdapter(theartreslist);
         // Inflate the layout for this fragment
         return view;
     }

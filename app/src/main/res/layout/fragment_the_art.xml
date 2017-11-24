@@ -16,13 +16,32 @@
             android:id="@+id/theTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="貼文內容" />
+            android:text="貼文標題" />
 
         <TextView
             android:id="@+id/theAut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="貼文作者" />
+
+        <ListView
+            android:id="@+id/theReslist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/theNewres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/addNewres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
 
 </FrameLayout>

@@ -35,6 +35,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<String> artID=new ArrayList<String>();
     final ArrayList<String> userID=new ArrayList<String>();
     final ArrayList<String> artTitle=new ArrayList<String>();
+    final ArrayList<ArrayList> resList=new ArrayList<>();
     final String nowuser="369";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,13 @@ public class habaActivity extends AppCompatActivity
         artTitle.add("幹什麼");
         artTitle.add("幹三小");
         artTitle.add("幹朋友");
+        resList.add(new ArrayList<String>());
+        resList.add(new ArrayList<String>());
+        resList.add(new ArrayList<String>());
+        resList.get(0).add("以下為留言");
+        resList.get(1).add("以下為留言");
+        resList.get(2).add("以下為留言");
+
 
 
         spall.setOnClickListener(new View.OnClickListener() {
@@ -238,14 +246,16 @@ public class habaActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(String Tag, String number) {
         artID.add("00"+artID.size());
+        int addid=artID.size()-1;
         userID.add(nowuser);
         artTitle.add(number);
-        int addid=artID.size()-1;
+        resList.add(new ArrayList<String>());
+        resList.get(addid).add("以下為留言");
         Toast.makeText(this,
                 "使用者"+userID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
                 Toast.LENGTH_SHORT).
                 show();
-        theArt theart=theArt.newInstance(artTitle.get(addid),userID.get(addid));
+        theArt theart=theArt.newInstance(artTitle.get(addid),userID.get(addid),resList.get(addid));
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.haba,theart,null)

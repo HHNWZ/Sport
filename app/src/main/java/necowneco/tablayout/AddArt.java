@@ -83,7 +83,8 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final TextView test = (TextView)view.findViewById(R.id.testtext);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         final String nowuser=mParam1;
-        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(view.getContext(),
+        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
+                view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 SportList);
         spinner.setAdapter(sportlist);
