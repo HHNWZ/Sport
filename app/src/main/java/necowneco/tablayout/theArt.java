@@ -95,6 +95,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 );
         theartReslist.setAdapter(theartreslist);
         // Inflate the layout for this fragment
+
         return view;
     }
 
