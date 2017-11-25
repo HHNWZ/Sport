@@ -50,6 +50,7 @@
         android:orientation="horizontal">
 
     </RelativeLayout>
+
     <!--<LinearLayout
         android:id="@+id/fragment_kelvin_running_invitation"
         android:layout_width="match_parent"

@@ -43,4 +43,11 @@
     <string name="textE">維他命E是一抗氧化劑，能夠保護多重不飽和脂肪酸、脂肪油溶性物質的氧化。維他命E也是一種預防癌症及心臟血管毛病的抗氧化劑，對於改善血液循環、修護組織、月經來前不適症狀均有幫助。</string>
     <string name="textK">維他命K與骨骼形成具有密切關係，故此吸取充足維他命K有效預防骨質疏鬆症。維他命K並能將葡萄糖轉化為肝糖並貯存在肝臟，大部分食物都只含有少量維他命K。</string>
     <string name="action_settings">Settings</string>
+    <string-array name="spinner_of_running_place">
+        <item>泊油路</item>
+        <item>草皮</item>
+        <item>紅磚</item>
+    </string-array>
+    <string name="empty_of_edit_text">輸入格不能空</string>
+    <string name="value_maximum_and_minimum_of_running_distance">距離不能小於100米和大於5000米</string>
 </resources>
