@@ -91,7 +91,6 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
         theartTitle.setText("貼文標題："+mParam1);
         theartAut.setText("貼文作者："+mParam2);
-
         ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
