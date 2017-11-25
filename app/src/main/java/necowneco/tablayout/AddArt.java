@@ -92,7 +92,13 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 test.setText("按下送出");
-                onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
+                //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
+                ((habaActivity) getActivity()).addartDATA(
+                        ct.getText().toString(),
+                        spinner.getSelectedItem().toString(),
+                        cc.getText().toString()
+                );
+
                 /*getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.haba,new theArt(),null)

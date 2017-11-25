@@ -31,9 +31,12 @@ public class habaActivity extends AppCompatActivity
         Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener,
         theArt.OnFragmentInteractionListener{
 
+    final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
     final ArrayList<String> artID=new ArrayList<String>();
-    final ArrayList<String> userID=new ArrayList<String>();
+    final ArrayList<String> autID=new ArrayList<String>();
     final ArrayList<String> artTitle=new ArrayList<String>();
+    final ArrayList<String> artClass=new ArrayList<String>();
+    final ArrayList<String> artCon=new ArrayList<String>();
     final ArrayList<ArrayList> resList=new ArrayList<>();
     final String nowuser="369";
     @Override
@@ -52,12 +55,18 @@ public class habaActivity extends AppCompatActivity
         artID.add("001");
         artID.add("002");
         artID.add("003");
-        userID.add("123");
-        userID.add("456");
-        userID.add("789");
+        autID.add("123");
+        autID.add("456");
+        autID.add("789");
         artTitle.add("幹什麼");
         artTitle.add("幹三小");
         artTitle.add("幹朋友");
+        artClass.add(SportList[3]);
+        artClass.add(SportList[5]);
+        artClass.add(SportList[1]);
+        artCon.add("反覆橫跳100次!!");
+        artCon.add("反覆橫跳200次!!");
+        artCon.add("反覆橫跳300次!!");
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
@@ -69,7 +78,9 @@ public class habaActivity extends AppCompatActivity
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selsport.setText("全部");
                 BackArtList();
+                onBackPressed();
             }
         });
         sprun.setOnClickListener(new View.OnClickListener() {
@@ -246,30 +257,32 @@ public class habaActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
-        addartDATA(number);
+        BackArtList();
     }
-    private void addartDATA(String number){
-        artID.add("00"+artID.size());
-        int addid=artID.size()-1;
-        userID.add(nowuser);
-        artTitle.add(number);
+    public void addartDATA(String theTitle, String theClass,String  theCon){
+        int addid=artID.size();
+        artID.add("00"+(addid+1));
+        autID.add(nowuser);
+        artTitle.add(theTitle);
+        artClass.add(theClass);
+        artCon.add(theCon);
         resList.add(new ArrayList<String>());
         addRes(addid,"以下為留言");
         Toast.makeText(this,
-                "使用者"+userID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
+                "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
                 Toast.LENGTH_SHORT).
                 show();
         toArtcon(addid);
     }
 
     private void toArtcon(int TargetID){
-        theArt theart=theArt.newInstance(artTitle.get(TargetID),userID.get(TargetID),resList.get(TargetID),TargetID);
+        theArt theart=theArt.newInstance(artTitle.get(TargetID),autID.get(TargetID),resList.get(TargetID),TargetID);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.haba,theart,null)
                 .commit();
     }
-    private void addRes(int TargetID,String resCon){
+    public void addRes(int TargetID,String resCon){
         resList.get(TargetID).add(resCon);
     }
 }

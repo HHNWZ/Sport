@@ -91,6 +91,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
         theartTitle.setText("貼文標題："+mParam1);
         theartAut.setText("貼文作者："+mParam2);
+
         ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
@@ -101,6 +102,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+                ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
             }
         });
         // Inflate the layout for this fragment
