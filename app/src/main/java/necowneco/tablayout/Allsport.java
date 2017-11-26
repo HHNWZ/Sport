@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -79,6 +80,12 @@ public class Allsport extends Fragment implements View.OnTouchListener {
                 mParam1
         );
         Myartlist.setAdapter(myartlist);
+        Myartlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((habaActivity) getActivity()).toArtcon(position/*-1*/);
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }

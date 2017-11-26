@@ -275,8 +275,8 @@ public class habaActivity extends AppCompatActivity
         toArtcon(addid);
     }
 
-    private void toArtcon(int TargetID){
-        theArt theart=theArt.newInstance(artTitle.get(TargetID),autID.get(TargetID),resList.get(TargetID),TargetID);
+    public void toArtcon(int TargetID){
+        theArt theart=theArt.newInstance(artTitle.get(TargetID),autID.get(TargetID),resList.get(TargetID),TargetID,artCon.get(TargetID));
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.haba,theart,null)
