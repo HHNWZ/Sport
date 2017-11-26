@@ -101,6 +101,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+                ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
             }
         });
         // Inflate the layout for this fragment
