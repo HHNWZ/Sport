@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -28,6 +31,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    int walking_set_count;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,6 +72,31 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this
         View view = inflater.inflate(R.layout.fragment_kelvin_walking_invitation, null);
         view.setOnTouchListener(this);
+        final EditText editText_of_walking_set_count=(EditText)view.findViewById(R.id.editText_of_walking_set_count);
+        Button button_of_walking_invitation_confirm=(Button)view.findViewById(R.id.button_of_walking_invitation_confirm);
+
+
+
+
+
+        button_of_walking_invitation_confirm.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                if("".equals(editText_of_walking_set_count.getText().toString().trim())){
+                    Toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
+                }else{
+                    walking_set_count=Integer.parseInt(editText_of_walking_set_count.getText().toString());
+                    if(walking_set_count<100||walking_set_count>50000){
+                        Toast.makeText(getActivity(), "步數不能小於100或大於50000", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                Toast.makeText(getActivity(), "步數是:"+walking_set_count, Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
 
 
         return view;
