@@ -83,7 +83,7 @@ public class Allsport extends Fragment implements View.OnTouchListener {
         Myartlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((habaActivity) getActivity()).toArtcon(position/*-1*/);
+                ((habaActivity) getActivity()).toArtcon(position);
             }
         });
         // Inflate the layout for this fragment
