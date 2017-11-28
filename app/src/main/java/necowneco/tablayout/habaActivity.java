@@ -182,7 +182,6 @@ public class habaActivity extends AppCompatActivity
             Toast.makeText(this, "篩選："+SearchValue, Toast.LENGTH_SHORT).show();
         }
         ToSearchList();
-
     }
 
     public void BackArtList(){
