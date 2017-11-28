@@ -74,7 +74,6 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
         final View view = inflater.inflate(R.layout.fragment_allsport, null);
         view.setOnTouchListener(this);
         ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
-
         ArrayAdapter<String> searchartlist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
