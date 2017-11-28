@@ -18,6 +18,25 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+            <SearchView
+                android:id="@+id/searchValuebtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/search_Value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="請輸入關鍵字" />
+
+            <Button
+                android:id="@+id/search_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="搜尋" />
+
             <Button
                 android:id="@+id/sp_all"
                 android:layout_width="match_parent"
