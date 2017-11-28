@@ -2,6 +2,7 @@ package kelvin.tablayout;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class kelvin_tab_layout extends AppCompatActivity
         kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
         kelvin_push_up_invitation.OnFragmentInteractionListener,
         kelvin_sit_up_invitation.OnFragmentInteractionListener{
+
 
     Toolbar toolbar;
     TabLayout tabLayout;
@@ -64,5 +66,10 @@ public class kelvin_tab_layout extends AppCompatActivity
     @Override
     public void onFragmentInteraction(String Tag, String number) {
 
+    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }
