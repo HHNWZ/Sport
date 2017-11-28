@@ -71,9 +71,10 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_allsport, null);
+        final View view = inflater.inflate(R.layout.fragment_search_art_list, null);
         view.setOnTouchListener(this);
         ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
+
         ArrayAdapter<String> searchartlist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
@@ -86,6 +87,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
                 ((habaActivity) getActivity()).toArtcon(mParam2.get(position));
             }
         });
+
         // Inflate the layout for this fragment
         return view;
     }

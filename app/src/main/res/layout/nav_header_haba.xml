@@ -28,8 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="請輸入關鍵字" />
+                android:inputType="textPersonName"/>
 
             <Button
                 android:id="@+id/search_btn"
@@ -49,35 +48,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="跑步" />
+                android:text="有氧運動" />
 
             <Button
                 android:id="@+id/sp_walk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="走路" />
+                android:text="跑步" />
 
             <Button
                 android:id="@+id/sp_air"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="有氧" />
+                android:text="走路" />
 
             <Button
                 android:id="@+id/sp_sit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="仰臥起坐" />
+                android:text="伏地挺身" />
 
             <Button
                 android:id="@+id/sp_push"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="伏地挺身" />
+                android:text="仰臥起坐" />
 
         </LinearLayout>
 
