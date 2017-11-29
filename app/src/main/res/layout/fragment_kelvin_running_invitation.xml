@@ -124,7 +124,7 @@
             android:layout_marginTop="25dp"
             android:layout_toRightOf="@+id/time_of_invitation_for_running"
             android:text="請選擇時間"
-            android:onClick="showTimePickerDialog"
+
             />
 
 

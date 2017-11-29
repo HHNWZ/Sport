@@ -68,8 +68,5 @@ public class kelvin_tab_layout extends AppCompatActivity
 
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
+
 }
