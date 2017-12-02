@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.Null;
 import com.example.a888888888.sport.R;
 
 import java.util.ArrayList;
@@ -113,8 +114,18 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
                     }
 
                 }
+                if (data == null || data.length() <= 0){
+                    Toast.makeText(getActivity(), "no Selected Students", Toast.LENGTH_LONG).show();
+                } else{
+                    Toast.makeText(getActivity(), "Selected Students: \n" + data, Toast.LENGTH_LONG).show();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragment_kelvin_running_invitation,new Null(),null)
+                            .addToBackStack(null)
+                            .commit();
+                }
 
-                Toast.makeText(getActivity(), "Selected Students: \n" + data, Toast.LENGTH_LONG).show();
+
             }
         });
         return view;

@@ -56,8 +56,8 @@ public class KelvinRunningFragment extends Fragment {
     private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
     private static final int NEGATIVE_STACKED_DATA = 4;
 
-    private ColumnChartView chart;
-    private ColumnChartData data;
+    private ColumnChartView chart_of_running_today_record;
+    private ColumnChartData data_of_running_today_record;
     private boolean hasAxes = true;
     private boolean hasAxesNames = true;
     private boolean hasLabels = false;
@@ -78,9 +78,9 @@ public class KelvinRunningFragment extends Fragment {
         TextView text_view_of_today_record_data = (TextView) rootView.findViewById(R.id.text_view_of_today_record_data);
         TextView text_view_of_lowest_record_data = (TextView) rootView.findViewById(R.id.text_view_of_lowest_record_data);
         TextView text_view_of_highest_record_data = (TextView) rootView.findViewById(R.id.text_view_of_highest_record_data);
-        chart = (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
+        chart_of_running_today_record = (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());
-        chart.setZoomEnabled(false);
+        chart_of_running_today_record.setZoomEnabled(false);
         generateData();
         final Button button_of_invitation = (Button) rootView.findViewById(R.id.button_of_invitation);
         //button_of_invitation.setVisibility(View.VISIBLE);
@@ -202,7 +202,7 @@ public class KelvinRunningFragment extends Fragment {
 
             values = new ArrayList<SubcolumnValue>();
             for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 10f + 5, ChartUtils.pickColor()));
+                values.add(new SubcolumnValue((float) Math.random() * 10f + 5, ChartUtils.COLOR_BLUE));
             }
 
             Column column = new Column(values);
@@ -211,7 +211,7 @@ public class KelvinRunningFragment extends Fragment {
             columns.add(column);
         }
 
-        data = new ColumnChartData(columns);
+        data_of_running_today_record = new ColumnChartData(columns);
 
         if (hasAxes) {
             Axis axisX = new Axis();
@@ -219,15 +219,23 @@ public class KelvinRunningFragment extends Fragment {
             if (hasAxesNames) {
                 axisX.setName("X軸");
                 axisY.setName("Y軸");
+                axisX.setLineColor(Color.BLACK);// 设置X轴轴线颜色
+                axisY.setLineColor(Color.BLACK);// 设置Y轴轴线颜色
+                axisX.setTextColor(Color.BLACK);// 设置X轴文字颜色
+                axisY.setTextColor(Color.BLACK);// 设置Y轴文字颜色
+                axisX.setTextSize(14);// 设置X轴文字大小
+                axisY.setTextSize(14);
+
+
             }
-            data.setAxisXBottom(axisX);
-            data.setAxisYLeft(axisY);
+            data_of_running_today_record.setAxisXBottom(axisX);
+            data_of_running_today_record.setAxisYLeft(axisY);
         } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
+            data_of_running_today_record.setAxisXBottom(null);
+            data_of_running_today_record.setAxisYLeft(null);
         }
 
-        chart.setColumnChartData(data);
+        chart_of_running_today_record.setColumnChartData(data_of_running_today_record);
 
     }
 

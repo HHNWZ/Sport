@@ -79,6 +79,11 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
             public void onClick(View v) {
 
                 Toast.makeText(getActivity(), "步數是:", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                        .addToBackStack(null)
+                        .commit();
             }
 
 
