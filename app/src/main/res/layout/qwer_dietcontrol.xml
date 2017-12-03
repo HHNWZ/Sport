@@ -1,118 +1,105 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/white"
-    android:orientation="vertical"
     android:clickable="true"
+    android:weightSum="4"
+    android:orientation="vertical"
     tools:context="qwer.Dietcontrol">
+
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srcCompat="@drawable/white"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
-
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/angry_btn"
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
 
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="7dp"
+                android:layout_height="285dp"
+                android:layout_above="@+id/angry_bt2"
+                android:layout_toStartOf="@+id/angry_bt2"
                 android:layout_weight="1"
-                android:background="@drawable/buttonshape"
+                android:background="@drawable/eatorange"
                 android:shadowColor="#86A89B"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
                 android:text="常見食物熱量"
-                android:textColor="#FFDB29"
-                android:textSize="32sp" />
-
-            <Button
-                android:id="@+id/angry_bt2"
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/angry_bt1"
-                android:layout_toStartOf="@+id/angry_bt1"
-                android:layout_weight="1"
-                android:background="@drawable/buttonshape2"
-                android:shadowColor="#86A89B"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:text="營養師諮詢"
-                android:textColor="#FFDB29"
-                android:textSize="32sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/angry_bt1"
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_alignBottom="@+id/angry_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="285dp"
+                android:layout_above="@+id/angry_bt2"
                 android:layout_toEndOf="@+id/angry_btn"
                 android:layout_weight="1"
-                android:background="@drawable/buttonshape1"
+                android:background="@drawable/eatblue"
                 android:shadowColor="#A8A319"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="熱量計算"
-                android:textColor="#FFDB29"
-                android:textSize="32sp" />
+                android:text="檢測工具"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/angry_bt2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_weight="1"
+
+                android:background="@drawable/eatpurple"
+                android:shadowColor="#86A89B"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="日記"
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/angry_btn3"
 
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
 
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/angry_bt1"
-                android:layout_toEndOf="@+id/angry_bt2"
+                android:layout_below="@+id/angry_btn"
+                android:layout_toStartOf="@+id/angry_bt2"
+
                 android:layout_weight="1"
-                android:background="@drawable/buttonshape3"
+                android:background="@drawable/eatpink"
                 android:shadowColor="#86A89B"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
                 android:text="攝取建議"
-                android:textColor="#FFDB29"
-                android:textSize="32sp" />
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
         </LinearLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.kelvin_walking_invitation">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/title_of_walking_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="步行邀請內容"
+            android:textColor="@android:color/black"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/text_of_walking_set_count_for_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/title_of_walking_invitation"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="步數:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editText_of_walking_set_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_walking_invitation"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/text_of_walking_set_count_for_invitation"
+            android:ems="4"
+            android:hint="輸入步數"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/text_of_walking_set_count_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_walking_invitation"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/editText_of_walking_set_count"
+            android:text="步"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/button_of_walking_invitation_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="41dp"
+            android:text="確認" />
+    </RelativeLayout>
+
+</RelativeLayout>

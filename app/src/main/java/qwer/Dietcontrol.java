@@ -72,8 +72,8 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         return view;
     }
-
     @Override
+
     public boolean onTouch(View v, MotionEvent event) {
         return false;
     }

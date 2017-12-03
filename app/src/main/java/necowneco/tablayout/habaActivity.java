@@ -1,30 +1,48 @@
 package necowneco.tablayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+
+import java.util.ArrayList;
 
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
         Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener{
+        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener,
+        theArt.OnFragmentInteractionListener,SearchArtList.OnFragmentInteractionListener{
 
+    final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
+    final ArrayList<String> artID=new ArrayList<String>();
+    final ArrayList<String> autID=new ArrayList<String>();
+    final ArrayList<String> artTitle=new ArrayList<String>();
+    final ArrayList<String> artClass=new ArrayList<String>();
+    final ArrayList<String> artCon=new ArrayList<String>();
+    final ArrayList<ArrayList> resList=new ArrayList<>();
+    final ArrayList<String> searchsol=new ArrayList<String>();
+    final ArrayList<Integer> searchsolid=new ArrayList<Integer>();
+    final String nowuser="369";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,88 +56,85 @@ public class habaActivity extends AppCompatActivity
         final Button spair = (Button)findViewById(R.id.sp_air);
         final Button spsit = (Button)findViewById(R.id.sp_sit);
         final Button sppush = (Button)findViewById(R.id.sp_push);
+        final EditText SearchValue=(EditText) findViewById(R.id.search_Value);
+        final Button SearchBtn=(Button)findViewById(R.id.search_btn);
+        artID.add("001");
+        artID.add("002");
+        artID.add("003");
+        autID.add("123");
+        autID.add("456");
+        autID.add("789");
+        artTitle.add("遊俠遠程機具");
+        artTitle.add("遊俠入門武器");
+        artTitle.add("超遠程攻擊武器");
+        artClass.add(SportList[3]);
+        artClass.add(SportList[5]);
+        artClass.add(SportList[1]);
+        artCon.add("衝鋒槍射速高攻擊力低跑速快");
+        artCon.add("弓箭可蓄力同時編製術式強力擊發");
+        artCon.add("重型狙擊槍一發秒殺破壞地形強無敵");
+        resList.add(new ArrayList<String>());
+        resList.add(new ArrayList<String>());
+        resList.add(new ArrayList<String>());
+        resList.get(0).add("以下為留言");
+        resList.get(1).add("以下為留言");
+        resList.get(2).add("以下為留言");
+        BackArtList();
+        SearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SelAndSearch(SearchValue.getText().toString(),true);
+                SearchValue.setText("");
+                onBackPressed();
+
+            }
+        });
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("所有運動動");
+                selsport.setText("全部");
+                BackArtList();
                 onBackPressed();
-                Allsport all=Allsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        all,
-                        all.getTag()
-                ).commit();
             }
         });
         sprun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("跑跑跑跑步");
+                selsport.setText("有氧氧運動");
+                SelAndSearch(SportList[1],false);
                 onBackPressed();
-                Runsport run=Runsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        run,
-                        run.getTag()
-                ).commit();
             }
         });
         spwalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("走走走走路");
+                selsport.setText("走路路");
+                SelAndSearch(SportList[2],false);
                 onBackPressed();
-                Walksport walk=Walksport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        walk,
-                        walk.getTag()
-                ).commit();
             }
         });
         spair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("有有有氧氧");
+                selsport.setText("跑步步");
+                SelAndSearch(SportList[3],false);
                 onBackPressed();
-                Airsport air=Airsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        air,
-                        air.getTag()
-                ).commit();
             }
         });
         spsit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("仰仰臥起坐坐");
+                selsport.setText("伏地挺身身");
+                SelAndSearch(SportList[4],false);
                 onBackPressed();
-                Sitsport sit=Sitsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        sit,
-                        sit.getTag()
-                ).commit();
             }
         });
         sppush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("伏地地挺身身");
+                selsport.setText("仰臥起坐坐");
+                SelAndSearch(SportList[5],false);
                 onBackPressed();
-                Pushsport push=Pushsport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        push,
-                        push.getTag()
-                ).commit();
             }
         });
 
@@ -127,10 +142,16 @@ public class habaActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                AddArt addart=AddArt.newInstance(nowuser,"param2");
+                FragmentManager manager=getSupportFragmentManager();
+                manager.beginTransaction().replace(
+                        R.id.haba,
+                        addart,
+                        addart.getTag()
+                ).commit();
             }
         });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -140,6 +161,59 @@ public class habaActivity extends AppCompatActivity
 
     }
 
+    private void SelAndSearch(String SearchValue, boolean FunctionType) {//Type=true:搜尋,false:篩選
+        searchsol.clear();
+        searchsolid.clear();
+        if(FunctionType) {
+            for (int i = 0; i < artID.size(); i++) {
+                if (artTitle.get(i).contains(SearchValue)||artCon.get(i).contains(SearchValue)) {
+                    searchsol.add(artTitle.get(i));
+                    searchsolid.add(i);
+                }
+            }
+            Toast.makeText(this, "搜尋："+SearchValue, Toast.LENGTH_SHORT).show();
+        }else{
+            for (int i = 0; i < artID.size(); i++) {
+                if (artClass.get(i)==SearchValue) {
+                    searchsol.add(artTitle.get(i));
+                    searchsolid.add(i);
+                }
+            }
+            Toast.makeText(this, "篩選："+SearchValue, Toast.LENGTH_SHORT).show();
+        }
+        ToSearchList();
+    }
+
+    public void BackArtList(){
+        Allsport all=Allsport.newInstance(artTitle,"param2");
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                all,
+                all.getTag()
+        ).commit();
+    }
+    public void ToSearchList(){
+        SearchArtList searchartlist=SearchArtList.newInstance(searchsol,searchsolid);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                searchartlist,
+                searchartlist.getTag()
+        ).commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+// Do something.
+            Intent intentHome= new Intent(habaActivity.this,MainActivity.class);
+            startActivity(intentHome);
+            this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }//返回鍵的設定
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -199,6 +273,32 @@ public class habaActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
+        BackArtList();
+    }
+    public void addartDATA(String theTitle, String theClass,String  theCon){
+        int addid=artID.size();
+        artID.add("00"+(addid+1));
+        autID.add(nowuser);
+        artTitle.add(theTitle);
+        artClass.add(theClass);
+        artCon.add(theCon);
+        resList.add(new ArrayList<String>());
+        addRes(addid,"以下為留言");
+        Toast.makeText(this,
+                "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
+                Toast.LENGTH_SHORT).
+                show();
+        toArtcon(addid);
+    }
 
+    public void toArtcon(int TargetID){
+        theArt theart=theArt.newInstance(artTitle.get(TargetID),autID.get(TargetID),resList.get(TargetID),TargetID,artCon.get(TargetID));
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.haba,theart,null)
+                .commit();
+    }
+    public void addRes(int TargetID,String resCon){
+        resList.get(TargetID).add(resCon);
     }
 }

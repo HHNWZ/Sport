@@ -69,8 +69,8 @@ public class Sport extends Fragment implements View.OnTouchListener {
         Button run = (Button) view.findViewById(R.id.button5);
         Button walk = (Button) view.findViewById(R.id.button6);
         Button air = (Button) view.findViewById(R.id.button7);
-        Button sit = (Button) view.findViewById(R.id.button8);
-        Button push = (Button) view.findViewById(R.id.button9);
+        Button push = (Button) view.findViewById(R.id.button8);
+        Button sit = (Button) view.findViewById(R.id.button9);
         run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
