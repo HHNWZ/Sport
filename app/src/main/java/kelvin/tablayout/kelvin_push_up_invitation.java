@@ -78,6 +78,11 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
             public void onClick(View v) {
 
                 Toast.makeText(getActivity(), "點擊了伏地挺身確認按鈕", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                        .addToBackStack(null)
+                        .commit();
             }
 
 

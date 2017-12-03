@@ -140,9 +140,16 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
                     distance_of_running=Integer.parseInt(edit_text_on_distance.getText().toString());
                         if(distance_of_running<100||distance_of_running>5000){
                             Toast.makeText(getActivity(), getResources().getString(R.string.value_maximum_and_minimum_of_running_distance), Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getActivity(), "場地是:"+placeOfrunning+"距離是:"+distance_of_running+"時間是:"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                                    .addToBackStack(null)
+                                    .commit();
                         }
                 }
-                Toast.makeText(getActivity(), "場地是:"+placeOfrunning+"距離是:"+distance_of_running+"時間是:"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT).show();
+
             }
 
 
@@ -157,23 +164,6 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
             }
         });
-        /*Button test1=(Button)view.findViewById(R.id.button19);
-        test1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = getArguments();
-
-                if(bundle !=null)
-                {
-                    String test = bundle.getString("test");
-                    Toast.makeText(getActivity(), "hour=" + test, Toast.LENGTH_SHORT).show();               //Bundle為空
-                }
-                else
-                {
-                    Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
 
         return view;
     }

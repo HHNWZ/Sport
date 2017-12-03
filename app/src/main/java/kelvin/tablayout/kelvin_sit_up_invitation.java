@@ -78,6 +78,11 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
             public void onClick(View v) {
 
                 Toast.makeText(getActivity(), "點擊了仰臥起坐確認按鈕", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                        .addToBackStack(null)
+                        .commit();
             }
 
 
