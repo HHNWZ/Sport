@@ -93,6 +93,11 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                     }
                 }
                 Toast.makeText(getActivity(), "步數是:"+walking_set_count, Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                        .addToBackStack(null)
+                        .commit();
             }
 
 

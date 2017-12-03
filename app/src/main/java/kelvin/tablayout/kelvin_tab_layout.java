@@ -2,6 +2,7 @@ package kelvin.tablayout;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,10 @@ public class kelvin_tab_layout extends AppCompatActivity
         implements kelvin_running_invitation.OnFragmentInteractionListener,kelvin_walking_invitation.OnFragmentInteractionListener,
         kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
         kelvin_push_up_invitation.OnFragmentInteractionListener,
-        kelvin_sit_up_invitation.OnFragmentInteractionListener{
+        kelvin_sit_up_invitation.OnFragmentInteractionListener,
+        kelvin_running_tag_friend.OnFragmentInteractionListener
+{
+
 
     Toolbar toolbar;
     TabLayout tabLayout;
@@ -36,7 +40,7 @@ public class kelvin_tab_layout extends AppCompatActivity
         viewPagerAdapter.addFragments(new KelvinWalkingFragment(),"步行");
         viewPagerAdapter.addFragments(new KelvinAerobicExerciseFragment(),"有氧運動");
         viewPagerAdapter.addFragments(new KelvinSitUpsFragment(),"仰臥起坐");
-        viewPagerAdapter.addFragments(new KelvinPushUpFragment(),"伏地挺身 ");
+        viewPagerAdapter.addFragments(new KelvinPushUpFragment(),"伏地挺身 ");//跟新
 
 
         viewPager.setAdapter(viewPagerAdapter);
@@ -46,14 +50,13 @@ public class kelvin_tab_layout extends AppCompatActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int count = getFragmentManager().getBackStackEntryCount();
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-// Do something.
+        /*if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);//kk
             startActivity(intentHome);
 
             this.finish();
             return true;
-        }
+        }*/
         if (count == 0) {
             super.onBackPressed();
             return true;
@@ -65,4 +68,6 @@ public class kelvin_tab_layout extends AppCompatActivity
     public void onFragmentInteraction(String Tag, String number) {
 
     }
+
+
 }

@@ -6,6 +6,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
@@ -20,8 +31,73 @@ public class  MainActivity extends AppCompatActivity
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener
 {
 
+    private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
+    private static final String TAG = "MainActivity";
+    private TextView rundata;
+    private TextView walkdata;
+    private TextView airdata;
+    private TextView pushdata;
+    private TextView sitdata;
+    com.android.volley.RequestQueue requestQueue;
+    private void getData() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        System.out.println(response.toString());
+                        try {
+                            JSONArray data = response.getJSONArray("data");
+                            //這邊要和上面json的名稱一樣
+                            //下邊是把全部資料都印出來
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject jasondata = data.getJSONObject(i);
+                                rundata.setText(jasondata.getString("run"));
+                                walkdata.setText(jasondata.getString("walk"));
+                                airdata.setText(jasondata.getString("air"));
+                                sitdata.setText(jasondata.getString("sit"));
+                                pushdata.setText(jasondata.getString("push"));
+                            }
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.append(error.getMessage());
+                    }
+                });
+        requestQueue.add(jsonObjectRequest);
+        /*StringRequest stringRequest = new StringRequest(
+                showUri,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d(TAG, "response = " + response.toString());
 
+                        parserJson(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG, "error : " + error.toString());
+                    }
+                }
+        );
+        Volley.newRequestQueue(this).add(stringRequest);
+    }
+    private void parserJson(String data) {
+        try {
+            JSONArray JA = new JSONArray(data);
+            for (int i = 0; i < JA.length(); i++) {
+                JSONObject JO = (JSONObject) JA.get(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +107,13 @@ public class  MainActivity extends AppCompatActivity
         Button del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
         Button over = (Button)findViewById(R.id.button3); //連至直播的按鈕
         Button sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        rundata =(TextView)findViewById(R.id.textView6);
+        walkdata =(TextView)findViewById(R.id.textView7);
+        airdata =(TextView)findViewById(R.id.textView8);
+        pushdata =(TextView)findViewById(R.id.textView10);
+        sitdata =(TextView)findViewById(R.id.textView9);
+        getData();
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

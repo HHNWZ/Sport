@@ -5,8 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -18,7 +21,7 @@ import com.example.a888888888.sport.R;
  * Use the {@link kelvin_push_up_invitation#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class kelvin_push_up_invitation extends Fragment {
+public class kelvin_push_up_invitation extends Fragment implements View.OnTouchListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,7 +68,27 @@ public class kelvin_push_up_invitation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kelvin_push_up_invitation, container, false);
+        View view = inflater.inflate(R.layout.fragment_kelvin_push_up_invitation, null);
+        view.setOnTouchListener(this);
+        final Button button_of_aerobic_push_up_invitation_confirm=(Button)view.findViewById(R.id.button_of_push_up_invitation_confirm);
+        button_of_aerobic_push_up_invitation_confirm.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getActivity(), "點擊了伏地挺身確認按鈕", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+
+
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +113,11 @@ public class kelvin_push_up_invitation extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
     }
 
     /**
