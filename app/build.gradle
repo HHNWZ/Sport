@@ -33,6 +33,4 @@ dependencies {
     compile 'com.ms-square:expandableTextView:0.1.4'
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile "cz.msebera.android:httpclient:4.4.1.1"
-    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
-    compile 'de.hdodenhof:circleimageview:2.2.0'
 }

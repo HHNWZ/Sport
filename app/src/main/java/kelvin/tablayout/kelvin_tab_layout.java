@@ -40,7 +40,7 @@ public class kelvin_tab_layout extends AppCompatActivity
         viewPagerAdapter.addFragments(new KelvinWalkingFragment(),"步行");
         viewPagerAdapter.addFragments(new KelvinAerobicExerciseFragment(),"有氧運動");
         viewPagerAdapter.addFragments(new KelvinSitUpsFragment(),"仰臥起坐");
-        viewPagerAdapter.addFragments(new KelvinPushUpFragment(),"伏地挺身 ");
+        viewPagerAdapter.addFragments(new KelvinPushUpFragment(),"伏地挺身 ");//跟新
 
 
         viewPager.setAdapter(viewPagerAdapter);
