@@ -96,7 +96,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
             }
 
 
-        });
+        });//
 
 
         return view;
