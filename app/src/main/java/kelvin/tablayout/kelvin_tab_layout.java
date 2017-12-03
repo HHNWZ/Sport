@@ -48,14 +48,13 @@ public class kelvin_tab_layout extends AppCompatActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int count = getFragmentManager().getBackStackEntryCount();
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-// Do something.
+        /*if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);//kk
             startActivity(intentHome);
 
             this.finish();
             return true;
-        }
+        }*/
         if (count == 0) {
             super.onBackPressed();
             return true;
