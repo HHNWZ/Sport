@@ -244,7 +244,6 @@ public class habaActivity extends AppCompatActivity
                 SelAndSearch(query,true);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
