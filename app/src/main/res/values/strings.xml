@@ -2,6 +2,8 @@
     <string name="app_name">交流型運動app</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="search_title">搜尋標題</string>
+    <string name="search_hint">請輸入關鍵字</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_haba">habaActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
