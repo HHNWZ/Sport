@@ -1,38 +1,27 @@
 package kelvin.tablayout;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.support.v4.app.FragmentManager;
-
-import android.support.v4.app.Fragment;
 
 import com.example.a888888888.sport.R;
 import java.lang.String;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.text.DecimalFormat;
 
 
 /**
@@ -49,15 +38,17 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Button doSetTime;
-    private TextView textDate;
-    private TimePickerDialog timePickerDialog;
-    static  String apple;
-    int hour_x;
-    int minute_x;
     public static final int REQUEST=1;
+
     public String hour_of_kelvin_running_invitation;
     public String minute_of_kelvin_running_invitation;
+    public TextView show_select_time_of_running_invitation_for_start;
+    DecimalFormat mDecimalFormat = new DecimalFormat("##00");
+    public EditText edit_text_on_distance;
+    public InputMethodManager imm_of_running_invitation;
+    public Toast toast;
+
+
 
 
 
@@ -97,6 +88,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        imm_of_running_invitation = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
 
     }
 
@@ -106,13 +99,15 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
-
+        edit_text_on_distance=(EditText)view.findViewById(R.id.editText_of_distance);
+        edit_text_on_distance.requestFocus();
 
         Spinner spinner_of_running_place =(Spinner)view.findViewById(R.id.spinner_of_running_place);
         String[]list_of_running_place=getResources().getStringArray(R.array.spinner_of_running_place);
         ArrayAdapter<String>adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,list_of_running_place);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_of_running_place.setAdapter(adapter);
+        show_select_time_of_running_invitation_for_start=(TextView)view.findViewById(R.id.text_view_of_show_select_time_for_start_running);
         spinner_of_running_place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
@@ -127,7 +122,10 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
             }
         });
-        final EditText edit_text_on_distance=(EditText)view.findViewById(R.id.editText_of_distance);
+
+
+
+
         Button button_of_running_invitation_confirm=(Button)view.findViewById(R.id.button_of_running_invitation_confirm);
         button_of_running_invitation_confirm.setOnClickListener(new View.OnClickListener() {
 
@@ -135,18 +133,36 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             @Override
             public void onClick(View v) {
                 if("".equals(edit_text_on_distance.getText().toString().trim())){
-                    Toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
+                    toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
+                    edit_text_on_distance.requestFocus();
+                    //imm2 = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm_of_running_invitation.showSoftInput(edit_text_on_distance, 0);
+
                 }else{
                     distance_of_running=Integer.parseInt(edit_text_on_distance.getText().toString());
                         if(distance_of_running<100||distance_of_running>5000){
-                            Toast.makeText(getActivity(), getResources().getString(R.string.value_maximum_and_minimum_of_running_distance), Toast.LENGTH_SHORT).show();
+                            toast.makeText(getActivity(), getResources().getString(R.string.value_maximum_and_minimum_of_running_distance), Toast.LENGTH_SHORT).show();
+                            edit_text_on_distance.setText(" ");
+                            imm_of_running_invitation.showSoftInput(edit_text_on_distance, 0);
                         }else{
-                            Toast.makeText(getActivity(), "場地是:"+placeOfrunning+"距離是:"+distance_of_running+"時間是:"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT).show();
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
-                                    .addToBackStack(null)
-                                    .commit();
+                            if(hour_of_kelvin_running_invitation==null||minute_of_kelvin_running_invitation==null){
+                                toast.makeText(getActivity(), "請選擇時間", Toast.LENGTH_SHORT).show();
+                                DialogFragment newFragment = new TimePickerFragmentOfstartTime();
+                                newFragment.setTargetFragment(kelvin_running_invitation.this,REQUEST);
+                                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                            }else{
+                                toast=Toast.makeText(getActivity(), "場地是:"+placeOfrunning+"距離是:"+distance_of_running+"時間是:"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT);
+                                toast.show();
+
+                                getActivity().getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                                        .addToBackStack(null)
+                                        .commit();
+                            }
+
+
+
                         }
                 }
 
@@ -158,15 +174,18 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         button_of_set_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new TimePickerFragment();
+                DialogFragment newFragment = new TimePickerFragmentOfstartTime();
                 newFragment.setTargetFragment(kelvin_running_invitation.this,REQUEST);
                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+
+
 
             }
         });
 
         return view;
     }
+
 
 
 
@@ -230,11 +249,13 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == REQUEST){
-            hour_of_kelvin_running_invitation = data.getStringExtra(TimePickerFragment.HOUR_OF_TIME_PICKER_FRAGMENT);
-            minute_of_kelvin_running_invitation=data.getStringExtra(TimePickerFragment.MINUTE_OF_TIME_PICKER_FRAGMENT);
+            minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfstartTime.MINUTE_OF_TIME_PICKER_FRAGMENT)));
+            hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfstartTime.HOUR_OF_TIME_PICKER_FRAGMENT)));
+
+            show_select_time_of_running_invitation_for_start.setText("時間是"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation);
     }
 
- }
+  }
 }
 
 

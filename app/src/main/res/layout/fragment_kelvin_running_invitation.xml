@@ -52,7 +52,9 @@
             android:hint="輸入距離"
             android:inputType="number"
             android:singleLine="true"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <!--<Spinner
            android:id="@+id/spinner_of_distance"
@@ -92,7 +94,7 @@
             android:layout_below="@+id/text_of_running_invitation_distance"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
-            android:text="距離:"
+            android:text="場地:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -126,6 +128,17 @@
             android:text="請選擇時間"
 
             />
+
+        <TextView
+            android:id="@+id/text_view_of_show_select_time_for_start_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/time_of_invitation_for_running"
+            android:layout_below="@+id/button_set_time_of_running_invitation"
+            android:layout_marginTop="18dp"
+            android:text=""
+            android:textSize="30sp"
+            android:textColor="@android:color/black"/>
 
 
     </RelativeLayout>

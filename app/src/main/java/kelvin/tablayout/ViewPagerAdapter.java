@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
-import static android.R.attr.fragment;
-
 /**
  * Created by 888888888 on 2017/10/22.
  */
