@@ -1,5 +1,7 @@
 package necowneco.tablayout;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,8 +15,10 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -227,7 +231,24 @@ public class habaActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.haba, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.haba, menu);
+        MenuItem menuSearchItem = menu.findItem(R.id.my_search);
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menuSearchItem.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SelAndSearch(query,true);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 
