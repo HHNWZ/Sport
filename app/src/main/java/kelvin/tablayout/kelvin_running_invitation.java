@@ -147,7 +147,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
                         }else{
                             if(hour_of_kelvin_running_invitation==null||minute_of_kelvin_running_invitation==null){
                                 toast.makeText(getActivity(), "請選擇時間", Toast.LENGTH_SHORT).show();
-                                DialogFragment newFragment = new TimePickerFragmentOfstartTime();
+                                DialogFragment newFragment = new TimePickerFragmentOfgeneral();
                                 newFragment.setTargetFragment(kelvin_running_invitation.this,REQUEST);
                                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                             }else{
@@ -174,7 +174,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         button_of_set_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment newFragment = new TimePickerFragmentOfstartTime();
+                DialogFragment newFragment = new TimePickerFragmentOfgeneral();
                 newFragment.setTargetFragment(kelvin_running_invitation.this,REQUEST);
                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
 
@@ -249,8 +249,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == REQUEST){
-            minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfstartTime.MINUTE_OF_TIME_PICKER_FRAGMENT)));
-            hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfstartTime.HOUR_OF_TIME_PICKER_FRAGMENT)));
+            minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfgeneral.MINUTE_OF_TIME_PICKER_FRAGMENT)));
+            hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfgeneral.HOUR_OF_TIME_PICKER_FRAGMENT)));
 
             show_select_time_of_running_invitation_for_start.setText("時間是"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation);
     }
