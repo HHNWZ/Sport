@@ -6,11 +6,8 @@ import android.os.Bundle;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
 
 import java.util.Calendar;
@@ -19,12 +16,11 @@ import java.util.Calendar;
  * Created by 888888888 on 2017/11/24.
  */
 
-public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-
-    ;
+public class TimePickerFragmentOfgeneral extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
     public static final String HOUR_OF_TIME_PICKER_FRAGMENT="hour_of_time_picker_fragment";
     public static final String MINUTE_OF_TIME_PICKER_FRAGMENT="minute_of_time_picker_fragment";
-    public TimePickerFragment() {
+
+    public TimePickerFragmentOfgeneral() {
         // Required empty public constructor
     }
 
@@ -44,7 +40,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        Toast.makeText(getActivity(), "hour="+hourOfDay+", min="+minute, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "hour="+hourOfDay+", min="+minute, Toast.LENGTH_SHORT).show();
+
         /*boolean pressed = true;
         Intent intent = new Intent(getActivity(), kelvin_running_invitation.class);
         intent.putExtra("hour", hourOfDay);
@@ -68,4 +65,3 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
 
 }
-// Toast.makeText(getActivity(), "hour="+hourOfDay+", min="+minute, Toast.LENGTH_SHORT).show();
