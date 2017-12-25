@@ -87,67 +87,91 @@
             android:text="確認" />
 
         <TextView
-            android:id="@+id/text_of_running_invitation_place"
+            android:id="@+id/start_time_of_invitation_for_running"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/text_of_running_invitation_distance"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
-            android:text="場地:"
+            android:text="開始時間:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <Spinner
-            android:id="@+id/spinner_of_running_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/text_of_running_invitation_place"
-            android:layout_alignBottom="@+id/text_of_running_invitation_place"
-            android:layout_toEndOf="@+id/text_of_running_invitation_place"
-            android:entries="@array/spinner_of_running_place"></Spinner>
-
         <TextView
-            android:id="@+id/time_of_invitation_for_running"
+            android:id="@+id/start_date_of_invitation_for_running"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_of_running_invitation_place"
+            android:layout_below="@+id/start_time_of_invitation_for_running"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
-            android:text="時間:"
+            android:text="開始日期:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/date_of_invitation_for_running"
+            android:id="@+id/show_start_time_of_running_invitation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/time_of_invitation_for_running"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
-            android:text="日期:"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/show_select_time_of_running_invitation_for_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/time_of_invitation_for_running"
-            android:layout_alignBottom="@+id/time_of_invitation_for_running"
-            android:layout_toEndOf="@+id/time_of_invitation_for_running"
+            android:layout_alignBaseline="@+id/start_time_of_invitation_for_running"
+            android:layout_alignBottom="@+id/start_time_of_invitation_for_running"
+            android:layout_toEndOf="@+id/start_time_of_invitation_for_running"
             android:text=""
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/show_select_date_of_running_invitation_for_start"
+            android:id="@+id/show_start_date_of_running_invitation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/date_of_invitation_for_running"
-            android:layout_alignBottom="@+id/date_of_invitation_for_running"
-            android:layout_toEndOf="@+id/date_of_invitation_for_running"
+            android:layout_alignBaseline="@+id/start_date_of_invitation_for_running"
+            android:layout_alignBottom="@+id/start_date_of_invitation_for_running"
+            android:layout_toEndOf="@+id/start_date_of_invitation_for_running"
             android:text=""
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_time_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_date_of_invitation_for_running"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="結束時間:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_date_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/end_time_of_invitation_for_running"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="開始日期:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_end_time_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_time_of_invitation_for_running"
+            android:layout_alignBottom="@+id/end_time_of_invitation_for_running"
+            android:layout_toEndOf="@+id/end_time_of_invitation_for_running"
+            android:text=""
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/show_end_date_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_date_of_invitation_for_running"
+            android:layout_alignBottom="@+id/end_date_of_invitation_for_running"
+            android:layout_toEndOf="@+id/end_date_of_invitation_for_running"
+            android:text=""
+            android:textSize="20sp" />
+
+
+
+
 
 
     </RelativeLayout>

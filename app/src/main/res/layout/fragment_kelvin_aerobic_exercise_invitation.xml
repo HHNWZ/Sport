@@ -32,27 +32,6 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/text_of_aerobic_exercise_start_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
-            android:layout_below="@+id/text_of_aerobic_exercise_invitation_challenge_of_time"
-            android:layout_marginTop="20dp"
-            android:text="挑戰開始時間:"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/button_set_time_of_aerobic_exercise_invitation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_of_aerobic_exercise_invitation"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/text_of_aerobic_exercise_start_time"
-
-            android:text="請選擇時間" />
-
         <Button
             android:id="@+id/button_of_aerobic_exercise_invitation_confirm"
             android:layout_width="wrap_content"

@@ -3,29 +3,27 @@ package kelvin.tablayout;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.DatePicker;
-import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
+import android.widget.DatePicker;
+
 import java.util.Calendar;
 
 /**
- * Created by 888888888 on 2017/12/22.
+ * Created by 888888888 on 2017/12/25.
  */
 
-public class DatePickerFragment1 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class EndDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener  {
     public String date;
-    public String DATE_OF_Date_PICKER_FRAGMENT="date_of_date_picker_fragment";
-    public  static final String DAY_OF_Date_PICKER_FRAGMENT="day_of_date_picker_fragment";
-    public  static final String MONTH_OF_Date_PICKER_FRAGMENT="month_of_date_picker_fragment";
-    public  static final String YEAR_OF_Date_PICKER_FRAGMENT="year_of_date_picker_fragment";
+    public  static final String DAY_OF_END_Date_PICKER_FRAGMENT="day_of_end_picker_fragment";
+    public  static final String MONTH_OF_END_Date_PICKER_FRAGMENT="month_of_end_date_picker_fragment";
+    public  static final String YEAR_OF_END_Date_PICKER_FRAGMENT="year_of_end_date_picker_fragment";
     public String day;
     public String month;
     public String year1;
 
-    public DatePickerFragment1() {
+    public EndDateFragment() {
         // Required empty public constructor
     }
     @Override
@@ -57,12 +55,10 @@ public class DatePickerFragment1 extends DialogFragment implements DatePickerDia
             return;
         }else{
             Intent intent = new Intent();
-            intent.putExtra(DAY_OF_Date_PICKER_FRAGMENT,day);
-            intent.putExtra(MONTH_OF_Date_PICKER_FRAGMENT,month);
-            intent.putExtra(YEAR_OF_Date_PICKER_FRAGMENT,year1);
-            getTargetFragment().onActivityResult(kelvin_running_invitation.RE, Activity.RESULT_OK,intent);
+            intent.putExtra(DAY_OF_END_Date_PICKER_FRAGMENT,day);
+            intent.putExtra(MONTH_OF_END_Date_PICKER_FRAGMENT,month);
+            intent.putExtra(YEAR_OF_END_Date_PICKER_FRAGMENT,year1);
+            getTargetFragment().onActivityResult(kelvin_running_invitation.end_date_data, Activity.RESULT_OK,intent);
         }
     }
-
-
 }
