@@ -32,20 +32,19 @@ import java.util.ArrayList;
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
-        Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
-        Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener,
-        theArt.OnFragmentInteractionListener,SearchArtList.OnFragmentInteractionListener{
+        AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
+        SearchArtList.OnFragmentInteractionListener{
 
-    final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
-    final ArrayList<String> artID=new ArrayList<String>();
-    final ArrayList<String> autID=new ArrayList<String>();
-    final ArrayList<String> artTitle=new ArrayList<String>();
-    final ArrayList<String> artClass=new ArrayList<String>();
-    final ArrayList<String> artCon=new ArrayList<String>();
-    final ArrayList<ArrayList> resList=new ArrayList<>();
-    final ArrayList<String> searchsol=new ArrayList<String>();
-    final ArrayList<Integer> searchsolid=new ArrayList<Integer>();
+    final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};//只是對照表
+    final ArrayList<String> artID=new ArrayList<String>();//貼文ID列表
+    final ArrayList<String> autID=new ArrayList<String>();//貼文作者ID列表
+    final ArrayList<String> artTitle=new ArrayList<String>();//貼文標題列表
+    final ArrayList<String> artClass=new ArrayList<String>();//貼文類別列表
+    final ArrayList<String> artCon=new ArrayList<String>();//貼文內容列表
+    final ArrayList<ArrayList> resList=new ArrayList<>();//貼文留言ID [ 該貼文列表 ]，resList.get(ID).size=取得貼文數
+    final ArrayList<String> searchsol=new ArrayList<String>();//搜尋&篩選標題列表
+    final ArrayList<Integer> searchsolid=new ArrayList<Integer>();//搜尋&篩選ID列表
+    final ArrayList<Integer> artgood=new ArrayList<Integer>();//貼文讚數列表
     final String nowuser="369";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,6 @@ public class habaActivity extends AppCompatActivity
         setContentView(R.layout.activity_haba_neco);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final TextView selsport=(TextView)findViewById(R.id.sel_sport);
         final Button spall = (Button)findViewById(R.id.sp_all);
         final Button sprun = (Button)findViewById(R.id.sp_run);
         final Button spwalk = (Button)findViewById(R.id.sp_walk);
@@ -77,6 +75,9 @@ public class habaActivity extends AppCompatActivity
         artCon.add("衝鋒槍射速高攻擊力低跑速快");
         artCon.add("弓箭可蓄力同時編製術式強力擊發");
         artCon.add("重型狙擊槍一發秒殺破壞地形強無敵");
+        artgood.add(10);
+        artgood.add(20);
+        artgood.add(30);
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
@@ -96,7 +97,6 @@ public class habaActivity extends AppCompatActivity
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("全部");
                 BackArtList();
                 onBackPressed();
             }
@@ -104,7 +104,6 @@ public class habaActivity extends AppCompatActivity
         sprun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("有氧氧運動");
                 SelAndSearch(SportList[1],false);
                 onBackPressed();
             }
@@ -112,7 +111,6 @@ public class habaActivity extends AppCompatActivity
         spwalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("走路路");
                 SelAndSearch(SportList[2],false);
                 onBackPressed();
             }
@@ -120,7 +118,6 @@ public class habaActivity extends AppCompatActivity
         spair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("跑步步");
                 SelAndSearch(SportList[3],false);
                 onBackPressed();
             }
@@ -128,7 +125,6 @@ public class habaActivity extends AppCompatActivity
         spsit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("伏地挺身身");
                 SelAndSearch(SportList[4],false);
                 onBackPressed();
             }
@@ -136,7 +132,6 @@ public class habaActivity extends AppCompatActivity
         sppush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("仰臥起坐坐");
                 SelAndSearch(SportList[5],false);
                 onBackPressed();
             }
@@ -187,9 +182,15 @@ public class habaActivity extends AppCompatActivity
         }
         ToSearchList();
     }
-
+    public ArrayList<Integer> artresCount(){
+        ArrayList<Integer> mycount=new ArrayList<Integer>();
+        for(int i=0;i<artID.size();i++){
+            mycount.add(resList.get(i).size());
+        }
+        return mycount;
+    }
     public void BackArtList(){
-        Allsport all=Allsport.newInstance(artTitle,"param2");
+        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgood,artresCount());
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
