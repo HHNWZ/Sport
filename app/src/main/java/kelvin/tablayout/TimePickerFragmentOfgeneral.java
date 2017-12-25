@@ -58,7 +58,7 @@ public class TimePickerFragmentOfgeneral extends DialogFragment implements TimeP
             Intent intent = new Intent();
             intent.putExtra(HOUR_OF_TIME_PICKER_FRAGMENT,hour_of_time_picker_fragment);
             intent.putExtra(MINUTE_OF_TIME_PICKER_FRAGMENT,minute_of_time_picker_fragment);
-            getTargetFragment().onActivityResult(kelvin_running_invitation.REQUEST,Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_running_invitation.RET,Activity.RESULT_OK,intent);
         }
 
     }

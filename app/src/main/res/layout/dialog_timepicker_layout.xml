@@ -14,7 +14,7 @@
         android:background="#ea1938"
         android:id="@+id/m"
         android:padding="16dp"
-        android:layout_marginTop="50dp">
+        >
 
         <TextView
             android:id="@+id/fromTime"
@@ -57,7 +57,7 @@
         android:id="@+id/al"
         android:layout_below="@id/m">
         <LinearLayout
-            android:layout_marginTop="10dp"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -93,10 +93,10 @@
             android:background="#9E9E9E"
             android:layout_marginRight="2dp"
             android:layout_marginLeft="2dp"
-            android:layout_marginTop="10dp"
+
             android:id="@+id/sep1"/>
     <LinearLayout
-        android:layout_marginTop="10dp"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
