@@ -163,7 +163,9 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
-
+    public void testfunction(){
+        Toast.makeText(this, "嘎啦", Toast.LENGTH_SHORT).show();
+    }
     private void SelAndSearch(String SearchValue, boolean FunctionType) {//Type=true:搜尋,false:篩選
         shsolID.clear();
         shsolTitle.clear();
@@ -322,6 +324,7 @@ public class habaActivity extends AppCompatActivity
         artCon.add(theCon);
         resList.add(new ArrayList<String>());
         addRes(addid,"以下為留言");
+        artgood.add(0);
         Toast.makeText(this,
                 "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
                 Toast.LENGTH_SHORT).

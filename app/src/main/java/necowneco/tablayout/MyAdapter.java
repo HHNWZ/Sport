@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -18,9 +20,11 @@ import java.util.List;
 public class MyAdapter extends BaseAdapter{
     private LayoutInflater myInflater;
     private List<ArtListItem> artlists;
-    public MyAdapter(Context context,List<ArtListItem> theartlist){
+    private String nowuser;
+    public MyAdapter(Context context,List<ArtListItem> theartlist,String nowuserID){
         myInflater=LayoutInflater.from(context);
         this.artlists=theartlist;
+        this.nowuser=nowuserID;
     }
     @Override
     public int getCount() {
@@ -42,12 +46,14 @@ public class MyAdapter extends BaseAdapter{
         TextView txtCon;
         TextView txtGdnum;
         TextView txtRsnum;
-        public ViewHolder(TextView thetxtArt, TextView thetxtAut,TextView thetxtCon,TextView thetxtGdnum,TextView thetxtRsnum){
+        Button deletbtn;
+        public ViewHolder(TextView thetxtArt, TextView thetxtAut,TextView thetxtCon,TextView thetxtGdnum,TextView thetxtRsnum,Button thedeletbtn){
             this.txtArt = thetxtArt;
             this.txtAut = thetxtAut;
             this.txtCon=thetxtCon;
             this.txtGdnum=thetxtGdnum;
             this.txtRsnum=thetxtRsnum;
+            this.deletbtn=thedeletbtn;
         }
     }
     @Override
@@ -60,7 +66,8 @@ public class MyAdapter extends BaseAdapter{
                     (TextView) convertView.findViewById(R.id.myAut),
                     (TextView) convertView.findViewById(R.id.myCon),
                     (TextView) convertView.findViewById(R.id.myGoodnum),
-                    (TextView) convertView.findViewById(R.id.myResnum)
+                    (TextView) convertView.findViewById(R.id.myResnum),
+                    (Button) convertView.findViewById(R.id.deletBtn)
 
             );
             convertView.setTag(holder);
@@ -73,6 +80,30 @@ public class MyAdapter extends BaseAdapter{
         holder.txtCon.setText(artlistitem.getMyCon());
         holder.txtGdnum.setText("GOOD："+artlistitem.getMyGoodnum());
         holder.txtRsnum.setText("RES："+artlistitem.getMyResnum());
+        if(nowuser==artlistitem.getMyAut()){
+            holder.deletbtn.setText("刪除");
+            holder.deletbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //((habaActivity) getActivity()).toArtcon(position);
+                }
+            });
+        }else{
+            holder.deletbtn.setVisibility(convertView.GONE);
+        }
         return convertView;
     }
+}
+
+class MyListener implements View.OnClickListener {
+    int mPosition;
+    public MyListener(int inPosition){
+        mPosition= inPosition;
+    }
+    @Override
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
+    }
+
+
 }

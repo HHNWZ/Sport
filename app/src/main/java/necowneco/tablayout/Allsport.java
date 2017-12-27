@@ -98,13 +98,13 @@ public class Allsport extends Fragment implements View.OnTouchListener {
         final View view = inflater.inflate(R.layout.fragment_allsport, null);
         view.setOnTouchListener(this);
         ListView Myartlist=(ListView)view.findViewById(R.id.myArtList);
-        ArrayAdapter<String> myartlist=new ArrayAdapter<String>(
+        /*ArrayAdapter<String> myartlist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
                 ArtsTitle
-        );
+        );*/
         Addartlist();
-        adapter=new MyAdapter(getContext(),art_list);
+        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser);
         Myartlist.setAdapter(adapter);
         Myartlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -106,7 +106,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
                 mParam1
         );*/
         Addartlist();
-        adapter=new MyAdapter(getContext(),art_list);
+        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser);
         Searchartlist.setAdapter(adapter);
         Searchartlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -131,7 +131,6 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
             );
         }
     }
-
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String Tag,String number) {
