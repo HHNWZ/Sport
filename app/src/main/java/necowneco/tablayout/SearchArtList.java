@@ -132,6 +132,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
         }
     }
 
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String Tag,String number) {
         if (mListener != null) {
