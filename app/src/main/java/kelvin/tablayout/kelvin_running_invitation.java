@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.a888888888.sport.R;
 import java.lang.String;
 import java.text.DecimalFormat;
+import java.util.Date;
 
 
 /**
@@ -38,15 +39,40 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static final int REQUEST=1;
+    public static final int start_time_data=1;
+    public static final int start_date_data=2;
+    public static final int end_time_data=3;
+    public static final int end_date_data=4;
+    public String start_hour_of_kelvin_running_invitation;
+    public int start_hour_int_of_kelvin_running_invitation;
+    public String start_minute_of_kelvin_running_invitation;
+    public int start_minute_int_of_kelvin_running_invitation;
+    public String start_day_of_kelvin_invitation;
+    public String start_month_of_kelvin_invitation;
+    public String start_year_of_kelvin_invitation;
+    public int start_year_int_of_kelvin_running_invitation;
+    public int start_month_int_of_kelvin_running_invitation;
+    public int start_day_int_of_kelvin_running_invitation;
+    public TextView show_start_time_of_running_invitation;
+    public TextView show_start_date_of_running_invitation;
 
-    public String hour_of_kelvin_running_invitation;
-    public String minute_of_kelvin_running_invitation;
-    public TextView show_select_time_of_running_invitation_for_start;
+    public String end_hour_of_kelvin_running_invitation;
+    public int end_hour_int_of_kelvin_running_invitation;
+    public String end_minute_of_kelvin_running_invitation;
+    public int end_minute_int_of_kelvin_running_invitation;
+    public String end_day_of_kelvin_invitation;
+    public String end_month_of_kelvin_invitation;
+    public String end_year_of_kelvin_invitation;
+    public int end_year_int_of_kelvin_running_invitation;
+    public int end_month_int_of_kelvin_running_invitation;
+    public int end_day_int_of_kelvin_running_invitation;
+    public TextView show_end_time_of_running_invitation;
+    public TextView show_end_date_of_running_invitation;
     DecimalFormat mDecimalFormat = new DecimalFormat("##00");
     public EditText edit_text_on_distance;
     public InputMethodManager imm_of_running_invitation;
     public Toast toast;
+    public Button button_of_running_invitation_confirm;
 
 
 
@@ -55,7 +81,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    String placeOfrunning;
+
     int distance_of_running;
     private OnFragmentInteractionListener mListener;
 
@@ -102,13 +128,67 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         edit_text_on_distance=(EditText)view.findViewById(R.id.editText_of_distance);
         edit_text_on_distance.requestFocus();
 
-        Spinner spinner_of_running_place =(Spinner)view.findViewById(R.id.spinner_of_running_place);
+        /*Spinner spinner_of_running_place =(Spinner)view.findViewById(R.id.spinner_of_running_place);
         String[]list_of_running_place=getResources().getStringArray(R.array.spinner_of_running_place);
         ArrayAdapter<String>adapter=new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,list_of_running_place);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_of_running_place.setAdapter(adapter);
-        show_select_time_of_running_invitation_for_start=(TextView)view.findViewById(R.id.text_view_of_show_select_time_for_start_running);
-        spinner_of_running_place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        spinner_of_running_place.setAdapter(adapter);*/
+        Date mDate = new Date();
+        start_hour_int_of_kelvin_running_invitation= mDate.getHours();
+        start_minute_int_of_kelvin_running_invitation=mDate.getMinutes();
+        start_year_int_of_kelvin_running_invitation=mDate.getYear()+1900;
+        start_month_int_of_kelvin_running_invitation=mDate.getMonth()+1;
+        start_day_int_of_kelvin_running_invitation=mDate.getDate();
+        end_hour_int_of_kelvin_running_invitation= mDate.getHours();
+        end_minute_int_of_kelvin_running_invitation=mDate.getMinutes();
+        end_year_int_of_kelvin_running_invitation=mDate.getYear()+1900;
+        end_month_int_of_kelvin_running_invitation=mDate.getMonth()+1;
+        end_day_int_of_kelvin_running_invitation=mDate.getDate();
+
+        show_start_time_of_running_invitation=(TextView)view.findViewById(R.id.show_start_time_of_running_invitation);
+        show_start_time_of_running_invitation.setText(mDecimalFormat.format(start_hour_int_of_kelvin_running_invitation) +":"+mDecimalFormat.format(start_minute_int_of_kelvin_running_invitation) );
+        show_start_time_of_running_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new StartTimeFragment();
+
+                newFragment.setTargetFragment(kelvin_running_invitation.this,start_time_data);
+                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+            }
+        });
+        show_start_date_of_running_invitation=(TextView)view.findViewById(R.id.show_start_date_of_running_invitation);
+        show_start_date_of_running_invitation.setText(start_year_int_of_kelvin_running_invitation+"-"+start_month_int_of_kelvin_running_invitation+"-"+start_day_int_of_kelvin_running_invitation);
+        show_start_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new StartDateFragment();
+                newFragment.setTargetFragment(kelvin_running_invitation.this,start_date_data);
+                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        show_end_time_of_running_invitation=(TextView)view.findViewById(R.id.show_end_time_of_running_invitation);
+        show_end_time_of_running_invitation.setText(mDecimalFormat.format(end_hour_int_of_kelvin_running_invitation) +":"+mDecimalFormat.format(end_minute_int_of_kelvin_running_invitation) );
+        show_end_time_of_running_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new EndTimeFragment();
+
+                newFragment.setTargetFragment(kelvin_running_invitation.this,end_time_data);
+                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+            }
+        });
+        show_end_date_of_running_invitation=(TextView)view.findViewById(R.id.show_end_date_of_running_invitation);
+        show_end_date_of_running_invitation.setText(end_year_int_of_kelvin_running_invitation+"-"+end_month_int_of_kelvin_running_invitation+"-"+end_day_int_of_kelvin_running_invitation);
+        show_end_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new EndDateFragment();
+                newFragment.setTargetFragment(kelvin_running_invitation.this,end_date_data);
+                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+            }
+        });
+        /*spinner_of_running_place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -121,12 +201,12 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
 
 
-        Button button_of_running_invitation_confirm=(Button)view.findViewById(R.id.button_of_running_invitation_confirm);
+        button_of_running_invitation_confirm=(Button)view.findViewById(R.id.button_of_running_invitation_confirm);
         button_of_running_invitation_confirm.setOnClickListener(new View.OnClickListener() {
 
 
@@ -145,13 +225,13 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
                             edit_text_on_distance.setText(" ");
                             imm_of_running_invitation.showSoftInput(edit_text_on_distance, 0);
                         }else{
-                            if(hour_of_kelvin_running_invitation==null||minute_of_kelvin_running_invitation==null){
+                            if(start_hour_of_kelvin_running_invitation==null||start_minute_of_kelvin_running_invitation==null){
                                 toast.makeText(getActivity(), "請選擇時間", Toast.LENGTH_SHORT).show();
-                                DialogFragment newFragment = new TimePickerFragmentOfgeneral();
-                                newFragment.setTargetFragment(kelvin_running_invitation.this,REQUEST);
+                                DialogFragment newFragment = new StartTimeFragment();
+                                newFragment.setTargetFragment(kelvin_running_invitation.this,start_time_data);
                                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                             }else{
-                                toast=Toast.makeText(getActivity(), "場地是:"+placeOfrunning+"距離是:"+distance_of_running+"時間是:"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT);
+                                toast=Toast.makeText(getActivity(), "距離是:"+distance_of_running+"時間是:"+start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT);
                                 toast.show();
 
                                 getActivity().getSupportFragmentManager()
@@ -170,18 +250,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
 
         });
-        Button button_of_set_date_of_running_invitation=(Button)view.findViewById(R.id.button_set_time_of_running_invitation);
-        button_of_set_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment newFragment = new TimePickerFragmentOfgeneral();
-                newFragment.setTargetFragment(kelvin_running_invitation.this,REQUEST);
-                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
 
-
-
-            }
-        });
 
         return view;
     }
@@ -245,17 +314,41 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         void onFragmentInteraction(String Tag, String number);
     }
 
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if(requestCode == REQUEST){
-            minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfgeneral.MINUTE_OF_TIME_PICKER_FRAGMENT)));
-            hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(TimePickerFragmentOfgeneral.HOUR_OF_TIME_PICKER_FRAGMENT)));
+        if(requestCode == start_time_data){
+            start_minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(StartTimeFragment.MINUTE_OF_START_TIME_PICKER_FRAGMENT)));
+            start_hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(StartTimeFragment.HOUR_OF_START_TIME_PICKER_FRAGMENT)));
+            show_start_time_of_running_invitation.setText(start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation);
+        }
 
-            show_select_time_of_running_invitation_for_start.setText("時間是"+hour_of_kelvin_running_invitation+":"+minute_of_kelvin_running_invitation);
+        if(requestCode == start_date_data){
+            start_day_of_kelvin_invitation=data.getStringExtra(StartDateFragment.DAY_OF_START_Date_PICKER_FRAGMENT);
+            start_month_of_kelvin_invitation=data.getStringExtra(StartDateFragment.MONTH_OF_START_Date_PICKER_FRAGMENT);
+            start_year_of_kelvin_invitation=data.getStringExtra(StartDateFragment.YEAR_OF_START_Date_PICKER_FRAGMENT);
+            show_start_date_of_running_invitation.setText(start_day_of_kelvin_invitation+"-"+start_month_of_kelvin_invitation+"-"+start_year_of_kelvin_invitation);
+        }
+
+        if(requestCode == end_time_data){
+            end_minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(EndTimeFragment.MINUTE_OF_END_TIME_PICKER_FRAGMENT)));
+            end_hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(EndTimeFragment.HOUR_OF_END_TIME_PICKER_FRAGMENT)));
+            show_end_time_of_running_invitation.setText(end_hour_of_kelvin_running_invitation+":"+end_minute_of_kelvin_running_invitation);
+        }
+
+        if(requestCode == end_date_data){
+            end_day_of_kelvin_invitation=data.getStringExtra(EndDateFragment.DAY_OF_END_Date_PICKER_FRAGMENT);
+            end_month_of_kelvin_invitation=data.getStringExtra(EndDateFragment.MONTH_OF_END_Date_PICKER_FRAGMENT);
+            end_year_of_kelvin_invitation=data.getStringExtra(EndDateFragment.YEAR_OF_END_Date_PICKER_FRAGMENT);
+            show_end_date_of_running_invitation.setText(end_day_of_kelvin_invitation+"-"+end_month_of_kelvin_invitation+"-"+end_year_of_kelvin_invitation);
+        }
+
     }
-
-  }
 }
 
 

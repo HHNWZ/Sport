@@ -16,11 +16,11 @@ import java.util.Calendar;
  * Created by 888888888 on 2017/11/24.
  */
 
-public class TimePickerFragmentOfgeneral extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-    public static final String HOUR_OF_TIME_PICKER_FRAGMENT="hour_of_time_picker_fragment";
-    public static final String MINUTE_OF_TIME_PICKER_FRAGMENT="minute_of_time_picker_fragment";
+public class StartTimeFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+    public static final String HOUR_OF_START_TIME_PICKER_FRAGMENT="hour_of_start_time_picker_fragment";
+    public static final String MINUTE_OF_START_TIME_PICKER_FRAGMENT="minute_of_start_time_picker_fragment";
 
-    public TimePickerFragmentOfgeneral() {
+    public StartTimeFragment() {
         // Required empty public constructor
     }
 
@@ -56,9 +56,9 @@ public class TimePickerFragmentOfgeneral extends DialogFragment implements TimeP
             return;
         }else{
             Intent intent = new Intent();
-            intent.putExtra(HOUR_OF_TIME_PICKER_FRAGMENT,hour_of_time_picker_fragment);
-            intent.putExtra(MINUTE_OF_TIME_PICKER_FRAGMENT,minute_of_time_picker_fragment);
-            getTargetFragment().onActivityResult(kelvin_running_invitation.REQUEST,Activity.RESULT_OK,intent);
+            intent.putExtra(HOUR_OF_START_TIME_PICKER_FRAGMENT,hour_of_time_picker_fragment);
+            intent.putExtra(MINUTE_OF_START_TIME_PICKER_FRAGMENT,minute_of_time_picker_fragment);
+            getTargetFragment().onActivityResult(kelvin_running_invitation.start_time_data,Activity.RESULT_OK,intent);
         }
 
     }

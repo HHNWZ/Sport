@@ -47,28 +47,14 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public static final int REQUEST=1;
-    public static final int REQUEST2=1;
 
-    public String hour_of_kelvin_walking_invitation_for_start_time;
-    public String minute_of_kelvin_walking_invitation_for_start_time;
-    public String hour_of_kelvin_walking_invitation_for_end_time;
-    public String minute_of_kelvin_walking_invitation_for_end_time;
-    public TextView text_of_select_start_time_for_walking_invitation;
-    public TextView text_of_select_end_time_for_walking_invitation;
-    public DecimalFormat mDecimalFormat = new DecimalFormat("##00");
-    public EditText editText_of_walking_set_count;
-    public Button button_of_walking_invitation_confirm;
-    public Button button_of_start_time_for_walking_invitation;
-    public Button button_of_end_time_for_walking_invitation;
-    public StringBuilder s;
     public Calendar m = Calendar.getInstance();
-    public Calendar calendar = Calendar.getInstance();
+    //public Calendar calendar = Calendar.getInstance();
     public TextView arrivalCalenderText;
     public TextView arrivalTimeText;
     long todayCheck;
     //    final int TIME_DIALOG_ID=0;
-    final boolean checkFrom=true;
+
     int arrivalHour,arrivalMinute,arrivalYear,arrivalMonth,arrivalDay;
 
     // Calender fromCal is for managing "from" time
@@ -83,10 +69,11 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    public int walking_set_count;
+    //public int walking_set_count;
     public InputMethodManager imm_of_walking_invitation;
 
     private OnFragmentInteractionListener mListener;
+    public Button button_of_walking_invitation_confirm;
 
     public kelvin_walking_invitation() {
         // Required empty public constructor
@@ -126,133 +113,6 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this
         View view = inflater.inflate(R.layout.fragment_kelvin_walking_invitation, null);
         view.setOnTouchListener(this);
-       /* editText_of_walking_set_count=(EditText)view.findViewById(R.id.editText_of_walking_set_count);
-        button_of_walking_invitation_confirm=(Button)view.findViewById(R.id.button_of_walking_invitation_confirm);
-        button_of_start_time_for_walking_invitation=(Button)view.findViewById(R.id.button_of_start_time_for_walking_invitation);
-        button_of_end_time_for_walking_invitation=(Button)view.findViewById(R.id.button_of_end_time_for_walking_invitation);
-        text_of_select_start_time_for_walking_invitation=(TextView)view.findViewById(R.id.text_of_select_start_time_for_walking_invitation);
-        text_of_select_end_time_for_walking_invitation=(TextView)view.findViewById(R.id.text_of_select_end_time_for_walking_invitation);*/
-        scrollView = (ScrollView) view.findViewById(R.id.scrollId);
-
-        scrollView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        },0);
-
-        Calendar c = Calendar.getInstance();
-        arrivalDay = c.get(Calendar.DAY_OF_MONTH);
-        arrivalMonth = c.get(Calendar.MONTH);
-        arrivalYear = c.get(Calendar.YEAR);
-        arrivalHour = c.get(Calendar.HOUR_OF_DAY);
-        arrivalMinute = c.get(Calendar.MINUTE);
-
-        arrivalTimeText = (TextView)view.findViewById(R.id.arrivalTimeText);
-
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm aa");
-        SimpleDateFormat format1 = new SimpleDateFormat("dd MMM yyyy");
-        String cTime = format.format(c.getTime());
-        String cDate = format1.format(c.getTime());
-        fromCal.setTimeInMillis(c.getTimeInMillis());
-
-        c.setTimeInMillis(c.getTimeInMillis()+7200000);
-        toCal.setTimeInMillis(c.getTimeInMillis());
-        m.setTimeInMillis(c.getTimeInMillis());
-        String fTime = format.format(c.getTime());
-
-        arrivalTimeText.setText(cTime+" - "+fTime);
-
-        RelativeLayout arrivalCalenderLayout = (RelativeLayout)view.findViewById(R.id.arrivalCalendar);
-        arrivalCalenderText = (TextView)view.findViewById(R.id.arrivalCalendarText);
-        arrivalCalenderText.setText("Today, " + cDate);
-        arrivalCalenderLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerFragmentOfAdvanced date = new TimePickerFragmentOfAdvanced();
-
-                Calendar calender = Calendar.getInstance();
-                if(todayCheck > 0) {
-                    calender.setTimeInMillis(todayCheck);
-                }
-                Bundle args = new Bundle();
-                args.putInt("year", calender.get(Calendar.YEAR));
-                args.putInt("month", calender.get(Calendar.MONTH));
-                args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
-                date.setArguments(args);
-
-                arrivalYear = calender.get(Calendar.YEAR);
-                arrivalMonth = calender.get(Calendar.MONTH);
-                arrivalDay = calender.get(Calendar.DAY_OF_MONTH);
-
-                /**
-                 * Set Call back to capture selected date
-                 */
-                date.setOnDateSetListener(ondate);
-                if(!date.isVisible()) {
-                    date.show(getActivity().getSupportFragmentManager(), "Date Picker");
-                }
-            }
-        });
-
-        RelativeLayout arrivalTimeLayout = (RelativeLayout)view.findViewById(R.id.arrivalTime);
-        arrivalTimeText = (TextView)view.findViewById(R.id.arrivalTimeText);
-        final Calendar cal = Calendar.getInstance();
-//        cal.set(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH,Calendar.HOUR_OF_DAY,Calendar.MINUTE+30);
-        cal.add(Calendar.MINUTE, 120);
-        arrivalTimeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-//                    showDialog(TIME_DIALOG_ID);
-                timeDialog();
-            }
-        });
-
-        /*button_of_walking_invitation_confirm.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-                if("".equals(editText_of_walking_set_count.getText().toString().trim())){
-                    Toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
-                    editText_of_walking_set_count.requestFocus();
-                    imm_of_walking_invitation.showSoftInput(editText_of_walking_set_count, 0);
-                }else{
-                    walking_set_count=Integer.parseInt(editText_of_walking_set_count.getText().toString());
-                    if(walking_set_count<100||walking_set_count>50000){
-                        Toast.makeText(getActivity(), "步數不能小於100或大於50000", Toast.LENGTH_SHORT).show();
-                        editText_of_walking_set_count.requestFocus();
-                        imm_of_walking_invitation.showSoftInput(editText_of_walking_set_count, 0);
-                    }else{
-                        Toast.makeText(getActivity(), "步數是:"+walking_set_count, Toast.LENGTH_SHORT).show();
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                }
-
-            }
-
-
-        });
-
-        button_of_start_time_for_walking_invitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        button_of_end_time_for_walking_invitation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
 
         return view;
 
@@ -289,18 +149,12 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                 todayCheck = cal.getTimeInMillis();
                 fromCal.setTimeInMillis(cal.getTimeInMillis());
             }
-//            showDialog(TIME_DIALOG_ID);
             timeDialog();
         }
     };
 
 
-    private static String pad(int c) {
-        if (c >= 10)
-            return String.valueOf(c);
-        else
-            return "0" + String.valueOf(c);
-    }
+
 
     public void timeDialog(){
 
@@ -328,7 +182,6 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
 
         final String[] hour = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
         final String[] minute = new String[]{"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35","36", "37", "38", "39", "40", "41", "42", "43","44","45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55","56", "57", "58", "59"};
-//                final String[] minute = new String[]{"00", "15", "30", "45"};
         final String[] aa = new String[]{"AM", "PM"};
 
 
@@ -383,13 +236,12 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                 }
 
                 //set the text according to the values in the number pickers
-                fromTime.setText(hour[p1.getValue()]+":"+minute[p2.getValue()]+" "+aa[p3.getValue()]);
-                toTime.setText(hour[p4.getValue()]+":"+minute[p5.getValue()]+" "+aa[p6.getValue()]);
-//                setNumberPickerTextColor(p1,Color.BLACK);
+                fromTime.setText(hour[p1.getValue()]+":"+minute[p2.getValue()]+" "+aa[p3.getValue()]);//最后
+                toTime.setText(hour[p4.getValue()]+":"+minute[p5.getValue()]+" "+aa[p6.getValue()]);//最后
             }
         });
 
-        //set p2 values for "from" minute
+
 
         p2.setMaxValue(minute.length-1);
         p2.setDisplayedValues(minute);
@@ -548,7 +400,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                 }
 
                 //checking if time selected is more than 8 hours
-                if(fromCal.getTimeInMillis()+28800000 < toCal.getTimeInMillis()){
+                if(fromCal.getTimeInMillis()+288  < toCal.getTimeInMillis()){
                     p6.setValue(i);
                     toCal.set(toCal.get(Calendar.YEAR),toCal.get(Calendar.MONTH),toCal.get(Calendar.DAY_OF_MONTH),oneToTwentyFour(hour[p4.getValue()],p6.getValue()),Integer.parseInt(minute[p5.getValue()]));
                 }
