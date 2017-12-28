@@ -18,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -33,7 +31,7 @@ import java.util.ArrayList;
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
-        SearchArtList.OnFragmentInteractionListener{
+        SearchArtList.OnFragmentInteractionListener,MyAdapter.Callback{
 
     final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};//只是對照表
     final ArrayList<String> artID=new ArrayList<String>();//貼文ID列表
@@ -341,5 +339,10 @@ public class habaActivity extends AppCompatActivity
     }
     public void addRes(int TargetID,String resCon){
         resList.get(TargetID).add(resCon);
+    }
+
+    @Override
+    public void click(View v) {
+        Toast.makeText(this, "幹", Toast.LENGTH_SHORT).show();
     }
 }

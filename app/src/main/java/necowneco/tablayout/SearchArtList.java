@@ -1,7 +1,6 @@
 package necowneco.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -25,7 +24,9 @@ import java.util.List;
  * Use the {@link SearchArtList#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchArtList extends Fragment implements View.OnTouchListener {
+public class SearchArtList extends Fragment implements View.OnTouchListener,
+        AdapterView.OnItemClickListener,
+        MyAdapter.Callback{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -106,14 +107,9 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
                 mParam1
         );*/
         Addartlist();
-        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser);
+        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser,(MyAdapter.Callback)getContext());
         Searchartlist.setAdapter(adapter);
-        Searchartlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((habaActivity) getActivity()).toArtcon(ArtsID.get(position));
-            }
-        });
+        Searchartlist.setOnItemClickListener(this);
 
         // Inflate the layout for this fragment
         return view;
@@ -159,6 +155,16 @@ public class SearchArtList extends Fragment implements View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         return false;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ((habaActivity) getActivity()).toArtcon(ArtsID.get(position));
+    }
+
+    @Override
+    public void click(View v) {
+        Toast.makeText(getActivity(), "搜篩", Toast.LENGTH_SHORT).show();
     }
 
     /**

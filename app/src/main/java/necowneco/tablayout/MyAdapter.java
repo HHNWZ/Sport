@@ -7,25 +7,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
 import java.util.List;
-
 /**
  * Created by 黃小黃 on 2017/12/19.
  */
 
-public class MyAdapter extends BaseAdapter{
+public class MyAdapter extends BaseAdapter implements View.OnClickListener{
     private LayoutInflater myInflater;
     private List<ArtListItem> artlists;
     private String nowuser;
-    public MyAdapter(Context context,List<ArtListItem> theartlist,String nowuserID){
+    private Callback mCallback;
+    public interface Callback {
+        public void click(View v);
+    }
+    public MyAdapter(Context context,List<ArtListItem> theartlist,String nowuserID,Callback callback){
         myInflater=LayoutInflater.from(context);
         this.artlists=theartlist;
         this.nowuser=nowuserID;
+        this.mCallback=callback;
     }
+
     @Override
     public int getCount() {
         return artlists.size();
@@ -47,7 +51,12 @@ public class MyAdapter extends BaseAdapter{
         TextView txtGdnum;
         TextView txtRsnum;
         Button deletbtn;
-        public ViewHolder(TextView thetxtArt, TextView thetxtAut,TextView thetxtCon,TextView thetxtGdnum,TextView thetxtRsnum,Button thedeletbtn){
+        public ViewHolder(TextView thetxtArt,
+                          TextView thetxtAut,
+                          TextView thetxtCon,
+                          TextView thetxtGdnum,
+                          TextView thetxtRsnum,
+                          Button thedeletbtn){
             this.txtArt = thetxtArt;
             this.txtAut = thetxtAut;
             this.txtCon=thetxtCon;
@@ -82,28 +91,16 @@ public class MyAdapter extends BaseAdapter{
         holder.txtRsnum.setText("RES："+artlistitem.getMyResnum());
         if(nowuser==artlistitem.getMyAut()){
             holder.deletbtn.setText("刪除");
-            holder.deletbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //((habaActivity) getActivity()).toArtcon(position);
-                }
-            });
+            holder.deletbtn.setOnClickListener(this);
         }else{
             holder.deletbtn.setVisibility(convertView.GONE);
         }
         return convertView;
     }
-}
 
-class MyListener implements View.OnClickListener {
-    int mPosition;
-    public MyListener(int inPosition){
-        mPosition= inPosition;
-    }
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
+        mCallback.click(v);
     }
-
-
 }
+
