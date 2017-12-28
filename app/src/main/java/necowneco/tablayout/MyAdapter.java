@@ -97,7 +97,6 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener{
         }
         return convertView;
     }
-
     @Override
     public void onClick(View v) {
         mCallback.click(v);
