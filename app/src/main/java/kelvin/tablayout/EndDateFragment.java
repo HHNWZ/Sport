@@ -59,6 +59,7 @@ public class EndDateFragment extends DialogFragment implements DatePickerDialog.
             intent.putExtra(MONTH_OF_END_Date_PICKER_FRAGMENT,month);
             intent.putExtra(YEAR_OF_END_Date_PICKER_FRAGMENT,year1);
             getTargetFragment().onActivityResult(kelvin_running_invitation.end_date_data, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_walking_invitation.end_date_data_of_walking_invitation, Activity.RESULT_OK,intent);
         }
     }
 }
