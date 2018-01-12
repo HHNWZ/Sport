@@ -2,6 +2,8 @@
     <string name="app_name">交流型運動app</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="search_title">搜尋標題</string>
+    <string name="search_hint">請輸入關鍵字</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_haba">habaActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -60,4 +62,13 @@
     <string name="metabolism">\n\n是維持生命所需消耗的最低能量,這些能量主要用於保持各器官的機能。基礎代謝率會隨著年齡增加或體重減輕而降低,而隨著肌肉增加而增加。疾病、進食、環境溫度變化承受壓力水平變化都會改變人體的能量消耗,因此基礎代謝率低的人要更注意控制自己的飲食。</string>
     <string name="metabolism1"></string>
     <string name="action_settings">Settings</string>
+    <string-array name="spinner_of_running_place">
+        <item>泊油路</item>
+        <item>草皮</item>
+        <item>紅磚</item>
+    </string-array>
+    <string name="empty_of_edit_text">輸入格不能空</string>
+    <string name="value_maximum_and_minimum_of_running_distance">距離不能小於100米和大於5000米</string>
+    <string name="login1">帳號：</string>
+    <string name="login2">密碼：</string>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/white"
+    android:background="@android:color/white"
     android:orientation="vertical"
     android:clickable="true"
     tools:context="kelvin.tablayout.kelvin_running_invitation"
@@ -11,33 +11,170 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-   <RelativeLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:background="@android:color/white">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white">
 
-       <TextView
-           android:id="@+id/title_of_running_invitation"
+        <TextView
+            android:id="@+id/title_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:focusableInTouchMode="true"
+            android:text="跑步邀請內容"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/text_of_running_invitation_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/title_of_running_invitation"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="距離:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editText_of_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_running_invitation"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/text_of_running_invitation_distance"
+            android:ems="4"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="輸入距離"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="20sp" />
+
+        <!--<Spinner
+           android:id="@+id/spinner_of_distance"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:text="跑步邀請內容"
-           android:textColor="@android:color/black"
-           android:layout_centerHorizontal="true"
-           android:layout_marginTop="10dp"
-           android:textSize="30sp"/>
-
-       <TextView
-           android:id="@+id/text_of_running_invitation_distance"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_alignParentStart="true"
+           android:entries="@array/spinner_of_distance"
            android:layout_below="@+id/title_of_running_invitation"
-           android:layout_marginStart="20dp"
+           android:layout_toRightOf="@+id/text_of_running_invitation_distance"
            android:layout_marginTop="20dp"
-           android:text="距離:"
-           android:textColor="@android:color/black"
-           android:textSize="20sp" />
-   </RelativeLayout>
+           ></Spinner>-->
+        <TextView
+            android:id="@+id/text_of_running_invitation_distance_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_running_invitation"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@+id/editText_of_distance"
+            android:text="米"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/button_of_running_invitation_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="41dp"
+            android:text="確認" />
+
+        <TextView
+            android:id="@+id/start_time_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_of_running_invitation_distance"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="開始時間:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/start_date_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_time_of_invitation_for_running"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="開始日期:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_start_time_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/start_time_of_invitation_for_running"
+            android:layout_alignBottom="@+id/start_time_of_invitation_for_running"
+            android:layout_toEndOf="@+id/start_time_of_invitation_for_running"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_start_date_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/start_date_of_invitation_for_running"
+            android:layout_alignBottom="@+id/start_date_of_invitation_for_running"
+            android:layout_toEndOf="@+id/start_date_of_invitation_for_running"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_time_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_date_of_invitation_for_running"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="結束時間:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_date_of_invitation_for_running"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/end_time_of_invitation_for_running"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="結束日期:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_end_time_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_time_of_invitation_for_running"
+            android:layout_alignBottom="@+id/end_time_of_invitation_for_running"
+            android:layout_toEndOf="@+id/end_time_of_invitation_for_running"
+            android:text=""
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/show_end_date_of_running_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_date_of_invitation_for_running"
+            android:layout_alignBottom="@+id/end_date_of_invitation_for_running"
+            android:layout_toEndOf="@+id/end_date_of_invitation_for_running"
+            android:text=""
+            android:textSize="20sp" />
+
+
+
+
+
+
+    </RelativeLayout>
 
 
 

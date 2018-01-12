@@ -1,14 +1,24 @@
 package kelvin.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
+
+import java.text.DecimalFormat;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,11 +28,49 @@ import com.example.a888888888.sport.R;
  * Use the {@link kelvin_sit_up_invitation#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class kelvin_sit_up_invitation extends Fragment {
+public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    public static final int start_time_data_of_sit_up_invitation =1;
+    public static final int start_date_data_of_sit_up_invitation =2;
+    public static final int end_time_data_of_sit_up_invitation =3;
+    public static final int end_date_data_of_sit_up_invitation =4;
+    public String start_hour_of_kelvin_sit_up_invitation;
+    public int start_hour_int_of_kelvin_sit_up_invitation;
+    public String start_minute_of_kelvin_sit_up_invitation;
+    public int start_minute_int_of_kelvin_sit_up_invitation;
+    public String start_day_of_kelvin_sit_up_invitation;
+    public String start_month_of_kelvin_sit_up_invitation;
+    public String start_year_of_kelvin_sit_up_invitation;
+    public int start_year_int_of_kelvin_sit_up_invitation;
+    public int start_month_int_of_kelvin_sit_up_invitation;
+    public int start_day_int_of_kelvin_sit_up_invitation;
+    public TextView show_start_time_of_sit_up_invitation;
+    public TextView show_start_date_of_sit_up_invitation;
+
+    public String end_hour_of_kelvin_sit_up_invitation;
+    public int end_hour_int_of_kelvin_sit_up_invitation;
+    public String end_minute_of_kelvin_sit_up_invitation;
+    public int end_minute_int_of_kelvin_sit_up_invitation;
+    public String end_day_of_kelvin_sit_up_invitation;
+    public String end_month_of_kelvin_sit_up_invitation;
+    public String end_year_of_kelvin_sit_up_invitation;
+    public int end_year_int_of_kelvin_sit_up_invitation;
+    public int end_month_int_of_kelvin_sit_up_invitation;
+    public int end_day_int_of_kelvin_sit_up_invitation;
+    public TextView show_end_time_of_sit_up_invitation;
+    public TextView show_end_date_of_sit_up_invitation;
+    DecimalFormat mDecimalFormat = new DecimalFormat("##00");
+    public EditText edit_text_of_sit_up_count;
+
+    public Toast toast;
+    public Button button_of_sit_up_invitation_confirm;
+
+    public int sit_up_count;
+    public InputMethodManager imm_of_sit_up_invitation;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,7 +113,114 @@ public class kelvin_sit_up_invitation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kelvin_sit_up_invitation, container, false);
+        final View view = inflater.inflate(R.layout.fragment_kelvin_sit_up_invitation, null);
+        view.setOnTouchListener(this);
+
+        edit_text_of_sit_up_count =(EditText)view.findViewById(R.id.editText_of_sit_up_count);
+        edit_text_of_sit_up_count.requestFocus();
+
+        Date mDate = new Date();
+        start_hour_int_of_kelvin_sit_up_invitation = mDate.getHours();
+        start_minute_int_of_kelvin_sit_up_invitation =mDate.getMinutes();
+        start_year_int_of_kelvin_sit_up_invitation =mDate.getYear()+1900;
+        start_month_int_of_kelvin_sit_up_invitation =mDate.getMonth()+1;
+        start_day_int_of_kelvin_sit_up_invitation =mDate.getDate();
+        end_hour_int_of_kelvin_sit_up_invitation = mDate.getHours();
+        end_minute_int_of_kelvin_sit_up_invitation =mDate.getMinutes();
+        end_year_int_of_kelvin_sit_up_invitation =mDate.getYear()+1900;
+        end_month_int_of_kelvin_sit_up_invitation =mDate.getMonth()+1;
+        end_day_int_of_kelvin_sit_up_invitation =mDate.getDate();
+
+        show_start_time_of_sit_up_invitation =(TextView)view.findViewById(R.id.show_start_time_of_sit_up_invitation);
+        show_start_time_of_sit_up_invitation.setText(mDecimalFormat.format(start_hour_int_of_kelvin_sit_up_invitation) +":"+mDecimalFormat.format(start_minute_int_of_kelvin_sit_up_invitation) );
+        show_start_time_of_sit_up_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new StartTimeFragment();
+
+                newFragment.setTargetFragment(kelvin_sit_up_invitation.this, start_time_data_of_sit_up_invitation);
+                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+            }
+        });
+
+        show_start_date_of_sit_up_invitation =(TextView)view.findViewById(R.id.show_start_date_of_sit_up_invitation);
+        show_start_date_of_sit_up_invitation.setText(start_year_int_of_kelvin_sit_up_invitation +"年"+ start_month_int_of_kelvin_sit_up_invitation +"月"+ start_day_int_of_kelvin_sit_up_invitation);
+        show_start_date_of_sit_up_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new StartDateFragment();
+                newFragment.setTargetFragment(kelvin_sit_up_invitation.this, start_date_data_of_sit_up_invitation);
+                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+            }
+        });
+        show_end_time_of_sit_up_invitation =(TextView)view.findViewById(R.id.show_end_time_of_sit_up_invitation);
+        show_end_time_of_sit_up_invitation.setText(mDecimalFormat.format(end_hour_int_of_kelvin_sit_up_invitation) +":"+mDecimalFormat.format(end_minute_int_of_kelvin_sit_up_invitation) );
+        show_end_time_of_sit_up_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new EndTimeFragment();
+
+                newFragment.setTargetFragment(kelvin_sit_up_invitation.this, end_time_data_of_sit_up_invitation);
+                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+            }
+        });
+        show_end_date_of_sit_up_invitation =(TextView)view.findViewById(R.id.show_end_date_of_sit_up_invitation);
+        show_end_date_of_sit_up_invitation.setText(end_year_int_of_kelvin_sit_up_invitation +"年"+ end_month_int_of_kelvin_sit_up_invitation +"月"+ end_day_int_of_kelvin_sit_up_invitation);
+        show_end_date_of_sit_up_invitation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new EndDateFragment();
+                newFragment.setTargetFragment(kelvin_sit_up_invitation.this, end_date_data_of_sit_up_invitation);
+                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        button_of_sit_up_invitation_confirm =(Button)view.findViewById(R.id.button_of_sit_up_invitation_confirm);
+        button_of_sit_up_invitation_confirm.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                if("".equals(edit_text_of_sit_up_count.getText().toString().trim())){
+                    toast.makeText(getActivity(), getResources().getString(R.string.empty_of_edit_text), Toast.LENGTH_SHORT).show();
+                    edit_text_of_sit_up_count.requestFocus();
+                    //imm2 = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm_of_sit_up_invitation.showSoftInput(edit_text_of_sit_up_count, 0);
+
+                }else{
+                    sit_up_count =Integer.parseInt(edit_text_of_sit_up_count.getText().toString());
+                    if(sit_up_count <10|| sit_up_count >50){
+                        toast.makeText(getActivity(), "仰臥起坐的次數不能小於10或大於50", Toast.LENGTH_SHORT).show();
+                        edit_text_of_sit_up_count.setText(" ");
+                        imm_of_sit_up_invitation.showSoftInput(edit_text_of_sit_up_count, 0);
+                    }else{
+                        if(start_hour_of_kelvin_sit_up_invitation ==null|| start_minute_of_kelvin_sit_up_invitation ==null){
+                            toast.makeText(getActivity(), "請選擇時間", Toast.LENGTH_SHORT).show();
+                            DialogFragment newFragment = new StartTimeFragment();
+                            newFragment.setTargetFragment(kelvin_sit_up_invitation.this, start_time_data_of_sit_up_invitation);
+                            newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                        }else{
+                            toast=Toast.makeText(getActivity(), "伏地挺身的次數:"+ sit_up_count +"時間是:"+ start_hour_of_kelvin_sit_up_invitation +":"+ start_minute_of_kelvin_sit_up_invitation, Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            getActivity().getSupportFragmentManager()
+                                    .beginTransaction()
+                                    .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+
+
+
+                    }
+                }
+
+            }
+
+
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -92,6 +247,11 @@ public class kelvin_sit_up_invitation extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -105,5 +265,39 @@ public class kelvin_sit_up_invitation extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(String Tag, String number);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode == start_time_data_of_sit_up_invitation){
+            start_minute_of_kelvin_sit_up_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(StartTimeFragment.MINUTE_OF_START_TIME_PICKER_FRAGMENT)));
+            start_hour_of_kelvin_sit_up_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(StartTimeFragment.HOUR_OF_START_TIME_PICKER_FRAGMENT)));
+            show_start_time_of_sit_up_invitation.setText(start_hour_of_kelvin_sit_up_invitation +":"+ start_minute_of_kelvin_sit_up_invitation);
+        }
+
+        if(requestCode == start_date_data_of_sit_up_invitation){
+            start_day_of_kelvin_sit_up_invitation =data.getStringExtra(StartDateFragment.DAY_OF_START_Date_PICKER_FRAGMENT);
+            start_month_of_kelvin_sit_up_invitation =data.getStringExtra(StartDateFragment.MONTH_OF_START_Date_PICKER_FRAGMENT);
+            start_year_of_kelvin_sit_up_invitation =data.getStringExtra(StartDateFragment.YEAR_OF_START_Date_PICKER_FRAGMENT);
+            show_start_date_of_sit_up_invitation.setText(start_year_of_kelvin_sit_up_invitation +"年"+ start_month_of_kelvin_sit_up_invitation +"月"+ start_day_of_kelvin_sit_up_invitation);
+        }
+
+        if(requestCode == end_time_data_of_sit_up_invitation){
+            end_minute_of_kelvin_sit_up_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(EndTimeFragment.MINUTE_OF_END_TIME_PICKER_FRAGMENT)));
+            end_hour_of_kelvin_sit_up_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(EndTimeFragment.HOUR_OF_END_TIME_PICKER_FRAGMENT)));
+            show_end_time_of_sit_up_invitation.setText(end_hour_of_kelvin_sit_up_invitation +":"+ end_minute_of_kelvin_sit_up_invitation);
+        }
+
+        if(requestCode == end_date_data_of_sit_up_invitation){
+            end_day_of_kelvin_sit_up_invitation =data.getStringExtra(EndDateFragment.DAY_OF_END_Date_PICKER_FRAGMENT);
+            end_month_of_kelvin_sit_up_invitation =data.getStringExtra(EndDateFragment.MONTH_OF_END_Date_PICKER_FRAGMENT);
+            end_year_of_kelvin_sit_up_invitation =data.getStringExtra(EndDateFragment.YEAR_OF_END_Date_PICKER_FRAGMENT);
+            show_end_date_of_sit_up_invitation.setText(end_year_of_kelvin_sit_up_invitation +"年"+ end_month_of_kelvin_sit_up_invitation +"月"+ end_day_of_kelvin_sit_up_invitation);
+        }
+
+
+
+
     }
 }

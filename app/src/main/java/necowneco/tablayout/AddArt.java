@@ -83,7 +83,8 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final TextView test = (TextView)view.findViewById(R.id.testtext);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         final String nowuser=mParam1;
-        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(view.getContext(),
+        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
+                view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 SportList);
         spinner.setAdapter(sportlist);
@@ -91,13 +92,18 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 test.setText("按下送出");
-                Toast.makeText(getContext(),"使用者"+nowuser+test.getText(), Toast.LENGTH_SHORT).show();
-                onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
-                getActivity().getSupportFragmentManager()
+                //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
+                ((habaActivity) getActivity()).addartDATA(
+                        ct.getText().toString(),
+                        spinner.getSelectedItem().toString(),
+                        cc.getText().toString()
+                );
+
+                /*getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.haba,new Allsport(),null)
+                        .replace(R.id.haba,new theArt(),null)
                         .addToBackStack(null)
-                        .commit();
+                        .commit();*/
             }
         });
 

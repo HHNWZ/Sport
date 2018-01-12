@@ -1,36 +1,50 @@
 package necowneco.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Runsport.OnFragmentInteractionListener} interface
+ * {@link theArt.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Runsport#newInstance} factory method to
+ * Use the {@link theArt#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Runsport extends Fragment {
+public class theArt extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+    private static final String THEART_ID = "param4";
+    private static final String THEART_CON="param5";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ArrayList<String> mParam3;
+    private int mParam4;
+    private String mParam5;
 
     private OnFragmentInteractionListener mListener;
 
-    public Runsport() {
+    public theArt() {
         // Required empty public constructor
     }
 
@@ -40,14 +54,20 @@ public class Runsport extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Runsport.
+     * @param param3 Parameter 3.
+     * @param param4 Parameter 4.
+     * @param mParam5 Parameter 5.
+     * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
-    public static Runsport newInstance(String param1, String param2) {
-        Runsport fragment = new Runsport();
+    public static theArt newInstance(String param1, String param2, ArrayList param3, int param4,String mParam5) {
+        theArt fragment = new theArt();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putStringArrayList(ARG_PARAM3, param3);
+        args.putInt(THEART_ID,param4);
+        args.putString(THEART_CON,mParam5);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,18 +78,49 @@ public class Runsport extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam3 = getArguments().getStringArrayList(ARG_PARAM3);
+            mParam4 = getArguments().getInt(THEART_ID);
+            mParam5 = getArguments().getString(THEART_CON);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
+        view.setOnTouchListener(this);
+        final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
+        final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
+        final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
+        final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
+        final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
+        final TextView theartCon=(TextView)view.findViewById(R.id.theCon);
+
+        theartTitle.setText("貼文標題："+mParam1);
+        theartAut.setText("貼文作者："+mParam2);
+        theartCon.setText("貼文內容："+mParam5);
+
+        ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
+                view.getContext(),
+                android.R.layout.simple_expandable_list_item_1,
+                mParam3
+                );
+        theartReslist.setAdapter(theartreslist);
+        addartNewres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+                ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
+                ((habaActivity) getActivity()).toArtcon(mParam4);
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_runsport, container, false);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String Tag, String number) {
+    public void onButtonPressed(String Tag,String number) {
         if (mListener != null) {
             mListener.onFragmentInteraction(Tag,number);
         }
@@ -92,6 +143,11 @@ public class Runsport extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return false;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -104,6 +160,6 @@ public class Runsport extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(String Tag, String number);
+        void onFragmentInteraction(String Tag,String number);
     }
 }

@@ -61,7 +61,7 @@
             android:id="@+id/testtext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="測試(失敗)" />
+            android:text="測試(載入失敗)" />
     </LinearLayout>
 
 </FrameLayout>
