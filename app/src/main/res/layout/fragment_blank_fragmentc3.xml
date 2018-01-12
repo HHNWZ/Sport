@@ -152,14 +152,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <jp.co.recruit_mp.android.lightcalendarview.LightCalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:lcv_dayTextSize="18dp"
-                app:lcv_firstDayOfWeek="@integer/lcv_monday"
 
-                app:lcv_weekDayTextSize="18sp" />
 
         </LinearLayout>
     </ScrollView>
