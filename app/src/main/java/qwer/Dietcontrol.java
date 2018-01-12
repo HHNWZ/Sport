@@ -41,7 +41,7 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener {
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_main,new BlankFragment1(),null)
+                        .replace(R.id.content_main,new BlankFragmentc1(),null)
                         .addToBackStack(null)
                         .commit();
             }

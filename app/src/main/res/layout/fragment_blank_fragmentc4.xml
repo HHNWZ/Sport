@@ -1,0 +1,121 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="qwer.BlankFragmentc4">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@android:color/white" />
+
+    <android.support.v7.widget.Toolbar
+        android:background="#000000"
+        android:id="@+id/toolbar"
+        android:minHeight="?actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:gravity="center_horizontal"
+        android:text="日記"
+        android:textColor="#ffffff"
+        android:textSize="22sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/scrollView2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtona1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerz" />
+
+        <ImageButton
+            android:id="@+id/imageButtona2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerx" />
+
+        <ImageButton
+            android:id="@+id/imageButtona3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerc" />
+
+        <ImageButton
+            android:id="@+id/imageButtona4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerc1" />
+
+    </LinearLayout>
+
+</RelativeLayout>

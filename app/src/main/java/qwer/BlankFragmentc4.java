@@ -8,18 +8,19 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.example.a888888888.sport.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlankFragment1.OnFragmentInteractionListener} interface
+ * {@link BlankFragmentc4.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BlankFragment1#newInstance} factory method to
+ * Use the {@link BlankFragmentc4#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment1 extends Fragment implements View.OnTouchListener {
+public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +32,7 @@ public class BlankFragment1 extends Fragment implements View.OnTouchListener {
 
     private OnFragmentInteractionListener mListener;
 
-    public BlankFragment1() {
+    public BlankFragmentc4() {
         // Required empty public constructor
     }
 
@@ -41,11 +42,11 @@ public class BlankFragment1 extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment1.
+     * @return A new instance of fragment BlankFragmentc4.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment1 newInstance(String param1, String param2) {
-        BlankFragment1 fragment = new BlankFragment1();
+    public static BlankFragmentc4 newInstance(String param1, String param2) {
+        BlankFragmentc4 fragment = new BlankFragmentc4();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,8 +67,41 @@ public class BlankFragment1 extends Fragment implements View.OnTouchListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_blank_fragment2, null);
+        View view = inflater.inflate(R.layout.fragment_blank_fragmentc4, null);
         view.setOnTouchListener(this);
+        ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
+        qwera2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new BlankFragmentc2(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        ImageButton qwera3=(ImageButton)view.findViewById(R.id.imageButtona3);
+        qwera3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new BlankFragmentc3(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        ImageButton qwera1=(ImageButton)view.findViewById(R.id.imageButtona1);
+        qwera1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new BlankFragmentc1(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         return view;
     }
 

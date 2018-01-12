@@ -87,6 +87,7 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
         TextView textViewa=(TextView)view.findViewById(R.id.textView16);
         textViewa.setText(getString(R.string.textA));
 
+
         ExpandableTextView expTv2 = (ExpandableTextView)view.findViewById(R.id.expand_text2_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
         expTv2.setText(getString(R.string.textb1));

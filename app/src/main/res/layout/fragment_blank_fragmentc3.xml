@@ -1,0 +1,213 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="qwer.BlankFragmentc3">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@android:color/white" />
+    <android.support.v7.widget.Toolbar
+        android:background="#000000"
+        android:id="@+id/toolbar"
+        android:minHeight="?actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="生理期計算工具"
+        android:textColor="#ffffff"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dsy1"
+        android:layout_alignBottom="@+id/dsy1"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:text="生理期週期:"
+        android:textSize="22dp" />
+
+    <ImageButton
+        android:id="@+id/left1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/textView43"
+        android:background="#00000000"
+        android:src="@drawable/zxc2" />
+
+    <EditText
+        android:id="@+id/dsy1"
+        android:layout_width="75dp"
+        android:layout_height="42dp"
+        android:layout_above="@+id/left2"
+        android:layout_toEndOf="@+id/left1"
+        android:background="@drawable/bg_edittext"
+        android:gravity="center"
+        android:inputType="number"
+        android:padding="5dip"
+        android:singleLine="true"
+        android:textColorHint="#AAAAAA" />
+
+    <ImageButton
+        android:id="@+id/right1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/left1"
+        android:layout_toEndOf="@+id/dsy1"
+        android:background="#00000000"
+        android:src="@drawable/zxc1" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView43"
+        android:layout_marginStart="55dp"
+        android:layout_toEndOf="@+id/dsy1"
+        android:text="天"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dsy2"
+        android:layout_alignBottom="@+id/dsy2"
+        android:layout_alignStart="@+id/textView43"
+        android:text="生理期天數:"
+        android:textSize="20dp" />
+
+    <ImageButton
+        android:id="@+id/left2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/left1"
+        android:layout_below="@+id/left1"
+        android:layout_marginTop="44dp"
+        android:background="#00000000"
+        android:src="@drawable/zxc2" />
+
+    <EditText
+        android:id="@+id/dsy2"
+        android:layout_width="75dp"
+        android:layout_height="42dp"
+        android:layout_alignTop="@+id/left2"
+        android:layout_toEndOf="@+id/left2"
+        android:background="@drawable/bg_edittext"
+        android:gravity="center"
+        android:inputType="number"
+        android:padding="5dip"
+        android:singleLine="true"
+        android:textColorHint="#AAAAAA" />
+
+    <ImageButton
+        android:id="@+id/right2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dsy2"
+        android:layout_toEndOf="@+id/dsy2"
+        android:background="#00000000"
+        android:src="@drawable/zxc1" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView45"
+        android:layout_alignStart="@+id/textView44"
+        android:text="天"
+        android:textSize="20dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/left2"
+        android:layout_marginTop="14dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <jp.co.recruit_mp.android.lightcalendarview.LightCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:lcv_dayTextSize="18sp"
+                app:lcv_firstDayOfWeek="@integer/lcv_monday"
+
+                app:lcv_weekDayTextSize="18sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButtona1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerz" />
+
+        <ImageButton
+            android:id="@+id/imageButtona2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerx" />
+
+        <ImageButton
+            android:id="@+id/imageButtona3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerc1" />
+
+        <ImageButton
+            android:id="@+id/imageButtona4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            android:src="@drawable/qwerc" />
+
+    </LinearLayout>
+
+</RelativeLayout>
