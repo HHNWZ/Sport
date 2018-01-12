@@ -57,8 +57,11 @@ public class EndTimeFragment extends DialogFragment implements TimePickerDialog.
             Intent intent = new Intent();
             intent.putExtra(HOUR_OF_END_TIME_PICKER_FRAGMENT,hour_of_time_picker_fragment);
             intent.putExtra(MINUTE_OF_END_TIME_PICKER_FRAGMENT,minute_of_time_picker_fragment);
-            getTargetFragment().onActivityResult(kelvin_running_invitation.end_time_data, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_running_invitation.end_time_data_of_running_invitation, Activity.RESULT_OK,intent);
             getTargetFragment().onActivityResult(kelvin_walking_invitation.end_time_data_of_walking_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_aerobic_exercise_invitation.end_time_data_of_aerobic_exercise_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_push_up_invitation.end_time_data_of_push_up_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_sit_up_invitation.end_date_data_of_sit_up_invitation, Activity.RESULT_OK,intent);
         }
 
     }

@@ -146,7 +146,7 @@
             android:layout_below="@+id/end_time_of_invitation_for_running"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
-            android:text="開始日期:"
+            android:text="結束日期:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 

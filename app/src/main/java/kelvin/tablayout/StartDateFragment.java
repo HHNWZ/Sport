@@ -7,7 +7,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.DatePicker;
-import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
 import java.util.Calendar;
 
@@ -59,8 +58,11 @@ public class StartDateFragment extends DialogFragment implements DatePickerDialo
             intent.putExtra(DAY_OF_START_Date_PICKER_FRAGMENT,day);
             intent.putExtra(MONTH_OF_START_Date_PICKER_FRAGMENT,month);
             intent.putExtra(YEAR_OF_START_Date_PICKER_FRAGMENT,year1);
-            getTargetFragment().onActivityResult(kelvin_running_invitation.start_date_data, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_running_invitation.start_date_data_of_running_invitation, Activity.RESULT_OK,intent);
             getTargetFragment().onActivityResult(kelvin_walking_invitation.start_date_data_of_walking_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_aerobic_exercise_invitation.start_date_data_of_aerobic_exercise_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_push_up_invitation.start_date_data_of_push_up_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_sit_up_invitation.start_date_data_of_sit_up_invitation, Activity.RESULT_OK,intent);
         }
     }
 

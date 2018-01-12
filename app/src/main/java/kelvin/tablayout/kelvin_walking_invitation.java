@@ -159,7 +159,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
         });
 
         show_start_date_of_walking_invitation=(TextView)view.findViewById(R.id.show_start_date_of_walking_invitation);
-        show_start_date_of_walking_invitation.setText(start_year_int_of_kelvin_walking_invitation+"-"+start_month_int_of_kelvin_walking_invitation+"-"+start_day_int_of_kelvin_walking_invitation);
+        show_start_date_of_walking_invitation.setText(start_year_int_of_kelvin_walking_invitation+"年"+start_month_int_of_kelvin_walking_invitation+"月"+start_day_int_of_kelvin_walking_invitation);
         show_start_date_of_walking_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,7 +180,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
             }
         });
         show_end_date_of_walking_invitation=(TextView)view.findViewById(R.id.show_end_date_of_walking_invitation);
-        show_end_date_of_walking_invitation.setText(end_year_int_of_kelvin_walking_invitation+"-"+end_month_int_of_kelvin_walking_invitation+"-"+end_day_int_of_kelvin_walking_invitation);
+        show_end_date_of_walking_invitation.setText(end_year_int_of_kelvin_walking_invitation+"年"+end_month_int_of_kelvin_walking_invitation+"月"+end_day_int_of_kelvin_walking_invitation);
         show_end_date_of_walking_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,7 +301,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
             start_day_of_kelvin_walking_invitation=data.getStringExtra(StartDateFragment.DAY_OF_START_Date_PICKER_FRAGMENT);
             start_month_of_kelvin_walking_invitation=data.getStringExtra(StartDateFragment.MONTH_OF_START_Date_PICKER_FRAGMENT);
             start_year_of_kelvin_walking_invitation=data.getStringExtra(StartDateFragment.YEAR_OF_START_Date_PICKER_FRAGMENT);
-            show_start_date_of_walking_invitation.setText(start_day_of_kelvin_walking_invitation+"-"+start_month_of_kelvin_walking_invitation+"-"+start_year_of_kelvin_walking_invitation);
+            show_start_date_of_walking_invitation.setText(start_year_of_kelvin_walking_invitation+"年"+start_month_of_kelvin_walking_invitation+"月"+start_day_of_kelvin_walking_invitation);
         }
 
         if(requestCode == end_time_data_of_walking_invitation){
@@ -314,7 +314,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
             end_day_of_kelvin_walking_invitation=data.getStringExtra(EndDateFragment.DAY_OF_END_Date_PICKER_FRAGMENT);
             end_month_of_kelvin_walking_invitation=data.getStringExtra(EndDateFragment.MONTH_OF_END_Date_PICKER_FRAGMENT);
             end_year_of_kelvin_walking_invitation=data.getStringExtra(EndDateFragment.YEAR_OF_END_Date_PICKER_FRAGMENT);
-            show_end_date_of_walking_invitation.setText(end_day_of_kelvin_walking_invitation+"-"+end_month_of_kelvin_walking_invitation+"-"+end_year_of_kelvin_walking_invitation);
+            show_end_date_of_walking_invitation.setText(end_year_of_kelvin_walking_invitation+"年"+end_month_of_kelvin_walking_invitation+"月"+end_day_of_kelvin_walking_invitation);
         }
 
 
