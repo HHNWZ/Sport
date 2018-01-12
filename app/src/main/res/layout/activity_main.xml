@@ -104,17 +104,27 @@
             android:text="走路：" />
 
         <Button
-            android:id="@+id/button4"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_above="@+id/button"
-            android:layout_marginBottom="53dp"
-            android:layout_toStartOf="@+id/button3"
+        android:id="@+id/button4"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/button"
+        android:layout_marginBottom="53dp"
+        android:layout_toStartOf="@+id/button3"
+        android:layout_weight="1"
+        android:background="@drawable/icon"
+        android:text="開始運動"
+        android:textColor="@android:color/white"
+        android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@drawable/icon"
-            android:text="開始運動"
+            android:text="登入"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="10dp" />
 
         <Button
             android:id="@+id/button"

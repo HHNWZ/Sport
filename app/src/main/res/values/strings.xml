@@ -52,4 +52,6 @@
     </string-array>
     <string name="empty_of_edit_text">輸入格不能空</string>
     <string name="value_maximum_and_minimum_of_running_distance">距離不能小於100米和大於5000米</string>
+    <string name="login1">帳號：</string>
+    <string name="login2">密碼：</string>
 </resources>
