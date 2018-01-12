@@ -48,6 +48,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<Integer> shsolGd=new ArrayList<Integer>();
     final ArrayList<Integer> shsolRn=new ArrayList<Integer>();
     final String nowuser="369";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -343,6 +344,7 @@ public class habaActivity extends AppCompatActivity
 
     @Override
     public void click(View v) {
-        Toast.makeText(this, "幹", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "幹"+v.getId(), Toast.LENGTH_SHORT).show();
+
     }
 }
