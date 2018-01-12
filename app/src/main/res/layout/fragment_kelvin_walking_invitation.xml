@@ -11,15 +11,65 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@android:color/white">
+
         <TextView
             android:id="@+id/title_of_walking_invitation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="步行邀請內容"
+            android:focusableInTouchMode="true"
+            android:text="步行邀請内容"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/text_of_walking_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/title_of_walking_invitation"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="步數:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editText_of_walking_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_walking_invitation"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/text_of_walking_count"
+            android:ems="4"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="輸入步數"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="20sp" />
+
+        <!--<Spinner
+           android:id="@+id/spinner_of_distance"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:entries="@array/spinner_of_distance"
+           android:layout_below="@+id/title_of_running_invitation"
+           android:layout_toRightOf="@+id/text_of_running_invitation_distance"
+           android:layout_marginTop="20dp"
+           ></Spinner>-->
+        <TextView
+            android:id="@+id/text_of_walking_invitation_distance_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_of_walking_invitation"
+            android:layout_marginTop="25dp"
+            android:layout_toRightOf="@+id/editText_of_walking_count"
+            android:text="步"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/button_of_walking_invitation_confirm"
             android:layout_width="wrap_content"
@@ -29,6 +79,93 @@
             android:layout_marginBottom="22dp"
             android:layout_marginEnd="41dp"
             android:text="確認" />
+
+        <TextView
+            android:id="@+id/start_time_of_invitation_for_walking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_of_walking_count"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="開始時間:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/start_date_of_invitation_for_walking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_time_of_invitation_for_walking"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="開始日期:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_start_time_of_walking_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/start_time_of_invitation_for_walking"
+            android:layout_alignBottom="@+id/start_time_of_invitation_for_walking"
+            android:layout_toEndOf="@+id/start_time_of_invitation_for_walking"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_start_date_of_walking_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/start_date_of_invitation_for_walking"
+            android:layout_alignBottom="@+id/start_date_of_invitation_for_walking"
+            android:layout_toEndOf="@+id/start_date_of_invitation_for_walking"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_time_of_invitation_for_walking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/start_date_of_invitation_for_walking"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="結束時間:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/end_date_of_invitation_for_walking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/end_time_of_invitation_for_walking"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="結束日期:"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/show_end_time_of_walking_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_time_of_invitation_for_walking"
+            android:layout_alignBottom="@+id/end_time_of_invitation_for_walking"
+            android:layout_toEndOf="@+id/end_time_of_invitation_for_walking"
+            android:text=""
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/show_end_date_of_walking_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/end_date_of_invitation_for_walking"
+            android:layout_alignBottom="@+id/end_date_of_invitation_for_walking"
+            android:layout_toEndOf="@+id/end_date_of_invitation_for_walking"
+            android:text=""
+            android:textSize="20sp" />
+
+
+
+
 
 
     </RelativeLayout>
