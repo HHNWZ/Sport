@@ -68,6 +68,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
+
         return view;
     }
 

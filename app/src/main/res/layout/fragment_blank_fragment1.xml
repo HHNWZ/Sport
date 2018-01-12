@@ -1,219 +1,714 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
 
-    android:orientation="vertical"
     android:clickable="true"
+    android:orientation="vertical"
     tools:context="qwer.BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         app:srcCompat="@android:color/white" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="98dp"
-        android:layout_marginTop="26dp"
-        android:layout_weight="1"
-        android:text="常見食物熱量"
-        android:textSize="25dp" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="83dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="119dp"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:text="常見食物熱量"
+                android:textSize="24dp" />
 
-                android:layout_below="@+id/textView3"
-                android:background="@drawable/blue"
-                android:text="麵"
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                android:textColor="@android:color/white" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer1" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button2"
-                android:layout_alignBottom="@+id/button2"
-                android:layout_toStartOf="@+id/textView3"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="白飯"
-                android:textColor="@android:color/white" />
+                <TextView
+                    android:id="@+id/tviwq1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="米飯"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button2"
-                android:layout_alignBottom="@+id/button2"
-                android:layout_toEndOf="@+id/textView3"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="牛奶"
-                android:textColor="@android:color/white" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq1-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1碗"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq1-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※225(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer2" />
+
+                <TextView
+                    android:id="@+id/tviwq2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="香蕉"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq2-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1碗"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq2-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※120(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer3" />
+
+                <TextView
+                    android:id="@+id/tviwq3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="牛奶"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq3-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1杯244g"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq3-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※150(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer4" />
+
+                <TextView
+                    android:id="@+id/tviwq4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="牛肉"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq4-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1片72g"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq4-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※140(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer5" />
+
+                <TextView
+                    android:id="@+id/tviwq5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="甜甜圈"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq5-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1個"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq5-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※270(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer6" />
+
+                <TextView
+                    android:id="@+id/tviwq6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="魚肉"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq6-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1條"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq6-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※206(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer7" />
+
+                <TextView
+                    android:id="@+id/tviwq7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="蔬菜"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq7-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎100g"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq7-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※65(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer9" />
+
+                <TextView
+                    android:id="@+id/tviwq8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="雞肉"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq8-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎100g"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq8-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※239(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer10" />
+
+                <TextView
+                    android:id="@+id/tviwq9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="雞蛋"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq9-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1顆"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq9-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※106(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/viewq1"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="3"
+                    android:src="@drawable/qwer9" />
+
+                <TextView
+                    android:id="@+id/tviwq10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/textView48"
+                    android:layout_alignTop="@+id/linearLayout"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="14dp"
+                    android:layout_weight="3"
+                    android:text="雞肉"
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tviwq10-1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="◎1碗"
+                        android:textColor="#EE7700"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/tviwq10-2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="※50(卡路里)"
+                        android:textColor="#CC00CC"
+                        android:textSize="15dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewq10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/editText6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:background="#AAAAAA" />
 
         </LinearLayout>
+    </ScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/button"
-                android:layout_below="@+id/button"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="水餃"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button4"
-                android:layout_alignBottom="@+id/button4"
-                android:layout_alignStart="@+id/button2"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="方便麵"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/button11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button10"
-                android:layout_alignBottom="@+id/button10"
-                android:layout_alignParentEnd="true"
-
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="蘋果"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/button4"
-                android:layout_below="@+id/button4"
-
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="西瓜"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/button13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button12"
-                android:layout_alignBottom="@+id/button12"
-                android:layout_alignStart="@+id/button10"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="芒果"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/button14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button13"
-                android:layout_alignBottom="@+id/button13"
-                android:layout_alignStart="@+id/button11"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="香蕉"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/button12"
-                android:layout_below="@+id/button12"
-
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="荷包蛋"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/button16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button15"
-                android:layout_alignBottom="@+id/button15"
-                android:layout_alignStart="@+id/button13"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="啤酒"
-                android:textColor="@android:color/white" />
-
-            <Button
-                android:id="@+id/button17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/button16"
-                android:layout_alignBottom="@+id/button16"
-                android:layout_alignStart="@+id/button14"
-                android:layout_weight="1"
-                android:background="@drawable/blue"
-                android:text="肉"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </RelativeLayout>

@@ -5,7 +5,6 @@
     android:layout_height="fill_parent"
     android:background="@drawable/white"
     android:clickable="true"
-    android:weightSum="4"
     android:orientation="vertical"
     tools:context="qwer.Dietcontrol">
 
@@ -16,19 +15,21 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:weightSum="2"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">//layout_weight搭配layout_weight使用
 
             <Button
                 android:id="@+id/angry_btn"
 
                 android:layout_width="fill_parent"
 
-                android:layout_height="285dp"
+                android:layout_height="fill_parent"
                 android:layout_above="@+id/angry_bt2"
                 android:layout_toStartOf="@+id/angry_bt2"
                 android:layout_weight="1"
@@ -44,7 +45,7 @@
             <Button
                 android:id="@+id/angry_bt1"
                 android:layout_width="fill_parent"
-                android:layout_height="285dp"
+                android:layout_height="fill_parent"
                 android:layout_above="@+id/angry_bt2"
                 android:layout_toEndOf="@+id/angry_btn"
                 android:layout_weight="1"
@@ -61,7 +62,8 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
