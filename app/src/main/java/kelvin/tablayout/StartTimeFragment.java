@@ -6,11 +6,8 @@ import android.os.Bundle;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.support.v4.app.Fragment;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
 
 import java.util.Calendar;
@@ -19,12 +16,11 @@ import java.util.Calendar;
  * Created by 888888888 on 2017/11/24.
  */
 
-public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+public class StartTimeFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+    public static final String HOUR_OF_START_TIME_PICKER_FRAGMENT="hour_of_start_time_picker_fragment";
+    public static final String MINUTE_OF_START_TIME_PICKER_FRAGMENT="minute_of_start_time_picker_fragment";
 
-    ;
-    public static final String HOUR_OF_TIME_PICKER_FRAGMENT="hour_of_time_picker_fragment";
-    public static final String MINUTE_OF_TIME_PICKER_FRAGMENT="minute_of_time_picker_fragment";
-    public TimePickerFragment() {
+    public StartTimeFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +40,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        Toast.makeText(getActivity(), "hour="+hourOfDay+", min="+minute, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "hour="+hourOfDay+", min="+minute, Toast.LENGTH_SHORT).show();
+
         /*boolean pressed = true;
         Intent intent = new Intent(getActivity(), kelvin_running_invitation.class);
         intent.putExtra("hour", hourOfDay);
@@ -59,13 +56,16 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
             return;
         }else{
             Intent intent = new Intent();
-            intent.putExtra(HOUR_OF_TIME_PICKER_FRAGMENT,hour_of_time_picker_fragment);
-            intent.putExtra(MINUTE_OF_TIME_PICKER_FRAGMENT,minute_of_time_picker_fragment);
-            getTargetFragment().onActivityResult(kelvin_running_invitation.REQUEST,Activity.RESULT_OK,intent);
+            intent.putExtra(HOUR_OF_START_TIME_PICKER_FRAGMENT,hour_of_time_picker_fragment);
+            intent.putExtra(MINUTE_OF_START_TIME_PICKER_FRAGMENT,minute_of_time_picker_fragment);
+            getTargetFragment().onActivityResult(kelvin_running_invitation.start_time_data_of_running_invitation,Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_walking_invitation.start_time_data_of_walking_invitation,Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_aerobic_exercise_invitation.start_time_data_of_aerobic_exercise_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_push_up_invitation.start_time_data_of_push_up_invitation, Activity.RESULT_OK,intent);
+            getTargetFragment().onActivityResult(kelvin_sit_up_invitation.start_time_data_of_sit_up_invitation, Activity.RESULT_OK,intent);
         }
 
     }
 
 
 }
-// Toast.makeText(getActivity(), "hour="+hourOfDay+", min="+minute, Toast.LENGTH_SHORT).show();

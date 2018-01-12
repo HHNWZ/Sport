@@ -18,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -32,20 +30,23 @@ import java.util.ArrayList;
 
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
-        Runsport.OnFragmentInteractionListener,Walksport.OnFragmentInteractionListener,
-        Airsport.OnFragmentInteractionListener,Sitsport.OnFragmentInteractionListener,
-        Pushsport.OnFragmentInteractionListener,AddArt.OnFragmentInteractionListener,
-        theArt.OnFragmentInteractionListener,SearchArtList.OnFragmentInteractionListener{
+        AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
+        SearchArtList.OnFragmentInteractionListener,MyAdapter.Callback{
 
-    final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
-    final ArrayList<String> artID=new ArrayList<String>();
-    final ArrayList<String> autID=new ArrayList<String>();
-    final ArrayList<String> artTitle=new ArrayList<String>();
-    final ArrayList<String> artClass=new ArrayList<String>();
-    final ArrayList<String> artCon=new ArrayList<String>();
-    final ArrayList<ArrayList> resList=new ArrayList<>();
-    final ArrayList<String> searchsol=new ArrayList<String>();
-    final ArrayList<Integer> searchsolid=new ArrayList<Integer>();
+    final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};//只是對照表
+    final ArrayList<String> artID=new ArrayList<String>();//貼文ID列表
+    final ArrayList<String> artTitle=new ArrayList<String>();//貼文標題列表
+    final ArrayList<String> autID=new ArrayList<String>();//貼文作者ID列表
+    final ArrayList<String> artClass=new ArrayList<String>();//貼文類別列表
+    final ArrayList<String> artCon=new ArrayList<String>();//貼文內容列表
+    final ArrayList<ArrayList> resList=new ArrayList<>();//貼文留言ID [ 該貼文列表 ]，resList.get(ID).size=取得貼文數
+    final ArrayList<Integer> artgood=new ArrayList<Integer>();//貼文讚數列表
+    final ArrayList<Integer> shsolID=new ArrayList<Integer>();//搜尋&篩選ID列表(位置)，searchsol=shsol
+    final ArrayList<String> shsolTitle=new ArrayList<String>();//搜尋&篩選標題列表
+    final ArrayList<String> shsolAut=new ArrayList<String>();
+    final ArrayList<String> shsolCon=new ArrayList<String>();
+    final ArrayList<Integer> shsolGd=new ArrayList<Integer>();
+    final ArrayList<Integer> shsolRn=new ArrayList<Integer>();
     final String nowuser="369";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,6 @@ public class habaActivity extends AppCompatActivity
         setContentView(R.layout.activity_haba_neco);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final TextView selsport=(TextView)findViewById(R.id.sel_sport);
         final Button spall = (Button)findViewById(R.id.sp_all);
         final Button sprun = (Button)findViewById(R.id.sp_run);
         final Button spwalk = (Button)findViewById(R.id.sp_walk);
@@ -77,6 +77,9 @@ public class habaActivity extends AppCompatActivity
         artCon.add("衝鋒槍射速高攻擊力低跑速快");
         artCon.add("弓箭可蓄力同時編製術式強力擊發");
         artCon.add("重型狙擊槍一發秒殺破壞地形強無敵");
+        artgood.add(10);
+        artgood.add(20);
+        artgood.add(30);
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
@@ -96,7 +99,6 @@ public class habaActivity extends AppCompatActivity
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("全部");
                 BackArtList();
                 onBackPressed();
             }
@@ -104,7 +106,6 @@ public class habaActivity extends AppCompatActivity
         sprun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("有氧氧運動");
                 SelAndSearch(SportList[1],false);
                 onBackPressed();
             }
@@ -112,7 +113,6 @@ public class habaActivity extends AppCompatActivity
         spwalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("走路路");
                 SelAndSearch(SportList[2],false);
                 onBackPressed();
             }
@@ -120,7 +120,6 @@ public class habaActivity extends AppCompatActivity
         spair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("跑步步");
                 SelAndSearch(SportList[3],false);
                 onBackPressed();
             }
@@ -128,7 +127,6 @@ public class habaActivity extends AppCompatActivity
         spsit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("伏地挺身身");
                 SelAndSearch(SportList[4],false);
                 onBackPressed();
             }
@@ -136,7 +134,6 @@ public class habaActivity extends AppCompatActivity
         sppush.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selsport.setText("仰臥起坐坐");
                 SelAndSearch(SportList[5],false);
                 onBackPressed();
             }
@@ -164,32 +161,52 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
-
+    public void testfunction(){
+        Toast.makeText(this, "嘎啦", Toast.LENGTH_SHORT).show();
+    }
     private void SelAndSearch(String SearchValue, boolean FunctionType) {//Type=true:搜尋,false:篩選
-        searchsol.clear();
-        searchsolid.clear();
+        shsolID.clear();
+        shsolTitle.clear();
+        shsolAut.clear();
+        shsolCon.clear();
+        shsolGd.clear();
+        shsolRn.clear();
         if(FunctionType) {
             for (int i = 0; i < artID.size(); i++) {
                 if (artTitle.get(i).contains(SearchValue)||artCon.get(i).contains(SearchValue)) {
-                    searchsol.add(artTitle.get(i));
-                    searchsolid.add(i);
+                    shsolID.add(i);
+                    shsolTitle.add(artTitle.get(i));
+                    shsolAut.add(autID.get(i));
+                    shsolCon.add(artCon.get(i));
+                    shsolGd.add(artgood.get(i));
+                    shsolRn.add(resList.get(i).size());
                 }
             }
             Toast.makeText(this, "搜尋："+SearchValue, Toast.LENGTH_SHORT).show();
         }else{
             for (int i = 0; i < artID.size(); i++) {
                 if (artClass.get(i)==SearchValue) {
-                    searchsol.add(artTitle.get(i));
-                    searchsolid.add(i);
+                    shsolID.add(i);
+                    shsolTitle.add(artTitle.get(i));
+                    shsolAut.add(autID.get(i));
+                    shsolCon.add(artCon.get(i));
+                    shsolGd.add(artgood.get(i));
+                    shsolRn.add(resList.get(i).size());
                 }
             }
             Toast.makeText(this, "篩選："+SearchValue, Toast.LENGTH_SHORT).show();
         }
         ToSearchList();
     }
-
+    public ArrayList<Integer> artresCount(){
+        ArrayList<Integer> mycount=new ArrayList<Integer>();
+        for(int i=0;i<artID.size();i++){
+            mycount.add(resList.get(i).size());
+        }
+        return mycount;
+    }
     public void BackArtList(){
-        Allsport all=Allsport.newInstance(artTitle,"param2");
+        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgood,artresCount());
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -198,7 +215,7 @@ public class habaActivity extends AppCompatActivity
         ).commit();
     }
     public void ToSearchList(){
-        SearchArtList searchartlist=SearchArtList.newInstance(searchsol,searchsolid);
+        SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -305,6 +322,7 @@ public class habaActivity extends AppCompatActivity
         artCon.add(theCon);
         resList.add(new ArrayList<String>());
         addRes(addid,"以下為留言");
+        artgood.add(0);
         Toast.makeText(this,
                 "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
                 Toast.LENGTH_SHORT).
@@ -321,5 +339,10 @@ public class habaActivity extends AppCompatActivity
     }
     public void addRes(int TargetID,String resCon){
         resList.get(TargetID).add(resCon);
+    }
+
+    @Override
+    public void click(View v) {
+        Toast.makeText(this, "幹", Toast.LENGTH_SHORT).show();
     }
 }
