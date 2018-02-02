@@ -5,41 +5,15 @@
     tools:context="necowneco.tablayout.theArt">
 
     <!-- TODO: Update blank fragment layout -->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/theTitle"
+        <Button
+            android:id="@+id/backArt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="貼文標題" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/theAut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="貼文作者" />
-            <TextView
-                android:id="@+id/theClass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="運動類別" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/theCon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="貼文內容" />
-
+            android:text="返回貼文" />
         <ListView
             android:id="@+id/theReslist"
             android:layout_width="wrap_content"
@@ -56,7 +30,6 @@
             android:id="@+id/addNewres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查看留言" />
+            android:text="留言" />
     </LinearLayout>
-
 </FrameLayout>

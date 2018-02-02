@@ -4,46 +4,43 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
 import java.util.ArrayList;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link theArt.OnFragmentInteractionListener} interface
+ * {@link theArtRes.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link theArt#newInstance} factory method to
+ * Use the {@link theArtRes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class theArt extends Fragment implements View.OnTouchListener {
+public class theArtRes extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String ARG_PARAM3 = "param3";
-    private static final String THEART_ID = "param4";
-    private static final String THEART_CON="param5";
+
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private ArrayList<String> mParam3;
-    private int mParam4;
-    private String mParam5;
+    private ArrayList<String> mReslist;
+    private String mArtTitle;
+    private int mArtID;
 
     private OnFragmentInteractionListener mListener;
 
-    public theArt() {
+    public theArtRes() {
         // Required empty public constructor
     }
 
@@ -53,20 +50,15 @@ public class theArt extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @param param3 Parameter 3.
-     * @param param4 Parameter 4.
-     * @param mParam5 Parameter 5.
-     * @return A new instance of fragment theArt.
+     * @return A new instance of fragment theArtRes.
      */
     // TODO: Rename and change types and number of parameters
-    public static theArt newInstance(String param1, String param2, ArrayList param3, int param4,String mParam5) {
-        theArt fragment = new theArt();
+    public static theArtRes newInstance(ArrayList<String> param1, String param2,int param3) {
+        theArtRes fragment = new theArtRes();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putStringArrayList(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        args.putStringArrayList(ARG_PARAM3, param3);
-        args.putInt(THEART_ID,param4);
-        args.putString(THEART_CON,mParam5);
+        args.putInt(ARG_PARAM3,param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -75,47 +67,42 @@ public class theArt extends Fragment implements View.OnTouchListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-            mParam3 = getArguments().getStringArrayList(ARG_PARAM3);
-            mParam4 = getArguments().getInt(THEART_ID);
-            mParam5 = getArguments().getString(THEART_CON);
+            mReslist = getArguments().getStringArrayList(ARG_PARAM1);
+            mArtTitle = getArguments().getString(ARG_PARAM2);
+            mArtID=getArguments().getInt(ARG_PARAM3);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
-        view.setOnTouchListener(this);
-        final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
-        final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
+        View view=inflater.inflate(R.layout.fragment_the_art_res, container, false);
+        // Inflate the layout for this fragment
+        final Button backart=(Button)view.findViewById(R.id.backArt);
         final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
         final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
-        final TextView theartCon=(TextView)view.findViewById(R.id.theCon);
-
-        theartTitle.setText("貼文標題："+mParam1);
-        theartAut.setText("貼文作者："+mParam2);
-        theartCon.setText("貼文內容："+mParam5);
-
+        backart.setText("返回貼文："+mArtTitle);
         ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
-                mParam3
-                );
+                mReslist
+        );
         theartReslist.setAdapter(theartreslist);
         addartNewres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
-                ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
-                ((habaActivity) getActivity()).toArtcon(mParam4);*/
-                ((habaActivity) getActivity()).toResList(mParam4);
+                Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+                ((habaActivity) getActivity()).addRes(mArtID,theartNewres.getText().toString());
+                ((habaActivity) getActivity()).toResList(mArtID);
             }
         });
-        // Inflate the layout for this fragment
-
+        backart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity) getActivity()).toArtcon(mArtID);
+            }
+        });
         return view;
     }
 
@@ -141,11 +128,6 @@ public class theArt extends Fragment implements View.OnTouchListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
     }
 
     /**

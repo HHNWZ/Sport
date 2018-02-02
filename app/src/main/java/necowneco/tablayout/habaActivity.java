@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
-        SearchArtList.OnFragmentInteractionListener{
+        SearchArtList.OnFragmentInteractionListener,theArtRes.OnFragmentInteractionListener{
 
     final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};//只是對照表
     final ArrayList<String> artID=new ArrayList<String>();//貼文ID列表
@@ -225,6 +225,7 @@ public class habaActivity extends AppCompatActivity
         ).commit();
     }
 
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -342,4 +343,13 @@ public class habaActivity extends AppCompatActivity
         resList.get(TargetID).add(resCon);
     }
 
+    public void toResList(int TargetID){
+        theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                theartres,
+                theartres.getTag()
+        ).commit();
+    }
 }
