@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
@@ -15,19 +14,14 @@ import java.util.List;
  * Created by 黃小黃 on 2017/12/19.
  */
 
-public class MyAdapter extends BaseAdapter implements View.OnClickListener{
+public class MyAdapter extends BaseAdapter{
     private LayoutInflater myInflater;
     private List<ArtListItem> artlists;
     private String nowuser;
-    private Callback mCallback;
-    public interface Callback {
-        public void click(View v);
-    }
-    public MyAdapter(Context context,List<ArtListItem> theartlist,String nowuserID,Callback callback){
+    public MyAdapter(Context context,List<ArtListItem> theartlist,String nowuserID){
         myInflater=LayoutInflater.from(context);
         this.artlists=theartlist;
         this.nowuser=nowuserID;
-        this.mCallback=callback;
     }
 
     @Override
@@ -50,19 +44,16 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener{
         TextView txtCon;
         TextView txtGdnum;
         TextView txtRsnum;
-        Button deletbtn;
         public ViewHolder(TextView thetxtArt,
                           TextView thetxtAut,
                           TextView thetxtCon,
                           TextView thetxtGdnum,
-                          TextView thetxtRsnum,
-                          Button thedeletbtn){
+                          TextView thetxtRsnum){
             this.txtArt = thetxtArt;
             this.txtAut = thetxtAut;
             this.txtCon=thetxtCon;
             this.txtGdnum=thetxtGdnum;
             this.txtRsnum=thetxtRsnum;
-            this.deletbtn=thedeletbtn;
         }
     }
     @Override
@@ -75,8 +66,7 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener{
                     (TextView) convertView.findViewById(R.id.myAut),
                     (TextView) convertView.findViewById(R.id.myCon),
                     (TextView) convertView.findViewById(R.id.myGoodnum),
-                    (TextView) convertView.findViewById(R.id.myResnum),
-                    (Button) convertView.findViewById(R.id.deletBtn)
+                    (TextView) convertView.findViewById(R.id.myResnum)
 
             );
             convertView.setTag(holder);
@@ -88,18 +78,8 @@ public class MyAdapter extends BaseAdapter implements View.OnClickListener{
         holder.txtAut.setText(artlistitem.getMyAut());
         holder.txtCon.setText(artlistitem.getMyCon());
         holder.txtGdnum.setText("GOOD："+artlistitem.getMyGoodnum());
-        holder.txtRsnum.setText("RES："+artlistitem.getMyResnum());
-        if(nowuser==artlistitem.getMyAut()){
-            holder.deletbtn.setText("刪除");
-            holder.deletbtn.setOnClickListener(this);
-        }else{
-            holder.deletbtn.setVisibility(convertView.GONE);
-        }
+        holder.txtRsnum.setText("RES："+(artlistitem.getMyResnum()-1));
         return convertView;
-    }
-    @Override
-    public void onClick(View v) {
-        mCallback.click(v);
     }
 }
 

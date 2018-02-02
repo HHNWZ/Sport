@@ -33,13 +33,6 @@
                 android:layout_below="@+id/myTitle"
                 android:gravity="center_horizontal" />
 
-            <Button
-                android:id="@+id/deletBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:text="刪瑚與蟾除" />
         </LinearLayout>
         <TextView
             android:id="@+id/myAut"

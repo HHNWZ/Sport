@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -25,8 +24,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class SearchArtList extends Fragment implements View.OnTouchListener,
-        AdapterView.OnItemClickListener,
-        MyAdapter.Callback{
+        AdapterView.OnItemClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -107,7 +105,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
                 mParam1
         );*/
         Addartlist();
-        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser,(MyAdapter.Callback)getContext());
+        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser);
         Searchartlist.setAdapter(adapter);
         Searchartlist.setOnItemClickListener(this);
 
@@ -162,10 +160,6 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         ((habaActivity) getActivity()).toArtcon(ArtsID.get(position));
     }
 
-    @Override
-    public void click(View v) {
-        Toast.makeText(getActivity(), "搜篩", Toast.LENGTH_SHORT).show();
-    }
 
     /**
      * This interface must be implemented by activities that contain this

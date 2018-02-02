@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
-        SearchArtList.OnFragmentInteractionListener,MyAdapter.Callback{
+        SearchArtList.OnFragmentInteractionListener{
 
     final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};//只是對照表
     final ArrayList<String> artID=new ArrayList<String>();//貼文ID列表
@@ -342,9 +342,4 @@ public class habaActivity extends AppCompatActivity
         resList.get(TargetID).add(resCon);
     }
 
-    @Override
-    public void click(View v) {
-        Toast.makeText(this, "幹"+v.getId(), Toast.LENGTH_SHORT).show();
-
-    }
 }

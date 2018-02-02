@@ -25,8 +25,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Allsport extends Fragment implements View.OnTouchListener,
-        AdapterView.OnItemClickListener,
-        MyAdapter.Callback {
+        AdapterView.OnItemClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -109,8 +108,7 @@ public class Allsport extends Fragment implements View.OnTouchListener,
         adapter=new MyAdapter(
                 getContext(),
                 art_list,
-                ((habaActivity) getActivity()).nowuser,
-                (MyAdapter.Callback)this.getContext()
+                ((habaActivity) getActivity()).nowuser
         );
         Myartlist.setAdapter(adapter);
         Myartlist.setOnItemClickListener(this);
@@ -123,10 +121,6 @@ public class Allsport extends Fragment implements View.OnTouchListener,
         ((habaActivity) getActivity()).toArtcon(position);
     }
 
-    @Override
-    public void click(View v) {
-        Toast.makeText(getActivity(), "頁面", Toast.LENGTH_SHORT).show();
-    }
     public void Addartlist(){
         for(int i=0;i<ArtsTitle.size();i++){
             art_list.add(
