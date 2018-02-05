@@ -12,26 +12,72 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/theTitle"
+        <Button
+            android:id="@+id/BackTolist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="貼文標題" />
-
+            android:text="回到貼文列表"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/theTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="貼文標題" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/myGoodnum"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+
+            <Button
+                android:id="@+id/DelebBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="刪除此貼文"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/theAut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="貼文作者" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/myGoodnum"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
             <TextView
                 android:id="@+id/theClass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="運動類別" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/myGoodnum"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
         </LinearLayout>
 
         <TextView

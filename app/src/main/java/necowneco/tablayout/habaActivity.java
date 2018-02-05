@@ -331,9 +331,29 @@ public class habaActivity extends AppCompatActivity
                 show();
         toArtcon(addid);
     }
-
+    public void deletartDATA(int Target){
+        artID.remove(Target);
+        autID.remove(Target);
+        artTitle.remove(Target);
+        artClass.remove(Target);
+        artCon.remove(Target);
+        resList.remove(Target);
+        artgood.remove(Target);
+        Toast.makeText(this,
+                "已刪除貼文",
+                Toast.LENGTH_SHORT).
+                show();
+        BackArtList();
+    }
     public void toArtcon(int TargetID){
-        theArt theart=theArt.newInstance(artTitle.get(TargetID),autID.get(TargetID),resList.get(TargetID),TargetID,artCon.get(TargetID));
+        theArt theart=theArt.newInstance(
+                artTitle.get(TargetID),
+                autID.get(TargetID),
+                resList.get(TargetID),
+                TargetID,
+                artCon.get(TargetID),
+                nowuser
+        );
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.haba,theart,null)
