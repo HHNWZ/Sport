@@ -14,9 +14,9 @@
 
         <Button
             android:id="@+id/BackTolist"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="回到貼文列表"/>
+            android:text="回到貼文列表" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,20 +86,9 @@
             android:layout_height="wrap_content"
             android:text="貼文內容" />
 
-        <ListView
-            android:id="@+id/theReslist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/theNewres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/addNewres"
+            android:id="@+id/toRes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="查看留言" />

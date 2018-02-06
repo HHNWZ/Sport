@@ -19,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -61,8 +60,6 @@ public class habaActivity extends AppCompatActivity
         final Button spair = (Button)findViewById(R.id.sp_air);
         final Button spsit = (Button)findViewById(R.id.sp_sit);
         final Button sppush = (Button)findViewById(R.id.sp_push);
-        final EditText SearchValue=(EditText) findViewById(R.id.search_Value);
-        final Button SearchBtn=(Button)findViewById(R.id.search_btn);
         artID.add("001");
         artID.add("002");
         artID.add("003");
@@ -88,15 +85,6 @@ public class habaActivity extends AppCompatActivity
         resList.get(1).add("以下為留言");
         resList.get(2).add("以下為留言");
         BackArtList();
-        SearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelAndSearch(SearchValue.getText().toString(),true);
-                SearchValue.setText("");
-                onBackPressed();
-
-            }
-        });
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

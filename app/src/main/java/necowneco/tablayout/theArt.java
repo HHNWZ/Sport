@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -96,7 +95,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
         final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
-        final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
+        final Button tores=(Button)view.findViewById(R.id.toRes);
         final TextView theartCon=(TextView)view.findViewById(R.id.theCon);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
         final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
@@ -106,14 +105,15 @@ public class theArt extends Fragment implements View.OnTouchListener {
         theartTitle.setText("貼文標題："+mParam1);
         theartAut.setText("貼文作者："+mParam2);
         theartCon.setText("貼文內容："+mParam5);
+        tores.setText("查看"+(mParam3.size()-1)+"則留言");
 
-        ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
+        /*ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
                 mParam3
                 );
-        theartReslist.setAdapter(theartreslist);
-        addartNewres.setOnClickListener(new View.OnClickListener() {
+        theartReslist.setAdapter(theartreslist);*/
+        tores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();

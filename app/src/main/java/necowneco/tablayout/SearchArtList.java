@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.a888888888.sport.R;
@@ -97,8 +98,8 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_search_art_list, null);
         view.setOnTouchListener(this);
-        ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
-
+        final ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
+        final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
         /*ArrayAdapter<String> searchartlist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
@@ -109,6 +110,12 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         Searchartlist.setAdapter(adapter);
         Searchartlist.setOnItemClickListener(this);
 
+        backtolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity) getActivity()).BackArtList();
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
