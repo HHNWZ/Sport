@@ -1,12 +1,8 @@
 package necowneco.tablayout;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -80,7 +74,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
-        final TextView test = (TextView)view.findViewById(R.id.testtext);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         final String nowuser=mParam1;
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
@@ -91,7 +84,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         submitArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test.setText("按下送出");
                 //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
                 ((habaActivity) getActivity()).addartDATA(
                         ct.getText().toString(),
