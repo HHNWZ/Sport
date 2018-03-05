@@ -26,7 +26,9 @@
                 android:id="@+id/theTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="貼文標題" />
+                android:text="貼文標題"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/myGoodnum"
+                android:layout_below="@+id/theAut"
                 android:layout_weight="1"
                 android:gravity="center_horizontal" />
             <TextView
@@ -75,21 +77,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/myGoodnum"
+                android:layout_below="@+id/theClass"
                 android:layout_weight="1"
                 android:gravity="center_horizontal" />
         </LinearLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="貼文內容：" />
+
+        <TextView
             android:id="@+id/theCon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="貼文內容" />
 
 
         <Button
             android:id="@+id/toRes"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="查看留言" />
     </LinearLayout>

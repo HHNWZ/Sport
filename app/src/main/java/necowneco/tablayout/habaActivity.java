@@ -335,11 +335,12 @@ public class habaActivity extends AppCompatActivity
     }
     public void toArtcon(int TargetID){
         theArt theart=theArt.newInstance(
+                TargetID,
                 artTitle.get(TargetID),
                 autID.get(TargetID),
-                resList.get(TargetID),
-                TargetID,
+                artClass.get(TargetID),
                 artCon.get(TargetID),
+                resList.get(TargetID),
                 nowuser
         );
         FragmentManager manager=getSupportFragmentManager();
