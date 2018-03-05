@@ -82,6 +82,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
