@@ -30,6 +30,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
     private static final String THEART_AUT = "param3";
     private static final String THEART_TYPE = "param4";
     private static final String THEART_CON="param5";
+    private static final String THEART_GOOD="param8";
     private static final String THEART_RES="param6";
     private static final String NOWUSER="param7";
 
@@ -39,6 +40,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
     private String mAut;
     private String mType;
     private String mCon;
+    private int mGood;
     private ArrayList<String> mRes;
     private String mNowUser;
 
@@ -59,6 +61,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
      * @param param5 Parameter 5.
      * @param param6 Parameter 6.
      * @param param7 Parameter 7.
+     * @param param8 Parameter 8.
      * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
@@ -67,6 +70,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                                      String param3,
                                      String param4,
                                      String param5,
+                                     int param8,
                                      ArrayList param6,
                                      String param7) {
         theArt fragment = new theArt();
@@ -76,6 +80,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         args.putString(THEART_AUT, param3);
         args.putString(THEART_TYPE,param4);
         args.putString(THEART_CON,param5);
+        args.putInt(THEART_GOOD,param8);
         args.putStringArrayList(THEART_RES,param6);
         args.putString(NOWUSER,param7);
         fragment.setArguments(args);
@@ -92,6 +97,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
             mAut = getArguments().getString(THEART_AUT);
             mType = getArguments().getString(THEART_TYPE);
             mCon = getArguments().getString(THEART_CON);
+            mGood=getArguments().getInt(THEART_GOOD);
             mRes=getArguments().getStringArrayList(THEART_RES);
             mNowUser = getArguments().getString(NOWUSER);
         }
@@ -107,6 +113,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
         final TextView theartClass=(TextView)view.findViewById(R.id.theClass);
         final TextView theartCon=(TextView)view.findViewById(R.id.theCon);
+        final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
         final Button tores=(Button)view.findViewById(R.id.toRes);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
@@ -118,8 +125,19 @@ public class theArt extends Fragment implements View.OnTouchListener {
         theartAut.setText("貼文作者："+mAut);
         theartClass.setText("貼文類別："+mType);
         theartCon.setText(mCon);
-        tores.setText("查看"+(mRes.size()-1)+"則留言");
-
+        koreiine.setText(mGood+"個讚");
+        if(mRes.size()>1) {
+            tores.setText("最新留言："+mRes.get(mRes.size()-1));
+        }else{
+            tores.setText("目前尚無留言");
+        }
+        koreiine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity)getActivity()).IINe(mTarID);
+                ((habaActivity)getActivity()).toArtcon(mTarID);
+            }
+        });
         /*ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
