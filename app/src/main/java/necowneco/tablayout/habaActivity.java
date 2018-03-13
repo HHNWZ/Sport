@@ -340,6 +340,7 @@ public class habaActivity extends AppCompatActivity
                 autID.get(TargetID),
                 artClass.get(TargetID),
                 artCon.get(TargetID),
+                artgood.get(TargetID),
                 resList.get(TargetID),
                 nowuser
         );
@@ -351,7 +352,9 @@ public class habaActivity extends AppCompatActivity
     public void addRes(int TargetID,String resCon){
         resList.get(TargetID).add(resCon);
     }
-
+    public void IINe(int TargetID){//讚
+        artgood.set(TargetID,artgood.get(TargetID)+1);
+    }
     public void toResList(int TargetID){
         theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
         FragmentManager manager=getSupportFragmentManager();
