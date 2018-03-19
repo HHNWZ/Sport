@@ -55,7 +55,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
+                android:imeOptions="actionDone"
                 tools:text="請輸入內容" />
         </LinearLayout>
 
