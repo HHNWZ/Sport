@@ -175,17 +175,12 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
     }
     private List<Student> getAllItemList() {
         List<Student> allItems = new ArrayList<Student>();
+        allItems.add(new Student("何晉丞","B10456013",R.drawable.he, false));
+        allItems.add(new Student("黃弘盛","B10456018",R.drawable.sheng,false));
+        allItems.add(new Student("張晧寬","B10456026",R.drawable.kuang,false));
+        allItems.add(new Student("黃琨城","B10456031",R.drawable.huang,false));
+        allItems.add(new Student("黃書輝","B10456061",R.drawable.ng,false));
 
-        allItems.add(new Student("twitter","25 Nov",R.drawable.twitter, false));
-        allItems.add(new Student("dropbox","26 Nov",R.drawable.dropbox,false));
-        allItems.add(new Student("facebook","27 Nov",R.drawable.facebook,false));
-        allItems.add(new Student("gmail","27 Nov",R.drawable.gmail,false));
-        allItems.add(new Student("googeledrive","27 Nov",R.drawable.googledrive,false));
-        allItems.add(new Student("googleplue","27 Nov",R.drawable.googleplus,false));
-        allItems.add(new Student("star","27 Nov",R.drawable.start,false));
-        allItems.add(new Student("linkedin","27 Nov",R.drawable.linkedin,false));
-        allItems.add(new Student("photoshop","27 Nov",R.drawable.photoshop,false));
-        allItems.add(new Student("skype","27 Nov",R.drawable.skype,false));
 
 
 
