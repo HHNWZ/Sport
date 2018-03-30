@@ -155,6 +155,7 @@ public class Userdata extends Fragment implements View.OnTouchListener{
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         getData();
 
+
         //建立一個AsyncTask執行緒進行圖片讀取動作，並帶入圖片連結網址路徑
         new AsyncTask<String, Void, Bitmap>()
         {
