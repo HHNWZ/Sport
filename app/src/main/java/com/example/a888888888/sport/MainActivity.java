@@ -170,6 +170,7 @@ public class  MainActivity extends AppCompatActivity
         });
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){//當按下左上三條線或顯示工具列
