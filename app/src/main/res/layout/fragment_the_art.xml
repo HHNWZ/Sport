@@ -91,9 +91,13 @@
             android:id="@+id/theCon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="貼文內容" />
 
+        <Button
+            android:id="@+id/koreIINe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="讚" />
 
         <Button
             android:id="@+id/toRes"
