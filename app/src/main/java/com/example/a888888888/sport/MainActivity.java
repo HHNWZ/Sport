@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,7 +38,8 @@ import qwer.Dietcontrol;
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
-        BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
+        BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
+        ,Userdata.OnFragmentInteractionListener{
 
     private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
     private TextView rundata;
@@ -211,8 +211,13 @@ public class  MainActivity extends AppCompatActivity
         }
         else if (id == R.id.navItemAbout)
         {
-            Toast.makeText(this,"開發中",Toast.LENGTH_SHORT).show();
-
+            Userdata userdata=Userdata.newInstance("param1","param2");
+            FragmentManager manager=getSupportFragmentManager();
+            manager.beginTransaction().addToBackStack(null).replace(
+                    R.id.content_main,
+                    userdata,
+                    userdata.getTag()
+            ).commit();
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
