@@ -2,11 +2,18 @@ package com.example.a888888888.sport;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -32,8 +39,7 @@ import qwer.Dietcontrol;
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
-        BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener
-{
+        BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
 
     private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
     private TextView rundata;
@@ -42,6 +48,9 @@ public class  MainActivity extends AppCompatActivity
     private TextView pushdata;
     private TextView sitdata;
     private MyDBHelper dbHelper; //內建資料庫
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private Toolbar mToolboar;
     com.android.volley.RequestQueue requestQueue;
     private void getData() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -80,12 +89,22 @@ public class  MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mToolboar=(Toolbar)findViewById(R.id.nav_action); //替換toolbar會爆
+        setSupportActionBar(mToolboar);//Toolbar取代原本的ActionBar
+        mDrawerLayout=(DrawerLayout)findViewById(R.id.drawerLayout);
+        mToggle=new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);//必須用字串資源檔
+        mDrawerLayout.addDrawerListener(mToggle);//監聽選單按鈕是否被觸擊
+        mToggle.syncState();//隱藏顯示箭頭返回
+        //讓 ActionBar 中的返回箭號置換成 Drawer 的三條線圖示。並且把這個觸發器指定給 layDrawer 。
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
+
         Button kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
         Button hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
         Button del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
         Button over = (Button)findViewById(R.id.button3); //連至直播的按鈕
         Button sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
-        Button login = (Button)findViewById(R.id.button5);
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         rundata =(TextView)findViewById(R.id.textView6);
         walkdata =(TextView)findViewById(R.id.textView7);
@@ -93,21 +112,6 @@ public class  MainActivity extends AppCompatActivity
         pushdata =(TextView)findViewById(R.id.textView10);
         sitdata =(TextView)findViewById(R.id.textView9);
         getData();
-
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Login login = new Login();
-                FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction().addToBackStack(null).replace(
-                        R.id.content_main,
-                        login,
-                        login.getTag()
-                ).commit();
-
-            }
-        });
 
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +171,13 @@ public class  MainActivity extends AppCompatActivity
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mToggle.onOptionsItemSelected(item)){//當按下左上三條線或顯示工具列
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public void onBackPressed() {
 
         int count = getFragmentManager().getBackStackEntryCount();
@@ -181,5 +192,28 @@ public class  MainActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction(String Tag, String number) {
 
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.Login) {
+            Login login=Login.newInstance("param1","param2");
+            FragmentManager manager=getSupportFragmentManager();
+            manager.beginTransaction().addToBackStack(null).replace(
+                    R.id.content_main,
+                    login,
+                    login.getTag()
+            ).commit();
+        }
+        else if (id == R.id.navItemAbout)
+        {
+            Toast.makeText(this,"開發中",Toast.LENGTH_SHORT).show();
+
+        }
+        mDrawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

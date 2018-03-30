@@ -130,6 +130,7 @@ public class Login extends Fragment {
                 getData();
             }
         });
+        
         return view;
     }
 

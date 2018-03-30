@@ -35,4 +35,5 @@ dependencies {
     compile "cz.msebera.android:httpclient:4.4.1.1"
     compile 'de.hdodenhof:circleimageview:2.2.0'
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    compile 'com.android.support:design:26.1.0'
 }
