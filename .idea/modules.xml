@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Sport.iml" filepath="$PROJECT_DIR$/Sport.iml" />
-      <module fileurl="file://C:\Users\CCBDA\Desktop\Sport\.idea\Sport.iml" filepath="C:\Users\CCBDA\Desktop\Sport\.idea\Sport.iml" />
-      <module fileurl="file://D:\Team\Sport\Sport.iml" filepath="D:\Team\Sport\Sport.iml" />
+      <module fileurl="file://C:\Users\necow\AndroidStudioProjects\Sport\.idea\Sport.iml" filepath="C:\Users\necow\AndroidStudioProjects\Sport\.idea\Sport.iml" />
+      <module fileurl="file://D:\newProject\Sport\Sport.iml" filepath="D:\newProject\Sport\Sport.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

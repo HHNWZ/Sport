@@ -7,12 +7,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -29,18 +25,24 @@ import java.util.ArrayList;
 public class theArt extends Fragment implements View.OnTouchListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String ARG_PARAM3 = "param3";
-    private static final String THEART_ID = "param4";
+    private static final String THEART_ID = "param1";
+    private static final String THEART_TITLE = "param2";
+    private static final String THEART_AUT = "param3";
+    private static final String THEART_TYPE = "param4";
     private static final String THEART_CON="param5";
+    private static final String THEART_GOOD="param8";
+    private static final String THEART_RES="param6";
+    private static final String NOWUSER="param7";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private ArrayList<String> mParam3;
-    private int mParam4;
-    private String mParam5;
+    private int mTarID;
+    private String mTitle;
+    private String mAut;
+    private String mType;
+    private String mCon;
+    private int mGood;
+    private ArrayList<String> mRes;
+    private String mNowUser;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,31 +58,48 @@ public class theArt extends Fragment implements View.OnTouchListener {
      * @param param2 Parameter 2.
      * @param param3 Parameter 3.
      * @param param4 Parameter 4.
-     * @param mParam5 Parameter 5.
+     * @param param5 Parameter 5.
+     * @param param6 Parameter 6.
+     * @param param7 Parameter 7.
+     * @param param8 Parameter 8.
      * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
-    public static theArt newInstance(String param1, String param2, ArrayList param3, int param4,String mParam5) {
+    public static theArt newInstance(int param1,
+                                     String param2,
+                                     String param3,
+                                     String param4,
+                                     String param5,
+                                     int param8,
+                                     ArrayList param6,
+                                     String param7) {
         theArt fragment = new theArt();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        args.putStringArrayList(ARG_PARAM3, param3);
-        args.putInt(THEART_ID,param4);
-        args.putString(THEART_CON,mParam5);
+        args.putInt(THEART_ID, param1);
+        args.putString(THEART_TITLE, param2);
+        args.putString(THEART_AUT, param3);
+        args.putString(THEART_TYPE,param4);
+        args.putString(THEART_CON,param5);
+        args.putInt(THEART_GOOD,param8);
+        args.putStringArrayList(THEART_RES,param6);
+        args.putString(NOWUSER,param7);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-            mParam3 = getArguments().getStringArrayList(ARG_PARAM3);
-            mParam4 = getArguments().getInt(THEART_ID);
-            mParam5 = getArguments().getString(THEART_CON);
+            mTarID = getArguments().getInt(THEART_ID);
+            mTitle = getArguments().getString(THEART_TITLE);
+            mAut = getArguments().getString(THEART_AUT);
+            mType = getArguments().getString(THEART_TYPE);
+            mCon = getArguments().getString(THEART_CON);
+            mGood=getArguments().getInt(THEART_GOOD);
+            mRes=getArguments().getStringArrayList(THEART_RES);
+            mNowUser = getArguments().getString(NOWUSER);
         }
     }
 
@@ -89,29 +108,63 @@ public class theArt extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
         view.setOnTouchListener(this);
+        final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
         final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
         final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
-        final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
-        final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
-        final Button addartNewres=(Button)view.findViewById(R.id.addNewres);
+        final TextView theartClass=(TextView)view.findViewById(R.id.theClass);
         final TextView theartCon=(TextView)view.findViewById(R.id.theCon);
+        final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
+        final Button tores=(Button)view.findViewById(R.id.toRes);
+        final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
+        //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
+        //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
+        if(mNowUser==mAut) {
+            thedeletBtn.setVisibility(View.VISIBLE);
+        }
+        theartTitle.setText(mTitle);
+        theartAut.setText("貼文作者："+mAut);
+        theartClass.setText("貼文類別："+mType);
+        theartCon.setText(mCon);
+        koreiine.setText(mGood+"個讚");
+        if(mRes.size()>1) {
+            tores.setText("最新留言："+mRes.get(mRes.size()-1));
+        }else{
+            tores.setText("目前尚無留言");
+        }
+        koreiine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity)getActivity()).IINe(mTarID);
+                ((habaActivity)getActivity()).toArtcon(mTarID);
+            }
+        });
 
-        theartTitle.setText("貼文標題："+mParam1);
-        theartAut.setText("貼文作者："+mParam2);
-        theartCon.setText("貼文內容："+mParam5);
-
-        ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
+        /*ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
                 mParam3
                 );
-        theartReslist.setAdapter(theartreslist);
-        addartNewres.setOnClickListener(new View.OnClickListener() {
+        theartReslist.setAdapter(theartreslist);*/
+        tores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
                 ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
-                ((habaActivity) getActivity()).toArtcon(mParam4);
+                ((habaActivity) getActivity()).toArtcon(mParam4);*/
+                ((habaActivity) getActivity()).toResList(mTarID);
+            }
+        });
+
+        backtolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity) getActivity()).BackArtList();
+            }
+        });
+        thedeletBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity) getActivity()).deletartDATA(mTarID);
             }
         });
         // Inflate the layout for this fragment

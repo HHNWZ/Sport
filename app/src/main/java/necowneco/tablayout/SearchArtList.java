@@ -8,8 +8,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -25,8 +25,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class SearchArtList extends Fragment implements View.OnTouchListener,
-        AdapterView.OnItemClickListener,
-        MyAdapter.Callback{
+        AdapterView.OnItemClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,18 +98,24 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_search_art_list, null);
         view.setOnTouchListener(this);
-        ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
-
+        final ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
+        final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
         /*ArrayAdapter<String> searchartlist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
                 mParam1
         );*/
         Addartlist();
-        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser,(MyAdapter.Callback)getContext());
+        adapter=new MyAdapter(getContext(),art_list,((habaActivity) getActivity()).nowuser);
         Searchartlist.setAdapter(adapter);
         Searchartlist.setOnItemClickListener(this);
 
+        backtolist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity) getActivity()).BackArtList();
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
@@ -162,10 +167,6 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         ((habaActivity) getActivity()).toArtcon(ArtsID.get(position));
     }
 
-    @Override
-    public void click(View v) {
-        Toast.makeText(getActivity(), "搜篩", Toast.LENGTH_SHORT).show();
-    }
 
     /**
      * This interface must be implemented by activities that contain this
