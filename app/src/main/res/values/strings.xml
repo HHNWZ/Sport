@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">交流型運動app</string>
-
+    <string name="app_name">不再邊緣運動</string>
+    <string name="main">No Lonely Health  Interaction</string>
+    <string name="Login">登入</string>
+    <string name="Home">首頁</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="search_title">搜尋標題</string>
     <string name="search_hint">請輸入關鍵字</string>

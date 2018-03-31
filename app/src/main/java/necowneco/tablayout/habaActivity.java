@@ -19,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
-        SearchArtList.OnFragmentInteractionListener,MyAdapter.Callback{
+        SearchArtList.OnFragmentInteractionListener,theArtRes.OnFragmentInteractionListener{
 
     final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};//只是對照表
     final ArrayList<String> artID=new ArrayList<String>();//貼文ID列表
@@ -61,8 +60,6 @@ public class habaActivity extends AppCompatActivity
         final Button spair = (Button)findViewById(R.id.sp_air);
         final Button spsit = (Button)findViewById(R.id.sp_sit);
         final Button sppush = (Button)findViewById(R.id.sp_push);
-        final EditText SearchValue=(EditText) findViewById(R.id.search_Value);
-        final Button SearchBtn=(Button)findViewById(R.id.search_btn);
         artID.add("001");
         artID.add("002");
         artID.add("003");
@@ -88,15 +85,6 @@ public class habaActivity extends AppCompatActivity
         resList.get(1).add("以下為留言");
         resList.get(2).add("以下為留言");
         BackArtList();
-        SearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SelAndSearch(SearchValue.getText().toString(),true);
-                SearchValue.setText("");
-                onBackPressed();
-
-            }
-        });
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -225,6 +213,7 @@ public class habaActivity extends AppCompatActivity
         ).commit();
     }
 
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -330,9 +319,31 @@ public class habaActivity extends AppCompatActivity
                 show();
         toArtcon(addid);
     }
-
+    public void deletartDATA(int Target){
+        artID.remove(Target);
+        autID.remove(Target);
+        artTitle.remove(Target);
+        artClass.remove(Target);
+        artCon.remove(Target);
+        resList.remove(Target);
+        artgood.remove(Target);
+        Toast.makeText(this,
+                "已刪除貼文",
+                Toast.LENGTH_SHORT).
+                show();
+        BackArtList();
+    }
     public void toArtcon(int TargetID){
-        theArt theart=theArt.newInstance(artTitle.get(TargetID),autID.get(TargetID),resList.get(TargetID),TargetID,artCon.get(TargetID));
+        theArt theart=theArt.newInstance(
+                TargetID,
+                artTitle.get(TargetID),
+                autID.get(TargetID),
+                artClass.get(TargetID),
+                artCon.get(TargetID),
+                artgood.get(TargetID),
+                resList.get(TargetID),
+                nowuser
+        );
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
                 .replace(R.id.haba,theart,null)
@@ -341,10 +352,16 @@ public class habaActivity extends AppCompatActivity
     public void addRes(int TargetID,String resCon){
         resList.get(TargetID).add(resCon);
     }
-
-    @Override
-    public void click(View v) {
-        Toast.makeText(this, "幹"+v.getId(), Toast.LENGTH_SHORT).show();
-
+    public void IINe(int TargetID){//讚
+        artgood.set(TargetID,artgood.get(TargetID)+1);
+    }
+    public void toResList(int TargetID){
+        theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                theartres,
+                theartres.getTag()
+        ).commit();
     }
 }

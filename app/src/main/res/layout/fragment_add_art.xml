@@ -43,13 +43,22 @@
             android:layout_height="wrap_content"
             android:text="貼文內容：" />
 
-        <EditText
-            android:id="@+id/Concon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            tools:text="請輸入內容" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Concon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:minHeight="250dp"
+                tools:text="請輸入內容" />
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/inputart"
@@ -57,11 +66,6 @@
             android:layout_height="wrap_content"
             android:text="送出" />
 
-        <TextView
-            android:id="@+id/testtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="測試(載入失敗)" />
     </LinearLayout>
 
 </FrameLayout>
