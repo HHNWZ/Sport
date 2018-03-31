@@ -228,5 +228,6 @@ public class BlankFragmentc3 extends Fragment implements View.OnTouchListener {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(String Tag, String number);
+
     }
 }
