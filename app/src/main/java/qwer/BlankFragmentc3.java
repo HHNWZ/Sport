@@ -3,15 +3,26 @@ package qwer;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,6 +81,7 @@ public class BlankFragmentc3 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         final int[] dayday = new int[1];
         final int[] dayday1 = new int[1];
+        final String asd="123";
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc3, null);
         view.setOnTouchListener(this);
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
@@ -145,6 +157,32 @@ public class BlankFragmentc3 extends Fragment implements View.OnTouchListener {
                 dayday1[0]=dayday1[0]+1;
                 day2.setText(String.valueOf( dayday1[0]));
             }});
+        //行事曆
+        MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
+        materialCalendarView.state().edit()
+                .setFirstDayOfWeek(Calendar.MONDAY)
+                .setMinimumDate(CalendarDay.from(2017,12,31))
+                .setMaximumDate(CalendarDay.from(2100,12,31))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
+            }
+        });//
+        final Button but12=(Button)view.findViewById(R.id.button12);
+        but12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new BlankFragmentc4(),null)
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
         return view;
     }
 
