@@ -33,4 +33,33 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="385dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/appbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:shownWeekCount="4"
+                app:mcv_selectionColor="#00F"
+                app:mcv_showOtherDates="all">
+
+            </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+
 </RelativeLayout>
