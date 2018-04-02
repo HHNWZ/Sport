@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
@@ -75,7 +76,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
-        MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
+        final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
                 .setMinimumDate(CalendarDay.from(2017,12,31))
@@ -88,6 +89,13 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
                 Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
             }
         });//
+        Button testing=(Button)view.findViewById(R.id.TestBtn);
+        testing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), ""+materialCalendarView.getSelectedDate(), Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 

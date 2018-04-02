@@ -52,6 +52,7 @@
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
+                android:paddingTop="100dp"
                 android:shownWeekCount="4"
                 app:mcv_selectionColor="#00F"
                 app:mcv_showOtherDates="all">
@@ -60,6 +61,13 @@
 
         </LinearLayout>
     </ScrollView>
+
+        <Button
+            android:id="@+id/TestBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            tools:text="TESTING" />
     </LinearLayout>
 
 </RelativeLayout>
