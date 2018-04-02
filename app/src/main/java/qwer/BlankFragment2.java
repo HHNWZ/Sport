@@ -17,6 +17,7 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -76,6 +77,8 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
+        final ArrayList<String> DL=new ArrayList<>();//DATE LIST
+        final ArrayList<String> diarys=new ArrayList<>();
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
@@ -87,13 +90,15 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
+                DL.add(date.toString());
             }
         });//
         Button testing=(Button)view.findViewById(R.id.TestBtn);
         testing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), ""+materialCalendarView.getSelectedDate(), Toast.LENGTH_SHORT).show();
+                diarys.add("BBBBAAA");
+                Toast.makeText(getActivity(), DL.get(DL.size()-1)+"："+diarys.get(diarys.size()-1), Toast.LENGTH_SHORT).show();
             }
         });
         return view;
