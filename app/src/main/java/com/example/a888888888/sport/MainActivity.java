@@ -193,6 +193,7 @@ public class  MainActivity extends AppCompatActivity
                 showdiary,
                 showdiary.getTag()
         ).commit();
+
     }
     public void deleOneDiary() {
         DL.remove(DL.size()-1);
