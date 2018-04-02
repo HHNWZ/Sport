@@ -33,13 +33,11 @@
                 android:layout_above="@+id/angry_bt2"
                 android:layout_toStartOf="@+id/angry_bt2"
                 android:layout_weight="1"
-                android:background="@drawable/eatorange"
+                android:background="@mipmap/food"
                 android:shadowColor="#86A89B"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="常見食物熱量"
-                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <Button
@@ -49,13 +47,11 @@
                 android:layout_above="@+id/angry_bt2"
                 android:layout_toEndOf="@+id/angry_btn"
                 android:layout_weight="1"
-                android:background="@drawable/eatblue"
+                android:background="@mipmap/tool"
                 android:shadowColor="#A8A319"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="檢測工具"
-                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
         </LinearLayout>
@@ -74,13 +70,11 @@
                 android:layout_alignParentEnd="true"
                 android:layout_weight="1"
 
-                android:background="@drawable/eatpurple"
+                android:background="@mipmap/diary"
                 android:shadowColor="#86A89B"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="日記"
-                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <Button
@@ -93,13 +87,11 @@
                 android:layout_toStartOf="@+id/angry_bt2"
 
                 android:layout_weight="1"
-                android:background="@drawable/eatpink"
+                android:background="@mipmap/device"
                 android:shadowColor="#86A89B"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="攝取建議"
-                android:textColor="@android:color/white"
                 android:textSize="24sp" />
         </LinearLayout>
     </LinearLayout>

@@ -3,18 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.a888888888.sport.MainActivity">
-
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/appBarLayout"
-        android:background="@drawable/background">
+        android:background="@mipmap/home">
 
         <include layout="@layout/navigation_actionbox"
             android:layout_width="match_parent"
@@ -100,9 +98,8 @@
             android:layout_alignBottom="@+id/button"
             android:layout_toEndOf="@+id/button1"
             android:layout_weight="1"
-            android:background="@drawable/blue"
-            android:text="飲食控制"
-            android:textColor="@android:color/white" />
+            android:background="@mipmap/eat1"
+            />
 
         <TextView
             android:id="@+id/TextView1"
@@ -117,12 +114,10 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_above="@+id/button2"
-            android:layout_marginBottom="29dp"
+            android:layout_marginBottom="35dp"
             android:layout_toStartOf="@+id/button3"
             android:layout_weight="1"
-            android:background="@drawable/icon"
-            android:text="開始運動"
-            android:textColor="@android:color/white"
+            android:background="@mipmap/main4"
             android:textSize="30dp" />
 
         <Button
@@ -130,12 +125,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView6"
-            android:layout_marginBottom="48dp"
+            android:layout_marginBottom="30dp"
             android:layout_toEndOf="@+id/button2"
             android:layout_weight="1"
-            android:background="@drawable/blue"
-            android:text="排行榜"
-            android:textColor="@android:color/white" />
+            android:background="@mipmap/rank1"
+            />
 
         <ImageView
             android:id="@+id/imageView"
@@ -157,9 +151,8 @@
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/button"
             android:layout_weight="1"
-            android:background="@drawable/blue"
-            android:text="直播"
-            android:textColor="@android:color/white" />
+            android:background="@mipmap/stream1"
+            />
 
         <TextView
             android:id="@+id/textView"
@@ -177,9 +170,8 @@
             android:layout_alignBottom="@+id/button2"
             android:layout_alignParentStart="true"
             android:layout_weight="1"
-            android:background="@drawable/blue"
-            android:text="交流平台"
-            android:textColor="@android:color/white" />
+            android:background="@mipmap/write1"
+            />
     </RelativeLayout>
 
     <LinearLayout
@@ -189,7 +181,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:orientation="horizontal"
-        android:layout_marginTop="55dp"
         >
 
     </LinearLayout>

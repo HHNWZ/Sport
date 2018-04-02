@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/white"
     android:clickable="true"
-    tools:context="com.example.a888888888.sport.MainActivity">
+    tools:context="com.example.a888888888.sport.MainActivity"
+    android:layout_marginTop="55dp">
 
     <LinearLayout
         android:layout_width="match_parent"
