@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.a888888888.sport.Over;
 import com.example.a888888888.sport.R;
 
-public class Dietcontrol extends Fragment implements View.OnTouchListener {
+public class Dietcontrol extends Fragment implements View.OnTouchListener,addDiary.OnFragmentInteractionListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,6 +23,7 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.qwer_dietcontrol, null);
         view.setOnTouchListener(this);
+
         Button angry_btn=(Button)view.findViewById(R.id.angry_btn);
         angry_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,4 +77,22 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         return false;
     }
+
+    @Override
+    public void onFragmentInteraction(String Tag, String number) {
+
+    }
+    /*public void BackToCalendar(String mydate){
+        DL.remove(mydate);
+    }
+    public void toAddDiary(String mydate) {
+        DL.add(mydate.toString());
+        addDiary adddiary=addDiary.newInstance(mydate,null);
+        FragmentManager manager=SupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.content_main,adddiary,null)
+                .addToBackStack(null)
+                .commit();
+    }
+*/
 }

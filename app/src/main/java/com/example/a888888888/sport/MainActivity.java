@@ -23,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -33,13 +36,17 @@ import qwer.BlankFragmentc2;
 import qwer.BlankFragmentc3;
 import qwer.BlankFragmentc4;
 import qwer.Dietcontrol;
+import qwer.ShowDiary;
+import qwer.addDiary;
 
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
-        BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
+        ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
         ,Userdata.OnFragmentInteractionListener{
-
+    final ArrayList<String> DL=new ArrayList<>();//日記.日期
+    final ArrayList<String> diarys=new ArrayList<>();//日記.內容
+    private String seleDAY;
     private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
     private TextView rundata;
     private TextView walkdata;
@@ -51,6 +58,10 @@ public class  MainActivity extends AppCompatActivity
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
     com.android.volley.RequestQueue requestQueue;
+
+    public MainActivity() {
+    }
+
     private void getData() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {
@@ -169,7 +180,24 @@ public class  MainActivity extends AppCompatActivity
         });
     }
 
-
+    public void toAddDiary(String mydate) {
+        seleDAY=mydate;
+    }
+    public void addMyDiary(String mydiary){
+        DL.add(seleDAY);
+        diarys.add(mydiary);
+        ShowDiary showdiary=ShowDiary.newInstance(seleDAY,mydiary);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                showdiary,
+                showdiary.getTag()
+        ).commit();
+    }
+    public void deleOneDiary() {
+        DL.remove(DL.size()-1);
+        diarys.remove(diarys.size()-1);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){//當按下左上三條線或顯示工具列
@@ -221,4 +249,5 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

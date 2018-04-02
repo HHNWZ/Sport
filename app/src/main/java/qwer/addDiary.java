@@ -2,33 +2,25 @@ package qwer;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.CalendarMode;
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-
-import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlankFragment2.OnFragmentInteractionListener} interface
+ * {@link addDiary.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BlankFragment2#newInstance} factory method to
+ * Use the {@link addDiary#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment2 extends Fragment implements View.OnTouchListener {
+public class addDiary extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,7 +32,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
 
     private OnFragmentInteractionListener mListener;
 
-    public BlankFragment2() {
+    public addDiary() {
         // Required empty public constructor
     }
 
@@ -50,11 +42,11 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment BlankFragment2.
+     * @return A new instance of fragment addDiary.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment2 newInstance(String param1, String param2) {
-        BlankFragment2 fragment = new BlankFragment2();
+    public static addDiary newInstance(String param1, String param2) {
+        addDiary fragment = new addDiary();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,35 +64,27 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
-        view.setOnTouchListener(this);
-        final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
-        materialCalendarView.state().edit()
-                .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(2017,12,31))
-                .setMaximumDate(CalendarDay.from(2100,12,31))
-                .setCalendarDisplayMode(CalendarMode.MONTHS)
-                .commit();
-        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+        View view=inflater.inflate(R.layout.fragment_add_diary, container, false);
+        final EditText mydiary=(EditText)view.findViewById(R.id.myDiary);
+        Button backbtn=(Button)view.findViewById(R.id.BackBtn);
+        Button addbtn=(Button)view.findViewById(R.id.AddBtn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
-                ((MainActivity)getActivity()).toAddDiary(date.toString());
+            public void onClick(View v) {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content_main,new addDiary(),null)
+                        .replace(R.id.content_main,new BlankFragment2(),null)
                         .addToBackStack(null)
                         .commit();
             }
-        });//
-        Button testing=(Button)view.findViewById(R.id.TestBtn);
-        testing.setOnClickListener(new View.OnClickListener() {
+        });
+        addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((MainActivity)getActivity()).addMyDiary(mydiary.getText().toString());
             }
         });
         return view;
@@ -128,11 +112,6 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
     }
 
     /**
