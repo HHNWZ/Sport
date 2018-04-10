@@ -1,6 +1,7 @@
 package com.example.a888888888.sport;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -47,7 +49,8 @@ public class  MainActivity extends AppCompatActivity
         ,Userdata.OnFragmentInteractionListener{
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
     public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
-    public CalendarDay seleDAY;
+    public final CalendarDay Today = CalendarDay.today();//取得今天日期
+    public CalendarDay seleDAY=Today;
     private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
     private TextView rundata;
     private TextView walkdata;
@@ -96,6 +99,48 @@ public class  MainActivity extends AppCompatActivity
                 });
         requestQueue.add(jsonObjectRequest);
     }
+    public void addOneDiary(CalendarDay date,String diary){//寫入單筆日記資料
+        DL.add(date);
+        diarys.add(diary);
+    }
+    private CalendarDay getOneDate(String myYEAR,String myMONTH,String myDAY){//將字串資料轉換為日期型態
+        CalendarDay c = new CalendarDay();
+        c.getCalendar().set(Integer.parseInt(myYEAR),Integer.parseInt(myMONTH),Integer.parseInt(myDAY));
+        return c;
+    }
+    public void readMyDiaryDATA(){//從檔案中讀取日記，若無則陣列歸零
+        SharedPreferences spref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = spref.edit();
+        int DATAsize=spref.getAll().size();
+        Toast.makeText(this, spref.getString("newDiary","啊吧吧吧吧"), Toast.LENGTH_SHORT).show();
+        if(spref.contains("newDiary")){//驗證檔案內存在日記資料
+            DL.clear();
+            diarys.clear();
+            for(int i=0;i<(DATAsize-1)/4;i++){
+                addOneDiary(getOneDate(spref.getString("DL_Y_"+Integer.toString(i),null),
+                                        spref.getString("DL_M_"+Integer.toString(i),null),
+                                        spref.getString("DL_D_"+Integer.toString(i),null)
+                        ),spref.getString("diarys_"+Integer.toString(i),null)
+                );
+            }
+        }
+    }
+    public void writAllDiaryDATA(){//將當前日記陣列存入檔案
+        Toast.makeText(this, "日記數量："+diarys.size(), Toast.LENGTH_SHORT).show();
+        SharedPreferences spref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = spref.edit();
+        editor.clear();
+        if(DL.size()>0){//存入時陣列中有資料
+            editor.putString("newDiary",""+DL+diarys).commit();//標示有資料
+            for(int i=0;i<DL.size();i++){//逐一寫入日寄資料
+                editor.putString("DL_Y_"+Integer.toString(i),Integer.toString(DL.get(i).getYear()))
+                        .putString("DL_M_"+Integer.toString(i),Integer.toString(DL.get(i).getMonth()))
+                        .putString("DL_D_"+Integer.toString(i),Integer.toString(DL.get(i).getDay()))
+                        .putString("diarys_"+Integer.toString(i),diarys.get(i))
+                        .commit();
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +168,7 @@ public class  MainActivity extends AppCompatActivity
         pushdata =(TextView)findViewById(R.id.textView10);
         sitdata =(TextView)findViewById(R.id.textView9);
         getData();
-
+        readMyDiaryDATA();//讀取使用者內存資料
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,12 +238,12 @@ public class  MainActivity extends AppCompatActivity
                 adddiary.getTag()
         ).commit();
     }
-    public void addMyDiary(String mydiary){//寫入日記
-        DL.add(seleDAY);
-        diarys.add(mydiary);
+    public void addNewDiary(String mydiary){//寫入日記至陣列
+        addOneDiary(seleDAY,mydiary);
+        writAllDiaryDATA();//新增時將日記存取至內存檔案中
         ShowMyDiary();
     }
-    public void ShowMyDiary(){//展示日期
+    public void ShowMyDiary(){//展示日記
         ShowDiary showdiary=ShowDiary.newInstance(seleDAY.toString(),diarys.get(DL.indexOf(seleDAY)));
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
@@ -210,6 +255,7 @@ public class  MainActivity extends AppCompatActivity
     public void deleOneDiary() {
         diarys.remove(DL.indexOf(seleDAY));//先刪除日記內容
         DL.remove(seleDAY);//再刪除作為索引的日期
+        writAllDiaryDATA();//刪除後將內存檔案重寫
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

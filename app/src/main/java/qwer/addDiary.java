@@ -89,7 +89,7 @@ public class addDiary extends Fragment {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).addMyDiary(mydiary.getText().toString());
+                ((MainActivity)getActivity()).addNewDiary(mydiary.getText().toString());
             }
         });
         return view;

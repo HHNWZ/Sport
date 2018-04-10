@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -76,7 +75,6 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
-        final CalendarDay Today = CalendarDay.today();//取得今天日期
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
@@ -84,8 +82,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
                 .setMaximumDate(CalendarDay.from(2100,12,31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
-        materialCalendarView.setDateSelected(Today,true);//預設選擇今天
-        ((MainActivity)getActivity()).seleDAY=Today;
+        materialCalendarView.setDateSelected(((MainActivity)getActivity()).seleDAY,true);//預設選擇今天
         //final CalendarDay[] Myday = {Today};//上一個選擇
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
@@ -97,7 +94,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
                         ((MainActivity)getActivity()).toAddDiary(null);
                     }
                 }else {//單擊日期時
-                    Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
                     //Myday[0] =date;
                 }
                 ((MainActivity) getActivity()).myDayChanged(date);//選擇日期
