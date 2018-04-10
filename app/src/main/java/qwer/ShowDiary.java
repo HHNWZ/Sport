@@ -79,11 +79,7 @@ public class ShowDiary extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).deleOneDiary();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new addDiary(),null)
-                        .addToBackStack(null)
-                        .commit();
+                ((MainActivity)getActivity()).toAddDiary(mParam2);
             }
         });
         okbtn.setOnClickListener(new View.OnClickListener() {

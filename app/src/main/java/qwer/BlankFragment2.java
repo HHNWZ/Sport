@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -77,33 +76,33 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
+        final CalendarDay Today = CalendarDay.today();//取得今天日期
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
-
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
                 .setMinimumDate(CalendarDay.from(2017,12,31))
                 .setMaximumDate(CalendarDay.from(2100,12,31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
+        materialCalendarView.setDateSelected(Today,true);//預設選擇今天
+        ((MainActivity)getActivity()).seleDAY=Today;
+        //final CalendarDay[] Myday = {Today};//上一個選擇
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
-                Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
-                ((MainActivity)getActivity()).toAddDiary(date.toString());
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new addDiary(),null)
-                        .addToBackStack(null)
-                        .commit();
+                if(date== ((MainActivity)getActivity()).seleDAY) {//雙擊日期時
+                    if(((MainActivity)getActivity()).DL.contains(date)){//已存在日記
+                        ((MainActivity)getActivity()).ShowMyDiary();//直接顯示日記
+                    }else{//尚未寫過日記
+                        ((MainActivity)getActivity()).toAddDiary(null);
+                    }
+                }else {//單擊日期時
+                    Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
+                    //Myday[0] =date;
+                }
+                ((MainActivity) getActivity()).myDayChanged(date);//選擇日期
             }
         });//
-        Button testing=(Button)view.findViewById(R.id.TestBtn);
-        testing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         return view;
     }
 

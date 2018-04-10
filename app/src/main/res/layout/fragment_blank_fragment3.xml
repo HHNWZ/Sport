@@ -62,12 +62,6 @@
         </LinearLayout>
     </ScrollView>
 
-        <Button
-            android:id="@+id/TestBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            tools:text="TESTING" />
     </LinearLayout>
 
 </RelativeLayout>

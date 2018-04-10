@@ -71,6 +71,7 @@ public class addDiary extends Fragment {
         final EditText mydiary=(EditText)view.findViewById(R.id.myDiary);
         Button backbtn=(Button)view.findViewById(R.id.BackBtn);
         Button addbtn=(Button)view.findViewById(R.id.AddBtn);
+        if(mParam1!=null){mydiary.setText(mParam1);backbtn.setText("刪除");}
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

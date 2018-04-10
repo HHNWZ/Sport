@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,9 +45,9 @@ public class  MainActivity extends AppCompatActivity
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
         ,Userdata.OnFragmentInteractionListener{
-    final ArrayList<String> DL=new ArrayList<>();//日記.日期
-    final ArrayList<String> diarys=new ArrayList<>();//日記.內容
-    private String seleDAY;
+    public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
+    public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
+    public CalendarDay seleDAY;
     private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
     private TextView rundata;
     private TextView walkdata;
@@ -180,24 +181,35 @@ public class  MainActivity extends AppCompatActivity
         });
     }
 
-    public void toAddDiary(String mydate) {
-        seleDAY=mydate;
+    public void myDayChanged(CalendarDay mydate) {//選擇日期
+        seleDAY=mydate;//紀錄選擇日期
     }
-    public void addMyDiary(String mydiary){
+    public void toAddDiary(String mydiary){//跳至撰寫日記
+        addDiary adddiary=addDiary.newInstance(mydiary,null);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                adddiary,
+                adddiary.getTag()
+        ).commit();
+    }
+    public void addMyDiary(String mydiary){//寫入日記
         DL.add(seleDAY);
         diarys.add(mydiary);
-        ShowDiary showdiary=ShowDiary.newInstance(seleDAY,mydiary);
+        ShowMyDiary();
+    }
+    public void ShowMyDiary(){//展示日期
+        ShowDiary showdiary=ShowDiary.newInstance(seleDAY.toString(),diarys.get(DL.indexOf(seleDAY)));
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
                 R.id.content_main,
                 showdiary,
                 showdiary.getTag()
         ).commit();
-
     }
     public void deleOneDiary() {
-        DL.remove(DL.size()-1);
-        diarys.remove(diarys.size()-1);
+        diarys.remove(DL.indexOf(seleDAY));//先刪除日記內容
+        DL.remove(seleDAY);//再刪除作為索引的日期
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
