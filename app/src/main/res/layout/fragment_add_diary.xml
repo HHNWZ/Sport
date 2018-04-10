@@ -68,18 +68,62 @@
         android:layout_below="@+id/appbar"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView47"
+
+        <ImageButton
+            android:id="@+id/BKbtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="請輸入日記內容" />
+            android:layout_height="50dp"
+            android:text="早餐"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <ImageButton
+            android:id="@+id/LHbtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="午餐"
+            app:srcCompat="@android:color/darker_gray" />
+
+        <ImageButton
+            android:id="@+id/DNbtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="晚餐"
+            app:srcCompat="@android:color/darker_gray" />
+
 
         <EditText
             android:id="@+id/myDiary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:ems="10"
+            android:hint="今天的心情如何？"
             android:inputType="textPersonName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日累積的熱量："
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/CaloriCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="20dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 

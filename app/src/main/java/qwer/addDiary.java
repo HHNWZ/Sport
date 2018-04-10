@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -71,6 +72,9 @@ public class addDiary extends Fragment {
         final EditText mydiary=(EditText)view.findViewById(R.id.myDiary);
         Button backbtn=(Button)view.findViewById(R.id.BackBtn);
         Button addbtn=(Button)view.findViewById(R.id.AddBtn);
+        ImageButton bkbtn=(ImageButton)view.findViewById(R.id.BKbtn);//早餐清單
+        ImageButton lhbtn=(ImageButton)view.findViewById(R.id.LHbtn);//午餐清單
+        ImageButton dnbtn=(ImageButton)view.findViewById(R.id.DNbtn);//晚餐清單
         if(mParam1!=null){mydiary.setText(mParam1);backbtn.setText("刪除");}
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
