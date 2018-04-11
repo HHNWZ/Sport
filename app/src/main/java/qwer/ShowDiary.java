@@ -82,6 +82,7 @@ public class ShowDiary extends Fragment {
                 ((MainActivity)getActivity()).toAddDiary(mParam2);
             }
         });
+
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
