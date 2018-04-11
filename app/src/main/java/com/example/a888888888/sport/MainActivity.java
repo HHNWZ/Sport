@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
@@ -50,7 +51,7 @@ public class  MainActivity extends AppCompatActivity
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
     public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
-    public CalendarDay seleDAY=Today;
+    public CalendarDay seleDAY=Today;//選擇預設為今天
     private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
     private TextView rundata;
     private TextView walkdata;
@@ -103,43 +104,55 @@ public class  MainActivity extends AppCompatActivity
         DL.add(date);
         diarys.add(diary);
     }
-    private CalendarDay getOneDate(String myYEAR,String myMONTH,String myDAY){//將字串資料轉換為日期型態
-        CalendarDay c = new CalendarDay();
-        c.getCalendar().set(Integer.parseInt(myYEAR),Integer.parseInt(myMONTH),Integer.parseInt(myDAY));
-        return c;
+    private CalendarDay getOneDate(int myYEAR,int myMONTH,int myDAY){//將字串資料轉換為日期型態
+        Calendar c = Calendar.getInstance();//先定義為今日
+        //c.getCalendar().set(myYEAR, myMONTH, myDAY);
+        int YearDif=myYEAR-seleDAY.getYear();c.add(Calendar.YEAR,YearDif);//傳值與今日的年之差
+        int MonthDif=myMONTH-seleDAY.getMonth();c.add(Calendar.MONTH,MonthDif);//傳值與今日的月之差
+        int DayDif=myDAY-seleDAY.getDay();c.add(Calendar.DATE,DayDif);//傳值與今日的日之差
+        //將變數c調整至傳直指定之日期
+        return CalendarDay.from(c);//將變數c轉變為要求型態CalendarDay
     }
     public void readMyDiaryDATA(){//從檔案中讀取日記，若無則陣列歸零
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = spref.edit();
         int DATAsize=spref.getAll().size();
-        Toast.makeText(this, spref.getString("newDiary","啊吧吧吧吧"), Toast.LENGTH_SHORT).show();
-        if(spref.contains("newDiary")){//驗證檔案內存在日記資料
+        //Toast.makeText(this, DATAsize, Toast.LENGTH_SHORT).show();
+        if(spref.getBoolean("NonDiary",true)) {//驗證檔案內存在日記資料
+            Toast.makeText(this, "目前尚無日記"+DATAsize, Toast.LENGTH_SHORT).show();
+        }else{
             DL.clear();
             diarys.clear();
             for(int i=0;i<(DATAsize-1)/4;i++){
-                addOneDiary(getOneDate(spref.getString("DL_Y_"+Integer.toString(i),null),
-                                        spref.getString("DL_M_"+Integer.toString(i),null),
-                                        spref.getString("DL_D_"+Integer.toString(i),null)
+                addOneDiary(getOneDate(spref.getInt("DL_Y_"+Integer.toString(i),0),
+                                        spref.getInt("DL_M_"+Integer.toString(i),0),
+                                        spref.getInt("DL_D_"+Integer.toString(i),0)
                         ),spref.getString("diarys_"+Integer.toString(i),null)
                 );
             }
+            //Toast.makeText(this, "資料量："+DATAsize, Toast.LENGTH_SHORT).show();
         }
     }
     public void writAllDiaryDATA(){//將當前日記陣列存入檔案
-        Toast.makeText(this, "日記數量："+diarys.size(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "日期數量："+DL.size()+"，日記數量："+diarys.size(), Toast.LENGTH_SHORT).show();
+
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = spref.edit();
-        editor.clear();
+        editor.clear().commit();
         if(DL.size()>0){//存入時陣列中有資料
-            editor.putString("newDiary",""+DL+diarys).commit();//標示有資料
+            editor.putBoolean("NonDiary",false);//標示有資料
             for(int i=0;i<DL.size();i++){//逐一寫入日寄資料
-                editor.putString("DL_Y_"+Integer.toString(i),Integer.toString(DL.get(i).getYear()))
-                        .putString("DL_M_"+Integer.toString(i),Integer.toString(DL.get(i).getMonth()))
-                        .putString("DL_D_"+Integer.toString(i),Integer.toString(DL.get(i).getDay()))
-                        .putString("diarys_"+Integer.toString(i),diarys.get(i))
-                        .commit();
+                editor.putInt("DL_Y_"+Integer.toString(i),DL.get(i).getYear())
+                        .putInt("DL_M_"+Integer.toString(i),DL.get(i).getMonth())
+                        .putInt("DL_D_"+Integer.toString(i),DL.get(i).getDay())
+                        .putString("diarys_"+Integer.toString(i),diarys.get(i));
             }
+        }else{
+            editor.putBoolean("NonDiary",true);
         }
+        editor.commit();
+
+        //editor.clear().commit();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +181,7 @@ public class  MainActivity extends AppCompatActivity
         pushdata =(TextView)findViewById(R.id.textView10);
         sitdata =(TextView)findViewById(R.id.textView9);
         getData();
+        //writAllDiaryDATA();
         readMyDiaryDATA();//讀取使用者內存資料
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -227,7 +241,7 @@ public class  MainActivity extends AppCompatActivity
     }
 
     public void myDayChanged(CalendarDay mydate) {//選擇日期
-        seleDAY=mydate;//紀錄選擇日期
+        seleDAY=mydate;//紀錄上一次選擇日期
     }
     public void toAddDiary(String mydiary){//跳至撰寫日記
         addDiary adddiary=addDiary.newInstance(mydiary,null);
@@ -253,8 +267,10 @@ public class  MainActivity extends AppCompatActivity
         ).commit();
     }
     public void deleOneDiary() {
-        diarys.remove(DL.indexOf(seleDAY));//先刪除日記內容
-        DL.remove(seleDAY);//再刪除作為索引的日期
+        int deletTAG=DL.indexOf(seleDAY);
+        Toast.makeText(this, ""+deletTAG, Toast.LENGTH_SHORT).show();
+        diarys.remove(deletTAG);//先刪除日記內容
+        DL.remove(deletTAG);//再刪除作為索引的日期
         writAllDiaryDATA();//刪除後將內存檔案重寫
     }
     @Override

@@ -37,30 +37,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="385dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/appbar">
-
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/appbar">
 
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                android:id="@+id/calendarView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="100dp"
-                android:shownWeekCount="4"
-                app:mcv_selectionColor="#00F"
-                app:mcv_showOtherDates="all">
+                android:orientation="vertical">
 
-            </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="100dp"
+                    android:shownWeekCount="4"
+                    app:mcv_selectionColor="#00F"
+                    app:mcv_showOtherDates="all">
 
-        </LinearLayout>
-    </ScrollView>
+                </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/testText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="目前尚無日記"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

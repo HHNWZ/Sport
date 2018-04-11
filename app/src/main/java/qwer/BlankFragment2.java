@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -16,6 +18,7 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -75,6 +78,10 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
+        TextView test=(TextView)view.findViewById(R.id.testText);
+        if(((MainActivity)getActivity()).DL.size()>0){
+            test.setText("已撰寫日記："+turnDateList(((MainActivity)getActivity()).DL));
+        }
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
@@ -83,24 +90,37 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
         materialCalendarView.setDateSelected(((MainActivity)getActivity()).seleDAY,true);//預設選擇今天
-        //final CalendarDay[] Myday = {Today};//上一個選擇
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 if(date== ((MainActivity)getActivity()).seleDAY) {//雙擊日期時
-                    if(((MainActivity)getActivity()).DL.contains(date)){//已存在日記
+                    if(((MainActivity)getActivity()).DL.contains(date)){//如果已存在日記
                         ((MainActivity)getActivity()).ShowMyDiary();//直接顯示日記
                     }else{//尚未寫過日記
                         ((MainActivity)getActivity()).toAddDiary(null);
                     }
                 }else {//單擊日期時
-                    //Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();
-                    //Myday[0] =date;
+                    Toast.makeText(getActivity(),
+                            showTrueDate(date),
+                            Toast.LENGTH_LONG).show();
+                    //由於日曆元件的月份是由0月開始計算，顯示正確月份時要+1
                 }
                 ((MainActivity) getActivity()).myDayChanged(date);//選擇日期
             }
         });//
         return view;
+    }
+
+    private String turnDateList(ArrayList<CalendarDay> dl) {
+        String allDate="";
+        for(int i=0;i<dl.size();i++){
+            if(i>0){allDate+="、";}
+            allDate+=showTrueDate(dl.get(i));
+        }
+        return allDate;
+    }
+    private String showTrueDate(CalendarDay cDay){
+        return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
