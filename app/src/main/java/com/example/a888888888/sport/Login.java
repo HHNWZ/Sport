@@ -2,6 +2,7 @@ package com.example.a888888888.sport;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.NameValuePair;
+import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
+import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
+import cz.msebera.android.httpclient.message.BasicNameValuePair;
+import cz.msebera.android.httpclient.protocol.HTTP;
 
 
 /**
@@ -74,10 +86,11 @@ public class Login extends Fragment {
         }
     }
     private EditText login1,login2;
-    private String showUri = "http://172.30.4.40:1335/login.php";
+    private String showUri = "http://172.30.4.170:1335/login.php";
     public static String userimage;
     com.android.volley.RequestQueue requestQueue;
     private void getData() {
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {
                     @Override
@@ -91,7 +104,7 @@ public class Login extends Fragment {
                             for (int i = 0; i < data.length(); i++) {
                                 jasondata = data.getJSONObject(i);
                                 if(Objects.equals(login1.getText().toString(), jasondata.getString("account")) &&
-                                        Objects.equals(login2.getText().toString(), jasondata.getString("password")))
+                                    Objects.equals(login2.getText().toString(), jasondata.getString("password")))
                                 {
                                     userimage = jasondata.getString("img");
                                     Toast.makeText(getActivity(), "登入成功", Toast.LENGTH_SHORT).show();
@@ -126,9 +139,28 @@ public class Login extends Fragment {
         login2 = (EditText)view.findViewById(R.id.editText2);
         Button login = (Button) view.findViewById(R.id.button18);
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new Thread(new Runnable(){
+
+                    @Override
+                    public void run() {
+                        Looper.prepare();
+                        HttpClient client = new DefaultHttpClient();
+
+                        HttpPost myPost = new HttpPost("http://172.30.4.170:1335/data_save.php");
+                        try {
+                            List<NameValuePair> params = new ArrayList<NameValuePair>();
+                            params.add(new BasicNameValuePair("login","aaa"));
+                            myPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+                            HttpResponse response = new DefaultHttpClient().execute(myPost,Connecte.localContext);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Looper.loop();
+                    }}).start();
                 getData();
             }
         });
@@ -175,3 +207,4 @@ public class Login extends Fragment {
         void onFragmentInteraction(String Tag, String number);
     }
 }
+

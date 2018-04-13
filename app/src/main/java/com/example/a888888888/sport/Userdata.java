@@ -77,7 +77,7 @@ public class Userdata extends Fragment implements View.OnTouchListener{
     private TextView sitdata;
     private ImageView img;
     com.android.volley.RequestQueue requestQueue;
-    private String showUri = "http://172.30.4.40:1335/test123.php";
+    private String showUri = "http://172.30.4.170:1335/test123.php";
     private void getData() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {

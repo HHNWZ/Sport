@@ -52,7 +52,7 @@ public class  MainActivity extends AppCompatActivity
     public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
-    private String showUri = "http://172.30.4.40:1335/test123.php";//連至資料庫
+    private String showUri = "http://172.30.4.170:1335/test123.php";//連至資料庫
     private TextView rundata;
     private TextView walkdata;
     private TextView airdata;
