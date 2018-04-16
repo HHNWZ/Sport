@@ -55,10 +55,16 @@ public class KelvinPushUpFragment extends Fragment {
         TextView text_view_of_today_record_data=(TextView)rootView.findViewById(R.id.text_view_of_today_record_data);
         TextView text_view_of_lowest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_data) ;
         TextView text_view_of_highest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_data);
+        TextView text_view_of_today_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_today_record_unit);
+        TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
+        TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
         text_View_of_exercise_title.setText("伏地挺身個人記錄");
-        text_view_of_today_record_data.setText("10次");
-        text_view_of_highest_record_data.setText("15次");
-        text_view_of_lowest_record_data.setText("5次");
+        text_view_of_today_record_data.setText("10");
+        text_view_of_highest_record_data.setText("15");
+        text_view_of_lowest_record_data.setText("5");
+        text_view_of_today_record_unit.setText("次");
+        text_view_of_lowest_record_unit.setText("次");
+        text_view_of_highest_record_unit.setText("次");
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override

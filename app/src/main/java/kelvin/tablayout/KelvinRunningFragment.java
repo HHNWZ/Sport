@@ -60,6 +60,9 @@ public class KelvinRunningFragment extends Fragment {
         TextView text_view_of_today_record_data = (TextView) rootView.findViewById(R.id.text_view_of_today_record_data);
         TextView text_view_of_lowest_record_data = (TextView) rootView.findViewById(R.id.text_view_of_lowest_record_data);
         TextView text_view_of_highest_record_data = (TextView) rootView.findViewById(R.id.text_view_of_highest_record_data);
+        TextView text_view_of_today_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_today_record_unit);
+        TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
+        TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
         chart_of_running_today_record = (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());
         chart_of_running_today_record.setZoomEnabled(false);
@@ -67,9 +70,12 @@ public class KelvinRunningFragment extends Fragment {
         final Button button_of_invitation = (Button) rootView.findViewById(R.id.button_of_invitation);
         //button_of_invitation.setVisibility(View.VISIBLE);
         text_View_of_exercise_title.setText("跑步個人記錄");
-        text_view_of_today_record_data.setText("100米");
-        text_view_of_highest_record_data.setText("200米");
-        text_view_of_lowest_record_data.setText("50米");
+        text_view_of_today_record_data.setText("100");
+        text_view_of_highest_record_data.setText("200");
+        text_view_of_lowest_record_data.setText("50");
+        text_view_of_today_record_unit.setText("公里");
+        text_view_of_lowest_record_unit.setText("公里");
+        text_view_of_highest_record_unit.setText("公里");
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
