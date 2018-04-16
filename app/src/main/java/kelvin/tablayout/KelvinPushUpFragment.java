@@ -64,7 +64,7 @@ public class KelvinPushUpFragment extends Fragment {
         text_view_of_lowest_record_data.setText("5");
         text_view_of_today_record_unit.setText("次");
         text_view_of_lowest_record_unit.setText("次");
-        text_view_of_highest_record_unit.setText("次");
+        text_view_of_highest_record_unit.setText("次");/////
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
