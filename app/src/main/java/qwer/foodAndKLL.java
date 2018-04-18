@@ -114,7 +114,6 @@ public class foodAndKLL extends Fragment {
         removebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
         backbtn.setOnClickListener(new View.OnClickListener() {
