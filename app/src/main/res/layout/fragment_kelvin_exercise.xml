@@ -8,72 +8,154 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TableRowOfExercise_record"
+        android:layout_below="@+id/exercise_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_view_of_lowest_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:baselineAligned="false"
+                android:text="最低記錄"
+                android:textColor="@android:color/black"
+                android:textSize="20dp"
+                android:layout_marginRight="50dp"/>
+
+            <TextView
+                android:id="@+id/text_view_Of_today_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/exercise_title"
+                android:layout_column="1"
+                android:text="今日記錄"
+                android:textColor="@android:color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/text_view_of_highest_record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:text="最高記錄"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="50dp"
+                android:textSize="20dp"
+
+
+                />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            >
+
+            <TextView
+                android:id="@+id/text_view_of_lowest_record_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginRight="50dp"
+                android:text="1000"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"
+
+                />
+
+            <TextView
+                android:id="@+id/text_view_of_today_record_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_column="1"
+                android:text="1000"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/text_view_of_highest_record_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginLeft="50dp"
+                android:text="1000"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/text_view_of_lowest_record_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginRight="50dp"
+                android:text="步"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"
+                android:textSize="20dp"
+                />
+
+            <TextView
+                android:id="@+id/text_view_of_today_record_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_view_Of_today_record"
+                android:layout_column="1"
+                android:text="步"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/text_view_of_highest_record_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginLeft="50dp"
+                android:text="步"
+                android:textColor="@android:color/black"
+                android:gravity="center_horizontal"
+                android:textSize="20dp"/>
+
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
+
     <lecho.lib.hellocharts.view.ColumnChartView
         android:id="@+id/chart_of_running_today_record"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="113dp" />
+        android:layout_marginTop="110dp" />
 
 
-    <TextView
-        android:id="@+id/text_view_Of_today_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_view_of_today_record_data"
-        android:layout_alignBottom="@+id/text_view_of_today_record_data"
-        android:layout_alignStart="@+id/exercise_title"
-        android:text="今天記錄:"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/text_view_of_today_record_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/exercise_title"
-        android:layout_toRightOf="@+id/text_view_Of_today_record"
-        android:layout_marginTop="5px"/>
 
-    <TextView
-        android:id="@+id/text_view_of_lowest_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_view_of_lowest_record_data"
-        android:layout_alignBottom="@+id/text_view_of_lowest_record_data"
-        android:layout_alignStart="@+id/text_view_Of_today_record"
-        android:text="最低記錄:"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/text_view_of_lowest_record_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/text_view_of_today_record_data"
-        android:layout_toRightOf="@+id/text_view_of_lowest_record"
-        android:layout_marginTop="5px"/>
 
-    <TextView
-        android:id="@+id/text_view_of_highest_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_view_of_highest_record_data"
-        android:layout_alignBottom="@+id/text_view_of_highest_record_data"
-        android:layout_alignStart="@+id/text_view_of_lowest_record"
-        android:text="最高記錄:"
-        android:textColor="@android:color/black" />
-    <TextView
-        android:id="@+id/text_view_of_highest_record_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/text_view_of_lowest_record_data"
-        android:layout_toRightOf="@+id/text_view_of_highest_record"
-        android:layout_marginTop="5px"/>
+
+
+
+
 
 
 
@@ -81,26 +163,27 @@
         android:id="@+id/exercise_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/chart_of_running_today_record"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         android:text="跑步个人记录"
-        android:textSize="30dp"
-        android:layout_centerHorizontal="true"
         android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:layout_below="@+id/chart_of_running_today_record"
+        android:textSize="30dp"
 
-         />
+        android:textStyle="bold"
+
+        />
 
     <Button
         android:id="@+id/button_of_invitation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="25dp"
-        android:text="邀請" />
+        android:text="邀請朋友運動"
+        android:textSize="10dp" />
 
 
 </RelativeLayout>

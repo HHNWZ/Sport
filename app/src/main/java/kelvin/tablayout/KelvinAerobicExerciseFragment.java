@@ -56,10 +56,17 @@ public class KelvinAerobicExerciseFragment extends Fragment {
         TextView text_view_of_today_record_data=(TextView)rootView.findViewById(R.id.text_view_of_today_record_data);
         TextView text_view_of_lowest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_data) ;
         TextView text_view_of_highest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_data);
+        TextView text_view_of_today_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_today_record_unit);
+        TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
+        TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
+
         text_View_of_exercise_title.setText("有氧運動個人記錄");
-        text_view_of_today_record_data.setText("10分鐘");
-        text_view_of_highest_record_data.setText("15分鐘");
-        text_view_of_lowest_record_data.setText("5分鐘");
+        text_view_of_today_record_data.setText("10");
+        text_view_of_highest_record_data.setText("15");
+        text_view_of_lowest_record_data.setText("5");
+        text_view_of_today_record_unit.setText("分鐘");
+        text_view_of_lowest_record_unit.setText("分鐘");
+        text_view_of_highest_record_unit.setText("分鐘");
         chart_of_aerobic_Exercise_today_record = (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());
         chart_of_aerobic_Exercise_today_record.setZoomEnabled(false);
