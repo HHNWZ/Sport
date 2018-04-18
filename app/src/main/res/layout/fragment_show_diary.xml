@@ -20,46 +20,6 @@
         tools:layout_editor_absoluteX="-348dp">
 
 
-
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?actionBarSize"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/reAddBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="修改" />
-
-                <TextView
-                    android:id="@+id/theDAY"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="10" />
-
-                <Button
-                    android:id="@+id/OKBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="確定" />
-            </LinearLayout>
-        </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
@@ -69,12 +29,115 @@
         android:layout_below="@+id/appbar"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/Diary_Btn_BK"
+                android:layout_width="184dp"
+                android:layout_height="230dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/d_b_1" />
+
+            <ImageButton
+                android:id="@+id/Diary_Btn_LH"
+                android:layout_width="184dp"
+                android:layout_height="230dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/d_b_2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/Diary_Btn_DN"
+                android:layout_width="184dp"
+                android:layout_height="230dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/d_b_3" />
+            <ImageButton
+                android:id="@+id/Diary_Btn_Diary"
+                android:layout_width="184dp"
+                android:layout_height="230dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/d_b_4" /></LinearLayout>
+
         <TextView
             android:id="@+id/DiaryCon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="今天天氣超級好" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="日期：" />
+
+            <TextView
+                android:id="@+id/theDAY"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="有一天" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="卡路里：" />
+
+            <TextView
+                android:id="@+id/theDayKLL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="突破天際" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/deletBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重製" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/OKBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="確定" />
+        </LinearLayout>
     </LinearLayout>
+
 
 
 </RelativeLayout>

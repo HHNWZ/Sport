@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -69,17 +71,52 @@ public class ShowDiary extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_show_diary, container, false);
         //Toast.makeText(getActivity(), mParam1+"："+mParam2, Toast.LENGTH_SHORT).show();
+        ImageButton theBK=(ImageButton)view.findViewById(R.id.Diary_Btn_BK);//早餐
+        ImageButton theLH=(ImageButton)view.findViewById(R.id.Diary_Btn_LH);//午餐
+        ImageButton theDN=(ImageButton)view.findViewById(R.id.Diary_Btn_DN);//晚餐
+        ImageButton theDiary=(ImageButton)view.findViewById(R.id.Diary_Btn_Diary);//日記
         TextView theday=(TextView)view.findViewById(R.id.theDAY);
         TextView showdiary=(TextView)view.findViewById(R.id.DiaryCon);
         theday.setText(mParam1);
+
         showdiary.setText(mParam2);
-        Button readdbtn=(Button)view.findViewById(R.id.reAddBtn);
+        Button deletbtn=(Button)view.findViewById(R.id.deletBtn);
         Button okbtn=(Button)view.findViewById(R.id.OKBtn);
-        readdbtn.setOnClickListener(new View.OnClickListener() {
+        theBK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).toFoodList("BK",0);
+            }
+        });
+        theLH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)getActivity()).toFoodList("LH",0);
+            }
+        });
+        theDN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)getActivity()).toFoodList("DN",0);
+            }
+        });
+        theDiary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mParam2!=null){
+                    ((MainActivity)getActivity()).deleOneDiary();
+                }
+                ((MainActivity)getActivity()).toAddDiary(mParam2);
+            }
+        });
+        deletbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).deleOneDiary();
-                ((MainActivity)getActivity()).toAddDiary(mParam2);
+                Toast.makeText(getActivity(), "已刪除今日紀錄", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).ShowMyDiary();
             }
         });
 
@@ -95,6 +132,7 @@ public class ShowDiary extends Fragment {
         });
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String Tag,String number) {

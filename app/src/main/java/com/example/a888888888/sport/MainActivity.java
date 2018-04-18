@@ -42,14 +42,23 @@ import qwer.BlankFragmentc4;
 import qwer.Dietcontrol;
 import qwer.ShowDiary;
 import qwer.addDiary;
+import qwer.foodAndKLL;
+import qwer.theDate;
 
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener{
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener{
+    public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
+    public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
     public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
+    //public final ArrayList<ArrayList<Integer>> BK_list=new ArrayList<ArrayList<Integer>>();//日記.早餐
+    //public final ArrayList<ArrayList<Integer>> LH_list=new ArrayList<ArrayList<Integer>>();//日記.午餐
+    //public final ArrayList<ArrayList<Integer>> DN_list=new ArrayList<ArrayList<Integer>>();//日記.晚餐
+    public ArrayList<theDate> datelist=new ArrayList<theDate>();//日清單(試作)
+    public int dateID;//
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
     private String showUri = "http://172.30.4.170:1335/test123.php";//連至資料庫
@@ -103,6 +112,7 @@ public class  MainActivity extends AppCompatActivity
     public void addOneDiary(CalendarDay date,String diary){//寫入單筆日記資料
         DL.add(date);
         diarys.add(diary);
+        datelist.add(new theDate(diary));
     }
     private CalendarDay getOneDate(int myYEAR,int myMONTH,int myDAY){//將字串資料轉換為日期型態
         Calendar c = Calendar.getInstance();//先定義為今日
@@ -123,6 +133,7 @@ public class  MainActivity extends AppCompatActivity
         }else{
             DL.clear();
             diarys.clear();
+            datelist.clear();
             for(int i=0;i<(DATAsize-1)/4;i++){
                 addOneDiary(getOneDate(spref.getInt("DL_Y_"+Integer.toString(i),0),
                                         spref.getInt("DL_M_"+Integer.toString(i),0),
@@ -135,7 +146,6 @@ public class  MainActivity extends AppCompatActivity
     }
     public void writAllDiaryDATA(){//將當前日記陣列存入檔案
         //Toast.makeText(this, "日期數量："+DL.size()+"，日記數量："+diarys.size(), Toast.LENGTH_SHORT).show();
-
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = spref.edit();
         editor.clear().commit();
@@ -168,7 +178,24 @@ public class  MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
-
+        food_list.add("米飯");
+        food_list.add("香蕉");
+        food_list.add("牛奶");
+        food_list.add("牛肉");
+        food_list.add("甜甜圈");
+        food_list.add("魚肉");
+        food_list.add("蔬菜");
+        food_list.add("雞肉");
+        food_list.add("雞蛋");
+        food_KLL.add(225);
+        food_KLL.add(120);
+        food_KLL.add(150);
+        food_KLL.add(140);
+        food_KLL.add(270);
+        food_KLL.add(206);
+        food_KLL.add(65);
+        food_KLL.add(239);
+        food_KLL.add(106);
         Button kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
         Button hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
         Button del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
@@ -242,6 +269,7 @@ public class  MainActivity extends AppCompatActivity
 
     public void myDayChanged(CalendarDay mydate) {//選擇日期
         seleDAY=mydate;//紀錄上一次選擇日期
+        dateID=DL.indexOf(seleDAY);
     }
     public void toAddDiary(String mydiary){//跳至撰寫日記
         addDiary adddiary=addDiary.newInstance(mydiary,null);
@@ -258,7 +286,9 @@ public class  MainActivity extends AppCompatActivity
         ShowMyDiary();
     }
     public void ShowMyDiary(){//展示日記
-        ShowDiary showdiary=ShowDiary.newInstance(seleDAY.toString(),diarys.get(DL.indexOf(seleDAY)));
+        String thediary=null;
+        if(DL.contains(seleDAY)){thediary=datelist.get(DL.indexOf(seleDAY)).Diary;}
+        ShowDiary showdiary=ShowDiary.newInstance(showTrueDate(seleDAY),thediary);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
                 R.id.content_main,
@@ -268,10 +298,24 @@ public class  MainActivity extends AppCompatActivity
     }
     public void deleOneDiary() {
         int deletTAG=DL.indexOf(seleDAY);
-        Toast.makeText(this, ""+deletTAG, Toast.LENGTH_SHORT).show();
         diarys.remove(deletTAG);//先刪除日記內容
         DL.remove(deletTAG);//再刪除作為索引的日期
+        datelist.remove(deletTAG);
         writAllDiaryDATA();//刪除後將內存檔案重寫
+    }
+
+    private String showTrueDate(CalendarDay cDay){
+        return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
+    }
+    public void toFoodList(String foodType,int seleID){
+        foodAndKLL FaK=foodAndKLL.newInstance(foodType,dateID,seleID
+                ,datelist.get(dateID).getfoodnum(foodType,seleID));
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                FaK,
+                FaK.getTag()
+        ).commit();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

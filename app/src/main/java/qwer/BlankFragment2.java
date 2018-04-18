@@ -94,11 +94,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 if(date== ((MainActivity)getActivity()).seleDAY) {//雙擊日期時
-                    if(((MainActivity)getActivity()).DL.contains(date)){//如果已存在日記
-                        ((MainActivity)getActivity()).ShowMyDiary();//直接顯示日記
-                    }else{//尚未寫過日記
-                        ((MainActivity)getActivity()).toAddDiary(null);
-                    }
+                    ((MainActivity)getActivity()).ShowMyDiary();//直接顯示日記
                 }else {//單擊日期時
                     Toast.makeText(getActivity(),
                             showTrueDate(date),
