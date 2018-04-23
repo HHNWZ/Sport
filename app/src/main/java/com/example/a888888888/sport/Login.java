@@ -142,7 +142,6 @@ public class Login extends Fragment {
         Toast.makeText(getActivity(), "2 "+PHPSESSID, Toast.LENGTH_SHORT).show();
         requestQueue.add(jsonObjectRequest);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
