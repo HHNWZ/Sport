@@ -21,18 +21,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.HttpResponse;
+import cz.msebera.android.httpclient.HttpStatus;
 import cz.msebera.android.httpclient.NameValuePair;
-import cz.msebera.android.httpclient.client.HttpClient;
+import cz.msebera.android.httpclient.client.ClientProtocolException;
+import cz.msebera.android.httpclient.client.CookieStore;
 import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
+import cz.msebera.android.httpclient.cookie.Cookie;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
 import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import cz.msebera.android.httpclient.protocol.HTTP;
+import cz.msebera.android.httpclient.util.EntityUtils;
 
 
 /**
@@ -87,6 +94,11 @@ public class Login extends Fragment {
     }
     private EditText login1,login2;
     private String showUri = "http://172.30.4.170:1335/login.php";
+    private HttpPost myPost;
+    private DefaultHttpClient httpClient;
+    private HttpEntity httpEntity;
+    private HttpResponse httpResponse;
+    public static String PHPSESSID = null;
     public static String userimage;
     com.android.volley.RequestQueue requestQueue;
     private void getData() {
@@ -127,9 +139,9 @@ public class Login extends Fragment {
                         System.out.append(error.getMessage());
                     }
                 });
+        Toast.makeText(getActivity(), "2 "+PHPSESSID, Toast.LENGTH_SHORT).show();
         requestQueue.add(jsonObjectRequest);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -148,14 +160,10 @@ public class Login extends Fragment {
                     @Override
                     public void run() {
                         Looper.prepare();
-                        HttpClient client = new DefaultHttpClient();
-
-                        HttpPost myPost = new HttpPost("http://172.30.4.170:1335/data_save.php");
                         try {
                             List<NameValuePair> params = new ArrayList<NameValuePair>();
                             params.add(new BasicNameValuePair("login","aaa"));
-                            myPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-                            HttpResponse response = new DefaultHttpClient().execute(myPost,Connecte.localContext);
+                            executeRequest(params);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -166,6 +174,48 @@ public class Login extends Fragment {
         });
         
         return view;
+    }
+
+
+
+    public String executeRequest( List<NameValuePair> params) {
+        String ret = "none";
+        try {
+            myPost = new HttpPost("http://172.30.4.170:1335/data_save.php");
+            httpEntity = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+            myPost.setEntity(httpEntity);
+//第一次一般是还未被赋值，若有值则将SessionId发给服务器
+            if(null != PHPSESSID){
+                myPost.setHeader("Cookie", "PHPSESSID=" + PHPSESSID);
+            }
+            httpClient = new DefaultHttpClient();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            httpResponse = httpClient.execute(myPost);
+            if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                HttpEntity entity = httpResponse.getEntity();
+                ret = EntityUtils.toString(entity);
+                CookieStore mCookieStore = httpClient.getCookieStore();
+                List<Cookie> cookies = mCookieStore.getCookies();
+                for (int i = 0; i < cookies.size(); i++) {
+//这里是读取Cookie['PHPSESSID']的值存在静态变量中，保证每次都是同一个值
+                    if ("PHPSESSID".equals(cookies.get(i).getName())) {
+                        PHPSESSID = cookies.get(i).getValue();
+                        break;
+                    }
+
+                }
+
+            }
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(getActivity(), "1 "+PHPSESSID, Toast.LENGTH_SHORT).show();
+        return ret;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
