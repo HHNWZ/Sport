@@ -35,10 +35,10 @@ public class foodAndKLL extends Fragment {
     private static final String ARG_PARAM4 = "param4";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private int mParam2;
-    private int mParam3;
-    private int mParam4;
+    private int foodType;
+    private int foodID;
+    private ArrayList<Integer> foodNum;
+    private int seleDate;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,12 +57,12 @@ public class foodAndKLL extends Fragment {
      * @return A new instance of fragment foodAndKLL.
      */
     // TODO: Rename and change types and number of parameters
-    public static foodAndKLL newInstance(String param1, int param2, int param3, int param4) {
+    public static foodAndKLL newInstance(int param1, int param2, ArrayList<Integer> param3, int param4) {
         foodAndKLL fragment = new foodAndKLL();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         args.putInt(ARG_PARAM2, param2);
-        args.putInt(ARG_PARAM3,param3);
+        args.putIntegerArrayList(ARG_PARAM3,param3);
         args.putInt(ARG_PARAM4,param4);
         fragment.setArguments(args);
         return fragment;
@@ -72,10 +72,10 @@ public class foodAndKLL extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
-            mParam3 = getArguments().getInt(ARG_PARAM3);
-            mParam4 = getArguments().getInt(ARG_PARAM4);
+            foodType = getArguments().getInt(ARG_PARAM1);
+            foodID = getArguments().getInt(ARG_PARAM2);
+            foodNum = getArguments().getIntegerArrayList(ARG_PARAM3);
+            seleDate = getArguments().getInt(ARG_PARAM4);
         }
     }
 
@@ -89,10 +89,9 @@ public class foodAndKLL extends Fragment {
         ListAdapter adapter = new ArrayAdapter(getContext() , android.R.layout.simple_list_item_single_choice
                 ,food_list_Item(((MainActivity)getActivity()).food_list,((MainActivity)getActivity()).food_KLL));
         foodlist.setAdapter(adapter);//將ListAdapter設定至ListView裡面
-        foodlist.setItemChecked(mParam3,true);
-        TextView itemnum=(TextView)view.findViewById(R.id.ItemNum);
-        //Toast.makeText(getActivity(), ""+mParam4, Toast.LENGTH_SHORT).show();
-        itemnum.setText(Integer.toString(mParam4));
+        foodlist.setItemChecked(foodID,true);
+        TextView totalkll=(TextView)view.findViewById(R.id.totalKLL);
+        totalkll.setText("總共"+getTheMealKLL(((MainActivity)getActivity()).food_KLL)+"大卡");
         Button addbtn=(Button)view.findViewById(R.id.ItemAdd);
         Button removebtn=(Button)view.findViewById(R.id.ItemRemove);
         Button backbtn=(Button)view.findViewById(R.id.OKBtn);
@@ -100,20 +99,22 @@ public class foodAndKLL extends Fragment {
         foodlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mParam3=position;
-                ((MainActivity)getActivity()).toFoodList(mParam1,mParam3);
+                foodID=position;
+                ((MainActivity)getActivity()).toFoodList(foodType,foodID);
             }
         });
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).datelist.get(mParam2).eat(mParam1,foodlist.getSelectedItemPosition());
-                ((MainActivity)getActivity()).toFoodList(mParam1,mParam3);
+                ((MainActivity)getActivity()).diarys.get(seleDate).addEated(foodType,foodID,1);
+                ((MainActivity)getActivity()).toFoodList(foodType,foodID);
             }
         });
         removebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).diarys.get(seleDate).addEated(foodType,foodID,-1);
+                ((MainActivity)getActivity()).toFoodList(foodType,foodID);
             }
         });
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -130,10 +131,19 @@ public class foodAndKLL extends Fragment {
         });
         return view;
     }
+
+    private int getTheMealKLL(ArrayList<Integer> KLL) {
+        int countKLL=0;
+        for(int i=0;i<foodNum.size();i++){
+            countKLL+=foodNum.get(i)*KLL.get(i);
+        }
+        return countKLL;
+    }
+
     public ArrayList<String> food_list_Item(ArrayList<String> food,ArrayList<Integer> KLL){
         ArrayList<String> mylist=new ArrayList<String>();
         for(int i=0;i<food.size();i++){
-            mylist.add(food.get(i).concat(KLL.get(i).toString()));
+            mylist.add(food.get(i)+"："+KLL.get(i)+"大卡 X "+foodNum.get(i)+"份");
         }
         return mylist;
     }

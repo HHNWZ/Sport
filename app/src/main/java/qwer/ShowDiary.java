@@ -27,10 +27,12 @@ public class ShowDiary extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String todayDate;
+    private String todayDiary;
+    private int todayKLL;
 
     private OnFragmentInteractionListener mListener;
 
@@ -44,14 +46,16 @@ public class ShowDiary extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
+     * @param param3 Parameter 3.
      * @return A new instance of fragment ShowDiary.
      */
     // TODO: Rename and change types and number of parameters
-    public static ShowDiary newInstance(String param1, String param2) {
+    public static ShowDiary newInstance(String param1, String param2, int param3) {
         ShowDiary fragment = new ShowDiary();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM3,param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,8 +64,9 @@ public class ShowDiary extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            todayDate = getArguments().getString(ARG_PARAM1);
+            todayDiary = getArguments().getString(ARG_PARAM2);
+            todayKLL=getArguments().getInt(ARG_PARAM3);
         }
     }
 
@@ -77,38 +82,39 @@ public class ShowDiary extends Fragment {
         ImageButton theDiary=(ImageButton)view.findViewById(R.id.Diary_Btn_Diary);//日記
         TextView theday=(TextView)view.findViewById(R.id.theDAY);
         TextView showdiary=(TextView)view.findViewById(R.id.DiaryCon);
-        theday.setText(mParam1);
-
-        showdiary.setText(mParam2);
+        TextView theKLL=(TextView)view.findViewById(R.id.theDayKLL);
+        theday.setText(todayDate);
+        showdiary.setText(todayDiary);
+        theKLL.setText(Integer.toString(todayKLL));
         Button deletbtn=(Button)view.findViewById(R.id.deletBtn);
         Button okbtn=(Button)view.findViewById(R.id.OKBtn);
         theBK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).toFoodList("BK",0);
+                ((MainActivity)getActivity()).toFoodList(0,0);
             }
         });
         theLH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity)getActivity()).toFoodList("LH",0);
+                ((MainActivity)getActivity()).toFoodList(1,0);
             }
         });
         theDN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ((MainActivity)getActivity()).toFoodList("DN",0);
+                ((MainActivity)getActivity()).toFoodList(2,0);
             }
         });
         theDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mParam2!=null){
+                if(todayDiary!=null){
                     ((MainActivity)getActivity()).deleOneDiary();
                 }
-                ((MainActivity)getActivity()).toAddDiary(mParam2);
+                ((MainActivity)getActivity()).toAddDiary(todayDiary);
             }
         });
         deletbtn.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +129,7 @@ public class ShowDiary extends Fragment {
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).writAllDiaryDATA();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_main,new BlankFragment2(),null)

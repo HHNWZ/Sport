@@ -53,11 +53,11 @@ public class  MainActivity extends AppCompatActivity
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
-    public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
+    //public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
     //public final ArrayList<ArrayList<Integer>> BK_list=new ArrayList<ArrayList<Integer>>();//日記.早餐
     //public final ArrayList<ArrayList<Integer>> LH_list=new ArrayList<ArrayList<Integer>>();//日記.午餐
     //public final ArrayList<ArrayList<Integer>> DN_list=new ArrayList<ArrayList<Integer>>();//日記.晚餐
-    public ArrayList<theDate> datelist=new ArrayList<theDate>();//日清單(試作)
+    public ArrayList<theDate> diarys=new ArrayList<theDate>();//日清單(試作)
     public int dateID;//
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
@@ -111,8 +111,7 @@ public class  MainActivity extends AppCompatActivity
     }
     public void addOneDiary(CalendarDay date,String diary){//寫入單筆日記資料
         DL.add(date);
-        diarys.add(diary);
-        datelist.add(new theDate(diary));
+        diarys.add(new theDate(diary));
     }
     private CalendarDay getOneDate(int myYEAR,int myMONTH,int myDAY){//將字串資料轉換為日期型態
         Calendar c = Calendar.getInstance();//先定義為今日
@@ -126,20 +125,26 @@ public class  MainActivity extends AppCompatActivity
     public void readMyDiaryDATA(){//從檔案中讀取日記，若無則陣列歸零
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = spref.edit();
-        int DATAsize=spref.getAll().size();
+        int num=spref.getInt("DiaryNum",0);
         //Toast.makeText(this, DATAsize, Toast.LENGTH_SHORT).show();
-        if(spref.getBoolean("NonDiary",true)) {//驗證檔案內存在日記資料
-            Toast.makeText(this, "目前尚無日記"+DATAsize, Toast.LENGTH_SHORT).show();
+        if(num==0) {//驗證檔案內存在日記資料
+            Toast.makeText(this, "目前尚無日記", Toast.LENGTH_SHORT).show();
         }else{
             DL.clear();
             diarys.clear();
-            datelist.clear();
-            for(int i=0;i<(DATAsize-1)/4;i++){
+            for(int i=0;i<num;i++){
                 addOneDiary(getOneDate(spref.getInt("DL_Y_"+Integer.toString(i),0),
                                         spref.getInt("DL_M_"+Integer.toString(i),0),
-                                        spref.getInt("DL_D_"+Integer.toString(i),0)
-                        ),spref.getString("diarys_"+Integer.toString(i),null)
+                                        spref.getInt("DL_D_"+Integer.toString(i),0)),//新增日記.新增日期
+                        spref.getString("diarys_"+Integer.toString(i),null)//新增日記.新增日記
                 );
+                for(int j=0;j<3;j++){
+                    for(int k=0;k<food_list.size();k++){
+                        diarys.get(i).setEated(j,k,spref.getInt(
+                                "eated_"+i+"_"+j+"_"+k,0));
+                    }
+                }
+
             }
             //Toast.makeText(this, "資料量："+DATAsize, Toast.LENGTH_SHORT).show();
         }
@@ -150,15 +155,22 @@ public class  MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = spref.edit();
         editor.clear().commit();
         if(DL.size()>0){//存入時陣列中有資料
-            editor.putBoolean("NonDiary",false);//標示有資料
+            editor.putInt("DiaryNum",DL.size());//標示有資料
             for(int i=0;i<DL.size();i++){//逐一寫入日寄資料
                 editor.putInt("DL_Y_"+Integer.toString(i),DL.get(i).getYear())
                         .putInt("DL_M_"+Integer.toString(i),DL.get(i).getMonth())
                         .putInt("DL_D_"+Integer.toString(i),DL.get(i).getDay())
-                        .putString("diarys_"+Integer.toString(i),diarys.get(i));
+                        .putString("diarys_"+Integer.toString(i),diarys.get(i).getDiary());
+                for(int j=0;j<3;j++){
+                    for(int k=0;k<food_list.size();k++){
+                        editor.putInt("eated_"+i+"_"+j+"_"+k,
+                                diarys.get(i).getEated(j,k));
+                    }
+                }
+
             }
         }else{
-            editor.putBoolean("NonDiary",true);
+            editor.putInt("DiaryNum",0);
         }
         editor.commit();
 
@@ -282,13 +294,13 @@ public class  MainActivity extends AppCompatActivity
     }
     public void addNewDiary(String mydiary){//寫入日記至陣列
         addOneDiary(seleDAY,mydiary);
-        writAllDiaryDATA();//新增時將日記存取至內存檔案中
+        //writAllDiaryDATA();//新增時將日記存取至內存檔案中
         ShowMyDiary();
     }
     public void ShowMyDiary(){//展示日記
         String thediary=null;
-        if(DL.contains(seleDAY)){thediary=datelist.get(DL.indexOf(seleDAY)).Diary;}
-        ShowDiary showdiary=ShowDiary.newInstance(showTrueDate(seleDAY),thediary);
+        if(DL.contains(seleDAY)){thediary=diarys.get(DL.indexOf(seleDAY)).Diary;}
+        ShowDiary showdiary=ShowDiary.newInstance(showTrueDate(seleDAY),thediary,diarys.get(dateID).todayKLL());
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
                 R.id.content_main,
@@ -300,22 +312,31 @@ public class  MainActivity extends AppCompatActivity
         int deletTAG=DL.indexOf(seleDAY);
         diarys.remove(deletTAG);//先刪除日記內容
         DL.remove(deletTAG);//再刪除作為索引的日期
-        datelist.remove(deletTAG);
         writAllDiaryDATA();//刪除後將內存檔案重寫
     }
 
     private String showTrueDate(CalendarDay cDay){
         return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
     }
-    public void toFoodList(String foodType,int seleID){
-        foodAndKLL FaK=foodAndKLL.newInstance(foodType,dateID,seleID
-                ,datelist.get(dateID).getfoodnum(foodType,seleID));
+    public void toFoodList(int foodType,int foodID){
+        foodAndKLL FaK=foodAndKLL.newInstance(
+                foodType,//1.餐時段
+                foodID,//2.食物種類
+                getDiarys_Food_Num(foodType),//3.食物數量
+                dateID);//4.日期ID
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
                 R.id.content_main,
                 FaK,
                 FaK.getTag()
         ).commit();
+    }
+    public ArrayList<Integer>getDiarys_Food_Num(int foodType){
+        ArrayList<Integer> food_num_list=new ArrayList<Integer>();
+        for(int i=0;i<food_list.size();i++){
+            food_num_list.add(diarys.get(dateID).getfoodnum(foodType,i));
+        }
+        return food_num_list;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
