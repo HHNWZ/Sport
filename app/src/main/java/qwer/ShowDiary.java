@@ -140,7 +140,6 @@ public class ShowDiary extends Fragment {
         return view;
     }
 
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String Tag,String number) {
         if (mListener != null) {
