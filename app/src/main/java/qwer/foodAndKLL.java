@@ -94,8 +94,8 @@ public class foodAndKLL extends Fragment {
         totalkll.setText("總共"+getTheMealKLL(((MainActivity)getActivity()).food_KLL)+"大卡");
         Button addbtn=(Button)view.findViewById(R.id.ItemAdd);
         Button removebtn=(Button)view.findViewById(R.id.ItemRemove);
-        Button backbtn=(Button)view.findViewById(R.id.OKBtn);
-        Button okbtn=(Button)view.findViewById(R.id.backBtn);
+        Button backbtn=(Button)view.findViewById(R.id.backBtn);
+        Button okbtn=(Button)view.findViewById(R.id.OKBtn);
         foodlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,6 +120,7 @@ public class foodAndKLL extends Fragment {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).deletOneDay(foodType+2);
                 ((MainActivity)getActivity()).ShowMyDiary();
             }
         });

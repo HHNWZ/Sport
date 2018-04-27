@@ -293,14 +293,24 @@ public class  MainActivity extends AppCompatActivity
         ).commit();
     }
     public void addNewDiary(String mydiary){//寫入日記至陣列
-        addOneDiary(seleDAY,mydiary);
+        diarys.get(DL.indexOf(seleDAY)).setDiary(mydiary);
+
         //writAllDiaryDATA();//新增時將日記存取至內存檔案中
         ShowMyDiary();
     }
     public void ShowMyDiary(){//展示日記
-        String thediary=null;
-        if(DL.contains(seleDAY)){thediary=diarys.get(DL.indexOf(seleDAY)).Diary;}
-        ShowDiary showdiary=ShowDiary.newInstance(showTrueDate(seleDAY),thediary,diarys.get(dateID).todayKLL());
+        String theDiary=null;
+        int theKLL=0;
+        if(!DL.contains(seleDAY)){
+            addOneDiary(seleDAY,null);
+        }
+        theDiary=diarys.get(DL.indexOf(seleDAY)).Diary;
+        theKLL=diarys.get(DL.indexOf(seleDAY)).todayKLL();
+        Toast.makeText(this, ""+DL.size()+"、"+diarys.size(), Toast.LENGTH_SHORT).show();
+        ShowDiary showdiary=ShowDiary.newInstance(
+                showTrueDate(seleDAY),
+                theDiary,
+                theKLL);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
                 R.id.content_main,
@@ -308,10 +318,36 @@ public class  MainActivity extends AppCompatActivity
                 showdiary.getTag()
         ).commit();
     }
-    public void deleOneDiary() {
+    public void deletOneDay(int delet_Type){//0.刪除整天；1.只刪除日記；2/3/4.只刪除早/中/晚餐
         int deletTAG=DL.indexOf(seleDAY);
-        diarys.remove(deletTAG);//先刪除日記內容
-        DL.remove(deletTAG);//再刪除作為索引的日期
+        if(delet_Type==0){//整天
+            diarys.remove(deletTAG);//先刪除日記內容
+            DL.remove(deletTAG);//再刪除作為索引的日期
+
+            Toast.makeText(this, "XXXXXXX", Toast.LENGTH_SHORT).show();
+        }else {//0時完全刪除一筆資料
+            switch (delet_Type) {//除此之外要先判定當天是否還有其他資料才能刪除日期
+                case 1://日記
+                    diarys.get(deletTAG).removeDiary();
+                    break;
+                case 2://早餐
+                    diarys.get(deletTAG).removeKLL(0);
+                    break;
+                case 3://午餐
+                    diarys.get(deletTAG).removeKLL(1);
+                    break;
+                case 4://晚餐
+                    diarys.get(deletTAG).removeKLL(2);
+                    break;
+                case 5://額外檢查點
+                    break;
+            }
+            if (diarys.get(deletTAG).todayKLL() == 0 && diarys.get(deletTAG).DiaryisNull()) {
+                Toast.makeText(this, "OOOOOOO"+deletTAG, Toast.LENGTH_SHORT).show();
+                diarys.remove(deletTAG);//先刪除日記內容
+                DL.remove(deletTAG);//再刪除作為索引的日期
+            }
+        }
         writAllDiaryDATA();//刪除後將內存檔案重寫
     }
 
@@ -331,7 +367,7 @@ public class  MainActivity extends AppCompatActivity
                 FaK.getTag()
         ).commit();
     }
-    public ArrayList<Integer>getDiarys_Food_Num(int foodType){
+    public ArrayList<Integer> getDiarys_Food_Num(int foodType){
         ArrayList<Integer> food_num_list=new ArrayList<Integer>();
         for(int i=0;i<food_list.size();i++){
             food_num_list.add(diarys.get(dateID).getfoodnum(foodType,i));

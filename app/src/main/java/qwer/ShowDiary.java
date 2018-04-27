@@ -112,7 +112,7 @@ public class ShowDiary extends Fragment {
             @Override
             public void onClick(View v) {
                 if(todayDiary!=null){
-                    ((MainActivity)getActivity()).deleOneDiary();
+                    ((MainActivity)getActivity()).deletOneDay(1);
                 }
                 ((MainActivity)getActivity()).toAddDiary(todayDiary);
             }
@@ -120,7 +120,7 @@ public class ShowDiary extends Fragment {
         deletbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).deleOneDiary();
+                ((MainActivity)getActivity()).deletOneDay(0);
                 Toast.makeText(getActivity(), "已刪除今日紀錄", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).ShowMyDiary();
             }
@@ -129,6 +129,7 @@ public class ShowDiary extends Fragment {
         okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((MainActivity)getActivity()).deletOneDay(5);
                 ((MainActivity)getActivity()).writAllDiaryDATA();
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()

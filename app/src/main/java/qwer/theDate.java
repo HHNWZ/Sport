@@ -41,7 +41,27 @@ public class theDate {
         }
         return countKLL;
     }
+    public void removeKLL(int Food_Type){
+        for(int i=0;i<9;i++){
+            this.eated[Food_Type][i]=0;
+        }
+    }
+    public void removeDiary(){
+        this.Diary=null;
+    }
     public String getDiary(){
         return this.Diary;
+    }
+
+    public void setDiary(String mydiary) {
+        this.Diary=mydiary;
+    }
+
+    public boolean DiaryisNull() {
+        if(this.Diary==null){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
