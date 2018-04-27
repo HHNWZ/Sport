@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -128,7 +127,7 @@ public class  MainActivity extends AppCompatActivity
         int num=spref.getInt("DiaryNum",0);
         //Toast.makeText(this, DATAsize, Toast.LENGTH_SHORT).show();
         if(num==0) {//驗證檔案內存在日記資料
-            Toast.makeText(this, "目前尚無日記", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "目前尚無日記", Toast.LENGTH_SHORT).show();
         }else{
             DL.clear();
             diarys.clear();
@@ -306,7 +305,7 @@ public class  MainActivity extends AppCompatActivity
         }
         theDiary=diarys.get(DL.indexOf(seleDAY)).Diary;
         theKLL=diarys.get(DL.indexOf(seleDAY)).todayKLL();
-        Toast.makeText(this, ""+DL.size()+"、"+diarys.size(), Toast.LENGTH_SHORT).show();
+
         ShowDiary showdiary=ShowDiary.newInstance(
                 showTrueDate(seleDAY),
                 theDiary,
@@ -323,8 +322,6 @@ public class  MainActivity extends AppCompatActivity
         if(delet_Type==0){//整天
             diarys.remove(deletTAG);//先刪除日記內容
             DL.remove(deletTAG);//再刪除作為索引的日期
-
-            Toast.makeText(this, "XXXXXXX", Toast.LENGTH_SHORT).show();
         }else {//0時完全刪除一筆資料
             switch (delet_Type) {//除此之外要先判定當天是否還有其他資料才能刪除日期
                 case 1://日記
@@ -343,7 +340,6 @@ public class  MainActivity extends AppCompatActivity
                     break;
             }
             if (diarys.get(deletTAG).todayKLL() == 0 && diarys.get(deletTAG).DiaryisNull()) {
-                Toast.makeText(this, "OOOOOOO"+deletTAG, Toast.LENGTH_SHORT).show();
                 diarys.remove(deletTAG);//先刪除日記內容
                 DL.remove(deletTAG);//再刪除作為索引的日期
             }
