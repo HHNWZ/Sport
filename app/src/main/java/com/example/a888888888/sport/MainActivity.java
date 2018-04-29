@@ -128,6 +128,7 @@ public class  MainActivity extends AppCompatActivity
         //Toast.makeText(this, DATAsize, Toast.LENGTH_SHORT).show();
         if(num==0) {//驗證檔案內存在日記資料
             //Toast.makeText(this, "目前尚無日記", Toast.LENGTH_SHORT).show();
+
         }else{
             DL.clear();
             diarys.clear();
