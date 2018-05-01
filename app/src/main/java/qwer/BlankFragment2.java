@@ -1,6 +1,7 @@
 package qwer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -79,9 +80,6 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
         TextView test=(TextView)view.findViewById(R.id.testText);
-        if(((MainActivity)getActivity()).DL.size()>0){
-            test.setText("已撰寫日記："+turnDateList(((MainActivity)getActivity()).DL));
-        }
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.MONDAY)
@@ -89,7 +87,13 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
                 .setMaximumDate(CalendarDay.from(2100,12,31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)
                 .commit();
+        materialCalendarView.setSelectionColor(Color.parseColor("#00BCD4"));
         materialCalendarView.setDateSelected(((MainActivity)getActivity()).seleDAY,true);//預設選擇今天
+        if(((MainActivity)getActivity()).DL.size()>0) {
+            test.setText("已撰寫日記："+turnDateList(((MainActivity)getActivity()).DL));
+            materialCalendarView.addDecorator(new EventDecorator(Color.RED,
+                    ((MainActivity)getActivity()).DL));
+        }
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
