@@ -171,7 +171,7 @@
                 android:id="@+id/button_of_aerobic_exercise_invitation_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="邀請本地朋友"
+                android:text="邀請本地朋友1"
                 android:layout_weight="1"/>
         </LinearLayout>
 
