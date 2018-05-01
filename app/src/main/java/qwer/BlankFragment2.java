@@ -94,6 +94,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
             materialCalendarView.addDecorator(new EventDecorator(Color.RED,
                     ((MainActivity)getActivity()).DL));
         }
+
         materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
