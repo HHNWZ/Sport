@@ -70,15 +70,7 @@
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/button_of_aerobic_exercise_invitation_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="22dp"
-            android:layout_marginEnd="41dp"
-            android:text="確認" />
+
 
         <TextView
             android:id="@+id/start_time_of_invitation_for_aerobic_exercise"
@@ -163,7 +155,25 @@
             android:text=""
             android:textSize="20sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
 
+            <Button
+                android:id="@+id/butt_of_aerobic_exercise_invitation_social_media_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="邀請社交媒體朋友"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/button_of_aerobic_exercise_invitation_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="邀請本地朋友1"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
 
 

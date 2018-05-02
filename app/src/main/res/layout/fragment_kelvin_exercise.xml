@@ -174,16 +174,35 @@
 
         />
 
-    <Button
-        android:id="@+id/button_of_invitation"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="25dp"
-        android:text="邀請朋友運動"
-        android:textSize="10dp" />
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/button_of_sports_monitoring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="運動監控"
+            android:textSize="10dp"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/button_of_task_execution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任務執行"
+            android:textSize="10dp"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/button_of_invitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邀請朋友運動"
+            android:textSize="10dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 
 
 </RelativeLayout>
