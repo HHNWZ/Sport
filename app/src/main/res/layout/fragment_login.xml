@@ -6,6 +6,7 @@
     tools:context="com.example.a888888888.sport.Login"
     android:orientation="vertical"
     android:gravity="center"
+    android:clickable="true"
     android:layout_marginTop="55dp"
     >
 
