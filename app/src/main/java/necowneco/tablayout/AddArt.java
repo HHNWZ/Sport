@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 
@@ -27,10 +28,19 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+    private static final String ARG_PARAM4 = "param4";
+    private static final String ARG_PARAM5 = "param5";
+    private static final String ARG_PARAM6 = "param6";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String nowuser;
+    private String addType;
+    private int theID;
+    private String theTitle;
+    private String theClass;
+    private String theCon;
+
 
     private OnFragmentInteractionListener mListener;
     public AddArt() {
@@ -41,16 +51,25 @@ public class AddArt extends Fragment implements View.OnTouchListener {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
+     *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AddArt.
+     * @param param3 Parameter 3.
+     * @param param4 Parameter 4.
+     * @param param5 Parameter 5.
+     * @param param6 Parameter 6.   @return A new instance of fragment AddArt.
      */
     // TODO: Rename and change types and number of parameters
-    public static AddArt newInstance(String param1, String param2) {
+    public static AddArt newInstance(String param1, String param2, int param3, String param4, String param5,String param6 ) {
         AddArt fragment = new AddArt();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM3, param3);
+        args.putString(ARG_PARAM4, param4);
+        args.putString(ARG_PARAM5, param5);
+        args.putString(ARG_PARAM6, param6);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,8 +78,12 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            nowuser = getArguments().getString(ARG_PARAM1);
+            addType = getArguments().getString(ARG_PARAM2);
+            theID = getArguments().getInt(ARG_PARAM3);
+            theTitle = getArguments().getString(ARG_PARAM4);
+            theClass = getArguments().getString(ARG_PARAM5);
+            theCon = getArguments().getString(ARG_PARAM6);
         }
     }
 
@@ -74,34 +97,45 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
+        final TextView at=(TextView)view.findViewById(R.id.theAddType);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
-        final String nowuser=mParam1;
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 SportList);
         spinner.setAdapter(sportlist);
+        if(addType=="編輯"){
+            at.setText(addType+"貼文");
+            ct.setText(theTitle);
+            int ci;
+            for(ci=0;theClass!=SportList[ci];ci++){}
+            spinner.setSelection(ci);
+            cc.setText(theCon);
+        }
         submitArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
-                ((habaActivity) getActivity()).addartDATA(
-                        ct.getText().toString(),
-                        spinner.getSelectedItem().toString(),
-                        cc.getText().toString()
-                );
-
-                /*getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.haba,new theArt(),null)
-                        .addToBackStack(null)
-                        .commit();*/
+                if(addType=="新增"){
+                    ((habaActivity) getActivity()).addartDATA(
+                            ct.getText().toString(),
+                            spinner.getSelectedItem().toString(),
+                            cc.getText().toString()
+                    );
+                }else{//編輯
+                    ((habaActivity)getActivity()).reSetArtDATA(
+                            theID,ct.getText().toString(),
+                            spinner.getSelectedItem().toString(),
+                            cc.getText().toString()
+                    );
+                }
             }
         });
 
         // Inflate the layout for this fragment
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
 

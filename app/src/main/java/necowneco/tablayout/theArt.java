@@ -116,10 +116,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
         final Button tores=(Button)view.findViewById(R.id.toRes);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
+        final Button readdBtn=(Button)view.findViewById(R.id.ReAddBtn);
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
         if(mNowUser==mAut) {
             thedeletBtn.setVisibility(View.VISIBLE);
+            readdBtn.setVisibility(View.VISIBLE);
         }
         theartTitle.setText(mTitle);
         theartAut.setText("貼文作者："+mAut);
@@ -165,6 +167,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 ((habaActivity) getActivity()).deletartDATA(mTarID);
+            }
+        });
+        readdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity)getActivity()).reAddArtDATA(mTarID,mTitle,mType,mCon);
             }
         });
         // Inflate the layout for this fragment

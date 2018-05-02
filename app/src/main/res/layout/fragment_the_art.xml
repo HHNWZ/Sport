@@ -45,6 +45,13 @@
                 android:layout_weight="1"
                 android:text="刪除此貼文"
                 android:visibility="gone"/>
+            <Button
+                android:id="@+id/ReAddBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="編輯此貼文"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <LinearLayout

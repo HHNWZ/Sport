@@ -132,7 +132,7 @@ public class habaActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddArt addart=AddArt.newInstance(nowuser,"param2");
+                AddArt addart=AddArt.newInstance(nowuser, "新增",artID.size(),null,null,null);
                 FragmentManager manager=getSupportFragmentManager();
                 manager.beginTransaction().replace(
                         R.id.haba,
@@ -149,6 +149,21 @@ public class habaActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+    }
+    public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){
+        AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                addart,
+                addart.getTag()
+        ).commit();
+    }
+    public void reSetArtDATA(int theartID,String theTitle, String theClass,String  theCon){
+        artTitle.set(theartID,theTitle);
+        artClass.set(theartID,theClass);
+        artCon.set(theartID,theCon);
+        toArtcon(theartID);
     }
     public void testfunction(){
         Toast.makeText(this, "嘎啦", Toast.LENGTH_SHORT).show();
