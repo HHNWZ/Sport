@@ -96,6 +96,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
+
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
         final TextView at=(TextView)view.findViewById(R.id.theAddType);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
