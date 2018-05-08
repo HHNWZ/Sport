@@ -2,7 +2,6 @@ package com.example.a888888888.sport;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -23,8 +22,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import cz.msebera.android.httpclient.HttpEntity;
@@ -37,7 +37,6 @@ import cz.msebera.android.httpclient.client.entity.UrlEncodedFormEntity;
 import cz.msebera.android.httpclient.client.methods.HttpPost;
 import cz.msebera.android.httpclient.cookie.Cookie;
 import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
-import cz.msebera.android.httpclient.message.BasicNameValuePair;
 import cz.msebera.android.httpclient.protocol.HTTP;
 import cz.msebera.android.httpclient.util.EntityUtils;
 
@@ -103,13 +102,13 @@ public class Login extends Fragment {
     com.android.volley.RequestQueue requestQueue;
     private void getData() {
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {
+        StringRequest jsonObjectRequest = new StringRequest
+                (Request.Method.POST,showUri, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
+                    public void onResponse(String response) {
                         try {
-                            JSONArray data = response.getJSONArray("data");
+                            JSONObject jsonObject= new JSONObject(response.toString());
+                            JSONArray data = jsonObject.getJSONArray("data");
                             JSONObject jasondata;
                             //這邊要和上面json的名稱一樣
                             //下邊是把全部資料都印出來
@@ -130,7 +129,7 @@ public class Login extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(), "登入失敗，請重新輸入", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "登入失敗，請重新輸入", Toast.LENGTH_SHORT).show();//傳資料回來在這裡
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -138,8 +137,19 @@ public class Login extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         System.out.append(error.getMessage());
                     }
-                });
-        Toast.makeText(getActivity(), "2 "+PHPSESSID, Toast.LENGTH_SHORT).show();
+                }
+
+                )
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("login", login1.getText().toString());
+                return params;
+            }
+
+        };
         requestQueue.add(jsonObjectRequest);
     }
     @Override
@@ -151,32 +161,15 @@ public class Login extends Fragment {
         login2 = (EditText)view.findViewById(R.id.editText2);
         Button login = (Button) view.findViewById(R.id.button18);
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable(){
-
-                    @Override
-                    public void run() {
-                        Looper.prepare();
-                        try {
-                            List<NameValuePair> params = new ArrayList<NameValuePair>();
-                            params.add(new BasicNameValuePair("login","aaa"));
-                            executeRequest(params);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        Looper.loop();
-                    }}).start();
                 getData();
             }
         });
         
         return view;
     }
-
-
 
     public String executeRequest( List<NameValuePair> params) {
         String ret = "none";

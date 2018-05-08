@@ -5,9 +5,6 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
-
     tools:context="com.example.a888888888.sport.MainActivity">
 
 
@@ -129,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView6"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="40dp"
             android:layout_toEndOf="@+id/button2"
             android:layout_weight="1"
             android:background="@mipmap/rank1"
