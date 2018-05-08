@@ -112,6 +112,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             spinner.setSelection(ci);
             cc.setText(theCon);
         }
+
         submitArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
