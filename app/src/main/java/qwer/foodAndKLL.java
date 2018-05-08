@@ -106,15 +106,18 @@ public class foodAndKLL extends Fragment {
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).diarys.get(seleDate).addEated(foodType,foodID,1);
-                ((MainActivity)getActivity()).toFoodList(foodType,foodID);
+                ((MainActivity) getActivity()).diarys.get(seleDate).addEated(foodType, foodID, 1);
+                ((MainActivity) getActivity()).toFoodList(foodType, foodID);
             }
+
         });
         removebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)getActivity()).diarys.get(seleDate).addEated(foodType,foodID,-1);
-                ((MainActivity)getActivity()).toFoodList(foodType,foodID);
+                if(((MainActivity)getActivity()).diarys.get(seleDate).getEated(foodType,foodID)>0) {
+                    ((MainActivity) getActivity()).diarys.get(seleDate).addEated(foodType, foodID, -1);
+                    ((MainActivity) getActivity()).toFoodList(foodType, foodID);
+                }
             }
         });
         backbtn.setOnClickListener(new View.OnClickListener() {

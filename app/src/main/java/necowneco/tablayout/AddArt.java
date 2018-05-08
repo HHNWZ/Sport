@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -96,7 +97,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
-
+        final Button finishbtn=(Button)view.findViewById(R.id.finidhBTN);
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
         final TextView at=(TextView)view.findViewById(R.id.theAddType);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
@@ -113,7 +114,13 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             spinner.setSelection(ci);
             cc.setText(theCon);
         }
-
+        finishbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+            }
+        });
         submitArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

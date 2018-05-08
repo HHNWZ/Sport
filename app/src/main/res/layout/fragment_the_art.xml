@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,10 +16,15 @@
         android:background="#FFFFFF" />
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+
 
 
         <LinearLayout
@@ -30,7 +36,7 @@
                 android:id="@+id/theTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="貼文標題"
+                android:text="【類別】貼文標題"
                 android:textColor="#000000"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -52,7 +58,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="運動類別"
-                    android:textColor="#000000"/>
+                    android:textColor="#000000"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/theAut"
@@ -94,8 +101,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="加載內容中"
             android:textColor="#000000"
             android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/theIMG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/theCon"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sheng" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,11 +135,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/buttonshape"
-                android:text="刪除此貼文"
+                android:text="變更貼文"
                 android:visibility="gone" />
 
         </LinearLayout>
 
     </LinearLayout>
+
+</ScrollView>
 
 </FrameLayout>
