@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         app:srcCompat="@android:color/white" />
     <android.support.v7.widget.Toolbar
-        android:background="#000000"
+        android:background="#323d4d"
         android:id="@+id/toolbar"
         android:minHeight="?actionBarSize"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:layout_marginTop="11dp"
         android:gravity="center"
         android:text="BMI檢測工具"
-        android:textColor="#ffffff"
+        android:textColor="#73c4d9"
         android:textSize="24dp" />
 
     <TextView
@@ -95,10 +95,10 @@
         android:layout_alignEnd="@+id/view"
         android:layout_below="@+id/textView20"
         android:layout_marginEnd="14dp"
-        android:background="#000000"
+        android:background="#323d4d"
         android:gravity="center"
         android:text="送出"
-        android:textColor="#ffffff" />
+        android:textColor="#73c4d9" />
 
     <View
         android:id="@+id/view"
@@ -247,7 +247,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="#00000000"
+            android:background="#73c4d9"
             android:scaleType="fitXY"
             android:src="@drawable/qwerz1" />
 
@@ -276,7 +276,7 @@
             android:layout_weight="5"
             android:background="#00000000"
             android:scaleType="fitXY"
-            android:src="@drawable/qwerc" />
+            android:src="@drawable/qwerv" />
 
     </LinearLayout>
 

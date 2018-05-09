@@ -34,8 +34,8 @@
                 android:layout_alignParentTop="true"
                 android:text=" 標題"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="#000000"
-                android:textSize="20dp" />
+                android:textColor="#323d4d"
+                android:textSize="25dp" />
 
         </LinearLayout>
 
@@ -50,7 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/myAut"
-            android:text=" 部分內容" />
+            android:text=" 部分內容"
+            android:textColor="#73c4d9"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,7 +77,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.01"
-                android:text="作者" />
+                android:text="作者"
+                android:textColor="#323d4d"
+                />
 
             <TextView
                 android:id="@+id/myAut"
@@ -83,7 +87,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/myTitle"
-                android:text=" 作者" />
+                android:text=" 作者"
+                android:textColor="#73c4d9"
+                />
 
             <TextView
                 android:id="@+id/textView52"
@@ -96,13 +102,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text=" 讚數" />
+                android:text=" 讚數"
+
+                />
 
             <TextView
                 android:id="@+id/textView53"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2" />
+                android:layout_weight="0.2"
+                android:textColor="#73c4d9"
+                />
 
             <TextView
                 android:id="@+id/myResnum"
@@ -117,7 +127,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/myResnum"
                 android:gravity="center_horizontal"
-                android:text=" 則回應" />
+                android:text=" 則回應"
+                android:textColor="#73c4d9"
+                />
 
             <TextView
                 android:id="@+id/textView54"
