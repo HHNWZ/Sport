@@ -70,6 +70,8 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
 
     public int aerobic_exercise_minute;
     public InputMethodManager imm_of_aerobic_exercise_invitation;
+    public Button button_of_aerobic_exercise_social_media_friends;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -213,6 +215,26 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
 
                     }
                 }
+
+            }
+
+
+        });
+        button_of_aerobic_exercise_social_media_friends=(Button)view.findViewById(R.id.button_of_aerobic_exercise_invitation_social_media_friends);
+        button_of_aerobic_exercise_social_media_friends.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:有氧運動\n時間:"+edit_text_of_aerobic_exercise_minute.getText().toString()+"分鐘\n開始日期:"+start_year_of_kelvin_aerobic_exercise_invitation+"年"+start_month_of_kelvin_aerobic_exercise_invitation+"月"+start_day_of_kelvin_aerobic_exercise_invitation+"號\n開始時間:"+start_hour_of_kelvin_aerobic_exercise_invitation+":"+start_minute_of_kelvin_aerobic_exercise_invitation+"\n結束日期:"+end_year_of_kelvin_aerobic_exercise_invitation+"年"+end_month_of_kelvin_aerobic_exercise_invitation+"月"+end_day_of_kelvin_aerobic_exercise_invitation+"號\n結束時間"+end_hour_of_kelvin_aerobic_exercise_invitation+":"+end_minute_of_kelvin_aerobic_exercise_invitation);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.app_name)));
+
+
+
+
 
             }
 

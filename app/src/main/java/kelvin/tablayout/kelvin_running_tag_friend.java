@@ -32,10 +32,20 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+    private static final String ARG_PARAM4 = "param4";
+    private static final String ARG_PARAM5 = "param5";
+    private static final String ARG_PARAM6 = "param6";
+    private static final String ARG_PARAM7 = "param7";
+    private static final String ARG_PARAM8 = "param8";
+    private static final String ARG_PARAM9 = "param9";
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String mParam3;
     private Toolbar toolbar;
 
     private RecyclerView mRecyclerView;
@@ -83,7 +93,9 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         final View view = inflater.inflate(R.layout.fragment_kelvin_running_tag_friend, null);
+        Toast.makeText(getActivity(), mParam1, Toast.LENGTH_LONG).show();
         view.setOnTouchListener(this);
         List<Student> rowListItem = getAllItemList();
         btnSelection = (Button) view.findViewById(R.id.btnShow);
@@ -186,4 +198,6 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
 
         return allItems;
     }
+
+
 }

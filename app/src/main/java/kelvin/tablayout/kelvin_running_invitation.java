@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -70,6 +71,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public InputMethodManager imm_of_running_invitation;
     public Toast toast;
     public Button button_of_running_invitation_confirm;
+    public Button button_of_running_invitation_social_media_friends;
 
 
 
@@ -228,14 +230,18 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
                                 newFragment.setTargetFragment(kelvin_running_invitation.this, start_time_data_of_running_invitation);
                                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                             }else{
-                                toast=Toast.makeText(getActivity(), "距離是:"+distance_of_running+"時間是:"+start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT);
-                                toast.show();
-
-                                getActivity().getSupportFragmentManager()
+                                //toast=Toast.makeText(getActivity(), "距離是:"+distance_of_running+"時間是:"+start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation, Toast.LENGTH_SHORT);
+                                //toast.show();
+                                kelvin_running_tag_friend kelvin_running_tag_friend1 = kelvin_running_tag_friend.newInstance("一起運動吧！\n運動種類:跑步\n距離:"+edit_text_on_distance.getText().toString()+"米\n開始日期:"+start_year_of_kelvin_running_invitation+"年"+start_month_of_kelvin_running_invitation+"月"+start_day_of_kelvin_running_invitation+"號\n開始時間:"+start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation+"\n結束日期:"+end_year_of_kelvin_running_invitation+"年"+end_month_of_kelvin_running_invitation+"月"+end_day_of_kelvin_running_invitation+"號\n結束時間"+end_hour_of_kelvin_running_invitation+":"+end_minute_of_kelvin_running_invitation,"");
+                                FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                                transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                                /*getActivity().getSupportFragmentManager()
                                         .beginTransaction()
                                         .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
                                         .addToBackStack(null)
-                                        .commit();
+                                        .commit();*/
                             }
 
 
@@ -247,6 +253,30 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
 
         });
+
+        button_of_running_invitation_social_media_friends=(Button)view.findViewById(R.id.button_of_running_invitation_social_media_friends);
+        button_of_running_invitation_social_media_friends.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:跑步\n距離:"+edit_text_on_distance.getText().toString()+"米\n開始日期:"+start_year_of_kelvin_running_invitation+"年"+start_month_of_kelvin_running_invitation+"月"+start_day_of_kelvin_running_invitation+"號\n開始時間:"+start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation+"\n結束日期:"+end_year_of_kelvin_running_invitation+"年"+end_month_of_kelvin_running_invitation+"月"+end_day_of_kelvin_running_invitation+"號\n結束時間"+end_hour_of_kelvin_running_invitation+":"+end_minute_of_kelvin_running_invitation);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.app_name)));
+
+
+
+
+
+            }
+
+
+        });
+
+
+
 
 
         return view;

@@ -82,6 +82,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
 
     public Toast toast;
     public Button button_of_walking_invitation_confirm;
+    public Button button_of_walking_invitation_social_media_friends;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -214,7 +215,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                             newFragment.setTargetFragment(kelvin_walking_invitation.this,start_time_data_of_walking_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            toast=Toast.makeText(getActivity(), "步數:"+walking_set_count+"時間是:"+start_hour_of_kelvin_walking_invitation+":"+start_minute_of_kelvin_walking_invitation, Toast.LENGTH_SHORT);
+                            toast=Toast.makeText(getActivity(), "步數:"+walking_set_count+"時間是:"+mDecimalFormat.format(start_hour_int_of_kelvin_walking_invitation)+":"+mDecimalFormat.format(start_minute_int_of_kelvin_walking_invitation), Toast.LENGTH_SHORT);
                             toast.show();
 
                             getActivity().getSupportFragmentManager()
@@ -228,6 +229,26 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
 
                     }
                 }
+
+            }
+
+
+        });
+        button_of_walking_invitation_social_media_friends=(Button)view.findViewById(R.id.button_of_walking_invitation_social_media_friends);
+        button_of_walking_invitation_social_media_friends.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:步行\n步數:"+edit_text_of_walking_set_count.getText().toString()+"步\n開始日期:"+start_year_of_kelvin_walking_invitation+"年"+start_month_of_kelvin_walking_invitation+"月"+start_day_of_kelvin_walking_invitation+"號\n開始時間:"+start_hour_of_kelvin_walking_invitation+":"+start_minute_of_kelvin_walking_invitation+"\n結束日期:"+end_year_of_kelvin_walking_invitation+"年"+end_month_of_kelvin_walking_invitation+"月"+end_day_of_kelvin_walking_invitation+"號\n結束時間"+end_hour_of_kelvin_walking_invitation+":"+end_minute_of_kelvin_walking_invitation);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.app_name)));
+
+
+
+
 
             }
 

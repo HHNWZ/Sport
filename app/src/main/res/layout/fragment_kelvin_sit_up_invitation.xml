@@ -161,7 +161,7 @@
             android:layout_alignParentStart="true">
 
             <Button
-                android:id="@+id/butt_of_sit_up_invitation_social_media_friends"
+                android:id="@+id/button_of_sit_up_invitation_social_media_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="邀請社交媒體朋友"
