@@ -1,6 +1,8 @@
 package necowneco.tablayout;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -116,23 +119,17 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
         final Button tores=(Button)view.findViewById(R.id.toRes);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
-        final Button readdBtn=(Button)view.findViewById(R.id.ReAddBtn);
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
         if(mNowUser==mAut) {
             thedeletBtn.setVisibility(View.VISIBLE);
-            readdBtn.setVisibility(View.VISIBLE);
         }
-        theartTitle.setText(mTitle);
+        theartTitle.setText("【"+mType+"】"+mTitle);
         theartAut.setText("貼文作者："+mAut);
         theartClass.setText("貼文類別："+mType);
         theartCon.setText(mCon);
         koreiine.setText(mGood+"個讚");
-        if(mRes.size()>1) {
-            tores.setText("最新留言："+mRes.get(mRes.size()-1));
-        }else{
-            tores.setText("目前尚無留言");
-        }
+        tores.setText("留言");
         koreiine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,13 +163,28 @@ public class theArt extends Fragment implements View.OnTouchListener {
         thedeletBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((habaActivity) getActivity()).deletartDATA(mTarID);
-            }
-        });
-        readdBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((habaActivity)getActivity()).reAddArtDATA(mTarID,mTitle,mType,mCon);
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("變更此貼文")
+                        .setMessage("您要：")
+                        .setPositiveButton("刪除", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((habaActivity) getActivity()).deletartDATA(mTarID);
+                            }
+                        })
+                        .setNegativeButton("修改", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ((habaActivity)getActivity()).reAddArtDATA(mTarID,mTitle,mType,mCon);
+                            }
+                        })
+                        .setNeutralButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getActivity(), "取消操作", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
             }
         });
         // Inflate the layout for this fragment

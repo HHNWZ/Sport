@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +33,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     private static final String ARG_PARAM4 = "param4";
     private static final String ARG_PARAM5 = "param5";
     private static final String ARG_PARAM6 = "param6";
-
     // TODO: Rename and change types of parameters
     private String nowuser;
     private String addType;
@@ -96,6 +96,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
+        final Button finishbtn=(Button)view.findViewById(R.id.finidhBTN);
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
         final TextView at=(TextView)view.findViewById(R.id.theAddType);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
@@ -112,6 +113,13 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             spinner.setSelection(ci);
             cc.setText(theCon);
         }
+        finishbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+            }
+        });
         submitArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +142,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         return view;
     }
-
 
     // TODO: Rename method, update argument and hook method into UI event
 

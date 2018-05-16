@@ -95,12 +95,13 @@
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button"
-            android:layout_alignBottom="@+id/button"
+            android:layout_alignTop="@+id/button1"
             android:layout_toEndOf="@+id/button1"
             android:layout_weight="1"
-            android:background="@mipmap/eat1"
-            />
+            android:background="#323d4d"
+            android:drawableTop="@drawable/food1"
+            android:text="飲食控制"
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/TextView1"
@@ -125,12 +126,13 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView6"
-            android:layout_marginBottom="40dp"
+            android:layout_alignTop="@+id/button2"
             android:layout_toEndOf="@+id/button2"
             android:layout_weight="1"
-            android:background="@mipmap/rank1"
-            />
+            android:background="#323d4d"
+            android:drawableTop="@drawable/rank1"
+            android:text="排行榜"
+            android:textColor="#ffffff" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -145,15 +147,15 @@
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="wrap_content"
+            android:layout_width="86dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button"
-            android:layout_alignBottom="@+id/button"
-            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/button2"
             android:layout_toEndOf="@+id/button"
             android:layout_weight="1"
-            android:background="@mipmap/stream1"
-            />
+            android:background="#323d4d"
+            android:drawableTop="@drawable/stream1"
+            android:text="直播"
+            android:textColor="#ffffff" />
 
         <TextView
             android:id="@+id/textView"
@@ -167,12 +169,14 @@
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button2"
-            android:layout_alignBottom="@+id/button2"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_marginBottom="211dp"
             android:layout_weight="1"
-            android:background="@mipmap/write1"
-            />
+            android:background="#323d4d"
+            android:drawableTop="@drawable/write1"
+            android:text="經驗交流"
+            android:textColor="#ffffff" />
     </RelativeLayout>
 
     <LinearLayout
