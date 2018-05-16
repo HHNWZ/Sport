@@ -12,11 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -70,37 +73,38 @@ public class Userdata extends Fragment implements View.OnTouchListener{
         fragment.setArguments(args);
         return fragment;
     }
-    private TextView rundata;
-    private TextView walkdata;
-    private TextView airdata;
-    private TextView pushdata;
-    private TextView sitdata;
+    private TextView name;
+    private TextView sex;
+    private TextView brithday;
+    private TextView telephone;
+    private TextView email;
     private ImageView img;
     com.android.volley.RequestQueue requestQueue;
-    private String showUri = "http://172.30.4.170:1335/test123.php";
+    private String showUri = "http://172.30.4.170:1335/getuserdata.php";
     private void getData() {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {
+
+        StringRequest jsonObjectRequest = new StringRequest
+                (Request.Method.POST,showUri, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
+                    public void onResponse(String response) {
                         try {
-                            JSONArray data = response.getJSONArray("data");
+                            JSONObject jsonObject= new JSONObject(response.toString());
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            JSONObject jasondata;
                             //這邊要和上面json的名稱一樣
                             //下邊是把全部資料都印出來
                             for (int i = 0; i < data.length(); i++) {
-                                JSONObject jasondata = data.getJSONObject(i);
-                                /*ContentValues values = new ContentValues();
-                                values.put("run", jasondata.getString("run"));*/
-                                rundata.setText(jasondata.getString("run"));
-                                walkdata.setText(jasondata.getString("walk"));
-                                airdata.setText(jasondata.getString("air"));
-                                sitdata.setText(jasondata.getString("sit"));
-                                pushdata.setText(jasondata.getString("push"));
+                                jasondata = data.getJSONObject(i);
+                                name.setText(jasondata.getString("name"));
+                                sex.setText(jasondata.getString("性別"));
+                                brithday.setText(jasondata.getString("生日"));
+                                telephone.setText("0"+jasondata.getString("電話"));
+                                email.setText(jasondata.getString("email"));
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(getActivity(), "登入失敗，請重新輸入", Toast.LENGTH_SHORT).show();//傳資料回來在這裡
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -108,7 +112,19 @@ public class Userdata extends Fragment implements View.OnTouchListener{
                     public void onErrorResponse(VolleyError error) {
                         System.out.append(error.getMessage());
                     }
-                });
+                }
+
+                )
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("login",Login.user);
+                return params;
+            }
+
+        };
         requestQueue.add(jsonObjectRequest);
     }
 
@@ -145,11 +161,11 @@ public class Userdata extends Fragment implements View.OnTouchListener{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_userdata, null);
-        rundata =view.findViewById(R.id.textView11);
-        walkdata =view.findViewById(R.id.textView12);
-        airdata =view.findViewById(R.id.textView13);
-        sitdata =view.findViewById(R.id.textView14);
-        pushdata =view.findViewById(R.id.textView15);
+        name =view.findViewById(R.id.textView49);
+        sex =view.findViewById(R.id.textView11);
+        brithday =view.findViewById(R.id.textView12);
+        telephone =view.findViewById(R.id.textView13);
+        email =view.findViewById(R.id.textView14);
         img = (ImageView) view.findViewById(R.id.imageView21);
         view.setOnTouchListener(this);
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());

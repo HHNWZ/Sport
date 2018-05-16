@@ -3,8 +3,8 @@
     <string name="main">No Lonely Health  Interaction</string>
     <string name="Login">登入</string>
     <string name="Home">首頁</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
+    <string name="open">會員資料</string>
+    <string name="close">註冊</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="search_title">搜尋標題</string>
     <string name="search_hint">請輸入關鍵字</string>
@@ -76,5 +76,21 @@
     <string name="value_maximum_and_minimum_of_running_distance">距離不能小於100米和大於5000米</string>
     <string name="login1">帳號：</string>
     <string name="login2">密碼：</string>
-    <string name="hint"><font size="15">請選擇所選取食物</font></string>
+    <string name="desc">Step Count</string>
+    <string name="title1">Today</string>
+    <string name="unit1">Steps</string>
+
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="connect_to_shealth">Connect to Samsung Health</string>
+
+    <string name="notice">Notice</string>
+    <string name="msg_perm_acquired">All permissions should be acquired</string>
+    <string name="msg_conn_not_available">Connection with Samsung Health is not available</string>
+    <string name="msg_req_install">Please install Samsung Health</string>
+    <string name="msg_req_upgrade">Please upgrade Samsung Health</string>
+    <string name="msg_req_enable">Please enable Samsung Health</string>
+    <string name="msg_req_agree">Please agree with Samsung Health policy</string>
+    <string name="msg_req_available">Please make Samsung Health available</string>
 </resources>

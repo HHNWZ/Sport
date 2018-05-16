@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -71,6 +72,7 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
 
     public int sit_up_count;
     public InputMethodManager imm_of_sit_up_invitation;
+    public Button button_of_sit_up_social_media_friends;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -200,20 +202,38 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
                             newFragment.setTargetFragment(kelvin_sit_up_invitation.this, start_time_data_of_sit_up_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            toast=Toast.makeText(getActivity(), "伏地挺身的次數:"+ sit_up_count +"時間是:"+ start_hour_of_kelvin_sit_up_invitation +":"+ start_minute_of_kelvin_sit_up_invitation, Toast.LENGTH_SHORT);
-                            toast.show();
-
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
-                                    .addToBackStack(null)
-                                    .commit();
+                            kelvin_running_tag_friend kelvin_running_tag_friend1 = kelvin_running_tag_friend.newInstance("仰臥起坐","次數",edit_text_of_sit_up_count.getText().toString(),"次",start_year_of_kelvin_sit_up_invitation,start_month_of_kelvin_sit_up_invitation,start_day_of_kelvin_sit_up_invitation,start_hour_of_kelvin_sit_up_invitation,start_minute_of_kelvin_sit_up_invitation,end_year_of_kelvin_sit_up_invitation,end_month_of_kelvin_sit_up_invitation,end_day_of_kelvin_sit_up_invitation,end_hour_of_kelvin_sit_up_invitation,end_minute_of_kelvin_sit_up_invitation);
+                            FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                            transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                         }
 
 
 
                     }
                 }
+
+            }
+
+
+        });
+
+        button_of_sit_up_social_media_friends=(Button)view.findViewById(R.id.button_of_sit_up_invitation_social_media_friends);
+        button_of_sit_up_social_media_friends.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:仰臥起坐\n次數:"+edit_text_of_sit_up_count.getText().toString()+"次\n開始日期:"+start_year_of_kelvin_sit_up_invitation+"年"+start_month_of_kelvin_sit_up_invitation+"月"+start_day_of_kelvin_sit_up_invitation+"號\n開始時間:"+start_hour_of_kelvin_sit_up_invitation+":"+start_minute_of_kelvin_sit_up_invitation+"\n結束日期:"+end_year_of_kelvin_sit_up_invitation+"年"+end_month_of_kelvin_sit_up_invitation+"月"+end_day_of_kelvin_sit_up_invitation+"號\n結束時間"+end_hour_of_kelvin_sit_up_invitation+":"+end_minute_of_kelvin_sit_up_invitation);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.app_name)));
+
+
+
+
 
             }
 

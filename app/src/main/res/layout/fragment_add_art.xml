@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="新增貼文"
+                android:textColor="#323d4d"
                 android:textSize="30sp" />
 
             <TextView
@@ -43,7 +44,9 @@
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="完成" />
+                android:text="完成"
+                android:textColor="#323d4d"
+                />
 
         </LinearLayout>
 
@@ -68,8 +71,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 android:text="貼文標題"
-                android:textColor="#000000"
+                android:textColor="#323d4d"
                 android:textSize="18dp" />
         </LinearLayout>
 
@@ -113,7 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="運動類型"
-                android:textColor="#000000"
+                android:textColor="#323d4d"
+
                 android:textSize="18dp"/>
         </LinearLayout>
 
@@ -139,7 +144,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="貼文內容"
-                android:textColor="#000000"
+                android:textColor="#323d4d"
+
                 android:textSize="18dp" />
         </LinearLayout>
 
@@ -183,8 +189,10 @@
                 android:id="@+id/inputart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/buttonshape"
-                android:text="送出" />
+                android:background="#323d4d"
+                android:text="送出"
+                android:textColor="#73c4d9"
+                />
         </LinearLayout>
 
     </LinearLayout>

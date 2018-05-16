@@ -21,7 +21,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#000000"
+            android:background="#323d4d"
             android:minHeight="?actionBarSize">
 
         </android.support.v7.widget.Toolbar>
@@ -35,7 +35,7 @@
             android:layout_marginTop="11dp"
             android:gravity="center"
             android:text="所需卡路里計算"
-            android:textColor="#ffffff"
+            android:textColor="#73c4d9"
             android:textSize="22dp" />
 
 
@@ -159,8 +159,9 @@
         android:layout_alignBottom="@+id/editText5"
         android:layout_alignEnd="@+id/radioGroup"
         android:layout_marginEnd="11dp"
+        android:background="#323d4d"
         android:text="確定送出"
-        android:textColor="#FFFFFF" />
+        android:textColor="#73c4d9" />
 
         <TextView
             android:id="@+id/textView41"
@@ -284,7 +285,7 @@
                 android:layout_weight="5"
                 android:background="#00000000"
                 android:scaleType="fitXY"
-                android:src="@drawable/qwerc" />
+                android:src="@drawable/qwerv" />
 
         </LinearLayout>
 

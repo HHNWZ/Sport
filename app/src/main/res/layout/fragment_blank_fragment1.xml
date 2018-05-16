@@ -35,6 +35,7 @@
                 android:layout_alignParentTop="true"
                 android:gravity="center"
                 android:text="常見食物熱量"
+                android:textColor="#323d4d"
                 android:textSize="24dp" />
 
             <LinearLayout
@@ -80,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1碗"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -89,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※225(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -147,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1碗"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -156,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※120(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -214,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1杯244g"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -223,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※150(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -281,7 +282,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1片72g"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -290,7 +291,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※140(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -348,7 +349,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1個"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -357,7 +358,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※270(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -415,7 +416,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1條"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -424,7 +425,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※206(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -482,7 +483,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎100g"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -491,7 +492,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※65(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -549,7 +550,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎100g"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -558,7 +559,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※239(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -616,7 +617,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1顆"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -625,7 +626,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※106(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -683,7 +684,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="◎1碗"
-                        android:textColor="#EE7700"
+                        android:textColor="#323d4d"
                         android:textSize="15dp" />
 
                     <TextView
@@ -692,7 +693,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="※50(卡路里)"
-                        android:textColor="#CC00CC"
+                        android:textColor="#73c4d9"
                         android:textSize="15dp" />
                 </LinearLayout>
 

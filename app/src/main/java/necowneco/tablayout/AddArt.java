@@ -33,7 +33,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
     private static final String ARG_PARAM4 = "param4";
     private static final String ARG_PARAM5 = "param5";
     private static final String ARG_PARAM6 = "param6";
-
     // TODO: Rename and change types of parameters
     private String nowuser;
     private String addType;
