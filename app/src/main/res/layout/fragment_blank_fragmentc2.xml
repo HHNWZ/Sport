@@ -159,8 +159,8 @@
         android:layout_alignBottom="@+id/editText5"
         android:layout_alignEnd="@+id/radioGroup"
         android:layout_marginEnd="11dp"
-        android:background="#323d4d"
         android:text="確定送出"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:textColor="#73c4d9" />
 
         <TextView
