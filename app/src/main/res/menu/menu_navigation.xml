@@ -6,6 +6,10 @@
             android:icon="@drawable/ic_menu_send"
             android:title="@string/Login" />
         <item
+            android:id="@+id/reg"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/close" />
+        <item
             android:id="@+id/navItemAbout"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/open" />
