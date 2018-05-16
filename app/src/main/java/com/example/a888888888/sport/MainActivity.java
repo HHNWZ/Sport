@@ -34,6 +34,7 @@ import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
 import qwer.BlankFragment3;
+import qwer.BlankFragmentDay;
 import qwer.BlankFragmentc1;
 import qwer.BlankFragmentc2;
 import qwer.BlankFragmentc3;
@@ -48,7 +49,7 @@ public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener{
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener, BlankFragmentDay.OnFragmentInteractionListener{
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
@@ -318,6 +319,9 @@ public class  MainActivity extends AppCompatActivity
                 showdiary.getTag()
         ).commit();
     }
+    public void qwerDay(){
+
+    }
     public void deletOneDay(int delet_Type){//0.刪除整天；1.只刪除日記；2/3/4.只刪除早/中/晚餐
         int deletTAG=DL.indexOf(seleDAY);
         if(delet_Type==0){//整天
@@ -371,6 +375,19 @@ public class  MainActivity extends AppCompatActivity
         }
         return food_num_list;
     }
+
+    public  void toBFD(String daynum,String daynum1){//按鈕傳值測試
+        BlankFragmentDay blankfragmentday=BlankFragmentDay.newInstance(daynum,daynum1);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                blankfragmentday,
+                blankfragmentday.getTag()
+        ).commit();
+    }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){//當按下左上三條線或顯示工具列

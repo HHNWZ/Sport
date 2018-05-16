@@ -53,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:text="取消" />
 
             <TextView
@@ -65,6 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                 android:text="儲存" />
         </LinearLayout>
     </LinearLayout>

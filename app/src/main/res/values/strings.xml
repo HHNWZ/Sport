@@ -76,4 +76,5 @@
     <string name="value_maximum_and_minimum_of_running_distance">距離不能小於100米和大於5000米</string>
     <string name="login1">帳號：</string>
     <string name="login2">密碼：</string>
+    <string name="hint"><font size="15">請選擇所選取食物</font></string>
 </resources>
