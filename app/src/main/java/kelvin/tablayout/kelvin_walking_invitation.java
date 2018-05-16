@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -215,14 +216,11 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                             newFragment.setTargetFragment(kelvin_walking_invitation.this,start_time_data_of_walking_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            toast=Toast.makeText(getActivity(), "步數:"+walking_set_count+"時間是:"+mDecimalFormat.format(start_hour_int_of_kelvin_walking_invitation)+":"+mDecimalFormat.format(start_minute_int_of_kelvin_walking_invitation), Toast.LENGTH_SHORT);
-                            toast.show();
-
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
-                                    .addToBackStack(null)
-                                    .commit();
+                            kelvin_running_tag_friend kelvin_running_tag_friend1 = kelvin_running_tag_friend.newInstance("步行","步數",edit_text_of_walking_set_count.getText().toString(),"步",start_year_of_kelvin_walking_invitation,start_month_of_kelvin_walking_invitation,start_day_of_kelvin_walking_invitation,start_hour_of_kelvin_walking_invitation,start_minute_of_kelvin_walking_invitation,end_year_of_kelvin_walking_invitation,end_month_of_kelvin_walking_invitation,end_day_of_kelvin_walking_invitation,end_hour_of_kelvin_walking_invitation,end_minute_of_kelvin_walking_invitation);
+                            FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                            transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                         }
 
 

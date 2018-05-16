@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -201,14 +202,19 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
                             newFragment.setTargetFragment(kelvin_aerobic_exercise_invitation.this,start_time_data_of_aerobic_exercise_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            toast=Toast.makeText(getActivity(), "有氧運動執行時間:"+aerobic_exercise_minute+"時間是:"+start_hour_of_kelvin_aerobic_exercise_invitation+":"+start_minute_of_kelvin_aerobic_exercise_invitation, Toast.LENGTH_SHORT);
-                            toast.show();
+                            //toast=Toast.makeText(getActivity(), "有氧運動執行時間:"+aerobic_exercise_minute+"時間是:"+start_hour_of_kelvin_aerobic_exercise_invitation+":"+start_minute_of_kelvin_aerobic_exercise_invitation, Toast.LENGTH_SHORT);
+                            //toast.show();
 
-                            getActivity().getSupportFragmentManager()
+                            /*getActivity().getSupportFragmentManager()
                                     .beginTransaction()
                                     .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
                                     .addToBackStack(null)
-                                    .commit();
+                                    .commit();*/
+                            kelvin_running_tag_friend kelvin_running_tag_friend1 = kelvin_running_tag_friend.newInstance("有氧運動","時間",edit_text_of_aerobic_exercise_minute.getText().toString(),"分鐘",start_year_of_kelvin_aerobic_exercise_invitation,start_month_of_kelvin_aerobic_exercise_invitation,start_day_of_kelvin_aerobic_exercise_invitation,start_hour_of_kelvin_aerobic_exercise_invitation,start_minute_of_kelvin_aerobic_exercise_invitation,end_year_of_kelvin_aerobic_exercise_invitation,end_month_of_kelvin_aerobic_exercise_invitation,end_day_of_kelvin_aerobic_exercise_invitation,end_hour_of_kelvin_aerobic_exercise_invitation,end_minute_of_kelvin_aerobic_exercise_invitation);
+                            FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                            transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
                         }
 
 

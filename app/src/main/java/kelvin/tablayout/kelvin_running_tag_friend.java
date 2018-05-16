@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.Null;
@@ -39,13 +40,31 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
     private static final String ARG_PARAM7 = "param7";
     private static final String ARG_PARAM8 = "param8";
     private static final String ARG_PARAM9 = "param9";
+    private static final String ARG_PARAM10= "param10";
+    private static final String ARG_PARAM11 = "param11";
+    private static final String ARG_PARAM12 = "param12";
+    private static final String ARG_PARAM13 = "param13";
+    private static final String ARG_PARAM14 = "param14";
 
 
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private String mParam3;
+    private String exercise_type;
+    private String exercise_data_count;
+    private String exercise_data;
+    private String exercise_unit;
+    private String start_year_of_invitation;
+    private String start_month_of_invitation;
+    private String start_day_of_invitation;
+    private String start_hour_of_invitation;
+    private String start_minute_of_invitation;
+    private String end_year_of_invitation;
+    private String end_month_of_invitation;
+    private String end_day_of_invitation;
+    private String end_hour_of_invitation;
+    private String end_minute_of_invitation;
+
+
     private Toolbar toolbar;
 
     private RecyclerView mRecyclerView;
@@ -55,6 +74,7 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
     private List<Student> studentList;
 
     private Button btnSelection;
+    private TextView text_view_of_exercise_type,text_view_of_exercise_start_time,text_view_of_exercise_end_time;
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,11 +91,25 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
      * @return A new instance of fragment kelvin_running_tag_friend.
      */
     // TODO: Rename and change types and number of parameters
-    public static kelvin_running_tag_friend newInstance(String param1, String param2) {
+    public static kelvin_running_tag_friend newInstance(String param1, String param2, String param3, String param4, String param5, String param6, String param7, String param8, String param9, String param10, String param11,String param12,String param13,String param14) {
         kelvin_running_tag_friend fragment = new kelvin_running_tag_friend();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
+        args.putString(ARG_PARAM4, param4);
+        args.putString(ARG_PARAM5, param5);
+        args.putString(ARG_PARAM6, param6);
+        args.putString(ARG_PARAM7, param7);
+        args.putString(ARG_PARAM8, param8);
+        args.putString(ARG_PARAM9, param9);
+        args.putString(ARG_PARAM10, param10);
+        args.putString(ARG_PARAM11, param11);
+        args.putString(ARG_PARAM12, param12);
+        args.putString(ARG_PARAM13, param13);
+        args.putString(ARG_PARAM14,param14);
+
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -84,8 +118,21 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            exercise_type=getArguments().getString(ARG_PARAM1);
+            exercise_data_count=getArguments().getString(ARG_PARAM2);
+            exercise_data = getArguments().getString(ARG_PARAM3);
+            exercise_unit=getArguments().getString(ARG_PARAM4);
+            start_year_of_invitation = getArguments().getString(ARG_PARAM5);
+            start_month_of_invitation = getArguments().getString(ARG_PARAM6);
+            start_day_of_invitation = getArguments().getString(ARG_PARAM7);
+            start_hour_of_invitation = getArguments().getString(ARG_PARAM8);
+            start_minute_of_invitation = getArguments().getString(ARG_PARAM9);
+            end_year_of_invitation = getArguments().getString(ARG_PARAM10);
+            end_month_of_invitation = getArguments().getString(ARG_PARAM11);
+            end_day_of_invitation = getArguments().getString(ARG_PARAM12);
+            end_hour_of_invitation = getArguments().getString(ARG_PARAM13);
+            end_minute_of_invitation= getArguments().getString(ARG_PARAM14);
+
         }
     }
 
@@ -95,7 +142,14 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
         // Inflate the layout for this fragment
 
         final View view = inflater.inflate(R.layout.fragment_kelvin_running_tag_friend, null);
-        Toast.makeText(getActivity(), mParam1, Toast.LENGTH_LONG).show();
+        text_view_of_exercise_type=(TextView)view.findViewById(R.id.text_view_of_exercise_type);
+        text_view_of_exercise_start_time=(TextView)view.findViewById(R.id.text_view_of_exercise_start_time);
+        text_view_of_exercise_end_time=(TextView)view.findViewById(R.id.text_view_of_exercise_end_time);
+        text_view_of_exercise_type.setText(exercise_type+":"+exercise_data+exercise_unit);
+        text_view_of_exercise_start_time.setText(start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation);
+        text_view_of_exercise_end_time.setText(end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
+
+        //Toast.makeText(getActivity(), "一起運動吧！\n運動種類:"+exercise_type+"\n"+exercise_data_count+":"+exercise_data+exercise_unit+"\n開始日期:"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號\n開始時間:"+start_hour_of_invitation+":"+start_minute_of_invitation+"\n結束日期:"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號\n結束時間"+end_hour_of_invitation+":"+end_minute_of_invitation, Toast.LENGTH_LONG).show();
         view.setOnTouchListener(this);
         List<Student> rowListItem = getAllItemList();
         btnSelection = (Button) view.findViewById(R.id.btnShow);
