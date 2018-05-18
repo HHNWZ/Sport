@@ -7,7 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.a888888888.sport.MainActivity">
 
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -179,6 +182,7 @@
             android:textColor="#ffffff" />
     </RelativeLayout>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout
         android:id="@+id/content_main"
         android:layout_width="match_parent"
@@ -189,6 +193,7 @@
         >
 
     </LinearLayout>
+
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -198,5 +203,7 @@
         android:layout_gravity="start">
 
     </android.support.design.widget.NavigationView>
+
+
 
 </android.support.v4.widget.DrawerLayout>

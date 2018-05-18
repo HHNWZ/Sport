@@ -2,14 +2,18 @@ package com.example.a888888888.sport;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +55,7 @@ public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener{
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener,SwipeRefreshLayout.OnRefreshListener {
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
@@ -73,6 +77,7 @@ public class  MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
+    SwipeRefreshLayout mSwipeLayout;
     com.android.volley.RequestQueue requestQueue;
 
     public MainActivity() {
@@ -124,6 +129,10 @@ public class  MainActivity extends AppCompatActivity
         };
         requestQueue.add(jsonObjectRequest);
     }
+
+
+
+
     public void addOneDiary(CalendarDay date,String diary){//寫入單筆日記資料
         DL.add(date);
         diarys.add(new theDate(diary));
@@ -165,6 +174,25 @@ public class  MainActivity extends AppCompatActivity
             //Toast.makeText(this, "資料量："+DATAsize, Toast.LENGTH_SHORT).show();
         }
     }
+    @Override
+    public void onRefresh() {
+
+        // 模仿更新 ( 2秒
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable(){
+
+            @Override
+            public void run() {
+
+                // 結束更新動畫
+                mSwipeLayout.setRefreshing(false);
+                Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+                Toast.makeText(MainActivity.this, "Refresh Success", Toast.LENGTH_SHORT).show();
+
+            }}, 2000);
+    }
     public void writAllDiaryDATA(){//將當前日記陣列存入檔案
         //Toast.makeText(this, "日期數量："+DL.size()+"，日記數量："+diarys.size(), Toast.LENGTH_SHORT).show();
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
@@ -205,7 +233,26 @@ public class  MainActivity extends AppCompatActivity
         //讓 ActionBar 中的返回箭號置換成 Drawer 的三條線圖示。並且把這個觸發器指定給 layDrawer 。
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        MenuItem menu_login = menu.findItem(R.id.Login);
+        MenuItem menu_user = menu.findItem(R.id.navItemAbout);
+        if(Login.user !=null)
+        {
+            menu_login.setTitle("登出");
+            menu_user.setVisible(true);
+        }
+        else
+        {
+            menu_login.setTitle("登入");
+            menu_user.setVisible(false);
+        }
         navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
+
+        //下拉更新
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorSchemeColors(Color.RED);
+
         food_list.add("米飯");
         food_list.add("香蕉");
         food_list.add("牛奶");
@@ -425,6 +472,7 @@ public class  MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){//當按下左上三條線或顯示工具列
+            invalidateOptionsMenu();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -452,13 +500,27 @@ public class  MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Login) {
-            Login login=Login.newInstance("param1","param2");
-            FragmentManager manager=getSupportFragmentManager();
-            manager.beginTransaction().addToBackStack(null).replace(
-                    R.id.content_main,
-                    login,
-                    login.getTag()
-            ).commit();
+            if(Login.user == null) {
+                Login login = Login.newInstance("param1", "param2");
+                FragmentManager manager = getSupportFragmentManager();
+                manager.beginTransaction().addToBackStack(null).replace(
+                        R.id.content_main,
+                        login,
+                        login.getTag()
+                ).commit();
+
+            }
+            else
+            {
+                Login.user = null;
+                Login.userimage = null;
+                rundata = null;
+                walkdata = null;
+                airdata = null;
+                pushdata = null;
+                sitdata = null;
+                Toast.makeText(MainActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
+            }
         }
         else if (id == R.id.navItemAbout)
         {
@@ -483,5 +545,7 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 }

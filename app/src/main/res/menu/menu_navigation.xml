@@ -5,14 +5,17 @@
             android:id="@+id/Login"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/Login" />
+    </group>
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/reg"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/close" />
+    </group>
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/navItemAbout"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/open" />
-
     </group>
 </menu>
