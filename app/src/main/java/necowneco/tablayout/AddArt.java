@@ -1,6 +1,7 @@
 package necowneco.tablayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -100,6 +101,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final Button finishbtn=(Button)view.findViewById(R.id.finidhBTN);
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
         final TextView at=(TextView)view.findViewById(R.id.theAddType);
+        final Button seleimgbtn=(Button)view.findViewById(R.id.seleImgBtn);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
                 view.getContext(),
@@ -119,6 +121,18 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+            }
+        });
+        seleimgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                //開啟Pictures畫面Type設定為image
+                intent.setType("image/*");
+                //使用Intent.ACTION_GET_CONTENT這個Action                                            //會開啟選取圖檔視窗讓您選取手機內圖檔
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                //取得相片後返回本畫面
+                startActivityForResult(intent, 1);
             }
         });
         submitArt.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +157,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         return view;
     }
-
     // TODO: Rename method, update argument and hook method into UI event
 
     public void onButtonPressed(String Tag,String number) {
@@ -185,6 +198,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
+
         // TODO: Update argument type and name
         void onFragmentInteraction(String Tag,String number);
     }
