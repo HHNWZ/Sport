@@ -163,7 +163,7 @@
             android:layout_alignParentStart="true">
 
             <Button
-                android:id="@+id/butt_of_aerobic_exercise_invitation_social_media_friends"
+                android:id="@+id/button_of_aerobic_exercise_invitation_social_media_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="邀請社交媒體朋友"
@@ -172,7 +172,7 @@
                 android:id="@+id/button_of_aerobic_exercise_invitation_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="邀請本地朋友1"
+                android:text="邀請本地朋友"
                 android:layout_weight="1"/>
         </LinearLayout>
 

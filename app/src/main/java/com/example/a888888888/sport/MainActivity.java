@@ -14,11 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
@@ -28,12 +29,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
 import qwer.BlankFragment3;
+import qwer.BlankFragmentDay;
 import qwer.BlankFragmentc1;
 import qwer.BlankFragmentc2;
 import qwer.BlankFragmentc3;
@@ -48,7 +52,7 @@ public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener{
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener{
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
@@ -60,7 +64,7 @@ public class  MainActivity extends AppCompatActivity
     public int dateID;//
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
-    private String showUri = "http://172.30.4.170:1335/test123.php";//連至資料庫
+    private String showUri = "http://172.30.4.170:1335/getusersport.php";//連至資料庫
     private TextView rundata;
     private TextView walkdata;
     private TextView airdata;
@@ -76,28 +80,29 @@ public class  MainActivity extends AppCompatActivity
     }
 
     private void getData() {
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST,showUri, new Response.Listener<JSONObject>() {
+
+        StringRequest jsonObjectRequest = new StringRequest
+                (Request.Method.POST,showUri, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
+                    public void onResponse(String response) {
                         try {
-                            JSONArray data = response.getJSONArray("data");
+                            JSONObject jsonObject= new JSONObject(response.toString());
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            JSONObject jasondata;
                             //這邊要和上面json的名稱一樣
                             //下邊是把全部資料都印出來
                             for (int i = 0; i < data.length(); i++) {
-                                JSONObject jasondata = data.getJSONObject(i);
-                                /*ContentValues values = new ContentValues();
-                                values.put("run", jasondata.getString("run"));*/
+                                jasondata = data.getJSONObject(i);
                                 rundata.setText(jasondata.getString("run"));
                                 walkdata.setText(jasondata.getString("walk"));
                                 airdata.setText(jasondata.getString("air"));
-                                sitdata.setText(jasondata.getString("sit"));
                                 pushdata.setText(jasondata.getString("push"));
+                                sitdata.setText(jasondata.getString("sit"));
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "登入失敗，請重新輸入", Toast.LENGTH_SHORT).show();//傳資料回來在這裡
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -105,7 +110,19 @@ public class  MainActivity extends AppCompatActivity
                     public void onErrorResponse(VolleyError error) {
                         System.out.append(error.getMessage());
                     }
-                });
+                }
+
+                )
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("login",Login.user);
+                return params;
+            }
+
+        };
         requestQueue.add(jsonObjectRequest);
     }
     public void addOneDiary(CalendarDay date,String diary){//寫入單筆日記資料
@@ -225,19 +242,43 @@ public class  MainActivity extends AppCompatActivity
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,kelvin_tab_layout.class);
-                startActivity(intent);
-                MainActivity.this.finish();
+                if(Login.user != null) {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, kelvin_tab_layout.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
+                }
+                else
+                {
+                    Ifnotuserdata ifnotuserdata = new Ifnotuserdata();
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().addToBackStack(null).replace(
+                            R.id.content_main,
+                            ifnotuserdata,
+                            ifnotuserdata.getTag()
+                    ).commit();
+                }
             }
         });
         hal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,habaActivity.class);
-                startActivity(intent);
-                MainActivity.this.finish();
+                if(Login.user != null) {
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, habaActivity.class);
+                    startActivity(intent);
+                    MainActivity.this.finish();
+                }
+                else
+                {
+                    Ifnotuserdata ifnotuserdata = new Ifnotuserdata();
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().addToBackStack(null).replace(
+                            R.id.content_main,
+                            ifnotuserdata,
+                            ifnotuserdata.getTag()
+                    ).commit();
+                }
             }
         });
         del.setOnClickListener(new View.OnClickListener() {
@@ -250,19 +291,30 @@ public class  MainActivity extends AppCompatActivity
                         del,
                         del.getTag()
                 ).commit();
-
             }
         });
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Over overs=Over.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().addToBackStack(null).replace(
-                        R.id.content_main,
-                        overs,
-                        overs.getTag()
-                ).commit();
+                if(Login.user != null) {
+                    Over overs = Over.newInstance("param1", "param2");
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().addToBackStack(null).replace(
+                            R.id.content_main,
+                            overs,
+                            overs.getTag()
+                    ).commit();
+                }
+                else
+                {
+                    Ifnotuserdata ifnotuserdata = new Ifnotuserdata();
+                    FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().addToBackStack(null).replace(
+                            R.id.content_main,
+                            ifnotuserdata,
+                            ifnotuserdata.getTag()
+                    ).commit();
+                }
             }
         });
         sport.setOnClickListener(new View.OnClickListener() {
@@ -348,6 +400,7 @@ public class  MainActivity extends AppCompatActivity
         writAllDiaryDATA();//刪除後將內存檔案重寫
     }
 
+
     private String showTrueDate(CalendarDay cDay){
         return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
     }
@@ -382,13 +435,23 @@ public class  MainActivity extends AppCompatActivity
     public void onBackPressed() {
 
         int count = getFragmentManager().getBackStackEntryCount();
-
+        getData();
         if (count == 0) {
             super.onBackPressed();
         } else {
             getFragmentManager().popBackStack();
         }
     }
+    public  void toBFD(String daynum,String daynum1){//按鈕傳值測試
+        BlankFragmentDay blankfragmentday=BlankFragmentDay.newInstance(daynum,daynum1);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                blankfragmentday,
+                blankfragmentday.getTag()
+        ).commit();
+    }
+
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
@@ -417,6 +480,16 @@ public class  MainActivity extends AppCompatActivity
                     R.id.content_main,
                     userdata,
                     userdata.getTag()
+            ).commit();
+        }
+        else if (id == R.id.reg)
+        {
+            Register reg=Register.newInstance("param1","param2");
+            FragmentManager manager=getSupportFragmentManager();
+            manager.beginTransaction().addToBackStack(null).replace(
+                    R.id.content_main,
+                    reg,
+                    reg.getTag()
             ).commit();
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

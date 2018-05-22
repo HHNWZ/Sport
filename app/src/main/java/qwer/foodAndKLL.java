@@ -91,7 +91,7 @@ public class foodAndKLL extends Fragment {
         foodlist.setAdapter(adapter);//將ListAdapter設定至ListView裡面
         foodlist.setItemChecked(foodID,true);
         TextView totalkll=(TextView)view.findViewById(R.id.totalKLL);
-        totalkll.setText("總共"+getTheMealKLL(((MainActivity)getActivity()).food_KLL)+"大卡");
+        totalkll.setText(""+getTheMealKLL(((MainActivity)getActivity()).food_KLL)+"");
         Button addbtn=(Button)view.findViewById(R.id.ItemAdd);
         Button removebtn=(Button)view.findViewById(R.id.ItemRemove);
         Button backbtn=(Button)view.findViewById(R.id.backBtn);
