@@ -181,6 +181,8 @@ public class habaActivity extends AppCompatActivity
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
     public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){
         AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);
         FragmentManager manager=getSupportFragmentManager();
