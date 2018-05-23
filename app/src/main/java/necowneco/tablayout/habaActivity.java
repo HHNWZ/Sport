@@ -1,8 +1,12 @@
 package necowneco.tablayout;
 
 import android.app.SearchManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,17 +17,20 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
@@ -150,6 +157,32 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //當使用者按下確定後
+        if (resultCode == RESULT_OK) {
+            //取得圖檔的路徑位置
+            Uri uri = data.getData();
+            //寫log
+            Log.e("uri", uri.toString());
+            //抽象資料的接口
+            ContentResolver cr = this.getContentResolver();
+            try {
+                //由抽象資料接口轉換圖檔路徑為Bitmap
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+                //取得圖片控制項ImageView
+                ImageView imageView = (ImageView) findViewById(R.id.myIMG);
+                // 將Bitmap設定到ImageView
+                imageView.setImageBitmap(bitmap);
+                imageView.setVisibility(View.VISIBLE);
+            } catch (FileNotFoundException e) {
+                Log.e("Exception", e.getMessage(),e);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
     public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){
         AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);
         FragmentManager manager=getSupportFragmentManager();
@@ -202,6 +235,7 @@ public class habaActivity extends AppCompatActivity
         }
         ToSearchList();
     }
+
     public ArrayList<Integer> artresCount(){
         ArrayList<Integer> mycount=new ArrayList<Integer>();
         for(int i=0;i<artID.size();i++){
@@ -314,6 +348,7 @@ public class habaActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
     public void onFragmentInteraction(String Tag, String number) {
         BackArtList();
@@ -379,4 +414,5 @@ public class habaActivity extends AppCompatActivity
                 theartres.getTag()
         ).commit();
     }
+
 }

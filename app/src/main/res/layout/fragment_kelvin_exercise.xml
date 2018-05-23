@@ -188,22 +188,28 @@
             android:id="@+id/button_of_sports_monitoring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape4"
             android:text="運動監控"
             android:textSize="10dp"
+            android:textColor="#FFFFFF"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/button_of_task_execution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape5"
             android:text="任務執行"
             android:textSize="10dp"
+            android:textColor="#000000"
             android:layout_weight="1" />
         <Button
             android:id="@+id/button_of_invitation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/buttonshape6"
             android:text="邀請朋友運動"
             android:textSize="10dp"
+            android:textColor="#FFFFFF"
             android:layout_weight="1"/>
     </LinearLayout>
 

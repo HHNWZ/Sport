@@ -41,6 +41,7 @@ import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
 import qwer.BlankFragment3;
+import qwer.BlankFragmentDay;
 import qwer.BlankFragmentc1;
 import qwer.BlankFragmentc2;
 import qwer.BlankFragmentc3;
@@ -446,6 +447,7 @@ public class  MainActivity extends AppCompatActivity
         writAllDiaryDATA();//刪除後將內存檔案重寫
     }
 
+
     private String showTrueDate(CalendarDay cDay){
         return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
     }
@@ -488,6 +490,16 @@ public class  MainActivity extends AppCompatActivity
             getFragmentManager().popBackStack();
         }
     }
+    public  void toBFD(String daynum,String daynum1){//按鈕傳值測試
+        BlankFragmentDay blankfragmentday=BlankFragmentDay.newInstance(daynum,daynum1);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                blankfragmentday,
+                blankfragmentday.getTag()
+        ).commit();
+    }
+
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {

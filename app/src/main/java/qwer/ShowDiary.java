@@ -83,7 +83,7 @@ public class ShowDiary extends Fragment {
         TextView theday=(TextView)view.findViewById(R.id.theDAY);
         TextView showdiary=(TextView)view.findViewById(R.id.DiaryCon);
         TextView theKLL=(TextView)view.findViewById(R.id.theDayKLL);
-        theday.setText(todayDate);
+        theday.setText(qwe(todayDate));
         showdiary.setText(todayDiary);
         theKLL.setText(Integer.toString(todayKLL));
         Button deletbtn=(Button)view.findViewById(R.id.deletBtn);
@@ -139,6 +139,12 @@ public class ShowDiary extends Fragment {
             }
         });
         return view;
+    }
+
+    private String qwe(String todayDate) {
+        String[] splitStringArray = todayDate.split("/");
+
+        return splitStringArray[0]+"年"+splitStringArray[1]+"月"+splitStringArray[2]+"日";
     }
 
     // TODO: Rename method, update argument and hook method into UI event
