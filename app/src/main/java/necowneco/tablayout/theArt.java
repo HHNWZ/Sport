@@ -125,6 +125,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final ImageView theimg=(ImageView)view.findViewById(R.id.theIMG);
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
+
         if(mNowUser==mAut) {
             thedeletBtn.setVisibility(View.VISIBLE);
         }
