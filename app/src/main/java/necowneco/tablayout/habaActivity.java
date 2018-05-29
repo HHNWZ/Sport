@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -30,7 +31,10 @@ import android.widget.Toast;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -159,6 +163,7 @@ public class habaActivity extends AppCompatActivity
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //Toast.makeText(this, "QU="+requestCode+"，SU="+resultCode, Toast.LENGTH_SHORT).show();
         //當使用者按下確定後
         if (resultCode == RESULT_OK) {
             //取得圖檔的路徑位置
@@ -182,6 +187,31 @@ public class habaActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    public void downloadTheImg(Bitmap bitmap) {
+        FileOutputStream fOut;
+        try {
+            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            String tmp = dir+"/girl.jpg";
+            fOut = new FileOutputStream(tmp);
+            Toast.makeText(this, "咻幹"+tmp, Toast.LENGTH_SHORT).show();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+
+            try {
+                fOut.flush();
+                fOut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "嘿幹", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+
+        }
+    }
 
     public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){
         AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);
@@ -414,5 +444,6 @@ public class habaActivity extends AppCompatActivity
                 theartres.getTag()
         ).commit();
     }
+
 
 }

@@ -3,6 +3,7 @@ package necowneco.tablayout;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -119,6 +121,8 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
         final Button tores=(Button)view.findViewById(R.id.toRes);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
+        final Button downloadbtn=(Button)view.findViewById(R.id.downloadBtn);
+        final ImageView theimg=(ImageView)view.findViewById(R.id.theIMG);
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
         if(mNowUser==mAut) {
@@ -130,6 +134,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
         theartCon.setText(mCon);
         koreiine.setText(mGood+"個讚");
         tores.setText("留言");
+        downloadbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((habaActivity)getActivity()).downloadTheImg(((BitmapDrawable)theimg.getDrawable()).getBitmap());
+            }
+        });
         koreiine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +197,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                         .show();
             }
         });
+
         // Inflate the layout for this fragment
 
         return view;

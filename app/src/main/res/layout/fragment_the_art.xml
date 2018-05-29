@@ -113,6 +113,12 @@
             android:adjustViewBounds="true"
             android:src="@drawable/sheng" />
 
+        <Button
+            android:id="@+id/downloadBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下載圖片" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

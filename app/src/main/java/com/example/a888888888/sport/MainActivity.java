@@ -310,7 +310,7 @@ public class  MainActivity extends AppCompatActivity
         hal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Login.user != null) {
+                if(true) {//IF條件：Login.user != null
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, habaActivity.class);
                     startActivity(intent);
