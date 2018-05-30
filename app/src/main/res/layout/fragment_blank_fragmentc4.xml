@@ -32,9 +32,27 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="14dp"
         android:gravity="center_horizontal"
-        android:text="日記"
+        android:text="運動方案"
         android:textColor="#73c4d9"
         android:textSize="22sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/SportListSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/seleSport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="選擇此運動" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

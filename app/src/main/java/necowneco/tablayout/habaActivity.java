@@ -196,7 +196,6 @@ public class habaActivity extends AppCompatActivity
             }
             String tmp = dir+"/girl.jpg";
             fOut = new FileOutputStream(tmp);
-            Toast.makeText(this, "咻幹"+tmp, Toast.LENGTH_SHORT).show();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
 
             try {
@@ -207,7 +206,6 @@ public class habaActivity extends AppCompatActivity
             }
 
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "嘿幹", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
 
         }

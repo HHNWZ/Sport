@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 import java.text.NumberFormat;
@@ -242,7 +243,21 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (24 <=a2 && a2<27)
                 {
-                    dialog.setMessage(getString(R.string.bmi2));
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("檢測報告")
+                            .setMessage(getString(R.string.bmi1))
+                            .setPositiveButton("來去運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((MainActivity)getActivity()).toSportPlan();
+                                }
+                            })
+                            .setNeutralButton("我還不想運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
                     tviw27.setTextColor(0xFF00FF00);
                     tviw32.setTextColor(0xFF00FF00);
                     tviw31.setTextColor(0xFF000000);
@@ -265,8 +280,22 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (27 <=a2 && a2 < 30)
                 {
-                    dialog.setMessage(getString(R.string.bmi2));
-                    tviw33.setTextColor(0xFF00FF00);
+
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("檢測報告")
+                            .setMessage(getString(R.string.bmi1))
+                            .setPositiveButton("來去運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((MainActivity)getActivity()).toSportPlan();
+                                }
+                            })
+                            .setNeutralButton("我還不想運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();                    tviw33.setTextColor(0xFF00FF00);
                     tviw36.setTextColor(0xFF00FF00);
                     tviw31.setTextColor(0xFF000000);
                     tviw32.setTextColor(0xFF000000);
@@ -288,7 +317,22 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (30 <= a2 && a2 < 35)
                 {
-                    dialog.setMessage(getString(R.string.bmi2));
+
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("檢測報告")
+                            .setMessage(getString(R.string.bmi1))
+                            .setPositiveButton("來去運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((MainActivity)getActivity()).toSportPlan();
+                                }
+                            })
+                            .setNeutralButton("我還不想運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
                     tviw34.setTextColor(0xFF00FF00);
                     tviw37.setTextColor(0xFF00FF00);
                     tviw31.setTextColor(0xFF000000);
@@ -311,7 +355,22 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                     else if (a2 >= 35)
                 {
-                    dialog.setMessage(getString(R.string.bmi2));
+
+                    new android.app.AlertDialog.Builder(getActivity())
+                            .setTitle("檢測報告")
+                            .setMessage(getString(R.string.bmi1))
+                            .setPositiveButton("來去運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ((MainActivity)getActivity()).toSportPlan();
+                                }
+                            })
+                            .setNeutralButton("我還不想運動", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            })
+                            .show();
                     tviw35.setTextColor(0xFF00FF00);
                     tviw38.setTextColor(0xFF00FF00);
                     tviw31.setTextColor(0xFF000000);

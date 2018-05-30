@@ -1,14 +1,18 @@
 package qwer;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -69,6 +73,38 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc4, null);
         view.setOnTouchListener(this);
+        final int[] mySport = {0};
+        final Spinner spinner=(Spinner)view.findViewById(R.id.SportListSpinner);
+        final String[] SportList = {"請選擇運動項目","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
+        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
+                view.getContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                SportList);
+        spinner.setAdapter(sportlist);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                mySport[0] =i;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mySport[0] =0;
+            }
+        });
+        final Button checkbtn=(Button)view.findViewById(R.id.seleSport);
+        checkbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mySport[0]==0){
+                    Toast.makeText(getActivity(), "請先選擇運動項目", Toast.LENGTH_SHORT).show();
+                }else{
+                    spinner.setVisibility(View.GONE);
+                    checkbtn.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
         qwera2.setOnClickListener(new View.OnClickListener() {
             @Override
