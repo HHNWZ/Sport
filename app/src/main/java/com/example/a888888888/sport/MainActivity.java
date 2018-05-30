@@ -490,13 +490,8 @@ public class  MainActivity extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
-
-        int count = getFragmentManager().getBackStackEntryCount();
-        getData();
-        if (count == 0) {
+        if (!BackHandlerHelper.handleBackPress(this)) {
             super.onBackPressed();
-        } else {
-            getFragmentManager().popBackStack();
         }
     }
     public  void toBFD(String daynum,String daynum1){//按鈕傳值測試
@@ -508,6 +503,7 @@ public class  MainActivity extends AppCompatActivity
                 blankfragmentday.getTag()
         ).commit();
     }
+
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
