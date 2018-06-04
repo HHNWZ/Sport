@@ -107,7 +107,6 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             }
         });
 
-
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
         qwera2.setOnClickListener(new View.OnClickListener() {
             @Override
