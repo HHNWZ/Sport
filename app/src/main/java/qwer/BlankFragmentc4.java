@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         final int[] mySport = {0};
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportListSpinner);
         final String[] SportList = {"請選擇運動項目","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
+        final LinearLayout selelayout=(LinearLayout)view.findViewById(R.id.seleLayout);
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
@@ -98,8 +100,9 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
                 if(mySport[0]==0){
                     Toast.makeText(getActivity(), "請先選擇運動項目", Toast.LENGTH_SHORT).show();
                 }else{
-                    spinner.setVisibility(View.GONE);
-                    checkbtn.setVisibility(View.GONE);
+                    //spinner.setVisibility(View.GONE);
+                    //checkbtn.setVisibility(View.GONE);
+                    selelayout.setVisibility(View.GONE);
                 }
             }
         });
