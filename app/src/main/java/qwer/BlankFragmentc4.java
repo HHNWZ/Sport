@@ -121,11 +121,11 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         dothesport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sportprogress.incrementProgressBy(10);
-                if(sportprogress.getProgress()<progressMax) {
+                sportprogress.incrementProgressBy(10);//每次點擊時增加進度條(10%)
+                if(sportprogress.getProgress()<progressMax) {//檢查進度條是否已滿
                     progressnum.setText("目前運動進度：" +
                             Integer.toString(sportprogress.getProgress()) + "/100");
-                }else{
+                }else{//進度條達到100%，顯示目標達成畫面
                     Toast.makeText(getActivity(), "今天的運動進度已完成(100/100)", Toast.LENGTH_SHORT).show();
                     progressnum.setText("今天的運動進度已完成");
                     dothesport.setVisibility(View.GONE);
