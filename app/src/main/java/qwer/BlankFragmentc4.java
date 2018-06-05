@@ -126,8 +126,7 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
                     progressnum.setText("目前運動進度：" +
                             Integer.toString(sportprogress.getProgress()) + "/100");
                 }else{//進度條達到100%，顯示目標達成畫面
-                    Toast.makeText(getActivity(), "今天的運動進度已完成(100/100)", Toast.LENGTH_SHORT).show();
-                    progressnum.setText("今天的運動進度已完成");
+                    progressnum.setText("今天的運動進度已完成(100/100)");
                     dothesport.setVisibility(View.GONE);
                     sportfinishimg.setVisibility(View.VISIBLE);
                 }
