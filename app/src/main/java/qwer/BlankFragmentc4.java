@@ -11,8 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
@@ -78,6 +81,9 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportListSpinner);
         final String[] SportList = {"請選擇運動項目","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         final LinearLayout selelayout=(LinearLayout)view.findViewById(R.id.seleLayout);
+        final LinearLayout sporttarget=(LinearLayout)view.findViewById(R.id.SportTargetLayout);
+        final TextView sportitem=(TextView)view.findViewById(R.id.SportItem);
+        final TextView progressnum=(TextView)view.findViewById(R.id.SportProgressNum);
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
@@ -92,7 +98,7 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 mySport[0] =0;
             }
-        });
+        });//以下拉式列表選擇運動項目
         final Button checkbtn=(Button)view.findViewById(R.id.seleSport);
         checkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,12 +106,34 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
                 if(mySport[0]==0){
                     Toast.makeText(getActivity(), "請先選擇運動項目", Toast.LENGTH_SHORT).show();
                 }else{
-                    //spinner.setVisibility(View.GONE);
-                    //checkbtn.setVisibility(View.GONE);
                     selelayout.setVisibility(View.GONE);
+                    sporttarget.setVisibility(View.VISIBLE);
+                    sportitem.setText(SportList[mySport[0]]);
+                }
+            }
+        });//選擇運動項目後方可進入下一階段：運動進度
+
+        final ProgressBar sportprogress=(ProgressBar)view.findViewById(R.id.SportProgressBar);
+        final Button dothesport=(Button)view.findViewById(R.id.DoTheSport);
+        final ImageView sportfinishimg=(ImageView)view.findViewById(R.id.SportFinishIMG);
+        int progressMax=100;
+        sportprogress.setMax(progressMax);
+        dothesport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sportprogress.incrementProgressBy(10);
+                if(sportprogress.getProgress()<progressMax) {
+                    progressnum.setText("目前運動進度：" +
+                            Integer.toString(sportprogress.getProgress()) + "/100");
+                }else{
+                    Toast.makeText(getActivity(), "今天的運動進度已完成(100/100)", Toast.LENGTH_SHORT).show();
+                    progressnum.setText("今天的運動進度已完成");
+                    dothesport.setVisibility(View.GONE);
+                    sportfinishimg.setVisibility(View.VISIBLE);
                 }
             }
         });
+
 
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
         qwera2.setOnClickListener(new View.OnClickListener() {
