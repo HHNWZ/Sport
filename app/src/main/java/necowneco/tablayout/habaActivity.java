@@ -19,7 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +27,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
@@ -291,23 +291,21 @@ public class habaActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-// Do something.
-            Intent intentHome= new Intent(habaActivity.this,MainActivity.class);
-            startActivity(intentHome);
-            this.finish();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }//返回鍵的設定
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+        else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            Intent intentHome= new Intent(habaActivity.this,MainActivity.class);//kk
+            Toast.makeText(habaActivity.this, "按返回鍵會用到這裡", Toast.LENGTH_SHORT).show();
+            startActivity(intentHome);
+            this.finish();
+        }
+        else if (!BackHandlerHelper.handleBackPress(this)) {
+            /*Toast.makeText(kelvin_tab_layout.this, "按返回鍵會用到這裡3", Toast.LENGTH_SHORT).show();不用刪除，因為fragment的返回鍵會無反應*/
             super.onBackPressed();
         }
     }
