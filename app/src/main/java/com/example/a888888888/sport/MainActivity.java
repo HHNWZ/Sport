@@ -83,6 +83,7 @@ public class  MainActivity extends AppCompatActivity
     private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     SwipeRefreshLayout mSwipeLayout;
+
     com.android.volley.RequestQueue requestQueue;
 
     public MainActivity() {
