@@ -298,7 +298,7 @@ public class habaActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+        else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {//這邊抓不到是否開啟頁面
             Intent intentHome= new Intent(habaActivity.this,MainActivity.class);//kk
             Toast.makeText(habaActivity.this, "按返回鍵會用到這裡", Toast.LENGTH_SHORT).show();
             startActivity(intentHome);
