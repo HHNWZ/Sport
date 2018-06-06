@@ -25,6 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.hedan.piechart_library.PieChartBean;
+import com.hedan.piechart_library.PieChart_View;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
@@ -78,6 +80,8 @@ public class  MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
+    private PieChart_View pieView;
+    private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     SwipeRefreshLayout mSwipeLayout;
     com.android.volley.RequestQueue requestQueue;
 
@@ -248,12 +252,30 @@ public class  MainActivity extends AppCompatActivity
             menu_user.setVisible(false);
         }
         navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
+            //下拉更新
+            mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+            mSwipeLayout.setOnRefreshListener(this);
+            mSwipeLayout.setColorSchemeColors(Color.RED);
 
-        //下拉更新
-        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        mSwipeLayout.setOnRefreshListener(this);
-        mSwipeLayout.setColorSchemeColors(Color.RED);
 
+            //圓餅圖
+        /*if(Login.user != null) {
+            frun = Float.parseFloat(rundata.getText().toString());
+            fwalk = Float.parseFloat(walkdata.getText().toString());
+            fair = Float.parseFloat(airdata.getText().toString());
+            fpush = Float.parseFloat(pushdata.getText().toString());
+            fsit = Float.parseFloat(sitdata.getText().toString());
+        }*/
+            pieView = (PieChart_View) findViewById(R.id.pie_view);
+            ArrayList<PieChartBean> lists = new ArrayList<>();
+            lists.add(new PieChartBean(Color.parseColor("#ee3c5d"), 60, "跑步"));//rundata
+            lists.add(new PieChartBean(Color.parseColor("#ffc12c"), 50, "走路"));//walkdata
+            lists.add(new PieChartBean(Color.parseColor("#1fde94"), 80, "有氧"));//airdata
+            lists.add(new PieChartBean(Color.parseColor("#f5a623"), 140, "扶地挺身"));//pushdata
+            lists.add(new PieChartBean(Color.parseColor("#fa734e"), 110, "仰臥起坐"));//sitdata
+            pieView.setData(lists);
+
+        //不知名
         food_list.add("米飯");
         food_list.add("香蕉");
         food_list.add("牛奶");
@@ -289,7 +311,7 @@ public class  MainActivity extends AppCompatActivity
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Login.user != null) {
+                if(true) {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, kelvin_tab_layout.class);
                     startActivity(intent);
@@ -343,7 +365,7 @@ public class  MainActivity extends AppCompatActivity
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Login.user != null) {
+                if(true) {
                     Over overs = Over.newInstance("param1", "param2");
                     FragmentManager manager = getSupportFragmentManager();
                     manager.beginTransaction().addToBackStack(null).replace(
