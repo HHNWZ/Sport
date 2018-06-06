@@ -401,6 +401,15 @@ public class  MainActivity extends AppCompatActivity
         });
     }
 
+    public void toSportPlan() {
+        BlankFragmentc4 sportplan=BlankFragmentc4.newInstance(null,null);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().addToBackStack(null).replace(
+                R.id.content_main,
+                sportplan,
+                sportplan.getTag()
+        ).commit();
+    }
     public void myDayChanged(CalendarDay mydate) {//選擇日期
         seleDAY=mydate;//紀錄上一次選擇日期
         dateID=DL.indexOf(seleDAY);
@@ -575,7 +584,6 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
 }
