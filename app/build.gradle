@@ -58,8 +58,8 @@ dependencies {
     implementation 'com.prolificinteractive:material-calendarview:1.4.3'
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.1'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.1'
-    compile 'com.github.ikidou:FragmentBackHandler:2.1'
-    compile 'com.github.ithedan:HeDan_Piechart:v2.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.1'
+    implementation 'com.github.ikidou:FragmentBackHandler:2.1'
+    implementation 'com.github.ithedan:HeDan_Piechart:v2.0'
 }
