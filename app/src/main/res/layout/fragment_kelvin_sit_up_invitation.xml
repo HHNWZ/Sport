@@ -161,7 +161,7 @@
             android:layout_alignParentStart="true">
 
             <Button
-                android:id="@+id/button_of_push_up_invitation_social_media_friends"
+                android:id="@+id/button_of_sit_up_invitation_social_media_friends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#323d4d"
@@ -170,7 +170,7 @@
                 android:textColor="#73c4d9"
                 android:layout_weight="1"/>
             <Button
-                android:id="@+id/button_of_push_up_invitation_confirm"
+                android:id="@+id/button_of_sit_up_invitation_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#323d4d"

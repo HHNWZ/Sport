@@ -57,6 +57,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<String> shsolCon=new ArrayList<String>();
     final ArrayList<Integer> shsolGd=new ArrayList<Integer>();
     final ArrayList<Integer> shsolRn=new ArrayList<Integer>();
+    public static int fragcount = 0,BacktheArt=0,BacktoID = 0;
     final String nowuser="369";//測試用之預設使用者
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +143,7 @@ public class habaActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {//<跳頁>新增貼文
+                fragcount++;
                 AddArt addart=AddArt.newInstance(nowuser, "新增",artID.size(),null,null,null);//賦予addArt頁面"新增"狀態
                 FragmentManager manager=getSupportFragmentManager();
                 manager.beginTransaction().replace(
@@ -171,6 +173,7 @@ public class habaActivity extends AppCompatActivity
     }
     public void ToSearchList(){//<跳頁>進入搜尋與篩選頁面
         SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn);
+        fragcount++;
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -179,6 +182,7 @@ public class habaActivity extends AppCompatActivity
         ).commit();
     }
     public void toArtcon(int TargetID){//<跳頁>查看貼文內容
+        fragcount++;
         theArt theart=theArt.newInstance(
                 TargetID,
                 artTitle.get(TargetID),
@@ -195,6 +199,8 @@ public class habaActivity extends AppCompatActivity
                 .commit();
     }
     public void toResList(int TargetID){//<跳頁>查看該貼文之全部留言
+        BacktheArt = 1;
+        BacktoID = TargetID;
         theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
@@ -342,16 +348,35 @@ public class habaActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else if (getSupportFragmentManager().getBackStackEntryCount() == 0) {//這邊抓不到是否開啟頁面
+        else if (BacktheArt == 1) {//回貼文內容
+            BacktheArt = 0;
+            theArt theart=theArt.newInstance(
+                    BacktoID,
+                    artTitle.get(BacktoID),
+                    autID.get(BacktoID),
+                    artClass.get(BacktoID),
+                    artCon.get(BacktoID),
+                    artgood.get(BacktoID),
+                    resList.get(BacktoID),
+                    nowuser
+            );
+            FragmentManager manager=getSupportFragmentManager();
+            manager.beginTransaction()
+                    .replace(R.id.haba,theart,null)
+                    .commit();
+        }
+        else if (fragcount == 0) {//回主頁面
             Intent intentHome= new Intent(habaActivity.this,MainActivity.class);//kk
             Toast.makeText(habaActivity.this, "按返回鍵會用到這裡", Toast.LENGTH_SHORT).show();
             startActivity(intentHome);
             this.finish();
         }
-        else if (!BackHandlerHelper.handleBackPress(this)) {
+        else if (!BackHandlerHelper.handleBackPress(this)) { //回貼文列表
+            fragcount--;
             /*Toast.makeText(kelvin_tab_layout.this, "按返回鍵會用到這裡3", Toast.LENGTH_SHORT).show();不用刪除，因為fragment的返回鍵會無反應*/
-            super.onBackPressed();
+            BackArtList();
         }
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
