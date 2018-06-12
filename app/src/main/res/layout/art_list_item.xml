@@ -77,7 +77,7 @@
                 android:layout_height="20dp"
                 android:layout_weight="0.2"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/qazz" />
+                app:srcCompat="@drawable/user" />
 
             <TextView
                 android:id="@+id/myAut"
@@ -100,7 +100,7 @@
                 android:layout_height="20dp"
                 android:layout_weight="0.2"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/qazz" />
+                app:srcCompat="@drawable/like" />
             <TextView
                 android:id="@+id/myGoodnum"
                 android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
                 android:layout_height="20dp"
                 android:layout_weight="0.2"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/qazz" />
+                app:srcCompat="@drawable/res" />
             <TextView
                 android:id="@+id/myResnum"
                 android:layout_width="wrap_content"

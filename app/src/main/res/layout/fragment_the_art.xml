@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="【類別】貼文標題"
-                android:textColor="#000000"
+                android:textColor="#323d4d"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -78,12 +78,16 @@
                 android:id="@+id/koreIINe"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/like1"
                 android:text="讚" />
 
             <Button
                 android:id="@+id/toRes"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/res1"
                 android:text="留言" />
 
 
@@ -117,6 +121,8 @@
             android:id="@+id/downloadBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#323d4d"
+            android:textColor="#73c4d9"
             android:text="下載圖片" />
 
         <LinearLayout

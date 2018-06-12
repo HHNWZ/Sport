@@ -83,6 +83,7 @@ public class  MainActivity extends AppCompatActivity
     private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     SwipeRefreshLayout mSwipeLayout;
+
     com.android.volley.RequestQueue requestQueue;
 
     public MainActivity() {
@@ -268,12 +269,13 @@ public class  MainActivity extends AppCompatActivity
         }*/
             pieView = (PieChart_View) findViewById(R.id.pie_view);
             ArrayList<PieChartBean> lists = new ArrayList<>();
-            lists.add(new PieChartBean(Color.parseColor("#ee3c5d"), 60, "跑步"));//rundata
-            lists.add(new PieChartBean(Color.parseColor("#ffc12c"), 50, "走路"));//walkdata
-            lists.add(new PieChartBean(Color.parseColor("#1fde94"), 80, "有氧"));//airdata
-            lists.add(new PieChartBean(Color.parseColor("#f5a623"), 140, "扶地挺身"));//pushdata
-            lists.add(new PieChartBean(Color.parseColor("#fa734e"), 110, "仰臥起坐"));//sitdata
+            lists.add(new PieChartBean(Color.parseColor("#38b048"), 50, "跑步"));//rundata
+            lists.add(new PieChartBean(Color.parseColor("#189428"), 60, "走路"));//walkdata
+            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 80, "有氧"));//airdata
+            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 120, "扶地挺身"));//pushdata
+            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 140, "仰臥起坐"));//sitdata
             pieView.setData(lists);
+
         //食物列表
         food_list.add("米飯");
         food_list.add("香蕉");
