@@ -137,16 +137,34 @@
             android:text="排行榜"
             android:textColor="#ffffff" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="185dp"
-            android:layout_height="120dp"
+        <com.hedan.piechart_library.PieChart_View
+            android:id="@+id/pie_view"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="66dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginEnd="19dp"
             android:layout_toStartOf="@+id/TextView1"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/img" />
+            app:name=" "
+            app:isAnimation="true"
+            app:isTouchFlag="true"
+            app:animaDuration="5000"
+            app:mRadius="140dp"
+            app:pieChartWidth="70dp"
+            app:alphaWidth="10dp"
+            app:alphaPieColor="#fff"
+            app:alphaPieTran="100"
+            app:segmentAngle="0.5"
+            app:startAngle="180"
+            app:textColor="#000"
+            app:textSize="18sp"
+            app:textOrientation="path"
+            app:inCricleColor="#eeeeee"
+            />
+
+
 
         <Button
             android:id="@+id/button3"
@@ -164,7 +182,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView"
+            android:layout_alignTop="@+id/pie_view"
             android:layout_toStartOf="@+id/button3"
             android:text="跑步:" />
 

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.a888888888.sport.BackHandlerHelper;
+import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KelvinSitUpsFragment extends Fragment {
+public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandler {
 
     private static final int DEFAULT_DATA = 0;
     private static final int SUBCOLUMNS_DATA = 1;
@@ -83,6 +85,12 @@ public class KelvinSitUpsFragment extends Fragment {
         generateData();
         return rootView;
     }
+
+    @Override
+    public boolean onBackPressed() {
+        return BackHandlerHelper.handleBackPress(this);
+    }
+
     /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.column_chart, menu);

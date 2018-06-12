@@ -1,12 +1,14 @@
 package kelvin.tablayout;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 
+import com.example.a888888888.sport.BackHandlerHelper;
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 public class kelvin_tab_layout extends AppCompatActivity
@@ -42,22 +44,20 @@ public class kelvin_tab_layout extends AppCompatActivity
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        int count = getFragmentManager().getBackStackEntryCount();
-        /*if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);//kk
-            startActivity(intentHome);
 
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            Intent intentHome= new Intent(kelvin_tab_layout.this,MainActivity.class);//kk
+            /*Toast.makeText(kelvin_tab_layout.this, "按返回鍵會用到這裡", Toast.LENGTH_SHORT).show();*/
+            startActivity(intentHome);
             this.finish();
-            return true;
-        }*/
-        if (count == 0) {
-            super.onBackPressed();
-            return true;
         }
-        return super.onKeyDown(keyCode, event);
-    }//返回鍵的設定
+        else if (!BackHandlerHelper.handleBackPress(this)) {
+            /*Toast.makeText(kelvin_tab_layout.this, "按返回鍵會用到這裡3", Toast.LENGTH_SHORT).show();不用刪除，因為fragment的返回鍵會無反應*/
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {

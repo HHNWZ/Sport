@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.a888888888.sport.BackHandlerHelper;
+import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KelvinRunningFragment extends Fragment {
+public class KelvinRunningFragment extends Fragment implements FragmentBackHandler{
     private FragmentManager fmanager;
     private FragmentTransaction ftransaction;
     private static final int DEFAULT_DATA = 0;
@@ -91,6 +93,12 @@ public class KelvinRunningFragment extends Fragment {
 
 
     }
+
+        @Override
+        public boolean onBackPressed() {
+            /*Toast.makeText(getActivity(), "按返回鍵會用到這裡3", Toast.LENGTH_SHORT).show();fragment返回鍵會使用到這裡的，用來分開返回功能用*/
+            return BackHandlerHelper.handleBackPress(this);
+        }
 
     /*@Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
