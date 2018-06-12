@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 /**
@@ -133,6 +134,19 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             }
         });
 
+        final TextView tdbk,tdlh,tddn,tdkll;//今日飲食紀錄
+        tdbk=(TextView)view.findViewById(R.id.tdBK);
+        tdlh=(TextView)view.findViewById(R.id.tdLH);
+        tddn=(TextView)view.findViewById(R.id.tdDN);
+        tdkll=(TextView)view.findViewById(R.id.tdKLL);
+        theDate todate=((MainActivity)getActivity()).getTodayEaetdInfo();//取得今日日記資訊
+        if(todate==null){}else {
+        tdbk.setText("早餐："+Integer.toString(todate.todayKLL(0)));
+        tdlh.setText("午餐："+Integer.toString(todate.todayKLL(1)));
+        tddn.setText("晚餐："+Integer.toString(todate.todayKLL(2)));
+            tdkll.setText("今日累計熱量：" + todate.todayKLL() + "大卡");
+        }
+
 
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
         qwera2.setOnClickListener(new View.OnClickListener() {
@@ -168,6 +182,16 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             }
         });
         return view;
+    }
+
+    private String getEatedString(int[] foods) {
+        String Count = null;
+        for(int i=0;i<9;i++){
+            if(foods[i]>0){
+                //Count.concat(((MainActivity)getActivity()).food_list.get(i)+"、");
+            }
+        }
+        return "尚未紀錄";
     }
 
     // TODO: Rename method, update argument and hook method into UI event

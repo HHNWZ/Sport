@@ -25,8 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.hedan.piechart_library.PieChartBean;
-import com.hedan.piechart_library.PieChart_View;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
@@ -80,7 +78,7 @@ public class  MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
-    private PieChart_View pieView;
+    //private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     SwipeRefreshLayout mSwipeLayout;
 
@@ -267,16 +265,16 @@ public class  MainActivity extends AppCompatActivity
             fpush = Float.parseFloat(pushdata.getText().toString());
             fsit = Float.parseFloat(sitdata.getText().toString());
         }*/
-            pieView = (PieChart_View) findViewById(R.id.pie_view);
+            /*pieView = (PieChart_View) findViewById(R.id.pie_view);
             ArrayList<PieChartBean> lists = new ArrayList<>();
             lists.add(new PieChartBean(Color.parseColor("#ee3c5d"), 60, "跑步"));//rundata
             lists.add(new PieChartBean(Color.parseColor("#ffc12c"), 50, "走路"));//walkdata
             lists.add(new PieChartBean(Color.parseColor("#1fde94"), 80, "有氧"));//airdata
             lists.add(new PieChartBean(Color.parseColor("#f5a623"), 140, "扶地挺身"));//pushdata
             lists.add(new PieChartBean(Color.parseColor("#fa734e"), 110, "仰臥起坐"));//sitdata
-            pieView.setData(lists);
+            pieView.setData(lists);*/
 
-        //不知名
+        //食物列表
         food_list.add("米飯");
         food_list.add("香蕉");
         food_list.add("牛奶");
@@ -286,6 +284,7 @@ public class  MainActivity extends AppCompatActivity
         food_list.add("蔬菜");
         food_list.add("雞肉");
         food_list.add("雞蛋");
+        //食物熱量列表
         food_KLL.add(225);
         food_KLL.add(120);
         food_KLL.add(150);
@@ -401,6 +400,13 @@ public class  MainActivity extends AppCompatActivity
         });
     }
 
+    public theDate getTodayEaetdInfo() {
+        if(DL.contains(Today)){
+        return diarys.get(DL.indexOf(Today));
+        }else{
+            return null;
+        }
+    }
     public void toSportPlan() {
         BlankFragmentc4 sportplan=BlankFragmentc4.newInstance(null,null);
         FragmentManager manager=getSupportFragmentManager();
