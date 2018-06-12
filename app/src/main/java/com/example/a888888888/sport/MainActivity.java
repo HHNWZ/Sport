@@ -78,7 +78,7 @@ public class  MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
-    private PieChart_View pieView;
+    //private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     SwipeRefreshLayout mSwipeLayout;
 
@@ -265,14 +265,14 @@ public class  MainActivity extends AppCompatActivity
             fpush = Float.parseFloat(pushdata.getText().toString());
             fsit = Float.parseFloat(sitdata.getText().toString());
         }*/
-            pieView = (PieChart_View) findViewById(R.id.pie_view);
+            /*pieView = (PieChart_View) findViewById(R.id.pie_view);
             ArrayList<PieChartBean> lists = new ArrayList<>();
             lists.add(new PieChartBean(Color.parseColor("#ee3c5d"), 60, "跑步"));//rundata
             lists.add(new PieChartBean(Color.parseColor("#ffc12c"), 50, "走路"));//walkdata
             lists.add(new PieChartBean(Color.parseColor("#1fde94"), 80, "有氧"));//airdata
             lists.add(new PieChartBean(Color.parseColor("#f5a623"), 140, "扶地挺身"));//pushdata
             lists.add(new PieChartBean(Color.parseColor("#fa734e"), 110, "仰臥起坐"));//sitdata
-            pieView.setData(lists);
+            pieView.setData(lists);*/
 
         //食物列表
         food_list.add("米飯");
