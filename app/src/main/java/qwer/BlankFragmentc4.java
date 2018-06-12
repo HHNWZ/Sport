@@ -140,10 +140,12 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         tddn=(TextView)view.findViewById(R.id.tdDN);
         tdkll=(TextView)view.findViewById(R.id.tdKLL);
         theDate todate=((MainActivity)getActivity()).getTodayEaetdInfo();//取得今日日記資訊
-        tdbk.setText("早餐："+getEatedString(todate.eated[0]));
-        tdlh.setText("午餐："+getEatedString(todate.eated[1]));
-        tddn.setText("晚餐："+getEatedString(todate.eated[2]));
-        tdkll.setText("今日累計熱量："+todate.todayKLL()+"大卡");
+        if(todate==null){}else {
+        tdbk.setText("早餐："+Integer.toString(todate.todayKLL(0)));
+        tdlh.setText("午餐："+Integer.toString(todate.todayKLL(1)));
+        tddn.setText("晚餐："+Integer.toString(todate.todayKLL(2)));
+            tdkll.setText("今日累計熱量：" + todate.todayKLL() + "大卡");
+        }
 
 
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);

@@ -41,6 +41,13 @@ public class theDate {
         }
         return countKLL;
     }
+    public int todayKLL(int foodType){
+        int countKLL=0;
+        for(int i=0;i<9;i++){
+            countKLL+=eated[foodType][i]*food_KLL[i];
+        }
+        return countKLL;
+    }
     public void removeKLL(int Food_Type){
         for(int i=0;i<9;i++){
             this.eated[Food_Type][i]=0;
