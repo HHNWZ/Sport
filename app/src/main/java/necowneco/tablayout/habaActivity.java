@@ -57,14 +57,14 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<String> shsolCon=new ArrayList<String>();
     final ArrayList<Integer> shsolGd=new ArrayList<Integer>();
     final ArrayList<Integer> shsolRn=new ArrayList<Integer>();
-    final String nowuser="369";
-
+    final String nowuser="369";//測試用之預設使用者
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haba_neco);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //填入測試用資料
         final Button spall = (Button)findViewById(R.id.sp_all);
         final Button sprun = (Button)findViewById(R.id.sp_run);
         final Button spwalk = (Button)findViewById(R.id.sp_walk);
@@ -94,8 +94,8 @@ public class habaActivity extends AppCompatActivity
         resList.add(new ArrayList<String>());
         resList.get(0).add("以下為留言");
         resList.get(1).add("以下為留言");
-        resList.get(2).add("以下為留言");
-        BackArtList();
+        resList.get(2).add("以下為留言");//連接資料庫後，請按照上述方法另建"取得資料"之函式
+        BackArtList();//展開貼文列表
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,8 +142,8 @@ public class habaActivity extends AppCompatActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AddArt addart=AddArt.newInstance(nowuser, "新增",artID.size(),null,null,null);
+            public void onClick(View view) {//<跳頁>新增貼文
+                AddArt addart=AddArt.newInstance(nowuser, "新增",artID.size(),null,null,null);//賦予addArt頁面"新增"狀態
                 FragmentManager manager=getSupportFragmentManager();
                 manager.beginTransaction().replace(
                         R.id.haba,
@@ -161,58 +161,51 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //Toast.makeText(this, "QU="+requestCode+"，SU="+resultCode, Toast.LENGTH_SHORT).show();
-        //當使用者按下確定後
-        if (resultCode == RESULT_OK) {
-            //取得圖檔的路徑位置
-            Uri uri = data.getData();
-            //寫log
-            Log.e("uri", uri.toString());
-            //抽象資料的接口
-            ContentResolver cr = this.getContentResolver();
-            try {
-                //由抽象資料接口轉換圖檔路徑為Bitmap
-                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
-                //取得圖片控制項ImageView
-                ImageView imageView = (ImageView) findViewById(R.id.myIMG);
-                // 將Bitmap設定到ImageView
-                imageView.setImageBitmap(bitmap);
-                imageView.setVisibility(View.VISIBLE);
-            } catch (FileNotFoundException e) {
-                Log.e("Exception", e.getMessage(),e);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+    public void BackArtList(){//<跳頁>回到貼文列表
+        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgood,artresCount());
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                all,
+                all.getTag()
+        ).commit();
     }
-
-    public void downloadTheImg(Bitmap bitmap) {
-        FileOutputStream fOut;
-        try {
-            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-            if (!dir.exists()) {
-                dir.mkdir();
-            }
-            String tmp = dir+"/girl.jpg";
-            fOut = new FileOutputStream(tmp);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
-
-            try {
-                fOut.flush();
-                fOut.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-
-        }
+    public void ToSearchList(){//<跳頁>進入搜尋與篩選頁面
+        SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                searchartlist,
+                searchartlist.getTag()
+        ).commit();
     }
-
-    public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){
-        AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);
+    public void toArtcon(int TargetID){//<跳頁>查看貼文內容
+        theArt theart=theArt.newInstance(
+                TargetID,
+                artTitle.get(TargetID),
+                autID.get(TargetID),
+                artClass.get(TargetID),
+                artCon.get(TargetID),
+                artgood.get(TargetID),
+                resList.get(TargetID),
+                nowuser
+        );
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.haba,theart,null)
+                .commit();
+    }
+    public void toResList(int TargetID){//<跳頁>查看該貼文之全部留言
+        theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                theartres,
+                theartres.getTag()
+        ).commit();
+    }
+    public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){//<跳頁>編輯已發佈的貼文內容
+        AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);//進入addArt頁面時賦予"編輯"狀態
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -220,23 +213,22 @@ public class habaActivity extends AppCompatActivity
                 addart.getTag()
         ).commit();
     }
-    public void reSetArtDATA(int theartID,String theTitle, String theClass,String  theCon){
-        artTitle.set(theartID,theTitle);
-        artClass.set(theartID,theClass);
-        artCon.set(theartID,theCon);
-        toArtcon(theartID);
+    public ArrayList<Integer> artresCount(){//<資料處理>取得貼文列表中每則貼文之留言數，展開貼文列表時使用
+        ArrayList<Integer> mycount=new ArrayList<Integer>();
+        for(int i=0;i<artID.size();i++){
+            mycount.add(resList.get(i).size());
+        }
+        return mycount;
     }
-    public void testfunction(){
-        Toast.makeText(this, "嘎啦", Toast.LENGTH_SHORT).show();
-    }
-    private void SelAndSearch(String SearchValue, boolean FunctionType) {//Type=true:搜尋,false:篩選
+    private void SelAndSearch(String SearchValue, boolean FunctionType) {//<資料處理>預先準備好符合搜尋或篩選條件的貼文項目列表
+        //Type=true:搜尋,false:篩選
         shsolID.clear();
         shsolTitle.clear();
         shsolAut.clear();
         shsolCon.clear();
         shsolGd.clear();
         shsolRn.clear();
-        if(FunctionType) {
+        if(FunctionType) {//使用搜尋元件
             for (int i = 0; i < artID.size(); i++) {
                 if (artTitle.get(i).contains(SearchValue)||artCon.get(i).contains(SearchValue)) {
                     shsolID.add(i);
@@ -248,7 +240,7 @@ public class habaActivity extends AppCompatActivity
                 }
             }
             Toast.makeText(this, "搜尋："+SearchValue, Toast.LENGTH_SHORT).show();
-        }else{
+        }else{//使用側拉式選單
             for (int i = 0; i < artID.size(); i++) {
                 if (artClass.get(i)==SearchValue) {
                     shsolID.add(i);
@@ -261,37 +253,90 @@ public class habaActivity extends AppCompatActivity
             }
             Toast.makeText(this, "篩選："+SearchValue, Toast.LENGTH_SHORT).show();
         }
-        ToSearchList();
+        ToSearchList();//呼叫進入搜尋與篩選頁面的函式
     }
+    public void addartDATA(String theTitle, String theClass,String  theCon){//<資料處理>新增貼文
+        int addid=artID.size();
+        artID.add("00"+(addid+1));
+        autID.add(nowuser);
+        artTitle.add(theTitle);
+        artClass.add(theClass);
+        artCon.add(theCon);
+        resList.add(new ArrayList<String>());
+        addRes(addid,"以下為留言");
+        artgood.add(0);
+        //以上為：將新增之貼文存於資料列
+        Toast.makeText(this,
+                "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
+                Toast.LENGTH_SHORT).
+                show();
+        toArtcon(addid);//直接檢視發布之貼文
+    }
+    public void IINe(int TargetID){//<資料處理>點讚
+        artgood.set(TargetID,artgood.get(TargetID)+1);
+    }
+    public void addRes(int TargetID,String resCon){//<資料處理>新增留言
+        resList.get(TargetID).add(resCon);
+    }
+    public void reSetArtDATA(int theartID,String theTitle, String theClass,String  theCon){//<資料處理>編輯後更新貼文內容
+        artTitle.set(theartID,theTitle);
+        artClass.set(theartID,theClass);
+        artCon.set(theartID,theCon);
+        toArtcon(theartID);//回到該貼文內容
+    }
+    public void deletartDATA(int Target){//<資料處理>自資料列中刪除一則貼文
+        artID.remove(Target);
+        autID.remove(Target);
+        artTitle.remove(Target);
+        artClass.remove(Target);
+        artCon.remove(Target);
+        resList.remove(Target);
+        artgood.remove(Target);
+        Toast.makeText(this,
+                "已刪除貼文",
+                Toast.LENGTH_SHORT).
+                show();
+        BackArtList();//回到貼文列表
+    }
+    public void downloadTheImg(Bitmap bitmap) {//<資料處理>將本頁(貼文內容)圖片儲存至手機內部儲存空間/DCIM中
+        FileOutputStream fOut;
+        try {
+            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);//取得前往DCIM之路徑
+            if (!dir.exists()) {//若無該路徑則自行建立
+                dir.mkdir();
+            }
+            String tmp = dir+"/girl.jpg";//設定儲存圖片之路徑+檔名
+            fOut = new FileOutputStream(tmp);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);//儲存圖片
+            try {
+                fOut.flush();
+                fOut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-    public ArrayList<Integer> artresCount(){
-        ArrayList<Integer> mycount=new ArrayList<Integer>();
-        for(int i=0;i<artID.size();i++){
-            mycount.add(resList.get(i).size());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+
         }
-        return mycount;
     }
-    public void BackArtList(){
-        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgood,artresCount());
-        FragmentManager manager=getSupportFragmentManager();
-        manager.beginTransaction().replace(
-                R.id.haba,
-                all,
-                all.getTag()
-        ).commit();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {//<資料處理>上傳圖片至APP(接收端)
+        if (resultCode == RESULT_OK) {//當使用者選擇圖片後
+            Uri uri = data.getData();//取得圖檔的路徑位置
+            Log.e("uri", uri.toString());//寫log
+            ContentResolver cr = this.getContentResolver();//抽象資料的接口
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));//由抽象資料接口轉換圖檔路徑為Bitmap
+                ImageView imageView = (ImageView) findViewById(R.id.myIMG);//取得圖片控制項ImageView
+                imageView.setImageBitmap(bitmap);// 將Bitmap設定到ImageView
+                imageView.setVisibility(View.VISIBLE);//將預設"隱藏"的ImageView改為"顯示"
+            } catch (FileNotFoundException e) {
+                Log.e("Exception", e.getMessage(),e);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
-    public void ToSearchList(){
-        SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn);
-        FragmentManager manager=getSupportFragmentManager();
-        manager.beginTransaction().replace(
-                R.id.haba,
-                searchartlist,
-                searchartlist.getTag()
-        ).commit();
-    }
-
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -309,7 +354,6 @@ public class habaActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -333,7 +377,6 @@ public class habaActivity extends AppCompatActivity
         });
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -348,7 +391,6 @@ public class habaActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -373,72 +415,9 @@ public class habaActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
     @Override
     public void onFragmentInteraction(String Tag, String number) {
         BackArtList();
-    }
-    public void addartDATA(String theTitle, String theClass,String  theCon){
-        int addid=artID.size();
-        artID.add("00"+(addid+1));
-        autID.add(nowuser);
-        artTitle.add(theTitle);
-        artClass.add(theClass);
-        artCon.add(theCon);
-        resList.add(new ArrayList<String>());
-        addRes(addid,"以下為留言");
-        artgood.add(0);
-        Toast.makeText(this,
-                "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
-                Toast.LENGTH_SHORT).
-                show();
-        toArtcon(addid);
-    }
-    public void deletartDATA(int Target){
-        artID.remove(Target);
-        autID.remove(Target);
-        artTitle.remove(Target);
-        artClass.remove(Target);
-        artCon.remove(Target);
-        resList.remove(Target);
-        artgood.remove(Target);
-        Toast.makeText(this,
-                "已刪除貼文",
-                Toast.LENGTH_SHORT).
-                show();
-        BackArtList();
-    }
-    public void toArtcon(int TargetID){
-        theArt theart=theArt.newInstance(
-                TargetID,
-                artTitle.get(TargetID),
-                autID.get(TargetID),
-                artClass.get(TargetID),
-                artCon.get(TargetID),
-                artgood.get(TargetID),
-                resList.get(TargetID),
-                nowuser
-        );
-        FragmentManager manager=getSupportFragmentManager();
-        manager.beginTransaction()
-                .replace(R.id.haba,theart,null)
-                .commit();
-    }
-    public void addRes(int TargetID,String resCon){
-        resList.get(TargetID).add(resCon);
-    }
-    public void IINe(int TargetID){//讚
-        artgood.set(TargetID,artgood.get(TargetID)+1);
-    }
-    public void toResList(int TargetID){
-        theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
-        FragmentManager manager=getSupportFragmentManager();
-        manager.beginTransaction().replace(
-                R.id.haba,
-                theartres,
-                theartres.getTag()
-        ).commit();
     }
 
 
