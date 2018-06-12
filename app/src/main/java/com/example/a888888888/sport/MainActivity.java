@@ -274,7 +274,6 @@ public class  MainActivity extends AppCompatActivity
             lists.add(new PieChartBean(Color.parseColor("#f5a623"), 140, "扶地挺身"));//pushdata
             lists.add(new PieChartBean(Color.parseColor("#fa734e"), 110, "仰臥起坐"));//sitdata
             pieView.setData(lists);
-
         //食物列表
         food_list.add("米飯");
         food_list.add("香蕉");
