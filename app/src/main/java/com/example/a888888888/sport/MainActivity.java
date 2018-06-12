@@ -258,7 +258,6 @@ public class  MainActivity extends AppCompatActivity
             mSwipeLayout.setOnRefreshListener(this);
             mSwipeLayout.setColorSchemeColors(Color.RED);
 
-
             //圓餅圖
         /*if(Login.user != null) {
             frun = Float.parseFloat(rundata.getText().toString());
