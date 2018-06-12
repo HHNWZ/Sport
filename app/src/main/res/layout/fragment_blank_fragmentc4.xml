@@ -102,6 +102,40 @@
                 android:src="@drawable/sportfinish"
                 android:visibility="gone" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/TodayFoodKKL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="今日的飲食：" />
+
+            <TextView
+                android:id="@+id/tdBK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="早餐：尚未紀錄" />
+
+            <TextView
+                android:id="@+id/tdLH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="午餐：尚未記錄" />
+
+            <TextView
+                android:id="@+id/tdDN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="晚餐：尚未紀錄" />
+
+            <TextView
+                android:id="@+id/tdKLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="今日累計熱量：0" />
+        </LinearLayout>
 
     </LinearLayout>
     <LinearLayout

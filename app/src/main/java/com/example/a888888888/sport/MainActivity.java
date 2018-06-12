@@ -378,6 +378,9 @@ public class  MainActivity extends AppCompatActivity
         });
     }
 
+    public theDate getTodayEaetdInfo() {
+        return diarys.get(DL.indexOf(Today));
+    }
     public void toSportPlan() {
         BlankFragmentc4 sportplan=BlankFragmentc4.newInstance(null,null);
         FragmentManager manager=getSupportFragmentManager();
