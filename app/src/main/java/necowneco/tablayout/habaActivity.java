@@ -209,6 +209,7 @@ public class habaActivity extends AppCompatActivity
                 theartres.getTag()
         ).commit();
     }
+
     public void reAddArtDATA(int theartID,String theTitle, String theClass,String  theCon){//<跳頁>編輯已發佈的貼文內容
         AddArt addart=AddArt.newInstance(nowuser,"編輯",theartID,theTitle,theClass,theCon);//進入addArt頁面時賦予"編輯"狀態
         FragmentManager manager=getSupportFragmentManager();
