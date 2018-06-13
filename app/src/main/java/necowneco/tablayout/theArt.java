@@ -164,7 +164,6 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 ((habaActivity)getActivity()).toArtcon(mTarID);
             }
         });
-
         /*ArrayAdapter<String> theartreslist=new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_expandable_list_item_1,
