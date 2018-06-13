@@ -120,6 +120,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final TextView theartClass=(TextView)view.findViewById(R.id.theClass);
         final TextView theartCon=(TextView)view.findViewById(R.id.theCon);
         final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
+        final Button koreiine2=(Button)view.findViewById(R.id.koreIINe2);
         final Button tores=(Button)view.findViewById(R.id.toRes);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
         final Button downloadbtn=(Button)view.findViewById(R.id.downloadBtn);
@@ -134,6 +135,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         theartClass.setText("貼文類別："+mType);
         theartCon.setText(mCon);
         koreiine.setText(mGood+"個讚");
+        koreiine2.setText(mGood+"個讚");
         tores.setText("留言");
         downloadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,10 +145,19 @@ public class theArt extends Fragment implements View.OnTouchListener {
         });
         if(((habaActivity)getActivity()).artgood.get(mTarID).contains(mNowUser)){//判斷是否已按讚此貼文
             isGooded=true;
+            koreiine.setVisibility(View.GONE);
+            koreiine2.setVisibility(View.VISIBLE);
         }else{
             isGooded=false;
         }
         koreiine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity)getActivity()).IINe(mTarID,isGooded);
+                ((habaActivity)getActivity()).toArtcon(mTarID);
+            }
+        });
+        koreiine2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((habaActivity)getActivity()).IINe(mTarID,isGooded);

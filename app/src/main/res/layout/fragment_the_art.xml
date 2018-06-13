@@ -83,6 +83,14 @@
                 android:text="讚" />
 
             <Button
+                android:id="@+id/koreIINe2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:drawableLeft="@drawable/like2"
+                android:text="讚"
+                android:visibility="gone" />
+            <Button
                 android:id="@+id/toRes"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
