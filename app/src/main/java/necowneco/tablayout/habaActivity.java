@@ -50,7 +50,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<String> artClass=new ArrayList<String>();//貼文類別列表
     final ArrayList<String> artCon=new ArrayList<String>();//貼文內容列表
     final ArrayList<ArrayList> resList=new ArrayList<>();//貼文留言ID [ 該貼文列表 ]，resList.get(ID).size=取得貼文數
-    final ArrayList<Integer> artgood=new ArrayList<Integer>();//貼文讚數列表
+    final ArrayList<ArrayList> artgood=new ArrayList<ArrayList>();//貼文讚數列表
     final ArrayList<Integer> shsolID=new ArrayList<Integer>();//搜尋&篩選ID列表(位置)，searchsol=shsol
     final ArrayList<String> shsolTitle=new ArrayList<String>();//搜尋&篩選標題列表
     final ArrayList<String> shsolAut=new ArrayList<String>();
@@ -87,9 +87,12 @@ public class habaActivity extends AppCompatActivity
         artCon.add("愉快，太愉快了。此時此刻，吾輩的雙足成為了地球上最快的傳說。吾輩名曰----夸父。");
         artCon.add("還差一點...不能放棄!!夢想中的六十四塊腹肌就在眼前，要是放棄的話，就只能回到六十三塊腹肌的生活了!!!!!");
         artCon.add("用人體本身具備的韻律感、平衡感等堪稱生物學奧秘的要素，達成與自然界的共鳴。...是的，我是一棵樹。");
-        artgood.add(10);
-        artgood.add(20);
-        artgood.add(30);
+        artgood.add(new ArrayList<String>());
+        artgood.add(new ArrayList<String>());
+        artgood.add(new ArrayList<String>());
+        artgood.get(0).add("456");artgood.get(0).add("789");
+        artgood.get(1).add("123");artgood.get(1).add("789");
+        artgood.get(2).add("123");artgood.get(2).add("456");artgood.get(2).add("369");
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
@@ -163,7 +166,7 @@ public class habaActivity extends AppCompatActivity
 
     }
     public void BackArtList(){//<跳頁>回到貼文列表
-        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgood,artresCount());
+        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgoodCount(),artresCount());
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -171,6 +174,8 @@ public class habaActivity extends AppCompatActivity
                 all.getTag()
         ).commit();
     }
+
+
     public void ToSearchList(){//<跳頁>進入搜尋與篩選頁面
         SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn);
         fragcount++;
@@ -189,7 +194,7 @@ public class habaActivity extends AppCompatActivity
                 autID.get(TargetID),
                 artClass.get(TargetID),
                 artCon.get(TargetID),
-                artgood.get(TargetID),
+                artgood.get(TargetID).size(),
                 resList.get(TargetID),
                 nowuser
         );
@@ -219,6 +224,13 @@ public class habaActivity extends AppCompatActivity
                 addart.getTag()
         ).commit();
     }
+    private ArrayList<Integer> artgoodCount() {
+        ArrayList<Integer> mycount=new ArrayList<Integer>();
+        for(int i=0;i<artID.size();i++){
+            mycount.add(artgood.get(i).size());
+        }
+        return mycount;
+    }
     public ArrayList<Integer> artresCount(){//<資料處理>取得貼文列表中每則貼文之留言數，展開貼文列表時使用
         ArrayList<Integer> mycount=new ArrayList<Integer>();
         for(int i=0;i<artID.size();i++){
@@ -241,7 +253,7 @@ public class habaActivity extends AppCompatActivity
                     shsolTitle.add(artTitle.get(i));
                     shsolAut.add(autID.get(i));
                     shsolCon.add(artCon.get(i));
-                    shsolGd.add(artgood.get(i));
+                    shsolGd.add(artgood.get(i).size());
                     shsolRn.add(resList.get(i).size());
                 }
             }
@@ -253,7 +265,7 @@ public class habaActivity extends AppCompatActivity
                     shsolTitle.add(artTitle.get(i));
                     shsolAut.add(autID.get(i));
                     shsolCon.add(artCon.get(i));
-                    shsolGd.add(artgood.get(i));
+                    shsolGd.add(artgood.get(i).size());
                     shsolRn.add(resList.get(i).size());
                 }
             }
@@ -268,9 +280,9 @@ public class habaActivity extends AppCompatActivity
         artTitle.add(theTitle);
         artClass.add(theClass);
         artCon.add(theCon);
+        artgood.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
         addRes(addid,"以下為留言");
-        artgood.add(0);
         //以上為：將新增之貼文存於資料列
         Toast.makeText(this,
                 "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
@@ -278,8 +290,12 @@ public class habaActivity extends AppCompatActivity
                 show();
         toArtcon(addid);//直接檢視發布之貼文
     }
-    public void IINe(int TargetID){//<資料處理>點讚
-        artgood.set(TargetID,artgood.get(TargetID)+1);
+    public void IINe(int TargetID,boolean gooded){//<資料處理>點讚&收回
+        if(gooded) {
+            artgood.get(TargetID).remove(nowuser);
+        }else{
+            artgood.get(TargetID).add(nowuser);
+        }
     }
     public void addRes(int TargetID,String resCon){//<資料處理>新增留言
         resList.get(TargetID).add(resCon);
@@ -357,7 +373,7 @@ public class habaActivity extends AppCompatActivity
                     autID.get(BacktoID),
                     artClass.get(BacktoID),
                     artCon.get(BacktoID),
-                    artgood.get(BacktoID),
+                    artgood.get(BacktoID).size(),
                     resList.get(BacktoID),
                     nowuser
             );

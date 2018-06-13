@@ -48,6 +48,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
     private int mGood;
     private ArrayList<String> mRes;
     private String mNowUser;
+    private boolean isGooded;
 
     private OnFragmentInteractionListener mListener;
 
@@ -125,7 +126,6 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final ImageView theimg=(ImageView)view.findViewById(R.id.theIMG);
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
-
         if(mNowUser==mAut) {
             thedeletBtn.setVisibility(View.VISIBLE);
         }
@@ -141,10 +141,15 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 ((habaActivity)getActivity()).downloadTheImg(((BitmapDrawable)theimg.getDrawable()).getBitmap());
             }
         });
+        if(((habaActivity)getActivity()).artgood.get(mTarID).contains(mNowUser)){//判斷是否已按讚此貼文
+            isGooded=true;
+        }else{
+            isGooded=false;
+        }
         koreiine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((habaActivity)getActivity()).IINe(mTarID);
+                ((habaActivity)getActivity()).IINe(mTarID,isGooded);
                 ((habaActivity)getActivity()).toArtcon(mTarID);
             }
         });
