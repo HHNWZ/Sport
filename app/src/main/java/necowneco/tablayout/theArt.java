@@ -122,6 +122,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
         final Button koreiine2=(Button)view.findViewById(R.id.koreIINe2);
         final Button tores=(Button)view.findViewById(R.id.toRes);
+        final Button toreart=(Button)view.findViewById(R.id.toRe_Art);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
         final Button downloadbtn=(Button)view.findViewById(R.id.downloadBtn);
         final ImageView theimg=(ImageView)view.findViewById(R.id.theIMG);
@@ -179,7 +180,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 ((habaActivity) getActivity()).toResList(mTarID);
             }
         });
-
+        toreart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((habaActivity) getActivity()).reTheArt(mTitle);
+            }
+        });
         backtolist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

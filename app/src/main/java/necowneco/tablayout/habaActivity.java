@@ -224,7 +224,16 @@ public class habaActivity extends AppCompatActivity
                 addart.getTag()
         ).commit();
     }
-    private ArrayList<Integer> artgoodCount() {
+    public void reTheArt(String theTitle) {
+        AddArt addart=AddArt.newInstance(nowuser,"回覆",artID.size(),theTitle,null,null);//進入addArt頁面時賦予"回覆"狀態
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.haba,
+                addart,
+                addart.getTag()
+        ).commit();
+    }
+    private ArrayList<Integer> artgoodCount() {//<資料處理>取得貼文列表中每則貼文之讚數，展開貼文列表時使用
         ArrayList<Integer> mycount=new ArrayList<Integer>();
         for(int i=0;i<artID.size();i++){
             mycount.add(artgood.get(i).size());
@@ -460,6 +469,7 @@ public class habaActivity extends AppCompatActivity
     public void onFragmentInteraction(String Tag, String number) {
         BackArtList();
     }
+
 
 
 }

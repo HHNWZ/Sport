@@ -114,6 +114,9 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             for(ci=0;theClass!=SportList[ci];ci++){}
             spinner.setSelection(ci);
             cc.setText(theCon);
+        }else if(addType=="回覆"){
+            at.setText(addType+"貼文");
+            ct.setText("Re："+theTitle);
         }
         finishbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,15 +141,15 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
-                if(addType=="新增"){
-                    ((habaActivity) getActivity()).addartDATA(
-                            ct.getText().toString(),
+                if(addType=="編輯"){
+                    ((habaActivity)getActivity()).reSetArtDATA(
+                            theID,ct.getText().toString(),
                             spinner.getSelectedItem().toString(),
                             cc.getText().toString()
                     );
-                }else{//編輯
-                    ((habaActivity)getActivity()).reSetArtDATA(
-                            theID,ct.getText().toString(),
+                }else{//新增、回覆
+                    ((habaActivity) getActivity()).addartDATA(
+                            ct.getText().toString(),
                             spinner.getSelectedItem().toString(),
                             cc.getText().toString()
                     );
