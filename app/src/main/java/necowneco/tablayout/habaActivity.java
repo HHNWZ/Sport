@@ -49,7 +49,8 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<String> autID=new ArrayList<String>();//貼文作者ID列表
     final ArrayList<String> artClass=new ArrayList<String>();//貼文類別列表
     final ArrayList<String> artCon=new ArrayList<String>();//貼文內容列表
-    final ArrayList<ArrayList> resList=new ArrayList<>();//貼文留言ID [ 該貼文列表 ]，resList.get(ID).size=取得貼文數
+    final ArrayList<ArrayList> resName=new ArrayList<ArrayList>();//貼文留言記名列表
+    final ArrayList<ArrayList> resList=new ArrayList<>();//貼文留言ID [ 該貼文列表 ]，resList.get(ID).size=取得留言數
     final ArrayList<ArrayList> artgood=new ArrayList<ArrayList>();//貼文讚數列表
     final ArrayList<Integer> shsolID=new ArrayList<Integer>();//搜尋&篩選ID列表(位置)，searchsol=shsol
     final ArrayList<String> shsolTitle=new ArrayList<String>();//搜尋&篩選標題列表
@@ -93,12 +94,12 @@ public class habaActivity extends AppCompatActivity
         artgood.get(0).add("456");artgood.get(0).add("789");
         artgood.get(1).add("123");artgood.get(1).add("789");
         artgood.get(2).add("123");artgood.get(2).add("456");artgood.get(2).add("369");
+        resName.add(new ArrayList<String>());
+        resName.add(new ArrayList<String>());
+        resName.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
-        resList.add(new ArrayList<String>());
-        resList.get(0).add("以下為留言");
-        resList.get(1).add("以下為留言");
-        resList.get(2).add("以下為留言");//連接資料庫後，請按照上述方法另建"取得資料"之函式
+        resList.add(new ArrayList<String>());//連接資料庫後，請按照上述方法另建"取得資料"之函式
         BackArtList();//展開貼文列表
         spall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,7 +207,7 @@ public class habaActivity extends AppCompatActivity
     public void toResList(int TargetID){//<跳頁>查看該貼文之全部留言
         BacktheArt = 1;
         BacktoID = TargetID;
-        theArtRes theartres=theArtRes.newInstance(resList.get(TargetID),artTitle.get(TargetID),TargetID);
+        theArtRes theartres=theArtRes.newInstance(resName.get(TargetID),resList.get(TargetID),artTitle.get(TargetID),TargetID);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -224,7 +225,7 @@ public class habaActivity extends AppCompatActivity
                 addart.getTag()
         ).commit();
     }
-    public void reTheArt(String theTitle) {
+    public void reTheArt(String theTitle) {//<跳頁>新增一則新貼文來回覆某一貼文
         AddArt addart=AddArt.newInstance(nowuser,"回覆",artID.size(),theTitle,null,null);//進入addArt頁面時賦予"回覆"狀態
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
@@ -291,7 +292,6 @@ public class habaActivity extends AppCompatActivity
         artCon.add(theCon);
         artgood.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
-        addRes(addid,"以下為留言");
         //以上為：將新增之貼文存於資料列
         Toast.makeText(this,
                 "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
@@ -307,6 +307,7 @@ public class habaActivity extends AppCompatActivity
         }
     }
     public void addRes(int TargetID,String resCon){//<資料處理>新增留言
+        resName.get(TargetID).add(nowuser);
         resList.get(TargetID).add(resCon);
     }
     public void reSetArtDATA(int theartID,String theTitle, String theClass,String  theCon){//<資料處理>編輯後更新貼文內容

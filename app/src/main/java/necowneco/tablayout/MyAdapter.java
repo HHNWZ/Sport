@@ -78,7 +78,7 @@ public class MyAdapter extends BaseAdapter{
         holder.txtAut.setText(artlistitem.getMyAut());
         holder.txtCon.setText(artlistitem.getMyCon());
         holder.txtGdnum.setText(""+artlistitem.getMyGoodnum());
-        holder.txtRsnum.setText(""+(artlistitem.getMyResnum()-1));
+        holder.txtRsnum.setText(""+(artlistitem.getMyResnum()));
         return convertView;
     }
 }
