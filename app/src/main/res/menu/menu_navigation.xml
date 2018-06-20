@@ -18,4 +18,10 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/open" />
     </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/email_register"
+            android:icon="@drawable/email_register"
+            android:title="@string/email_register" />
+    </group>
 </menu>

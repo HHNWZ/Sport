@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
+import com.onesignal.OneSignal;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import org.json.JSONArray;
@@ -38,6 +39,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import kelvin.tablayout.Firebase_Email_Register;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -229,6 +231,10 @@ public class  MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
         setContentView(R.layout.activity_main);
         mToolboar=(Toolbar)findViewById(R.id.nav_action); //替換toolbar會爆
         setSupportActionBar(mToolboar);//Toolbar取代原本的ActionBar
@@ -587,6 +593,11 @@ public class  MainActivity extends AppCompatActivity
                     reg,
                     reg.getTag()
             ).commit();
+        }
+        else if(id==R.id.email_register){
+            Intent i = new Intent(MainActivity.this,Firebase_Email_Register.class);
+            finish();
+            startActivity(i);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
