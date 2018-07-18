@@ -23,8 +23,12 @@
           }
         },
         {
-          "client_id": "752419777916-8gsdabu7m0aj9r261n96u2o0av2smv21.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "752419777916-d12136b32oiiln342so22jp493po6cho.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a888888888.sport",
+            "certificate_hash": "558f079b39d4046ca1f2bf0c11baf25175118850"
+          }
         },
         {
           "client_id": "752419777916-8gsdabu7m0aj9r261n96u2o0av2smv21.apps.googleusercontent.com",

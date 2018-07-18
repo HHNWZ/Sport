@@ -40,6 +40,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kelvin.tablayout.Firebase_Email_Register;
+import kelvin.tablayout.MainActivityFireBase;
+import kelvin.tablayout.StartActivity;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -595,7 +597,7 @@ public class  MainActivity extends AppCompatActivity
             ).commit();
         }
         else if(id==R.id.email_register){
-            Intent i = new Intent(MainActivity.this,Firebase_Email_Register.class);
+            Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
             finish();
             startActivity(i);
         }

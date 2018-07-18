@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
-                onesignal_app_id: 'e1dd785a-5dec-4297-9934-711ed3bb69ca',
+                onesignal_app_id               : 'e1dd785a-5dec-4297-9934-711ed3bb69ca',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]
@@ -23,7 +23,6 @@ android {
         }
     }
     sourceSets {
-
 
         // Move the tests to tests/java, tests/res, etc...
         androidTest.setRoot('tests')
@@ -47,6 +46,7 @@ android {
 dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -77,12 +77,12 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:4.0.1'
     implementation 'com.firebaseui:firebase-ui-database:4.0.1'*/
     implementation 'com.google.firebase:firebase-core:16.0.0'
-    implementation 'com.google.firebase:firebase-auth:10.2.0'
-    implementation 'com.google.firebase:firebase-storage:10.2.0'
-    implementation 'com.google.firebase:firebase-database:10.2.0'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.firebase:firebase-client-android:2.4.0'
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
-    implementation 'com.firebaseui:firebase-ui-database:1.2.0'
+    //implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     //通知管理
     implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
     implementation 'com.squareup.okhttp3:okhttp:3.6.0'
@@ -91,15 +91,17 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 
-
     // Required for OneSignal, even if you have added FCM.
     implementation 'com.google.android.gms:play-services-gcm:12.0.1'
     // Required for geotagging
     implementation 'com.google.android.gms:play-services-location:12.0.1'
 
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
 
-
+    implementation 'id.zelory:compressor:2.0.0'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
 
 
 }

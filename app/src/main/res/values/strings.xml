@@ -94,4 +94,13 @@
     <string name="msg_req_enable">Please enable Samsung Health</string>
     <string name="msg_req_agree">Please agree with Samsung Health policy</string>
     <string name="msg_req_available">Please make Samsung Health available</string>
+    <string name="need_a_new_account">註冊新的賬號</string>
+    <string name="display_name">顯示名字</string>
+    <string name="email">電郵</string>
+    <string name="password">密碼</string>
+    <string name="create_account">創建賬號</string>
+    <string name="log_out">登出</string>
+
+
+    <string name="default_status">做運動真好</string>
 </resources>
