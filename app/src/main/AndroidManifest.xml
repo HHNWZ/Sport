@@ -51,11 +51,6 @@
             android:label="@string/title_activity_haba"
             android:screenOrientation="nosensor"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="kelvin.tablayout.Firebase_Email_Register" />
-        <activity android:name="kelvin.tablayout.Firebase_User_Login_Activity" />
-        <activity android:name="kelvin.tablayout.UploadInfo" />
-        <activity android:name="kelvin.tablayout.ShowData" />
-        <activity android:name="kelvin.tablayout.ChatConversationActivity" />
         <activity android:name="kelvin.tablayout.EnlargeImageView" />
         <activity android:name="kelvin.tablayout.MainActivityFireBase" />
         <activity android:name="kelvin.tablayout.StartActivity" />

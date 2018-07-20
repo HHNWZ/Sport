@@ -35,7 +35,7 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
-import com.onesignal.OneSignal;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.squareup.picasso.Picasso;
 
@@ -48,12 +48,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import kelvin.tablayout.Firebase_Email_Register;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.SettingsActivity;
-import kelvin.tablayout.StartActivity;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -254,10 +252,7 @@ public class  MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
+
         setContentView(R.layout.activity_main);
         mToolboar=(Toolbar)findViewById(R.id.nav_action); //替換toolbar會爆
         setSupportActionBar(mToolboar);//Toolbar取代原本的ActionBar
@@ -647,7 +642,7 @@ public class  MainActivity extends AppCompatActivity
                 Toast.makeText(MainActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
             }*/
             Intent i = new Intent(MainActivity.this,LoginActivity.class);
-            finish();
+            //finish();
             startActivity(i);
         }
 
@@ -661,17 +656,17 @@ public class  MainActivity extends AppCompatActivity
                     reg.getTag()
             ).commit();*/
             Intent i = new Intent(MainActivity.this,RegisterActivity.class);
-            finish();
+            //finish();
             startActivity(i);
         }
         else if(id==R.id.chat_room){
             Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
-            finish();
+            //finish();
             startActivity(i);
         }
         else if(id==R.id.setting_account){
             Intent i = new Intent(MainActivity.this,SettingsActivity.class);
-            finish();
+            //finish();
             startActivity(i);
         }
         else if(id==R.id.Logout){
@@ -679,7 +674,7 @@ public class  MainActivity extends AppCompatActivity
 
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(MainActivity.this,MainActivity.class);
-            finish();
+            //finish();
             startActivity(i);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
