@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -55,6 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private Button mStatusBtn;
     private Button mImageBtn;
+    private Button gotomainpage;
 
 
     private static final int GALLERY_PICK = 1;
@@ -76,6 +78,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
         mImageBtn = (Button) findViewById(R.id.settings_image_btn);
+        gotomainpage=(Button) findViewById(R.id.button_go_to_main_page);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
@@ -163,6 +166,13 @@ public class SettingsActivity extends AppCompatActivity {
                         .start(SettingsActivity.this);
                         */
 
+            }
+        });
+        gotomainpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,7 +38,8 @@ public class MainActivityFireBase extends AppCompatActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Lapit Chat");
+        getSupportActionBar().setTitle("運動聊天室");
+
 
         if (mAuth.getCurrentUser() != null) {
 
@@ -69,7 +71,9 @@ public class MainActivityFireBase extends AppCompatActivity {
 
         if(currentUser == null){
 
-            sendToStart();
+            Intent startIntent = new Intent(MainActivityFireBase.this, StartActivity.class);
+            startActivity(startIntent);
+            finish();
 
         } else {
 
@@ -90,13 +94,14 @@ public class MainActivityFireBase extends AppCompatActivity {
 
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
+
         }
 
     }
 
     private void sendToStart() {
 
-        Intent startIntent = new Intent(MainActivityFireBase.this, StartActivity.class);
+        Intent startIntent = new Intent(MainActivityFireBase.this, MainActivity.class);
         startActivity(startIntent);
         finish();
 
@@ -118,14 +123,14 @@ public class MainActivityFireBase extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        if(item.getItemId() == R.id.main_logout_btn){
+        /*if(item.getItemId() == R.id.main_logout_btn){
 
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
             FirebaseAuth.getInstance().signOut();
             sendToStart();
 
-        }
+        }*/
 
         if(item.getItemId() == R.id.main_settings_btn){
 
@@ -133,13 +138,14 @@ public class MainActivityFireBase extends AppCompatActivity {
             startActivity(settingsIntent);
 
         }
+        if(item.getItemId() == R.id.go_to_mainpage){
 
-        if(item.getItemId() == R.id.main_all_btn){
-
-            Intent settingsIntent = new Intent(MainActivityFireBase.this, UsersActivity.class);
+            Intent settingsIntent = new Intent(MainActivityFireBase.this, MainActivity.class);
             startActivity(settingsIntent);
 
         }
+
+
 
         return true;
     }

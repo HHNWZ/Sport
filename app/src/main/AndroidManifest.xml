@@ -61,10 +61,10 @@
         <activity android:name="kelvin.tablayout.StartActivity" />
         <activity
             android:name="kelvin.tablayout.RegisterActivity"
-            android:parentActivityName="kelvin.tablayout.StartActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name="kelvin.tablayout.LoginActivity"
-            android:parentActivityName="kelvin.tablayout.StartActivity" />
+            android:parentActivityName="com.example.a888888888.sport.MainActivity" />
         <activity android:name="kelvin.tablayout.SettingsActivity" />
         <activity
             android:name="kelvin.tablayout.StatusActivity"
@@ -72,9 +72,6 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity
-            android:name="kelvin.tablayout.UsersActivity"
-            android:parentActivityName="kelvin.tablayout.MainActivityFireBase" />
         <activity android:name="kelvin.tablayout.ProfileActivity">
             <intent-filter>
                 <action android:name="kelvin.tablayout.lapitchat_TARGET_NOTIFICATION" />
@@ -82,8 +79,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="kelvin.tablayout.ChatActivity" />
-        <activity android:name="kelvin.tablayout.MessageAdapter"></activity>
+        <activity android:name="kelvin.tablayout.ChatActivity"
+            android:parentActivityName="kelvin.tablayout.MainActivityFireBase"></activity>
+
     </application>
 
 </manifest>

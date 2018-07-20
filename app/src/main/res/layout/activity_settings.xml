@@ -31,9 +31,9 @@
         android:id="@+id/settings_status_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/settings_image_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="-121dp"
         android:backgroundTint="@color/colorAccent"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -44,9 +44,9 @@
         android:id="@+id/settings_image_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/settings_status_btn"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="121dp"
         android:backgroundTint="@android:color/white"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
@@ -62,5 +62,13 @@
         android:layout_marginTop="15dp"
         android:text="@string/default_status"
         android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/button_go_to_main_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_status_btn"
+        android:layout_centerHorizontal="true"
+        android:text="返回主頁" />
 
 </RelativeLayout>

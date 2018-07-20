@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +26,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 import com.onesignal.OneSignal;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +49,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import kelvin.tablayout.Firebase_Email_Register;
+import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
+import kelvin.tablayout.RegisterActivity;
+import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.StartActivity;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
@@ -80,12 +92,21 @@ public class  MainActivity extends AppCompatActivity
     private TextView airdata;
     private TextView pushdata;
     private TextView sitdata;
+    private TextView username;
+    private TextView username1;
+    private ImageView userImage;
     private MyDBHelper dbHelper; //內建資料庫
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
     private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
+    private DatabaseReference mUserRef;
+    private FirebaseAuth mAuth;
+    private String mCurrent_state;
+    //private DatabaseReference mUsersDatabase;
+
+
     SwipeRefreshLayout mSwipeLayout;
 
     com.android.volley.RequestQueue requestQueue;
@@ -247,10 +268,22 @@ public class  MainActivity extends AppCompatActivity
         //讓 ActionBar 中的返回箭號置換成 Drawer 的三條線圖示。並且把這個觸發器指定給 layDrawer 。
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =navigationView.getHeaderView(0);
+        username=(TextView)hView.findViewById(R.id.text_user_name);
+        userImage=(ImageView)hView.findViewById(R.id.user_image);
+        //username.setText("123456");
         Menu menu = navigationView.getMenu();
-        MenuItem menu_login = menu.findItem(R.id.Login);
-        MenuItem menu_user = menu.findItem(R.id.navItemAbout);
-        if(Login.user !=null)
+        MenuItem menu_email_login = menu.findItem(R.id.email_login);
+        MenuItem menu_email_register = menu.findItem(R.id.email_register);
+        MenuItem menu_chat_room = menu.findItem(R.id.chat_room);
+        MenuItem menu_setting_account = menu.findItem(R.id.setting_account);
+        MenuItem menu_Logout = menu.findItem(R.id.Logout);
+        final String user_id = getIntent().getStringExtra("user_id");
+
+
+
+
+        /*if(Login.user !=null)
         {
             menu_login.setTitle("登出");
             menu_user.setVisible(true);
@@ -259,7 +292,45 @@ public class  MainActivity extends AppCompatActivity
         {
             menu_login.setTitle("登入");
             menu_user.setVisible(false);
+        }*/
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+
+
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            menu_email_login.setVisible(false);
+            menu_email_register.setVisible(false);
+            menu_chat_room.setVisible(true);
+            menu_setting_account.setVisible(true);
+            menu_Logout.setVisible(true);
+
+            mUserRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String user_name = dataSnapshot.child("name").getValue().toString();
+                    String user_image = dataSnapshot.child("thumb_image").getValue().toString();
+                    username.setText(user_name);
+                    Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+        }else {
+            menu_email_login.setVisible(true);
+            menu_email_register.setVisible(true);
+            menu_chat_room.setVisible(false);
+            menu_setting_account.setVisible(false);
+            menu_Logout.setVisible(false);
+
         }
+
+
         navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
             //下拉更新
             mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
@@ -553,8 +624,8 @@ public class  MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.Login) {
-            if(Login.user == null) {
+        if (id == R.id.email_login) {
+            /*if(Login.user == null) {
                 Login login = Login.newInstance("param1", "param2");
                 FragmentManager manager = getSupportFragmentManager();
                 manager.beginTransaction().addToBackStack(null).replace(
@@ -574,30 +645,40 @@ public class  MainActivity extends AppCompatActivity
                 pushdata = null;
                 sitdata = null;
                 Toast.makeText(MainActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
-            }
+            }*/
+            Intent i = new Intent(MainActivity.this,LoginActivity.class);
+            finish();
+            startActivity(i);
         }
-        else if (id == R.id.navItemAbout)
+
+        else if (id == R.id.email_register)
         {
-            Userdata userdata=Userdata.newInstance("param1","param2");
-            FragmentManager manager=getSupportFragmentManager();
-            manager.beginTransaction().addToBackStack(null).replace(
-                    R.id.content_main,
-                    userdata,
-                    userdata.getTag()
-            ).commit();
-        }
-        else if (id == R.id.reg)
-        {
-            Register reg=Register.newInstance("param1","param2");
+            /*Register reg=Register.newInstance("param1","param2");
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction().addToBackStack(null).replace(
                     R.id.content_main,
                     reg,
                     reg.getTag()
-            ).commit();
+            ).commit();*/
+            Intent i = new Intent(MainActivity.this,RegisterActivity.class);
+            finish();
+            startActivity(i);
         }
-        else if(id==R.id.email_register){
+        else if(id==R.id.chat_room){
             Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
+            finish();
+            startActivity(i);
+        }
+        else if(id==R.id.setting_account){
+            Intent i = new Intent(MainActivity.this,SettingsActivity.class);
+            finish();
+            startActivity(i);
+        }
+        else if(id==R.id.Logout){
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
+            FirebaseAuth.getInstance().signOut();
+            Intent i = new Intent(MainActivity.this,MainActivity.class);
             finish();
             startActivity(i);
         }

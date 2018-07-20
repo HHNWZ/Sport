@@ -81,8 +81,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
                 viewHolder.displayName.setText(name);
 
-                Picasso.with(viewHolder.profileImage.getContext()).load(image)
-                        .placeholder(R.drawable.default_avatar).into(viewHolder.profileImage);
+                Picasso.with(viewHolder.profileImage.getContext()).load(image).placeholder(R.drawable.default_avatar).into(viewHolder.profileImage);
+                //Picasso.with(ChatActivity).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
 
             }
 

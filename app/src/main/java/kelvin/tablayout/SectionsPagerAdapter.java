@@ -40,7 +40,7 @@ class SectionsPagerAdapter extends FragmentPagerAdapter{
 
         switch (position) {
             case 0:
-                return "朋友邀請";
+                return "全部使用者";
 
             case 1:
                 return "聊天";

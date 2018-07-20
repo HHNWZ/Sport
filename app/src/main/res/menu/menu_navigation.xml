@@ -2,26 +2,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/Login"
-            android:icon="@drawable/ic_menu_send"
+            android:id="@+id/email_login"
+            android:icon="@drawable/login"
             android:title="@string/Login" />
     </group>
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/reg"
-            android:icon="@drawable/ic_menu_camera"
+            android:id="@+id/email_register"
+            android:icon="@drawable/account_plus"
             android:title="@string/close" />
     </group>
-    <group android:checkableBehavior="single">
+    <!--<group android:checkableBehavior="single">
         <item
             android:id="@+id/navItemAbout"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/open" />
+    </group>-->
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/chat_room"
+            android:icon="@drawable/chatroom"
+            android:title="@string/chat_room" />
     </group>
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/email_register"
-            android:icon="@drawable/email_register"
-            android:title="@string/email_register" />
+            android:id="@+id/setting_account"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="會員資料設定" />
     </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/logout"
+            android:title="登出" />
+    </group>
+
 </menu>
