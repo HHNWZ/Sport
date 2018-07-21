@@ -202,7 +202,7 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
                             newFragment.setTargetFragment(kelvin_sit_up_invitation.this, start_time_data_of_sit_up_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            kelvin_running_tag_friend kelvin_running_tag_friend1 = kelvin_running_tag_friend.newInstance("仰臥起坐","次數",edit_text_of_sit_up_count.getText().toString(),"次",start_year_of_kelvin_sit_up_invitation,start_month_of_kelvin_sit_up_invitation,start_day_of_kelvin_sit_up_invitation,start_hour_of_kelvin_sit_up_invitation,start_minute_of_kelvin_sit_up_invitation,end_year_of_kelvin_sit_up_invitation,end_month_of_kelvin_sit_up_invitation,end_day_of_kelvin_sit_up_invitation,end_hour_of_kelvin_sit_up_invitation,end_minute_of_kelvin_sit_up_invitation);
+                            FriendsFragment kelvin_running_tag_friend1 = FriendsFragment.newInstance("仰臥起坐","次數",edit_text_of_sit_up_count.getText().toString(),"次",start_year_of_kelvin_sit_up_invitation,start_month_of_kelvin_sit_up_invitation,start_day_of_kelvin_sit_up_invitation,start_hour_of_kelvin_sit_up_invitation,start_minute_of_kelvin_sit_up_invitation,end_year_of_kelvin_sit_up_invitation,end_month_of_kelvin_sit_up_invitation,end_day_of_kelvin_sit_up_invitation,end_hour_of_kelvin_sit_up_invitation,end_minute_of_kelvin_sit_up_invitation);
                             FragmentTransaction transaction=getFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
