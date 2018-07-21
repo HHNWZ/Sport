@@ -47,6 +47,20 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChatActivity extends AppCompatActivity {
 
     private String mChatUser;
+    private String exercise_type;
+    private String exercise_data_count;
+    private String exercise_data;
+    private String exercise_unit;
+    private String start_year_of_invitation;
+    private String start_month_of_invitation;
+    private String start_day_of_invitation;
+    private String start_hour_of_invitation;
+    private String start_minute_of_invitation;
+    private String end_year_of_invitation;
+    private String end_month_of_invitation;
+    private String end_day_of_invitation;
+    private String end_hour_of_invitation;
+    private String end_minute_of_invitation;
     private Toolbar mChatToolbar;
 
     private DatabaseReference mRootRef;
@@ -105,9 +119,21 @@ public class ChatActivity extends AppCompatActivity {
 
         mChatUser = getIntent().getStringExtra("user_id");
         String userName = getIntent().getStringExtra("user_name");
-        //String image= getIntent().getStringExtra("status");
+        exercise_type=getIntent().getStringExtra("exercise_type");
+        exercise_data_count=getIntent().getStringExtra("exercise_data_count");
+        exercise_data=getIntent().getStringExtra("exercise_data");
+        exercise_unit=getIntent().getStringExtra("exercise_unit");
+        start_year_of_invitation=getIntent().getStringExtra("start_year_of_invitation");
+        start_month_of_invitation=getIntent().getStringExtra("start_month_of_invitation");
+        start_day_of_invitation=getIntent().getStringExtra("start_day_of_invitation");
+        start_hour_of_invitation=getIntent().getStringExtra("start_hour_of_invitation");
+        start_minute_of_invitation=getIntent().getStringExtra("start_minute_of_invitation");
+        end_year_of_invitation=getIntent().getStringExtra("end_year_of_invitation");
+        end_month_of_invitation=getIntent().getStringExtra("end_month_of_invitation");
+        end_day_of_invitation=getIntent().getStringExtra("end_day_of_invitation");
+        end_hour_of_invitation=getIntent().getStringExtra("end_hour_of_invitation");
+        end_minute_of_invitation=getIntent().getStringExtra("end_minute_of_invitation");
 
-        //Toast.makeText(getApplicationContext(),image,Toast.LENGTH_LONG).show();
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View action_bar_view = inflater.inflate(R.layout.chat_custom_bar, null);
@@ -141,7 +167,7 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);
 
         loadMessages();
-
+        mChatMessageView.setText(exercise_type+":"+exercise_data+exercise_unit+"\n"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation+"\n"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
 
         mTitleView.setText(userName);
 

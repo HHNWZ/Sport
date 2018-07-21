@@ -57,7 +57,7 @@
             android:background="@android:color/white"
             android:ems="10"
             android:hint="Enter Message..."
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine|textPersonName"
             android:paddingBottom="12dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

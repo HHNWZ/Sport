@@ -1,6 +1,7 @@
 package kelvin.tablayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -16,7 +17,9 @@ public class kelvin_tab_layout extends AppCompatActivity
         kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
         kelvin_push_up_invitation.OnFragmentInteractionListener,
         kelvin_sit_up_invitation.OnFragmentInteractionListener,
-        kelvin_running_tag_friend.OnFragmentInteractionListener
+        kelvin_running_tag_friend.OnFragmentInteractionListener,
+        FriendsFragment2.OnFragmentInteractionListener
+
 {
 
 
@@ -63,6 +66,7 @@ public class kelvin_tab_layout extends AppCompatActivity
     public void onFragmentInteraction(String Tag, String number) {
 
     }
+
 
 
 }

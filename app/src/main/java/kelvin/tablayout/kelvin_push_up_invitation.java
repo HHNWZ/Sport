@@ -201,15 +201,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
                             newFragment.setTargetFragment(kelvin_push_up_invitation.this,start_time_data_of_push_up_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            /*toast=Toast.makeText(getActivity(), "伏地挺身的次數:"+push_up_count+"時間是:"+start_hour_of_kelvin_push_up_invitation+":"+start_minute_of_kelvin_push_up_invitation, Toast.LENGTH_SHORT);
-                            toast.show();
-
-                            getActivity().getSupportFragmentManager()
-                                    .beginTransaction()
-                                    .replace(R.id.fragment_kelvin_running_invitation,new kelvin_running_tag_friend(),null)
-                                    .addToBackStack(null)
-                                    .commit();*/
-                            FriendsFragment kelvin_running_tag_friend1 = FriendsFragment.newInstance("伏地挺身","次數",edit_text_of_push_up_count.getText().toString(),"次",start_year_of_kelvin_push_up_invitation,start_month_of_kelvin_push_up_invitation,start_day_of_kelvin_push_up_invitation,start_hour_of_kelvin_push_up_invitation,start_minute_of_kelvin_push_up_invitation,end_year_of_kelvin_push_up_invitation,end_month_of_kelvin_push_up_invitation,end_day_of_kelvin_push_up_invitation,end_hour_of_kelvin_push_up_invitation,end_minute_of_kelvin_push_up_invitation);
+                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("伏地挺身","次數",edit_text_of_push_up_count.getText().toString(),"次",start_year_of_kelvin_push_up_invitation,start_month_of_kelvin_push_up_invitation,start_day_of_kelvin_push_up_invitation,start_hour_of_kelvin_push_up_invitation,start_minute_of_kelvin_push_up_invitation,end_year_of_kelvin_push_up_invitation,end_month_of_kelvin_push_up_invitation,end_day_of_kelvin_push_up_invitation,end_hour_of_kelvin_push_up_invitation,end_minute_of_kelvin_push_up_invitation);
                             FragmentTransaction transaction=getFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);

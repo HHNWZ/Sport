@@ -216,7 +216,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                             newFragment.setTargetFragment(kelvin_walking_invitation.this,start_time_data_of_walking_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            FriendsFragment kelvin_running_tag_friend1 = FriendsFragment.newInstance("步行","步數",edit_text_of_walking_set_count.getText().toString(),"步",start_year_of_kelvin_walking_invitation,start_month_of_kelvin_walking_invitation,start_day_of_kelvin_walking_invitation,start_hour_of_kelvin_walking_invitation,start_minute_of_kelvin_walking_invitation,end_year_of_kelvin_walking_invitation,end_month_of_kelvin_walking_invitation,end_day_of_kelvin_walking_invitation,end_hour_of_kelvin_walking_invitation,end_minute_of_kelvin_walking_invitation);
+                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("步行","步數",edit_text_of_walking_set_count.getText().toString(),"步",start_year_of_kelvin_walking_invitation,start_month_of_kelvin_walking_invitation,start_day_of_kelvin_walking_invitation,start_hour_of_kelvin_walking_invitation,start_minute_of_kelvin_walking_invitation,end_year_of_kelvin_walking_invitation,end_month_of_kelvin_walking_invitation,end_day_of_kelvin_walking_invitation,end_hour_of_kelvin_walking_invitation,end_minute_of_kelvin_walking_invitation);
                             FragmentTransaction transaction=getFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);

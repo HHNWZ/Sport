@@ -67,6 +67,7 @@ public class kelvin_running_tag_friend extends Fragment implements View.OnTouchL
 
     private Toolbar toolbar;
 
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

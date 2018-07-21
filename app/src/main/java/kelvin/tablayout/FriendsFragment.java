@@ -31,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FriendsFragment extends Fragment implements View.OnTouchListener{
+public class FriendsFragment extends Fragment {
 
     private RecyclerView mFriendsList;
 
@@ -81,51 +81,8 @@ public class FriendsFragment extends Fragment implements View.OnTouchListener{
     public FriendsFragment() {
         // Required empty public constructor
     }
-    public static  FriendsFragment newInstance(String param1, String param2, String param3, String param4, String param5, String param6, String param7, String param8, String param9, String param10, String param11,String param12,String param13,String param14){
-        FriendsFragment fragment= new FriendsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        args.putString(ARG_PARAM3, param3);
-        args.putString(ARG_PARAM4, param4);
-        args.putString(ARG_PARAM5, param5);
-        args.putString(ARG_PARAM6, param6);
-        args.putString(ARG_PARAM7, param7);
-        args.putString(ARG_PARAM8, param8);
-        args.putString(ARG_PARAM9, param9);
-        args.putString(ARG_PARAM10, param10);
-        args.putString(ARG_PARAM11, param11);
-        args.putString(ARG_PARAM12, param12);
-        args.putString(ARG_PARAM13, param13);
-        args.putString(ARG_PARAM14,param14);
 
 
-        fragment.setArguments(args);
-        return fragment;
-
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            exercise_type=getArguments().getString(ARG_PARAM1);
-            exercise_data_count=getArguments().getString(ARG_PARAM2);
-            exercise_data = getArguments().getString(ARG_PARAM3);
-            exercise_unit=getArguments().getString(ARG_PARAM4);
-            start_year_of_invitation = getArguments().getString(ARG_PARAM5);
-            start_month_of_invitation = getArguments().getString(ARG_PARAM6);
-            start_day_of_invitation = getArguments().getString(ARG_PARAM7);
-            start_hour_of_invitation = getArguments().getString(ARG_PARAM8);
-            start_minute_of_invitation = getArguments().getString(ARG_PARAM9);
-            end_year_of_invitation = getArguments().getString(ARG_PARAM10);
-            end_month_of_invitation = getArguments().getString(ARG_PARAM11);
-            end_day_of_invitation = getArguments().getString(ARG_PARAM12);
-            end_hour_of_invitation = getArguments().getString(ARG_PARAM13);
-            end_minute_of_invitation= getArguments().getString(ARG_PARAM14);
-
-        }
-    }
 
 
     @Override
@@ -248,39 +205,6 @@ public class FriendsFragment extends Fragment implements View.OnTouchListener{
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String Tag, String number) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(Tag,number);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof kelvin_running_tag_friend.OnFragmentInteractionListener) {
-            mListener = (kelvin_running_tag_friend.OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(String Tag, String number);
-    }
 
 
     public static class FriendsViewHolder extends RecyclerView.ViewHolder {
