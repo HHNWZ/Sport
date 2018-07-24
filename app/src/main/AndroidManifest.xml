@@ -22,11 +22,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name="kelvin.tablayout.FirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -67,7 +62,8 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name="kelvin.tablayout.ProfileActivity">
+        <activity android:name="kelvin.tablayout.ProfileActivity"
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="kelvin.tablayout.lapitchat_TARGET_NOTIFICATION" />
 
@@ -76,6 +72,7 @@
         </activity>
         <activity android:name="kelvin.tablayout.ChatActivity"
             android:parentActivityName="kelvin.tablayout.MainActivityFireBase"></activity>
+
 
     </application>
 

@@ -18,7 +18,9 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.10.1, 0.99.99]'
     }
+
 }
+
 
 
 

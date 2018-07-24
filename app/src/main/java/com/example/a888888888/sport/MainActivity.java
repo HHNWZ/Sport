@@ -1,10 +1,17 @@
 package com.example.a888888888.sport;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -36,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
+import com.onesignal.OneSignal;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.squareup.picasso.Picasso;
 
@@ -43,13 +51,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
+import kelvin.tablayout.ChatActivity;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
+import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.kelvin_tab_layout;
@@ -101,7 +115,9 @@ public class  MainActivity extends AppCompatActivity
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     private DatabaseReference mUserRef;
     private FirebaseAuth mAuth;
-    private String mCurrent_state;
+    private String mCurrent_state,onesignal_email,device_token;
+    String channelId = "love";
+    String channelName = "我的最愛";
     //private DatabaseReference mUsersDatabase;
 
 
@@ -249,9 +265,18 @@ public class  MainActivity extends AppCompatActivity
 
         //editor.clear().commit();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();*/
+
+
+
 
         setContentView(R.layout.activity_main);
         mToolboar=(Toolbar)findViewById(R.id.nav_action); //替換toolbar會爆
@@ -293,6 +318,7 @@ public class  MainActivity extends AppCompatActivity
 
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
             menu_chat_room.setVisible(true);
@@ -304,7 +330,13 @@ public class  MainActivity extends AppCompatActivity
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String user_name = dataSnapshot.child("name").getValue().toString();
                     String user_image = dataSnapshot.child("thumb_image").getValue().toString();
+
                     username.setText(user_name);
+
+                    //OneSignal.deleteTag("User_Device_Token");
+                    //onesignal_email= device_token;
+                    //OneSignal.sendTag("User_Device_Token",onesignal_email);
+                    //Toast.makeText(MainActivity.this, onesignal_email, Toast.LENGTH_SHORT).show();
                     Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                 }
 
@@ -464,13 +496,15 @@ public class  MainActivity extends AppCompatActivity
         sport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sport sport=Sport.newInstance("param1","param2");
+                Toast.makeText(MainActivity.this, "發送", Toast.LENGTH_SHORT).show();
+                /*Sport sport=Sport.newInstance("param1","param2");
                 FragmentManager manager=getSupportFragmentManager();
                 manager.beginTransaction().addToBackStack(null).replace(
                         R.id.content_main,
                         sport,
                         sport.getTag()
-                ).commit();
+                ).commit();*/
+
             }
         });
     }
@@ -670,7 +704,10 @@ public class  MainActivity extends AppCompatActivity
             startActivity(i);
         }
         else if(id==R.id.Logout){
+
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+            OneSignal.deleteTag("Uid");
+            //OneSignal.deleteTag("User_ID");
 
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(MainActivity.this,MainActivity.class);
