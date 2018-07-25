@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -37,8 +38,16 @@ public class MainActivityFireBase extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("運動聊天室");
+        mToolbar.setTitle("運動聊天室");
+        mToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivityFireBase.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
 
         if (mAuth.getCurrentUser() != null) {

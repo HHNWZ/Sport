@@ -55,10 +55,17 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
-        setSupportActionBar(mToolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setTitle("Login");
+        mToolbar.setTitle("登錄賬號");
+        mToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
 
 
 
@@ -82,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
 
-                    mLoginProgress.setTitle("Logging In");
-                    mLoginProgress.setMessage("Please wait while we check your credentials.");
+                    mLoginProgress.setTitle("登錄中");
+                    mLoginProgress.setMessage("請等我們檢查您的憑據.");
                     mLoginProgress.setCanceledOnTouchOutside(false);
                     mLoginProgress.show();
 
@@ -135,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     String task_result = task.getException().getMessage().toString();
 
-                    Toast.makeText(LoginActivity.this, "Error : " + task_result, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "錯誤: " + task_result, Toast.LENGTH_LONG).show();
 
                 }
 

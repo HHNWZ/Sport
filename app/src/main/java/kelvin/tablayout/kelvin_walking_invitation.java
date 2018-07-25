@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -84,6 +85,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
     public Toast toast;
     public Button button_of_walking_invitation_confirm;
     public Button button_of_walking_invitation_social_media_friends;
+    private Toolbar walking_Toolbar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -132,6 +134,15 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this
         final View view = inflater.inflate(R.layout.fragment_kelvin_walking_invitation, null);
         view.setOnTouchListener(this);
+        walking_Toolbar=(Toolbar)view.findViewById(R.id.walking_Toolbar);
+        walking_Toolbar.setTitle("步行邀請內容");
+        walking_Toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        walking_Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
         edit_text_of_walking_set_count=(EditText)view.findViewById(R.id.editText_of_walking_count);
         edit_text_of_walking_set_count.requestFocus();
@@ -217,7 +228,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
                             FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("步行","步數",edit_text_of_walking_set_count.getText().toString(),"步",start_year_of_kelvin_walking_invitation,start_month_of_kelvin_walking_invitation,start_day_of_kelvin_walking_invitation,start_hour_of_kelvin_walking_invitation,start_minute_of_kelvin_walking_invitation,end_year_of_kelvin_walking_invitation,end_month_of_kelvin_walking_invitation,end_day_of_kelvin_walking_invitation,end_hour_of_kelvin_walking_invitation,end_minute_of_kelvin_walking_invitation);
-                            FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();

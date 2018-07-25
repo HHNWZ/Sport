@@ -18,7 +18,9 @@
             tools:layout_editor_absoluteY="0dp">
 
             <include
-                layout="@layout/toolbar_layout_kelvin"
+
+                layout="@layout/app_bar_layout"
+                android:id="@+id/exercise_data_Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

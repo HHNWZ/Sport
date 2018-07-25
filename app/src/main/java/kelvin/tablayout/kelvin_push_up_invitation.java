@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -73,7 +74,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
     public int push_up_count;
     public InputMethodManager imm_of_push_up_invitation;
     public Button button_of_push_up_social_media_friends;
-
+    private Toolbar push_up_Toolbar;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -117,6 +118,15 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_kelvin_push_up_invitation, null);
         view.setOnTouchListener(this);
+        push_up_Toolbar=(Toolbar)view.findViewById(R.id.push_up_Toolbar);
+        push_up_Toolbar.setTitle("伏地挺身邀請內容");
+        push_up_Toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        push_up_Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         edit_text_of_push_up_count=(EditText)view.findViewById(R.id.editText_of_push_up_count);
         edit_text_of_push_up_count.requestFocus();
 
@@ -202,7 +212,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
                             FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("伏地挺身","次數",edit_text_of_push_up_count.getText().toString(),"次",start_year_of_kelvin_push_up_invitation,start_month_of_kelvin_push_up_invitation,start_day_of_kelvin_push_up_invitation,start_hour_of_kelvin_push_up_invitation,start_minute_of_kelvin_push_up_invitation,end_year_of_kelvin_push_up_invitation,end_month_of_kelvin_push_up_invitation,end_day_of_kelvin_push_up_invitation,end_hour_of_kelvin_push_up_invitation,end_minute_of_kelvin_push_up_invitation);
-                            FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();

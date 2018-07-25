@@ -50,9 +50,16 @@ public class RegisterActivity extends AppCompatActivity {
 
         //Toolbar Set
         mToolbar = (Toolbar) findViewById(R.id.register_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Create Account");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle("註冊帳號");
+        mToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
 
         mRegProgress = new ProgressDialog(this);
@@ -82,8 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if(!TextUtils.isEmpty(display_name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
 
-                    mRegProgress.setTitle("Registering User");
-                    mRegProgress.setMessage("Please wait while we create your account !");
+                    mRegProgress.setTitle("註冊用戶");
+                    mRegProgress.setMessage("我們正在創建您的帳戶，請稍候");
                     mRegProgress.setCanceledOnTouchOutside(false);
                     mRegProgress.show();
 
@@ -117,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("name", display_name);
-                    userMap.put("status", "Hi there I'm using Lapit Chat App.");
+                    userMap.put("status", "不在邊緣運動");
                     userMap.put("image", "default");
                     userMap.put("thumb_image", "default");
                     userMap.put("device_token", device_token);
@@ -144,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
 
                     mRegProgress.hide();
-                    Toast.makeText(RegisterActivity.this, "Cannot Sign in. Please check the form and try again.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "無法登錄。請檢查表單然後重試。", Toast.LENGTH_LONG).show();
 
                 }
 

@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.example.a888888888.sport.R;
 import java.lang.String;
@@ -74,7 +75,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public Button button_of_running_invitation_confirm;
     public Button button_of_running_invitation_social_media_friends;
 
-
+    private View view;
+    private Toolbar runningToolbar;
 
 
 
@@ -123,8 +125,19 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
+        view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
+        runningToolbar=(Toolbar)view.findViewById(R.id.running_bar);
+        //runningToolbar.setBackgroundColor(16711680);
+        runningToolbar.setTitle("跑步邀請內容");
+        runningToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        runningToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+
         edit_text_on_distance=(EditText)view.findViewById(R.id.editText_of_distance);
         edit_text_on_distance.requestFocus();
 
@@ -232,7 +245,7 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
                                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                             }else{
                                 FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("跑步","距離",edit_text_on_distance.getText().toString(),"米",start_year_of_kelvin_running_invitation,start_month_of_kelvin_running_invitation,start_day_of_kelvin_running_invitation,start_hour_of_kelvin_running_invitation,start_minute_of_kelvin_running_invitation,end_year_of_kelvin_running_invitation,end_month_of_kelvin_running_invitation,end_day_of_kelvin_running_invitation,end_hour_of_kelvin_running_invitation,end_minute_of_kelvin_running_invitation);
-                                FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                                 transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                                 transaction.addToBackStack(null);
                                 transaction.commit();

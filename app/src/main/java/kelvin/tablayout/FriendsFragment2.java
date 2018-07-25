@@ -1,19 +1,26 @@
 package kelvin.tablayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -71,6 +78,7 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
     private String end_hour_of_invitation;
     private String end_minute_of_invitation;
 
+    private Toolbar mFriendToolbar;
     private kelvin_running_tag_friend.OnFragmentInteractionListener mListener;
 
 
@@ -103,6 +111,8 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         if (getArguments() != null) {
             exercise_type=getArguments().getString(ARG_PARAM1);
             exercise_data_count=getArguments().getString(ARG_PARAM2);
@@ -124,11 +134,25 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         mMainView = inflater.inflate(R.layout.fragment_friends_fragment2, container, false);
+        mFriendToolbar=(Toolbar)mMainView.findViewById(R.id.friend_app_bar);
+        mFriendToolbar.setTitle("朋友列表");
+
+        mFriendToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+
+        mFriendToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(getContext(), "点击了左侧导航按钮", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().popBackStack();
+
+            }
+        });
 
         mFriendsList = (RecyclerView) mMainView.findViewById(R.id.friends_list);
         mAuth = FirebaseAuth.getInstance();

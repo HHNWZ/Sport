@@ -7,13 +7,21 @@
     android:background="@color/colorPrimaryDark"
     tools:context="kelvin.tablayout.SettingsActivity">
 
+    <include
+
+        layout="@layout/app_bar_layout"
+        android:id="@+id/user_setting_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/settings_image"
         android:layout_width="170dp"
         android:layout_height="170dp"
+
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="90dp"
         android:src="@drawable/default_avatar" />
 
     <TextView
@@ -62,13 +70,5 @@
         android:layout_marginTop="15dp"
         android:text="@string/default_status"
         android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/button_go_to_main_page"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_status_btn"
-        android:layout_centerHorizontal="true"
-        android:text="返回主頁" />
 
 </RelativeLayout>

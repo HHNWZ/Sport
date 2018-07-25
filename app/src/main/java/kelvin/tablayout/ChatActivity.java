@@ -3,6 +3,8 @@ package kelvin.tablayout;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -35,12 +37,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -70,6 +77,7 @@ public class ChatActivity extends AppCompatActivity {
     private CircleImageView mProfileImage;
     private FirebaseAuth mAuth;
     private String mCurrentUserId;
+    private String Uid;
 
     private ImageButton mChatAddBtn;
     private ImageButton mChatSendBtn;
@@ -104,6 +112,10 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
 
         mChatToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
         setSupportActionBar(mChatToolbar);
@@ -251,7 +263,72 @@ public class ChatActivity extends AppCompatActivity {
         mChatSendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Uid=mChatUser;
+                Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                        if (SDK_INT > 8) {
+                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                    .permitAll().build();
+                            StrictMode.setThreadPolicy(policy);
 
+
+                            try {
+                                String jsonResponse;
+
+                                URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                con.setUseCaches(false);
+                                con.setDoOutput(true);
+                                con.setDoInput(true);
+
+                                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                con.setRequestMethod("POST");
+
+                                String strJsonBody = "{"
+                                        + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+
+                                        + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
+
+                                        + "\"data\": {\"foo\": \"bar\"},"
+                                        + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \"你有新信息\"}"
+                                        + "}";
+
+
+
+
+                                System.out.println("strJsonBody:\n" + strJsonBody);
+
+                                byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                con.setFixedLengthStreamingMode(sendBytes.length);
+
+                                OutputStream outputStream = con.getOutputStream();
+                                outputStream.write(sendBytes);
+
+                                int httpResponse = con.getResponseCode();
+                                System.out.println("httpResponse: " + httpResponse);
+
+                                if (httpResponse >= HttpURLConnection.HTTP_OK
+                                        && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                    Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                    scanner.close();
+                                } else {
+                                    Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                    scanner.close();
+                                }
+                                System.out.println("jsonResponse:\n" + jsonResponse);
+
+                            } catch (Throwable t) {
+                                t.printStackTrace();
+                            }
+                        }
+                    }
+                });
                 sendMessage();
 
             }

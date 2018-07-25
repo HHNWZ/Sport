@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,6 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mStatusBtn;
     private Button mImageBtn;
     private Button gotomainpage;
+    private Toolbar user_setting_Toolbar;
 
 
     private static final int GALLERY_PICK = 1;
@@ -71,6 +73,17 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        user_setting_Toolbar=(Toolbar)findViewById(R.id.user_setting_Toolbar);
+        user_setting_Toolbar.setTitle("修改會員資料");
+        user_setting_Toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        user_setting_Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SettingsActivity.this,MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
         mName = (TextView) findViewById(R.id.settings_name);
@@ -78,7 +91,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
         mImageBtn = (Button) findViewById(R.id.settings_image_btn);
-        gotomainpage=(Button) findViewById(R.id.button_go_to_main_page);
+        //gotomainpage=(Button) findViewById(R.id.button_go_to_main_page);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
@@ -168,13 +181,13 @@ public class SettingsActivity extends AppCompatActivity {
 
             }
         });
-        gotomainpage.setOnClickListener(new View.OnClickListener() {
+        /*gotomainpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
     }

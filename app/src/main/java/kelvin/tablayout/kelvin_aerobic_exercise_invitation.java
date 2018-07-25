@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -72,7 +73,7 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
     public int aerobic_exercise_minute;
     public InputMethodManager imm_of_aerobic_exercise_invitation;
     public Button button_of_aerobic_exercise_social_media_friends;
-
+    private Toolbar aerobic_excerciseToolbar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -118,6 +119,15 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
 
         final View view = inflater.inflate(R.layout.fragment_kelvin_aerobic_exercise_invitation, null);
         view.setOnTouchListener(this);
+        aerobic_excerciseToolbar=(Toolbar)view.findViewById(R.id.aerobic_exercise_bar);
+        aerobic_excerciseToolbar.setTitle("有氧運動邀請內容");
+        aerobic_excerciseToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        aerobic_excerciseToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         edit_text_of_aerobic_exercise_minute=(EditText)view.findViewById(R.id.editText_of_aerobic_exercise_minute);
         edit_text_of_aerobic_exercise_minute.requestFocus();
 
@@ -203,7 +213,7 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
                             FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("有氧運動","時間",edit_text_of_aerobic_exercise_minute.getText().toString(),"分鐘",start_year_of_kelvin_aerobic_exercise_invitation,start_month_of_kelvin_aerobic_exercise_invitation,start_day_of_kelvin_aerobic_exercise_invitation,start_hour_of_kelvin_aerobic_exercise_invitation,start_minute_of_kelvin_aerobic_exercise_invitation,end_year_of_kelvin_aerobic_exercise_invitation,end_month_of_kelvin_aerobic_exercise_invitation,end_day_of_kelvin_aerobic_exercise_invitation,end_hour_of_kelvin_aerobic_exercise_invitation,end_minute_of_kelvin_aerobic_exercise_invitation);
-                            FragmentTransaction transaction=getFragmentManager().beginTransaction();
+                            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();
