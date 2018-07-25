@@ -198,7 +198,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 if(online.equals("true")) {
 
-                    mLastSeenView.setText("Online");
+                    mLastSeenView.setText("在線");
 
                 } else {
 
@@ -264,7 +264,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Uid=mChatUser;
-                Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {

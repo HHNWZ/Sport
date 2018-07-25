@@ -219,7 +219,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 // --------------- NOT FRIENDS STATE ------------
                 Uid=user_id;
-                Toast.makeText(ProfileActivity.this, Uid, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ProfileActivity.this, Uid, Toast.LENGTH_SHORT).show();
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {

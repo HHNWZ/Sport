@@ -172,6 +172,8 @@ public class FriendsFragment extends Fragment {
             @Override
             protected void populateViewHolder(final FriendsViewHolder friendsViewHolder, Friends friends, int i) {
 
+
+
                 friendsViewHolder.setDate(friends.getDate());
 
                 final String list_user_id = getRef(i).getKey();

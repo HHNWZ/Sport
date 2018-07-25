@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,6 +52,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         public CircleImageView profileImage;
         public TextView displayName;
         public ImageView messageImage;
+        public TextView time_text_layout;
 
         public MessageViewHolder(View view) {
             super(view);
@@ -57,6 +61,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             profileImage = (CircleImageView) view.findViewById(R.id.message_profile_layout);
             displayName = (TextView) view.findViewById(R.id.name_text_layout);
             messageImage = (ImageView) view.findViewById(R.id.message_image_layout);
+            time_text_layout=(TextView)view.findViewById(R.id.time_text_layout);
 
         }
     }
@@ -91,6 +96,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             }
         });
+        long time;
+        time=c.getTime();
+        Date date = new Date(time);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 a hh:mm:ss");
+        viewHolder.time_text_layout.setText(""+format.format(date));
+
 
         if(message_type.equals("text")) {
 
