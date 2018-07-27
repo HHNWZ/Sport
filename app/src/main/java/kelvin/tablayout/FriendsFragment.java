@@ -213,11 +213,11 @@ public class FriendsFragment extends Fragment {
                             @Override
                             public void onClick(View view) {
 
-                                CharSequence options[] = new CharSequence[]{"Open Profile", "Send message"};
+                                CharSequence options[] = new CharSequence[]{"打開個人資料", "發信息"};
 
                                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                                builder.setTitle("Select Options");
+                                builder.setTitle("選擇選項");
                                 builder.setItems(options, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {

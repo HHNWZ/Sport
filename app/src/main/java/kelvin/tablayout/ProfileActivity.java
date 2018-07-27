@@ -82,8 +82,8 @@ public class ProfileActivity extends AppCompatActivity {
         mProfileName = (TextView) findViewById(R.id.profile_displayName);
         mProfileStatus = (TextView) findViewById(R.id.profile_status);
         mProfileFriendsCount = (TextView) findViewById(R.id.profile_totalFriends);
-        mProfileSendReqBtn = (Button) findViewById(R.id.profile_send_req_btn);
-        mDeclineBtn = (Button) findViewById(R.id.profile_decline_btn);
+        mProfileSendReqBtn = (Button) findViewById(R.id.profile_send_req_btn);//發送朋友請求按鈕
+
         //buuton_send=(Button)findViewById(R.id.button_send);
 
 
@@ -94,8 +94,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setTitle("Loading User Data");
-        mProgressDialog.setMessage("Please wait while we load the user data.");
+        mProgressDialog.setTitle("加載用戶數據");
+        mProgressDialog.setMessage("我們加載用戶數據時請稍候.");
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
 
@@ -138,7 +138,7 @@ public class ProfileActivity extends AppCompatActivity {
                             if(req_type.equals("received")){
 
                                 mCurrent_state = "req_received";
-                                mProfileSendReqBtn.setText("Accept Friend Request");
+                                mProfileSendReqBtn.setText("接受朋友請求");
 
                                 mDeclineBtn.setVisibility(View.VISIBLE);
                                 mDeclineBtn.setEnabled(true);
@@ -147,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
                             } else if(req_type.equals("sent")) {
 
                                 mCurrent_state = "req_sent";
-                                mProfileSendReqBtn.setText("Cancel Friend Request");
+                                mProfileSendReqBtn.setText("取消朋友請求");
 
                                 mDeclineBtn.setVisibility(View.INVISIBLE);
                                 mDeclineBtn.setEnabled(false);
@@ -167,10 +167,10 @@ public class ProfileActivity extends AppCompatActivity {
                                     if(dataSnapshot.hasChild(user_id)){
 
                                         mCurrent_state = "friends";
-                                        mProfileSendReqBtn.setText("Unfriend this Person");
+                                        mProfileSendReqBtn.setText("與這個人取消聯繫");
 
                                         mDeclineBtn.setVisibility(View.INVISIBLE);
-                                        mDeclineBtn.setEnabled(false);
+                                        mDeclineBtn.setEnabled(false);//取決朋友邀請按鈕不會顯示
 
                                     }
 
@@ -305,12 +305,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                             if(databaseError != null){
 
-                                Toast.makeText(ProfileActivity.this, "There was some error in sending request", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileActivity.this, "發送請求時出錯", Toast.LENGTH_SHORT).show();
 
                             } else {
 
                                 mCurrent_state = "req_sent";
-                                mProfileSendReqBtn.setText("Cancel Friend Request");
+                                mProfileSendReqBtn.setText("取消朋友請求");
 
                             }
 
@@ -338,7 +338,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                     mProfileSendReqBtn.setEnabled(true);
                                     mCurrent_state = "not_friends";
-                                    mProfileSendReqBtn.setText("Send Friend Request");
+                                    mProfileSendReqBtn.setText("發送朋友請求");
 
                                     mDeclineBtn.setVisibility(View.INVISIBLE);
                                     mDeclineBtn.setEnabled(false);
@@ -377,7 +377,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 mProfileSendReqBtn.setEnabled(true);
                                 mCurrent_state = "friends";
-                                mProfileSendReqBtn.setText("Unfriend this Person");
+                                mProfileSendReqBtn.setText("與這個人取消聯繫");
 
                                 mDeclineBtn.setVisibility(View.INVISIBLE);
                                 mDeclineBtn.setEnabled(false);
@@ -413,7 +413,7 @@ public class ProfileActivity extends AppCompatActivity {
                             if(databaseError == null){
 
                                 mCurrent_state = "not_friends";
-                                mProfileSendReqBtn.setText("Send Friend Request");
+                                mProfileSendReqBtn.setText("發送朋友請求");
 
                                 mDeclineBtn.setVisibility(View.INVISIBLE);
                                 mDeclineBtn.setEnabled(false);
@@ -441,88 +441,13 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
-    /*private class ExampleNotificationReceivedHandler implements OneSignal.NotificationReceivedHandler {
-        @Override
-        public void notificationReceived(OSNotification notification) {
-            JSONObject data = notification.payload.additionalData;
-            String notificationID = notification.payload.notificationID;
-            String title = notification.payload.title;
-            String body = notification.payload.body;
-            String smallIcon = notification.payload.smallIcon;
-            String largeIcon = notification.payload.largeIcon;
-            String bigPicture = notification.payload.bigPicture;
-            String smallIconAccentColor = notification.payload.smallIconAccentColor;
-            String sound = notification.payload.sound;
-            String ledColor = notification.payload.ledColor;
-            int lockScreenVisibility = notification.payload.lockScreenVisibility;
-            String groupKey = notification.payload.groupKey;
-            String groupMessage = notification.payload.groupMessage;
-            String fromProjectNumber = notification.payload.fromProjectNumber;
-            String rawPayload = notification.payload.rawPayload;
-
-            String customKey;
-
-            Log.i("OneSignalExample", "NotificationID received: " + notificationID);
-
-            if (data != null) {
-                customKey = data.optString("customkey", null);
-                if (customKey != null)
-                    Log.i("OneSignalExample", "customkey set with value: " + customKey);
-            }
-        }
-    }*/
 
 
-    private class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
-        // This fires when a notification is opened by tapping on it.
-        @Override
-        public void notificationOpened(OSNotificationOpenResult result) {
-            OSNotificationAction.ActionType actionType = result.action.type;
-            JSONObject data = result.notification.payload.additionalData;
-            String launchUrl = result.notification.payload.launchURL; // update docs launchUrl
-
-            String customKey;
-            String openURL = null;
-            Object activityToLaunch = ProfileActivity.class;
-
-            /*if (data != null) {
-                customKey = data.optString("customkey", null);
-                openURL = data.optString("openURL", null);
-
-                if (customKey != null)
-                    Log.i("OneSignalExample", "customkey set with value: " + customKey);
-
-                if (openURL != null)
-                    Log.i("OneSignalExample", "openURL to webview with URL value: " + openURL);
-            }*/
-
-            if (actionType == OSNotificationAction.ActionType.ActionTaken) {
-                Intent intent = new Intent(getApplicationContext(), (Class<?>) activityToLaunch);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-            // The following can be used to open an Activity of your choice.
-            // Replace - getApplicationContext() - with any Android Context.
-            // Intent intent = new Intent(getApplicationContext(), YourActivity.class);
-           ;
-            // intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            //intent.putExtra("openURL", openURL);
-            //Log.i("OneSignalExample", "openURL = " + openURL);
-            // startActivity(intent);
 
 
-            // Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
-            //   if you are calling startActivity above.
-        /*
-           <application ...>
-             <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
-           </application>
-        */
-        }
     }
 
 
 
 
-}
+
