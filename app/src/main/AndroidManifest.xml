@@ -72,6 +72,7 @@
         </activity>
         <activity android:name="kelvin.tablayout.ChatActivity"
             android:parentActivityName="kelvin.tablayout.MainActivityFireBase"></activity>
+        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
 
 
     </application>

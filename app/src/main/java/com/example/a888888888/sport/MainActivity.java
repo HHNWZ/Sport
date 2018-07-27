@@ -20,6 +20,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +45,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
+import com.onesignal.OSNotificationAction;
+import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.squareup.picasso.Picasso;
@@ -81,6 +85,8 @@ import qwer.ShowDiary;
 import qwer.addDiary;
 import qwer.foodAndKLL;
 import qwer.theDate;
+
+
 
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
@@ -273,6 +279,7 @@ public class  MainActivity extends AppCompatActivity
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
 
 
@@ -716,6 +723,59 @@ public class  MainActivity extends AppCompatActivity
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+    class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+        // This fires when a notification is opened by tapping on it.
+        public String value;
+        @Override
+        public void notificationOpened(OSNotificationOpenResult result) {
+            OSNotificationAction.ActionType actionType = result.action.type;
+            JSONObject data = result.notification.payload.additionalData;
+
+            try {
+                JSONObject jsonObject = new JSONObject(String.valueOf(data));
+                value=jsonObject.getString("1234");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            String customKey;
+
+            if (data != null) {
+                customKey = data.optString("customkey", null);
+                if (customKey != null)
+                    Log.i("OneSignalExample", "customkey set with value: " + customKey);
+            }
+
+            if (actionType == OSNotificationAction.ActionType.ActionTaken){
+                Log.i("OneSignalExample", "Button pressed with id: " + result.action.actionID);
+                Log.i("apple", "open");
+                /*Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);*/
+            }
+
+            Log.i("Data","value"+data);
+            Log.i("String",""+value);
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+
+
+            // The following can be used to open an Activity of your choice.
+            // Replace - getApplicationContext() - with any Android Context.
+
+
+            // Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
+            //   if you are calling startActivity above.
+     /*
+        <application ...>
+          <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+        </application>
+     */
+        }
     }
 
 

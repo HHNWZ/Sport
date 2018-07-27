@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageView mProfileImage;
     private TextView mProfileName, mProfileStatus, mProfileFriendsCount;
-    private Button mProfileSendReqBtn, mDeclineBtn,buuton_send;
+    private Button mProfileSendReqBtn,buuton_send;
 
     private DatabaseReference mUsersDatabase;
 
@@ -89,8 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mCurrent_state = "not_friends";
 
-        mDeclineBtn.setVisibility(View.INVISIBLE);
-        mDeclineBtn.setEnabled(false);
+
 
 
         mProgressDialog = new ProgressDialog(this);
@@ -116,8 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if(mCurrent_user.getUid().equals(user_id)){
 
-                    mDeclineBtn.setEnabled(false);
-                    mDeclineBtn.setVisibility(View.INVISIBLE);
+
 
                     mProfileSendReqBtn.setEnabled(false);
                     mProfileSendReqBtn.setVisibility(View.INVISIBLE);
@@ -140,8 +138,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mCurrent_state = "req_received";
                                 mProfileSendReqBtn.setText("接受朋友請求");
 
-                                mDeclineBtn.setVisibility(View.VISIBLE);
-                                mDeclineBtn.setEnabled(true);
+
 
 
                             } else if(req_type.equals("sent")) {
@@ -149,8 +146,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mCurrent_state = "req_sent";
                                 mProfileSendReqBtn.setText("取消朋友請求");
 
-                                mDeclineBtn.setVisibility(View.INVISIBLE);
-                                mDeclineBtn.setEnabled(false);
+
 
                             }
 
@@ -169,8 +165,7 @@ public class ProfileActivity extends AppCompatActivity {
                                         mCurrent_state = "friends";
                                         mProfileSendReqBtn.setText("與這個人取消聯繫");
 
-                                        mDeclineBtn.setVisibility(View.INVISIBLE);
-                                        mDeclineBtn.setEnabled(false);//取決朋友邀請按鈕不會顯示
+
 
                                     }
 
@@ -340,8 +335,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     mCurrent_state = "not_friends";
                                     mProfileSendReqBtn.setText("發送朋友請求");
 
-                                    mDeclineBtn.setVisibility(View.INVISIBLE);
-                                    mDeclineBtn.setEnabled(false);
+
 
 
                                 }
@@ -379,8 +373,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mCurrent_state = "friends";
                                 mProfileSendReqBtn.setText("與這個人取消聯繫");
 
-                                mDeclineBtn.setVisibility(View.INVISIBLE);
-                                mDeclineBtn.setEnabled(false);
+
 
                             } else {
 
@@ -415,8 +408,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mCurrent_state = "not_friends";
                                 mProfileSendReqBtn.setText("發送朋友請求");
 
-                                mDeclineBtn.setVisibility(View.INVISIBLE);
-                                mDeclineBtn.setEnabled(false);
+
 
                             } else {
 
