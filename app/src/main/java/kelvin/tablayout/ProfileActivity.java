@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -54,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mRootRef;
 
     private FirebaseUser mCurrent_user;
-
+    private FirebaseAuth mAuth;
     private String mCurrent_state;
     public String Uid;
 
@@ -70,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
         final String user_id = getIntent().getStringExtra("user_id");
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
-
+        mAuth = FirebaseAuth.getInstance();
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
 
         mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
@@ -103,7 +104,8 @@ public class ProfileActivity extends AppCompatActivity {
         mUsersDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                String user=user_id.toString();
+                Log.i("user_id",user);
                 String display_name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
@@ -243,7 +245,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
-                                        + "\"data\": {\"foo\": \"bar\"},"
+                                        + "\"data\": {\"profile_send_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \"朋友邀請\"}"
                                         + "}";
 

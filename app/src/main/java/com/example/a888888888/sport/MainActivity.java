@@ -726,7 +726,7 @@ public class  MainActivity extends AppCompatActivity
     }
     class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
         // This fires when a notification is opened by tapping on it.
-        public String value;
+        public String profile_send_id;
         @Override
         public void notificationOpened(OSNotificationOpenResult result) {
             OSNotificationAction.ActionType actionType = result.action.type;
@@ -734,7 +734,7 @@ public class  MainActivity extends AppCompatActivity
 
             try {
                 JSONObject jsonObject = new JSONObject(String.valueOf(data));
-                value=jsonObject.getString("1234");
+                profile_send_id=jsonObject.getString("profile_send_id");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -755,12 +755,17 @@ public class  MainActivity extends AppCompatActivity
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);*/
             }
-
             Log.i("Data","value"+data);
-            Log.i("String",""+value);
-            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            if(profile_send_id!=null){
+                Log.i("String",""+profile_send_id);
+                final String user_id=profile_send_id.toString();
+                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                intent.putExtra("user_id",user_id);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+
+
 
 
 
