@@ -245,7 +245,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
-                                        + "\"data\": {\"profile_send_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \"朋友邀請\"}"
                                         + "}";
 

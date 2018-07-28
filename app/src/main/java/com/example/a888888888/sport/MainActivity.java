@@ -727,14 +727,18 @@ public class  MainActivity extends AppCompatActivity
     class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
         // This fires when a notification is opened by tapping on it.
         public String profile_send_id;
+        public String Chat_send_id;
+        public JSONObject data,data1;
+        public Boolean has_key_friend,has_key_chat;
         @Override
         public void notificationOpened(OSNotificationOpenResult result) {
             OSNotificationAction.ActionType actionType = result.action.type;
-            JSONObject data = result.notification.payload.additionalData;
+            data = result.notification.payload.additionalData;
 
+            Log.i("Data1", String.valueOf(data));
             try {
-                JSONObject jsonObject = new JSONObject(String.valueOf(data));
-                profile_send_id=jsonObject.getString("profile_send_id");
+                JSONObject jsonObject =new JSONObject(String.valueOf(data));
+                Chat_send_id=jsonObject.getString("Chat_send_id");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -755,15 +759,19 @@ public class  MainActivity extends AppCompatActivity
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);*/
             }
-            Log.i("Data","value"+data);
-            if(profile_send_id!=null){
-                Log.i("String",""+profile_send_id);
-                final String user_id=profile_send_id.toString();
-                Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                intent.putExtra("user_id",user_id);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
+
+            Log.i("Chat_id",""+Chat_send_id);
+            final String user_id_chat=Chat_send_id.toString();
+            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+            intent.putExtra("user_id",user_id_chat);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+
+
+
+
+
 
 
 

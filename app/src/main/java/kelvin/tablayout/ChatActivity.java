@@ -130,7 +130,7 @@ public class ChatActivity extends AppCompatActivity {
         mCurrentUserId = mAuth.getCurrentUser().getUid();
 
         mChatUser = getIntent().getStringExtra("user_id");
-        String userName = getIntent().getStringExtra("user_name");
+        //String userName = getIntent().getStringExtra("user_name");
         exercise_type=getIntent().getStringExtra("exercise_type");
         exercise_data_count=getIntent().getStringExtra("exercise_data_count");
         exercise_data=getIntent().getStringExtra("exercise_data");
@@ -186,7 +186,7 @@ public class ChatActivity extends AppCompatActivity {
         }
 
 
-        mTitleView.setText(userName);
+        //mTitleView.setText(userName);
 
         mRootRef.child("Users").child(mChatUser).addValueEventListener(new ValueEventListener() {
             @Override
@@ -194,8 +194,9 @@ public class ChatActivity extends AppCompatActivity {
 
                 String online = dataSnapshot.child("online").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
+                String userName= dataSnapshot.child("name").getValue().toString();
                 Picasso.with(ChatActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
-
+                mTitleView.setText(userName);
                 if(online.equals("true")) {
 
                     mLastSeenView.setText("在線");
@@ -293,7 +294,7 @@ public class ChatActivity extends AppCompatActivity {
 
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
-                                        + "\"data\": {\"foo\": \"bar\"},"
+                                        + "\"data\": {\"Chat_send_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \"你有新信息\"}"
                                         + "}";
 
