@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -125,6 +126,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i("year_int1", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string1", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
         view = inflater.inflate(R.layout.fragment_kelvin_running_invitation, null);
         view.setOnTouchListener(this);
         runningToolbar=(Toolbar)view.findViewById(R.id.running_bar);
@@ -135,6 +138,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
             @Override
             public void onClick(View view) {
                 getActivity().getSupportFragmentManager().popBackStack();
+                Log.i("year_int2", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+                Log.i("year_string2", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             }
         });
 
@@ -147,6 +152,8 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_of_running_place.setAdapter(adapter);*/
         Date mDate = new Date();
+        Log.i("year_int3", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string3", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
         start_hour_int_of_kelvin_running_invitation= mDate.getHours();
         start_minute_int_of_kelvin_running_invitation=mDate.getMinutes();
         start_year_int_of_kelvin_running_invitation=mDate.getYear()+1900;
@@ -155,11 +162,18 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
         end_hour_int_of_kelvin_running_invitation= mDate.getHours();
         end_minute_int_of_kelvin_running_invitation=mDate.getMinutes();
         end_year_int_of_kelvin_running_invitation=mDate.getYear()+1900;
+        Log.i("year_int4", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string4", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
         end_month_int_of_kelvin_running_invitation=mDate.getMonth()+1;
         end_day_int_of_kelvin_running_invitation=mDate.getDate();
+        Log.i("year_int5", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string5", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
 
         show_start_time_of_running_invitation=(TextView)view.findViewById(R.id.show_start_time_of_running_invitation);
         show_start_time_of_running_invitation.setText(mDecimalFormat.format(start_hour_int_of_kelvin_running_invitation) +":"+mDecimalFormat.format(start_minute_int_of_kelvin_running_invitation) );
+        Log.i("year_int6", String.valueOf(++end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string6", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
+
         show_start_time_of_running_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,21 +181,29 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
                 newFragment.setTargetFragment(kelvin_running_invitation.this, start_time_data_of_running_invitation);
                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                Log.i("year_int7", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+                Log.i("year_string7", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             }
         });
         show_start_date_of_running_invitation=(TextView)view.findViewById(R.id.show_start_date_of_running_invitation);
         show_start_date_of_running_invitation.setText(start_year_int_of_kelvin_running_invitation+"年"+start_month_int_of_kelvin_running_invitation+"月"+start_day_int_of_kelvin_running_invitation);
+        Log.i("year_int8", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string8", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
         show_start_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new StartDateFragment();
                 newFragment.setTargetFragment(kelvin_running_invitation.this, start_date_data_of_running_invitation);
                 newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+                Log.i("year_int9", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+                Log.i("year_string9", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             }
         });
 
         show_end_time_of_running_invitation=(TextView)view.findViewById(R.id.show_end_time_of_running_invitation);
         show_end_time_of_running_invitation.setText(mDecimalFormat.format(end_hour_int_of_kelvin_running_invitation) +":"+mDecimalFormat.format(end_minute_int_of_kelvin_running_invitation) );
+        Log.i("year_int10", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string10", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
         show_end_time_of_running_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,16 +211,22 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
 
                 newFragment.setTargetFragment(kelvin_running_invitation.this, end_time_data_of_running_invitation);
                 newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+                Log.i("year_int11", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+                Log.i("year_string12", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             }
         });
         show_end_date_of_running_invitation=(TextView)view.findViewById(R.id.show_end_date_of_running_invitation);
         show_end_date_of_running_invitation.setText(end_year_int_of_kelvin_running_invitation+"年"+end_month_int_of_kelvin_running_invitation+"月"+end_day_int_of_kelvin_running_invitation);
+        Log.i("year_int13", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+        Log.i("year_string13", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
         show_end_date_of_running_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment newFragment = new EndDateFragment();
                 newFragment.setTargetFragment(kelvin_running_invitation.this, end_date_data_of_running_invitation);
                 newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+                Log.i("year_int14", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+                Log.i("year_string14", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             }
         });
         /*spinner_of_running_place.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -357,29 +385,56 @@ public class kelvin_running_invitation extends Fragment implements View.OnTouchL
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode == start_time_data_of_running_invitation){
+            Log.i("為什麼2", "我在這裡");
+            Log.i("year_int15", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string15", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             start_minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(StartTimeFragment.MINUTE_OF_START_TIME_PICKER_FRAGMENT)));
             start_hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(StartTimeFragment.HOUR_OF_START_TIME_PICKER_FRAGMENT)));
             show_start_time_of_running_invitation.setText(start_hour_of_kelvin_running_invitation+":"+start_minute_of_kelvin_running_invitation);
+            Log.i("year_int16", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string16", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
+            Log.i("為什麼3", "我在這裡");
         }
 
         if(requestCode == start_date_data_of_running_invitation){
+            Log.i("為什麼4", "我在這裡");
+            Log.i("year_int17", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string17", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             start_day_of_kelvin_running_invitation =data.getStringExtra(StartDateFragment.DAY_OF_START_Date_PICKER_FRAGMENT);
             start_month_of_kelvin_running_invitation =data.getStringExtra(StartDateFragment.MONTH_OF_START_Date_PICKER_FRAGMENT);
             start_year_of_kelvin_running_invitation =data.getStringExtra(StartDateFragment.YEAR_OF_START_Date_PICKER_FRAGMENT);
             show_start_date_of_running_invitation.setText(start_year_of_kelvin_running_invitation +"年"+ start_month_of_kelvin_running_invitation +"月"+ start_day_of_kelvin_running_invitation);
+            Log.i("year_int18", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string18", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
+            Log.i("為什麼5", "我在這裡");
         }
 
         if(requestCode == end_time_data_of_running_invitation){
+            Log.i("為什麼", "我在這裡");
+            Log.i("year_int19", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string19", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             end_minute_of_kelvin_running_invitation= mDecimalFormat.format(Double.parseDouble(data.getStringExtra(EndTimeFragment.MINUTE_OF_END_TIME_PICKER_FRAGMENT)));
             end_hour_of_kelvin_running_invitation = mDecimalFormat.format(Double.parseDouble(data.getStringExtra(EndTimeFragment.HOUR_OF_END_TIME_PICKER_FRAGMENT)));
             show_end_time_of_running_invitation.setText(end_hour_of_kelvin_running_invitation+":"+end_minute_of_kelvin_running_invitation);
+            Log.i("year_int20", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string20", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
+            Log.i("為什麼7", "我在這裡");
         }
 
         if(requestCode == end_date_data_of_running_invitation){
+
+            Log.i("為什麼1", "我在這裡");
+            Log.i("year_int21", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string21", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
             end_day_of_kelvin_running_invitation =data.getStringExtra(EndDateFragment.DAY_OF_END_Date_PICKER_FRAGMENT);
             end_month_of_kelvin_running_invitation =data.getStringExtra(EndDateFragment.MONTH_OF_END_Date_PICKER_FRAGMENT);
             end_year_of_kelvin_running_invitation =data.getStringExtra(EndDateFragment.YEAR_OF_END_Date_PICKER_FRAGMENT);
-            show_end_date_of_running_invitation.setText(end_year_of_kelvin_running_invitation +"年"+ end_month_of_kelvin_running_invitation +"月"+ end_day_of_kelvin_running_invitation);
+            if(end_day_of_kelvin_running_invitation!=null){
+                show_end_date_of_running_invitation.setText(end_year_of_kelvin_running_invitation +"年"+ end_month_of_kelvin_running_invitation +"月"+ end_day_of_kelvin_running_invitation);
+            }
+            Log.i("year_int22", String.valueOf(+end_year_int_of_kelvin_running_invitation+":"+end_month_int_of_kelvin_running_invitation+":"+end_day_int_of_kelvin_running_invitation));
+            Log.i("year_string22", end_day_of_kelvin_running_invitation+end_month_of_kelvin_running_invitation+end_year_of_kelvin_running_invitation);
+            Log.i("為什麼8", "我在這裡");
         }
 
     }
