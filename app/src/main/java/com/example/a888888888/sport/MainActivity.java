@@ -65,12 +65,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import kelvin.tablayout.Aerobic_exercise_task;
 import kelvin.tablayout.ChatActivity;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.ProfileActivity;
+import kelvin.tablayout.Push_up_task;
 import kelvin.tablayout.RegisterActivity;
+import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
+import kelvin.tablayout.Sit_up_task;
+import kelvin.tablayout.Walking_task;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -733,8 +738,8 @@ public class  MainActivity extends AppCompatActivity
     class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
 
 
-        public String user_id_send;
-        public JSONObject data,user_id;
+        public String user_id_send,exercise_data_from;
+        public JSONObject data,user_id,exercise_data;
 
         @Override
         public void notificationOpened(OSNotificationOpenResult result) {
@@ -747,8 +752,10 @@ public class  MainActivity extends AppCompatActivity
             if (data != null) {
                 activityToBeOpened = data.optString("activityToBeOpened", null);
                 user_id = result.notification.payload.additionalData;
-
+                exercise_data=result.notification.payload.additionalData;
+               exercise_data_from=exercise_data.optString("exercise_data");
                 user_id_send=user_id.optString("user_id");
+
 
                 if(activityToBeOpened != null && activityToBeOpened.equals("ProfileActivity")){
                     Log.i("OneSignalExample", "customkey set with value: " + activityToBeOpened);
@@ -762,6 +769,36 @@ public class  MainActivity extends AppCompatActivity
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("ChatActivity")){
                     Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                     intent.putExtra("user_id",user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Aerobic_exercise_task")){
+                    Intent intent = new Intent(getApplicationContext(), Aerobic_exercise_task.class);
+                    intent.putExtra("exercise_data",exercise_data_from);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Push_up_task")){
+                    Intent intent = new Intent(getApplicationContext(), Push_up_task.class);
+                    intent.putExtra("exercise_data",exercise_data_from);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
+                    Intent intent = new Intent(getApplicationContext(), Running_task.class);
+                    intent.putExtra("exercise_data",exercise_data_from);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Sit_up_task")){
+                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    intent.putExtra("exercise_data",exercise_data_from);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
+                    Intent intent = new Intent(getApplicationContext(), Walking_task.class);
+                    intent.putExtra("exercise_data",exercise_data_from);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }

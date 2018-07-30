@@ -1,6 +1,7 @@
 package kelvin.tablayout;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -78,6 +79,15 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
                         .commit();
             }
 
+        });
+        final Button button_of_task_execution=(Button)rootView.findViewById(R.id.button_of_task_execution);
+        button_of_task_execution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                startActivity(intent);
+
+            }
         });
         chart_of_sit_up_today_record= (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());

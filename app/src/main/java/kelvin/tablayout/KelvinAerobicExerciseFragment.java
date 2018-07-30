@@ -1,6 +1,7 @@
 package kelvin.tablayout;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -85,6 +86,17 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
             }
 
         });
+
+        final Button button_of_task_execution=(Button)rootView.findViewById(R.id.button_of_task_execution);
+        button_of_task_execution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Aerobic_exercise_task.class);
+                startActivity(intent);
+
+            }
+        });
+
 
 
 
