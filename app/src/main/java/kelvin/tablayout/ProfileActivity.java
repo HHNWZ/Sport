@@ -260,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
-
+                                        + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \"朋友邀請\"}"
                                         + "}";
 

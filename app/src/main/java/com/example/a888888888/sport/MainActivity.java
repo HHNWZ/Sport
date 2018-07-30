@@ -45,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
+import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
@@ -124,6 +125,7 @@ public class  MainActivity extends AppCompatActivity
     private String mCurrent_state,onesignal_email,device_token;
     String channelId = "love";
     String channelName = "我的最愛";
+    private static Context context;
     //private DatabaseReference mUsersDatabase;
 
 
@@ -272,10 +274,14 @@ public class  MainActivity extends AppCompatActivity
         //editor.clear().commit();
     }
 
+    public static Context getContext() {
+        return context;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        context = getApplicationContext();
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
@@ -725,69 +731,48 @@ public class  MainActivity extends AppCompatActivity
         return true;
     }
     class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
-        // This fires when a notification is opened by tapping on it.
-        public String profile_send_id;
-        public String Chat_send_id;
-        public JSONObject data,data1;
-        public Boolean has_key_friend,has_key_chat;
+
+
+        public String user_id_send;
+        public JSONObject data,user_id;
+
         @Override
         public void notificationOpened(OSNotificationOpenResult result) {
             OSNotificationAction.ActionType actionType = result.action.type;
             data = result.notification.payload.additionalData;
+            String activityToBeOpened;
 
             Log.i("Data1", String.valueOf(data));
-            try {
-                JSONObject jsonObject =new JSONObject(String.valueOf(data));
-                Chat_send_id=jsonObject.getString("Chat_send_id");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-            String customKey;
 
             if (data != null) {
-                customKey = data.optString("customkey", null);
-                if (customKey != null)
-                    Log.i("OneSignalExample", "customkey set with value: " + customKey);
+                activityToBeOpened = data.optString("activityToBeOpened", null);
+                user_id = result.notification.payload.additionalData;
+
+                user_id_send=user_id.optString("user_id");
+
+                if(activityToBeOpened != null && activityToBeOpened.equals("ProfileActivity")){
+                    Log.i("OneSignalExample", "customkey set with value: " + activityToBeOpened);
+                    Log.i("我在這裡","Chat_send_id："+user_id_send);
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    intent.putExtra("user_id",user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("ChatActivity")){
+                    Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    intent.putExtra("user_id",user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
             }
 
             if (actionType == OSNotificationAction.ActionType.ActionTaken){
                 Log.i("OneSignalExample", "Button pressed with id: " + result.action.actionID);
                 Log.i("apple", "open");
-                /*Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);*/
+
             }
 
-            Log.i("Chat_id",""+Chat_send_id);
-            final String user_id_chat=Chat_send_id.toString();
-            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-            intent.putExtra("user_id",user_id_chat);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-
-
-
-
-
-
-
-
-
-
-            // The following can be used to open an Activity of your choice.
-            // Replace - getApplicationContext() - with any Android Context.
-
-
-            // Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
-            //   if you are calling startActivity above.
-     /*
-        <application ...>
-          <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
-        </application>
-     */
         }
     }
 
