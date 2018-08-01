@@ -755,6 +755,7 @@ public class  MainActivity extends AppCompatActivity
                 exercise_data=result.notification.payload.additionalData;
                exercise_data_from=exercise_data.optString("exercise_data");
                 user_id_send=user_id.optString("user_id");
+                mUserRef.child("exercise_data").setValue(exercise_data_from);
 
 
                 if(activityToBeOpened != null && activityToBeOpened.equals("ProfileActivity")){
@@ -774,31 +775,26 @@ public class  MainActivity extends AppCompatActivity
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Aerobic_exercise_task")){
                     Intent intent = new Intent(getApplicationContext(), Aerobic_exercise_task.class);
-                    intent.putExtra("exercise_data",exercise_data_from);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Push_up_task")){
                     Intent intent = new Intent(getApplicationContext(), Push_up_task.class);
-                    intent.putExtra("exercise_data",exercise_data_from);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
                     Intent intent = new Intent(getApplicationContext(), Running_task.class);
-                    intent.putExtra("exercise_data",exercise_data_from);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Sit_up_task")){
                     Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
-                    intent.putExtra("exercise_data",exercise_data_from);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
                     Intent intent = new Intent(getApplicationContext(), Walking_task.class);
-                    intent.putExtra("exercise_data",exercise_data_from);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }

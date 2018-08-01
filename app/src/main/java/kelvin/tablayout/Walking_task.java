@@ -8,16 +8,26 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Walking_task extends AppCompatActivity {
     private Toolbar walking_task;
     public String walking_data;
     public TextView data_walking_task;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_task);
+        mAuth=FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         walking_task=(Toolbar)findViewById(R.id.Walking_task_app_bar);
         walking_task.setTitle("步行每週任務");
         walking_task.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
@@ -29,8 +39,19 @@ public class Walking_task extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        walking_data=getIntent().getStringExtra("exercise_data");
+
         data_walking_task=(TextView)findViewById(R.id.data_walking_task);
-        data_walking_task.setText(walking_data);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String exercise_data =dataSnapshot.child("exercise_data").getValue().toString();
+                data_walking_task.setText(exercise_data);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }
