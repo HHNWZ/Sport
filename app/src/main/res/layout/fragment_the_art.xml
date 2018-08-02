@@ -105,14 +105,6 @@
                 android:text="讚"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/toRes"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:drawableLeft="@drawable/res1"
-                android:text="留言" />
-
         </LinearLayout>
 
         <TextView
@@ -138,6 +130,14 @@
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:src="@drawable/sheng" />
+
+        <Button
+            android:id="@+id/toRes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:drawableLeft="@drawable/res1"
+            android:text="留言" />
 
         <LinearLayout
             android:layout_width="match_parent"
