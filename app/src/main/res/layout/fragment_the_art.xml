@@ -41,7 +41,21 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/theReTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回朔："
+                android:textColor="#323d4d"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="貼文作者"
-                    android:textColor="#000000"/>
+                    android:textColor="#000000" />
             </LinearLayout>
 
             <TextView
@@ -90,6 +104,7 @@
                 android:drawableLeft="@drawable/like2"
                 android:text="讚"
                 android:visibility="gone" />
+
             <Button
                 android:id="@+id/toRes"
                 android:layout_width="80dp"
@@ -97,14 +112,6 @@
                 android:background="#FFFFFF"
                 android:drawableLeft="@drawable/res1"
                 android:text="留言" />
-
-            <Button
-                android:id="@+id/toRe_Art"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
-                android:drawableLeft="@drawable/res1"
-                android:text="回覆" />
 
         </LinearLayout>
 
@@ -132,14 +139,6 @@
             android:adjustViewBounds="true"
             android:src="@drawable/sheng" />
 
-        <Button
-            android:id="@+id/downloadBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#323d4d"
-            android:textColor="#73c4d9"
-            android:text="下載圖片" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -162,7 +161,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/buttonshape"
                 android:text="變更貼文"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
