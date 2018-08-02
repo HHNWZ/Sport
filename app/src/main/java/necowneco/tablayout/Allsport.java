@@ -98,6 +98,7 @@ public class Allsport extends Fragment implements View.OnTouchListener,
 
         final View view = inflater.inflate(R.layout.fragment_allsport, null);
         view.setOnTouchListener(this);
+        ((habaActivity)getActivity()).fabIn();
         ListView Myartlist=(ListView)view.findViewById(R.id.myArtList);
         /*ArrayAdapter<String> myartlist=new ArrayAdapter<String>(
                 view.getContext(),

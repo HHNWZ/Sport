@@ -114,6 +114,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
         view.setOnTouchListener(this);
+        ((habaActivity)getActivity()).fabIn();
         final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
         final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
         final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
@@ -177,7 +178,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 /*Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
                 ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
                 ((habaActivity) getActivity()).toArtcon(mParam4);*/
-                ((habaActivity) getActivity()).toResList(mTarID);
+                ((habaActivity) getActivity()).toResList(mTarID-1);
             }
         });
         toreart.setOnClickListener(new View.OnClickListener() {

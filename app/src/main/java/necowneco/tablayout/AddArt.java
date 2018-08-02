@@ -94,6 +94,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
 
         final View view = inflater.inflate(R.layout.fragment_add_art, null);
         view.setOnTouchListener(this);
+        ((habaActivity)getActivity()).fabOut();
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
@@ -141,7 +142,6 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
-                ((habaActivity)getActivity()).fabIn();
                 if(addType=="編輯"){
                     ((habaActivity)getActivity()).reSetArtDATA(
                             theID,ct.getText().toString(),

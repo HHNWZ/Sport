@@ -85,6 +85,7 @@ public class theArtRes extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_the_art_res, container, false);
         // Inflate the layout for this fragment
+        ((habaActivity)getActivity()).fabOut();
         final Button backart=(Button)view.findViewById(R.id.backArt);
         final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);

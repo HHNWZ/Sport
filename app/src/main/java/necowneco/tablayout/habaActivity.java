@@ -155,7 +155,6 @@ public class habaActivity extends AppCompatActivity
                         addart,
                         addart.getTag()
                 ).commit();
-                fabOut();
             }
         });
 
@@ -235,6 +234,7 @@ public class habaActivity extends AppCompatActivity
                 addart,
                 addart.getTag()
         ).commit();
+
     }
     private ArrayList<Integer> artgoodCount() {//<資料處理>取得貼文列表中每則貼文之讚數，展開貼文列表時使用
         ArrayList<Integer> mycount=new ArrayList<Integer>();
@@ -332,7 +332,7 @@ public class habaActivity extends AppCompatActivity
                 show();
         BackArtList();//回到貼文列表
     }
-    private void fabOut() {//<版面控制>浮動按鈕隱藏
+    public void fabOut() {//<版面控制>浮動按鈕隱藏
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
     }
