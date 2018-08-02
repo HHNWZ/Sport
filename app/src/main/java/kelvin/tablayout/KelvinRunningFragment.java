@@ -1,11 +1,13 @@
 package kelvin.tablayout;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,11 @@ import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.Axis;
@@ -47,6 +53,8 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
     private boolean hasLabels = false;
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
+    public String pTime;
+    public Button button_of_task_execution;
 
     public KelvinRunningFragment() {
         // Required empty public constructor kkkkkkkkkkkkk
@@ -89,6 +97,26 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
 
             }
 
+        });
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        pTime=getWeek(""+simpleDateFormat.format(date));
+        Log.i("今天是",pTime);
+
+        button_of_task_execution=(Button)rootView.findViewById(R.id.button_of_task_execution);
+
+        if(pTime.equals("一")){
+            button_of_task_execution.setVisibility(View.VISIBLE);
+        }else{
+            button_of_task_execution.setVisibility(View.INVISIBLE);
+        }
+        button_of_task_execution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Running_task.class);
+                startActivity(intent);
+
+            }
         });
         return rootView;
 
@@ -431,6 +459,48 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
                 generateDefaultData();
                 break;
         }
+    }
+    private String getWeek(String pTime) {
+
+
+        String Week = "";
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+
+            c.setTime(format.parse(pTime));
+
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 1) {
+            Week += "天";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 2) {
+            Week += "一";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 3) {
+            Week += "二";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 4) {
+            Week += "三";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 5) {
+            Week += "四";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 6) {
+            Week += "五";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 7) {
+            Week += "六";
+        }
+
+
+
+        return Week;
     }
 
     /*private void toggleLabels() {

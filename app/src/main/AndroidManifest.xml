@@ -22,7 +22,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -54,7 +53,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name="kelvin.tablayout.LoginActivity"
-            android:parentActivityName="com.example.a888888888.sport.MainActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity android:name="kelvin.tablayout.SettingsActivity" />
         <activity
             android:name="kelvin.tablayout.StatusActivity"
@@ -62,7 +61,8 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name="kelvin.tablayout.ProfileActivity"
+        <activity
+            android:name="kelvin.tablayout.ProfileActivity"
             android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="kelvin.tablayout.lapitchat_TARGET_NOTIFICATION" />
@@ -70,11 +70,19 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="kelvin.tablayout.ChatActivity"
-            android:parentActivityName="kelvin.tablayout.MainActivityFireBase"></activity>
-        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+        <activity
+            android:name="kelvin.tablayout.ChatActivity"
+            android:parentActivityName="kelvin.tablayout.MainActivityFireBase" />
 
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="DISABLE" />
 
+        <activity android:name="kelvin.tablayout.Push_up_task" />
+        <activity android:name="kelvin.tablayout.Aerobic_exercise_task" />
+        <activity android:name="kelvin.tablayout.Running_task" />
+        <activity android:name="kelvin.tablayout.Sit_up_task" />
+        <activity android:name="kelvin.tablayout.Walking_task"></activity>
     </application>
 
 </manifest>

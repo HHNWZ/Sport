@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
-                onesignal_app_id: '04904fc0-8d20-4c22-be79-77da6073d641',
+                onesignal_app_id               : '04904fc0-8d20-4c22-be79-77da6073d641',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]
@@ -85,7 +85,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     //implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     //通知管理
-    implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
+    implementation 'com.onesignal:OneSignal:[3.9.3, 3.99.99]'
     implementation 'com.squareup.okhttp3:okhttp:3.6.0'
 
     //照片瀏覽

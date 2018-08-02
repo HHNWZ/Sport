@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mCurrent_state;
     public String Uid;
+    private Toolbar profile_app_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,18 @@ public class ProfileActivity extends AppCompatActivity {
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+
+        profile_app_bar=(Toolbar)findViewById(R.id.profile_app_bar);
+        profile_app_bar.setTitle("使用者個人資料");
+        profile_app_bar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        profile_app_bar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(ProfileActivity.this,MainActivityFireBase.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         final String user_id = getIntent().getStringExtra("user_id");
 
@@ -245,7 +260,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
-
+                                        + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \"朋友邀請\"}"
                                         + "}";
 

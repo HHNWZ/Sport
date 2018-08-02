@@ -294,7 +294,7 @@ public class ChatActivity extends AppCompatActivity {
 
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
-                                        + "\"data\": {\"Chat_send_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                        + "\"data\": {\"activityToBeOpened\":\"ChatActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \"你有新信息\"}"
                                         + "}";
 

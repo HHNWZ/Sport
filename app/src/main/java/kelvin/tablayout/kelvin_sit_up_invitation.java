@@ -325,7 +325,10 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
             end_day_of_kelvin_sit_up_invitation =data.getStringExtra(EndDateFragment.DAY_OF_END_Date_PICKER_FRAGMENT);
             end_month_of_kelvin_sit_up_invitation =data.getStringExtra(EndDateFragment.MONTH_OF_END_Date_PICKER_FRAGMENT);
             end_year_of_kelvin_sit_up_invitation =data.getStringExtra(EndDateFragment.YEAR_OF_END_Date_PICKER_FRAGMENT);
-            show_end_date_of_sit_up_invitation.setText(end_year_of_kelvin_sit_up_invitation +"年"+ end_month_of_kelvin_sit_up_invitation +"月"+ end_day_of_kelvin_sit_up_invitation);
+            if(end_year_of_kelvin_sit_up_invitation!=null){
+                show_end_date_of_sit_up_invitation.setText(end_year_of_kelvin_sit_up_invitation +"年"+ end_month_of_kelvin_sit_up_invitation +"月"+ end_day_of_kelvin_sit_up_invitation);
+            }
+
         }
 
 

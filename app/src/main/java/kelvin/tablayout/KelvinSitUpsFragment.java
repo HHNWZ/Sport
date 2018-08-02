@@ -1,9 +1,11 @@
 package kelvin.tablayout;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,11 @@ import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.Axis;
@@ -43,6 +49,8 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
     private boolean hasLabels = false;
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
+    public String pTime;
+    public Button button_of_task_execution;
     public KelvinSitUpsFragment() {
         // Required empty public constructor kkkkkkkkkkkk
     }
@@ -78,6 +86,24 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
                         .commit();
             }
 
+        });
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        pTime=getWeek(""+simpleDateFormat.format(date));
+        Log.i("今天是",pTime);
+        button_of_task_execution=(Button)rootView.findViewById(R.id.button_of_task_execution);
+        if(pTime.equals("四")){
+            button_of_task_execution.setVisibility(View.VISIBLE);
+        }else{
+            button_of_task_execution.setVisibility(View.INVISIBLE);
+        }
+        button_of_task_execution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                startActivity(intent);
+
+            }
         });
         chart_of_sit_up_today_record= (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());
@@ -421,6 +447,48 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
                 generateDefaultData();
                 break;
         }
+    }
+    private String getWeek(String pTime) {
+
+
+        String Week = "";
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+
+            c.setTime(format.parse(pTime));
+
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 1) {
+            Week += "天";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 2) {
+            Week += "一";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 3) {
+            Week += "二";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 4) {
+            Week += "三";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 5) {
+            Week += "四";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 6) {
+            Week += "五";
+        }
+        if (c.get(Calendar.DAY_OF_WEEK) == 7) {
+            Week += "六";
+        }
+
+
+
+        return Week;
     }
 
     /*private void toggleLabels() {
