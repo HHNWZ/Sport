@@ -141,6 +141,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
+                ((habaActivity)getActivity()).fabIn();
                 if(addType=="編輯"){
                     ((habaActivity)getActivity()).reSetArtDATA(
                             theID,ct.getText().toString(),

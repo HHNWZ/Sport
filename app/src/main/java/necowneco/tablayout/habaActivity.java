@@ -155,6 +155,7 @@ public class habaActivity extends AppCompatActivity
                         addart,
                         addart.getTag()
                 ).commit();
+                fabOut();
             }
         });
 
@@ -166,6 +167,7 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
+
     public void BackArtList(){//<跳頁>回到貼文列表
         Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgoodCount(),artresCount());
         FragmentManager manager=getSupportFragmentManager();
@@ -329,6 +331,14 @@ public class habaActivity extends AppCompatActivity
                 Toast.LENGTH_SHORT).
                 show();
         BackArtList();//回到貼文列表
+    }
+    private void fabOut() {//<版面控制>浮動按鈕隱藏
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
+    }
+    public void fabIn() {//<版面控制>浮動按鈕出現
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.VISIBLE);
     }
     public void downloadTheImg(Bitmap bitmap) {//<資料處理>將本頁(貼文內容)圖片儲存至手機內部儲存空間/DCIM中
         FileOutputStream fOut;
