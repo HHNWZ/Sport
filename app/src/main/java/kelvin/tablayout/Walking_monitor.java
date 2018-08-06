@@ -12,11 +12,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
-import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
-import com.samsung.android.sdk.healthdata.HealthConstants;
-import com.samsung.android.sdk.healthdata.HealthDataService;
-import com.samsung.android.sdk.healthdata.HealthDataStore;
-import com.samsung.android.sdk.healthdata.HealthPermissionManager;
+import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;//此類處理由健康數據存儲的連接失敗引發的錯誤。
+import com.samsung.android.sdk.healthdata.HealthConstants;//此類包含Samsung Health Android SDK的數據類型的接口，例如計數步驟或練習。
+import com.samsung.android.sdk.healthdata.HealthDataService;//這是com.samsung.android.sdk.healthdata包的代表類。它提供了初始化運行狀況數據服務的方法。
+import com.samsung.android.sdk.healthdata.HealthDataStore;//此類提供與運行狀況數據存儲的連接。
+import com.samsung.android.sdk.healthdata.HealthPermissionManager;//此類請求讀取或寫入特定運行狀況數據類型的運行狀況數據的權限。
 
 import java.util.Collections;
 import java.util.Map;
@@ -62,7 +62,7 @@ public class Walking_monitor extends AppCompatActivity {
 
         HealthDataService healthDataService = new HealthDataService();
         try {
-            healthDataService.initialize(this);
+            healthDataService.initialize(this);//初始化運行狀況數據服務。初始化成功後，Health Data的其他類或接口中的API工作。
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,10 +162,10 @@ public class Walking_monitor extends AppCompatActivity {
         alert.show();
     }
     private boolean isPermissionAcquired() {
-        HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);
+        HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);//此類表示由健康數據類型和權限類型組成的權限密鑰。它用作請求權限的密鑰並檢查權限狀態。
         HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
         try {
-            // Check whether the permissions that this application needs are acquired
+            //檢查是否獲取了此應用程序所需的權限
             Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(Collections.singleton(permKey));
             return resultMap.get(permKey);
         } catch (Exception e) {
@@ -177,7 +177,7 @@ public class Walking_monitor extends AppCompatActivity {
         HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);
         HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
         try {
-            // Show user permission UI for allowing user to change options
+            // 顯示允許用戶更改選項的用戶權限UI
             pmsManager.requestPermissions(Collections.singleton(permKey), Walking_monitor.this)
                     .setResultListener(result -> {
                         Log.d(APP_TAG, "收到權限回調。");
@@ -187,7 +187,7 @@ public class Walking_monitor extends AppCompatActivity {
                             updateStepCountView("");
                             showPermissionAlarmDialog();
                         } else {
-                            // Get the current step count and display it
+                            // 獲取當前步數並顯示它it
                             mReporter.start(mStepCountObserver);
                         }
                     });
