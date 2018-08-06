@@ -22,6 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.samsung.android.health.permission.read"
+            android:value="com.samsung.health.step_count" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -82,7 +85,16 @@
         <activity android:name="kelvin.tablayout.Aerobic_exercise_task" />
         <activity android:name="kelvin.tablayout.Running_task" />
         <activity android:name="kelvin.tablayout.Sit_up_task" />
-        <activity android:name="kelvin.tablayout.Walking_task"></activity>
+        <activity android:name="kelvin.tablayout.Walking_task" />
+        <activity android:name="kelvin.tablayout.Walking_monitor"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

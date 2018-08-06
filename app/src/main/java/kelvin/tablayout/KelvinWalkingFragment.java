@@ -50,7 +50,7 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
     public String pTime;
-    public Button button_of_task_execution;
+    public Button button_of_task_execution,button_of_sports_monitoring;
     public KelvinWalkingFragment() {
         // Required empty public constructor kkkkkkkkkkk
     }
@@ -69,6 +69,7 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
         TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
         TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
+
         text_View_of_exercise_title.setText("步行個人記錄");
         text_view_of_today_record_data.setText("1000");
         text_view_of_highest_record_data.setText("2000");
@@ -109,6 +110,14 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
         //chart.setOnValueTouchListener(new ValueTouchListener());
         chart_of_walking_today_record.setZoomEnabled(false);
         generateData();
+        button_of_sports_monitoring=(Button)rootView.findViewById(R.id.button_of_sports_monitoring);
+        button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Walking_monitor.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 
