@@ -98,6 +98,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_search_art_list, null);
         view.setOnTouchListener(this);
+        ((habaActivity)getActivity()).fabIn(null);
         final ListView Searchartlist=(ListView)view.findViewById(R.id.searchArtList);
         final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
         /*ArrayAdapter<String> searchartlist=new ArrayAdapter<String>(

@@ -159,7 +159,7 @@ public class  MainActivity extends AppCompatActivity
                                 walkdata.setText(jasondata.getString("walk"));
                                 airdata.setText(jasondata.getString("air"));
                                 pushdata.setText(jasondata.getString("push"));
-                                sitdata.setText(jasondata.getString("sit"));
+                                sitdata.setText(jasondata.getString("sit"));//dd
                             }
 
                         } catch (JSONException e) {

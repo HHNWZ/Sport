@@ -38,6 +38,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
     private static final String THEART_GOOD="param8";
     private static final String THEART_RES="param6";
     private static final String NOWUSER="param7";
+    private static final String RETARGET="param9";
 
     // TODO: Rename and change types of parameters
     private int mTarID;
@@ -49,6 +50,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
     private ArrayList<String> mRes;
     private String mNowUser;
     private boolean isGooded;
+    private String mretarget;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,6 +70,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
      * @param param6 Parameter 6.
      * @param param7 Parameter 7.
      * @param param8 Parameter 8.
+     * @param param9 Parameter 9.
      * @return A new instance of fragment theArt.
      */
     // TODO: Rename and change types and number of parameters
@@ -78,7 +81,8 @@ public class theArt extends Fragment implements View.OnTouchListener {
                                      String param5,
                                      int param8,
                                      ArrayList param6,
-                                     String param7) {
+                                     String param7,
+                                     String param9) {
         theArt fragment = new theArt();
         Bundle args = new Bundle();
         args.putInt(THEART_ID, param1);
@@ -89,6 +93,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
         args.putInt(THEART_GOOD,param8);
         args.putStringArrayList(THEART_RES,param6);
         args.putString(NOWUSER,param7);
+        args.putString(RETARGET,param9);
         fragment.setArguments(args);
         return fragment;
     }
@@ -106,6 +111,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
             mGood=getArguments().getInt(THEART_GOOD);
             mRes=getArguments().getStringArrayList(THEART_RES);
             mNowUser = getArguments().getString(NOWUSER);
+            mretarget = getArguments().getString(RETARGET);
         }
     }
 
@@ -114,6 +120,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_the_art, container, false);
         view.setOnTouchListener(this);
+        ((habaActivity)getActivity()).fabIn(mTitle);
         final Button backtolist=(Button)view.findViewById(R.id.BackTolist);
         final TextView theartTitle=(TextView)view.findViewById(R.id.theTitle);
         final TextView theartAut=(TextView)view.findViewById(R.id.theAut);
@@ -122,14 +129,18 @@ public class theArt extends Fragment implements View.OnTouchListener {
         final Button koreiine=(Button)view.findViewById(R.id.koreIINe);
         final Button koreiine2=(Button)view.findViewById(R.id.koreIINe2);
         final Button tores=(Button)view.findViewById(R.id.toRes);
-        final Button toreart=(Button)view.findViewById(R.id.toRe_Art);
         final Button thedeletBtn=(Button)view.findViewById(R.id.DelebBtn);
-        final Button downloadbtn=(Button)view.findViewById(R.id.downloadBtn);
         final ImageView theimg=(ImageView)view.findViewById(R.id.theIMG);
+        final Button retarget=(Button)view.findViewById(R.id.theReTarget);
+        if(mretarget==null) {//檢查是否為回覆貼文
+            retarget.setVisibility(View.GONE);//若不是，則隱藏
+        }else {
+            retarget.setText("回朔：" + mretarget);//若是，則設定回朔目標
+        }
         //final ListView theartReslist=(ListView)view.findViewById(R.id.theReslist);
         //final EditText theartNewres=(EditText)view.findViewById(R.id.theNewres);
-        if(mNowUser==mAut) {
-            thedeletBtn.setVisibility(View.VISIBLE);
+        if(mNowUser!=mAut) {
+            thedeletBtn.setVisibility(View.GONE);
         }
         theartTitle.setText("【"+mType+"】"+mTitle);
         theartAut.setText("貼文作者："+mAut);
@@ -138,12 +149,12 @@ public class theArt extends Fragment implements View.OnTouchListener {
         koreiine.setText(mGood+"個讚");
         koreiine2.setText(mGood+"個讚");
         tores.setText("留言");
-        downloadbtn.setOnClickListener(new View.OnClickListener() {
+        /*downloadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((habaActivity)getActivity()).downloadTheImg(((BitmapDrawable)theimg.getDrawable()).getBitmap());
             }
-        });
+        });*/
         if(((habaActivity)getActivity()).artgood.get(mTarID).contains(mNowUser)){//判斷是否已按讚此貼文
             isGooded=true;
             koreiine.setVisibility(View.GONE);
@@ -177,15 +188,15 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 /*Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
                 ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
                 ((habaActivity) getActivity()).toArtcon(mParam4);*/
-                ((habaActivity) getActivity()).toResList(mTarID);
+                ((habaActivity) getActivity()).toResList(mTarID-1);
             }
         });
-        toreart.setOnClickListener(new View.OnClickListener() {
+        /*toreart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((habaActivity) getActivity()).reTheArt(mTitle);
             }
-        });
+        });*/
         backtolist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,10 +230,19 @@ public class theArt extends Fragment implements View.OnTouchListener {
                         .show();
             }
         });
-
+        retarget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((habaActivity)getActivity()).toArtcon(findThisID(mretarget));
+            }
+        });
         // Inflate the layout for this fragment
 
         return view;
+    }
+
+    private int findThisID(String mretarget) {
+        return ((habaActivity)getActivity()).artTitle.indexOf(mretarget);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

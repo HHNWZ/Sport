@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
 
@@ -94,6 +95,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
 
         final View view = inflater.inflate(R.layout.fragment_add_art, null);
         view.setOnTouchListener(this);
+        ((habaActivity)getActivity()).fabOut();
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
@@ -125,6 +127,7 @@ public class AddArt extends Fragment implements View.OnTouchListener {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
             }
         });
+        finishbtn.setVisibility(View.GONE);
         seleimgbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,11 +150,19 @@ public class AddArt extends Fragment implements View.OnTouchListener {
                             spinner.getSelectedItem().toString(),
                             cc.getText().toString()
                     );
-                }else{//新增、回覆
+                }else if(addType=="回覆"){//回覆
                     ((habaActivity) getActivity()).addartDATA(
                             ct.getText().toString(),
                             spinner.getSelectedItem().toString(),
-                            cc.getText().toString()
+                            cc.getText().toString(),
+                            theTitle
+                    );
+                }else{//新增
+                    ((habaActivity) getActivity()).addartDATA(
+                            ct.getText().toString(),
+                            spinner.getSelectedItem().toString(),
+                            cc.getText().toString(),
+                            null
                     );
                 }
             }

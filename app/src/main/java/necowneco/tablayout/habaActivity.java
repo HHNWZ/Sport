@@ -52,6 +52,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<ArrayList> resName=new ArrayList<ArrayList>();//貼文留言記名列表
     final ArrayList<ArrayList> resList=new ArrayList<>();//貼文留言ID [ 該貼文列表 ]，resList.get(ID).size=取得留言數
     final ArrayList<ArrayList> artgood=new ArrayList<ArrayList>();//貼文讚數列表
+    final ArrayList<String> artRETitle=new ArrayList<String>();//貼文回覆之標題列表
     final ArrayList<Integer> shsolID=new ArrayList<Integer>();//搜尋&篩選ID列表(位置)，searchsol=shsol
     final ArrayList<String> shsolTitle=new ArrayList<String>();//搜尋&篩選標題列表
     final ArrayList<String> shsolAut=new ArrayList<String>();
@@ -60,6 +61,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<Integer> shsolRn=new ArrayList<Integer>();
     public static int fragcount = 0,BacktheArt=0,BacktoID = 0;
     final String nowuser="369";//測試用之預設使用者
+    String isReArt=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +84,9 @@ public class habaActivity extends AppCompatActivity
         artTitle.add("總有一天要追上太陽");
         artTitle.add("來自地獄的腹筋壓榨術");
         artTitle.add("使全身充滿氧氣");
+        artRETitle.add(null);
+        artRETitle.add(null);
+        artRETitle.add(null);
         artClass.add(SportList[3]);
         artClass.add(SportList[5]);
         artClass.add(SportList[1]);
@@ -148,13 +153,17 @@ public class habaActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {//<跳頁>新增貼文
                 fragcount++;
-                AddArt addart=AddArt.newInstance(nowuser, "新增",artID.size(),null,null,null);//賦予addArt頁面"新增"狀態
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().replace(
-                        R.id.haba,
-                        addart,
-                        addart.getTag()
-                ).commit();
+                if(isReArt==null){
+                    AddArt addart=AddArt.newInstance(nowuser, "新增",artID.size(),null,null,null);//賦予addArt頁面"新增"狀態
+                    FragmentManager manager=getSupportFragmentManager();
+                    manager.beginTransaction().replace(
+                            R.id.haba,
+                            addart,
+                            addart.getTag()
+                    ).commit();
+                }else{
+                    reTheArt(isReArt);
+                }
             }
         });
 
@@ -166,6 +175,7 @@ public class habaActivity extends AppCompatActivity
         toggle.syncState();
 
     }
+
     public void BackArtList(){//<跳頁>回到貼文列表
         Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgoodCount(),artresCount());
         FragmentManager manager=getSupportFragmentManager();
@@ -197,7 +207,8 @@ public class habaActivity extends AppCompatActivity
                 artCon.get(TargetID),
                 artgood.get(TargetID).size(),
                 resList.get(TargetID),
-                nowuser
+                nowuser,
+                artRETitle.get(TargetID)
         );
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction()
@@ -226,13 +237,14 @@ public class habaActivity extends AppCompatActivity
         ).commit();
     }
     public void reTheArt(String theTitle) {//<跳頁>新增一則新貼文來回覆某一貼文
-        AddArt addart=AddArt.newInstance(nowuser,"回覆",artID.size(),theTitle,null,null);//進入addArt頁面時賦予"回覆"狀態
+        AddArt addart=AddArt.newInstance(nowuser,"回覆",artID.size(),theTitle,null,theTitle);//進入addArt頁面時賦予"回覆"狀態
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
                 addart,
                 addart.getTag()
         ).commit();
+
     }
     private ArrayList<Integer> artgoodCount() {//<資料處理>取得貼文列表中每則貼文之讚數，展開貼文列表時使用
         ArrayList<Integer> mycount=new ArrayList<Integer>();
@@ -283,7 +295,7 @@ public class habaActivity extends AppCompatActivity
         }
         ToSearchList();//呼叫進入搜尋與篩選頁面的函式
     }
-    public void addartDATA(String theTitle, String theClass,String  theCon){//<資料處理>新增貼文
+    public void addartDATA(String theTitle, String theClass,String  theCon,String RETar){//<資料處理>新增貼文
         int addid=artID.size();
         artID.add("00"+(addid+1));
         autID.add(nowuser);
@@ -292,11 +304,8 @@ public class habaActivity extends AppCompatActivity
         artCon.add(theCon);
         artgood.add(new ArrayList<String>());
         resList.add(new ArrayList<String>());
+        artRETitle.add(RETar);
         //以上為：將新增之貼文存於資料列
-        Toast.makeText(this,
-                "使用者"+autID.get(addid)+"新增"+artID.get(addid)+"號"+artTitle.get(addid),
-                Toast.LENGTH_SHORT).
-                show();
         toArtcon(addid);//直接檢視發布之貼文
     }
     public void IINe(int TargetID,boolean gooded){//<資料處理>點讚&收回
@@ -329,6 +338,15 @@ public class habaActivity extends AppCompatActivity
                 Toast.LENGTH_SHORT).
                 show();
         BackArtList();//回到貼文列表
+    }
+    public void fabOut() {//<版面控制>浮動按鈕隱藏
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.GONE);
+    }
+    public void fabIn(String isRethis) {//<版面控制>浮動按鈕出現
+        isReArt=isRethis;
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(View.VISIBLE);
     }
     public void downloadTheImg(Bitmap bitmap) {//<資料處理>將本頁(貼文內容)圖片儲存至手機內部儲存空間/DCIM中
         FileOutputStream fOut;
@@ -385,7 +403,8 @@ public class habaActivity extends AppCompatActivity
                     artCon.get(BacktoID),
                     artgood.get(BacktoID).size(),
                     resList.get(BacktoID),
-                    nowuser
+                    nowuser,
+                    artRETitle.get(BacktoID)
             );
             FragmentManager manager=getSupportFragmentManager();
             manager.beginTransaction()
