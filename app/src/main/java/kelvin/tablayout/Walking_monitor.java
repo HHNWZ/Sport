@@ -169,7 +169,7 @@ public class Walking_monitor extends AppCompatActivity {
             Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(Collections.singleton(permKey));
             return resultMap.get(permKey);
         } catch (Exception e) {
-            Log.e(APP_TAG, "權限請求失敗", e);
+            Log.e(APP_TAG, "權限請求失敗", e);//
         }
         return false;
     }
