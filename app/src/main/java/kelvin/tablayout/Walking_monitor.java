@@ -1,6 +1,7 @@
 package kelvin.tablayout;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,43 +13,36 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
-import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;//此類處理由健康數據存儲的連接失敗引發的錯誤。
-import com.samsung.android.sdk.healthdata.HealthConstants;//此類包含Samsung Health Android SDK的數據類型的接口，例如計數步驟或練習。
-import com.samsung.android.sdk.healthdata.HealthDataService;//這是com.samsung.android.sdk.healthdata包的代表類。它提供了初始化運行狀況數據服務的方法。
-import com.samsung.android.sdk.healthdata.HealthDataStore;//此類提供與運行狀況數據存儲的連接。
-import com.samsung.android.sdk.healthdata.HealthPermissionManager;//此類請求讀取或寫入特定運行狀況數據類型的運行狀況數據的權限。
+import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
+import com.samsung.android.sdk.healthdata.HealthConstants;
+import com.samsung.android.sdk.healthdata.HealthDataService;
+import com.samsung.android.sdk.healthdata.HealthDataStore;
+import com.samsung.android.sdk.healthdata.HealthPermissionManager;
+import com.samsung.android.sdk.healthdata.HealthResultHolder;
 
-import java.util.Collections;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Map;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-
+import java.util.Set;
 
 public class Walking_monitor extends AppCompatActivity {
-
-    public static final String APP_TAG="SimpleHealth";
-
-    @BindView(R.id.editHealthDateValue1)
-    TextView mStepCountTv;
-
-    private HealthDataStore mStore;
-    private StepCountReporter mReporter;
-    private static  Walking_monitor mInstance = null;
     private Toolbar walking_monitor_toolbar;
-
-
-
+    private HealthDataStore mStore;
+    private HealthConnectionErrorResult mConnError;
+    private Set<HealthPermissionManager.PermissionKey> mKeySet;
+    private final int MENU_ITEM_PERMISSION_SETTING = 1;
+    public static final String APP_TAG = "Sport";
+    private static Walking_monitor mInstance = null;
+    private WalkReporter wReporter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_monitor);
-        ButterKnife.bind(this);
-        walking_monitor_toolbar=(Toolbar)findViewById(R.id.Walking_monitor_app_bar);
+
+        walking_monitor_toolbar=(Toolbar)findViewById(R.id.walking_monitor_toolBar);
         setSupportActionBar(walking_monitor_toolbar);
-        walking_monitor_toolbar.setTitle("步數每日監控");
+        walking_monitor_toolbar.setTitle("步行監控");
         walking_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         walking_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,169 +52,196 @@ public class Walking_monitor extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
+        mInstance = this;
+        mKeySet = new HashSet<>();
+        mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.Exercise.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
         HealthDataService healthDataService = new HealthDataService();
         try {
-            healthDataService.initialize(this);//初始化運行狀況數據服務。初始化成功後，Health Data的其他類或接口中的API工作。
+            healthDataService.initialize(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-        //創建一個HealthDataStore實例並設置其偵聽器
-        mStore = new HealthDataStore(this, mConnectionListener);
         // 創建一個HealthDataStore實例並設置其偵聽器
+        mStore = new HealthDataStore(this, mConnectionListener);
+        // 請求連接到運行狀況數據存儲
         mStore.connectService();
-
     }
-
     @Override
-    public void onDestroy() {
-        mStore.disconnectService();
-        super.onDestroy();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //給菜單充氣;這會將項目添加到操作欄（如果存在）。
+        getMenuInflater().inflate(R.menu.step_count_menu, menu);
+        menu.add(1, MENU_ITEM_PERMISSION_SETTING, 0, "連接到 S Health");
+        return true;
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // 處理操作欄項目點擊此處。操作欄會
+        // 自動處理Home / Up按鈕上的點擊，這麼久
+        //在AndroidManifest.xml中指定父活動時。
+        int id = item.getItemId();
+        if(id == (MENU_ITEM_PERMISSION_SETTING)) {
+            HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
+            try {
+                // 顯示允許用戶更改選項的用戶權限UI
+                pmsManager.requestPermissions(mKeySet, Walking_monitor.this).setResultListener(mPermissionListener);
+            } catch (Exception e) {
+                Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
+                Log.e(APP_TAG, "權限設置失敗。");
+            }
+        }
 
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
 
         @Override
         public void onConnected() {
             Log.d(APP_TAG, "健康數據服務已連接。");
-            mReporter = new StepCountReporter(mStore);
-            if (isPermissionAcquired()) {
-                mReporter.start(mStepCountObserver);
-            } else {
-                requestPermission();
+            HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
+            //mReporter = new StepCountReporter(mStore);
+            wReporter = new WalkReporter(mStore);
+            try {
+                // 檢查是否獲取了此應用程序所需的權限
+                Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(mKeySet);
+
+                if (resultMap.containsValue(Boolean.FALSE)) {
+                    //如果未獲取，則請求讀取步數的權限
+                    pmsManager.requestPermissions(mKeySet, Walking_monitor.this).setResultListener(mPermissionListener);
+                } else {
+                    //獲取當前步數並顯示它
+
+                    wReporter.start();
+                }
+            } catch (Exception e) {
+                Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
+                Log.e(APP_TAG, "權限設置失敗。");
             }
         }
 
         @Override
         public void onConnectionFailed(HealthConnectionErrorResult error) {
-            Log.d(APP_TAG, "健康數據服務不可用");
+            Log.d(APP_TAG, "健康數據服務不可用。");
             showConnectionFailureDialog(error);
         }
 
         @Override
         public void onDisconnected() {
-            Log.d(APP_TAG,"健康數據服務已斷開連接。");
-            if (!isFinishing()) {
-                mStore.connectService();
-            }
+            Log.d(APP_TAG, "Health data service is disconnected.");
         }
     };
 
+    private final HealthResultHolder.ResultListener<HealthPermissionManager.PermissionResult> mPermissionListener =
+            new HealthResultHolder.ResultListener<HealthPermissionManager.PermissionResult>() {
+
+                @Override
+                public void onResult(HealthPermissionManager.PermissionResult result) {
+                    Log.d(APP_TAG, "健康數據服務已斷開連接。");
+                    Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = result.getResultMap();
+
+                    if (resultMap.containsValue(Boolean.FALSE)) {
+
+                        showPermissionAlarmDialog();
+                    } else {
+                        //獲取當前步數並顯示它
+
+                        wReporter.start();
+                    }
+                }
+            };
+    public void drawWalk(String info, long time,String meanHeartRate){
+
+        TextView distance_data = (TextView)findViewById(R.id.distance_data);
+        TextView time_data = (TextView)findViewById(R.id.time_data);
+        TextView meanHeartRate1 =(TextView )findViewById(R.id.meanHeartRate_data);
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTimeInMillis(time);
+        int year = calendar2.get(Calendar.YEAR);
+        int month = calendar2.get(Calendar.MONTH);
+        int day = calendar2.get(Calendar.DAY_OF_MONTH);
+        //int hour = calendar2.get(Calendar.HOUR_OF_DAY);//24小时制
+        int hour = calendar2.get(Calendar.HOUR);//12小时制
+        int minute = calendar2.get(Calendar.MINUTE);
+        int second = calendar2.get(Calendar.SECOND);
+
+        int distance = Integer.parseInt(info);
+        double dis;
+        dis = ((distance/100d)/10d);
+        java.text.DecimalFormat df = new java.text.DecimalFormat("0.00");
+        //df.format(dis);
+        // Display the today step count so far
+        distance_data.setText(""+df.format(dis));
+        //walkDurationTv.setText(time);
+        meanHeartRate1.setText(""+meanHeartRate);
+        if(time<3600000){
+            time_data.setText(minute+"分鐘 "+second+"秒");
+        }
+        if(time>=3600000){
+            time_data.setText(hour+"時 "+minute+"分鐘 "+second+"秒");
+        }
+    }
+    public static Walking_monitor getInstance() {
+        return mInstance;
+    }
     private void showPermissionAlarmDialog() {
         if (isFinishing()) {
             return;
         }
 
         AlertDialog.Builder alert = new AlertDialog.Builder(Walking_monitor.this);
-        alert.setTitle(R.string.notice)
-                .setMessage(R.string.msg_perm_acquired)
-                .setPositiveButton(R.string.ok, null)
-                .show();
+        alert.setTitle("注意");
+        alert.setMessage("應獲取所有權限");
+        alert.setPositiveButton("OK", null);
+        alert.show();
     }
-    private void showConnectionFailureDialog(final HealthConnectionErrorResult error) {
-        if (isFinishing()) {
-            return;
-        }
+
+    private void showConnectionFailureDialog(HealthConnectionErrorResult error) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        mConnError = error;
+        String message = "無法與S Health連接";
 
-        if (error.hasResolution()) {
-            switch (error.getErrorCode()) {
+        if (mConnError.hasResolution()) {
+            switch(error.getErrorCode()) {
                 case HealthConnectionErrorResult.PLATFORM_NOT_INSTALLED:
-                    alert.setMessage(R.string.msg_req_install);
+                    message = "請安裝S Health";
                     break;
                 case HealthConnectionErrorResult.OLD_VERSION_PLATFORM:
-                    alert.setMessage(R.string.msg_req_upgrade);
+                    message = "請升級S Healthh";
                     break;
                 case HealthConnectionErrorResult.PLATFORM_DISABLED:
-                    alert.setMessage(R.string.msg_req_enable);
+                    message = "請啟用S Health";
                     break;
                 case HealthConnectionErrorResult.USER_AGREEMENT_NEEDED:
-                    alert.setMessage(R.string.msg_req_agree);
+                    message = "請同意S Health政策";
                     break;
                 default:
-                    alert.setMessage(R.string.msg_req_available);
+                    message = "請提供S Health";
                     break;
             }
-        } else {
-            alert.setMessage(R.string.msg_conn_not_available);
         }
 
-        alert.setPositiveButton(R.string.ok, (dialog, id) -> {
-            if (error.hasResolution()) {
-                error.resolve(Walking_monitor.this);
+        alert.setMessage(message);
+
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                if (mConnError.hasResolution()) {
+                    mConnError.resolve(mInstance);
+                }
             }
         });
 
         if (error.hasResolution()) {
-            alert.setNegativeButton(R.string.cancel, null);
+            alert.setNegativeButton("Cancel", null);
         }
 
         alert.show();
     }
-    private boolean isPermissionAcquired() {
-        HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);//此類表示由健康數據類型和權限類型組成的權限密鑰。它用作請求權限的密鑰並檢查權限狀態。
-        HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
-        try {
-            //檢查是否獲取了此應用程序所需的權限
-            Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = pmsManager.isPermissionAcquired(Collections.singleton(permKey));
-            return resultMap.get(permKey);
-        } catch (Exception e) {
-            Log.e(APP_TAG, "權限請求失敗", e);//
-        }
-        return false;
-    }
-    private void requestPermission() {
-        HealthPermissionManager.PermissionKey permKey = new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ);
-        HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
-        try {
-            // 顯示允許用戶更改選項的用戶權限UI
-            pmsManager.requestPermissions(Collections.singleton(permKey), Walking_monitor.this)
-                    .setResultListener(result -> {
-                        Log.d(APP_TAG, "收到權限回調。");
-                        Map<HealthPermissionManager.PermissionKey, Boolean> resultMap = result.getResultMap();
-
-                        if (resultMap.containsValue(Boolean.FALSE)) {
-                            updateStepCountView("");
-                            showPermissionAlarmDialog();
-                        } else {
-                            // 獲取當前步數並顯示它it
-                            mReporter.start(mStepCountObserver);
-                        }
-                    });
-        } catch (Exception e) {
-            Log.e(APP_TAG, "權限設置失敗。", e);
-        }
-    }
-    private StepCountReporter.StepCountObserver mStepCountObserver = count -> {
-        Log.d(APP_TAG, "步驟報告： " + count);
-        updateStepCountView(String.valueOf(count));
-    };
-
-    private void updateStepCountView(final String count) {
-        runOnUiThread(() -> mStepCountTv.setText(count));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.step_count_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (item.getItemId() == R.id.connect) {
-            requestPermission();
-        }
-
-        return true;
-    }
-
-
-
 }

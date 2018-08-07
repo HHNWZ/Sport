@@ -24,8 +24,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.samsung.android.health.permission.read"
-            android:value="com.samsung.health.step_count" />
-
+            android:value="com.samsung.health.exercise" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -88,16 +87,8 @@
         <activity android:name="kelvin.tablayout.Running_task" />
         <activity android:name="kelvin.tablayout.Sit_up_task" />
         <activity android:name="kelvin.tablayout.Walking_task" />
-        <activity
-            android:name="kelvin.tablayout.Walking_monitor"
-            android:screenOrientation="portrait">
-
-        </activity>
         <activity android:name="kelvin.tablayout.Test" />
-        <activity android:name="kelvin.tablayout.Walking">
-
-
-        </activity>
+        <activity android:name="kelvin.tablayout.Walking_monitor"></activity>
     </application>
 
 </manifest>
