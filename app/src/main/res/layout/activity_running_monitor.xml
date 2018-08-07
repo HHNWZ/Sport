@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.RunningMonitor">
+
+    <include
+        android:id="@+id/running_monitor_toolBar"
+        layout="@layout/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/distance_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="99dp"
+        android:text="距離:" />
+
+    <TextView
+        android:id="@+id/distance_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginStart="87dp"
+        android:text="距離資料" />
+
+    <TextView
+        android:id="@+id/time_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/distance_of_running_monitor_text_view"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="159dp"
+        android:text="時間" />
+
+    <TextView
+        android:id="@+id/time_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/distance_data_of_running_monitor"
+        android:layout_alignTop="@+id/time_of_running_monitor_text_view"
+        android:text="時間資料" />
+
+    <TextView
+        android:id="@+id/mean_HeartRate_of_running_monitor_text_vie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/distance_of_running_monitor_text_view"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="213dp"
+        android:text="平均心跳" />
+
+    <TextView
+        android:id="@+id/meanHeartRate_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/distance_data_of_running_monitor"
+        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_vie"
+        android:text="平均心態資料" />
+
+</RelativeLayout>

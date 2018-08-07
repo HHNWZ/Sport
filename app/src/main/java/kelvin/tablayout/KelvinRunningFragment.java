@@ -54,7 +54,7 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
     public String pTime;
-    public Button button_of_task_execution;
+    public Button button_of_task_execution,button_of_sports_monitoring;
 
     public KelvinRunningFragment() {
         // Required empty public constructor kkkkkkkkkkkkk
@@ -116,6 +116,14 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
                 Intent intent = new Intent(getContext(),Running_task.class);
                 startActivity(intent);
 
+            }
+        });
+        button_of_sports_monitoring=(Button)rootView.findViewById(R.id.button_of_sports_monitoring);
+        button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),RunningMonitor.class);
+                startActivity(intent);
             }
         });
         return rootView;
