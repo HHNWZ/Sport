@@ -41,8 +41,9 @@ public class Walking_monitor extends AppCompatActivity {
         setContentView(R.layout.activity_walking_monitor);
 
         walking_monitor_toolbar=(Toolbar)findViewById(R.id.walking_monitor_toolBar);
-        setSupportActionBar(walking_monitor_toolbar);
         walking_monitor_toolbar.setTitle("步行監控");
+        setSupportActionBar(walking_monitor_toolbar);
+
         walking_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         walking_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

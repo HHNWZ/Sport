@@ -36,7 +36,15 @@ public class RunningReporter {
 
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
                 .setDataType(HealthConstants.Exercise.HEALTH_DATA_TYPE)
-                .setProperties(new String[] {HealthConstants.Exercise.DISTANCE,HealthConstants.Exercise.DURATION,HealthConstants.Exercise.MEAN_HEART_RATE})
+                .setProperties(new String[] {HealthConstants.Exercise.DISTANCE,
+                                             HealthConstants.Exercise.DURATION,
+                                             HealthConstants.Exercise.MEAN_HEART_RATE,
+                                             HealthConstants.Exercise.START_TIME,
+                                             HealthConstants.Exercise.END_TIME,
+                                             HealthConstants.Exercise.CALORIE,
+                                             HealthConstants.Exercise.INCLINE_DISTANCE,
+                                             HealthConstants.Exercise.DECLINE_DISTANCE,
+                })
                 .setFilter(filter)
                 .build();
 
@@ -62,18 +70,29 @@ public class RunningReporter {
     private final HealthResultHolder.ResultListener<HealthDataResolver.ReadResult> mListener = new HealthResultHolder.ResultListener<HealthDataResolver.ReadResult>() {
         @Override
         public void onResult(HealthDataResolver.ReadResult result) {
-            int count = 0;
-            long time=0 ;
-            String meanHeartRate2="";
+            double running_distance = 0;
+            long running_duration=0 ;
+            long running_start_time=0;
+            long running_end_time=0;
+            int running_mean_heart_rate=0;
+            double running_calorie=0;
+            double running_incline_distance=0;
+            double running_decline_distance=0;
             Cursor c = null;
 
             try {
                 c = result.getResultCursor();
                 if (c != null) {
                     while (c.moveToNext()) {
-                        count = c.getInt(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
-                        time = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
-                        meanHeartRate2=c.getString(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
+                        running_distance = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
+                        running_duration = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
+                        running_mean_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
+                        running_start_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.START_TIME));
+                        running_end_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.END_TIME));
+                        running_calorie=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.CALORIE));
+                        running_incline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.INCLINE_DISTANCE));
+                        running_decline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DECLINE_DISTANCE));
+
                     }
                 }
             } finally {
@@ -81,7 +100,7 @@ public class RunningReporter {
                     c.close();
                 }
             }
-            RunningMonitor.getInstance().drawRunning(String.valueOf(count),time,meanHeartRate2);
+            RunningMonitor.getInstance().drawRunning(running_distance,running_duration,running_mean_heart_rate,running_start_time,running_end_time,running_calorie,running_incline_distance,running_decline_distance);
         }
     };
 
