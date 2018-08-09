@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataService;
@@ -36,6 +39,7 @@ public class RunningMonitor extends AppCompatActivity {
     public static final String APP_TAG = "Sport";
     private static RunningMonitor mInstance = null;
     private RunningReporter rReporter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +47,6 @@ public class RunningMonitor extends AppCompatActivity {
         running_monitor_toolbar=(Toolbar)findViewById(R.id.running_monitor_toolBar);
         running_monitor_toolbar.setTitle("跑步監控");
         setSupportActionBar(running_monitor_toolbar);
-
         running_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         running_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,11 +66,13 @@ public class RunningMonitor extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // 創建一個HealthDataStore實例並設置其偵聽器
         mStore = new HealthDataStore(this, mConnectionListener);
         // 請求連接到運行狀況數據存儲
         mStore.connectService();
+
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -186,7 +191,21 @@ public class RunningMonitor extends AppCompatActivity {
         min_altitude_data_of_running_monitor.setText(""+running_min_altitude);
         mean_speed_data_of_running_monitor.setText(""+UnitConversion.get_kilometer_per_hour(running_mean_speed));
         max_speed_data_of_running_monitor.setText(""+UnitConversion.get_kilometer_per_hour(running_max_speed));
-
+        writeNewExerciseData.setNewExerciseData("running",
+                                             Time.get_start_time(running_start_time),
+                                             Time.get_end_time(running_end_time),
+                                             UnitConversion.get_kilometer(running_distance),
+                                             Time.get_duration_time(running_duration),
+                                             running_mean_heart_rate,
+                                             running_calorie,
+                                             UnitConversion.get_kilometer(running_incline_distance),
+                                             UnitConversion.get_kilometer(running_decline_distance),
+                                             running_max_heart_rate,
+                                             running_max_altitude,
+                                             running_min_altitude,
+                                             UnitConversion.get_kilometer_per_hour(running_mean_speed),
+                                             UnitConversion.get_kilometer_per_hour(running_max_speed)
+                );
 
     }
     public static RunningMonitor getInstance() {
@@ -247,4 +266,5 @@ public class RunningMonitor extends AppCompatActivity {
 
         alert.show();
     }
+
 }

@@ -36,7 +36,20 @@ public class WalkReporter {
 
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
                 .setDataType(HealthConstants.Exercise.HEALTH_DATA_TYPE)
-                .setProperties(new String[] {HealthConstants.Exercise.DISTANCE,HealthConstants.Exercise.DURATION,HealthConstants.Exercise.MEAN_HEART_RATE})
+                .setProperties(new String[]{HealthConstants.Exercise.DISTANCE,
+                        HealthConstants.Exercise.DURATION,
+                        HealthConstants.Exercise.MEAN_HEART_RATE,
+                        HealthConstants.Exercise.START_TIME,
+                        HealthConstants.Exercise.END_TIME,
+                        HealthConstants.Exercise.CALORIE,
+                        HealthConstants.Exercise.INCLINE_DISTANCE,
+                        HealthConstants.Exercise.DECLINE_DISTANCE,
+                        HealthConstants.Exercise.MAX_HEART_RATE,
+                        HealthConstants.Exercise.MAX_ALTITUDE,
+                        HealthConstants.Exercise.MIN_ALTITUDE,
+                        HealthConstants.Exercise.MEAN_SPEED,
+                        HealthConstants.Exercise.MAX_SPEED
+                })
                 .setFilter(filter)
                 .build();
 
@@ -62,18 +75,39 @@ public class WalkReporter {
     private final HealthResultHolder.ResultListener<HealthDataResolver.ReadResult> mListener = new HealthResultHolder.ResultListener<HealthDataResolver.ReadResult>() {
         @Override
         public void onResult(HealthDataResolver.ReadResult result) {
-            int count = 0;
-            long time=0 ;
-            String meanHeartRate2="";
+            double walking_distance = 0;
+            long walking_duration=0 ;
+            long walking_start_time=0;
+            long walking_end_time=0;
+            int walking_mean_heart_rate=0;
+            int walking_calorie=0;
+            double walking_incline_distance=0;
+            double walking_decline_distance=0;
+            int walking_max_heart_rate=0;
+            int walking_max_altitude=0;
+            int walking_min_altitude=0;
+            double walking_mean_speed=0;
+            double walking_max_speed=0;
             Cursor c = null;
 
             try {
                 c = result.getResultCursor();
                 if (c != null) {
                     while (c.moveToNext()) {
-                        count = c.getInt(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
-                        time = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
-                        meanHeartRate2=c.getString(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
+                        walking_distance = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
+                        walking_duration = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
+                        walking_mean_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
+                        walking_start_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.START_TIME));
+                        walking_end_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.END_TIME));
+                        walking_calorie=c.getInt(c.getColumnIndex(HealthConstants.Exercise.CALORIE));
+                        walking_incline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.INCLINE_DISTANCE));
+                        walking_decline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DECLINE_DISTANCE));
+                        walking_max_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_HEART_RATE));
+                        walking_max_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_ALTITUDE));
+                        walking_min_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MIN_ALTITUDE));
+                        walking_mean_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MEAN_SPEED));
+                        walking_max_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MAX_SPEED));
+
                     }
                 }
             } finally {
@@ -81,7 +115,7 @@ public class WalkReporter {
                     c.close();
                 }
             }
-            Walking_monitor.getInstance().drawWalk(String.valueOf(count),time,meanHeartRate2);
+            Walking_monitor.getInstance().drawWalk(walking_distance,walking_duration,walking_mean_heart_rate,walking_start_time,walking_end_time,walking_calorie,walking_incline_distance,walking_decline_distance,walking_max_heart_rate,walking_max_altitude,walking_min_altitude,walking_mean_speed,walking_max_speed);
         }
     };
 
