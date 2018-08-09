@@ -207,8 +207,9 @@ public class ChatActivity extends AppCompatActivity {
 
                     long lastTime = Long.parseLong(online);
 
-                    String lastSeenTime = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
+                    //String lastSeenTime = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
 
+                    String lastSeenTime =getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
                     mLastSeenView.setText(lastSeenTime);
 
                 }

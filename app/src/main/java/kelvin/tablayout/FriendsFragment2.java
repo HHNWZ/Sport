@@ -79,7 +79,7 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
     private String end_minute_of_invitation;
 
     private Toolbar mFriendToolbar;
-    private kelvin_running_tag_friend.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
 
     public FriendsFragment2() {
@@ -333,8 +333,8 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof kelvin_running_tag_friend.OnFragmentInteractionListener) {
-            mListener = (kelvin_running_tag_friend.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");

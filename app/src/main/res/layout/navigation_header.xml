@@ -5,6 +5,7 @@
     android:padding="20dp">
 
     <TextView
+
         android:text="@string/main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,19 +22,18 @@
         android:id="@+id/user_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
-
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_marginBottom="22dp"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="10dp"
         android:src="@drawable/default_avatar" />
 
     <TextView
         android:id="@+id/text_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="4dp"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="26dp"
+        android:layout_toRightOf="@+id/user_image"
         android:text="UserName"
         android:textColor="#ffffff"
         android:textSize="20sp" />

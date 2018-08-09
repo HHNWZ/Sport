@@ -32,7 +32,7 @@ public class RunningReporter {
         long startTime = getStartTimeOfToday();
         long endTime = System.currentTimeMillis();
         HealthDataResolver.Filter filter = HealthDataResolver.Filter.and(HealthDataResolver.Filter.greaterThanEquals(HealthConstants.Exercise.START_TIME, startTime),
-                HealthDataResolver.Filter.lessThanEquals(HealthConstants.Exercise.START_TIME, endTime), HealthDataResolver.Filter.eq(HealthConstants.Exercise.EXERCISE_TYPE,1002));
+                HealthDataResolver.Filter.lessThanEquals(HealthConstants.Exercise.START_TIME, endTime), HealthDataResolver.Filter.eq(HealthConstants.Exercise.EXERCISE_TYPE,11007));
 
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
                 .setDataType(HealthConstants.Exercise.HEALTH_DATA_TYPE)
@@ -44,6 +44,11 @@ public class RunningReporter {
                                              HealthConstants.Exercise.CALORIE,
                                              HealthConstants.Exercise.INCLINE_DISTANCE,
                                              HealthConstants.Exercise.DECLINE_DISTANCE,
+                                             HealthConstants.Exercise.MAX_HEART_RATE,
+                                             HealthConstants.Exercise.MAX_ALTITUDE,
+                                             HealthConstants.Exercise.MIN_ALTITUDE,
+                                             HealthConstants.Exercise.MEAN_SPEED,
+                                             HealthConstants.Exercise.MAX_SPEED
                 })
                 .setFilter(filter)
                 .build();
@@ -75,9 +80,14 @@ public class RunningReporter {
             long running_start_time=0;
             long running_end_time=0;
             int running_mean_heart_rate=0;
-            double running_calorie=0;
+            int running_calorie=0;
             double running_incline_distance=0;
             double running_decline_distance=0;
+            int running_max_heart_rate=0;
+            int running_max_altitude=0;
+            int running_min_altitude=0;
+            double running_mean_speed=0;
+            double running_max_speed=0;
             Cursor c = null;
 
             try {
@@ -89,9 +99,14 @@ public class RunningReporter {
                         running_mean_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
                         running_start_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.START_TIME));
                         running_end_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.END_TIME));
-                        running_calorie=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.CALORIE));
+                        running_calorie=c.getInt(c.getColumnIndex(HealthConstants.Exercise.CALORIE));
                         running_incline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.INCLINE_DISTANCE));
                         running_decline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DECLINE_DISTANCE));
+                        running_max_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_HEART_RATE));
+                        running_max_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_ALTITUDE));
+                        running_min_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MIN_ALTITUDE));
+                        running_mean_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MEAN_SPEED));
+                        running_max_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MAX_SPEED));
 
                     }
                 }
@@ -100,7 +115,7 @@ public class RunningReporter {
                     c.close();
                 }
             }
-            RunningMonitor.getInstance().drawRunning(running_distance,running_duration,running_mean_heart_rate,running_start_time,running_end_time,running_calorie,running_incline_distance,running_decline_distance);
+            RunningMonitor.getInstance().drawRunning(running_distance,running_duration,running_mean_heart_rate,running_start_time,running_end_time,running_calorie,running_incline_distance,running_decline_distance,running_max_heart_rate,running_max_altitude,running_min_altitude,running_mean_speed,running_max_speed);
         }
     };
 

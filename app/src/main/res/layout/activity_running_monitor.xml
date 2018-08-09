@@ -47,7 +47,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
         android:layout_marginTop="163dp"
-        android:text="持續跑步時間:" />
+        android:text="跑步持續時間:" />
 
     <TextView
         android:id="@+id/duration_data_of_running_monitor"
@@ -56,10 +56,10 @@
 
         android:layout_alignTop="@+id/duration_of_running_monitor_text_view"
         android:layout_toEndOf="@+id/duration_of_running_monitor_text_view"
-        android:text="持續跑步時間資料" />
+        android:text="跑步持續時間資料" />
 
     <TextView
-        android:id="@+id/mean_HeartRate_of_running_monitor_text_vie"
+        android:id="@+id/mean_HeartRate_of_running_monitor_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -71,8 +71,8 @@
         android:id="@+id/meanHeartRate_data_of_running_monitor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_vie"
-        android:layout_toEndOf="@+id/mean_HeartRate_of_running_monitor_text_vie"
+        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/mean_HeartRate_of_running_monitor_text_view"
         android:text="跑步時平均心跳資料" />
 
     <TextView
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
 
 
-        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_vie"
+        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_view"
         android:layout_toEndOf="@+id/meanHeartRate_data_of_running_monitor"
         android:text="次/分" />
 
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="238dp"
+        android:layout_marginTop="270dp"
         android:text="健身熱量:" />
 
     <TextView
@@ -150,7 +150,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="300dp"
         android:text="總上坡:" />
 
     <TextView
@@ -173,9 +173,9 @@
         android:id="@+id/decline_distance_of_running_monitor_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/duration_of_running_monitor_text_view"
-        android:layout_marginBottom="240dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginTop="330dp"
         android:text="總下坡:" />
 
     <TextView
@@ -193,6 +193,131 @@
         android:layout_alignTop="@+id/decline_distance_of_running_monitor_text_view"
         android:layout_toEndOf="@+id/incline_distance_data_of_running_monitor"
         android:text="公里" />
+
+    <TextView
+        android:id="@+id/max_heart_rate_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginTop="236dp"
+        android:text="跑步時最高心跳:" />
+
+    <TextView
+        android:id="@+id/max_heart_rate_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/max_heart_rate_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/mean_HeartRate_of_running_monitor_text_view"
+        android:text="跑步時最高心跳資料" />
+
+    <TextView
+        android:id="@+id/running_max_heart_rate_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/max_heart_rate_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/meanHeartRate_data_of_running_monitor"
+        android:text="次/分" />
+
+    <TextView
+        android:id="@+id/max_altitude_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginTop="360dp"
+        android:text="最高坡度:" />
+
+    <TextView
+        android:id="@+id/max_altitude_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/max_altitude_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
+        android:text="最高坡度資料" />
+
+    <TextView
+        android:id="@+id/running_max__altitude_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/max_altitude_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/distance_data_of_running_monitor"
+        android:text="米" />
+
+    <TextView
+        android:id="@+id/min_altitude_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginTop="390dp"
+        android:text="最低坡度:" />
+
+    <TextView
+        android:id="@+id/min_altitude_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/min_altitude_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
+        android:text="最低坡度資料" />
+
+    <TextView
+        android:id="@+id/running_min__altitude_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/min_altitude_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/distance_data_of_running_monitor"
+        android:text="米" />
+
+    <TextView
+        android:id="@+id/mean_speed_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginTop="420dp"
+        android:text="平均速度:" />
+
+    <TextView
+        android:id="@+id/mean_speed_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/mean_speed_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
+        android:text="平均速度資料" />
+
+    <TextView
+        android:id="@+id/running_mean_speed_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/mean_speed_data_of_running_monitor"
+        android:layout_marginTop="420dp"
+        android:text="公里/小時" />
+
+    <TextView
+        android:id="@+id/mex_speed_of_running_monitor_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
+        android:layout_marginTop="450dp"
+        android:text="最高速度:" />
+
+    <TextView
+        android:id="@+id/max_speed_data_of_running_monitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/mex_speed_of_running_monitor_text_view"
+        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
+        android:text="最高速度資料" />
+
+    <TextView
+        android:id="@+id/running_max_speed_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/max_speed_data_of_running_monitor"
+        android:layout_marginTop="450dp"
+        android:text="公里/小時" />
 
 
 </RelativeLayout>

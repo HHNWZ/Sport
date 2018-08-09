@@ -18,7 +18,6 @@ public class kelvin_tab_layout extends AppCompatActivity
         kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
         kelvin_push_up_invitation.OnFragmentInteractionListener,
         kelvin_sit_up_invitation.OnFragmentInteractionListener,
-        kelvin_running_tag_friend.OnFragmentInteractionListener,
         FriendsFragment2.OnFragmentInteractionListener
 
 {
@@ -27,7 +26,7 @@ public class kelvin_tab_layout extends AppCompatActivity
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;//kkkkkkkkkkkkkkk
+    ViewPagerAdapter viewPagerAdapter;//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
