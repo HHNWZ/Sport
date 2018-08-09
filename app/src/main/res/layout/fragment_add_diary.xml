@@ -54,7 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-                android:text="取消" />
+                android:text="取消"
+                android:textColor="#323d4d"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-                android:text="儲存" />
+                android:text="儲存"
+                android:textColor="#323d4d"
+                />
         </LinearLayout>
     </LinearLayout>
 

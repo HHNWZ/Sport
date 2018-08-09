@@ -136,8 +136,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:drawableLeft="@drawable/res1"
-            android:text="留言" />
+            android:drawableLeft="@drawable/talk"
+            android:text="留言"
+
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
