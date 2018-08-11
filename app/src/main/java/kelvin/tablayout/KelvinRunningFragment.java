@@ -13,17 +13,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Column;
@@ -55,16 +65,25 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
     private int dataType = DEFAULT_DATA;
     public String pTime;
     public Button button_of_task_execution,button_of_sports_monitoring;
+    private static DatabaseReference mDatabase;
+    private static FirebaseAuth mAuth;
+
 
     public KelvinRunningFragment() {
         // Required empty public constructor kkkkkkkkkkkkk
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        //walking_distance=walking_distance+Double.parseDouble(today_record);
+        //mDatabase.child("exercise_count").child("walking").child("today_record").setValue(walking_distance);
         View rootView = inflater.inflate(R.layout.fragment_kelvin_exercise, container, false);
         TextView text_View_of_exercise_title = (TextView) rootView.findViewById(R.id.exercise_title);
         TextView text_view_of_today_record_data = (TextView) rootView.findViewById(R.id.text_view_of_today_record_data);
@@ -81,8 +100,8 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
         //button_of_invitation.setVisibility(View.VISIBLE);
         text_View_of_exercise_title.setText("跑步個人記錄");
         text_view_of_today_record_data.setText("100");
-        text_view_of_highest_record_data.setText("200");
-        text_view_of_lowest_record_data.setText("50");
+        //text_view_of_highest_record_data.setText("200");
+        //text_view_of_lowest_record_data.setText("50");
         text_view_of_today_record_unit.setText("公里");
         text_view_of_lowest_record_unit.setText("公里");
         text_view_of_highest_record_unit.setText("公里");
@@ -100,6 +119,28 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
         });
         pTime=Week.getWeek(System.currentTimeMillis());
         Log.i("今天是",pTime);
+        /*mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String long_distance=dataSnapshot.child("exercise_count").child("walking").child("long_distance").getValue().toString();
+                String short_distance=dataSnapshot.child("exercise_count").child("walking").child("short_distance").getValue().toString();
+                double longDistance=Double.parseDouble(long_distance);
+                double shortDistance=Double.parseDouble(short_distance);
+                text_view_of_highest_record_data.setText(""+longDistance);
+                text_view_of_lowest_record_data.setText(""+shortDistance);
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
 
         button_of_task_execution=(Button)rootView.findViewById(R.id.button_of_task_execution);
 
@@ -124,10 +165,38 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
                 startActivity(intent);
             }
         });
+
         return rootView;
     }
 
-        @Override
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.d("kelvinRunningFragment", "onCreate");
+        /*mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Distance= dataSnapshot.child("exercise_count").child("walking").child("distance").getValue().toString();
+
+                Log.i("距離",Distance);
+                //mDatabase.child("exercise_count").child("walking").child("distance").setValue(0);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+
+
+    }
+
+
+    @Override
         public boolean onBackPressed() {
             /*Toast.makeText(getActivity(), "按返回鍵會用到這裡3", Toast.LENGTH_SHORT).show();fragment返回鍵會使用到這裡的，用來分開返回功能用*/
             return BackHandlerHelper.handleBackPress(this);

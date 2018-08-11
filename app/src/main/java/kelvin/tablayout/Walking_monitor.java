@@ -11,8 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataService;
@@ -34,12 +41,21 @@ public class Walking_monitor extends AppCompatActivity {
     public static final String APP_TAG = "Sport";
     private static Walking_monitor mInstance = null;
     private WalkReporter wReporter;
+    private static DatabaseReference mDatabase;
+    private static FirebaseAuth mAuth;
+
+    public static double distance2;
+    public static String distance;
+    public static String todayRecord;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_monitor);
-
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         walking_monitor_toolbar=(Toolbar)findViewById(R.id.walking_monitor_toolBar);
         walking_monitor_toolbar.setTitle("步行監控");
         setSupportActionBar(walking_monitor_toolbar);
@@ -53,6 +69,8 @@ public class Walking_monitor extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Log.e("距離1", today_distance1);
         mInstance = this;
         mKeySet = new HashSet<>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.Exercise.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -67,6 +85,7 @@ public class Walking_monitor extends AppCompatActivity {
         mStore = new HealthDataStore(this, mConnectionListener);
         // 請求連接到運行狀況數據存儲
         mStore.connectService();
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -158,49 +177,91 @@ public class Walking_monitor extends AppCompatActivity {
     public void drawWalk(double walking_distance, long walking_duration,int walking_mean_heart_rate,long walking_start_time,long walking_end_time, int walking_calorie,double walking_incline_distance,double walking_decline_distance,int walking_max_heart_rate,int walking_max_altitude,
                          int walking_min_altitude,double walking_mean_speed,double walking_max_speed){
 
-        TextView distance_data_of_walking_monitor = (TextView)findViewById(R.id.distance_data_of_walking_monitor);
-        TextView duration_data_of_walking_monitor = (TextView)findViewById(R.id.duration_data_of_walking_monitor);
-        TextView meanHeartRate_data_of_walking_monitor =(TextView )findViewById(R.id.meanHeartRate_data_of_walking_monitor);
-        TextView start_time_data_of_walking_monitor=(TextView)findViewById(R.id.start_time_data_of_walking_monitor);
-        TextView end_time_data_of_walking_monitor=(TextView)findViewById(R.id.end_time_data_of_walking_monitor);
-        TextView calorie_data_of_walking_monitor=(TextView)findViewById(R.id.calorie_data_of_walking_monitor);
-        TextView incline_distance_data_of_walking_monitor=(TextView)findViewById(R.id.incline_distance_data_of_walking_monitor);
-        TextView decline_distance_data_of_walking_monitor=(TextView)findViewById(R.id.decline_distance_data_of_walking_monitor);
-        TextView max_heart_rate_data_of_walking_monitor=(TextView)findViewById(R.id.max_heart_rate_data_of_walking_monitor);
-        TextView max_altitude_data_of_walking_monitor=(TextView)findViewById(R.id.max_altitude_data_of_walking_monitor);
-        TextView min_altitude_data_of_walking_monitor=(TextView)findViewById(R.id.min_altitude_data_of_walking_monitor);
-        TextView mean_speed_data_of_walking_monitor=(TextView)findViewById(R.id.mean_speed_data_of_walking_monitor);
-        TextView max_speed_data_of_walking_monitor=(TextView)findViewById(R.id.max_speed_data_of_walking_monitor);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        if(walking_distance!=0) {
+            TextView distance_data_of_walking_monitor = (TextView) findViewById(R.id.distance_data_of_walking_monitor);
+            TextView duration_data_of_walking_monitor = (TextView) findViewById(R.id.duration_data_of_walking_monitor);
+            TextView meanHeartRate_data_of_walking_monitor = (TextView) findViewById(R.id.meanHeartRate_data_of_walking_monitor);
+            TextView start_time_data_of_walking_monitor = (TextView) findViewById(R.id.start_time_data_of_walking_monitor);
+            TextView end_time_data_of_walking_monitor = (TextView) findViewById(R.id.end_time_data_of_walking_monitor);
+            TextView calorie_data_of_walking_monitor = (TextView) findViewById(R.id.calorie_data_of_walking_monitor);
+            TextView incline_distance_data_of_walking_monitor = (TextView) findViewById(R.id.incline_distance_data_of_walking_monitor);
+            TextView decline_distance_data_of_walking_monitor = (TextView) findViewById(R.id.decline_distance_data_of_walking_monitor);
+            TextView max_heart_rate_data_of_walking_monitor = (TextView) findViewById(R.id.max_heart_rate_data_of_walking_monitor);
+            TextView max_altitude_data_of_walking_monitor = (TextView) findViewById(R.id.max_altitude_data_of_walking_monitor);
+            TextView min_altitude_data_of_walking_monitor = (TextView) findViewById(R.id.min_altitude_data_of_walking_monitor);
+            TextView mean_speed_data_of_walking_monitor = (TextView) findViewById(R.id.mean_speed_data_of_walking_monitor);
+            TextView max_speed_data_of_walking_monitor = (TextView) findViewById(R.id.max_speed_data_of_walking_monitor);
 
-        distance_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer(walking_distance));
-        meanHeartRate_data_of_walking_monitor.setText(""+walking_mean_heart_rate);
-        duration_data_of_walking_monitor.setText(Time.get_duration_time(walking_duration));
-        start_time_data_of_walking_monitor.setText(Time.get_start_time(walking_start_time));
-        end_time_data_of_walking_monitor.setText(Time.get_end_time(walking_end_time));
-        calorie_data_of_walking_monitor.setText(""+walking_calorie);
-        incline_distance_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer(walking_incline_distance));
-        decline_distance_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer(walking_decline_distance));
-        max_heart_rate_data_of_walking_monitor.setText(""+walking_max_heart_rate);
-        max_altitude_data_of_walking_monitor.setText(""+walking_max_altitude);
-        min_altitude_data_of_walking_monitor.setText(""+walking_min_altitude);
-        mean_speed_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer_per_hour(walking_mean_speed));
-        max_speed_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer_per_hour(walking_max_speed));
-        writeNewExerciseData.setNewExerciseData("walking",
-                Time.get_start_time(walking_start_time),
-                Time.get_end_time(walking_end_time),
-                UnitConversion.get_kilometer(walking_distance),
-                Time.get_duration_time(walking_duration),
-                walking_mean_heart_rate,
-                walking_calorie,
-                UnitConversion.get_kilometer(walking_incline_distance),
-                UnitConversion.get_kilometer(walking_decline_distance),
-                walking_max_heart_rate,
-                walking_max_altitude,
-                walking_min_altitude,
-                UnitConversion.get_kilometer_per_hour(walking_mean_speed),
-                UnitConversion.get_kilometer_per_hour(walking_max_speed)
-        );
+            distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_distance));
+            meanHeartRate_data_of_walking_monitor.setText("" + walking_mean_heart_rate);
+            duration_data_of_walking_monitor.setText(Time.get_duration_time(walking_duration));
+            start_time_data_of_walking_monitor.setText(Time.get_start_time(walking_start_time));
+            end_time_data_of_walking_monitor.setText(Time.get_end_time(walking_end_time));
+            calorie_data_of_walking_monitor.setText("" + walking_calorie);
+            incline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_incline_distance));
+            decline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_decline_distance));
+            max_heart_rate_data_of_walking_monitor.setText("" + walking_max_heart_rate);
+            max_altitude_data_of_walking_monitor.setText("" + walking_max_altitude);
+            min_altitude_data_of_walking_monitor.setText("" + walking_min_altitude);
+            mean_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_mean_speed));
+            max_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_max_speed));
+
+            writeNewExerciseData.setNewExerciseData("walking",
+                    Time.get_start_time(walking_start_time),
+                    Time.get_end_time(walking_end_time),
+                    UnitConversion.get_kilometer(walking_distance),
+                    Time.get_duration_time(walking_duration),
+                    walking_mean_heart_rate,
+                    walking_calorie,
+                    UnitConversion.get_kilometer(walking_incline_distance),
+                    UnitConversion.get_kilometer(walking_decline_distance),
+                    walking_max_heart_rate,
+                    walking_max_altitude,
+                    walking_min_altitude,
+                    UnitConversion.get_kilometer_per_hour(walking_mean_speed),
+                    UnitConversion.get_kilometer_per_hour(walking_max_speed)
+            );
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String long_distance=dataSnapshot.child("exercise_count").child("walking").child("long_distance").getValue().toString();
+                    String short_distance=dataSnapshot.child("exercise_count").child("walking").child("short_distance").getValue().toString();
+                    double longDistance=Double.parseDouble(long_distance);
+                    double shortDistance=Double.parseDouble(short_distance);
+                    if(UnitConversion.get_kilometer(walking_distance)>longDistance){
+                        mDatabase.child("exercise_count").child("walking").child("long_distance").setValue(UnitConversion.get_kilometer(walking_distance));
+                    }else if(UnitConversion.get_kilometer(walking_distance)<shortDistance){
+                        mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(UnitConversion.get_kilometer(walking_distance));
+                    }
+                    Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
+
+
+
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+        }
+
+
+
+
+
+
+
+
     }
+
     public static Walking_monitor getInstance() {
         return mInstance;
     }

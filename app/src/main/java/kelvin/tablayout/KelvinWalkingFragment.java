@@ -15,6 +15,12 @@ import android.widget.TextView;
 import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,6 +57,8 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
     private int dataType = DEFAULT_DATA;
     public String pTime;
     public Button button_of_task_execution,button_of_sports_monitoring;
+    private static DatabaseReference mDatabase;
+    private static FirebaseAuth mAuth;
     public KelvinWalkingFragment() {
         // Required empty public constructor kkkkkkkkkkk
     }
@@ -60,6 +68,8 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         View rootView= inflater.inflate(R.layout.fragment_kelvin_exercise, container, false);
         TextView text_View_of_exercise_title=(TextView)rootView.findViewById(R.id.exercise_title);
         TextView text_view_of_today_record_data=(TextView)rootView.findViewById(R.id.text_view_of_today_record_data);
@@ -72,11 +82,32 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
 
         text_View_of_exercise_title.setText("步行個人記錄");
         text_view_of_today_record_data.setText("1000");
-        text_view_of_highest_record_data.setText("2000");
-        text_view_of_lowest_record_data.setText("5000");
-        text_view_of_today_record_unit.setText("步");
-        text_view_of_lowest_record_unit.setText("步");
-        text_view_of_highest_record_unit.setText("步");
+        //text_view_of_highest_record_data.setText("2000");
+        //text_view_of_lowest_record_data.setText("5000");
+        text_view_of_today_record_unit.setText("公里");
+        text_view_of_lowest_record_unit.setText("公里");
+        text_view_of_highest_record_unit.setText("公里");
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String long_distance=dataSnapshot.child("exercise_count").child("walking").child("long_distance").getValue().toString();
+                String short_distance=dataSnapshot.child("exercise_count").child("walking").child("short_distance").getValue().toString();
+                double longDistance=Double.parseDouble(long_distance);
+                double shortDistance=Double.parseDouble(short_distance);
+                text_view_of_highest_record_data.setText(""+longDistance);
+                text_view_of_lowest_record_data.setText(""+shortDistance);
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

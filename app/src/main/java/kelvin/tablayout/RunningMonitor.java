@@ -16,8 +16,11 @@ import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataService;
@@ -39,10 +42,15 @@ public class RunningMonitor extends AppCompatActivity {
     public static final String APP_TAG = "Sport";
     private static RunningMonitor mInstance = null;
     private RunningReporter rReporter;
+    private static DatabaseReference mDatabase;
+    private static FirebaseAuth mAuth;
+    private   double todayDistance;
+    private String today_distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_running_monitor);
         running_monitor_toolbar=(Toolbar)findViewById(R.id.running_monitor_toolBar);
         running_monitor_toolbar.setTitle("跑步監控");
@@ -57,6 +65,7 @@ public class RunningMonitor extends AppCompatActivity {
             }
         });
 
+
         mInstance = this;
         mKeySet = new HashSet<>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.Exercise.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -70,6 +79,7 @@ public class RunningMonitor extends AppCompatActivity {
         mStore = new HealthDataStore(this, mConnectionListener);
         // 請求連接到運行狀況數據存儲
         mStore.connectService();
+
 
 
 
@@ -164,48 +174,55 @@ public class RunningMonitor extends AppCompatActivity {
     public void drawRunning(double running_distance, long running_duration,int running_mean_heart_rate,long running_start_time,long running_end_time, int running_calorie,double running_incline_distance,double running_decline_distance,int running_max_heart_rate,int running_max_altitude,
                             int running_min_altitude,double running_mean_speed,double running_max_speed){
 
-        TextView distance_data_of_running_monitor = (TextView)findViewById(R.id.distance_data_of_running_monitor);
-        TextView duration_data_of_running_monitor = (TextView)findViewById(R.id.duration_data_of_running_monitor);
-        TextView meanHeartRate_data_of_running_monitor =(TextView )findViewById(R.id.meanHeartRate_data_of_running_monitor);
-        TextView start_time_data_of_running_monitor=(TextView)findViewById(R.id.start_time_data_of_running_monitor);
-        TextView end_time_data_of_running_monitor=(TextView)findViewById(R.id.end_time_data_of_running_monitor);
-        TextView calorie_data_of_running_monitor=(TextView)findViewById(R.id.calorie_data_of_running_monitor);
-        TextView incline_distance_data_of_running_monitor=(TextView)findViewById(R.id.incline_distance_data_of_running_monitor);
-        TextView decline_distance_data_of_running_monitor=(TextView)findViewById(R.id.decline_distance_data_of_running_monitor);
-        TextView max_heart_rate_data_of_running_monitor=(TextView)findViewById(R.id.max_heart_rate_data_of_running_monitor);
-        TextView max_altitude_data_of_running_monitor=(TextView)findViewById(R.id.max_altitude_data_of_running_monitor);
-        TextView min_altitude_data_of_running_monitor=(TextView)findViewById(R.id.min_altitude_data_of_running_monitor);
-        TextView mean_speed_data_of_running_monitor=(TextView)findViewById(R.id.mean_speed_data_of_running_monitor);
-        TextView max_speed_data_of_running_monitor=(TextView)findViewById(R.id.max_speed_data_of_running_monitor);
+        if(running_distance!=0) {
+            TextView distance_data_of_running_monitor = (TextView) findViewById(R.id.distance_data_of_running_monitor);
+            TextView duration_data_of_running_monitor = (TextView) findViewById(R.id.duration_data_of_running_monitor);
+            TextView meanHeartRate_data_of_running_monitor = (TextView) findViewById(R.id.meanHeartRate_data_of_running_monitor);
+            TextView start_time_data_of_running_monitor = (TextView) findViewById(R.id.start_time_data_of_running_monitor);
+            TextView end_time_data_of_running_monitor = (TextView) findViewById(R.id.end_time_data_of_running_monitor);
+            TextView calorie_data_of_running_monitor = (TextView) findViewById(R.id.calorie_data_of_running_monitor);
+            TextView incline_distance_data_of_running_monitor = (TextView) findViewById(R.id.incline_distance_data_of_running_monitor);
+            TextView decline_distance_data_of_running_monitor = (TextView) findViewById(R.id.decline_distance_data_of_running_monitor);
+            TextView max_heart_rate_data_of_running_monitor = (TextView) findViewById(R.id.max_heart_rate_data_of_running_monitor);
+            TextView max_altitude_data_of_running_monitor = (TextView) findViewById(R.id.max_altitude_data_of_running_monitor);
+            TextView min_altitude_data_of_running_monitor = (TextView) findViewById(R.id.min_altitude_data_of_running_monitor);
+            TextView mean_speed_data_of_running_monitor = (TextView) findViewById(R.id.mean_speed_data_of_running_monitor);
+            TextView max_speed_data_of_running_monitor = (TextView) findViewById(R.id.max_speed_data_of_running_monitor);
 
-        distance_data_of_running_monitor.setText(""+UnitConversion.get_kilometer(running_distance));
-        meanHeartRate_data_of_running_monitor.setText(""+running_mean_heart_rate);
-        duration_data_of_running_monitor.setText(Time.get_duration_time(running_duration));
-        start_time_data_of_running_monitor.setText(Time.get_start_time(running_start_time));
-        end_time_data_of_running_monitor.setText(Time.get_end_time(running_end_time));
-        calorie_data_of_running_monitor.setText(""+running_calorie);
-        incline_distance_data_of_running_monitor.setText(""+UnitConversion.get_kilometer(running_incline_distance));
-        decline_distance_data_of_running_monitor.setText(""+UnitConversion.get_kilometer(running_decline_distance));
-        max_heart_rate_data_of_running_monitor.setText(""+running_max_heart_rate);
-        max_altitude_data_of_running_monitor.setText(""+running_max_altitude);
-        min_altitude_data_of_running_monitor.setText(""+running_min_altitude);
-        mean_speed_data_of_running_monitor.setText(""+UnitConversion.get_kilometer_per_hour(running_mean_speed));
-        max_speed_data_of_running_monitor.setText(""+UnitConversion.get_kilometer_per_hour(running_max_speed));
-        writeNewExerciseData.setNewExerciseData("running",
-                                             Time.get_start_time(running_start_time),
-                                             Time.get_end_time(running_end_time),
-                                             UnitConversion.get_kilometer(running_distance),
-                                             Time.get_duration_time(running_duration),
-                                             running_mean_heart_rate,
-                                             running_calorie,
-                                             UnitConversion.get_kilometer(running_incline_distance),
-                                             UnitConversion.get_kilometer(running_decline_distance),
-                                             running_max_heart_rate,
-                                             running_max_altitude,
-                                             running_min_altitude,
-                                             UnitConversion.get_kilometer_per_hour(running_mean_speed),
-                                             UnitConversion.get_kilometer_per_hour(running_max_speed)
-                );
+
+
+            distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_distance));
+            meanHeartRate_data_of_running_monitor.setText("" + running_mean_heart_rate);
+            duration_data_of_running_monitor.setText(Time.get_duration_time(running_duration));
+            start_time_data_of_running_monitor.setText(Time.get_start_time(running_start_time));
+            end_time_data_of_running_monitor.setText(Time.get_end_time(running_end_time));
+            calorie_data_of_running_monitor.setText("" + running_calorie);
+            incline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_incline_distance));
+            decline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_decline_distance));
+            max_heart_rate_data_of_running_monitor.setText("" + running_max_heart_rate);
+            max_altitude_data_of_running_monitor.setText("" + running_max_altitude);
+            min_altitude_data_of_running_monitor.setText("" + running_min_altitude);
+            mean_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_mean_speed));
+            max_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_max_speed));
+
+            writeNewExerciseData.setNewExerciseData("running",
+                    Time.get_start_time(running_start_time),
+                    Time.get_end_time(running_end_time),
+                    UnitConversion.get_kilometer(running_distance),
+                    Time.get_duration_time(running_duration),
+                    running_mean_heart_rate,
+                    running_calorie,
+                    UnitConversion.get_kilometer(running_incline_distance),
+                    UnitConversion.get_kilometer(running_decline_distance),
+                    running_max_heart_rate,
+                    running_max_altitude,
+                    running_min_altitude,
+                    UnitConversion.get_kilometer_per_hour(running_mean_speed),
+                    UnitConversion.get_kilometer_per_hour(running_max_speed)
+            );
+
+
+        }
 
     }
     public static RunningMonitor getInstance() {

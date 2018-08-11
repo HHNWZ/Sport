@@ -48,7 +48,8 @@ public class RunningReporter {
                                              HealthConstants.Exercise.MAX_ALTITUDE,
                                              HealthConstants.Exercise.MIN_ALTITUDE,
                                              HealthConstants.Exercise.MEAN_SPEED,
-                                             HealthConstants.Exercise.MAX_SPEED,
+                                             HealthConstants.Exercise.MAX_SPEED
+
 
                 })
                 .setFilter(filter)

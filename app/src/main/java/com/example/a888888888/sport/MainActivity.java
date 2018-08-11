@@ -59,11 +59,14 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Timer;
 
 import kelvin.tablayout.Aerobic_exercise_task;
 import kelvin.tablayout.ChatActivity;
@@ -75,6 +78,7 @@ import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
+import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.Walking_task;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
@@ -295,7 +299,8 @@ public class  MainActivity extends AppCompatActivity
 
 
 
-
+        //Timer timer = new Timer();
+        //timer.schedule(new TimerTaskTest(), time);
         setContentView(R.layout.activity_main);
         mToolboar=(Toolbar)findViewById(R.id.nav_action); //替換toolbar會爆
         setSupportActionBar(mToolboar);//Toolbar取代原本的ActionBar
@@ -808,6 +813,7 @@ public class  MainActivity extends AppCompatActivity
 
         }
     }
+
 
 
 }

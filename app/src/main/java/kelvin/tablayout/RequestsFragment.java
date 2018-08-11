@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +45,14 @@ public class RequestsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
-        mUsersList1=(RecyclerView) mMainView.findViewById(R.id.friends_list);
+        mMainView = inflater.inflate(R.layout.fragment_requests, container, false);
+        mUsersList1=(RecyclerView) mMainView.findViewById(R.id.user_list);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
 
         mUsersList1.setHasFixedSize(true);
         mUsersList1.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        Log.i("為什麼","1");
 
         return mMainView;
     }

@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 public class UnitConversion extends Application {
     public static  double get_kilometer(double meter){
         double kilometer;
-        kilometer=((meter/100d)/10d);
+        kilometer=(meter/1000d);
         DecimalFormat df = new DecimalFormat("0.00");
 
         return Double.parseDouble(df.format(kilometer));
