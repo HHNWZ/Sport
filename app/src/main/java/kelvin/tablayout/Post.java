@@ -8,6 +8,7 @@ public class Post {
     }
 
     public Post(Double distance){
-        this.distance=distance;
+        this.distance=distance;//1112
+
     }
 }
