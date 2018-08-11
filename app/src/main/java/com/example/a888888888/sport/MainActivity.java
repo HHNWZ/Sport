@@ -305,19 +305,23 @@ public class  MainActivity extends AppCompatActivity
         int m=cal.get(Calendar.MONTH)+1;
         int d=cal.get(Calendar.DAY_OF_MONTH)+1;
         String clear=null;
-
+        String date=null;
+        Date firstTime=null;
         clear=y+"/"+m+"/"+d+" 00:00:00";
         Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
         SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+
         try {
-            Date firstTime = dateFormatter.parse(clear);
-            Toast.makeText(MainActivity.this,""+firstTime,Toast.LENGTH_LONG).show();
-            Timer timer = new Timer();
-            timer.schedule(new TimerTaskTest(), firstTime,86400000);
+            firstTime = dateFormatter.parse(clear);
+            Toast.makeText(MainActivity.this,""+dateFormatter.format(firstTime),Toast.LENGTH_LONG).show();
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        Timer timer = new Timer();
+        Log.i("執行時間",""+dateFormatter.format(firstTime));
+        timer.schedule(new TimerTaskTest(), firstTime,86400000);
 
 
         setContentView(R.layout.activity_main);
