@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
@@ -59,6 +60,7 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
     public Button button_of_task_execution,button_of_sports_monitoring;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
+
     public KelvinWalkingFragment() {
         // Required empty public constructor kkkkkkkkkkk
     }
@@ -81,21 +83,50 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
 
         text_View_of_exercise_title.setText("步行個人記錄");
-        text_view_of_today_record_data.setText("1000");
+        //text_view_of_today_record_data.setText("1000");
         //text_view_of_highest_record_data.setText("2000");
         //text_view_of_lowest_record_data.setText("5000");
         text_view_of_today_record_unit.setText("公里");
         text_view_of_lowest_record_unit.setText("公里");
         text_view_of_highest_record_unit.setText("公里");
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String DataIdcheck=dataSnapshot.child("exercise").child("walking").child("DataIdcheck").getValue().toString();
                 String long_distance=dataSnapshot.child("exercise_count").child("walking").child("long_distance").getValue().toString();
                 String short_distance=dataSnapshot.child("exercise_count").child("walking").child("short_distance").getValue().toString();
+                String distance=dataSnapshot.child("exercise_count").child("walking").child("distance").getValue().toString();
+                String today_record=dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
+                String all_record=dataSnapshot.child("exercise_count").child("walking").child("all_record").getValue().toString();
+                String dataId=dataSnapshot.child("exercise").child("walking").child("dataId").getValue().toString();
+
+                double distance1=Double.parseDouble(distance);
+                double today_record1=Double.parseDouble(today_record);
+                double all_record1=Double.parseDouble(all_record);
+                Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                if(DataIdcheck.equals(dataId)){
+                    Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+
+
+
+                }else {
+                    Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                    today_record1=today_record1+distance1;
+                    all_record1=all_record1+distance1;
+                    mDatabase.child("exercise_count").child("walking").child("today_record").setValue(today_record1);
+                    mDatabase.child("exercise_count").child("walking").child("all_record").setValue(all_record1);
+                    mDatabase.child("exercise").child("walking").child("DataIdcheck").setValue(dataId);
+                }
+
                 double longDistance=Double.parseDouble(long_distance);
                 double shortDistance=Double.parseDouble(short_distance);
                 text_view_of_highest_record_data.setText(""+longDistance);
                 text_view_of_lowest_record_data.setText(""+shortDistance);
+                text_view_of_today_record_data.setText(""+today_record);
+
 
 
 

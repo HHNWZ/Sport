@@ -59,6 +59,7 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -135,6 +136,8 @@ public class  MainActivity extends AppCompatActivity
     String channelId = "love";
     String channelName = "我的最愛";
     private static Context context;
+    public Date dt2=null;
+
     //private DatabaseReference mUsersDatabase;
 
 
@@ -297,10 +300,26 @@ public class  MainActivity extends AppCompatActivity
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
 
+        Calendar cal=Calendar.getInstance();
+        int y=cal.get(Calendar.YEAR);
+        int m=cal.get(Calendar.MONTH)+1;
+        int d=cal.get(Calendar.DAY_OF_MONTH)+1;
+        String clear=null;
+
+        clear=y+"/"+m+"/"+d+" 00:00:00";
+        Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
+        SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            Date firstTime = dateFormatter.parse(clear);
+            Toast.makeText(MainActivity.this,""+firstTime,Toast.LENGTH_LONG).show();
+            Timer timer = new Timer();
+            timer.schedule(new TimerTaskTest(), firstTime,86400000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
-        //Timer timer = new Timer();
-        //timer.schedule(new TimerTaskTest(), time);
+
         setContentView(R.layout.activity_main);
         mToolboar=(Toolbar)findViewById(R.id.nav_action); //替換toolbar會爆
         setSupportActionBar(mToolboar);//Toolbar取代原本的ActionBar

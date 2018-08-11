@@ -28,7 +28,8 @@ public class writeNewExerciseData extends Application{
 
         ExerciseData exerciseData = new ExerciseData(start_time,end_time,distance,duration,mean_heart_rate,calorie,incline_distance,decline_distance,max_heart_rate,max_altitude,min_altitude,mean_speed,max_speed);
         mDatabase.child("exercise").child(exercise_type).child(start_time).setValue(exerciseData);
-        mDatabase.child("exercise_count").child(exercise_type).child("distance").setValue(distance);
+        //mDatabase.child("exercise_count").child(exercise_type).child("distance").setValue(distance);
+
 
 
 

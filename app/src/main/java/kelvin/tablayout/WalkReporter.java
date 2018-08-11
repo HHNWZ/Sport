@@ -48,7 +48,10 @@ public class WalkReporter {
                         HealthConstants.Exercise.MAX_ALTITUDE,
                         HealthConstants.Exercise.MIN_ALTITUDE,
                         HealthConstants.Exercise.MEAN_SPEED,
-                        HealthConstants.Exercise.MAX_SPEED
+                        HealthConstants.Exercise.MAX_SPEED,
+                        HealthConstants.Common.UUID
+
+
                 })
                 .setFilter(filter)
                 .build();
@@ -88,6 +91,7 @@ public class WalkReporter {
             int walking_min_altitude=0;
             double walking_mean_speed=0;
             double walking_max_speed=0;
+            String walking_UUID="";
             Cursor c = null;
 
             try {
@@ -107,6 +111,7 @@ public class WalkReporter {
                         walking_min_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MIN_ALTITUDE));
                         walking_mean_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MEAN_SPEED));
                         walking_max_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MAX_SPEED));
+                        walking_UUID=c.getString(c.getColumnIndex(HealthConstants.Common.UUID));
 
                     }
                 }
@@ -115,7 +120,7 @@ public class WalkReporter {
                     c.close();
                 }
             }
-            Walking_monitor.getInstance().drawWalk(walking_distance,walking_duration,walking_mean_heart_rate,walking_start_time,walking_end_time,walking_calorie,walking_incline_distance,walking_decline_distance,walking_max_heart_rate,walking_max_altitude,walking_min_altitude,walking_mean_speed,walking_max_speed);
+            Walking_monitor.getInstance().drawWalk(walking_distance,walking_duration,walking_mean_heart_rate,walking_start_time,walking_end_time,walking_calorie,walking_incline_distance,walking_decline_distance,walking_max_heart_rate,walking_max_altitude,walking_min_altitude,walking_mean_speed,walking_max_speed,walking_UUID);
         }
     };
 

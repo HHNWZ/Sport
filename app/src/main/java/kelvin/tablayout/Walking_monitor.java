@@ -83,8 +83,11 @@ public class Walking_monitor extends AppCompatActivity {
 
         // 創建一個HealthDataStore實例並設置其偵聽器
         mStore = new HealthDataStore(this, mConnectionListener);
+        Toast.makeText(Walking_monitor.this, "請求連接到運行狀況數據存儲", Toast.LENGTH_SHORT).show();
         // 請求連接到運行狀況數據存儲
-        mStore.connectService();
+
+
+         mStore.connectService();
 
     }
     @Override
@@ -175,7 +178,7 @@ public class Walking_monitor extends AppCompatActivity {
                 }
             };
     public void drawWalk(double walking_distance, long walking_duration,int walking_mean_heart_rate,long walking_start_time,long walking_end_time, int walking_calorie,double walking_incline_distance,double walking_decline_distance,int walking_max_heart_rate,int walking_max_altitude,
-                         int walking_min_altitude,double walking_mean_speed,double walking_max_speed){
+                         int walking_min_altitude,double walking_mean_speed,double walking_max_speed,String walking_UUID){
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
@@ -208,6 +211,7 @@ public class Walking_monitor extends AppCompatActivity {
             mean_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_mean_speed));
             max_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_max_speed));
 
+
             writeNewExerciseData.setNewExerciseData("walking",
                     Time.get_start_time(walking_start_time),
                     Time.get_end_time(walking_end_time),
@@ -223,6 +227,8 @@ public class Walking_monitor extends AppCompatActivity {
                     UnitConversion.get_kilometer_per_hour(walking_mean_speed),
                     UnitConversion.get_kilometer_per_hour(walking_max_speed)
             );
+            mDatabase.child("exercise_count").child("walking").child("distance").setValue(UnitConversion.get_kilometer(walking_distance));
+            mDatabase.child("exercise").child("walking").child("dataId").setValue(walking_UUID);
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -235,7 +241,7 @@ public class Walking_monitor extends AppCompatActivity {
                     }else if(UnitConversion.get_kilometer(walking_distance)<shortDistance){
                         mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(UnitConversion.get_kilometer(walking_distance));
                     }
-                    Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
 
 
 
