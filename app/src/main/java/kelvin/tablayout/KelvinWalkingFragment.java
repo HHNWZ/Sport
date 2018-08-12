@@ -106,16 +106,13 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
                 double distance1=Double.parseDouble(distance);
                 double today_record1=Double.parseDouble(today_record);
                 double all_record1=Double.parseDouble(all_record);
-                Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                 if(DataIdcheck.equals(dataId)){
-                    Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-
-
-
+                    //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                     today_record1=today_record1+distance1;
                     all_record1=all_record1+distance1;
                     DecimalFormat df = new DecimalFormat("0.00");

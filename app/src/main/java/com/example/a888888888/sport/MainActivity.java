@@ -308,13 +308,13 @@ public class  MainActivity extends AppCompatActivity
         String date=null;
         Date firstTime=null;
         clear=y+"/"+m+"/"+d+" 00:00:00";
-        Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
+        //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
         SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
         try {
             firstTime = dateFormatter.parse(clear);
-            Toast.makeText(MainActivity.this,""+dateFormatter.format(firstTime),Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this,""+dateFormatter.format(firstTime),Toast.LENGTH_LONG).show();
 
         } catch (ParseException e) {
             e.printStackTrace();

@@ -83,7 +83,7 @@ public class Walking_monitor extends AppCompatActivity {
 
         // 創建一個HealthDataStore實例並設置其偵聽器
         mStore = new HealthDataStore(this, mConnectionListener);
-        Toast.makeText(Walking_monitor.this, "請求連接到運行狀況數據存儲", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Walking_monitor.this, "請求連接到運行狀況數據存儲", Toast.LENGTH_SHORT).show();
         // 請求連接到運行狀況數據存儲
 
 
@@ -241,9 +241,29 @@ public class Walking_monitor extends AppCompatActivity {
                     double shortDistance=Double.parseDouble(short_distance);
                     if(UnitConversion.get_kilometer(walking_distance)>longDistance){
                         mDatabase.child("exercise_count").child("walking").child("long_distance").setValue(UnitConversion.get_kilometer(walking_distance));
-                    }else if(UnitConversion.get_kilometer(walking_distance)<shortDistance){
-                        mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(UnitConversion.get_kilometer(walking_distance));
+                        Log.i("追踪1","新的距離大於最長距離");
+                        if(shortDistance==0){
+                            mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(longDistance);
+                            Log.i("追踪2longDistance",""+longDistance);
+                            Log.i("追踪3shortDistance",""+shortDistance);
+                        }else if(shortDistance!=0&&longDistance<shortDistance){
+                            mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(longDistance);
+                            Log.i("追踪4longDistance",""+longDistance);
+                            Log.i("追踪5shortDistance",""+shortDistance);
+                        }
+                    }else if(UnitConversion.get_kilometer(walking_distance)<longDistance){
+                        Log.i("追踪6","新的距離小於最短距離");
+                        if(shortDistance==0){
+                            mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(UnitConversion.get_kilometer(walking_distance));
+                            Log.i("追踪7longDistance",""+longDistance);
+                            Log.i("追踪8shortDistance",""+shortDistance);
+                        }else if(shortDistance!=0&&UnitConversion.get_kilometer(walking_distance)<shortDistance){
+                            mDatabase.child("exercise_count").child("walking").child("short_distance").setValue(UnitConversion.get_kilometer(walking_distance));
+                            Log.i("追踪9longDistance",""+longDistance);
+                            Log.i("追踪10shortDistance",""+shortDistance);
+                        }
                     }
+
                     //Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
 
 
