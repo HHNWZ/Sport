@@ -82,8 +82,7 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        //walking_distance=walking_distance+Double.parseDouble(today_record);
-        //mDatabase.child("exercise_count").child("walking").child("today_record").setValue(walking_distance);
+
         View rootView = inflater.inflate(R.layout.fragment_kelvin_exercise, container, false);
         TextView text_View_of_exercise_title = (TextView) rootView.findViewById(R.id.exercise_title);
         TextView text_view_of_today_record_data = (TextView) rootView.findViewById(R.id.text_view_of_today_record_data);
@@ -99,12 +98,60 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
         final Button button_of_invitation = (Button) rootView.findViewById(R.id.button_of_invitation);
         //button_of_invitation.setVisibility(View.VISIBLE);
         text_View_of_exercise_title.setText("跑步個人記錄");
-        text_view_of_today_record_data.setText("100");
+        //text_view_of_today_record_data.setText("100");
         //text_view_of_highest_record_data.setText("200");
         //text_view_of_lowest_record_data.setText("50");
         text_view_of_today_record_unit.setText("公里");
         text_view_of_lowest_record_unit.setText("公里");
         text_view_of_highest_record_unit.setText("公里");
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String DataIdcheck=dataSnapshot.child("exercise").child("running").child("DataIdcheck").getValue().toString();
+                String long_distance=dataSnapshot.child("exercise_count").child("running").child("long_distance").getValue().toString();
+                String short_distance=dataSnapshot.child("exercise_count").child("running").child("short_distance").getValue().toString();
+                String distance=dataSnapshot.child("exercise_count").child("running").child("distance").getValue().toString();
+                String today_record=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
+                String all_record=dataSnapshot.child("exercise_count").child("running").child("all_record").getValue().toString();
+                String dataId=dataSnapshot.child("exercise").child("running").child("dataId").getValue().toString();
+
+                double distance1=Double.parseDouble(distance);
+                double today_record1=Double.parseDouble(today_record);
+                double all_record1=Double.parseDouble(all_record);
+                //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                if(DataIdcheck.equals(dataId)){
+                    //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                }else {
+                    //Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                    today_record1=today_record1+distance1;
+                    all_record1=all_record1+distance1;
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    mDatabase.child("exercise_count").child("running").child("today_record").setValue(df.format(today_record1));
+                    mDatabase.child("exercise_count").child("running").child("all_record").setValue(df.format(all_record1));
+                    mDatabase.child("exercise").child("running").child("DataIdcheck").setValue(dataId);
+                }
+
+                double longDistance=Double.parseDouble(long_distance);
+                double shortDistance=Double.parseDouble(short_distance);
+                text_view_of_highest_record_data.setText(""+longDistance);
+                text_view_of_lowest_record_data.setText(""+shortDistance);
+                text_view_of_today_record_data.setText(""+today_record);
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,27 +166,7 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
         });
         pTime=Week.getWeek(System.currentTimeMillis());
         Log.i("今天是",pTime);
-        /*mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String long_distance=dataSnapshot.child("exercise_count").child("walking").child("long_distance").getValue().toString();
-                String short_distance=dataSnapshot.child("exercise_count").child("walking").child("short_distance").getValue().toString();
-                double longDistance=Double.parseDouble(long_distance);
-                double shortDistance=Double.parseDouble(short_distance);
-                text_view_of_highest_record_data.setText(""+longDistance);
-                text_view_of_lowest_record_data.setText(""+shortDistance);
 
-
-
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
 
 
         button_of_task_execution=(Button)rootView.findViewById(R.id.button_of_task_execution);
@@ -174,22 +201,7 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
         super.onCreate(savedInstanceState);
 
         Log.d("kelvinRunningFragment", "onCreate");
-        /*mAuth = FirebaseAuth.getInstance();
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Distance= dataSnapshot.child("exercise_count").child("walking").child("distance").getValue().toString();
 
-                Log.i("距離",Distance);
-                //mDatabase.child("exercise_count").child("walking").child("distance").setValue(0);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
 
 
 

@@ -172,7 +172,7 @@ public class RunningMonitor extends AppCompatActivity {
                 }
             };
     public void drawRunning(double running_distance, long running_duration,int running_mean_heart_rate,long running_start_time,long running_end_time, int running_calorie,double running_incline_distance,double running_decline_distance,int running_max_heart_rate,int running_max_altitude,
-                            int running_min_altitude,double running_mean_speed,double running_max_speed){
+                            int running_min_altitude,double running_mean_speed,double running_max_speed,String running_UUID){
 
         if(running_distance!=0) {
             TextView distance_data_of_running_monitor = (TextView) findViewById(R.id.distance_data_of_running_monitor);
@@ -222,6 +222,53 @@ public class RunningMonitor extends AppCompatActivity {
                     Time.getToDate(running_start_time),
                     Time.getTime(running_start_time)
             );
+            mDatabase.child("exercise_count").child("running").child("distance").setValue(UnitConversion.get_kilometer(running_distance));
+            mDatabase.child("exercise").child("running").child("dataId").setValue(running_UUID);
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String long_distance=dataSnapshot.child("exercise_count").child("running").child("long_distance").getValue().toString();
+                    String short_distance=dataSnapshot.child("exercise_count").child("running").child("short_distance").getValue().toString();
+                    double longDistance=Double.parseDouble(long_distance);
+                    double shortDistance=Double.parseDouble(short_distance);
+                    if(UnitConversion.get_kilometer(running_distance)>longDistance){
+                        mDatabase.child("exercise_count").child("running").child("long_distance").setValue(UnitConversion.get_kilometer(running_distance));
+                        Log.i("追踪1","新的距離大於最長距離");
+                        if(shortDistance==0){
+                            mDatabase.child("exercise_count").child("running").child("short_distance").setValue(longDistance);
+                            Log.i("追踪2longDistance",""+longDistance);
+                            Log.i("追踪3shortDistance",""+shortDistance);
+                        }else if(shortDistance!=0&&longDistance<shortDistance){
+                            mDatabase.child("exercise_count").child("running").child("short_distance").setValue(longDistance);
+                            Log.i("追踪4longDistance",""+longDistance);
+                            Log.i("追踪5shortDistance",""+shortDistance);
+                        }
+                    }else if(UnitConversion.get_kilometer(running_distance)<longDistance){
+                        Log.i("追踪6","新的距離小於最短距離");
+                        if(shortDistance==0){
+                            mDatabase.child("exercise_count").child("running").child("short_distance").setValue(UnitConversion.get_kilometer(running_distance));
+                            Log.i("追踪7longDistance",""+longDistance);
+                            Log.i("追踪8shortDistance",""+shortDistance);
+                        }else if(shortDistance!=0&&UnitConversion.get_kilometer(running_distance)<shortDistance){
+                            mDatabase.child("exercise_count").child("running").child("short_distance").setValue(UnitConversion.get_kilometer(running_distance));
+                            Log.i("追踪9longDistance",""+longDistance);
+                            Log.i("追踪10shortDistance",""+shortDistance);
+                        }
+                    }
+
+
+
+
+
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
 
 
         }

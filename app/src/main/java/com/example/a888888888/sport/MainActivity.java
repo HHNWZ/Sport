@@ -137,6 +137,9 @@ public class  MainActivity extends AppCompatActivity
     String channelName = "我的最愛";
     private static Context context;
     public Date dt2=null;
+    public Button kel,hal,del,over,sport;
+
+
 
     //private DatabaseReference mUsersDatabase;
 
@@ -346,7 +349,11 @@ public class  MainActivity extends AppCompatActivity
         MenuItem menu_Logout = menu.findItem(R.id.Logout);
         final String user_id = getIntent().getStringExtra("user_id");
 
-
+         kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
+        hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
+         del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
+         over = (Button)findViewById(R.id.button3); //連至直播的按鈕
+         sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
 
 
         /*if(Login.user !=null)
@@ -370,7 +377,7 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
             menu_Logout.setVisible(true);
-
+            kel.setVisibility(View.VISIBLE);
             mUserRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -400,6 +407,7 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(false);
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
+            kel.setVisibility(View.INVISIBLE);
 
         }
 
@@ -447,11 +455,7 @@ public class  MainActivity extends AppCompatActivity
         food_KLL.add(65);
         food_KLL.add(239);
         food_KLL.add(106);
-        Button kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
-        Button hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
-        Button del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
-        Button over = (Button)findViewById(R.id.button3); //連至直播的按鈕
-        Button sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
+
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         rundata =(TextView)findViewById(R.id.textView6);
         walkdata =(TextView)findViewById(R.id.textView7);

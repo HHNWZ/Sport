@@ -48,7 +48,8 @@ public class RunningReporter {
                                              HealthConstants.Exercise.MAX_ALTITUDE,
                                              HealthConstants.Exercise.MIN_ALTITUDE,
                                              HealthConstants.Exercise.MEAN_SPEED,
-                                             HealthConstants.Exercise.MAX_SPEED
+                                             HealthConstants.Exercise.MAX_SPEED,
+                                             HealthConstants.Common.UUID,
 
 
                 })
@@ -90,6 +91,7 @@ public class RunningReporter {
             int running_min_altitude=0;
             double running_mean_speed=0;
             double running_max_speed=0;
+            String running_UUID="";
 
             Cursor c = null;
 
@@ -110,6 +112,8 @@ public class RunningReporter {
                         running_min_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MIN_ALTITUDE));
                         running_mean_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MEAN_SPEED));
                         running_max_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MAX_SPEED));
+                        running_UUID=c.getString(c.getColumnIndex(HealthConstants.Common.UUID));
+
 
 
                     }
@@ -120,7 +124,7 @@ public class RunningReporter {
                 }
             }
 
-                RunningMonitor.getInstance().drawRunning(running_distance,running_duration,running_mean_heart_rate,running_start_time,running_end_time,running_calorie,running_incline_distance,running_decline_distance,running_max_heart_rate,running_max_altitude,running_min_altitude,running_mean_speed,running_max_speed);
+                RunningMonitor.getInstance().drawRunning(running_distance,running_duration,running_mean_heart_rate,running_start_time,running_end_time,running_calorie,running_incline_distance,running_decline_distance,running_max_heart_rate,running_max_altitude,running_min_altitude,running_mean_speed,running_max_speed,running_UUID);
 
 
         }
