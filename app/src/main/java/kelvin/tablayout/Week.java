@@ -19,7 +19,7 @@ public class Week extends Application {
         c.setTimeInMillis(pTime);
 
         if (c.get(Calendar.DAY_OF_WEEK) == 1) {
-            Week += "天";
+            Week += "日";
         }
         if (c.get(Calendar.DAY_OF_WEEK) == 2) {
             Week += "一";

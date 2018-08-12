@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,6 +90,7 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
         text_view_of_today_record_unit.setText("公里");
         text_view_of_lowest_record_unit.setText("公里");
         text_view_of_highest_record_unit.setText("公里");
+
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -116,8 +118,9 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
                     Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                     today_record1=today_record1+distance1;
                     all_record1=all_record1+distance1;
-                    mDatabase.child("exercise_count").child("walking").child("today_record").setValue(today_record1);
-                    mDatabase.child("exercise_count").child("walking").child("all_record").setValue(all_record1);
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    mDatabase.child("exercise_count").child("walking").child("today_record").setValue(df.format(today_record1));
+                    mDatabase.child("exercise_count").child("walking").child("all_record").setValue(df.format(all_record1));
                     mDatabase.child("exercise").child("walking").child("DataIdcheck").setValue(dataId);
                 }
 

@@ -55,5 +55,30 @@ public class Time extends Application {
         return endTime;
     }
 
+    public static String getToDate(long Datemilliseconds){
+        String Todate ="";
+        Calendar date=Calendar.getInstance();
+        date.setTimeInMillis(Datemilliseconds);
+        int y=date.get(Calendar.YEAR);
+        int m=date.get(Calendar.MONTH)+1;
+        int d=date.get(Calendar.DAY_OF_MONTH);
+        String DateWeek=Week.getWeek(Datemilliseconds);
+        Todate=""+y+"年"+m+"月"+d+"日 週"+DateWeek ;
+        return  Todate;
+    }
+
+    public static  String getTime(long Timemilliseconds){
+        String Time ="";
+        Calendar time=Calendar.getInstance();
+        time.setTimeInMillis(Timemilliseconds);
+        int H=time.get(Calendar.HOUR_OF_DAY);
+        int m=time.get(Calendar.MINUTE);
+        int s=time.get(Calendar.SECOND);
+        Time=""+H+"時"+m+"分"+s+"秒";
+        return Time;
+    }
+
+
+
 
 }

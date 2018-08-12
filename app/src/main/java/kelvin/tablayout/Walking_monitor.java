@@ -225,7 +225,10 @@ public class Walking_monitor extends AppCompatActivity {
                     walking_max_altitude,
                     walking_min_altitude,
                     UnitConversion.get_kilometer_per_hour(walking_mean_speed),
-                    UnitConversion.get_kilometer_per_hour(walking_max_speed)
+                    UnitConversion.get_kilometer_per_hour(walking_max_speed),
+                    Time.getToDate(walking_start_time),
+                    Time.getTime(walking_start_time)
+
             );
             mDatabase.child("exercise_count").child("walking").child("distance").setValue(UnitConversion.get_kilometer(walking_distance));
             mDatabase.child("exercise").child("walking").child("dataId").setValue(walking_UUID);

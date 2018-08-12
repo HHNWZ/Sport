@@ -218,7 +218,9 @@ public class RunningMonitor extends AppCompatActivity {
                     running_max_altitude,
                     running_min_altitude,
                     UnitConversion.get_kilometer_per_hour(running_mean_speed),
-                    UnitConversion.get_kilometer_per_hour(running_max_speed)
+                    UnitConversion.get_kilometer_per_hour(running_max_speed),
+                    Time.getToDate(running_start_time),
+                    Time.getTime(running_start_time)
             );
 
 

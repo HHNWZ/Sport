@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,mDatabase1,mDatabase2,mDatabase3,mDatabase4,mDatabase5,mDatabase6;
 
     //ProgressDialog
     private ProgressDialog mRegProgress;
@@ -128,6 +128,9 @@ public class RegisterActivity extends AppCompatActivity {
                     userMap.put("image", "default");
                     userMap.put("thumb_image", "default");
                     userMap.put("device_token", device_token);
+                    userMap.put("exercise","default");
+                    userMap.put("exercise_count","default");
+
 
                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -135,11 +138,97 @@ public class RegisterActivity extends AppCompatActivity {
 
                             if(task.isSuccessful()){
 
-                                mRegProgress.dismiss();
+                                mDatabase1= FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("exercise");
+                                HashMap<String,String> exercise_Map =new HashMap<>();
+                                exercise_Map.put("running","default");
+                                exercise_Map.put("walking","default");
+
+                                mDatabase1.setValue(exercise_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            mDatabase2= FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("exercise").child("running");
+                                            HashMap<String,String>running_Map=new HashMap<>();
+                                            running_Map.put("DataIdcheck","0");
+                                            running_Map.put("dataId"," ");
+
+                                            mDatabase2.setValue(running_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                    if(task.isSuccessful()){
+                                                        mDatabase3= FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("exercise").child("walking");
+                                                        HashMap<String,String>Walking_Map=new HashMap<>();
+                                                        Walking_Map.put("DataIdcheck"," ");
+                                                        Walking_Map.put("dataId","0");
+                                                        mDatabase3.setValue(Walking_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if(task.isSuccessful()){
+                                                                    mDatabase4= FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("exercise_count");
+                                                                    HashMap<String,String> exercise_count_Map =new HashMap<>();
+                                                                    exercise_count_Map.put("running","default");
+                                                                    exercise_count_Map.put("walking","default");
+                                                                    mDatabase4.setValue(exercise_count_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if(task.isSuccessful()){
+                                                                                mDatabase5=FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("exercise_count").child("running");
+                                                                                HashMap<String,String> running_count_Map =new HashMap<>();
+                                                                                running_count_Map.put("all_record","0");
+                                                                                running_count_Map.put("distance","0");
+                                                                                running_count_Map.put("long_distance","0");
+                                                                                running_count_Map.put("short_distance","0");
+                                                                                running_count_Map.put("today_record","0");
+                                                                                mDatabase5.setValue(running_count_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                        if(task.isSuccessful()){
+                                                                                            mDatabase6=FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("exercise_count").child("walking");
+                                                                                            HashMap<String,String> walking_count_Map =new HashMap<>();
+                                                                                            walking_count_Map.put("all_record","0");
+                                                                                            walking_count_Map.put("distance","0");
+                                                                                            walking_count_Map.put("long_distance","0");
+                                                                                            walking_count_Map.put("short_distance","0");
+                                                                                            walking_count_Map.put("today_record","0");
+                                                                                            mDatabase6.setValue(walking_count_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                @Override
+                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                    if(task.isSuccessful()){
+                                                                                                        mRegProgress.dismiss();
+                                                                                                        Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                                                                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                                                                        startActivity(mainIntent);
+                                                                                                        finish();
+                                                                                                    }
+                                                                                                }
+                                                                                            });
+                                                                                        }
+                                                                                    }
+                                                                                });
+
+                                                                            }
+
+                                                                        }
+                                                                    });
+                                                                }
+
+                                                            }
+                                                        });
+                                                    }
+
+                                                }
+                                            });
+                                        }
+
+                                    }
+                                });
+
+                                /*mRegProgress.dismiss();
 
                                 Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
                                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(mainIntent);
+                                startActivity(mainIntent);*/
                                 //finish();
 
                             }
