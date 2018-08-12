@@ -15,6 +15,8 @@ public class TimerTaskTest extends java.util.TimerTask{
         mAuth = FirebaseAuth.getInstance();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUserRef.child("exercise_count").child("walking").child("today_record").setValue(0);
+        mUserRef.child("exercise_count").child("running").child("today_record").setValue(0);
+
         Log.i("1234","jkjjkjkd");
     }
 }

@@ -306,11 +306,11 @@ public class  MainActivity extends AppCompatActivity
         Calendar cal=Calendar.getInstance();
         int y=cal.get(Calendar.YEAR);
         int m=cal.get(Calendar.MONTH)+1;
-        int d=cal.get(Calendar.DAY_OF_MONTH)+1;
+        int d=cal.get(Calendar.DAY_OF_MONTH);
         String clear=null;
         String date=null;
         Date firstTime=null;
-        clear=y+"/"+m+"/"+d+" 00:00:00";
+        clear=y+"/"+m+"/"+d+" 11:59:59";
         //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
         SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -322,9 +322,7 @@ public class  MainActivity extends AppCompatActivity
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Timer timer = new Timer();
-        Log.i("執行時間",""+dateFormatter.format(firstTime));
-        timer.schedule(new TimerTaskTest(), firstTime,86400000);
+
 
 
         setContentView(R.layout.activity_main);
@@ -372,6 +370,9 @@ public class  MainActivity extends AppCompatActivity
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
+            Timer timer = new Timer();
+            Log.i("執行時間",""+dateFormatter.format(firstTime));
+            timer.schedule(new TimerTaskTest(), firstTime);
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
             menu_chat_room.setVisible(true);
