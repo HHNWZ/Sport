@@ -15,7 +15,14 @@ import android.widget.TextView;
 import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +57,9 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
     public String pTime;
-    public Button button_of_task_execution;
+    public Button button_of_task_execution,button_of_sports_monitoring;
+    private static DatabaseReference mDatabase;
+    private static FirebaseAuth mAuth;
 
     public KelvinAerobicExerciseFragment() {
         // Required empty public constructor kkkkk
@@ -61,6 +70,8 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         View rootView= inflater.inflate(R.layout.fragment_kelvin_exercise, container, false);
         TextView text_View_of_exercise_title=(TextView)rootView.findViewById(R.id.exercise_title);
         TextView text_view_of_today_record_data=(TextView)rootView.findViewById(R.id.text_view_of_today_record_data);
@@ -70,17 +81,69 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
         TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
         TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
 
-        text_View_of_exercise_title.setText("有氧運動個人記錄");
-        text_view_of_today_record_data.setText("10");
-        text_view_of_highest_record_data.setText("15");
-        text_view_of_lowest_record_data.setText("5");
+        text_View_of_exercise_title.setText("瑜伽個人記錄");
+        //text_view_of_today_record_data.setText("10");
+        //text_view_of_highest_record_data.setText("15");
+        //text_view_of_lowest_record_data.setText("5");
         text_view_of_today_record_unit.setText("分鐘");
         text_view_of_lowest_record_unit.setText("分鐘");
         text_view_of_highest_record_unit.setText("分鐘");
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String DataIdcheck=dataSnapshot.child("exercise").child("yoga").child("DataIdcheck").getValue().toString();
+                String long_distance=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
+                String short_distance=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
+                String distance=dataSnapshot.child("exercise_count").child("yoga").child("time").getValue().toString();
+                String today_record=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
+                String all_record=dataSnapshot.child("exercise_count").child("yoga").child("all_time").getValue().toString();
+                String dataId=dataSnapshot.child("exercise").child("yoga").child("dataId").getValue().toString();
+
+                long distance1=Long.parseLong(distance);
+                long today_record1=Long.parseLong(today_record);
+                long all_record1=Long.parseLong(all_record);
+                //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                if(DataIdcheck.equals(dataId)){
+                    //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                }else {
+                    //Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                    today_record1=today_record1+distance1;
+                    all_record1=all_record1+distance1;
+
+                    mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(today_record1);
+                    mDatabase.child("exercise_count").child("yoga").child("all_time").setValue(all_record1);
+                    mDatabase.child("exercise").child("yoga").child("DataIdcheck").setValue(dataId);
+                }
+                DecimalFormat df = new DecimalFormat("0.00");
+                long longDistance=Long.parseLong(long_distance);
+                long shortDistance=Long.parseLong(short_distance);
+                text_view_of_highest_record_data.setText(""+Time.changeYogaTime(longDistance));
+                text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(shortDistance));
+                text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_record1));
+                if(longDistance<60000){
+                    text_view_of_highest_record_unit.setText("秒");
+                }
+                if(shortDistance<60000){
+                    text_view_of_lowest_record_unit.setText("秒");
+                }
+                if(today_record1<60000){
+                    text_view_of_today_record_unit.setText("秒");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         chart_of_aerobic_Exercise_today_record = (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());
         chart_of_aerobic_Exercise_today_record.setZoomEnabled(false);
         generateData();
+
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +164,14 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
         }else{
             button_of_task_execution.setVisibility(View.INVISIBLE);
         }
+        button_of_sports_monitoring=(Button)rootView.findViewById(R.id.button_of_sports_monitoring);
+        button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),YogaMonitor.class);
+                startActivity(intent);
+            }
+        });
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

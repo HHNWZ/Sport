@@ -32,7 +32,7 @@ public class RunningReporter {
         long startTime = getStartTimeOfToday();
         long endTime = System.currentTimeMillis();
         HealthDataResolver.Filter filter = HealthDataResolver.Filter.and(HealthDataResolver.Filter.greaterThanEquals(HealthConstants.Exercise.START_TIME, startTime),
-                HealthDataResolver.Filter.lessThanEquals(HealthConstants.Exercise.START_TIME, endTime),HealthDataResolver.Filter.eq(HealthConstants.Exercise.EXERCISE_TYPE,11007));
+                HealthDataResolver.Filter.lessThanEquals(HealthConstants.Exercise.START_TIME, endTime),HealthDataResolver.Filter.eq(HealthConstants.Exercise.EXERCISE_TYPE,1002));
 
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
                 .setDataType(HealthConstants.Exercise.HEALTH_DATA_TYPE)

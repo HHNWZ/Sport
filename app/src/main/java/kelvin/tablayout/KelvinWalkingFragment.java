@@ -126,12 +126,6 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
                 text_view_of_highest_record_data.setText(""+longDistance);
                 text_view_of_lowest_record_data.setText(""+shortDistance);
                 text_view_of_today_record_data.setText(""+today_record);
-
-
-
-
-
-
             }
 
             @Override

@@ -88,7 +88,10 @@
         <activity android:name="kelvin.tablayout.Sit_up_task" />
         <activity android:name="kelvin.tablayout.Walking_task" />
         <activity android:name="kelvin.tablayout.Walking_monitor" />
-        <activity android:name="kelvin.tablayout.RunningMonitor"></activity>
+        <activity android:name="kelvin.tablayout.RunningMonitor" />
+        <activity android:name="kelvin.tablayout.YogaMonitor" />
+        <activity android:name="kelvin.tablayout.CrunchesMonitor" />
+        <activity android:name="kelvin.tablayout.SquatsMonitor"></activity>
     </application>
 
 </manifest>

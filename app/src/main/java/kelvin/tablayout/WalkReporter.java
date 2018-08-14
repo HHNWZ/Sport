@@ -1,5 +1,6 @@
 package kelvin.tablayout;
 
+import android.app.Application;
 import android.database.Cursor;
 import android.util.Log;
 
@@ -7,11 +8,14 @@ import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataObserver;
 import com.samsung.android.sdk.healthdata.HealthDataResolver;
 import com.samsung.android.sdk.healthdata.HealthDataStore;
+import com.samsung.android.sdk.healthdata.HealthDataUtil;
 import com.samsung.android.sdk.healthdata.HealthResultHolder;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
-public class WalkReporter {
+public class WalkReporter extends Application{
     private final HealthDataStore mStore;
 
     public WalkReporter(HealthDataStore store) {
@@ -49,7 +53,8 @@ public class WalkReporter {
                         HealthConstants.Exercise.MIN_ALTITUDE,
                         HealthConstants.Exercise.MEAN_SPEED,
                         HealthConstants.Exercise.MAX_SPEED,
-                        HealthConstants.Common.UUID
+                        HealthConstants.Common.UUID,
+                        HealthConstants.Exercise.LOCATION_DATA
 
 
                 })
@@ -75,54 +80,66 @@ public class WalkReporter {
         return today.getTimeInMillis();
     }
 
-    private final HealthResultHolder.ResultListener<HealthDataResolver.ReadResult> mListener = new HealthResultHolder.ResultListener<HealthDataResolver.ReadResult>() {
-        @Override
-        public void onResult(HealthDataResolver.ReadResult result) {
-            double walking_distance = 0;
-            long walking_duration=0 ;
-            long walking_start_time=0;
-            long walking_end_time=0;
-            int walking_mean_heart_rate=0;
-            int walking_calorie=0;
-            double walking_incline_distance=0;
-            double walking_decline_distance=0;
-            int walking_max_heart_rate=0;
-            int walking_max_altitude=0;
-            int walking_min_altitude=0;
-            double walking_mean_speed=0;
-            double walking_max_speed=0;
-            String walking_UUID="";
-            Cursor c = null;
+    private final HealthResultHolder.ResultListener<HealthDataResolver.ReadResult> mListener;
 
-            try {
-                c = result.getResultCursor();
-                if (c != null) {
-                    while (c.moveToNext()) {
-                        walking_distance = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
-                        walking_duration = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
-                        walking_mean_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
-                        walking_start_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.START_TIME));
-                        walking_end_time=c.getLong(c.getColumnIndex(HealthConstants.Exercise.END_TIME));
-                        walking_calorie=c.getInt(c.getColumnIndex(HealthConstants.Exercise.CALORIE));
-                        walking_incline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.INCLINE_DISTANCE));
-                        walking_decline_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DECLINE_DISTANCE));
-                        walking_max_heart_rate=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_HEART_RATE));
-                        walking_max_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_ALTITUDE));
-                        walking_min_altitude=c.getInt(c.getColumnIndex(HealthConstants.Exercise.MIN_ALTITUDE));
-                        walking_mean_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MEAN_SPEED));
-                        walking_max_speed=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MAX_SPEED));
-                        walking_UUID=c.getString(c.getColumnIndex(HealthConstants.Common.UUID));
+    {
+        mListener = new HealthResultHolder.ResultListener<HealthDataResolver.ReadResult>() {
+            @Override
+            public void onResult(HealthDataResolver.ReadResult result) {
+                double walking_distance = 0;
+                long walking_duration = 0;
+                long walking_start_time = 0;
+                long walking_end_time = 0;
+                int walking_mean_heart_rate = 0;
+                int walking_calorie = 0;
+                double walking_incline_distance = 0;
+                double walking_decline_distance = 0;
+                int walking_max_heart_rate = 0;
+                int walking_max_altitude = 0;
+                int walking_min_altitude = 0;
+                double walking_mean_speed = 0;
+                double walking_max_speed = 0;
+                String walking_UUID = "";
+                Cursor c = null;
+                byte[] walking_location_data=null;
 
+
+                try {
+
+
+                    c = result.getResultCursor();
+                    if (c != null) {
+                        while (c.moveToNext()) {
+                            walking_distance = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
+                            walking_duration = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
+                            walking_mean_heart_rate = c.getInt(c.getColumnIndex(HealthConstants.Exercise.MEAN_HEART_RATE));
+                            walking_start_time = c.getLong(c.getColumnIndex(HealthConstants.Exercise.START_TIME));
+                            walking_end_time = c.getLong(c.getColumnIndex(HealthConstants.Exercise.END_TIME));
+                            walking_calorie = c.getInt(c.getColumnIndex(HealthConstants.Exercise.CALORIE));
+                            walking_incline_distance = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.INCLINE_DISTANCE));
+                            walking_decline_distance = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DECLINE_DISTANCE));
+                            walking_max_heart_rate = c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_HEART_RATE));
+                            walking_max_altitude = c.getInt(c.getColumnIndex(HealthConstants.Exercise.MAX_ALTITUDE));
+                            walking_min_altitude = c.getInt(c.getColumnIndex(HealthConstants.Exercise.MIN_ALTITUDE));
+                            walking_mean_speed = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MEAN_SPEED));
+                            walking_max_speed = c.getDouble(c.getColumnIndex(HealthConstants.Exercise.MAX_SPEED));
+                            walking_UUID = c.getString(c.getColumnIndex(HealthConstants.Common.UUID));
+                            walking_location_data = c.getBlob(c.getColumnIndex(HealthConstants.Exercise.LOCATION_DATA));
+                            Log.e("追踪1",""+walking_location_data.length);
+
+
+                        }
+                    }
+                } finally {
+                    if (c != null) {
+                        c.close();
                     }
                 }
-            } finally {
-                if (c != null) {
-                    c.close();
-                }
+
+                Walking_monitor.getInstance().drawWalk(walking_distance, walking_duration, walking_mean_heart_rate, walking_start_time, walking_end_time, walking_calorie, walking_incline_distance, walking_decline_distance, walking_max_heart_rate, walking_max_altitude, walking_min_altitude, walking_mean_speed, walking_max_speed, walking_UUID,walking_location_data);
             }
-            Walking_monitor.getInstance().drawWalk(walking_distance,walking_duration,walking_mean_heart_rate,walking_start_time,walking_end_time,walking_calorie,walking_incline_distance,walking_decline_distance,walking_max_heart_rate,walking_max_altitude,walking_min_altitude,walking_mean_speed,walking_max_speed,walking_UUID);
-        }
-    };
+        };
+    }
 
     private final HealthDataObserver mObserver = new HealthDataObserver(null) {
 
@@ -133,4 +150,14 @@ public class WalkReporter {
             readLastWalk();
         }
     };
+    public byte[] createLocationData(List<Location> locationList){
+        byte[] zip= HealthDataUtil.getJsonBlob(locationList);
+        return zip;
+    }
+
+
+    public static List<Location> getLiveData(byte[] zip){
+        List<Location> locationList=HealthDataUtil.getStructuredDataList(zip,Location.class);
+        return  locationList;
+    }
 }

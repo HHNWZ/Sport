@@ -50,7 +50,7 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
     public String pTime;
-    public Button button_of_task_execution;
+    public Button button_of_task_execution,button_of_sports_monitoring;
     public KelvinSitUpsFragment() {
         // Required empty public constructor kkkkkkkkkkkk
     }
@@ -107,6 +107,14 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
         //chart.setOnValueTouchListener(new ValueTouchListener());
         chart_of_sit_up_today_record.setZoomEnabled(false);
         generateData();
+        button_of_sports_monitoring=(Button)rootView.findViewById(R.id.button_of_sports_monitoring);
+        button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),CrunchesMonitor.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 

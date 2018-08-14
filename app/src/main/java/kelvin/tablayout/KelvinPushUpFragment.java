@@ -50,7 +50,7 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
     public String pTime;
-    public Button button_of_task_execution;
+    public Button button_of_task_execution,button_of_sports_monitoring;
 
     public KelvinPushUpFragment() {
         // Required empty public constructor////
@@ -69,7 +69,7 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
         TextView text_view_of_today_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_today_record_unit);
         TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
         TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
-        text_View_of_exercise_title.setText("伏地挺身個人記錄");
+        text_View_of_exercise_title.setText("深蹲身個人記錄");
         text_view_of_today_record_data.setText("10");
         text_view_of_highest_record_data.setText("15");
         text_view_of_lowest_record_data.setText("5");
@@ -107,6 +107,14 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
         chart_of_push_up_today_record = (ColumnChartView) rootView.findViewById(R.id.chart_of_running_today_record);
         //chart.setOnValueTouchListener(new ValueTouchListener());
         chart_of_push_up_today_record.setZoomEnabled(false);
+        button_of_sports_monitoring=(Button)rootView.findViewById(R.id.button_of_sports_monitoring);
+        button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),SquatsMonitor.class);
+                startActivity(intent);
+            }
+        });
         generateData();
         return rootView;
     }

@@ -78,6 +78,13 @@ public class Time extends Application {
         return Time;
     }
 
+    public static String changeYogaTime(long yogaMilliseconds){
+        String minute="";
+        long min =yogaMilliseconds/60000;
+        minute=String.valueOf(min);
+        return minute;
+    }
+
 
 
 

@@ -24,11 +24,14 @@ import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataService;
 import com.samsung.android.sdk.healthdata.HealthDataStore;
+import com.samsung.android.sdk.healthdata.HealthDataUtil;
 import com.samsung.android.sdk.healthdata.HealthPermissionManager;
 import com.samsung.android.sdk.healthdata.HealthResultHolder;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,10 +46,9 @@ public class Walking_monitor extends AppCompatActivity {
     private WalkReporter wReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
-
-    public static double distance2;
     public static String distance;
-    public static String todayRecord;
+
+    public byte[]walking_location;
 
 
 
@@ -88,6 +90,7 @@ public class Walking_monitor extends AppCompatActivity {
 
 
          mStore.connectService();
+        //Toast.makeText(Walking_monitor.this, ""+walking_location.length, Toast.LENGTH_SHORT).show();
 
     }
     @Override
@@ -178,11 +181,12 @@ public class Walking_monitor extends AppCompatActivity {
                 }
             };
     public void drawWalk(double walking_distance, long walking_duration,int walking_mean_heart_rate,long walking_start_time,long walking_end_time, int walking_calorie,double walking_incline_distance,double walking_decline_distance,int walking_max_heart_rate,int walking_max_altitude,
-                         int walking_min_altitude,double walking_mean_speed,double walking_max_speed,String walking_UUID){
+                         int walking_min_altitude,double walking_mean_speed,double walking_max_speed,String walking_UUID,byte[] walking_location_data){
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         if(walking_distance!=0) {
+            List<Location> locationList = Collections.emptyList();
             TextView distance_data_of_walking_monitor = (TextView) findViewById(R.id.distance_data_of_walking_monitor);
             TextView duration_data_of_walking_monitor = (TextView) findViewById(R.id.duration_data_of_walking_monitor);
             TextView meanHeartRate_data_of_walking_monitor = (TextView) findViewById(R.id.meanHeartRate_data_of_walking_monitor);
@@ -196,6 +200,14 @@ public class Walking_monitor extends AppCompatActivity {
             TextView min_altitude_data_of_walking_monitor = (TextView) findViewById(R.id.min_altitude_data_of_walking_monitor);
             TextView mean_speed_data_of_walking_monitor = (TextView) findViewById(R.id.mean_speed_data_of_walking_monitor);
             TextView max_speed_data_of_walking_monitor = (TextView) findViewById(R.id.max_speed_data_of_walking_monitor);
+
+            walking_location=walking_location_data;
+            //createLocationData(locationList);
+
+            //byte[] zip_walking_location=
+            //zip_walking_location=createLocationData(locationList);
+            //createLocationData(locationList);
+            //Log.i("追踪11",""+zip_walking_location.length);
 
             distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_distance));
             meanHeartRate_data_of_walking_monitor.setText("" + walking_mean_heart_rate);
@@ -265,11 +277,6 @@ public class Walking_monitor extends AppCompatActivity {
                     }
 
                     //Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
-
-
-
-
-
                 }
 
                 @Override
@@ -277,20 +284,18 @@ public class Walking_monitor extends AppCompatActivity {
 
                 }
             });
-
-
-
         }
-
-
-
-
-
-
-
-
     }
 
+    public byte[] createLocationData(List<Location> locationList){
+        byte[] zip= HealthDataUtil.getJsonBlob(locationList);
+        return zip;
+    }
+
+    public  List<Location> getLocationData(byte[] zip){
+        List<Location> locationList=HealthDataUtil.getStructuredDataList(zip,Location.class);
+        return  locationList;
+    }
     public static Walking_monitor getInstance() {
         return mInstance;
     }

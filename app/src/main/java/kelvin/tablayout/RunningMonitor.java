@@ -173,7 +173,8 @@ public class RunningMonitor extends AppCompatActivity {
             };
     public void drawRunning(double running_distance, long running_duration,int running_mean_heart_rate,long running_start_time,long running_end_time, int running_calorie,double running_incline_distance,double running_decline_distance,int running_max_heart_rate,int running_max_altitude,
                             int running_min_altitude,double running_mean_speed,double running_max_speed,String running_UUID){
-
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         if(running_distance!=0) {
             TextView distance_data_of_running_monitor = (TextView) findViewById(R.id.distance_data_of_running_monitor);
             TextView duration_data_of_running_monitor = (TextView) findViewById(R.id.duration_data_of_running_monitor);
