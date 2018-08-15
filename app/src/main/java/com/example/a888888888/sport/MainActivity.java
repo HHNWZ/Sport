@@ -59,6 +59,7 @@ import org.json.JSONObject;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
+import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.Walking_task;
 import kelvin.tablayout.Week;
@@ -311,7 +313,7 @@ public class  MainActivity extends AppCompatActivity
         String clear=null;
         String date=null;
         Date firstTime=null;
-        clear=y+"/"+m+"/"+d+" 23:59:00";
+        clear=y+"/"+m+"/"+d+" 11:59:00";
         //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
         SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -372,7 +374,7 @@ public class  MainActivity extends AppCompatActivity
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
-            String getWeek= Week.getWeek(System.currentTimeMillis());
+
 
             timer.schedule(new TimerTaskTest(), firstTime);
             menu_email_login.setVisible(false);
@@ -429,14 +431,62 @@ public class  MainActivity extends AppCompatActivity
             fpush = Float.parseFloat(pushdata.getText().toString());
             fsit = Float.parseFloat(sitdata.getText().toString());
         }*/
-            pieView = (PieChart_View) findViewById(R.id.pie_view);
-            ArrayList<PieChartBean> lists = new ArrayList<>();
-            lists.add(new PieChartBean(Color.parseColor("#38b048"), 50, "跑步"));//rundata
-            lists.add(new PieChartBean(Color.parseColor("#189428"), 60, "走路"));//walkdata
-            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 80, "瑜伽"));//airdata
-            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 120, "深蹲"));//pushdata
-            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, "仰臥起坐"));//sitdata
-            pieView.setData(lists);
+            mUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String crunches_week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
+                    String running_week_record=dataSnapshot.child("exercise_count").child("running").child("week_record").getValue().toString();
+                    String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
+                    String walking_week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
+                    String yoga_week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
+
+                    float crunches_week_record_float=Float.parseFloat(crunches_week_record);
+                    float running_week_record_float=Float.parseFloat(running_week_record);
+                    float squats_week_record_float=Float.parseFloat(squats_week_record);
+                    float walking_week_record_float=Float.parseFloat(walking_week_record);
+                    //float yoga_week_record_float=Float.parseFloat(yoga_week_record);
+
+                    long yoga_week_record_long=Long.parseLong(yoga_week_record);
+                    Log.i("數據1",""+crunches_week_record_float);
+                    Log.i("數據2",""+running_week_record_float);
+                    Log.i("數據3",""+squats_week_record_float);
+                    Log.i("數據4",""+walking_week_record_float);
+                    Log.i("數據5",""+Time.yogaWeekminute(yoga_week_record_long));
+
+
+                    pieView = (PieChart_View) findViewById(R.id.pie_view);
+                    ArrayList<PieChartBean> lists = new ArrayList<>();
+                    lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, "跑步"));//rundata
+                    lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, "走路"));//walkdata
+                    lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), "瑜伽"));//airdata
+                    lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, "深蹲"));//pushdata
+                    lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, "仰臥起坐"));//sitdata
+                    pieView.setData(lists);
+
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    TextView textView6=(TextView)findViewById(R.id.textView6);
+                    TextView textView7=(TextView)findViewById(R.id.textView7);
+                    TextView textView8=(TextView)findViewById(R.id.textView8);
+                    TextView textView10=(TextView)findViewById(R.id.textView10);
+                    TextView textView9=(TextView)findViewById(R.id.textView9);
+
+                    textView6.setText(""+running_week_record_float+"公里");
+                    textView7.setText(""+walking_week_record_float+"公里");
+                    textView8.setText(""+Float.parseFloat(df.format(Time.yogaWeekminute(yoga_week_record_long)))+"分鐘");
+                    textView10.setText(""+squats_week_record+"次");
+                    textView9.setText(""+crunches_week_record+"次");
+
+
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 
         //食物列表
         food_list.add("米飯");

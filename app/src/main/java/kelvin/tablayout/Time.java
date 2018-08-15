@@ -97,6 +97,13 @@ public class Time extends Application {
 
     }
 
+    public static float yogaWeekminute(long yogaMilliseconds){
+        double yogaTime1=yogaMilliseconds/60000d;
+        float yogaTime=(float)yogaTime1;
+
+        return yogaTime;
+    }
+
 
 
 

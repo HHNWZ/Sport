@@ -16,11 +16,11 @@ public class TimerTaskTest extends java.util.TimerTask{
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUserRef.child("exercise_count").child("walking").child("today_record").setValue(0);
         mUserRef.child("exercise_count").child("running").child("today_record").setValue(0);
-        mUserRef.child("exercise_count").child("crunches").child("today_record").setValue(0);
-        mUserRef.child("exercise_count").child("squats").child("today_record").setValue(0);
-        mUserRef.child("exercise_count").child("walking").child("today_record").setValue(0);
+        mUserRef.child("exercise_count").child("yoga").child("today_time").setValue(0);
+        mUserRef.child("exercise_count").child("squats").child("today_count").setValue(0);
+        mUserRef.child("exercise_count").child("crunches").child("today_count").setValue(0);
         String getWeek= Week.getWeek(System.currentTimeMillis());
-        if(getWeek.equals("三")){
+        if(getWeek.equals("日")){
             mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
             mUserRef.child("exercise_count").child("running").child("week_record").setValue(0);
             mUserRef.child("exercise_count").child("crunches").child("week_record").setValue(0);
