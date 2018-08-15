@@ -46,7 +46,7 @@ public class Walking_monitor extends AppCompatActivity {
     private WalkReporter wReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
-    public static String distance;
+    //public static String distance;
 
     public byte[]walking_location;
 

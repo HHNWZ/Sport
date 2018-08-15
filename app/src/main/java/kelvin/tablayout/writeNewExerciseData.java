@@ -33,4 +33,11 @@ public class writeNewExerciseData extends Application{
         mDatabase.child("exercise").child(exercise_type).child(Todate).child(Totime).setValue(exerciseData2);
 
     }
+
+    public static void setNewExerciseData3(String exercise_type,String start_time,String end_time,String duration,int mean_heart_rate,int calorie,int max_heart_rate,int count,String Todate,String Totime){
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        ExerciseData3 exerciseData3=new ExerciseData3(start_time,end_time,duration,mean_heart_rate,calorie,max_heart_rate,count);
+        mDatabase.child("exercise").child(exercise_type).child(Todate).child(Totime).setValue(exerciseData3);
+    }
 }

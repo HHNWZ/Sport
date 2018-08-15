@@ -79,10 +79,22 @@ public class Time extends Application {
     }
 
     public static String changeYogaTime(long yogaMilliseconds){
-        String minute="";
-        long min =yogaMilliseconds/60000;
-        minute=String.valueOf(min);
-        return minute;
+        String yogaTime="";
+        Calendar yoga_time = Calendar.getInstance();
+        yoga_time.setTimeInMillis(yogaMilliseconds);
+        int yoga_hour = yoga_time.get(Calendar.HOUR);//12小时制
+        int yoga_minute = yoga_time.get(Calendar.MINUTE);
+        int yoga_second = yoga_time.get(Calendar.SECOND);
+        if(yogaMilliseconds<60000){
+            yogaTime=""+yoga_second+"秒";
+        }else if(yogaMilliseconds>=60000||yogaMilliseconds<3600000){
+            yogaTime=""+yoga_minute+"分鐘"+yoga_second+"秒";
+        }else if(yogaMilliseconds>=3600000){
+            yogaTime=""+yoga_hour+"時"+yoga_minute+"分鐘"+yoga_second+"秒";
+        }
+        return yogaTime;
+
+
     }
 
 

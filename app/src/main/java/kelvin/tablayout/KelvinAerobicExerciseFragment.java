@@ -72,7 +72,7 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
         // Inflate the layout for this fragment
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        View rootView= inflater.inflate(R.layout.fragment_kelvin_exercise, container, false);
+        View rootView= inflater.inflate(R.layout.fragment_kelvin_exercise2, container, false);
         TextView text_View_of_exercise_title=(TextView)rootView.findViewById(R.id.exercise_title);
         TextView text_view_of_today_record_data=(TextView)rootView.findViewById(R.id.text_view_of_today_record_data);
         TextView text_view_of_lowest_record_data=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_data) ;
@@ -85,9 +85,7 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
         //text_view_of_today_record_data.setText("10");
         //text_view_of_highest_record_data.setText("15");
         //text_view_of_lowest_record_data.setText("5");
-        text_view_of_today_record_unit.setText("分鐘");
-        text_view_of_lowest_record_unit.setText("分鐘");
-        text_view_of_highest_record_unit.setText("分鐘");
+
         mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -123,15 +121,7 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
                 text_view_of_highest_record_data.setText(""+Time.changeYogaTime(longDistance));
                 text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(shortDistance));
                 text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_record1));
-                if(longDistance<60000){
-                    text_view_of_highest_record_unit.setText("秒");
-                }
-                if(shortDistance<60000){
-                    text_view_of_lowest_record_unit.setText("秒");
-                }
-                if(today_record1<60000){
-                    text_view_of_today_record_unit.setText("秒");
-                }
+
             }
 
             @Override

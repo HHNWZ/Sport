@@ -41,7 +41,7 @@ public class YogaMonitor extends AppCompatActivity {
     private YogaReporter yReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
-    public static String time;
+    //public static String time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
