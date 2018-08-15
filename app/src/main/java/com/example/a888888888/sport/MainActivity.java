@@ -81,6 +81,7 @@ import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
 import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.Walking_task;
+import kelvin.tablayout.Week;
 import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
@@ -310,7 +311,7 @@ public class  MainActivity extends AppCompatActivity
         String clear=null;
         String date=null;
         Date firstTime=null;
-        clear=y+"/"+m+"/"+d+" 11:59:59";
+        clear=y+"/"+m+"/"+d+" 23:59:00";
         //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
         SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -371,7 +372,8 @@ public class  MainActivity extends AppCompatActivity
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
-            Log.i("執行時間",""+dateFormatter.format(firstTime));
+            String getWeek= Week.getWeek(System.currentTimeMillis());
+
             timer.schedule(new TimerTaskTest(), firstTime);
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
@@ -433,7 +435,7 @@ public class  MainActivity extends AppCompatActivity
             lists.add(new PieChartBean(Color.parseColor("#189428"), 60, "走路"));//walkdata
             lists.add(new PieChartBean(Color.parseColor("#349bb3"), 80, "瑜伽"));//airdata
             lists.add(new PieChartBean(Color.parseColor("#2671ab"), 120, "深蹲"));//pushdata
-            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 140, "仰臥起坐"));//sitdata
+            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, "仰臥起坐"));//sitdata
             pieView.setData(lists);
 
         //食物列表

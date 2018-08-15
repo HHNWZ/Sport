@@ -19,7 +19,15 @@ public class TimerTaskTest extends java.util.TimerTask{
         mUserRef.child("exercise_count").child("crunches").child("today_record").setValue(0);
         mUserRef.child("exercise_count").child("squats").child("today_record").setValue(0);
         mUserRef.child("exercise_count").child("walking").child("today_record").setValue(0);
+        String getWeek= Week.getWeek(System.currentTimeMillis());
+        if(getWeek.equals("三")){
+            mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
+            mUserRef.child("exercise_count").child("running").child("week_record").setValue(0);
+            mUserRef.child("exercise_count").child("crunches").child("week_record").setValue(0);
+            mUserRef.child("exercise_count").child("squats").child("week_record").setValue(0);
+            mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
+            Log.i("刪除時間",""+Time.get_start_time(System.currentTimeMillis()));
+        }
 
-        Log.i("1234","jkjjkjkd");
     }
 }

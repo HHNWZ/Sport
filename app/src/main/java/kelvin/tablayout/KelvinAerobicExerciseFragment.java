@@ -97,10 +97,12 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
                 String today_record=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
                 String all_record=dataSnapshot.child("exercise_count").child("yoga").child("all_time").getValue().toString();
                 String dataId=dataSnapshot.child("exercise").child("yoga").child("dataId").getValue().toString();
+                String week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
 
                 long distance1=Long.parseLong(distance);
                 long today_record1=Long.parseLong(today_record);
                 long all_record1=Long.parseLong(all_record);
+                long week_record1=Long.parseLong(week_record);
                 //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                 if(DataIdcheck.equals(dataId)){
                     //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
@@ -110,9 +112,12 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
                     //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                     today_record1=today_record1+distance1;
                     all_record1=all_record1+distance1;
+                    week_record1=week_record1+distance1;
 
                     mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(today_record1);
                     mDatabase.child("exercise_count").child("yoga").child("all_time").setValue(all_record1);
+                    mDatabase.child("exercise_count").child("yoga").child("week_record").setValue(week_record1);
+
                     mDatabase.child("exercise").child("yoga").child("DataIdcheck").setValue(dataId);
                 }
                 DecimalFormat df = new DecimalFormat("0.00");

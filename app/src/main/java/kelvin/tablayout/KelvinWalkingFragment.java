@@ -102,10 +102,12 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
                 String today_record=dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
                 String all_record=dataSnapshot.child("exercise_count").child("walking").child("all_record").getValue().toString();
                 String dataId=dataSnapshot.child("exercise").child("walking").child("dataId").getValue().toString();
+                String week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
 
                 double distance1=Double.parseDouble(distance);
                 double today_record1=Double.parseDouble(today_record);
                 double all_record1=Double.parseDouble(all_record);
+                double week_record1=Double.parseDouble(week_record);
                 //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                 if(DataIdcheck.equals(dataId)){
                     //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
@@ -115,9 +117,11 @@ public class KelvinWalkingFragment extends Fragment implements FragmentBackHandl
                     //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                     today_record1=today_record1+distance1;
                     all_record1=all_record1+distance1;
+                    week_record1=week_record1+distance1;
                     DecimalFormat df = new DecimalFormat("0.00");
                     mDatabase.child("exercise_count").child("walking").child("today_record").setValue(df.format(today_record1));
                     mDatabase.child("exercise_count").child("walking").child("all_record").setValue(df.format(all_record1));
+                    mDatabase.child("exercise_count").child("walking").child("week_record").setValue(df.format(week_record1));
                     mDatabase.child("exercise").child("walking").child("DataIdcheck").setValue(dataId);
                 }
 

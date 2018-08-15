@@ -97,10 +97,12 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
                 String today_count=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
                 String all_count=dataSnapshot.child("exercise_count").child("crunches").child("all_count").getValue().toString();
                 String dataId=dataSnapshot.child("exercise").child("crunches").child("dataId").getValue().toString();
+                String week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
 
                 int count1=Integer.parseInt(count);
                 int today_count1=Integer.parseInt(today_count);
                 int all_count1=Integer.parseInt(all_count);
+                int week_record1=Integer.parseInt(week_record);
                 //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                 if(DataIdcheck.equals(dataId)){
                     //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
@@ -110,9 +112,10 @@ public class KelvinSitUpsFragment extends Fragment implements FragmentBackHandle
                     //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
                     today_count1=today_count1+count1;
                     all_count1=all_count1+count1;
-
+                    week_record1=week_record1+count1;
                     mDatabase.child("exercise_count").child("crunches").child("today_count").setValue(today_count1);
                     mDatabase.child("exercise_count").child("crunches").child("all_count").setValue(all_count1);
+                    mDatabase.child("exercise_count").child("crunches").child("week_record").setValue(week_record1);
                     mDatabase.child("exercise").child("crunches").child("DataIdcheck").setValue(dataId);
                 }
 
