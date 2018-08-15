@@ -42,7 +42,7 @@ public class CrunchesMonitor extends AppCompatActivity {
     private CrunchesReporter cReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
-    public static String time;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

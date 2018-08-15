@@ -34,7 +34,7 @@ public class Aerobic_exercise_task extends AppCompatActivity {
         mAuth= FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         aerobic_exercise_task=(Toolbar)findViewById(R.id.Aerobic_exercise_task_app_bar);
-        aerobic_exercise_task.setTitle("有氧運動每週任務");
+        aerobic_exercise_task.setTitle("瑜伽運動每週任務");
         aerobic_exercise_task.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         aerobic_exercise_task.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

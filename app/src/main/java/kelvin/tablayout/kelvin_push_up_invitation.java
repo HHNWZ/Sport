@@ -119,7 +119,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
         final View view = inflater.inflate(R.layout.fragment_kelvin_push_up_invitation, null);
         view.setOnTouchListener(this);
         push_up_Toolbar=(Toolbar)view.findViewById(R.id.push_up_Toolbar);
-        push_up_Toolbar.setTitle("伏地挺身邀請內容");
+        push_up_Toolbar.setTitle("深蹲邀請內容");
         push_up_Toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         push_up_Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +201,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
                 }else{
                     push_up_count=Integer.parseInt(edit_text_of_push_up_count.getText().toString());
                     if(push_up_count<10||push_up_count>50){
-                        toast.makeText(getActivity(), "伏地挺身的次數不能小於10或大於50", Toast.LENGTH_SHORT).show();
+                        toast.makeText(getActivity(), "深蹲的次數不能小於10或大於50", Toast.LENGTH_SHORT).show();
                         edit_text_of_push_up_count.setText(" ");
                         imm_of_push_up_invitation.showSoftInput(edit_text_of_push_up_count, 0);
                     }else{
@@ -211,7 +211,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
                             newFragment.setTargetFragment(kelvin_push_up_invitation.this,start_time_data_of_push_up_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("伏地挺身","次數",edit_text_of_push_up_count.getText().toString(),"次",start_year_of_kelvin_push_up_invitation,start_month_of_kelvin_push_up_invitation,start_day_of_kelvin_push_up_invitation,start_hour_of_kelvin_push_up_invitation,start_minute_of_kelvin_push_up_invitation,end_year_of_kelvin_push_up_invitation,end_month_of_kelvin_push_up_invitation,end_day_of_kelvin_push_up_invitation,end_hour_of_kelvin_push_up_invitation,end_minute_of_kelvin_push_up_invitation);
+                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("深蹲","次數",edit_text_of_push_up_count.getText().toString(),"次",start_year_of_kelvin_push_up_invitation,start_month_of_kelvin_push_up_invitation,start_day_of_kelvin_push_up_invitation,start_hour_of_kelvin_push_up_invitation,start_minute_of_kelvin_push_up_invitation,end_year_of_kelvin_push_up_invitation,end_month_of_kelvin_push_up_invitation,end_day_of_kelvin_push_up_invitation,end_hour_of_kelvin_push_up_invitation,end_minute_of_kelvin_push_up_invitation);
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                             transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
@@ -235,7 +235,7 @@ public class kelvin_push_up_invitation extends Fragment implements View.OnTouchL
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:伏地挺身\n次數:"+edit_text_of_push_up_count.getText().toString()+"次\n開始日期:"+start_year_of_kelvin_push_up_invitation+"年"+start_month_of_kelvin_push_up_invitation+"月"+start_day_of_kelvin_push_up_invitation+"號\n開始時間:"+start_hour_of_kelvin_push_up_invitation+":"+start_minute_of_kelvin_push_up_invitation+"\n結束日期:"+end_year_of_kelvin_push_up_invitation+"年"+end_month_of_kelvin_push_up_invitation+"月"+end_day_of_kelvin_push_up_invitation+"號\n結束時間"+end_hour_of_kelvin_push_up_invitation+":"+end_minute_of_kelvin_push_up_invitation);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:深蹲\n次數:"+edit_text_of_push_up_count.getText().toString()+"次\n開始日期:"+start_year_of_kelvin_push_up_invitation+"年"+start_month_of_kelvin_push_up_invitation+"月"+start_day_of_kelvin_push_up_invitation+"號\n開始時間:"+start_hour_of_kelvin_push_up_invitation+":"+start_minute_of_kelvin_push_up_invitation+"\n結束日期:"+end_year_of_kelvin_push_up_invitation+"年"+end_month_of_kelvin_push_up_invitation+"月"+end_day_of_kelvin_push_up_invitation+"號\n結束時間"+end_hour_of_kelvin_push_up_invitation+":"+end_minute_of_kelvin_push_up_invitation);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.app_name)));
 

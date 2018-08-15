@@ -32,7 +32,7 @@ public class Push_up_task extends AppCompatActivity {
         mDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         data_push_up_task=(TextView)findViewById(R.id.data_push_up_task);
         push_up_task=(Toolbar)findViewById(R.id.Push_up_task_app_bar);
-        push_up_task.setTitle("伏地挺身每週任務");
+        push_up_task.setTitle("深蹲每週任務");
         push_up_task.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         push_up_task.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

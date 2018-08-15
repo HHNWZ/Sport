@@ -431,8 +431,8 @@ public class  MainActivity extends AppCompatActivity
             ArrayList<PieChartBean> lists = new ArrayList<>();
             lists.add(new PieChartBean(Color.parseColor("#38b048"), 50, "跑步"));//rundata
             lists.add(new PieChartBean(Color.parseColor("#189428"), 60, "走路"));//walkdata
-            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 80, "有氧"));//airdata
-            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 120, "扶地挺身"));//pushdata
+            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 80, "瑜伽"));//airdata
+            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 120, "深蹲"));//pushdata
             lists.add(new PieChartBean(Color.parseColor("#2c618a"), 140, "仰臥起坐"));//sitdata
             pieView.setData(lists);
 

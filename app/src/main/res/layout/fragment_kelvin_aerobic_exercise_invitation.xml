@@ -26,7 +26,7 @@
             android:layout_below="@+id/aerobic_exercise_bar"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
-            android:text="有氧運動執行時間:"
+            android:text="瑜伽運動執行時間:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 

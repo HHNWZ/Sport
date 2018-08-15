@@ -15,6 +15,12 @@ import android.widget.TextView;
 import com.example.a888888888.sport.BackHandlerHelper;
 import com.example.a888888888.sport.FragmentBackHandler;
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,6 +57,8 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
     private int dataType = DEFAULT_DATA;
     public String pTime;
     public Button button_of_task_execution,button_of_sports_monitoring;
+    private static DatabaseReference mDatabase;
+    private static FirebaseAuth mAuth;
 
     public KelvinPushUpFragment() {
         // Required empty public constructor////
@@ -61,6 +69,8 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         View rootView= inflater.inflate(R.layout.fragment_kelvin_exercise, container, false);
         TextView text_View_of_exercise_title=(TextView)rootView.findViewById(R.id.exercise_title);
         TextView text_view_of_today_record_data=(TextView)rootView.findViewById(R.id.text_view_of_today_record_data);
@@ -70,12 +80,55 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
         TextView text_view_of_lowest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_lowest_record_unit) ;
         TextView text_view_of_highest_record_unit=(TextView)rootView.findViewById(R.id.text_view_of_highest_record_unit);
         text_View_of_exercise_title.setText("深蹲身個人記錄");
-        text_view_of_today_record_data.setText("10");
-        text_view_of_highest_record_data.setText("15");
-        text_view_of_lowest_record_data.setText("5");
+        //text_view_of_today_record_data.setText("10");
+        //text_view_of_highest_record_data.setText("15");
+        //text_view_of_lowest_record_data.setText("5");
         text_view_of_today_record_unit.setText("次");
         text_view_of_lowest_record_unit.setText("次");
-        text_view_of_highest_record_unit.setText("次");/////
+        text_view_of_highest_record_unit.setText("次");
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String DataIdcheck=dataSnapshot.child("exercise").child("squats").child("DataIdcheck").getValue().toString();
+                String big_count=dataSnapshot.child("exercise_count").child("squats").child("big_count").getValue().toString();
+                String small_count=dataSnapshot.child("exercise_count").child("squats").child("small_count").getValue().toString();
+                String count=dataSnapshot.child("exercise_count").child("squats").child("count").getValue().toString();
+                String today_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
+                String all_count=dataSnapshot.child("exercise_count").child("squats").child("all_count").getValue().toString();
+                String dataId=dataSnapshot.child("exercise").child("squats").child("dataId").getValue().toString();
+
+                int count1=Integer.parseInt(count);
+                int today_count1=Integer.parseInt(today_count);
+                int all_count1=Integer.parseInt(all_count);
+                //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                if(DataIdcheck.equals(dataId)){
+                    //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                }else {
+                    //Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
+                    today_count1=today_count1+count1;
+                    all_count1=all_count1+count1;
+
+                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(today_count1);
+                    mDatabase.child("exercise_count").child("squats").child("all_count").setValue(all_count1);
+                    mDatabase.child("exercise").child("squats").child("DataIdcheck").setValue(dataId);
+                }
+
+
+                text_view_of_highest_record_data.setText(big_count);
+                text_view_of_lowest_record_data.setText(small_count);
+                text_view_of_today_record_data.setText(""+today_count1);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         final Button button_of_invitation=(Button)rootView.findViewById(R.id.button_of_invitation);
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override

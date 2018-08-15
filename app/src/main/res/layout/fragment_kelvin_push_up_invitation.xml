@@ -25,7 +25,7 @@
             android:layout_below="@+id/push_up_Toolbar"
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
-            android:text="伏地挺身次數:"
+            android:text="深蹲次數:"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 

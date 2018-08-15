@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
-        android:text="做伏地挺身"
+        android:text="做深蹲"
         android:textSize="30sp"
         tools:textColor="@android:color/black" />
 
