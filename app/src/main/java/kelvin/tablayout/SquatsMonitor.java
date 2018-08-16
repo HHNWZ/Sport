@@ -200,46 +200,57 @@ public class SquatsMonitor extends AppCompatActivity {
                     Time.getTime(squats_start_time)
             );
 
-            mDatabase.child("exercise_count").child("squats").child("count").setValue(squats_count);
-            mDatabase.child("exercise").child("squats").child("dataId").setValue(squats_UUID);
+
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String big_count=dataSnapshot.child("exercise_count").child("squats").child("big_count").getValue().toString();
-                    String small_time=dataSnapshot.child("exercise_count").child("squats").child("small_count").getValue().toString();
+                    String small_count=dataSnapshot.child("exercise_count").child("squats").child("small_count").getValue().toString();
+                    String today_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
+                    String all_count=dataSnapshot.child("exercise_count").child("squats").child("all_count").getValue().toString();
+                    String week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise").child("squats").child("DataIdcheck").getValue().toString();
+
                     int bigCount=Integer.parseInt(big_count);
-                    int smallCount=Integer.parseInt(small_time);
+                    int smallCount=Integer.parseInt(small_count);
+                    int today_count1=Integer.parseInt(today_count);
+                    int all_count1=Integer.parseInt(all_count);
+                    int week_record1=Integer.parseInt(week_record);
                     if(squats_count>bigCount){
                         mDatabase.child("exercise_count").child("squats").child("big_count").setValue(squats_count);
-                        Log.i("追踪1","新的距離大於最長距離");
+
                         if(smallCount==0){
                             mDatabase.child("exercise_count").child("squats").child("small_count").setValue(bigCount);
-                            Log.i("追踪2longDistance",""+bigCount);
-                            Log.i("追踪3shortDistance",""+smallCount);
+
                         }else if(smallCount!=0&&bigCount<smallCount){
                             mDatabase.child("exercise_count").child("squats").child("small_count").setValue(bigCount);
-                            Log.i("追踪4longDistance",""+bigCount);
-                            Log.i("追踪5shortDistance",""+smallCount);
+
                         }
                     }else if(squats_count<bigCount){
-                        Log.i("追踪6","新的距離小於最短距離");
+
                         if(smallCount==0){
                             mDatabase.child("exercise_count").child("squats").child("small_count").setValue(squats_count);
-                            Log.i("追踪7longDistance",""+bigCount);
-                            Log.i("追踪8shortDistance",""+smallCount);
+
                         }else if(smallCount!=0&&squats_count<smallCount){
                             mDatabase.child("exercise_count").child("squats").child("small_count").setValue(squats_count);
-                            Log.i("追踪9longDistance",""+bigCount);
-                            Log.i("追踪10shortDistance",""+smallCount);
+
                         }
                     }
 
-                    //Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
+                    if(DataIdcheck.equals(squats_UUID)){
 
+                    }else {
+                        today_count1=today_count1+squats_count;
+                        all_count1=all_count1+squats_count;
+                        week_record1=week_record1+squats_count;
 
-
-
-
+                        mDatabase.child("exercise_count").child("squats").child("today_count").setValue(today_count1);
+                        mDatabase.child("exercise_count").child("squats").child("all_count").setValue(all_count1);
+                        mDatabase.child("exercise").child("squats").child("DataIdcheck").setValue(squats_UUID);
+                        mDatabase.child("exercise_count").child("squats").child("week_record").setValue(week_record1);
+                        mDatabase.child("exercise_count").child("squats").child("count").setValue(squats_count);
+                        mDatabase.child("exercise").child("squats").child("dataId").setValue(squats_UUID);
+                    }
                 }
 
                 @Override

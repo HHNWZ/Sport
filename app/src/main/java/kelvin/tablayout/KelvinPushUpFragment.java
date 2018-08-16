@@ -90,41 +90,12 @@ public class KelvinPushUpFragment extends Fragment implements FragmentBackHandle
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String DataIdcheck=dataSnapshot.child("exercise").child("squats").child("DataIdcheck").getValue().toString();
                 String big_count=dataSnapshot.child("exercise_count").child("squats").child("big_count").getValue().toString();
                 String small_count=dataSnapshot.child("exercise_count").child("squats").child("small_count").getValue().toString();
-                String count=dataSnapshot.child("exercise_count").child("squats").child("count").getValue().toString();
                 String today_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
-                String all_count=dataSnapshot.child("exercise_count").child("squats").child("all_count").getValue().toString();
-                String dataId=dataSnapshot.child("exercise").child("squats").child("dataId").getValue().toString();
-                String week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
-
-                int count1=Integer.parseInt(count);
-                int today_count1=Integer.parseInt(today_count);
-                int all_count1=Integer.parseInt(all_count);
-                int week_record1=Integer.parseInt(week_record);
-
-                //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-                if(DataIdcheck.equals(dataId)){
-                    //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-                }else {
-                    //Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-                    today_count1=today_count1+count1;
-                    all_count1=all_count1+count1;
-                    week_record1=week_record1+count1;
-
-                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(today_count1);
-                    mDatabase.child("exercise_count").child("squats").child("all_count").setValue(all_count1);
-                    mDatabase.child("exercise").child("squats").child("DataIdcheck").setValue(dataId);
-                    mDatabase.child("exercise_count").child("squats").child("week_record").setValue(week_record1);
-                }
-
-
                 text_view_of_highest_record_data.setText(big_count);
                 text_view_of_lowest_record_data.setText(small_count);
-                text_view_of_today_record_data.setText(""+today_count1);
+                text_view_of_today_record_data.setText(today_count);
 
             }
 

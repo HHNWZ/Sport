@@ -90,42 +90,18 @@ public class KelvinAerobicExerciseFragment extends Fragment implements FragmentB
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String DataIdcheck=dataSnapshot.child("exercise").child("yoga").child("DataIdcheck").getValue().toString();
-                String long_distance=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
-                String short_distance=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
-                String distance=dataSnapshot.child("exercise_count").child("yoga").child("time").getValue().toString();
-                String today_record=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
-                String all_record=dataSnapshot.child("exercise_count").child("yoga").child("all_time").getValue().toString();
-                String dataId=dataSnapshot.child("exercise").child("yoga").child("dataId").getValue().toString();
-                String week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
 
-                long distance1=Long.parseLong(distance);
-                long today_record1=Long.parseLong(today_record);
-                long all_record1=Long.parseLong(all_record);
-                long week_record1=Long.parseLong(week_record);
-                //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-                if(DataIdcheck.equals(dataId)){
-                    //Toast.makeText(getContext(), "DataIdcheck=dataID", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-                }else {
-                    //Toast.makeText(getContext(), "DataIdcheck!=dataID", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getContext(), "DataIdcheck"+DataIdcheck, Toast.LENGTH_SHORT).show();
-                    today_record1=today_record1+distance1;
-                    all_record1=all_record1+distance1;
-                    week_record1=week_record1+distance1;
+                String long_time=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
+                String short_time=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
+                String today_time=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
 
-                    mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(today_record1);
-                    mDatabase.child("exercise_count").child("yoga").child("all_time").setValue(all_record1);
-                    mDatabase.child("exercise_count").child("yoga").child("week_record").setValue(week_record1);
+                long today_time1=Long.parseLong(today_time);
+                long long_time1=Long.parseLong(long_time);
+                long short_time1=Long.parseLong(short_time);
 
-                    mDatabase.child("exercise").child("yoga").child("DataIdcheck").setValue(dataId);
-                }
-                DecimalFormat df = new DecimalFormat("0.00");
-                long longDistance=Long.parseLong(long_distance);
-                long shortDistance=Long.parseLong(short_distance);
-                text_view_of_highest_record_data.setText(""+Time.changeYogaTime(longDistance));
-                text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(shortDistance));
-                text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_record1));
+                text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
+                text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(short_time1));
+                text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_time1));
 
             }
 

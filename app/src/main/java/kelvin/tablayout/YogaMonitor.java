@@ -197,15 +197,21 @@ public class YogaMonitor extends AppCompatActivity {
                     Time.getTime(yoga_start_time)
                     );
 
-            mDatabase.child("exercise_count").child("yoga").child("time").setValue(yoga_duration);
-            mDatabase.child("exercise").child("yoga").child("dataId").setValue(yoga_UUID);
+
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String long_time=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
                     String short_time=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
+                    String today_time=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
+                    String all_time=dataSnapshot.child("exercise_count").child("yoga").child("all_time").getValue().toString();
+                    String week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise").child("yoga").child("DataIdcheck").getValue().toString();
                     long longTime=Long.parseLong(long_time);
                     long shortTime=Long.parseLong(short_time);
+                    long todayTime=Long.parseLong(today_time);
+                    long allTime=Long.parseLong(all_time);
+                    long weekRecord=Long.parseLong(week_record);
                     if(yoga_duration>longTime){
                         mDatabase.child("exercise_count").child("yoga").child("long_time").setValue(yoga_duration);
                         Log.i("追踪1","新的距離大於最長距離");
@@ -231,7 +237,20 @@ public class YogaMonitor extends AppCompatActivity {
                         }
                     }
 
-                    //Toast.makeText(Walking_monitor.this, ""+UnitConversion.get_kilometer(walking_distance), Toast.LENGTH_SHORT).show();
+                    if(DataIdcheck.equals(yoga_UUID)){
+
+                    }else {
+                        todayTime=todayTime+yoga_duration;
+                        allTime=allTime+yoga_duration;
+                        weekRecord=weekRecord+yoga_duration;
+
+                        mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(todayTime);
+                        mDatabase.child("exercise_count").child("yoga").child("all_time").setValue(allTime);
+                        mDatabase.child("exercise").child("yoga").child("DataIdcheck").setValue(yoga_UUID);
+                        mDatabase.child("exercise_count").child("yoga").child("week_record").setValue(weekRecord);
+                        mDatabase.child("exercise_count").child("yoga").child("time").setValue(yoga_duration);
+                        mDatabase.child("exercise").child("yoga").child("dataId").setValue(yoga_UUID);
+                    }
 
 
 

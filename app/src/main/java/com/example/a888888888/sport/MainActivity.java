@@ -472,7 +472,7 @@ public class  MainActivity extends AppCompatActivity
 
                     textView6.setText(""+running_week_record_float+"公里");
                     textView7.setText(""+walking_week_record_float+"公里");
-                    textView8.setText(""+Float.parseFloat(df.format(Time.yogaWeekminute(yoga_week_record_long)))+"分鐘");
+                    textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
                     textView10.setText(""+squats_week_record+"次");
                     textView9.setText(""+crunches_week_record+"次");
 

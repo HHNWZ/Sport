@@ -28,6 +28,7 @@ import com.samsung.android.sdk.healthdata.HealthDataStore;
 import com.samsung.android.sdk.healthdata.HealthPermissionManager;
 import com.samsung.android.sdk.healthdata.HealthResultHolder;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Map;
@@ -223,15 +224,22 @@ public class RunningMonitor extends AppCompatActivity {
                     Time.getToDate(running_start_time),
                     Time.getTime(running_start_time)
             );
-            mDatabase.child("exercise_count").child("running").child("distance").setValue(UnitConversion.get_kilometer(running_distance));
-            mDatabase.child("exercise").child("running").child("dataId").setValue(running_UUID);
+
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String long_distance=dataSnapshot.child("exercise_count").child("running").child("long_distance").getValue().toString();
                     String short_distance=dataSnapshot.child("exercise_count").child("running").child("short_distance").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise").child("running").child("DataIdcheck").getValue().toString();
+                    String today_record=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
+                    String all_record=dataSnapshot.child("exercise_count").child("running").child("all_record").getValue().toString();
+                    String week_record=dataSnapshot.child("exercise_count").child("running").child("week_record").getValue().toString();
+
                     double longDistance=Double.parseDouble(long_distance);
                     double shortDistance=Double.parseDouble(short_distance);
+                    double today_record1=Double.parseDouble(today_record);
+                    double all_record1=Double.parseDouble(all_record);
+                    double week_record1=Double.parseDouble(week_record);
                     if(UnitConversion.get_kilometer(running_distance)>longDistance){
                         mDatabase.child("exercise_count").child("running").child("long_distance").setValue(UnitConversion.get_kilometer(running_distance));
                         Log.i("追踪1","新的距離大於最長距離");
@@ -256,6 +264,26 @@ public class RunningMonitor extends AppCompatActivity {
                             Log.i("追踪10shortDistance",""+shortDistance);
                         }
                     }
+
+                    if(DataIdcheck.equals(running_UUID)){
+
+                    }else {
+
+                        today_record1=today_record1+UnitConversion.get_kilometer(running_distance);
+                        all_record1=all_record1+UnitConversion.get_kilometer(running_distance);
+                        week_record1=week_record1+UnitConversion.get_kilometer(running_distance);
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        mDatabase.child("exercise_count").child("running").child("today_record").setValue(df.format(today_record1));
+                        mDatabase.child("exercise_count").child("running").child("all_record").setValue(df.format(all_record1));
+                        mDatabase.child("exercise_count").child("running").child("week_record").setValue(df.format(week_record1));
+                        mDatabase.child("exercise").child("running").child("DataIdcheck").setValue(running_UUID);
+                        mDatabase.child("exercise_count").child("running").child("distance").setValue(UnitConversion.get_kilometer(running_distance));
+                        mDatabase.child("exercise").child("running").child("dataId").setValue(running_UUID);
+
+
+                    }
+
+
 
 
 
