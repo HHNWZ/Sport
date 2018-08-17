@@ -392,51 +392,6 @@ public class  MainActivity extends AppCompatActivity
                     String user_image = dataSnapshot.child("thumb_image").getValue().toString();
 
                     username.setText(user_name);
-
-                    //OneSignal.deleteTag("User_Device_Token");
-                    //onesignal_email= device_token;
-                    //OneSignal.sendTag("User_Device_Token",onesignal_email);
-                    //Toast.makeText(MainActivity.this, onesignal_email, Toast.LENGTH_SHORT).show();
-                    Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-            Log.i("數據crunches_week_record2",""+crunches_week_record);
-
-
-
-        }else {
-            menu_email_login.setVisible(true);
-            menu_email_register.setVisible(true);
-            menu_chat_room.setVisible(false);
-            menu_setting_account.setVisible(false);
-            menu_Logout.setVisible(false);
-            kel.setVisibility(View.INVISIBLE);
-
-        }
-
-
-        navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
-            //下拉更新
-            mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-            mSwipeLayout.setOnRefreshListener(this);
-            mSwipeLayout.setColorSchemeColors(Color.RED);
-
-            //圓餅圖
-        /*if(Login.user != null) {
-            frun = Float.parseFloat(rundata.getText().toString());
-            fwalk = Float.parseFloat(walkdata.getText().toString());
-            fair = Float.parseFloat(airdata.getText().toString());
-            fpush = Float.parseFloat(pushdata.getText().toString());
-            fsit = Float.parseFloat(sitdata.getText().toString());
-        }*/
-            mUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
                     crunches_week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
                     String running_week_record=dataSnapshot.child("exercise_count").child("running").child("week_record").getValue().toString();
                     String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
@@ -479,9 +434,11 @@ public class  MainActivity extends AppCompatActivity
                     textView10.setText(""+squats_week_record+"次");
                     textView9.setText(""+crunches_week_record+"次");
 
-
-
-
+                    //OneSignal.deleteTag("User_Device_Token");
+                    //onesignal_email= device_token;
+                    //OneSignal.sendTag("User_Device_Token",onesignal_email);
+                    //Toast.makeText(MainActivity.this, onesignal_email, Toast.LENGTH_SHORT).show();
+                    Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                 }
 
                 @Override
@@ -489,6 +446,36 @@ public class  MainActivity extends AppCompatActivity
 
                 }
             });
+            Log.i("數據crunches_week_record2",""+crunches_week_record);
+
+
+
+        }else {
+            menu_email_login.setVisible(true);
+            menu_email_register.setVisible(true);
+            menu_chat_room.setVisible(false);
+            menu_setting_account.setVisible(false);
+            menu_Logout.setVisible(false);
+            kel.setVisibility(View.INVISIBLE);
+
+        }
+
+
+        navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
+            //下拉更新
+            mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+            mSwipeLayout.setOnRefreshListener(this);
+            mSwipeLayout.setColorSchemeColors(Color.RED);
+
+            //圓餅圖
+        /*if(Login.user != null) {
+            frun = Float.parseFloat(rundata.getText().toString());
+            fwalk = Float.parseFloat(walkdata.getText().toString());
+            fair = Float.parseFloat(airdata.getText().toString());
+            fpush = Float.parseFloat(pushdata.getText().toString());
+            fsit = Float.parseFloat(sitdata.getText().toString());
+        }*/
+
         Log.i("數據crunches_week_record3",""+crunches_week_record);
 
 
