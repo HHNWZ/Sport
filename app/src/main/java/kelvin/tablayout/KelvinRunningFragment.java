@@ -188,7 +188,7 @@ public class KelvinRunningFragment extends Fragment implements FragmentBackHandl
 
     private void generateDefaultData() {
         int numSubcolumns = 1;
-        int numColumns = 100;
+        int numColumns = 5;
         // Column can have many subcolumns, here by default I use 1 subcolumn in each of 8 columns.
         List<Column> columns = new ArrayList<Column>();
         List<SubcolumnValue> values;

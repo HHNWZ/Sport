@@ -36,6 +36,7 @@ public class MainActivityFireBase extends AppCompatActivity {
         setContentView(R.layout.activity_main_fire_base);
 
         mAuth = FirebaseAuth.getInstance();
+        mUserRef=FirebaseDatabase.getInstance().getReference();
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         mToolbar.setTitle("運動聊天室");

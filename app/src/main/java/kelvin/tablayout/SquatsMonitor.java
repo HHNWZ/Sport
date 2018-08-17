@@ -56,7 +56,7 @@ public class SquatsMonitor extends AppCompatActivity {
         squats_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(SquatsMonitor.this,kelvin_tab_layout.class);
+                Intent intent =new Intent(SquatsMonitor.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -209,7 +209,7 @@ public class SquatsMonitor extends AppCompatActivity {
                     String today_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
                     String all_count=dataSnapshot.child("exercise_count").child("squats").child("all_count").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
-                    String DataIdcheck=dataSnapshot.child("exercise").child("squats").child("DataIdcheck").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise_count").child("squats").child("DataIdcheck").getValue().toString();
 
                     int bigCount=Integer.parseInt(big_count);
                     int smallCount=Integer.parseInt(small_count);
@@ -246,10 +246,10 @@ public class SquatsMonitor extends AppCompatActivity {
 
                         mDatabase.child("exercise_count").child("squats").child("today_count").setValue(today_count1);
                         mDatabase.child("exercise_count").child("squats").child("all_count").setValue(all_count1);
-                        mDatabase.child("exercise").child("squats").child("DataIdcheck").setValue(squats_UUID);
+                        mDatabase.child("exercise_count").child("squats").child("DataIdcheck").setValue(squats_UUID);
                         mDatabase.child("exercise_count").child("squats").child("week_record").setValue(week_record1);
                         mDatabase.child("exercise_count").child("squats").child("count").setValue(squats_count);
-                        mDatabase.child("exercise").child("squats").child("dataId").setValue(squats_UUID);
+                        mDatabase.child("squats_all_count").setValue(all_count1);
                     }
                 }
 

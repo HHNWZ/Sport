@@ -74,6 +74,8 @@ public class RequestsFragment extends Fragment {
                 newUsersViewHolder.setDisplayName(users.getName());
                 newUsersViewHolder.setUserStatus(users.getStatus());
                 newUsersViewHolder.setUserImage(users.getThumb_image(), getContext());
+                //newUsersViewHolder.setCrunchesAllCount(users.getCrunches_all_count());
+
 
                 final String user_id = getRef(position).getKey();
 
@@ -126,6 +128,12 @@ public class RequestsFragment extends Fragment {
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+
+        }
+
+        public void setCrunchesAllCount(int crunches_all_count){
+            TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
+            crunches_all_count_view.setText(""+crunches_all_count);
 
         }
 

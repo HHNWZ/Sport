@@ -15,11 +15,7 @@ import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 public class kelvin_tab_layout extends AppCompatActivity
-        implements kelvin_running_invitation.OnFragmentInteractionListener,kelvin_walking_invitation.OnFragmentInteractionListener,
-        kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
-        kelvin_push_up_invitation.OnFragmentInteractionListener,
-        kelvin_sit_up_invitation.OnFragmentInteractionListener,
-        FriendsFragment2.OnFragmentInteractionListener
+
 
 {
 
@@ -74,10 +70,7 @@ public class kelvin_tab_layout extends AppCompatActivity
         }
     }
 
-    @Override
-    public void onFragmentInteraction(String Tag, String number) {
 
-    }
 
 
 

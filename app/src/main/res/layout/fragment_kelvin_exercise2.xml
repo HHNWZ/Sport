@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/LinearLayout_of_record"
 
-        android:layout_toEndOf="@+id/exercise_title"
+        android:layout_toStartOf="@+id/exercise_title"
         android:layout_weight="1"
         android:text="0時0分0秒"
         android:textColor="#323d4d"
@@ -113,9 +113,9 @@
         android:id="@+id/text_view_of_highest_record_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LinearLayout_of_record"
 
-        android:layout_toStartOf="@+id/exercise_title"
+        android:layout_below="@+id/LinearLayout_of_record"
+        android:layout_toEndOf="@+id/exercise_title"
         android:layout_weight="1"
         android:text="0時0分0秒"
         android:textColor="#323d4d"

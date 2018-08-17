@@ -57,7 +57,7 @@ public class YogaMonitor extends AppCompatActivity {
         yoga_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(YogaMonitor.this,kelvin_tab_layout.class);
+                Intent intent =new Intent(YogaMonitor.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -206,7 +206,7 @@ public class YogaMonitor extends AppCompatActivity {
                     String today_time=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
                     String all_time=dataSnapshot.child("exercise_count").child("yoga").child("all_time").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
-                    String DataIdcheck=dataSnapshot.child("exercise").child("yoga").child("DataIdcheck").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise_count").child("yoga").child("DataIdcheck").getValue().toString();
                     long longTime=Long.parseLong(long_time);
                     long shortTime=Long.parseLong(short_time);
                     long todayTime=Long.parseLong(today_time);
@@ -246,10 +246,11 @@ public class YogaMonitor extends AppCompatActivity {
 
                         mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(todayTime);
                         mDatabase.child("exercise_count").child("yoga").child("all_time").setValue(allTime);
-                        mDatabase.child("exercise").child("yoga").child("DataIdcheck").setValue(yoga_UUID);
+                        mDatabase.child("exercise_count").child("yoga").child("DataIdcheck").setValue(yoga_UUID);
                         mDatabase.child("exercise_count").child("yoga").child("week_record").setValue(weekRecord);
                         mDatabase.child("exercise_count").child("yoga").child("time").setValue(yoga_duration);
-                        mDatabase.child("exercise").child("yoga").child("dataId").setValue(yoga_UUID);
+                        mDatabase.child("yoga_all_count").setValue(allTime);
+
                     }
 
 

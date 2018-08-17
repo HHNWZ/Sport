@@ -58,7 +58,7 @@ public class CrunchesMonitor extends AppCompatActivity {
         crunches_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(CrunchesMonitor.this,kelvin_tab_layout.class);
+                Intent intent =new Intent(CrunchesMonitor.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -204,8 +204,7 @@ public class CrunchesMonitor extends AppCompatActivity {
                     Time.getTime(crunches_start_time)
             );
 
-            mDatabase.child("exercise_count").child("crunches").child("count").setValue(crunches_count);
-            mDatabase.child("exercise").child("crunches").child("dataId").setValue(crunches_UUID);
+
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -214,7 +213,7 @@ public class CrunchesMonitor extends AppCompatActivity {
                     String today_count=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
                     String all_count=dataSnapshot.child("exercise_count").child("crunches").child("all_count").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
-                    String DataIdcheck=dataSnapshot.child("exercise").child("crunches").child("DataIdcheck").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise_count").child("crunches").child("DataIdcheck").getValue().toString();
                     int bigCount=Integer.parseInt(big_count);
                     int smallCount=Integer.parseInt(small_count);
                     int today_count1=Integer.parseInt(today_count);
@@ -253,10 +252,11 @@ public class CrunchesMonitor extends AppCompatActivity {
 
                         mDatabase.child("exercise_count").child("crunches").child("today_count").setValue(today_count1);
                         mDatabase.child("exercise_count").child("crunches").child("all_count").setValue(all_count1);
-                        mDatabase.child("exercise").child("crunches").child("DataIdcheck").setValue(crunches_UUID);
+                        mDatabase.child("exercise_count").child("crunches").child("DataIdcheck").setValue(crunches_UUID);
                         mDatabase.child("exercise_count").child("crunches").child("week_record").setValue(week_record1);
                         mDatabase.child("exercise_count").child("crunches").child("count").setValue(crunches_count);
-                        mDatabase.child("exercise").child("crunches").child("dataId").setValue(crunches_count);
+                        mDatabase.child("crunches_all_count").setValue(all_count1);
+
                     }
 
 

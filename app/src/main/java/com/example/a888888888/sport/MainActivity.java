@@ -72,6 +72,7 @@ import java.util.Timer;
 
 import kelvin.tablayout.Aerobic_exercise_task;
 import kelvin.tablayout.ChatActivity;
+import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.ProfileActivity;
@@ -141,6 +142,7 @@ public class  MainActivity extends AppCompatActivity
     private static Context context;
     public Date dt2=null;
     public Button kel,hal,del,over,sport;
+    private static String crunches_week_record;
 
 
 
@@ -313,7 +315,7 @@ public class  MainActivity extends AppCompatActivity
         String clear=null;
         String date=null;
         Date firstTime=null;
-        clear=y+"/"+m+"/"+d+" 11:59:00";
+        clear=y+"/"+m+"/"+d+" 23:59:00";
         //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
         SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
@@ -375,7 +377,7 @@ public class  MainActivity extends AppCompatActivity
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
 
-
+            Log.i("數據crunches_week_record1",""+crunches_week_record);
             timer.schedule(new TimerTaskTest(), firstTime);
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
@@ -403,6 +405,7 @@ public class  MainActivity extends AppCompatActivity
 
                 }
             });
+            Log.i("數據crunches_week_record2",""+crunches_week_record);
 
 
 
@@ -434,12 +437,12 @@ public class  MainActivity extends AppCompatActivity
             mUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    String crunches_week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
+                    crunches_week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
                     String running_week_record=dataSnapshot.child("exercise_count").child("running").child("week_record").getValue().toString();
                     String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
                     String walking_week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
                     String yoga_week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
-
+                    Log.i("數據crunches_week_record",""+crunches_week_record);
                     float crunches_week_record_float=Float.parseFloat(crunches_week_record);
                     float running_week_record_float=Float.parseFloat(running_week_record);
                     float squats_week_record_float=Float.parseFloat(squats_week_record);
@@ -486,6 +489,7 @@ public class  MainActivity extends AppCompatActivity
 
                 }
             });
+        Log.i("數據crunches_week_record3",""+crunches_week_record);
 
 
         //食物列表
@@ -523,7 +527,7 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 if(true) {
                     Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, kelvin_tab_layout.class);
+                    intent.setClass(MainActivity.this, Exercise_main.class);
                     startActivity(intent);
                     MainActivity.this.finish();
                 }

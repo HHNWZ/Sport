@@ -67,7 +67,7 @@ public class Walking_monitor extends AppCompatActivity {
         walking_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Walking_monitor.this,kelvin_tab_layout.class);
+                Intent intent = new Intent(Walking_monitor.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -248,7 +248,7 @@ public class Walking_monitor extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String long_distance=dataSnapshot.child("exercise_count").child("walking").child("long_distance").getValue().toString();
                     String short_distance=dataSnapshot.child("exercise_count").child("walking").child("short_distance").getValue().toString();
-                    String DataIdcheck=dataSnapshot.child("exercise").child("walking").child("DataIdcheck").getValue().toString();
+                    String DataIdcheck=dataSnapshot.child("exercise_count").child("walking").child("DataIdcheck").getValue().toString();
                     String today_record=dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
                     String all_record=dataSnapshot.child("exercise_count").child("walking").child("all_record").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
@@ -293,9 +293,9 @@ public class Walking_monitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("walking").child("today_record").setValue(df.format(today_record1));
                         mDatabase.child("exercise_count").child("walking").child("all_record").setValue(df.format(all_record1));
                         mDatabase.child("exercise_count").child("walking").child("week_record").setValue(df.format(week_record1));
-                        mDatabase.child("exercise").child("walking").child("DataIdcheck").setValue(walking_UUID);
+                        mDatabase.child("exercise_count").child("walking").child("DataIdcheck").setValue(walking_UUID);
                         mDatabase.child("exercise_count").child("walking").child("distance").setValue(UnitConversion.get_kilometer(walking_distance));
-                        mDatabase.child("exercise").child("walking").child("dataId").setValue(walking_UUID);
+                        mDatabase.child("walking_all_count").setValue(all_record1);
 
 
                     }

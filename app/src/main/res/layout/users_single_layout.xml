@@ -44,4 +44,12 @@
         android:visibility="invisible"
         app:srcCompat="@drawable/online_icon" />
 
+    <TextView
+        android:id="@+id/crunches_all_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_single_status"
+        android:layout_toEndOf="@+id/user_single_status"
+        android:text="" />
+
 </RelativeLayout>
