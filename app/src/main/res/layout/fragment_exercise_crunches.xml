@@ -93,7 +93,7 @@
                     android:layout_column="0"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="1000"
+                    android:text="0"
                     android:textColor="#73c4d9"
                     android:textSize="40dp"
 
@@ -106,7 +106,7 @@
                     android:layout_weight="1"
                     android:layout_column="1"
                     android:gravity="center"
-                    android:text="1000"
+                    android:text="0"
                     android:textColor="#73c4d9"
                     android:textSize="40dp" />
 
@@ -117,7 +117,7 @@
                     android:layout_column="2"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="1000"
+                    android:text="0"
                     android:textColor="#73c4d9"
                     android:textSize="40dp" />
             </TableRow>

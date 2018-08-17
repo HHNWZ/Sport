@@ -35,6 +35,8 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM3 = "param3";
+
 
     public static final int start_time_data_of_sit_up_invitation =1;
     public static final int start_date_data_of_sit_up_invitation =2;
@@ -75,10 +77,12 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
     public InputMethodManager imm_of_sit_up_invitation;
     public Button button_of_sit_up_social_media_friends;
     private Toolbar sit_up_Toolbar;
+    public TextView text_of_exercise,text_of_exercise_unit;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String text_of_exerciseString;
+    private String text_of_exercise_unitString;
+    private String text_of_ToolbarTitle;
 
     private OnFragmentInteractionListener mListener;
 
@@ -95,11 +99,12 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
      * @return A new instance of fragment kelvin_sit_up_invitation.
      */
     // TODO: Rename and change types and number of parameters
-    public static kelvin_sit_up_invitation newInstance(String param1, String param2) {
+    public static kelvin_sit_up_invitation newInstance(String param1, String param2,String param3) {
         kelvin_sit_up_invitation fragment = new kelvin_sit_up_invitation();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM3, param3);
         fragment.setArguments(args);
         return fragment;
     }
@@ -108,8 +113,9 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            text_of_ToolbarTitle = getArguments().getString(ARG_PARAM1);
+            text_of_exerciseString = getArguments().getString(ARG_PARAM2);
+            text_of_exercise_unitString=getArguments().getString(ARG_PARAM3);
         }
     }
 
@@ -120,7 +126,7 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
         final View view = inflater.inflate(R.layout.fragment_kelvin_sit_up_invitation, null);
         view.setOnTouchListener(this);
         sit_up_Toolbar=(Toolbar)view.findViewById(R.id.sit_up_Toolbar);
-        sit_up_Toolbar.setTitle("仰臥起坐邀請內容");
+        sit_up_Toolbar.setTitle(text_of_ToolbarTitle);
         sit_up_Toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         sit_up_Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +135,10 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
             }
         });
 
-
+        text_of_exercise=(TextView)view.findViewById(R.id.text_of_exercise);
+        text_of_exercise_unit=(TextView)view.findViewById(R.id.text_of_exercise_unit);
+        text_of_exercise.setText(text_of_exerciseString);
+        text_of_exercise_unit.setText(text_of_exercise_unitString);
         edit_text_of_sit_up_count =(EditText)view.findViewById(R.id.editText_of_sit_up_count);
         edit_text_of_sit_up_count.requestFocus();
 
@@ -202,21 +211,16 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
                     imm_of_sit_up_invitation.showSoftInput(edit_text_of_sit_up_count, 0);
 
                 }else{
-                    sit_up_count =Integer.parseInt(edit_text_of_sit_up_count.getText().toString());
-                    if(sit_up_count <10|| sit_up_count >50){
-                        toast.makeText(getActivity(), "仰臥起坐的次數不能小於10或大於50", Toast.LENGTH_SHORT).show();
-                        edit_text_of_sit_up_count.setText(" ");
-                        imm_of_sit_up_invitation.showSoftInput(edit_text_of_sit_up_count, 0);
-                    }else{
+
                         if(start_hour_of_kelvin_sit_up_invitation ==null|| start_minute_of_kelvin_sit_up_invitation ==null){
                             toast.makeText(getActivity(), "請選擇時間", Toast.LENGTH_SHORT).show();
                             DialogFragment newFragment = new StartTimeFragment();
                             newFragment.setTargetFragment(kelvin_sit_up_invitation.this, start_time_data_of_sit_up_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("仰臥起坐","次數",edit_text_of_sit_up_count.getText().toString(),"次",start_year_of_kelvin_sit_up_invitation,start_month_of_kelvin_sit_up_invitation,start_day_of_kelvin_sit_up_invitation,start_hour_of_kelvin_sit_up_invitation,start_minute_of_kelvin_sit_up_invitation,end_year_of_kelvin_sit_up_invitation,end_month_of_kelvin_sit_up_invitation,end_day_of_kelvin_sit_up_invitation,end_hour_of_kelvin_sit_up_invitation,end_minute_of_kelvin_sit_up_invitation);
+                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance(text_of_exerciseString,"次數",edit_text_of_sit_up_count.getText().toString(),text_of_exercise_unitString,start_year_of_kelvin_sit_up_invitation,start_month_of_kelvin_sit_up_invitation,start_day_of_kelvin_sit_up_invitation,start_hour_of_kelvin_sit_up_invitation,start_minute_of_kelvin_sit_up_invitation,end_year_of_kelvin_sit_up_invitation,end_month_of_kelvin_sit_up_invitation,end_day_of_kelvin_sit_up_invitation,end_hour_of_kelvin_sit_up_invitation,end_minute_of_kelvin_sit_up_invitation);
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                            transaction.add(R.id.content1_main,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();
                         }
@@ -226,7 +230,7 @@ public class kelvin_sit_up_invitation extends Fragment implements View.OnTouchLi
                     }
                 }
 
-            }
+
 
 
         });

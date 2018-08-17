@@ -214,7 +214,7 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
                         }else{
                             FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("瑜伽運動","時間",edit_text_of_aerobic_exercise_minute.getText().toString(),"分鐘",start_year_of_kelvin_aerobic_exercise_invitation,start_month_of_kelvin_aerobic_exercise_invitation,start_day_of_kelvin_aerobic_exercise_invitation,start_hour_of_kelvin_aerobic_exercise_invitation,start_minute_of_kelvin_aerobic_exercise_invitation,end_year_of_kelvin_aerobic_exercise_invitation,end_month_of_kelvin_aerobic_exercise_invitation,end_day_of_kelvin_aerobic_exercise_invitation,end_hour_of_kelvin_aerobic_exercise_invitation,end_minute_of_kelvin_aerobic_exercise_invitation);
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                            transaction.add(R.id.content1_main,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();
                         }

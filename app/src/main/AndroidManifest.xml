@@ -43,7 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="kelvin.tablayout.kelvin_tab_layout" />
         <activity
             android:name="necowneco.tablayout.habaActivity"
             android:label="@string/title_activity_haba"
@@ -82,11 +81,7 @@
             android:name="com.onesignal.NotificationOpened.DEFAULT"
             android:value="DISABLE" />
 
-        <activity android:name="kelvin.tablayout.Push_up_task" />
-        <activity android:name="kelvin.tablayout.Aerobic_exercise_task" />
-        <activity android:name="kelvin.tablayout.Running_task" />
         <activity android:name="kelvin.tablayout.Sit_up_task" />
-        <activity android:name="kelvin.tablayout.Walking_task" />
         <activity android:name="kelvin.tablayout.Walking_monitor" />
         <activity android:name="kelvin.tablayout.RunningMonitor" />
         <activity android:name="kelvin.tablayout.YogaMonitor" />

@@ -1,17 +1,11 @@
 package com.example.a888888888.sport;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -34,7 +28,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +38,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
-import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
@@ -56,9 +48,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,25 +56,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Timer;
 
-import kelvin.tablayout.Aerobic_exercise_task;
 import kelvin.tablayout.ChatActivity;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.ProfileActivity;
-import kelvin.tablayout.Push_up_task;
 import kelvin.tablayout.RegisterActivity;
-import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
-import kelvin.tablayout.Walking_task;
-import kelvin.tablayout.Week;
-import kelvin.tablayout.kelvin_tab_layout;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
@@ -849,28 +831,43 @@ public class  MainActivity extends AppCompatActivity
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Aerobic_exercise_task")){
-                    Intent intent = new Intent(getApplicationContext(), Aerobic_exercise_task.class);
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Yoga_task")){
+                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","瑜伽每週任務");
+                    intent.putExtra("exerciseWeekTitle","做瑜伽");
+                    intent.putExtra("exerciseWeekUnit","分鐘");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Push_up_task")){
-                    Intent intent = new Intent(getApplicationContext(), Push_up_task.class);
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Squats_task")){
+                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","深蹲每週任務");
+                    intent.putExtra("exerciseWeekTitle","做深蹲");
+                    intent.putExtra("exerciseWeekUnit","次");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
-                    Intent intent = new Intent(getApplicationContext(), Running_task.class);
+                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","跑步每週任務");
+                    intent.putExtra("exerciseWeekTitle","去跑步");
+                    intent.putExtra("exerciseWeekUnit","公里");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Sit_up_task")){
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Crunches_task")){
                     Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
+                    intent.putExtra("exerciseWeekTitle","做仰臥起坐");
+                    intent.putExtra("exerciseWeekUnit","次");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
-                    Intent intent = new Intent(getApplicationContext(), Walking_task.class);
+                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","步行每週任務");
+                    intent.putExtra("exerciseWeekTitle","去步行");
+                    intent.putExtra("exerciseWeekUnit","公里");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }

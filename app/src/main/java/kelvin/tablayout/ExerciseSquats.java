@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -83,11 +84,11 @@ public class ExerciseSquats extends Fragment {
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content1_main,new kelvin_push_up_invitation(),null)
-                        .addToBackStack(null)
-                        .commit();
+                kelvin_sit_up_invitation kelvin_sit_up_invitation1=kelvin_sit_up_invitation.newInstance("深蹲邀請內容","做深蹲起坐:","次");
+                FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.add(R.id.content1_main,kelvin_sit_up_invitation1);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
 
         });
@@ -96,7 +97,7 @@ public class ExerciseSquats extends Fragment {
 
 
         button_of_task_execution=(Button)mMainView.findViewById(R.id.button_of_task_execution);
-        if(pTime.equals("五")){
+        if(pTime.equals("四")){
             button_of_task_execution.setVisibility(View.VISIBLE);
         }else{
             button_of_task_execution.setVisibility(View.INVISIBLE);
@@ -104,7 +105,10 @@ public class ExerciseSquats extends Fragment {
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Push_up_task.class);
+                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                intent.putExtra("ToolbarTitle","深蹲每週任務");
+                intent.putExtra("exerciseWeekTitle","做深蹲");
+                intent.putExtra("exerciseWeekUnit","次");
                 startActivity(intent);
 
             }
@@ -179,7 +183,7 @@ public class ExerciseSquats extends Fragment {
 
         public void setCrunchesAllCount(int crunches_all_count){
             TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
-            crunches_all_count_view.setText(""+crunches_all_count);
+            crunches_all_count_view.setText(""+crunches_all_count+"次");
 
         }
 

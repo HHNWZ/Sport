@@ -181,7 +181,7 @@ public class ChatActivity extends AppCompatActivity {
 
         loadMessages();
         if(exercise_data!=null){
-            mChatMessageView.setText(exercise_type+":"+exercise_data+exercise_unit+"\n"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation+"\n"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
+            mChatMessageView.setText(exercise_type+exercise_data+exercise_unit+"\n"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation+"\n"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
         }else {
             mChatMessageView.setText("");
         }

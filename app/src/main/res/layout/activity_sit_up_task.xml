@@ -11,18 +11,18 @@
         layout="@layout/app_bar_layout" />
 
     <TextView
-        android:id="@+id/sit_up_title"
+        android:id="@+id/exercise_week_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
-        android:text="做仰臥起坐"
+        android:text=""
         android:textSize="30sp"
         tools:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/data_sit_up_task"
+        android:id="@+id/exercise_week_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -33,13 +33,13 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/sit_up_unit"
+        android:id="@+id/exercise_week_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="212dp"
-        android:text="次"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="30sp" />
 
