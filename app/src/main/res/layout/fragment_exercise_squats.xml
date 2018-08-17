@@ -32,7 +32,7 @@
             android:id="@+id/TableRowOfExercise_record"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/buttonLinear_squats"
+            android:layout_above="@+id/buttonLinear"
             android:layout_marginBottom="10dp"
             android:layout_alignParentStart="true"
             android:orientation="vertical">
@@ -171,7 +171,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:background="#323d4d"
-            android:id="@+id/buttonLinear_squats">
+            android:id="@+id/buttonLinear">
             <Button
                 android:id="@+id/button_of_sports_monitoring"
                 android:layout_width="wrap_content"

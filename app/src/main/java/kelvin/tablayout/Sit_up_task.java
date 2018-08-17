@@ -35,7 +35,7 @@ public class Sit_up_task extends AppCompatActivity {
         sit_up_task.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Sit_up_task.this,kelvin_tab_layout.class);
+                Intent intent = new Intent(Sit_up_task.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

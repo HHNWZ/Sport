@@ -34,7 +34,7 @@ public class Walking_task extends AppCompatActivity {
         walking_task.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Walking_task.this,kelvin_tab_layout.class);
+                Intent intent = new Intent(Walking_task.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

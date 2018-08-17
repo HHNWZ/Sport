@@ -39,7 +39,7 @@ public class Aerobic_exercise_task extends AppCompatActivity {
         aerobic_exercise_task.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Aerobic_exercise_task.this,kelvin_tab_layout.class);
+                Intent intent = new Intent(Aerobic_exercise_task.this,Exercise_main.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
 
