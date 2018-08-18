@@ -68,6 +68,7 @@ import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
+import kelvin.tablayout.Week;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
@@ -289,6 +290,7 @@ public class  MainActivity extends AppCompatActivity
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
+        Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show();
 
         Calendar cal=Calendar.getInstance();
         int y=cal.get(Calendar.YEAR);
@@ -379,47 +381,72 @@ public class  MainActivity extends AppCompatActivity
                     String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
                     String walking_week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
                     String yoga_week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
-                    Log.i("數據crunches_week_record",""+crunches_week_record);
+                    String DateCheck=dataSnapshot.child("DateCheck").getValue().toString();
+                    String Week= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
+                    String nowDate=Time.getToDate(System.currentTimeMillis());
+                    Log.i("現在是1",DateCheck);
+                    Log.i("現在是",nowDate);
                     float crunches_week_record_float=Float.parseFloat(crunches_week_record);
                     float running_week_record_float=Float.parseFloat(running_week_record);
                     float squats_week_record_float=Float.parseFloat(squats_week_record);
                     float walking_week_record_float=Float.parseFloat(walking_week_record);
-                    //float yoga_week_record_float=Float.parseFloat(yoga_week_record);
-
                     long yoga_week_record_long=Long.parseLong(yoga_week_record);
-                    Log.i("數據1",""+crunches_week_record_float);
-                    Log.i("數據2",""+running_week_record_float);
-                    Log.i("數據3",""+squats_week_record_float);
-                    Log.i("數據4",""+walking_week_record_float);
-                    Log.i("數據5",""+Time.yogaWeekminute(yoga_week_record_long));
-
-
                     pieView = (PieChart_View) findViewById(R.id.pie_view);
                     ArrayList<PieChartBean> lists = new ArrayList<>();
-                    lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, "跑步"));//rundata
-                    lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, "走路"));//walkdata
-                    lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), "瑜伽"));//airdata
-                    lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, "深蹲"));//pushdata
-                    lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, "仰臥起坐"));//sitdata
-                    pieView.setData(lists);
-
                     DecimalFormat df = new DecimalFormat("0.00");
                     TextView textView6=(TextView)findViewById(R.id.textView6);
                     TextView textView7=(TextView)findViewById(R.id.textView7);
                     TextView textView8=(TextView)findViewById(R.id.textView8);
                     TextView textView10=(TextView)findViewById(R.id.textView10);
                     TextView textView9=(TextView)findViewById(R.id.textView9);
+                    if(Week.equals("一")){
+                        if(DateCheck.equals(nowDate)){
+                            lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, "跑步"));//rundata
+                            lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, "走路"));//walkdata
+                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), "瑜伽"));//airdata
+                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, "深蹲"));//pushdata
+                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, "仰臥起坐"));//sitdata
+                            pieView.setData(lists);
+                            textView6.setText(""+running_week_record_float+"公里");
+                            textView7.setText(""+walking_week_record_float+"公里");
+                            textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
+                            textView10.setText(""+squats_week_record+"次");
+                            textView9.setText(""+crunches_week_record+"次");
+                        }else{
+                            lists.add(new PieChartBean(Color.parseColor("#38b048"), 0, "跑步"));//rundata
+                            lists.add(new PieChartBean(Color.parseColor("#189428"), 0, "走路"));//walkdata
+                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 0, "瑜伽"));//airdata
+                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 0, "深蹲"));//pushdata
+                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, "仰臥起坐"));//sitdata
+                            pieView.setData(lists);
+                            textView6.setText("0公里");
+                            textView7.setText("0公里");
+                            textView8.setText("0秒");
+                            textView10.setText("0次");
+                            textView9.setText("0次");
+                            mUserRef.child("DateCheck").setValue(nowDate);
+                            mUserRef.child("exercise_count").child("crunches").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("running").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("squats").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("yoga").child("week_record").setValue(0);
 
-                    textView6.setText(""+running_week_record_float+"公里");
-                    textView7.setText(""+walking_week_record_float+"公里");
-                    textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
-                    textView10.setText(""+squats_week_record+"次");
-                    textView9.setText(""+crunches_week_record+"次");
+                        }
 
-                    //OneSignal.deleteTag("User_Device_Token");
-                    //onesignal_email= device_token;
-                    //OneSignal.sendTag("User_Device_Token",onesignal_email);
-                    //Toast.makeText(MainActivity.this, onesignal_email, Toast.LENGTH_SHORT).show();
+                    }else {
+                        lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, "跑步"));//rundata
+                        lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, "走路"));//walkdata
+                        lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), "瑜伽"));//airdata
+                        lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, "深蹲"));//pushdata
+                        lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, "仰臥起坐"));//sitdata
+                        pieView.setData(lists);
+                        textView6.setText(""+running_week_record_float+"公里");
+                        textView7.setText(""+walking_week_record_float+"公里");
+                        textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
+                        textView10.setText(""+squats_week_record+"次");
+                        textView9.setText(""+crunches_week_record+"次");
+                    }
+
                     Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                 }
 
@@ -717,7 +744,38 @@ public class  MainActivity extends AppCompatActivity
                 blankfragmentday.getTag()
         ).commit();
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "onStop", Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "onDestroy", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this, "onPause", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "onResume", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "onStart", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(this, "onRestart", Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {

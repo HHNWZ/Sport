@@ -68,11 +68,20 @@ public class ExerciseRunning extends Fragment {
                 String long_distance=dataSnapshot.child("exercise_count").child("running").child("long_distance").getValue().toString();
                 String short_distance=dataSnapshot.child("exercise_count").child("running").child("short_distance").getValue().toString();
                 String today_record=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
-                double longDistance=Double.parseDouble(long_distance);
-                double shortDistance=Double.parseDouble(short_distance);
-                text_view_of_highest_record_data.setText(""+longDistance);
-                text_view_of_lowest_record_data.setText(""+shortDistance);
-                text_view_of_today_record_data.setText(""+today_record);
+                String DateCheck=dataSnapshot.child("exercise_count").child("running").child("DateCheck").getValue().toString();
+                String nowDate=Time.getToDate(System.currentTimeMillis());
+                Log.i("現在是1",DateCheck);
+                Log.i("現在是",nowDate);
+                if(DateCheck.equals(nowDate)){
+                    text_view_of_today_record_data.setText(today_record);
+                }else {
+
+                    mDatabase.child("exercise_count").child("squats").child("DateCheck").setValue(nowDate);
+                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(0);
+                    text_view_of_today_record_data.setText("0");
+                }
+                text_view_of_highest_record_data.setText(long_distance);
+                text_view_of_lowest_record_data.setText(short_distance);
 
 
             }

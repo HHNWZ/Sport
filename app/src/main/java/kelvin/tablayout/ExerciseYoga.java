@@ -68,14 +68,24 @@ public class ExerciseYoga extends Fragment {
                 String long_time=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
                 String short_time=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
                 String today_time=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
-
+                String DateCheck=dataSnapshot.child("exercise_count").child("yoga").child("DateCheck").getValue().toString();
                 long today_time1=Long.parseLong(today_time);
                 long long_time1=Long.parseLong(long_time);
                 long short_time1=Long.parseLong(short_time);
+                String nowDate=Time.getToDate(System.currentTimeMillis());
+                Log.i("現在是1",DateCheck);
+                Log.i("現在是",nowDate);
+                if(DateCheck.equals(nowDate)){
+                    text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
+                }else {
 
+                    mDatabase.child("exercise_count").child("squats").child("DateCheck").setValue(nowDate);
+                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(0);
+                    text_view_of_today_record_data.setText("0秒");
+                }
                 text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
                 text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(short_time1));
-                text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_time1));
+
 
 
             }

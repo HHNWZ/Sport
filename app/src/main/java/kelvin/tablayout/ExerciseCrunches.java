@@ -68,9 +68,20 @@ public class ExerciseCrunches extends Fragment {
                 String big_count=dataSnapshot.child("exercise_count").child("crunches").child("big_count").getValue().toString();
                 String small_count=dataSnapshot.child("exercise_count").child("crunches").child("small_count").getValue().toString();
                 String today_count=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
+                String DateCheck=dataSnapshot.child("exercise_count").child("crunches").child("DateCheck").getValue().toString();
+                String nowDate=Time.getToDate(System.currentTimeMillis());
+                Log.i("現在是1",DateCheck);
+                Log.i("現在是",nowDate);
+                if(DateCheck.equals(nowDate)){
+                    text_view_of_today_record_data.setText(today_count);
+                }else {
+
+                    mDatabase.child("exercise_count").child("squats").child("DateCheck").setValue(nowDate);
+                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(0);
+                    text_view_of_today_record_data.setText("0");
+                }
                 text_view_of_highest_record_data.setText(big_count);
                 text_view_of_lowest_record_data.setText(small_count);
-                text_view_of_today_record_data.setText(today_count);
 
 
             }
