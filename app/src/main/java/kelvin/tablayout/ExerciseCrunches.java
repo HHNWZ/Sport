@@ -146,7 +146,7 @@ public class ExerciseCrunches extends Fragment {
                 Users.class,
                 R.layout.users_single_layout,
                 CrunchesNewUsersViewHolder.class,
-                mUsersDatabase
+                mUsersDatabase.orderByChild("crunches_all_count_sort")
         ) {
             @Override
             protected void populateViewHolder(CrunchesNewUsersViewHolder crunchesNewUsersViewHolder, Users users, int position) {

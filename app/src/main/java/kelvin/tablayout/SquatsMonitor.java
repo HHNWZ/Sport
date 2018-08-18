@@ -250,6 +250,7 @@ public class SquatsMonitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("squats").child("week_record").setValue(week_record1);
                         mDatabase.child("exercise_count").child("squats").child("count").setValue(squats_count);
                         mDatabase.child("squats_all_count").setValue(all_count1);
+                        mDatabase.child("squats_all_count_sort").setValue(-all_count1);
                     }
                 }
 

@@ -279,6 +279,7 @@ public class RunningMonitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("running").child("DataIdcheck").setValue(running_UUID);
                         mDatabase.child("exercise_count").child("running").child("distance").setValue(UnitConversion.get_kilometer(running_distance));
                         mDatabase.child("running_all_count").setValue(all_record1);
+                        mDatabase.child("running_all_count_sort").setValue(-all_record1);
 
 
 

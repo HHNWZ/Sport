@@ -146,7 +146,7 @@ public class ExerciseRunning extends Fragment {
                 Users.class,
                 R.layout.users_single_layout,
                 RunningNewUsersViewHolder.class,
-                mUsersDatabase
+                mUsersDatabase.orderByChild("running_all_count_sort")
         ) {
             @Override
             protected void populateViewHolder(RunningNewUsersViewHolder runningNewUsersViewHolder, Users users, int position) {

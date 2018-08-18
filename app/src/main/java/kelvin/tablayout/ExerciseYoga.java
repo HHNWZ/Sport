@@ -148,7 +148,7 @@ public class ExerciseYoga extends Fragment {
                 Users.class,
                 R.layout.users_single_layout,
                 YogaNewUsersViewHolder.class,
-                mUsersDatabase
+                mUsersDatabase.orderByChild("yoga_all_count_sort")
         ) {
             @Override
             protected void populateViewHolder(YogaNewUsersViewHolder yogaNewUsersViewHolder, Users users, int position) {
