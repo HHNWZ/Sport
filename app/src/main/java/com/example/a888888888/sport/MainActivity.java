@@ -401,11 +401,11 @@ public class  MainActivity extends AppCompatActivity
                     TextView textView9=(TextView)findViewById(R.id.textView9);
                     if(Week.equals("一")){
                         if(DateCheck.equals(nowDate)){
-                            lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, "跑步"));//rundata
-                            lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, "走路"));//walkdata
-                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), "瑜伽"));//airdata
-                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, "深蹲"));//pushdata
-                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, "仰臥起坐"));//sitdata
+                            lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
+                            lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, ""));//walkdata
+                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), ""));//airdata
+                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, ""));//pushdata
+                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, ""));//sitdata
                             pieView.setData(lists);
                             textView6.setText(""+running_week_record_float+"公里");
                             textView7.setText(""+walking_week_record_float+"公里");
@@ -413,11 +413,11 @@ public class  MainActivity extends AppCompatActivity
                             textView10.setText(""+squats_week_record+"次");
                             textView9.setText(""+crunches_week_record+"次");
                         }else{
-                            lists.add(new PieChartBean(Color.parseColor("#38b048"), 0, "跑步"));//rundata
-                            lists.add(new PieChartBean(Color.parseColor("#189428"), 0, "走路"));//walkdata
-                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 0, "瑜伽"));//airdata
-                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 0, "深蹲"));//pushdata
-                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, "仰臥起坐"));//sitdata
+                            lists.add(new PieChartBean(Color.parseColor("#38b048"), 0, ""));//rundata
+                            lists.add(new PieChartBean(Color.parseColor("#189428"), 0, ""));//walkdata
+                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 0, ""));//airdata
+                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 0, ""));//pushdata
+                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, ""));//sitdata
                             pieView.setData(lists);
                             textView6.setText("0公里");
                             textView7.setText("0公里");
@@ -434,11 +434,11 @@ public class  MainActivity extends AppCompatActivity
                         }
 
                     }else {
-                        lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, "跑步"));//rundata
-                        lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, "走路"));//walkdata
-                        lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), "瑜伽"));//airdata
-                        lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, "深蹲"));//pushdata
-                        lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, "仰臥起坐"));//sitdata
+                        lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
+                        lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, ""));//walkdata
+                        lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), ""));//airdata
+                        lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, ""));//pushdata
+                        lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, ""));//sitdata
                         pieView.setData(lists);
                         textView6.setText(""+running_week_record_float+"公里");
                         textView7.setText(""+walking_week_record_float+"公里");

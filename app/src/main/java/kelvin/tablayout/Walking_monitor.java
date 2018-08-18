@@ -210,17 +210,17 @@ public class Walking_monitor extends AppCompatActivity {
             //createLocationData(locationList);
             //Log.i("追踪11",""+zip_walking_location.length);
 
-            distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_distance));
-            meanHeartRate_data_of_walking_monitor.setText("" + walking_mean_heart_rate);
+            distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_distance)+"公里");
+            meanHeartRate_data_of_walking_monitor.setText("" + walking_mean_heart_rate+"次/分");
             duration_data_of_walking_monitor.setText(Time.get_duration_time(walking_duration));
             start_time_data_of_walking_monitor.setText(Time.get_start_time(walking_start_time));
             end_time_data_of_walking_monitor.setText(Time.get_end_time(walking_end_time));
-            calorie_data_of_walking_monitor.setText("" + walking_calorie);
-            incline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_incline_distance));
-            decline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_decline_distance));
-            max_heart_rate_data_of_walking_monitor.setText("" + walking_max_heart_rate);
-            max_altitude_data_of_walking_monitor.setText("" + walking_max_altitude);
-            min_altitude_data_of_walking_monitor.setText("" + walking_min_altitude);
+            calorie_data_of_walking_monitor.setText("" + walking_calorie+"大卡");
+            incline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_incline_distance)+"公里");
+            decline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_decline_distance)+"公里");
+            max_heart_rate_data_of_walking_monitor.setText("" + walking_max_heart_rate+"次/分");
+            max_altitude_data_of_walking_monitor.setText("" + walking_max_altitude+"米");
+            min_altitude_data_of_walking_monitor.setText("" + walking_min_altitude+"米");
             mean_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_mean_speed));
             max_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_max_speed));
 

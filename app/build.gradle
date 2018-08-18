@@ -100,6 +100,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     //implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
     implementation files('libs/samsung-health-data-v1.3.0.jar')
+
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
