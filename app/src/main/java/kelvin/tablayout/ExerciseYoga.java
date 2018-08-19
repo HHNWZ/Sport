@@ -160,7 +160,7 @@ public class ExerciseYoga extends Fragment {
                 first_image=(CircleImageView)yogaNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
                     first_image.setVisibility(View.VISIBLE);
-                    first_image.setImageResource(R.drawable.goldmedal);
+                    first_image.setImageResource(R.drawable.goldmedal);//
                 }
                 if(position==1){
                     first_image.setVisibility(View.VISIBLE);
