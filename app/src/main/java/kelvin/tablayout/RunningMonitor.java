@@ -193,19 +193,19 @@ public class RunningMonitor extends AppCompatActivity {
 
 
 
-            distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_distance));
-            meanHeartRate_data_of_running_monitor.setText("" + running_mean_heart_rate);
+            distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_distance)+"公里");
+            meanHeartRate_data_of_running_monitor.setText("" + running_mean_heart_rate+"次/分");
             duration_data_of_running_monitor.setText(Time.get_duration_time(running_duration));
             start_time_data_of_running_monitor.setText(Time.get_start_time(running_start_time));
             end_time_data_of_running_monitor.setText(Time.get_end_time(running_end_time));
-            calorie_data_of_running_monitor.setText("" + running_calorie);
-            incline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_incline_distance));
-            decline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_decline_distance));
-            max_heart_rate_data_of_running_monitor.setText("" + running_max_heart_rate);
-            max_altitude_data_of_running_monitor.setText("" + running_max_altitude);
-            min_altitude_data_of_running_monitor.setText("" + running_min_altitude);
-            mean_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_mean_speed));
-            max_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_max_speed));
+            calorie_data_of_running_monitor.setText("" + running_calorie+"大卡");
+            incline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_incline_distance)+"公里");
+            decline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_decline_distance)+"公里");
+            max_heart_rate_data_of_running_monitor.setText("" + running_max_heart_rate+"次/分");
+            max_altitude_data_of_running_monitor.setText("" + running_max_altitude+"米");
+            min_altitude_data_of_running_monitor.setText("" + running_min_altitude+"米");
+            mean_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_mean_speed)+"公里/小時");
+            max_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_max_speed)+"公里小時");
 
             writeNewExerciseData.setNewExerciseData("running",
                     Time.get_start_time(running_start_time),

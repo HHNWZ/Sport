@@ -12,156 +12,203 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/duration_of_squats_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="70dp"
-        android:text="做深蹲時間:" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/squats_monitor_toolbar">
 
-    <TextView
-        android:id="@+id/duration_data_of_squats_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/duration_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/duration_of_squats_monitor_text_view"
-        android:text="做深蹲時間資料" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <TableLayout
+                android:layout_below="@+id/walking_monitor_toolBar1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp">
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/distance_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/time" />
+                    <TextView
+                        android:id="@+id/duration_of_squats_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="時間:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical"
 
-    <TextView
-        android:id="@+id/calorie_of_squats_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/duration_of_squats_monitor_text_view"
-        android:layout_marginTop="190dp"
-        android:text="健身熱量:" />
 
-    <TextView
-        android:id="@+id/calorie_data_of_squats_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/calorie_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/calorie_of_squats_monitor_text_view"
-        android:text="健身熱量資料" />
+                        />
+                    <TextView
+                        android:id="@+id/duration_data_of_squats_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="時間資料資料"
+                        android:gravity="center_vertical"
+                        />
 
-    <TextView
-        android:id="@+id/squats_calorie_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/calorie_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/calorie_data_of_squats_monitor"
-        android:text="大卡" />
 
-    <TextView
-        android:id="@+id/mean_HeartRate_of_squats_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/duration_of_squats_monitor_text_view"
-        android:layout_marginTop="220dp"
-        android:text="做深蹲時平均心跳:" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/calorie_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/calorie" />
 
-    <TextView
-        android:id="@+id/meanHeartRate_data_of_squats_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/mean_HeartRate_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/mean_HeartRate_of_squats_monitor_text_view"
-        android:text="做深蹲時平均心跳資料" />
+                    <TextView
+                        android:id="@+id/calorie_of_squats_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="消耗熱量:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/calorie_data_of_squats_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="消耗熱量資料"
+                        android:gravity="center_vertical" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/mean_HeartRat_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/meanheart" />
+                    <TextView
+                        android:id="@+id/mean_HeartRate_of_squats_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="平均心跳:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/meanHeartRate_data_of_squats_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="平均心跳資料"
+                        android:gravity="center_vertical" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/max_heart_rate_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/maxheart" />
 
-    <TextView
-        android:id="@+id/squats_mean_heat_rate_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/mean_HeartRate_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/meanHeartRate_data_of_squats_monitor"
-        android:text="次/分" />
+                    <TextView
+                        android:id="@+id/max_heart_rate_of_squats_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高心跳:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/max_heart_rate_data_of_squats_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高心跳資料"
+                        android:gravity="center_vertical" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/count_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/squats" />
+                    <TextView
+                        android:id="@+id/count_squats_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="次數:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/count_squats_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="次數資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/max_heart_rate_of_squats_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/duration_of_squats_monitor_text_view"
-        android:layout_marginTop="250dp"
-        android:text="做深蹲最高心跳:" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/start_time_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/start" />
+                    <TextView
+                        android:id="@+id/squats_start_time_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="結束時間:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/squats_start_time_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="結束時間資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/max_heart_rate_data_of_squats_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/max_heart_rate_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/max_heart_rate_of_squats_monitor_text_view"
-        android:text="做深蹲時最高心跳資料" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/end_time_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/finishline" />
+                    <TextView
+                        android:id="@+id/squats_end_time_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="結束時間:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/squats_end_time_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="結束時間資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/squats_max_heart_rate_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/max_heart_rate_of_squats_monitor_text_view"
-        android:layout_toEndOf="@+id/max_heart_rate_data_of_squats_monitor"
-        android:text="次/分" />
+                </TableRow>
 
-    <TextView
-        android:id="@+id/count_squats_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/duration_of_squats_monitor_text_view"
-        android:layout_marginTop="160dp"
-        android:text="做深蹲次數:" />
-
-    <TextView
-        android:id="@+id/count_squats_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/count_squats_text_view"
-        android:layout_toEndOf="@+id/count_squats_text_view"
-        android:text="次數資料" />
-
-    <TextView
-        android:id="@+id/count_squats_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/count_squats_text_view"
-        android:layout_toEndOf="@+id/count_squats_data"
-        android:text="次" />
-
-    <TextView
-        android:id="@+id/squats_start_time_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/duration_of_squats_monitor_text_view"
-        android:layout_marginTop="100dp"
-        android:text="開始時間:" />
-
-    <TextView
-        android:id="@+id/squats_start_time_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/squats_start_time_text_view"
-        android:layout_toEndOf="@+id/calorie_of_squats_monitor_text_view"
-        android:text="開始時間資料" />
-
-    <TextView
-        android:id="@+id/squats_end_time_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/duration_of_squats_monitor_text_view"
-        android:layout_marginTop="130dp"
-        android:text="結束時間:" />
-
-    <TextView
-        android:id="@+id/squats_end_time_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/squats_end_time_text_view"
-        android:layout_toEndOf="@+id/calorie_of_squats_monitor_text_view"
-        android:text="結束時間資料" />
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-
                 android:layout_marginLeft="5dp">
                 <TableRow
                     android:layout_width="wrap_content"
@@ -45,6 +44,8 @@
                         android:paddingRight="2.5dp"
                         android:layout_gravity="right"
                         android:gravity="center_vertical"
+
+
                         />
                     <TextView
                         android:id="@+id/distance_data_of_walking_monitor"

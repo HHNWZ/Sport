@@ -180,9 +180,9 @@ public class YogaMonitor extends AppCompatActivity {
             TextView yoga_end_time_data= (TextView) findViewById(R.id.yoga_end_time_data);
 
             duration_data_of_yoga_monitor.setText(""+Time.get_duration_time(yoga_duration));
-            calorie_data_of_yoga_monitor.setText(""+yoga_calorie);
-            meanHeartRate_data_of_yoga_monitor.setText(""+yoga_mean_heart_rate);
-            max_heart_rate_data_of_yoga_monitor.setText(""+yoga_max_heart_rate);
+            calorie_data_of_yoga_monitor.setText(""+yoga_calorie+"大卡");
+            meanHeartRate_data_of_yoga_monitor.setText(""+yoga_mean_heart_rate+"次/分");
+            max_heart_rate_data_of_yoga_monitor.setText(""+yoga_max_heart_rate+"次/分");
             yoga_start_time_data.setText(""+Time.get_start_time(yoga_start_time));
             yoga_end_time_data.setText(""+Time.get_end_time(yoga_end_time));
 

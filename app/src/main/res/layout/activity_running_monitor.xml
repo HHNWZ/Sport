@@ -12,312 +12,354 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/distance_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="70dp"
-        android:text="跑步距離:" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/running_monitor_toolBar">
 
-    <TextView
-        android:id="@+id/distance_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/distance_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="跑步距離資料" />
-
-    <TextView
-        android:id="@+id/running_distance_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignTop="@+id/distance_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_data_of_running_monitor"
-        android:text="公里" />
-
-    <TextView
-        android:id="@+id/duration_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="163dp"
-        android:text="跑步持續時間:" />
-
-    <TextView
-        android:id="@+id/duration_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignTop="@+id/duration_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/duration_of_running_monitor_text_view"
-        android:text="跑步持續時間資料" />
-
-    <TextView
-        android:id="@+id/mean_HeartRate_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="200dp"
-        android:text="跑步時平均心跳:" />
-
-    <TextView
-        android:id="@+id/meanHeartRate_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/mean_HeartRate_of_running_monitor_text_view"
-        android:text="跑步時平均心跳資料" />
-
-    <TextView
-        android:id="@+id/running_mean_heat_rate_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+            <TableLayout
+                android:layout_below="@+id/running_monitor_toolBar1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp">
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/distance_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/distance" />
+                    <TextView
+                        android:id="@+id/distance_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="距離:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical"
 
 
-        android:layout_alignTop="@+id/mean_HeartRate_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/meanHeartRate_data_of_running_monitor"
-        android:text="次/分" />
+                        />
+                    <TextView
+                        android:id="@+id/distance_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="距離資料"
+                        android:gravity="center_vertical"
+                        />
 
-    <TextView
-        android:id="@+id/start_time_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_alignTop="@+id/start_time_data_of_running_monitor"
-        android:text="開始時間:" />
 
-    <TextView
-        android:id="@+id/start_time_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="101dp"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="開始時間資料" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/duration_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/running" />
 
-    <TextView
-        android:id="@+id/end_time_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="133dp"
-        android:text="結束時間:" />
+                    <TextView
+                        android:id="@+id/duration_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="持續時間:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/duration_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="持續時間資料"
+                        android:gravity="center_vertical" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/start_time_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/start" />
 
-    <TextView
-        android:id="@+id/end_time_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/end_time_of_running_monitor"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="結束時間資料" />
+                    <TextView
+                        android:id="@+id/start_time_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="開始時間:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/start_time_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="開始時間資料"
+                        android:gravity="center_vertical" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/end_time_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/finishline" />
 
-    <TextView
-        android:id="@+id/calorie_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="270dp"
-        android:text="健身熱量:" />
+                    <TextView
+                        android:id="@+id/end_time_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="结束時間:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/end_time_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="结束時間資料"
+                        android:gravity="center_vertical" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/mean_HeartRat_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/meanheart" />
+                    <TextView
+                        android:id="@+id/meanHeartRate_data_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="平均心跳:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/meanHeartRate_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="平均心跳資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/calorie_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/calorie_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="健身熱量資料" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/max_heart_rate_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/maxheart" />
+                    <TextView
+                        android:id="@+id/max_heart_rate_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高心跳:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/max_heart_rate_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高心跳資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/running_calorie_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/calorie_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/calorie_data_of_running_monitor"
-        android:text="大卡" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/calorie_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/calorie" />
+                    <TextView
+                        android:id="@+id/calorie_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="消耗热量:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/calorie_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="消耗热量資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/incline_distance_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="300dp"
-        android:text="總上坡:" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/incline_distance_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/diagonalarrow" />
+                    <TextView
+                        android:id="@+id/incline_distance_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="總上坡:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/incline_distance_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="總上坡資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/incline_distance_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/incline_distance_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/incline_distance_of_running_monitor_text_view"
-        android:text="總上坡資料" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/decline_distance_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/downarrow" />
+                    <TextView
+                        android:id="@+id/decline_distance_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="總下坡:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/decline_distance_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="總下坡資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/running_incline_distance_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/incline_distance_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/incline_distance_data_of_running_monitor"
-        android:text="公里" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/max_altitude_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/maxmountain" />
+                    <TextView
+                        android:id="@+id/max_altitude_of_running_running_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高坡度:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/max_altitude_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高坡度資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/decline_distance_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="330dp"
-        android:text="總下坡:" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/min_altitude_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/meanmountain" />
+                    <TextView
+                        android:id="@+id/min_altitude_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最低坡度:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/min_altitude_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最低坡度資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/decline_distance_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/decline_distance_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/incline_distance_of_running_monitor_text_view"
-        android:text="總下坡資料" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/mean_speed_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/meanspeed" />
+                    <TextView
+                        android:id="@+id/mean_speed_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="平均速度:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/mean_speed_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="平均速度資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/running_decline_distance_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/decline_distance_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/incline_distance_data_of_running_monitor"
-        android:text="公里" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/max_speed_image"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/maximumspeed" />
+                    <TextView
+                        android:id="@+id/max_speed_of_running_monitor_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高速度:"
+                        android:paddingRight="2.5dp"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical" />
+                    <TextView
+                        android:id="@+id/max_speed_data_of_running_monitor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="最高速度資料"
+                        android:gravity="center_vertical" />
 
-    <TextView
-        android:id="@+id/max_heart_rate_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="236dp"
-        android:text="跑步時最高心跳:" />
-
-    <TextView
-        android:id="@+id/max_heart_rate_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/max_heart_rate_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/mean_HeartRate_of_running_monitor_text_view"
-        android:text="跑步時最高心跳資料" />
-
-    <TextView
-        android:id="@+id/running_max_heart_rate_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/max_heart_rate_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/meanHeartRate_data_of_running_monitor"
-        android:text="次/分" />
-
-    <TextView
-        android:id="@+id/max_altitude_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="360dp"
-        android:text="最高坡度:" />
-
-    <TextView
-        android:id="@+id/max_altitude_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/max_altitude_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="最高坡度資料" />
-
-    <TextView
-        android:id="@+id/running_max__altitude_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/max_altitude_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_data_of_running_monitor"
-        android:text="米" />
-
-    <TextView
-        android:id="@+id/min_altitude_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="390dp"
-        android:text="最低坡度:" />
-
-    <TextView
-        android:id="@+id/min_altitude_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/min_altitude_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="最低坡度資料" />
-
-    <TextView
-        android:id="@+id/running_min__altitude_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/min_altitude_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_data_of_running_monitor"
-        android:text="米" />
-
-    <TextView
-        android:id="@+id/mean_speed_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="420dp"
-        android:text="平均速度:" />
-
-    <TextView
-        android:id="@+id/mean_speed_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/mean_speed_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="平均速度資料" />
-
-    <TextView
-        android:id="@+id/running_mean_speed_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/mean_speed_data_of_running_monitor"
-        android:layout_marginTop="420dp"
-        android:text="公里/小時" />
-
-    <TextView
-        android:id="@+id/mex_speed_of_running_monitor_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/distance_of_running_monitor_text_view"
-        android:layout_marginTop="450dp"
-        android:text="最高速度:" />
-
-    <TextView
-        android:id="@+id/max_speed_data_of_running_monitor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/mex_speed_of_running_monitor_text_view"
-        android:layout_toEndOf="@+id/distance_of_running_monitor_text_view"
-        android:text="最高速度資料" />
-
-    <TextView
-        android:id="@+id/running_max_speed_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/max_speed_data_of_running_monitor"
-        android:layout_marginTop="450dp"
-        android:text="公里/小時" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

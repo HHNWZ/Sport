@@ -181,12 +181,12 @@ public class SquatsMonitor extends AppCompatActivity {
             TextView count_squats_data=(TextView)findViewById(R.id.count_squats_data);
 
             duration_data_of_squats_monitor.setText(""+Time.get_duration_time(squats_duration));
-            calorie_data_of_squats_monitor.setText(""+squats_calorie);
-            meanHeartRate_data_of_squats_monitor.setText(""+squats_mean_heart_rate);
-            max_heart_rate_data_of_squats_monitor.setText(""+squats_max_heart_rate);
+            calorie_data_of_squats_monitor.setText(""+squats_calorie+"大卡");
+            meanHeartRate_data_of_squats_monitor.setText(""+squats_mean_heart_rate+"次/分");
+            max_heart_rate_data_of_squats_monitor.setText(""+squats_max_heart_rate+"次/分");
             squats_start_time_data.setText(""+Time.get_start_time(squats_start_time));
             squats_end_time_data.setText(""+Time.get_end_time(squats_end_time));
-            count_squats_data.setText(""+squats_count);
+            count_squats_data.setText(""+squats_count+"次");
 
             writeNewExerciseData.setNewExerciseData3("squats",
                     Time.get_start_time(squats_start_time),
