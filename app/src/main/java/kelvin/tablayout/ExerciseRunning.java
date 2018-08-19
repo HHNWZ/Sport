@@ -78,7 +78,7 @@ public class ExerciseRunning extends Fragment {
                 }else {
 
                     mDatabase.child("exercise_count").child("running").child("DateCheck").setValue(nowDate);
-                    mDatabase.child("exercise_count").child("running").child("today_count").setValue(0);
+                    mDatabase.child("exercise_count").child("running").child("today_record").setValue(0);
                     text_view_of_today_record_data.setText("0");
                 }
                 text_view_of_highest_record_data.setText(long_distance);

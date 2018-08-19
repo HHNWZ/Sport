@@ -81,7 +81,7 @@ public class ExerciseYoga extends Fragment {
                 }else {
 
                     mDatabase.child("exercise_count").child("yoga").child("DateCheck").setValue(nowDate);
-                    mDatabase.child("exercise_count").child("yoga").child("today_count").setValue(0);
+                    mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(0);
                     text_view_of_today_record_data.setText("0秒");
                 }
                 text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
