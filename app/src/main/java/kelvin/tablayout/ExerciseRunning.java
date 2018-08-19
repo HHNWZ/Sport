@@ -38,6 +38,7 @@ public class ExerciseRunning extends Fragment {
     private RecyclerView mUsersList1;
     public Button button_of_task_execution,button_of_sports_monitoring,button_of_invitation;
     public String pTime;
+    public static CircleImageView userImageView,first_image;
 
     public ExerciseRunning() {
         // Required empty public constructor
@@ -76,8 +77,8 @@ public class ExerciseRunning extends Fragment {
                     text_view_of_today_record_data.setText(today_record);
                 }else {
 
-                    mDatabase.child("exercise_count").child("squats").child("DateCheck").setValue(nowDate);
-                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(0);
+                    mDatabase.child("exercise_count").child("running").child("DateCheck").setValue(nowDate);
+                    mDatabase.child("exercise_count").child("running").child("today_count").setValue(0);
                     text_view_of_today_record_data.setText("0");
                 }
                 text_view_of_highest_record_data.setText(long_distance);
@@ -154,7 +155,20 @@ public class ExerciseRunning extends Fragment {
                 runningNewUsersViewHolder.setUserStatus("跑步全部記錄:");
                 runningNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
                 runningNewUsersViewHolder.setRunningAllCount(users.getRunning_all_count());
-                Log.i("回圈",""+getRef(position).getKey());
+                first_image=(CircleImageView)runningNewUsersViewHolder.mView.findViewById(R.id.first_image);
+                if(position==0){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.goldmedal);
+                }
+                if(position==1){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.secondprize);
+                }
+                if(position==2){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.bronzemedal);
+                }
+
             }
         };
 
@@ -189,7 +203,7 @@ public class ExerciseRunning extends Fragment {
 
         public void setUserImage(String thumb_image, Context ctx){
 
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+            userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 

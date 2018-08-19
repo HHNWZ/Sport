@@ -10,9 +10,7 @@ public class Users {
     public double running_all_count;
     public double walking_all_count;
     public long yoga_all_count;
-
-
-
+    public int i;
 
 
 
@@ -20,7 +18,7 @@ public class Users {
 
     }
 
-    public Users(String name, String image, String status, String thumb_image,int crunches_all_count,int squats_all_count,int running_all_count,int walking_all_count,long yoga_all_count) {
+    public Users(String name, String image, String status, String thumb_image,int crunches_all_count,int squats_all_count,int running_all_count,int walking_all_count,long yoga_all_count,int i) {
         this.name = name;
         this.image = image;
         this.status = status;
@@ -30,6 +28,7 @@ public class Users {
         this.running_all_count=running_all_count;
         this.walking_all_count=walking_all_count;
         this.yoga_all_count=yoga_all_count;
+        this.i=i;
 
     }
 
@@ -102,5 +101,14 @@ public class Users {
 
     public void setYoga_all_count(long yoga_all_count) {
         this.yoga_all_count = yoga_all_count;
+
+    }public int getI() {
+        return i;
     }
+
+    public void setI(int i) {
+        this.i = i;
+    }
+
+
 }

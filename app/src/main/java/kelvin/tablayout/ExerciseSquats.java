@@ -38,6 +38,7 @@ public class ExerciseSquats extends Fragment {
     private RecyclerView mUsersList1;
     public Button button_of_task_execution,button_of_sports_monitoring,button_of_invitation;
     public String pTime;
+    public static CircleImageView userImageView,first_image;
     public ExerciseSquats() {
         // Required empty public constructor
     }
@@ -153,6 +154,20 @@ public class ExerciseSquats extends Fragment {
                 squatsNewUsersViewHolder.setUserStatus("深蹲全部記錄:");
                 squatsNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
                 squatsNewUsersViewHolder.setCrunchesAllCount(users.getSquats_all_count());
+                first_image=(CircleImageView)squatsNewUsersViewHolder.mView.findViewById(R.id.first_image);
+                if(position==0){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.goldmedal);
+                }
+                if(position==1){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.secondprize);
+                }
+                if(position==2){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.bronzemedal);
+                }
+
             }
         };
 
@@ -187,7 +202,7 @@ public class ExerciseSquats extends Fragment {
 
         public void setUserImage(String thumb_image, Context ctx){
 
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+            userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
