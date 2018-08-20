@@ -38,12 +38,14 @@ public class FriendsFragment extends Fragment {
 
     private DatabaseReference mFriendsDatabase;
     private DatabaseReference mUsersDatabase;
+    private DatabaseReference friendDatabase;
 
     private FirebaseAuth mAuth;
 
     private String mCurrent_user_id;
 
     private View mMainView;
+    public static  int k=0;
 
     public FriendsFragment() {
         // Required empty public constructor
@@ -63,6 +65,7 @@ public class FriendsFragment extends Fragment {
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        friendDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
         Log.i("為什麼","2");
 
@@ -94,6 +97,7 @@ public class FriendsFragment extends Fragment {
             protected void populateViewHolder(final FriendsViewHolder friendsViewHolder, Friends friends, int i) {
 
 
+                k=k+1;
 
                 friendsViewHolder.setDate(friends.getDate());
 
@@ -115,6 +119,7 @@ public class FriendsFragment extends Fragment {
 
                         friendsViewHolder.setName(userName);
                         friendsViewHolder.setUserImage(userThumb, getContext());
+
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -163,12 +168,13 @@ public class FriendsFragment extends Fragment {
 
                     }
                 });
-
+                friendDatabase.child("friend_count").setValue(k);
             }
+
         };
 
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);
-
+        k=0;
 
     }
 

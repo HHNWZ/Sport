@@ -13,6 +13,7 @@ import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onesignal.OneSignal;
 
 public class Exercise_main extends AppCompatActivity implements
         kelvin_push_up_invitation.OnFragmentInteractionListener,
@@ -36,6 +37,11 @@ public class Exercise_main extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_main);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .init();
         mAuth = FirebaseAuth.getInstance();
         mUserRef= FirebaseDatabase.getInstance().getReference();
 

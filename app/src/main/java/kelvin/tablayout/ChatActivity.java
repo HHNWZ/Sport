@@ -23,9 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,9 +70,13 @@ public class ChatActivity extends AppCompatActivity {
     private String end_day_of_invitation;
     private String end_hour_of_invitation;
     private String end_minute_of_invitation;
+    private static String online;
+    private static String button_online;
     private Toolbar mChatToolbar;
 
     private DatabaseReference mRootRef;
+    private DatabaseReference mUserRef;
+    private DatabaseReference myUsersDatabase;
 
     private TextView mTitleView;
     private TextView mLastSeenView;
@@ -78,10 +84,14 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mCurrentUserId;
     private String Uid;
+    public static String my_name;
+    public static String image;
+    public static String my_image;
 
     private ImageButton mChatAddBtn;
     private ImageButton mChatSendBtn;
     private EditText mChatMessageView;
+
 
     private RecyclerView mMessagesList;
     private SwipeRefreshLayout mRefreshLayout;
@@ -126,10 +136,12 @@ public class ChatActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
+        mUserRef= FirebaseDatabase.getInstance().getReference();
+
 
         mAuth = FirebaseAuth.getInstance();
         mCurrentUserId = mAuth.getCurrentUser().getUid();
-
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mChatUser = getIntent().getStringExtra("user_id");
         //String userName = getIntent().getStringExtra("user_name");
         exercise_type=getIntent().getStringExtra("exercise_type");
@@ -178,6 +190,8 @@ public class ChatActivity extends AppCompatActivity {
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);
+        mUserRef.child("Users");
+        myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
 
         loadMessages();
         if(exercise_data!=null){
@@ -185,6 +199,20 @@ public class ChatActivity extends AppCompatActivity {
         }else {
             mChatMessageView.setText("");
         }
+        myUsersDatabase.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                my_name=dataSnapshot.child("name").getValue().toString();
+                my_image=dataSnapshot.child("thumb_image").getValue().toString();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         //mTitleView.setText(userName);
@@ -193,8 +221,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String online = dataSnapshot.child("online").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
+                online = dataSnapshot.child("online").getValue().toString();
+                image = dataSnapshot.child("image").getValue().toString();
                 String userName= dataSnapshot.child("name").getValue().toString();
                 Picasso.with(ChatActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
                 mTitleView.setText(userName);
@@ -267,71 +295,81 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Uid=mChatUser;
-                //Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-                        if (SDK_INT > 8) {
-                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                                    .permitAll().build();
-                            StrictMode.setThreadPolicy(policy);
+                button_online=online;
+                if(button_online.equals("true")){
+
+                }else {
+                    //Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
 
 
-                            try {
-                                String jsonResponse;
+                                try {
+                                    String jsonResponse;
 
-                                URL url = new URL("https://onesignal.com/api/v1/notifications");
-                                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                                con.setUseCaches(false);
-                                con.setDoOutput(true);
-                                con.setDoInput(true);
+                                    URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setUseCaches(false);
+                                    con.setDoOutput(true);
+                                    con.setDoInput(true);
 
-                                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                                con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
-                                con.setRequestMethod("POST");
+                                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                    con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                    con.setRequestMethod("POST");
+                                    Log.i("image",image.toString());
+                                    String strJsonBody = "{"
+                                            + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                            + "\"large_icon\": \""+my_image.toString()+"\","
+                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
+                                            + "\"android_background_layout\": " +
+                                            // "{\"image\": \"http://3.bp.blogspot.com/-5GNtI62kFFw/U4DK7M_fNkI/AAAAAAAAADA/nvF-d_CfBsg/s1600/wp917d5eab_06.png\","
+                                            "{\"headings_color\": \"9C27B0\"," +
+                                            "\"contents_color\": \"00695C\"},"
+                                            + "\"data\": {\"activityToBeOpened\":\"ChatActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                            + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \""+my_name.toString()+"發信息給你"+"\"}"
+                                            + "}";
 
-                                String strJsonBody = "{"
-                                        + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
-
-                                        + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
-                                        + "\"data\": {\"activityToBeOpened\":\"ChatActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                        + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \"你有新信息\"}"
-                                        + "}";
 
 
 
+                                    System.out.println("strJsonBody:\n" + strJsonBody);
 
-                                System.out.println("strJsonBody:\n" + strJsonBody);
+                                    byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                    con.setFixedLengthStreamingMode(sendBytes.length);
 
-                                byte[] sendBytes = strJsonBody.getBytes("UTF-8");
-                                con.setFixedLengthStreamingMode(sendBytes.length);
+                                    OutputStream outputStream = con.getOutputStream();
+                                    outputStream.write(sendBytes);
 
-                                OutputStream outputStream = con.getOutputStream();
-                                outputStream.write(sendBytes);
+                                    int httpResponse = con.getResponseCode();
+                                    System.out.println("httpResponse: " + httpResponse);
 
-                                int httpResponse = con.getResponseCode();
-                                System.out.println("httpResponse: " + httpResponse);
+                                    if (httpResponse >= HttpURLConnection.HTTP_OK
+                                            && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                        Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    } else {
+                                        Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    }
+                                    System.out.println("jsonResponse:\n" + jsonResponse);
 
-                                if (httpResponse >= HttpURLConnection.HTTP_OK
-                                        && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-                                    Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
-                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                                    scanner.close();
-                                } else {
-                                    Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
-                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                                    scanner.close();
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
                                 }
-                                System.out.println("jsonResponse:\n" + jsonResponse);
-
-                            } catch (Throwable t) {
-                                t.printStackTrace();
                             }
                         }
-                    }
-                });
+                    });
+                }
+
                 sendMessage();
 
             }
@@ -370,7 +408,24 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
 
+        mUserRef.child("online").setValue("true");
+
+
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

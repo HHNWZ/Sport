@@ -117,7 +117,7 @@ public class  MainActivity extends AppCompatActivity
     private Toolbar mToolboar;
     private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
-    private DatabaseReference mUserRef;
+    private static DatabaseReference mUserRef;
     private FirebaseAuth mAuth;
     private String mCurrent_state,onesignal_email,device_token;
     String channelId = "love";
@@ -851,7 +851,7 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-    class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+    public static class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
 
 
         public String user_id_send,exercise_data_from;
@@ -877,57 +877,57 @@ public class  MainActivity extends AppCompatActivity
                 if(activityToBeOpened != null && activityToBeOpened.equals("ProfileActivity")){
                     Log.i("OneSignalExample", "customkey set with value: " + activityToBeOpened);
                     Log.i("我在這裡","Chat_send_id："+user_id_send);
-                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    Intent intent = new Intent(getContext(), ProfileActivity.class);
                     intent.putExtra("user_id",user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
 
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("ChatActivity")){
-                    Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    Intent intent = new Intent(getContext(), ChatActivity.class);
                     intent.putExtra("user_id",user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Yoga_task")){
-                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
                     intent.putExtra("ToolbarTitle","瑜伽每週任務");
                     intent.putExtra("exerciseWeekTitle","做瑜伽");
                     intent.putExtra("exerciseWeekUnit","分鐘");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Squats_task")){
-                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
                     intent.putExtra("ToolbarTitle","深蹲每週任務");
                     intent.putExtra("exerciseWeekTitle","做深蹲");
                     intent.putExtra("exerciseWeekUnit","次");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
-                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
                     intent.putExtra("ToolbarTitle","跑步每週任務");
                     intent.putExtra("exerciseWeekTitle","去跑步");
                     intent.putExtra("exerciseWeekUnit","公里");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Crunches_task")){
-                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
                     intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
                     intent.putExtra("exerciseWeekTitle","做仰臥起坐");
                     intent.putExtra("exerciseWeekUnit","次");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
-                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(),Sit_up_task.class);
                     intent.putExtra("ToolbarTitle","步行每週任務");
                     intent.putExtra("exerciseWeekTitle","去步行");
                     intent.putExtra("exerciseWeekUnit","公里");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
             }
 
