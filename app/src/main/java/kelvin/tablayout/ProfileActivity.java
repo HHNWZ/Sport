@@ -416,7 +416,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if(mCurrent_state.equals("req_received")){//結束朋友事件觸發
 
-
+                    delete_send_req_btn.setVisibility(View.INVISIBLE);
                     final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
 
                     Map friendsMap = new HashMap();
