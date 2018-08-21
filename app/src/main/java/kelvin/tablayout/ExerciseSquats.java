@@ -3,9 +3,12 @@ package kelvin.tablayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +42,8 @@ public class ExerciseSquats extends Fragment {
     public Button button_of_task_execution,button_of_sports_monitoring,button_of_invitation;
     public String pTime;
     public static CircleImageView userImageView,first_image;
+    private SwipeRefreshLayout mRefreshLayout;
+
     public ExerciseSquats() {
         // Required empty public constructor
     }
@@ -54,7 +59,20 @@ public class ExerciseSquats extends Fragment {
         mUsersList1=(RecyclerView) mMainView.findViewById(R.id.squats_list);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
-
+        mRefreshLayout=(SwipeRefreshLayout)mMainView.findViewById(R.id.squats_swipe_layout);
+        mRefreshLayout.setColorSchemeColors(Color.RED);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable(){
+                    @Override
+                    public void run() {
+                        mRefreshLayout.setRefreshing(false);
+                        onStart();
+                    }}, 1000);
+            }
+        });
         mUsersList1.setHasFixedSize(true);
         mUsersList1.setLayoutManager(new LinearLayoutManager(getContext()));
         TextView text_view_of_today_record_data=(TextView)mMainView.findViewById(R.id.text_view_of_today_record_data);

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.a888888888.sport.MainActivity;
@@ -14,6 +15,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onesignal.OneSignal;
+
+import java.util.Timer;
 
 public class Exercise_main extends AppCompatActivity implements
         kelvin_push_up_invitation.OnFragmentInteractionListener,
@@ -33,6 +36,7 @@ public class Exercise_main extends AppCompatActivity implements
     private DatabaseReference mUserRef;
 
     private TabLayout eTabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class Exercise_main extends AppCompatActivity implements
         });
 
 
+
         //Tabs
         eViewPager = (ViewPager) findViewById(R.id.exercise_main_tabPager);
         eSectionsPagerAdapter = new ExercisePagerAdapter(getSupportFragmentManager());
@@ -66,6 +71,8 @@ public class Exercise_main extends AppCompatActivity implements
 
         eTabLayout = (TabLayout) findViewById(R.id.exercise_main_tabs);
         eTabLayout.setupWithViewPager(eViewPager);
+
+
     }
 
     @Override

@@ -29,5 +29,6 @@ public class TimerTaskTest extends java.util.TimerTask{
             Log.i("刪除時間",""+Time.get_start_time(System.currentTimeMillis()));
         }
 
+
     }
 }

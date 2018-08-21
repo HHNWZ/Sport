@@ -3,9 +3,12 @@ package kelvin.tablayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +44,9 @@ public class ExerciseWalking extends Fragment {
     public Button button_of_task_execution,button_of_sports_monitoring,button_of_invitation;
     public String pTime;
     public static CircleImageView userImageView,first_image;
+    public static int k=0;
+    private SwipeRefreshLayout mRefreshLayout;
+
 
     public ExerciseWalking() {
         // Required empty public constructor
@@ -49,12 +57,27 @@ public class ExerciseWalking extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i("fragment在","creatview");
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mMainView = inflater.inflate(R.layout.fragment_exercise_walking, container, false);
         mUsersList1=(RecyclerView) mMainView.findViewById(R.id.walking_list);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
+        mRefreshLayout=(SwipeRefreshLayout)mMainView.findViewById(R.id.walking_swipe_layout);
+        mRefreshLayout.setColorSchemeColors(Color.RED);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable(){
+                    @Override
+                    public void run() {
+                        mRefreshLayout.setRefreshing(false);
+                        onStart();
+                    }}, 1000);
+            }
+        });
 
         mUsersList1.setHasFixedSize(true);
         mUsersList1.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -137,24 +160,44 @@ public class ExerciseWalking extends Fragment {
             }
         });
 
+
         return mMainView;
     }
+
+
+
     @Override
     public void onStart(){
         super.onStart();
 
+        Log.i("fragment在"," onStart()");
         FirebaseRecyclerAdapter<Users,WalkingNewUsersViewHolder>firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Users, WalkingNewUsersViewHolder>(
                 Users.class,
                 R.layout.users_single_layout,
                 WalkingNewUsersViewHolder.class,
                 mUsersDatabase.orderByChild("walking_all_count_sort")
         ) {
+
+            public int getItenCount(){
+                int itemCount =super.getItemCount();
+
+                return itemCount;
+            }
+
+            @Override
+            public Users getItem(int position) {
+                return super.getItem(position);
+            }
+
             @Override
             protected void populateViewHolder(WalkingNewUsersViewHolder walkingNewUsersViewHolder, Users users, int position) {
+
+
                 walkingNewUsersViewHolder.setDisplayName(users.getName());
                 walkingNewUsersViewHolder.setUserStatus("步行全部記錄:");
                 walkingNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
                 walkingNewUsersViewHolder.setRunningAllCount(users.getWalking_all_count());
+
                 first_image=(CircleImageView)walkingNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
                     first_image.setVisibility(View.VISIBLE);
@@ -168,7 +211,12 @@ public class ExerciseWalking extends Fragment {
                     first_image.setVisibility(View.VISIBLE);
                     first_image.setImageResource(R.drawable.bronzemedal);
                 }
+                Log.i("1234",""+getItenCount());
+
+
             }
+
+
         };
 
 
@@ -217,6 +265,9 @@ public class ExerciseWalking extends Fragment {
         }
 
 
+
     }
+
+
 
 }

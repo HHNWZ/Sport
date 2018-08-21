@@ -75,6 +75,7 @@ public class Walking_monitor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Walking_monitor.this,Exercise_main.class);
+                intent.putExtra("id",2);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

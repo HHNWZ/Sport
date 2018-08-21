@@ -93,11 +93,16 @@ public class FriendsFragment extends Fragment {
 
 
         ) {
+            public int getItenCount(){
+                int itemCount =super.getItemCount();
+
+                return itemCount;
+            }
             @Override
             protected void populateViewHolder(final FriendsViewHolder friendsViewHolder, Friends friends, int i) {
 
 
-                k=k+1;
+
 
                 friendsViewHolder.setDate(friends.getDate());
 
@@ -168,13 +173,14 @@ public class FriendsFragment extends Fragment {
 
                     }
                 });
-                friendDatabase.child("friend_count").setValue(k);
+                Log.i(" getItenCount()",""+ getItenCount());
+                friendDatabase.child("friend_count").setValue(getItenCount());
             }
 
         };
 
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);
-        k=0;
+
 
     }
 

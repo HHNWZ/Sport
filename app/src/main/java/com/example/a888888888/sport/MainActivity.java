@@ -524,6 +524,7 @@ public class  MainActivity extends AppCompatActivity
                 if(true) {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, Exercise_main.class);
+
                     startActivity(intent);
                     MainActivity.this.finish();
                 }

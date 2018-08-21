@@ -32,6 +32,13 @@
                 app:tabSelectedTextColor="#73c4d9"></android.support.design.widget.TabLayout>
 
         </android.support.design.widget.AppBarLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content2_main"
+            android:layout_below="@+id/appBarLayout">
+
+        </RelativeLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/exercise_main_tabPager"

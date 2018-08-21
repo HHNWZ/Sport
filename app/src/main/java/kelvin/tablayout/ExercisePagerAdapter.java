@@ -66,4 +66,5 @@ class ExercisePagerAdapter extends FragmentPagerAdapter {
         }
 
     }
+
 }
