@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,24 +73,28 @@ public class ChatActivity extends AppCompatActivity {
     private String end_minute_of_invitation;
     private static String online;
     private static String button_online;
-    private Toolbar mChatToolbar;
-
-    private DatabaseReference mRootRef;
-    private DatabaseReference mUserRef;
-    private DatabaseReference myUsersDatabase;
-
-    private TextView mTitleView;
-    private TextView mLastSeenView;
-    private CircleImageView mProfileImage;
-    private FirebaseAuth mAuth;
     private String mCurrentUserId;
     private String Uid;
     public static String my_name;
     public static String image;
     public static String my_image;
 
+    private Toolbar mChatToolbar;
+
+    private DatabaseReference mRootRef;
+    private DatabaseReference mUserRef;
+    private DatabaseReference myUsersDatabase;
+
+    private FirebaseAuth mAuth;
+
+    private TextView mTitleView;
+    private TextView mLastSeenView;
+
+    private CircleImageView mProfileImage;
+
     private ImageButton mChatAddBtn;
     private ImageButton mChatSendBtn;
+
     private EditText mChatMessageView;
 
 
@@ -108,14 +113,11 @@ public class ChatActivity extends AppCompatActivity {
     // Storage Firebase
     private StorageReference mImageStorage;
 
-
     //New Solution
     private int itemPos = 0;
 
     private String mLastKey = "";
     private String mPrevKey = "";
-
-
 
 
     @Override
@@ -125,13 +127,12 @@ public class ChatActivity extends AppCompatActivity {
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
 
         mChatToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
         setSupportActionBar(mChatToolbar);
-
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
@@ -140,10 +141,10 @@ public class ChatActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        mCurrentUserId = mAuth.getCurrentUser().getUid();
-        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        mChatUser = getIntent().getStringExtra("user_id");
-        //String userName = getIntent().getStringExtra("user_name");
+        mCurrentUserId = mAuth.getCurrentUser().getUid();//自己的id
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());//讀取自己的資料
+        mChatUser = getIntent().getStringExtra("user_id");//對方的id
+
         exercise_type=getIntent().getStringExtra("exercise_type");
         exercise_data_count=getIntent().getStringExtra("exercise_data_count");
         exercise_data=getIntent().getStringExtra("exercise_data");
@@ -160,7 +161,7 @@ public class ChatActivity extends AppCompatActivity {
         end_minute_of_invitation=getIntent().getStringExtra("end_minute_of_invitation");
 
 
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//查找xml文件並套用
         View action_bar_view = inflater.inflate(R.layout.chat_custom_bar, null);
 
         actionBar.setCustomView(action_bar_view);
@@ -189,11 +190,11 @@ public class ChatActivity extends AppCompatActivity {
         //------- IMAGE STORAGE ---------
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
-        mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);
+        mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);//初始對方的信息
         mUserRef.child("Users");
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
 
-        loadMessages();
+        loadMessages();//載入資料
         if(exercise_data!=null){
             mChatMessageView.setText(exercise_type+exercise_data+exercise_unit+"\n"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation+"\n"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
         }else {
@@ -204,8 +205,6 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 my_name=dataSnapshot.child("name").getValue().toString();
                 my_image=dataSnapshot.child("thumb_image").getValue().toString();
-
-
             }
 
             @Override
@@ -213,9 +212,6 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-
-
-        //mTitleView.setText(userName);
 
         mRootRef.child("Users").child(mChatUser).addValueEventListener(new ValueEventListener() {
             @Override
@@ -229,20 +225,15 @@ public class ChatActivity extends AppCompatActivity {
                 if(online.equals("true")) {
 
                     mLastSeenView.setText("在線");
-
                 } else {
 
                     GetTimeAgo getTimeAgo = new GetTimeAgo();
 
                     long lastTime = Long.parseLong(online);
 
-                    //String lastSeenTime = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
-
                     String lastSeenTime =getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
                     mLastSeenView.setText(lastSeenTime);
-
                 }
-
             }
 
             @Override
@@ -252,18 +243,18 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-        mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+        mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {//用自己的id在chat找
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.hasChild(mChatUser)){
+                if(!dataSnapshot.hasChild(mChatUser)){//如果有對方的id存在
 
                     Map chatAddMap = new HashMap();
                     chatAddMap.put("seen", false);
                     chatAddMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     Map chatUserMap = new HashMap();
-                    chatUserMap.put("Chat/" + mCurrentUserId + "/" + mChatUser, chatAddMap);
+                    chatUserMap.put("Chat/" + mCurrentUserId + "/" + mChatUser, chatAddMap);//判斷對方有沒有看到
                     chatUserMap.put("Chat/" + mChatUser + "/" + mCurrentUserId, chatAddMap);
 
                     mRootRef.updateChildren(chatUserMap, new DatabaseReference.CompletionListener() {
@@ -296,6 +287,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Uid=mChatUser;
                 button_online=online;
+                //myUsersDatabase.child(mAuth.getCurrentUser().getUid()).child("last_message_time").child(Uid).setValue(System.currentTimeMillis());
                 if(button_online.equals("true")){
 
                 }else {
@@ -370,7 +362,7 @@ public class ChatActivity extends AppCompatActivity {
                     });
                 }
 
-                sendMessage();
+                sendMessage();//發送信息
 
             }
         });
@@ -435,16 +427,16 @@ public class ChatActivity extends AppCompatActivity {
 
             Uri imageUri = data.getData();
 
-            final String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
-            final String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
+            final String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;//自己的id先在到對方id
+            final String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;//對方的id在到自己的id
 
             DatabaseReference user_message_push = mRootRef.child("messages")
-                    .child(mCurrentUserId).child(mChatUser).push();
+                    .child(mCurrentUserId).child(mChatUser).push();//用自己的id在去差子節點別人的id
 
-            final String push_id = user_message_push.getKey();
+            final String push_id = user_message_push.getKey();//唯一值
 
 
-            StorageReference filepath = mImageStorage.child("message_images").child( push_id + ".jpg");
+            StorageReference filepath = mImageStorage.child("message_images").child( push_id + ".jpg");//雲端存資料庫
 
             filepath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -493,14 +485,13 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMoreMessages() {
 
-        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);
+        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);//自己的id在到別人的id
 
         Query messageQuery = messageRef.orderByKey().endAt(mLastKey).limitToLast(10);
 
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
 
                 Messages message = dataSnapshot.getValue(Messages.class);
                 String messageKey = dataSnapshot.getKey();
@@ -512,7 +503,6 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
 
                     mPrevKey = mLastKey;
-
                 }
 
 
@@ -529,7 +519,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 mRefreshLayout.setRefreshing(false);
 
-                mLinearLayout.scrollToPositionWithOffset(10, 0);
+                mLinearLayout.scrollToPositionWithOffset(10, 0);//運動recyclerview
 
             }
 
@@ -558,7 +548,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMessages() {
 
-        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);
+        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);//自己的id先在到對方的id
 
         Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
 
@@ -619,8 +609,8 @@ public class ChatActivity extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(message)){
 
-            String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
-            String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
+            String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;//自己的id先在到別人的id
+            String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;//別人id在到自己的id
 
             DatabaseReference user_message_push = mRootRef.child("messages")
                     .child(mCurrentUserId).child(mChatUser).push();

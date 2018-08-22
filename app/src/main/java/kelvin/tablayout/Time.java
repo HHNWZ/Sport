@@ -104,6 +104,24 @@ public class Time extends Application {
         return yogaTime;
     }
 
+    public static String get_Chat_date(long chat_milliseconds){
+        String endTime = "";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(chat_milliseconds);
+        int end_year = end_calendar.get(Calendar.YEAR);
+        int end_month= end_calendar.get(Calendar.MONTH)+1;
+        int end_day =end_calendar.get(Calendar.DAY_OF_MONTH);
+        int end_hour = end_calendar.get(Calendar.HOUR_OF_DAY);
+        int end_minute=end_calendar.get(Calendar.MINUTE);
+        //int end_second=end_calendar.get(Calendar.SECOND);
+        String end_week=Week.getWeek(chat_milliseconds);
+        endTime=""+end_year+"年"+end_month+"月"+end_day+"日 週"+end_week+" "+end_hour+"時 "+end_minute+"分鐘  ";
+
+        return endTime;
+    }
+
+
+
 
 
 
