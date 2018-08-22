@@ -36,6 +36,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private String message_one_i;
    private static Messages d;
     private FirebaseAuth mAuth;
+    public static String new_date2;
 
     public MessageAdapter(List<Messages> mMessageList) {
 
@@ -56,10 +57,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
         public TextView messageText;
+        public TextView mymessageText;
         public CircleImageView profileImage;
+        public CircleImageView myprofileImage;
         public TextView displayName;
+        public TextView mydisplayName;
         public ImageView messageImage;
         public TextView time_text_layout;
+        public TextView mytime_text_layout;
         public TextView date_text_layout;
 
 
@@ -69,11 +74,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageText = (TextView) view.findViewById(R.id.message_text_layout);
             profileImage = (CircleImageView) view.findViewById(R.id.message_profile_layout);
             displayName = (TextView) view.findViewById(R.id.name_text_layout);
-            messageImage = (ImageView) view.findViewById(R.id.message_image_layout);
             time_text_layout=(TextView)view.findViewById(R.id.time_text_layout);
+            mymessageText = (TextView) view.findViewById(R.id.my_message_text_layout);
+            myprofileImage = (CircleImageView) view.findViewById(R.id.my_message_profile_layout);
+            mydisplayName = (TextView) view.findViewById(R.id.my_name_text_layout);
+            mytime_text_layout=(TextView)view.findViewById(R.id.my_time_text_layout);
+
+            messageImage = (ImageView) view.findViewById(R.id.message_image_layout);
             date_text_layout=(TextView)view.findViewById(R.id.date_text_layout);
-
-
         }
     }
 
@@ -86,6 +94,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if(i!=0){
             d =mMessageList.get(i-1);
             message_one_i =d.getMessage();
+            long date2;
+            date2=d.getTime();
+            new_date2=Time.get_Chat_date(date2);
         }
 
 
@@ -94,20 +105,32 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         String from_user = c.getFrom();
         String message_type = c.getType();
+        String send_type=c.getSendType();
+
+
 
         long time;
         time=c.getTime();
         Date date = new Date(time);
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        viewHolder.time_text_layout.setText(""+format.format(date));
+        if(c.getSendType().equals("sent")){
+            viewHolder.mytime_text_layout.setText(""+format.format(date));
+            viewHolder.time_text_layout.setVisibility(View.INVISIBLE);
+
+        }else if(c.getSendType().equals("received")){
+            viewHolder.time_text_layout.setText(""+format.format(date));
+            viewHolder.mytime_text_layout.setVisibility(View.INVISIBLE);
+        }else {
+            viewHolder.time_text_layout.setVisibility(View.INVISIBLE);
+            viewHolder.mytime_text_layout.setVisibility(View.INVISIBLE);
+        }
+
 
         long date1;
         date1=c.getTime();
         String new_date=Time.get_Chat_date(date1);
 
-        long date2;
-        date2=d.getTime();
-        String new_date2=Time.get_Chat_date(date2);
+
 
 
 
@@ -121,12 +144,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 String name = dataSnapshot.child("name").getValue().toString();
                 String image = dataSnapshot.child("thumb_image").getValue().toString();
 
+                if(c.getSendType().equals("sent")){
+                    viewHolder.displayName.setVisibility(View.INVISIBLE);
+                    viewHolder.profileImage.setVisibility(View.INVISIBLE);
+                    viewHolder.mydisplayName.setText(name);
+                    Picasso.with(viewHolder.myprofileImage.getContext()).load(image).placeholder(R.drawable.default_avatar).into(viewHolder.myprofileImage);
+                }else if(c.getSendType().equals("received")){
+                    viewHolder.mydisplayName.setVisibility(View.INVISIBLE);
+                    viewHolder.myprofileImage.setVisibility(View.INVISIBLE);
+                    viewHolder.displayName.setText(name);
+                    Picasso.with(viewHolder.profileImage.getContext()).load(image).placeholder(R.drawable.default_avatar).into(viewHolder.profileImage);
+                }else {
+                    viewHolder.displayName.setVisibility(View.INVISIBLE);
+                    viewHolder.profileImage.setVisibility(View.INVISIBLE);
+                    viewHolder.mydisplayName.setVisibility(View.INVISIBLE);
+                    viewHolder.myprofileImage.setVisibility(View.INVISIBLE);
+                }
 
 
 
-                viewHolder.displayName.setText(name);
-
-                Picasso.with(viewHolder.profileImage.getContext()).load(image).placeholder(R.drawable.default_avatar).into(viewHolder.profileImage);
                 //Picasso.with(ChatActivity).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
 
             }
@@ -152,7 +188,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
 
 
-
+        Log.i("發送狀態",c.getSendType());
 
 
         //viewHolder.date_text_layout.setText(new_date);
@@ -176,13 +212,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
 
         if(message_type.equals("text")) {
+            if(c.getSendType().equals("sent")){
+                viewHolder.mymessageText.setText(c.getMessage());
+                viewHolder.messageText.setVisibility(View.INVISIBLE);
+                viewHolder.messageImage.setVisibility(View.INVISIBLE);
 
-            viewHolder.messageText.setText(c.getMessage());
-            viewHolder.messageImage.setVisibility(View.INVISIBLE);
+            }else if(c.getSendType().equals("received")){
+                viewHolder.messageText.setText(c.getMessage());
+                viewHolder.mymessageText.setVisibility(View.INVISIBLE);
+                viewHolder.messageImage.setVisibility(View.INVISIBLE);
+            }else {
+                viewHolder.messageText.setVisibility(View.INVISIBLE);
+                viewHolder.mymessageText.setVisibility(View.INVISIBLE);
+            }
+
+
 
 
         } else {
-
+            viewHolder.mymessageText.setVisibility(View.INVISIBLE);
             viewHolder.messageText.setVisibility(View.INVISIBLE);
             Picasso.with(viewHolder.profileImage.getContext()).load(c.getMessage())
                     .placeholder(R.drawable.default_avatar).into(viewHolder.messageImage);

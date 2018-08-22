@@ -446,6 +446,13 @@ public class ChatActivity extends AppCompatActivity {
 
                         String download_url = task.getResult().getDownloadUrl().toString();
 
+                        Map mymessageMap = new HashMap();
+                        mymessageMap.put("message", download_url);
+                        mymessageMap.put("seen", false);
+                        mymessageMap.put("type", "image");
+                        mymessageMap.put("time", ServerValue.TIMESTAMP);
+                        mymessageMap.put("from", mCurrentUserId);
+                        mymessageMap.put("sendType","send");
 
                         Map messageMap = new HashMap();
                         messageMap.put("message", download_url);
@@ -453,9 +460,10 @@ public class ChatActivity extends AppCompatActivity {
                         messageMap.put("type", "image");
                         messageMap.put("time", ServerValue.TIMESTAMP);
                         messageMap.put("from", mCurrentUserId);
+                        messageMap.put("sendType","received");
 
                         Map messageUserMap = new HashMap();
-                        messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
+                        messageUserMap.put(current_user_ref + "/" + push_id, mymessageMap);
                         messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
                         mChatMessageView.setText("");
@@ -617,15 +625,24 @@ public class ChatActivity extends AppCompatActivity {
 
             String push_id = user_message_push.getKey();
 
+            Map mymessageMap = new HashMap();
+            mymessageMap.put("message", message);
+            mymessageMap.put("seen", false);
+            mymessageMap.put("type", "text");
+            mymessageMap.put("time", ServerValue.TIMESTAMP);
+            mymessageMap.put("from", mCurrentUserId);
+            mymessageMap.put("sendType","sent");
+
             Map messageMap = new HashMap();
             messageMap.put("message", message);
             messageMap.put("seen", false);
             messageMap.put("type", "text");
             messageMap.put("time", ServerValue.TIMESTAMP);
             messageMap.put("from", mCurrentUserId);
+            messageMap.put("sendType","received");
 
             Map messageUserMap = new HashMap();
-            messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
+            messageUserMap.put(current_user_ref + "/" + push_id, mymessageMap);
             messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
             mChatMessageView.setText("");

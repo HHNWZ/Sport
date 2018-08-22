@@ -2,7 +2,15 @@ package kelvin.tablayout;
 
 public class Messages {
 
-    private String message, type;
+    private String message;
+    private String type;
+
+
+
+    private String sendType;
+
+
+
     private long  time;
     private boolean seen;
 
@@ -20,11 +28,12 @@ public class Messages {
         this.from = from;
     }
 
-    public Messages(String message, String type, long time, boolean seen) {
+    public Messages(String message, String type, long time, boolean seen,String sendType) {
         this.message = message;
         this.type = type;
         this.time = time;
         this.seen = seen;
+        this.sendType=sendType;
     }
 
     public String getMessage() {
@@ -42,6 +51,14 @@ public class Messages {
     public void setType(String type) {
         this.type = type;
     }
+    public String getSendType() {
+        return sendType;
+    }
+
+    public void setSendType(String sendType) {
+        this.sendType = sendType;
+    }
+
 
     public long getTime() {
         return time;
