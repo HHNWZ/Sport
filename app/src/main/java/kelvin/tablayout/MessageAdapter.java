@@ -119,7 +119,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             if(new_date2.equals(new_date)&&i!=0){
                 viewHolder.date_text_layout.setVisibility(View.INVISIBLE);
             }else {
-                viewHolder.date_text_layout.setText(new_date);
+                viewHolder.date_text_layout.setText(new_date);//
             }
 
         }
