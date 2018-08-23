@@ -18,6 +18,8 @@ public class MyAdapter extends BaseAdapter{
     private LayoutInflater myInflater;
     private List<ArtListItem> artlists;
     private String nowuser;
+    private String[] SportICON={"運","氧","走","跑","伏","坐"};//只是對照表;
+
     public MyAdapter(Context context,List<ArtListItem> theartlist,String nowuserID){
         myInflater=LayoutInflater.from(context);
         this.artlists=theartlist;
@@ -44,16 +46,19 @@ public class MyAdapter extends BaseAdapter{
         TextView txtCon;
         TextView txtGdnum;
         TextView txtRsnum;
+        TextView txtClass;
         public ViewHolder(TextView thetxtArt,
                           TextView thetxtAut,
                           TextView thetxtCon,
                           TextView thetxtGdnum,
-                          TextView thetxtRsnum){
+                          TextView thetxtRsnum,
+                          TextView thetxtClass){
             this.txtArt = thetxtArt;
             this.txtAut = thetxtAut;
             this.txtCon=thetxtCon;
             this.txtGdnum=thetxtGdnum;
             this.txtRsnum=thetxtRsnum;
+            this.txtClass=thetxtClass;
         }
     }
     @Override
@@ -66,7 +71,8 @@ public class MyAdapter extends BaseAdapter{
                     (TextView) convertView.findViewById(R.id.myAut),
                     (TextView) convertView.findViewById(R.id.myCon),
                     (TextView) convertView.findViewById(R.id.myGoodnum),
-                    (TextView) convertView.findViewById(R.id.myResnum)
+                    (TextView) convertView.findViewById(R.id.myResnum),
+                    (TextView) convertView.findViewById(R.id.myClassICON)
 
             );
             convertView.setTag(holder);
@@ -79,6 +85,7 @@ public class MyAdapter extends BaseAdapter{
         holder.txtCon.setText(artlistitem.getMyCon());
         holder.txtGdnum.setText(""+artlistitem.getMyGoodnum());
         holder.txtRsnum.setText(""+(artlistitem.getMyResnum()));
+        holder.txtClass.setText(SportICON[artlistitem.getMyClass()]);
         return convertView;
     }
 }

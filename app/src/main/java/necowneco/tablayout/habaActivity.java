@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+
 public class habaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,Allsport.OnFragmentInteractionListener,
         AddArt.OnFragmentInteractionListener,theArt.OnFragmentInteractionListener,
@@ -59,6 +60,7 @@ public class habaActivity extends AppCompatActivity
     final ArrayList<String> shsolCon=new ArrayList<String>();
     final ArrayList<Integer> shsolGd=new ArrayList<Integer>();
     final ArrayList<Integer> shsolRn=new ArrayList<Integer>();
+    final ArrayList<Integer> shsolClass=new ArrayList<Integer>();
     public static int fragcount = 0,BacktheArt=0,BacktoID = 0;
     final String nowuser="369";//測試用之預設使用者
     String isReArt=null;
@@ -177,7 +179,7 @@ public class habaActivity extends AppCompatActivity
     }
 
     public void BackArtList(){//<跳頁>回到貼文列表
-        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgoodCount(),artresCount());
+        Allsport all=Allsport.newInstance(artID,artTitle,autID,artCon,artgoodCount(),artresCount(),artClassNum());
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
                 R.id.haba,
@@ -186,9 +188,8 @@ public class habaActivity extends AppCompatActivity
         ).commit();
     }
 
-
     public void ToSearchList(){//<跳頁>進入搜尋與篩選頁面
-        SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn);
+        SearchArtList searchartlist=SearchArtList.newInstance(shsolID,shsolTitle,shsolAut,shsolCon,shsolGd,shsolRn,shsolClass);
         fragcount++;
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().replace(
@@ -260,6 +261,22 @@ public class habaActivity extends AppCompatActivity
         }
         return mycount;
     }
+    public ArrayList<Integer> artClassNum() {//<資料處理>取得貼文列表中每則貼文之運動類別，展開貼文列表時使用
+        ArrayList<Integer> mycount=new ArrayList<Integer>();
+        for(int i=0;i<artID.size();i++){
+            mycount.add(getClassNumber(artClass.get(i)));
+        }
+        return mycount;
+    }
+    public int getClassNumber(String theClass){//<資料處理>將字串的運動類別轉換為數值ID
+        int theNumber=0;
+        for(int i=0;i<SportList.length;i++){
+            if(theClass==SportList[i]){
+                theNumber=i;
+            }
+        }
+        return theNumber;
+    }
     private void SelAndSearch(String SearchValue, boolean FunctionType) {//<資料處理>預先準備好符合搜尋或篩選條件的貼文項目列表
         //Type=true:搜尋,false:篩選
         shsolID.clear();
@@ -268,15 +285,17 @@ public class habaActivity extends AppCompatActivity
         shsolCon.clear();
         shsolGd.clear();
         shsolRn.clear();
-        if(FunctionType) {//使用搜尋元件
+        shsolClass.clear();
+        if(FunctionType) {//使用搜尋元件，只搜尋標題
             for (int i = 0; i < artID.size(); i++) {
-                if (artTitle.get(i).contains(SearchValue)||artCon.get(i).contains(SearchValue)) {
+                if (artTitle.get(i).contains(SearchValue)/*||artCon.get(i).contains(SearchValue)*/) {
                     shsolID.add(i);
                     shsolTitle.add(artTitle.get(i));
                     shsolAut.add(autID.get(i));
                     shsolCon.add(artCon.get(i));
                     shsolGd.add(artgood.get(i).size());
                     shsolRn.add(resList.get(i).size());
+                    shsolClass.add(getClassNumber(artClass.get(i)));
                 }
             }
             Toast.makeText(this, "搜尋："+SearchValue, Toast.LENGTH_SHORT).show();

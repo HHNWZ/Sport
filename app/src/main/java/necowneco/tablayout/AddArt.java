@@ -96,11 +96,14 @@ public class AddArt extends Fragment implements View.OnTouchListener {
         final View view = inflater.inflate(R.layout.fragment_add_art, null);
         view.setOnTouchListener(this);
         ((habaActivity)getActivity()).fabOut();
+        //String BlankTest="";
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportClassSpinner);
         Button submitArt=(Button)view.findViewById(R.id.inputart);
         final EditText ct=(EditText)view.findViewById(R.id.ConTitle);
+        //ct.setText(BlankTest);
         final Button finishbtn=(Button)view.findViewById(R.id.finidhBTN);
         final EditText cc=(EditText)view.findViewById(R.id.Concon);
+        //cc.setText(BlankTest);
         final TextView at=(TextView)view.findViewById(R.id.theAddType);
         final Button seleimgbtn=(Button)view.findViewById(R.id.seleImgBtn);
         final String[] SportList = {"所有運動","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
@@ -144,26 +147,32 @@ public class AddArt extends Fragment implements View.OnTouchListener {
             @Override
             public void onClick(View v) {
                 //onButtonPressed(spinner.getSelectedItem().toString(),ct.getText().toString());
-                if(addType=="編輯"){
-                    ((habaActivity)getActivity()).reSetArtDATA(
-                            theID,ct.getText().toString(),
-                            spinner.getSelectedItem().toString(),
-                            cc.getText().toString()
-                    );
-                }else if(addType=="回覆"){//回覆
-                    ((habaActivity) getActivity()).addartDATA(
-                            ct.getText().toString(),
-                            spinner.getSelectedItem().toString(),
-                            cc.getText().toString(),
-                            theTitle
-                    );
-                }else{//新增
-                    ((habaActivity) getActivity()).addartDATA(
-                            ct.getText().toString(),
-                            spinner.getSelectedItem().toString(),
-                            cc.getText().toString(),
-                            null
-                    );
+                if(ct.getText().toString().matches("")||
+                        spinner.getSelectedItemPosition()==0||
+                        cc.getText().toString().matches("")){
+                    Toast.makeText(getActivity(), "未輸入標題或內容，或是未選擇運動項目", Toast.LENGTH_SHORT).show();
+                }else {
+                    if (addType == "編輯") {
+                        ((habaActivity) getActivity()).reSetArtDATA(
+                                theID, ct.getText().toString(),
+                                spinner.getSelectedItem().toString(),
+                                cc.getText().toString()
+                        );
+                    } else if (addType == "回覆") {//回覆
+                        ((habaActivity) getActivity()).addartDATA(
+                                ct.getText().toString(),
+                                spinner.getSelectedItem().toString(),
+                                cc.getText().toString(),
+                                theTitle
+                        );
+                    } else {//新增
+                        ((habaActivity) getActivity()).addartDATA(
+                                ct.getText().toString(),
+                                spinner.getSelectedItem().toString(),
+                                cc.getText().toString(),
+                                null
+                        );
+                    }
                 }
             }
         });

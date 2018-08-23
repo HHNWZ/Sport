@@ -10,12 +10,14 @@ public class ArtListItem {
     private String myCon;
     private int myGoodnum;
     private int myResnum;
-    public ArtListItem(String theTitle,String theAut,String theCon,int theGoodnum,int theResnum){
+    private int myClass;
+    public ArtListItem(String theTitle,String theAut,String theCon,int theGoodnum,int theResnum,int theClass){
         this.myTitle=theTitle;
         this.myAut=theAut;
         this.myCon=theCon;
         this.myGoodnum=theGoodnum;
         this.myResnum=theResnum;
+        this.myClass=theClass;
     }
     public String getMyTitle(){
         return myTitle;
@@ -35,4 +37,6 @@ public class ArtListItem {
     public void setMyGoodnum(int theGoodnum){this.myGoodnum=theGoodnum;}
     public int getMyResnum(){return myResnum;}
     public void setMyResnum(int theResnum){this.myResnum=theResnum;}
+    public int getMyClass(){return myClass;}
+    public void setMyClass(int theClass){this.myClass=theClass;}
 }

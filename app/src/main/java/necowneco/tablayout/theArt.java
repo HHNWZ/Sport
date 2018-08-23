@@ -188,7 +188,7 @@ public class theArt extends Fragment implements View.OnTouchListener {
                 /*Toast.makeText(getActivity(), "留言："+theartNewres.getText(), Toast.LENGTH_SHORT).show();
                 ((habaActivity) getActivity()).addRes(mParam4,theartNewres.getText().toString());
                 ((habaActivity) getActivity()).toArtcon(mParam4);*/
-                ((habaActivity) getActivity()).toResList(mTarID-1);
+                ((habaActivity) getActivity()).toResList(mTarID);
             }
         });
         /*toreart.setOnClickListener(new View.OnClickListener() {

@@ -34,6 +34,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
     private static final String ARG_PARAM4 = "param4";
     private static final String ARG_PARAM5 = "param5";
     private static final String ARG_PARAM6 = "param6";
+    private static final String ARG_PARAM7 = "param7";
 
     // TODO: Rename and change types of parameters
     private ArrayList<Integer> ArtsID;
@@ -42,6 +43,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
     private ArrayList ArtsCon;
     private ArrayList ArtsGoodnum;
     private ArrayList ArtsResnum;
+    private ArrayList ArtsClass;
 
     private ListView listV;
     List<ArtListItem> art_list = new ArrayList<ArtListItem>();
@@ -66,7 +68,8 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
             ArrayList<String> artsautid,
             ArrayList<String> artscon,
             ArrayList<Integer> artsgoodnum,
-            ArrayList<Integer> artsresnum) {
+            ArrayList<Integer> artsresnum,
+            ArrayList<Integer> artsclass) {
         SearchArtList fragment = new SearchArtList();
         Bundle args = new Bundle();
         args.putIntegerArrayList(String.valueOf(ARG_PARAM1), artsid);
@@ -75,6 +78,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
         args.putStringArrayList(String.valueOf(ARG_PARAM4), artscon);
         args.putIntegerArrayList(String.valueOf(ARG_PARAM5), artsgoodnum);
         args.putIntegerArrayList(String.valueOf(ARG_PARAM6), artsresnum);
+        args.putIntegerArrayList(String.valueOf(ARG_PARAM7), artsclass);
         fragment.setArguments(args);
         return fragment;
     }
@@ -89,6 +93,7 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
             ArtsCon = getArguments().getStringArrayList(String.valueOf(ARG_PARAM4));
             ArtsGoodnum=getArguments().getIntegerArrayList(String.valueOf(ARG_PARAM5));
             ArtsResnum=getArguments().getIntegerArrayList(String.valueOf(ARG_PARAM6));
+            ArtsClass=getArguments().getIntegerArrayList(String.valueOf(ARG_PARAM7));
         }
     }
 
@@ -128,7 +133,8 @@ public class SearchArtList extends Fragment implements View.OnTouchListener,
                             ArtsAutID.get(i).toString(),
                             ArtsCon.get(i).toString(),
                             (int)ArtsGoodnum.get(i),
-                            (int)ArtsResnum.get(i)
+                            (int)ArtsResnum.get(i),
+                            (int)ArtsClass.get(i)
                     )
             );
         }
