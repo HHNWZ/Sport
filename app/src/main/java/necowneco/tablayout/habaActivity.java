@@ -268,9 +268,9 @@ public class habaActivity extends AppCompatActivity
         shsolCon.clear();
         shsolGd.clear();
         shsolRn.clear();
-        if(FunctionType) {//使用搜尋元件
+        if(FunctionType) {//使用搜尋元件，只搜尋標題
             for (int i = 0; i < artID.size(); i++) {
-                if (artTitle.get(i).contains(SearchValue)||artCon.get(i).contains(SearchValue)) {
+                if (artTitle.get(i).contains(SearchValue)/*||artCon.get(i).contains(SearchValue)*/) {
                     shsolID.add(i);
                     shsolTitle.add(artTitle.get(i));
                     shsolAut.add(autID.get(i));
