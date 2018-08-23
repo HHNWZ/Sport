@@ -120,7 +120,7 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
         final View view = inflater.inflate(R.layout.fragment_kelvin_aerobic_exercise_invitation, null);
         view.setOnTouchListener(this);
         aerobic_excerciseToolbar=(Toolbar)view.findViewById(R.id.aerobic_exercise_bar);
-        aerobic_excerciseToolbar.setTitle("有氧運動邀請內容");
+        aerobic_excerciseToolbar.setTitle("瑜伽運動邀請內容");
         aerobic_excerciseToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         aerobic_excerciseToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,7 +202,7 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
                 }else{
                     aerobic_exercise_minute=Integer.parseInt(edit_text_of_aerobic_exercise_minute.getText().toString());
                     if(aerobic_exercise_minute<10||aerobic_exercise_minute>20){
-                        toast.makeText(getActivity(), "有氧運動操作時間不能小與10分鐘或大於20分鐘", Toast.LENGTH_SHORT).show();
+                        toast.makeText(getActivity(), "瑜伽運動操作時間不能小與10分鐘或大於20分鐘", Toast.LENGTH_SHORT).show();
                         edit_text_of_aerobic_exercise_minute.setText(" ");
                         imm_of_aerobic_exercise_invitation.showSoftInput(edit_text_of_aerobic_exercise_minute, 0);
                     }else{
@@ -212,9 +212,9 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
                             newFragment.setTargetFragment(kelvin_aerobic_exercise_invitation.this,start_time_data_of_aerobic_exercise_invitation);
                             newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
                         }else{
-                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("有氧運動","時間",edit_text_of_aerobic_exercise_minute.getText().toString(),"分鐘",start_year_of_kelvin_aerobic_exercise_invitation,start_month_of_kelvin_aerobic_exercise_invitation,start_day_of_kelvin_aerobic_exercise_invitation,start_hour_of_kelvin_aerobic_exercise_invitation,start_minute_of_kelvin_aerobic_exercise_invitation,end_year_of_kelvin_aerobic_exercise_invitation,end_month_of_kelvin_aerobic_exercise_invitation,end_day_of_kelvin_aerobic_exercise_invitation,end_hour_of_kelvin_aerobic_exercise_invitation,end_minute_of_kelvin_aerobic_exercise_invitation);
+                            FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("瑜伽運動","時間",edit_text_of_aerobic_exercise_minute.getText().toString(),"分鐘",start_year_of_kelvin_aerobic_exercise_invitation,start_month_of_kelvin_aerobic_exercise_invitation,start_day_of_kelvin_aerobic_exercise_invitation,start_hour_of_kelvin_aerobic_exercise_invitation,start_minute_of_kelvin_aerobic_exercise_invitation,end_year_of_kelvin_aerobic_exercise_invitation,end_month_of_kelvin_aerobic_exercise_invitation,end_day_of_kelvin_aerobic_exercise_invitation,end_hour_of_kelvin_aerobic_exercise_invitation,end_minute_of_kelvin_aerobic_exercise_invitation);
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            transaction.add(R.id.fragment_kelvin_running_invitation,kelvin_running_tag_friend1);
+                            transaction.add(R.id.content1_main,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();
                         }
@@ -236,7 +236,7 @@ public class kelvin_aerobic_exercise_invitation extends Fragment implements View
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:有氧運動\n時間:"+edit_text_of_aerobic_exercise_minute.getText().toString()+"分鐘\n開始日期:"+start_year_of_kelvin_aerobic_exercise_invitation+"年"+start_month_of_kelvin_aerobic_exercise_invitation+"月"+start_day_of_kelvin_aerobic_exercise_invitation+"號\n開始時間:"+start_hour_of_kelvin_aerobic_exercise_invitation+":"+start_minute_of_kelvin_aerobic_exercise_invitation+"\n結束日期:"+end_year_of_kelvin_aerobic_exercise_invitation+"年"+end_month_of_kelvin_aerobic_exercise_invitation+"月"+end_day_of_kelvin_aerobic_exercise_invitation+"號\n結束時間"+end_hour_of_kelvin_aerobic_exercise_invitation+":"+end_minute_of_kelvin_aerobic_exercise_invitation);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "一起運動吧！\n運動種類:瑜伽運動\n時間:"+edit_text_of_aerobic_exercise_minute.getText().toString()+"分鐘\n開始日期:"+start_year_of_kelvin_aerobic_exercise_invitation+"年"+start_month_of_kelvin_aerobic_exercise_invitation+"月"+start_day_of_kelvin_aerobic_exercise_invitation+"號\n開始時間:"+start_hour_of_kelvin_aerobic_exercise_invitation+":"+start_minute_of_kelvin_aerobic_exercise_invitation+"\n結束日期:"+end_year_of_kelvin_aerobic_exercise_invitation+"年"+end_month_of_kelvin_aerobic_exercise_invitation+"月"+end_day_of_kelvin_aerobic_exercise_invitation+"號\n結束時間"+end_hour_of_kelvin_aerobic_exercise_invitation+":"+end_minute_of_kelvin_aerobic_exercise_invitation);
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.app_name)));
 

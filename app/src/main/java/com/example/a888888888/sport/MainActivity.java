@@ -1,17 +1,11 @@
 package com.example.a888888888.sport;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -34,7 +28,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +38,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
-import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
@@ -56,27 +48,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Timer;
 
-import kelvin.tablayout.Aerobic_exercise_task;
 import kelvin.tablayout.ChatActivity;
+import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.ProfileActivity;
-import kelvin.tablayout.Push_up_task;
 import kelvin.tablayout.RegisterActivity;
-import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
-import kelvin.tablayout.Walking_task;
-import kelvin.tablayout.kelvin_tab_layout;
+import kelvin.tablayout.Time;
+import kelvin.tablayout.TimerTaskTest;
+import kelvin.tablayout.Week;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
@@ -125,12 +117,18 @@ public class  MainActivity extends AppCompatActivity
     private Toolbar mToolboar;
     private PieChart_View pieView;
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
-    private DatabaseReference mUserRef;
+    private static DatabaseReference mUserRef;
     private FirebaseAuth mAuth;
     private String mCurrent_state,onesignal_email,device_token;
     String channelId = "love";
     String channelName = "我的最愛";
     private static Context context;
+    public Date dt2=null;
+    public Button kel,hal,del,over,sport;
+    private static String crunches_week_record;
+
+
+
     //private DatabaseReference mUsersDatabase;
 
 
@@ -159,7 +157,7 @@ public class  MainActivity extends AppCompatActivity
                                 walkdata.setText(jasondata.getString("walk"));
                                 airdata.setText(jasondata.getString("air"));
                                 pushdata.setText(jasondata.getString("push"));
-                                sitdata.setText(jasondata.getString("sit"));
+                                sitdata.setText(jasondata.getString("sit"));//dd
                             }
 
                         } catch (JSONException e) {
@@ -292,7 +290,27 @@ public class  MainActivity extends AppCompatActivity
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
+        Toast.makeText(this, "onCreate", Toast.LENGTH_LONG).show();
 
+        Calendar cal=Calendar.getInstance();
+        int y=cal.get(Calendar.YEAR);
+        int m=cal.get(Calendar.MONTH)+1;
+        int d=cal.get(Calendar.DAY_OF_MONTH);
+        String clear=null;
+        String date=null;
+        Date firstTime=null;
+        clear=y+"/"+m+"/"+d+" 23:59:00";
+        //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
+        SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+
+        try {
+            firstTime = dateFormatter.parse(clear);
+            //Toast.makeText(MainActivity.this,""+dateFormatter.format(firstTime),Toast.LENGTH_LONG).show();
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -318,7 +336,11 @@ public class  MainActivity extends AppCompatActivity
         MenuItem menu_Logout = menu.findItem(R.id.Logout);
         final String user_id = getIntent().getStringExtra("user_id");
 
-
+         kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
+        hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
+         del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
+         over = (Button)findViewById(R.id.button3); //連至直播的按鈕
+         sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
 
 
         /*if(Login.user !=null)
@@ -337,12 +359,16 @@ public class  MainActivity extends AppCompatActivity
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
+            Timer timer = new Timer();
+
+            Log.i("數據crunches_week_record1",""+crunches_week_record);
+            timer.schedule(new TimerTaskTest(), firstTime);
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
             menu_Logout.setVisible(true);
-
+            kel.setVisibility(View.VISIBLE);
             mUserRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -350,11 +376,77 @@ public class  MainActivity extends AppCompatActivity
                     String user_image = dataSnapshot.child("thumb_image").getValue().toString();
 
                     username.setText(user_name);
+                    crunches_week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
+                    String running_week_record=dataSnapshot.child("exercise_count").child("running").child("week_record").getValue().toString();
+                    String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
+                    String walking_week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
+                    String yoga_week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
+                    String DateCheck=dataSnapshot.child("DateCheck").getValue().toString();
+                    String Week= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
+                    String nowDate=Time.getToDate(System.currentTimeMillis());
+                    Log.i("現在是1",DateCheck);
+                    Log.i("現在是",nowDate);
+                    float crunches_week_record_float=Float.parseFloat(crunches_week_record);
+                    float running_week_record_float=Float.parseFloat(running_week_record);
+                    float squats_week_record_float=Float.parseFloat(squats_week_record);
+                    float walking_week_record_float=Float.parseFloat(walking_week_record);
+                    long yoga_week_record_long=Long.parseLong(yoga_week_record);
+                    pieView = (PieChart_View) findViewById(R.id.pie_view);
+                    ArrayList<PieChartBean> lists = new ArrayList<>();
+                    DecimalFormat df = new DecimalFormat("0.00");
+                    TextView textView6=(TextView)findViewById(R.id.textView6);
+                    TextView textView7=(TextView)findViewById(R.id.textView7);
+                    TextView textView8=(TextView)findViewById(R.id.textView8);
+                    TextView textView10=(TextView)findViewById(R.id.textView10);
+                    TextView textView9=(TextView)findViewById(R.id.textView9);
+                    if(Week.equals("一")){
+                        if(DateCheck.equals(nowDate)){
+                            lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
+                            lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, ""));//walkdata
+                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), ""));//airdata
+                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, ""));//pushdata
+                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, ""));//sitdata
+                            pieView.setData(lists);
+                            textView6.setText(""+running_week_record_float+"公里");
+                            textView7.setText(""+walking_week_record_float+"公里");
+                            textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
+                            textView10.setText(""+squats_week_record+"次");
+                            textView9.setText(""+crunches_week_record+"次");
+                        }else{
+                            lists.add(new PieChartBean(Color.parseColor("#38b048"), 0, ""));//rundata
+                            lists.add(new PieChartBean(Color.parseColor("#189428"), 0, ""));//walkdata
+                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 0, ""));//airdata
+                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 0, ""));//pushdata
+                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, ""));//sitdata
+                            pieView.setData(lists);
+                            textView6.setText("0公里");
+                            textView7.setText("0公里");
+                            textView8.setText("0秒");
+                            textView10.setText("0次");
+                            textView9.setText("0次");
+                            mUserRef.child("DateCheck").setValue(nowDate);
+                            mUserRef.child("exercise_count").child("crunches").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("running").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("squats").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("yoga").child("week_record").setValue(0);
 
-                    //OneSignal.deleteTag("User_Device_Token");
-                    //onesignal_email= device_token;
-                    //OneSignal.sendTag("User_Device_Token",onesignal_email);
-                    //Toast.makeText(MainActivity.this, onesignal_email, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else {
+                        lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
+                        lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, ""));//walkdata
+                        lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), ""));//airdata
+                        lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, ""));//pushdata
+                        lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, ""));//sitdata
+                        pieView.setData(lists);
+                        textView6.setText(""+running_week_record_float+"公里");
+                        textView7.setText(""+walking_week_record_float+"公里");
+                        textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
+                        textView10.setText(""+squats_week_record+"次");
+                        textView9.setText(""+crunches_week_record+"次");
+                    }
+
                     Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                 }
 
@@ -363,6 +455,7 @@ public class  MainActivity extends AppCompatActivity
 
                 }
             });
+            Log.i("數據crunches_week_record2",""+crunches_week_record);
 
 
 
@@ -372,6 +465,7 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(false);
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
+            kel.setVisibility(View.INVISIBLE);
 
         }
 
@@ -390,14 +484,9 @@ public class  MainActivity extends AppCompatActivity
             fpush = Float.parseFloat(pushdata.getText().toString());
             fsit = Float.parseFloat(sitdata.getText().toString());
         }*/
-            pieView = (PieChart_View) findViewById(R.id.pie_view);
-            ArrayList<PieChartBean> lists = new ArrayList<>();
-            lists.add(new PieChartBean(Color.parseColor("#38b048"), 50, "跑步"));//rundata
-            lists.add(new PieChartBean(Color.parseColor("#189428"), 60, "走路"));//walkdata
-            lists.add(new PieChartBean(Color.parseColor("#349bb3"), 80, "有氧"));//airdata
-            lists.add(new PieChartBean(Color.parseColor("#2671ab"), 120, "扶地挺身"));//pushdata
-            lists.add(new PieChartBean(Color.parseColor("#2c618a"), 140, "仰臥起坐"));//sitdata
-            pieView.setData(lists);
+
+        Log.i("數據crunches_week_record3",""+crunches_week_record);
+
 
         //食物列表
         food_list.add("米飯");
@@ -419,11 +508,7 @@ public class  MainActivity extends AppCompatActivity
         food_KLL.add(65);
         food_KLL.add(239);
         food_KLL.add(106);
-        Button kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
-        Button hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
-        Button del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
-        Button over = (Button)findViewById(R.id.button3); //連至直播的按鈕
-        Button sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
+
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         rundata =(TextView)findViewById(R.id.textView6);
         walkdata =(TextView)findViewById(R.id.textView7);
@@ -438,7 +523,8 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 if(true) {
                     Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, kelvin_tab_layout.class);
+                    intent.setClass(MainActivity.this, Exercise_main.class);
+
                     startActivity(intent);
                     MainActivity.this.finish();
                 }
@@ -659,7 +745,38 @@ public class  MainActivity extends AppCompatActivity
                 blankfragmentday.getTag()
         ).commit();
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "onStop", Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(this, "onDestroy", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this, "onPause", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, "onResume", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "onStart", Toast.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(this, "onRestart", Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void onFragmentInteraction(String Tag, String number) {
@@ -735,7 +852,7 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-    class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
+    public static class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
 
 
         public String user_id_send,exercise_data_from;
@@ -761,42 +878,57 @@ public class  MainActivity extends AppCompatActivity
                 if(activityToBeOpened != null && activityToBeOpened.equals("ProfileActivity")){
                     Log.i("OneSignalExample", "customkey set with value: " + activityToBeOpened);
                     Log.i("我在這裡","Chat_send_id："+user_id_send);
-                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                    Intent intent = new Intent(getContext(), ProfileActivity.class);
                     intent.putExtra("user_id",user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
 
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("ChatActivity")){
-                    Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+                    Intent intent = new Intent(getContext(), ChatActivity.class);
                     intent.putExtra("user_id",user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Aerobic_exercise_task")){
-                    Intent intent = new Intent(getApplicationContext(), Aerobic_exercise_task.class);
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Yoga_task")){
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","瑜伽每週任務");
+                    intent.putExtra("exerciseWeekTitle","做瑜伽");
+                    intent.putExtra("exerciseWeekUnit","分鐘");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Push_up_task")){
-                    Intent intent = new Intent(getApplicationContext(), Push_up_task.class);
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Squats_task")){
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","深蹲每週任務");
+                    intent.putExtra("exerciseWeekTitle","做深蹲");
+                    intent.putExtra("exerciseWeekUnit","次");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
-                    Intent intent = new Intent(getApplicationContext(), Running_task.class);
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","跑步每週任務");
+                    intent.putExtra("exerciseWeekTitle","去跑步");
+                    intent.putExtra("exerciseWeekUnit","公里");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Sit_up_task")){
-                    Intent intent = new Intent(getApplicationContext(), Sit_up_task.class);
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("Crunches_task")){
+                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
+                    intent.putExtra("exerciseWeekTitle","做仰臥起坐");
+                    intent.putExtra("exerciseWeekUnit","次");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
-                    Intent intent = new Intent(getApplicationContext(), Walking_task.class);
+                    Intent intent = new Intent(getContext(),Sit_up_task.class);
+                    intent.putExtra("ToolbarTitle","步行每週任務");
+                    intent.putExtra("exerciseWeekTitle","去步行");
+                    intent.putExtra("exerciseWeekUnit","公里");
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    getContext().startActivity(intent);
                 }
             }
 
@@ -808,6 +940,7 @@ public class  MainActivity extends AppCompatActivity
 
         }
     }
+
 
 
 }

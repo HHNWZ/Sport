@@ -22,10 +22,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,20 +71,32 @@ public class ChatActivity extends AppCompatActivity {
     private String end_day_of_invitation;
     private String end_hour_of_invitation;
     private String end_minute_of_invitation;
+    private static String online;
+    private static String button_online;
+    private String mCurrentUserId;
+    private String Uid;
+    public static String my_name;
+    public static String image;
+    public static String my_image;
+
     private Toolbar mChatToolbar;
 
     private DatabaseReference mRootRef;
+    private DatabaseReference mUserRef;
+    private DatabaseReference myUsersDatabase;
+
+    private FirebaseAuth mAuth;
 
     private TextView mTitleView;
     private TextView mLastSeenView;
+
     private CircleImageView mProfileImage;
-    private FirebaseAuth mAuth;
-    private String mCurrentUserId;
-    private String Uid;
 
     private ImageButton mChatAddBtn;
     private ImageButton mChatSendBtn;
+
     private EditText mChatMessageView;
+
 
     private RecyclerView mMessagesList;
     private SwipeRefreshLayout mRefreshLayout;
@@ -98,14 +113,11 @@ public class ChatActivity extends AppCompatActivity {
     // Storage Firebase
     private StorageReference mImageStorage;
 
-
     //New Solution
     private int itemPos = 0;
 
     private String mLastKey = "";
     private String mPrevKey = "";
-
-
 
 
     @Override
@@ -115,22 +127,24 @@ public class ChatActivity extends AppCompatActivity {
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
 
         mChatToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
         setSupportActionBar(mChatToolbar);
-
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUserId = mAuth.getCurrentUser().getUid();
+        mUserRef= FirebaseDatabase.getInstance().getReference();
 
-        mChatUser = getIntent().getStringExtra("user_id");
-        //String userName = getIntent().getStringExtra("user_name");
+
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUserId = mAuth.getCurrentUser().getUid();//自己的id
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());//讀取自己的資料
+        mChatUser = getIntent().getStringExtra("user_id");//對方的id
+
         exercise_type=getIntent().getStringExtra("exercise_type");
         exercise_data_count=getIntent().getStringExtra("exercise_data_count");
         exercise_data=getIntent().getStringExtra("exercise_data");
@@ -147,7 +161,7 @@ public class ChatActivity extends AppCompatActivity {
         end_minute_of_invitation=getIntent().getStringExtra("end_minute_of_invitation");
 
 
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//查找xml文件並套用
         View action_bar_view = inflater.inflate(R.layout.chat_custom_bar, null);
 
         actionBar.setCustomView(action_bar_view);
@@ -176,43 +190,50 @@ public class ChatActivity extends AppCompatActivity {
         //------- IMAGE STORAGE ---------
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
-        mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);
+        mRootRef.child("Chat").child(mCurrentUserId).child(mChatUser).child("seen").setValue(true);//初始對方的信息
+        mUserRef.child("Users");
+        myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
 
-        loadMessages();
+        loadMessages();//載入資料
         if(exercise_data!=null){
-            mChatMessageView.setText(exercise_type+":"+exercise_data+exercise_unit+"\n"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation+"\n"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
+            mChatMessageView.setText(exercise_type+exercise_data+exercise_unit+"\n"+start_year_of_invitation+"年"+start_month_of_invitation+"月"+start_day_of_invitation+"號 "+start_hour_of_invitation+":"+start_minute_of_invitation+"\n"+end_year_of_invitation+"年"+end_month_of_invitation+"月"+end_day_of_invitation+"號 "+end_hour_of_invitation+":"+end_minute_of_invitation);
         }else {
             mChatMessageView.setText("");
         }
+        myUsersDatabase.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                my_name=dataSnapshot.child("name").getValue().toString();
+                my_image=dataSnapshot.child("thumb_image").getValue().toString();
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-        //mTitleView.setText(userName);
+            }
+        });
 
         mRootRef.child("Users").child(mChatUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String online = dataSnapshot.child("online").getValue().toString();
-                String image = dataSnapshot.child("image").getValue().toString();
+                online = dataSnapshot.child("online").getValue().toString();
+                image = dataSnapshot.child("image").getValue().toString();
                 String userName= dataSnapshot.child("name").getValue().toString();
                 Picasso.with(ChatActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
                 mTitleView.setText(userName);
                 if(online.equals("true")) {
 
                     mLastSeenView.setText("在線");
-
                 } else {
 
                     GetTimeAgo getTimeAgo = new GetTimeAgo();
 
                     long lastTime = Long.parseLong(online);
 
-                    String lastSeenTime = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
-
+                    String lastSeenTime =getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
                     mLastSeenView.setText(lastSeenTime);
-
                 }
-
             }
 
             @Override
@@ -222,18 +243,18 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-        mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+        mRootRef.child("Chat").child(mCurrentUserId).addValueEventListener(new ValueEventListener() {//用自己的id在chat找
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!dataSnapshot.hasChild(mChatUser)){
+                if(!dataSnapshot.hasChild(mChatUser)){//如果有對方的id存在
 
                     Map chatAddMap = new HashMap();
                     chatAddMap.put("seen", false);
                     chatAddMap.put("timestamp", ServerValue.TIMESTAMP);
 
                     Map chatUserMap = new HashMap();
-                    chatUserMap.put("Chat/" + mCurrentUserId + "/" + mChatUser, chatAddMap);
+                    chatUserMap.put("Chat/" + mCurrentUserId + "/" + mChatUser, chatAddMap);//判斷對方有沒有看到
                     chatUserMap.put("Chat/" + mChatUser + "/" + mCurrentUserId, chatAddMap);
 
                     mRootRef.updateChildren(chatUserMap, new DatabaseReference.CompletionListener() {
@@ -265,72 +286,83 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Uid=mChatUser;
-                //Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        int SDK_INT = android.os.Build.VERSION.SDK_INT;
-                        if (SDK_INT > 8) {
-                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                                    .permitAll().build();
-                            StrictMode.setThreadPolicy(policy);
+                button_online=online;
+                //myUsersDatabase.child(mAuth.getCurrentUser().getUid()).child("last_message_time").child(Uid).setValue(System.currentTimeMillis());
+                if(button_online.equals("true")){
+
+                }else {
+                    //Toast.makeText(ChatActivity.this, Uid, Toast.LENGTH_SHORT).show();
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
 
 
-                            try {
-                                String jsonResponse;
+                                try {
+                                    String jsonResponse;
 
-                                URL url = new URL("https://onesignal.com/api/v1/notifications");
-                                HttpURLConnection con = (HttpURLConnection) url.openConnection();
-                                con.setUseCaches(false);
-                                con.setDoOutput(true);
-                                con.setDoInput(true);
+                                    URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setUseCaches(false);
+                                    con.setDoOutput(true);
+                                    con.setDoInput(true);
 
-                                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                                con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
-                                con.setRequestMethod("POST");
+                                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                    con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                    con.setRequestMethod("POST");
+                                    Log.i("image",image.toString());
+                                    String strJsonBody = "{"
+                                            + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                            + "\"large_icon\": \""+my_image.toString()+"\","
+                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
+                                            + "\"android_background_layout\": " +
+                                            // "{\"image\": \"http://3.bp.blogspot.com/-5GNtI62kFFw/U4DK7M_fNkI/AAAAAAAAADA/nvF-d_CfBsg/s1600/wp917d5eab_06.png\","
+                                            "{\"headings_color\": \"9C27B0\"," +
+                                            "\"contents_color\": \"00695C\"},"
+                                            + "\"data\": {\"activityToBeOpened\":\"ChatActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                            + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \""+my_name.toString()+"發信息給你"+"\"}"
+                                            + "}";
 
-                                String strJsonBody = "{"
-                                        + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
-
-                                        + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
-                                        + "\"data\": {\"activityToBeOpened\":\"ChatActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                        + "\"contents\": {\"en\": \"You have new message\",\"zh-Hant\": \"你有新信息\"}"
-                                        + "}";
 
 
 
+                                    System.out.println("strJsonBody:\n" + strJsonBody);
 
-                                System.out.println("strJsonBody:\n" + strJsonBody);
+                                    byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                    con.setFixedLengthStreamingMode(sendBytes.length);
 
-                                byte[] sendBytes = strJsonBody.getBytes("UTF-8");
-                                con.setFixedLengthStreamingMode(sendBytes.length);
+                                    OutputStream outputStream = con.getOutputStream();
+                                    outputStream.write(sendBytes);
 
-                                OutputStream outputStream = con.getOutputStream();
-                                outputStream.write(sendBytes);
+                                    int httpResponse = con.getResponseCode();
+                                    System.out.println("httpResponse: " + httpResponse);
 
-                                int httpResponse = con.getResponseCode();
-                                System.out.println("httpResponse: " + httpResponse);
+                                    if (httpResponse >= HttpURLConnection.HTTP_OK
+                                            && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                        Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    } else {
+                                        Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    }
+                                    System.out.println("jsonResponse:\n" + jsonResponse);
 
-                                if (httpResponse >= HttpURLConnection.HTTP_OK
-                                        && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-                                    Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
-                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                                    scanner.close();
-                                } else {
-                                    Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
-                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-                                    scanner.close();
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
                                 }
-                                System.out.println("jsonResponse:\n" + jsonResponse);
-
-                            } catch (Throwable t) {
-                                t.printStackTrace();
                             }
                         }
-                    }
-                });
-                sendMessage();
+                    });
+                }
+
+                sendMessage();//發送信息
 
             }
         });
@@ -368,7 +400,24 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
 
+        mUserRef.child("online").setValue("true");
+
+
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -378,16 +427,16 @@ public class ChatActivity extends AppCompatActivity {
 
             Uri imageUri = data.getData();
 
-            final String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
-            final String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
+            final String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;//自己的id先在到對方id
+            final String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;//對方的id在到自己的id
 
             DatabaseReference user_message_push = mRootRef.child("messages")
-                    .child(mCurrentUserId).child(mChatUser).push();
+                    .child(mCurrentUserId).child(mChatUser).push();//用自己的id在去差子節點別人的id
 
-            final String push_id = user_message_push.getKey();
+            final String push_id = user_message_push.getKey();//唯一值
 
 
-            StorageReference filepath = mImageStorage.child("message_images").child( push_id + ".jpg");
+            StorageReference filepath = mImageStorage.child("message_images").child( push_id + ".jpg");//雲端存資料庫
 
             filepath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -397,6 +446,13 @@ public class ChatActivity extends AppCompatActivity {
 
                         String download_url = task.getResult().getDownloadUrl().toString();
 
+                        Map mymessageMap = new HashMap();
+                        mymessageMap.put("message", download_url);
+                        mymessageMap.put("seen", false);
+                        mymessageMap.put("type", "image");
+                        mymessageMap.put("time", ServerValue.TIMESTAMP);
+                        mymessageMap.put("from", mCurrentUserId);
+                        mymessageMap.put("sendType","send");
 
                         Map messageMap = new HashMap();
                         messageMap.put("message", download_url);
@@ -404,9 +460,10 @@ public class ChatActivity extends AppCompatActivity {
                         messageMap.put("type", "image");
                         messageMap.put("time", ServerValue.TIMESTAMP);
                         messageMap.put("from", mCurrentUserId);
+                        messageMap.put("sendType","received");
 
                         Map messageUserMap = new HashMap();
-                        messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
+                        messageUserMap.put(current_user_ref + "/" + push_id, mymessageMap);
                         messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
                         mChatMessageView.setText("");
@@ -436,14 +493,13 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMoreMessages() {
 
-        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);
+        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);//自己的id在到別人的id
 
         Query messageQuery = messageRef.orderByKey().endAt(mLastKey).limitToLast(10);
 
         messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
 
                 Messages message = dataSnapshot.getValue(Messages.class);
                 String messageKey = dataSnapshot.getKey();
@@ -455,7 +511,6 @@ public class ChatActivity extends AppCompatActivity {
                 } else {
 
                     mPrevKey = mLastKey;
-
                 }
 
 
@@ -472,7 +527,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 mRefreshLayout.setRefreshing(false);
 
-                mLinearLayout.scrollToPositionWithOffset(10, 0);
+                mLinearLayout.scrollToPositionWithOffset(10, 0);//運動recyclerview
 
             }
 
@@ -501,7 +556,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void loadMessages() {
 
-        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);
+        DatabaseReference messageRef = mRootRef.child("messages").child(mCurrentUserId).child(mChatUser);//自己的id先在到對方的id
 
         Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_TO_LOAD);
 
@@ -562,13 +617,21 @@ public class ChatActivity extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(message)){
 
-            String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;
-            String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;
+            String current_user_ref = "messages/" + mCurrentUserId + "/" + mChatUser;//自己的id先在到別人的id
+            String chat_user_ref = "messages/" + mChatUser + "/" + mCurrentUserId;//別人id在到自己的id
 
             DatabaseReference user_message_push = mRootRef.child("messages")
                     .child(mCurrentUserId).child(mChatUser).push();
 
             String push_id = user_message_push.getKey();
+
+            Map mymessageMap = new HashMap();
+            mymessageMap.put("message", message);
+            mymessageMap.put("seen", false);
+            mymessageMap.put("type", "text");
+            mymessageMap.put("time", ServerValue.TIMESTAMP);
+            mymessageMap.put("from", mCurrentUserId);
+            mymessageMap.put("sendType","sent");
 
             Map messageMap = new HashMap();
             messageMap.put("message", message);
@@ -576,9 +639,10 @@ public class ChatActivity extends AppCompatActivity {
             messageMap.put("type", "text");
             messageMap.put("time", ServerValue.TIMESTAMP);
             messageMap.put("from", mCurrentUserId);
+            messageMap.put("sendType","received");
 
             Map messageUserMap = new HashMap();
-            messageUserMap.put(current_user_ref + "/" + push_id, messageMap);
+            messageUserMap.put(current_user_ref + "/" + push_id, mymessageMap);
             messageUserMap.put(chat_user_ref + "/" + push_id, messageMap);
 
             mChatMessageView.setText("");

@@ -7,7 +7,25 @@
     android:background="@drawable/side_nav_bar"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#323d4d"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:paddingBottom="8dp"
+            android:text="您目前位於文章分類列表..."
+            android:textColor="#73c4d9"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,42 +43,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="所有運動" />
+                android:text="所有運動"
+                android:textColor="#323d4d"
+                />
 
             <Button
                 android:id="@+id/sp_air"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="有氧運動" />
+                android:text="瑜伽運動"
+                android:textColor="#323d4d"
+            />
 
             <Button
                 android:id="@+id/sp_run"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="跑步" />
+                android:text="跑步"
+                android:textColor="#323d4d"
+                />
 
             <Button
                 android:id="@+id/sp_walk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="走路" />
+                android:text="走路"
+                android:textColor="#323d4d"
+               />
 
             <Button
                 android:id="@+id/sp_push"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="伏地挺身" />
+                android:text="深蹲"
+                android:textColor="#323d4d"
+               />
 
             <Button
                 android:id="@+id/sp_sit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="仰臥起坐" />
+                android:text="仰臥起坐"
+                android:textColor="#323d4d"
+                />
 
         </LinearLayout>
 

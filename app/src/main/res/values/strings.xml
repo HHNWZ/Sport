@@ -77,23 +77,23 @@
     <string name="value_maximum_and_minimum_of_running_distance">距離不能小於100米和大於5000米</string>
     <string name="login1">帳號：</string>
     <string name="login2">密碼：</string>
-    <string name="desc">Step Count</string>
-    <string name="title1">Today</string>
-    <string name="unit1">Steps</string>
+    <string name="desc">步數</string>
+    <string name="title1">今天</string>
+    <string name="unit1">步數</string>
 
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
-    <string name="connect_to_shealth">Connect to Samsung Health</string>
+    <string name="connect_to_shealth">連接到Samsung Health</string>
 
-    <string name="notice">Notice</string>
-    <string name="msg_perm_acquired">All permissions should be acquired</string>
-    <string name="msg_conn_not_available">Connection with Samsung Health is not available</string>
-    <string name="msg_req_install">Please install Samsung Health</string>
+    <string name="notice">注意</string>
+    <string name="msg_perm_acquired">應獲取所有權限</string>
+    <string name="msg_conn_not_available">無法與Samsung Health連接</string>
+    <string name="msg_req_install">請安裝Samsung Health</string>
     <string name="msg_req_upgrade">Please upgrade Samsung Health</string>
-    <string name="msg_req_enable">Please enable Samsung Health</string>
-    <string name="msg_req_agree">Please agree with Samsung Health policy</string>
-    <string name="msg_req_available">Please make Samsung Health available</string>
+    <string name="msg_req_enable">請升級Samsung Health</string>
+    <string name="msg_req_agree">請同意三星健康政策</string>
+    <string name="msg_req_available">請提供三星健康</string>
     <string name="need_a_new_account">註冊新的賬號</string>
     <string name="display_name">顯示名字</string>
     <string name="email">電郵</string>

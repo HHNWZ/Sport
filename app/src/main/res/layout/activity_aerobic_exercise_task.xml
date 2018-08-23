@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="95dp"
-        android:text="做有氧運動"
+        android:text="做瑜伽運動"
         android:textSize="30sp"
         tools:textColor="@android:color/black" />
 

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,14 +45,14 @@ public class RequestsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mMainView = inflater.inflate(R.layout.fragment_friends, container, false);
-        mUsersList1=(RecyclerView) mMainView.findViewById(R.id.friends_list);
+        mMainView = inflater.inflate(R.layout.fragment_requests, container, false);
+        mUsersList1=(RecyclerView) mMainView.findViewById(R.id.user_list);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
 
         mUsersList1.setHasFixedSize(true);
         mUsersList1.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        Log.i("為什麼","1");
 
         return mMainView;
     }
@@ -73,6 +74,8 @@ public class RequestsFragment extends Fragment {
                 newUsersViewHolder.setDisplayName(users.getName());
                 newUsersViewHolder.setUserStatus(users.getStatus());
                 newUsersViewHolder.setUserImage(users.getThumb_image(), getContext());
+                //newUsersViewHolder.setCrunchesAllCount(users.getCrunches_all_count());
+
 
                 final String user_id = getRef(position).getKey();
 
@@ -125,6 +128,12 @@ public class RequestsFragment extends Fragment {
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+
+        }
+
+        public void setCrunchesAllCount(int crunches_all_count){
+            TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
+            crunches_all_count_view.setText(""+crunches_all_count);
 
         }
 

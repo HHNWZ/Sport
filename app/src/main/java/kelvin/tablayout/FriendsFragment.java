@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,97 +38,18 @@ public class FriendsFragment extends Fragment {
 
     private DatabaseReference mFriendsDatabase;
     private DatabaseReference mUsersDatabase;
+    private DatabaseReference friendDatabase;
 
     private FirebaseAuth mAuth;
 
     private String mCurrent_user_id;
 
     private View mMainView;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private static final String ARG_PARAM3 = "param3";
-    private static final String ARG_PARAM4 = "param4";
-    private static final String ARG_PARAM5 = "param5";
-    private static final String ARG_PARAM6 = "param6";
-    private static final String ARG_PARAM7 = "param7";
-    private static final String ARG_PARAM8 = "param8";
-    private static final String ARG_PARAM9 = "param9";
-    private static final String ARG_PARAM10= "param10";
-    private static final String ARG_PARAM11 = "param11";
-    private static final String ARG_PARAM12 = "param12";
-    private static final String ARG_PARAM13 = "param13";
-    private static final String ARG_PARAM14 = "param14";
-
-    private TextView text_view_of_exercise_type,text_view_of_exercise_start_time,text_view_of_exercise_end_time;
-
-    private String exercise_type;
-    private String exercise_data_count;
-    private String exercise_data;
-    private String exercise_unit;
-    private String start_year_of_invitation;
-    private String start_month_of_invitation;
-    private String start_day_of_invitation;
-    private String start_hour_of_invitation;
-    private String start_minute_of_invitation;
-    private String end_year_of_invitation;
-    private String end_month_of_invitation;
-    private String end_day_of_invitation;
-    private String end_hour_of_invitation;
-    private String end_minute_of_invitation;
-
-    private kelvin_running_tag_friend.OnFragmentInteractionListener mListener;
-
+    public static  int k=0;
 
     public FriendsFragment() {
         // Required empty public constructor
     }
-
-    /*public static FriendsFragment newInstance(String param1, String param2, String param3, String param4, String param5, String param6, String param7, String param8, String param9, String param10, String param11,String param12,String param13,String param14) {
-        FriendsFragment fragment = new FriendsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        args.putString(ARG_PARAM3, param3);
-        args.putString(ARG_PARAM4, param4);
-        args.putString(ARG_PARAM5, param5);
-        args.putString(ARG_PARAM6, param6);
-        args.putString(ARG_PARAM7, param7);
-        args.putString(ARG_PARAM8, param8);
-        args.putString(ARG_PARAM9, param9);
-        args.putString(ARG_PARAM10, param10);
-        args.putString(ARG_PARAM11, param11);
-        args.putString(ARG_PARAM12, param12);
-        args.putString(ARG_PARAM13, param13);
-        args.putString(ARG_PARAM14,param14);
-
-
-        fragment.setArguments(args);
-        return fragment;
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            exercise_type=getArguments().getString(ARG_PARAM1);
-            exercise_data_count=getArguments().getString(ARG_PARAM2);
-            exercise_data = getArguments().getString(ARG_PARAM3);
-            exercise_unit=getArguments().getString(ARG_PARAM4);
-            start_year_of_invitation = getArguments().getString(ARG_PARAM5);
-            start_month_of_invitation = getArguments().getString(ARG_PARAM6);
-            start_day_of_invitation = getArguments().getString(ARG_PARAM7);
-            start_hour_of_invitation = getArguments().getString(ARG_PARAM8);
-            start_minute_of_invitation = getArguments().getString(ARG_PARAM9);
-            end_year_of_invitation = getArguments().getString(ARG_PARAM10);
-            end_month_of_invitation = getArguments().getString(ARG_PARAM11);
-            end_day_of_invitation = getArguments().getString(ARG_PARAM12);
-            end_hour_of_invitation = getArguments().getString(ARG_PARAM13);
-            end_minute_of_invitation= getArguments().getString(ARG_PARAM14);
-
-        }
-    }*/
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,7 +65,9 @@ public class FriendsFragment extends Fragment {
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        friendDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
+        Log.i("為什麼","2");
 
 
 
@@ -169,28 +93,20 @@ public class FriendsFragment extends Fragment {
 
 
         ) {
+            public int getItenCount(){
+                int itemCount =super.getItemCount();
+
+                return itemCount;
+            }
             @Override
             protected void populateViewHolder(final FriendsViewHolder friendsViewHolder, Friends friends, int i) {
+
 
 
 
                 friendsViewHolder.setDate(friends.getDate());
 
                 final String list_user_id = getRef(i).getKey();
-                /*final String exercise_typeFF=exercise_type.toString();
-                final String exercise_data_countFF=exercise_data_count.toString();
-                final String exercise_dataFF=exercise_data.toString();
-                final String exercise_unitFF=exercise_unit.toString();
-                final String start_year_of_invitationFF=start_year_of_invitation.toString();
-                final String start_month_of_invitationFF=start_month_of_invitation.toString();
-                final String start_day_of_invitationFF=start_day_of_invitation.toString();
-                final String start_hour_of_invitationFF=start_hour_of_invitation.toString();
-                final String start_minute_of_invitationFF=start_minute_of_invitation.toString();
-                final String end_year_of_invitationFF=end_year_of_invitation.toString();
-                final String end_month_of_invitationFF=end_month_of_invitation.toString();
-                final String end_day_of_invitationFF=end_day_of_invitation.toString();
-                final String end_hour_of_invitationFF=end_hour_of_invitation.toString();
-                final String end_minute_of_invitationFF=end_minute_of_invitation.toString();*/
 
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -208,6 +124,7 @@ public class FriendsFragment extends Fragment {
 
                         friendsViewHolder.setName(userName);
                         friendsViewHolder.setUserImage(userThumb, getContext());
+
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -236,20 +153,6 @@ public class FriendsFragment extends Fragment {
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                             chatIntent.putExtra("user_id", list_user_id);
                                             chatIntent.putExtra("user_name", userName);
-                                            /*chatIntent.putExtra("exercise_type",exercise_typeFF );
-                                            chatIntent.putExtra("exercise_data_count",exercise_data_countFF );
-                                            chatIntent.putExtra("exercise_data", exercise_dataFF);
-                                            chatIntent.putExtra("exercise_unit", exercise_unitFF);
-                                            chatIntent.putExtra("start_year_of_invitation",start_year_of_invitationFF );
-                                            chatIntent.putExtra("start_month_of_invitation", start_month_of_invitationFF);
-                                            chatIntent.putExtra("start_day_of_invitation",start_day_of_invitationFF );
-                                            chatIntent.putExtra("start_hour_of_invitation",start_hour_of_invitationFF );
-                                            chatIntent.putExtra("start_minute_of_invitation",start_minute_of_invitationFF );
-                                            chatIntent.putExtra("end_year_of_invitation", end_year_of_invitationFF);
-                                            chatIntent.putExtra("end_month_of_invitation", end_month_of_invitationFF);
-                                            chatIntent.putExtra("end_day_of_invitation", end_day_of_invitationFF);
-                                            chatIntent.putExtra("end_hour_of_invitation",end_hour_of_invitationFF );
-                                            chatIntent.putExtra("end_minute_of_invitation", end_minute_of_invitationFF);*/
                                             startActivity(chatIntent);
 
                                         }
@@ -270,8 +173,10 @@ public class FriendsFragment extends Fragment {
 
                     }
                 });
-
+                Log.i(" getItenCount()",""+ getItenCount());
+                friendDatabase.child("friend_count").setValue(getItenCount());
             }
+
         };
 
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);

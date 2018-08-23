@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.onesignal.OneSignal;
 
 public class MainActivityFireBase extends AppCompatActivity {
 
@@ -34,8 +35,14 @@ public class MainActivityFireBase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_fire_base);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .init();
 
         mAuth = FirebaseAuth.getInstance();
+        mUserRef=FirebaseDatabase.getInstance().getReference();
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         mToolbar.setTitle("運動聊天室");
@@ -76,7 +83,7 @@ public class MainActivityFireBase extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        /*FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){
 
@@ -88,7 +95,7 @@ public class MainActivityFireBase extends AppCompatActivity {
 
             mUserRef.child("online").setValue("true");
 
-        }
+        }*/
 
     }
 
@@ -97,14 +104,14 @@ public class MainActivityFireBase extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        /*FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser != null) {
 
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
 
 
-        }
+        }*/
 
     }
 

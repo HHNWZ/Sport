@@ -48,14 +48,16 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                     android:layout_weight="1"
-                    android:text="選擇圖片" />
+                    android:drawableEnd="@drawable/imagez1" />
 
                 <Button
                     android:id="@+id/finidhBTN"
                     style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="完成" />
+                    android:text="完成"
+                    android:textColor="#323d4d"
+                    />
 
             </LinearLayout>
 
