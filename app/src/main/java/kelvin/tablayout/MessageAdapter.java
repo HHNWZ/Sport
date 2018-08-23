@@ -88,7 +88,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             date_text_layout=(TextView)view.findViewById(R.id.date_text_layout);
             mymessageImage = (ImageView) view.findViewById(R.id.my_message_image_layout);
             leftLayout=(RelativeLayout)view.findViewById(R.id.left_layout);
-            rightLayout=(RelativeLayout)view.findViewById(R.id.right_layout);
+            rightLayout=(RelativeLayout)view.findViewById(R.id.right_layout);//
         }
     }
 
