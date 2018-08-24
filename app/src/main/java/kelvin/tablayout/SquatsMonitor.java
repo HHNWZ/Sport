@@ -63,7 +63,7 @@ public class SquatsMonitor extends AppCompatActivity {
         squats_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(SquatsMonitor.this,Exercise_main.class);
+                Intent intent =new Intent(SquatsMonitor.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

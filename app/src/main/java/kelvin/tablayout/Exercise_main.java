@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
+import com.ToxicBakery.viewpager.transforms.RotateUpTransformer;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.onesignal.OneSignal;
 
 import java.util.Timer;
+
+import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
 public class Exercise_main extends AppCompatActivity implements
         kelvin_push_up_invitation.OnFragmentInteractionListener,
@@ -27,15 +33,10 @@ public class Exercise_main extends AppCompatActivity implements
         kelvin_walking_invitation.OnFragmentInteractionListener
 {
 
-    private FirebaseAuth mAuth;
-    private Toolbar eToolbar;
-
-    private ViewPager eViewPager;
-    private ExercisePagerAdapter eSectionsPagerAdapter;
-
-    private DatabaseReference mUserRef;
-
-    private TabLayout eTabLayout;
+    private CoordinatorTabLayout mCoordinatorTabLayout;
+    private int[] mImageArray, mColorArray;
+    private ExercisePagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,31 +47,39 @@ public class Exercise_main extends AppCompatActivity implements
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
-        mAuth = FirebaseAuth.getInstance();
-        mUserRef= FirebaseDatabase.getInstance().getReference();
+        mViewPager = (ViewPager) findViewById(R.id.vp);
 
-        eToolbar = (Toolbar) findViewById(R.id.exercise_main_page_toolbar);
-        eToolbar.setTitle("運動記錄");
-        eToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        eToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Exercise_main.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        mSectionsPagerAdapter=new ExercisePagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        mImageArray = new int[]{
+                R.mipmap.bg_android,
+                R.mipmap.bg_ios,
+                R.mipmap.bg_js,
+                R.mipmap.bg_other,
+                R.mipmap.bg_other,};
+        mColorArray = new int[]{
+                android.R.color.holo_blue_light,
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_green_light};
+
+        mCoordinatorTabLayout = (CoordinatorTabLayout) findViewById(R.id.coordinatortablayout);
+        mCoordinatorTabLayout.setTranslucentStatusBar(this)
+                .setTitle("運動記錄")
+                .setBackEnable(true)
+                .setImageArray(mImageArray, mColorArray)
+                .setupWithViewPager(mViewPager);
 
 
+        mViewPager = (ViewPager) findViewById(R.id.vp);
 
-        //Tabs
-        eViewPager = (ViewPager) findViewById(R.id.exercise_main_tabPager);
-        eSectionsPagerAdapter = new ExercisePagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter=new ExercisePagerAdapter(getSupportFragmentManager());
 
-        eViewPager.setAdapter(eSectionsPagerAdapter);
-
-        eTabLayout = (TabLayout) findViewById(R.id.exercise_main_tabs);
-        eTabLayout.setupWithViewPager(eViewPager);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setPageTransformer(true,new CubeOutTransformer());
 
 
     }
@@ -78,5 +87,22 @@ public class Exercise_main extends AppCompatActivity implements
     @Override
     public void onFragmentInteraction(String Tag, String number) {
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(Exercise_main.this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

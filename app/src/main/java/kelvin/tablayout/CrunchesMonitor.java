@@ -65,7 +65,7 @@ public class CrunchesMonitor extends AppCompatActivity {
         crunches_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(CrunchesMonitor.this,Exercise_main.class);
+                Intent intent =new Intent(CrunchesMonitor.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

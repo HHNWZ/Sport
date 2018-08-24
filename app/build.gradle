@@ -100,6 +100,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     //implementation 'com.onesignal:OneSignal:[3.9.1, 3.99.99]'
     implementation files('libs/samsung-health-data-v1.3.0.jar')
+    implementation 'cn.hugeterry.coordinatortablayout:coordinatortablayout:1.2.2'
+    implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    implementation 'com.github.markushi:circlebutton:1.1'
+    implementation 'com.nelson:CircleLayout:0.1.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

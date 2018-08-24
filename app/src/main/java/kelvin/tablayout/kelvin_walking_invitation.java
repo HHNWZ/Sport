@@ -229,7 +229,7 @@ public class kelvin_walking_invitation extends Fragment implements View.OnTouchL
                         }else{
                             FriendsFragment2 kelvin_running_tag_friend1 = FriendsFragment2.newInstance("步行","步數",edit_text_of_walking_set_count.getText().toString(),"步",start_year_of_kelvin_walking_invitation,start_month_of_kelvin_walking_invitation,start_day_of_kelvin_walking_invitation,start_hour_of_kelvin_walking_invitation,start_minute_of_kelvin_walking_invitation,end_year_of_kelvin_walking_invitation,end_month_of_kelvin_walking_invitation,end_day_of_kelvin_walking_invitation,end_hour_of_kelvin_walking_invitation,end_minute_of_kelvin_walking_invitation);
                             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                            transaction.add(R.id.content1_main,kelvin_running_tag_friend1);
+                            transaction.add(R.id.coordinatortablayout,kelvin_running_tag_friend1);
                             transaction.addToBackStack(null);
                             transaction.commit();
                         }

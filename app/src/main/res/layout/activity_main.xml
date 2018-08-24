@@ -31,14 +31,63 @@
                     android:layout_above="@id/buttonLinear"
                     android:layout_below="@+id/nav_action">
 
-                    <Button
-                        android:id="@+id/button4"
-                        android:layout_width="160dp"
-                        android:layout_height="160dp"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="運動監控"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        />
 
-                        android:layout_centerInParent="true"
-                        android:background="@mipmap/main4"
-                        android:textSize="30dp" />
+
+                    <com.nelson.circlelayout.CircleLayout
+                        android:id="@+id/circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        app:radium="100dp"
+                        >
+                        <!--步行-->
+                       <Button
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/walkingbackground"
+                           android:id="@+id/button_of_walking_monitoring"/>
+
+
+                        <!--跑步-->
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/runningbackground"
+                            android:id="@+id/button_of_running_monitoring"/>
+
+                        <!--瑜伽-->
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/yogabackground"
+                            android:id="@+id/button_of_yoga_monitoring"/>
+
+                        <!--深蹲-->
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/suagatsbackground"
+                            android:id="@+id/button_of_squats_monitoring"/>
+
+                        <!--仰臥起坐-->
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/crunchesbackground"
+                            android:id="@+id/button_of_crunches_monitoring"/>
+
+
+
+
+                    </com.nelson.circlelayout.CircleLayout>
 
                 </RelativeLayout>
 
@@ -94,39 +143,47 @@
                         android:textColor="#ffffff" />
 
                 </LinearLayout>
-                <com.hedan.piechart_library.PieChart_View
-                    android:paddingLeft="10dp"
-                    android:id="@+id/pie_view"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_below="@id/buttonLinear"
                     android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/dataLinear1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    app:alphaPieColor="#fff"
-                    app:alphaPieTran="255"
-                    android:paddingRight="10dp"
-                    android:textSize="14sp"
-                    app:animaDuration="5000"
-                    app:inCricleColor="#eeeeee"
-                    app:isAnimation="true"
-                    app:isTouchFlag="true"
-                    app:mRadius="140dp"
-                    app:name="本週運動量"
-                    app:pieChartWidth="40dp"
-                    app:segmentAngle="0.5"
-                    app:startAngle="180"
-                    app:textColor="#000"
-                    app:textOrientation="path"
-                    />
+                    >
+
+                    <com.hedan.piechart_library.PieChart_View
+
+                        android:id="@+id/pie_view"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@+id/dataLinear1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:alphaPieColor="#fff"
+                        app:alphaPieTran="255"
+                        android:layout_gravity="center"
+                        android:textSize="14sp"
+                        app:animaDuration="5000"
+                        app:inCricleColor="#eeeeee"
+                        app:isAnimation="true"
+                        app:isTouchFlag="true"
+                        app:mRadius="140dp"
+                        app:name="本週運動量"
+                        app:pieChartWidth="40dp"
+                        app:segmentAngle="0.5"
+                        app:startAngle="180"
+                        app:textColor="#000"
+                        app:textOrientation="path"
+                        />
+
+                </LinearLayout>
                 <LinearLayout
                     android:id="@+id/dataLinear1"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:orientation="vertical"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-
-
-                    >
+                    android:layout_alignParentRight="true">
 
                     <TableLayout
                         android:layout_width="match_parent"

@@ -318,7 +318,7 @@ public class ChatActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"android_background_layout\": " +
                                             // "{\"image\": \"http://3.bp.blogspot.com/-5GNtI62kFFw/U4DK7M_fNkI/AAAAAAAAADA/nvF-d_CfBsg/s1600/wp917d5eab_06.png\","

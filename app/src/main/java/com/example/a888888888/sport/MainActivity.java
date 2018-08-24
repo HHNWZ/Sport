@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
+import com.nelson.circlelayout.CircleLayout;
 import com.onesignal.OSNotificationAction;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
@@ -58,17 +59,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
+import at.markushi.ui.CircleButton;
 import kelvin.tablayout.ChatActivity;
+import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
+import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
+import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
-import kelvin.tablayout.Week;
+import kelvin.tablayout.Walking_monitor;
+import kelvin.tablayout.YogaMonitor;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
@@ -126,6 +132,9 @@ public class  MainActivity extends AppCompatActivity
     public Date dt2=null;
     public Button kel,hal,del,over,sport;
     private static String crunches_week_record;
+
+
+    public Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
 
 
 
@@ -327,6 +336,8 @@ public class  MainActivity extends AppCompatActivity
         View hView =navigationView.getHeaderView(0);
         username=(TextView)hView.findViewById(R.id.text_user_name);
         userImage=(ImageView)hView.findViewById(R.id.user_image);
+        final CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circle);
+        circleLayout.setCanScroll(true);
         //username.setText("123456");
         Menu menu = navigationView.getMenu();
         MenuItem menu_email_login = menu.findItem(R.id.email_login);
@@ -340,7 +351,68 @@ public class  MainActivity extends AppCompatActivity
         hal = (Button)findViewById(R.id.button1); //連至弘盛的按鈕
          del = (Button)findViewById(R.id.button2); //連至琨城的按鈕
          over = (Button)findViewById(R.id.button3); //連至直播的按鈕
-         sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
+         //sport = (Button)findViewById(R.id.button4); //連至運動的按鈕
+
+        button_of_walking_monitoring=(Button)findViewById(R.id.button_of_walking_monitoring);
+        button_of_running_monitoring=(Button)findViewById(R.id.button_of_running_monitoring);
+        button_of_yoga_monitoring=(Button)findViewById(R.id.button_of_yoga_monitoring);
+        button_of_squats_monitoring=(Button)findViewById(R.id.button_of_squats_monitoring);
+        button_of_crunches_monitoring=(Button)findViewById(R.id.button_of_crunches_monitoring);
+
+        button_of_walking_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, Walking_monitor.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+        button_of_running_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, RunningMonitor.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+
+        button_of_yoga_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, YogaMonitor.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+
+        button_of_squats_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, SquatsMonitor.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+
+        button_of_crunches_monitoring.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, CrunchesMonitor.class);
+                startActivity(intent);
+                MainActivity.this.finish();
+            }
+        });
+
+
+
+
+
+
 
 
         /*if(Login.user !=null)
@@ -597,20 +669,7 @@ public class  MainActivity extends AppCompatActivity
                 }
             }
         });
-        sport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "發送", Toast.LENGTH_SHORT).show();
-                /*Sport sport=Sport.newInstance("param1","param2");
-                FragmentManager manager=getSupportFragmentManager();
-                manager.beginTransaction().addToBackStack(null).replace(
-                        R.id.content_main,
-                        sport,
-                        sport.getTag()
-                ).commit();*/
 
-            }
-        });
     }
 
     public theDate getTodayEaetdInfo() {
