@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,8 @@ public class ExerciseWalking extends Fragment {
     public static CircleImageView userImageView,first_image;
     public static int k=0;
     private SwipeRefreshLayout mRefreshLayout;
+    public static RelativeLayout background_layout;
+
 
 
     public ExerciseWalking() {
@@ -155,7 +158,7 @@ public class ExerciseWalking extends Fragment {
         button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Walking_monitor.class);
+                Intent intent = new Intent(getContext(),ExerciseHistory.class);
                 startActivity(intent);
             }
         });
@@ -192,7 +195,8 @@ public class ExerciseWalking extends Fragment {
             @Override
             protected void populateViewHolder(WalkingNewUsersViewHolder walkingNewUsersViewHolder, Users users, int position) {
 
-
+                k=k+1;
+                background_layout=(RelativeLayout)walkingNewUsersViewHolder.mView.findViewById(R.id.user_single_layout);
                 walkingNewUsersViewHolder.setDisplayName(users.getName());
                 walkingNewUsersViewHolder.setUserStatus("步行全部記錄:");
                 walkingNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
@@ -211,16 +215,43 @@ public class ExerciseWalking extends Fragment {
                     first_image.setVisibility(View.VISIBLE);
                     first_image.setImageResource(R.drawable.bronzemedal);
                 }
-                Log.i("1234",""+getItenCount());
+
+                if(k==1){
+                    background_layout.setBackgroundColor(Color.rgb(255,0,0));
+                }
+                if(k==2){
+                    background_layout.setBackgroundColor(Color.rgb(255,165,0));
+                }
+                if(k==3){
+                    background_layout.setBackgroundColor(Color.rgb(255,255,0));
+                }
+                if(k==4){
+                    background_layout.setBackgroundColor(Color.rgb(0,255,0));
+                }
+                if(k==5){
+                    background_layout.setBackgroundColor(Color.rgb(0,0,255));
+                }
+                if(k==6){
+                    background_layout.setBackgroundColor(Color.rgb(43,0,255));
+                }
+                if(k==7){
+                    background_layout.setBackgroundColor(Color.rgb(87,0,255));
+                }
+                Log.i("k值",""+k);
+
+                if(k>=7){
+                    k=0;
+                }
 
 
             }
 
 
+
         };
 
 
-
+        k=0;
         mUsersList1.setAdapter(firebaseRecyclerAdapter);
     }
 

@@ -88,6 +88,7 @@
         <activity android:name="kelvin.tablayout.CrunchesMonitor" />
         <activity android:name="kelvin.tablayout.SquatsMonitor" />
         <activity android:name="kelvin.tablayout.Exercise_main" />
+        <activity android:name="kelvin.tablayout.ExerciseHistory"></activity>
     </application>
 
 </manifest>

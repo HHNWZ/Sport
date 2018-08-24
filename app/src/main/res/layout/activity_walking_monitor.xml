@@ -12,353 +12,474 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/walking_monitor_toolBar">
+        android:layout_below="@+id/walking_monitor_toolBar"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
 
-        <LinearLayout
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <TableLayout
-                android:layout_below="@+id/walking_monitor_toolBar1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="5dp">
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/distance_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/distance" />
-                    <TextView
-                        android:id="@+id/distance_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="距離:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/distance_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/distance"/>
+
+                <TextView
+                    android:id="@+id/distance_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="距離" />
+
+                <TextView
+                    android:id="@+id/distance_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="100公里"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/duration_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/pedestrianwalking"/>
+
+                <TextView
+                    android:id="@+id/duration_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="持續時間" />
+
+                <TextView
+                    android:id="@+id/duration_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="23時59分59秒" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/start_time_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/start"/>
+
+                <TextView
+                    android:id="@+id/start_time_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="開始時間"/>
+
+                <TextView
+                    android:id="@+id/start_time_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="23時59分59秒"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/end_time_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/finishline"/>
+
+                <TextView
+                    android:id="@+id/end_time_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="结束時間"/>
+
+                <TextView
+                    android:id="@+id/end_time_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="23時59分59秒"/>
+            </LinearLayout>
 
 
-                        />
-                    <TextView
-                        android:id="@+id/distance_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="距離資料"
-                        android:gravity="center_vertical"
-                        />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mean_HeartRat_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/meanheart" />
+
+                <TextView
+                    android:id="@+id/meanHeartRate_data_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="平均心跳" />
+
+                <TextView
+                    android:id="@+id/meanHeartRate_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="100次/分" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/max_heart_rate_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/maxheart" />
+
+                <TextView
+                    android:id="@+id/max_heart_rate_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="最高心跳" />
+
+                <TextView
+                    android:id="@+id/max_heart_rate_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="100次/分" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/calorie_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/calorie" />
+
+                <TextView
+                    android:id="@+id/calorie_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="消耗热量" />
+
+                <TextView
+                    android:id="@+id/calorie_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="100大卡" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/incline_distance_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/diagonalarrow" />
+
+                <TextView
+                    android:id="@+id/incline_distance_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="總上坡" />
+
+                <TextView
+                    android:id="@+id/incline_distance_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="1公里" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/decline_distance_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/downarrow" />
+
+                <TextView
+                    android:id="@+id/decline_distance_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="總下坡" />
+
+                <TextView
+                    android:id="@+id/decline_distance_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="1公里" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/max_altitude_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/maxmountain" />
+
+                <TextView
+                    android:id="@+id/max_altitude_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="最高坡度" />
+
+                <TextView
+                    android:id="@+id/max_altitude_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="100米" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/min_altitude_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/meanmountain" />
+
+                <TextView
+                    android:id="@+id/min_altitude_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="最低坡度" />
+
+                <TextView
+                    android:id="@+id/min_altitude_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="100米" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mean_speed_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:src="@drawable/meanspeed" />
+
+                <TextView
+                    android:id="@+id/mean_speed_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="平均速度" />
+
+                <TextView
+                    android:id="@+id/mean_speed_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="10公里/小時" />
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/max_speed_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/maximumspeed" />
+
+                <TextView
+                    android:id="@+id/max_speed_of_walking_monitor_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="最高速度" />
+
+                <TextView
+                    android:id="@+id/max_speed_data_of_walking_monitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="10公里/小時" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/duration_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/pedestrianwalking" />
 
-                    <TextView
-                        android:id="@+id/duration_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="持續時間:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/duration_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="持續時間資料"
-                        android:gravity="center_vertical" />
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/start_time_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/start" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/start_time_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="開始時間:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/start_time_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="開始時間資料"
-                        android:gravity="center_vertical" />
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/end_time_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/finishline" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/end_time_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="结束時間:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/end_time_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="结束時間資料"
-                        android:gravity="center_vertical" />
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/mean_HeartRat_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/meanheart" />
-                    <TextView
-                        android:id="@+id/meanHeartRate_data_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="平均心跳:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/meanHeartRate_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="平均心跳資料"
-                        android:gravity="center_vertical" />
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/max_heart_rate_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/maxheart" />
-                    <TextView
-                        android:id="@+id/max_heart_rate_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高心跳:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/max_heart_rate_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高心跳資料"
-                        android:gravity="center_vertical" />
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/calorie_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/calorie" />
-                    <TextView
-                        android:id="@+id/calorie_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="消耗热量:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/calorie_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="消耗热量資料"
-                        android:gravity="center_vertical" />
+            </LinearLayout>
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/incline_distance_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/diagonalarrow" />
-                    <TextView
-                        android:id="@+id/incline_distance_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="總上坡:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/incline_distance_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="總上坡資料"
-                        android:gravity="center_vertical" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/decline_distance_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/downarrow" />
-                    <TextView
-                        android:id="@+id/decline_distance_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="總下坡:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/decline_distance_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="總下坡資料"
-                        android:gravity="center_vertical" />
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/max_altitude_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/maxmountain" />
-                    <TextView
-                        android:id="@+id/max_altitude_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高坡度:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/max_altitude_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高坡度資料"
-                        android:gravity="center_vertical" />
+            </LinearLayout>
+        </TableRow>
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/min_altitude_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/meanmountain" />
-                    <TextView
-                        android:id="@+id/min_altitude_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最低坡度:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/min_altitude_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最低坡度資料"
-                        android:gravity="center_vertical" />
+    </TableLayout>
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/mean_speed_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/meanspeed" />
-                    <TextView
-                        android:id="@+id/mean_speed_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="平均速度:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/mean_speed_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="平均速度資料"
-                        android:gravity="center_vertical" />
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/max_speed_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/maximumspeed" />
-                    <TextView
-                        android:id="@+id/max_speed_of_walking_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高速度:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/max_speed_data_of_walking_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高速度資料"
-                        android:gravity="center_vertical" />
 
-                </TableRow>
-            </TableLayout>
-        </LinearLayout>
-    </ScrollView>
 
 </RelativeLayout>

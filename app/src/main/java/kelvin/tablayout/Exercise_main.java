@@ -82,6 +82,7 @@ public class Exercise_main extends AppCompatActivity implements
         mViewPager.setPageTransformer(true,new CubeOutTransformer());
 
 
+
     }
 
     @Override

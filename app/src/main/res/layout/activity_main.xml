@@ -31,14 +31,22 @@
                     android:layout_above="@id/buttonLinear"
                     android:layout_below="@+id/nav_action">
 
-                    <TextView
+                    <!--<TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="運動監控"
                         android:textColor="@android:color/white"
                         android:textSize="20sp"
-                        />
+                        />-->
+                    <com.hanks.htextview.rainbow.RainbowTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="運動監控"
+                        android:textSize="30sp"
+                        app:colorSpace="150dp"
+                        app:colorSpeed="4dp"/>
 
 
                     <com.nelson.circlelayout.CircleLayout
