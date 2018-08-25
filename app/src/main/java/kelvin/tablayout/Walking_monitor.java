@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,9 +48,9 @@ public class Walking_monitor extends AppCompatActivity {
     public static final String APP_TAG = "Sport";
     private static Walking_monitor mInstance = null;
     private WalkReporter wReporter;
-    private static DatabaseReference mDatabase;
+    private static DatabaseReference mDatabase,keydatabse;
     private static FirebaseAuth mAuth;
-    //public static String distance;
+    public static String check_date=" ";
 
     public byte[]walking_location;
 
@@ -66,6 +67,7 @@ public class Walking_monitor extends AppCompatActivity {
                 .init();
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        keydatabse=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("walking");
         walking_monitor_toolbar=(Toolbar)findViewById(R.id.walking_monitor_toolBar);
         walking_monitor_toolbar.setTitle("步行監控");
         setSupportActionBar(walking_monitor_toolbar);
@@ -233,24 +235,35 @@ public class Walking_monitor extends AppCompatActivity {
             max_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_max_speed));
 
 
-            writeNewExerciseData.setNewExerciseData("walking",
-                    Time.get_start_time(walking_start_time),
-                    Time.get_end_time(walking_end_time),
-                    UnitConversion.get_kilometer(walking_distance),
-                    Time.get_duration_time(walking_duration),
-                    walking_mean_heart_rate,
-                    walking_calorie,
-                    UnitConversion.get_kilometer(walking_incline_distance),
-                    UnitConversion.get_kilometer(walking_decline_distance),
-                    walking_max_heart_rate,
-                    walking_max_altitude,
-                    walking_min_altitude,
-                    UnitConversion.get_kilometer_per_hour(walking_mean_speed),
-                    UnitConversion.get_kilometer_per_hour(walking_max_speed),
-                    Time.getToDate(walking_start_time),
-                    Time.getTime(walking_start_time)
 
-            );
+
+                writeNewExerciseData.setNewExerciseData("walking",
+                        Time.get_start_time(walking_start_time),
+                        Time.get_end_time(walking_end_time),
+                        UnitConversion.get_kilometer(walking_distance),
+                        Time.get_duration_time(walking_duration),
+                        walking_mean_heart_rate,
+                        walking_calorie,
+                        UnitConversion.get_kilometer(walking_incline_distance),
+                        UnitConversion.get_kilometer(walking_decline_distance),
+                        walking_max_heart_rate,
+                        walking_max_altitude,
+                        walking_min_altitude,
+                        UnitConversion.get_kilometer_per_hour(walking_mean_speed),
+                        UnitConversion.get_kilometer_per_hour(walking_max_speed),
+                        Time.getToDate(walking_start_time),
+                        Time.getTime(walking_start_time)
+
+                );
+
+
+            /*
+                    ExerciseData newEalkingData =dataSnapshot.getValue(ExerciseData.class);
+                    Log.i("開始日期",""+newEalkingData.start_time);
+                    Log.i("開始日期id",""+prevChildKey);
+            */
+
+
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {

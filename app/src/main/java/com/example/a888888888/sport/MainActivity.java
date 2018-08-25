@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.hanks.htextview.rainbow.RainbowTextView;
 import com.hedan.piechart_library.PieChartBean;
 import com.hedan.piechart_library.PieChart_View;
 
@@ -109,11 +113,11 @@ public class  MainActivity extends AppCompatActivity
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
     private String showUri = "http://172.30.4.170:1335/getusersport.php";//連至資料庫
-    private TextView rundata;
-    private TextView walkdata;
-    private TextView airdata;
-    private TextView pushdata;
-    private TextView sitdata;
+    public static TextView rundata;
+    public static TextView walkdata;
+    public static TextView airdata;
+    public static TextView pushdata;
+    public static TextView sitdata;
     private TextView username;
     private TextView username1;
     private ImageView userImage;
@@ -132,9 +136,24 @@ public class  MainActivity extends AppCompatActivity
     public Date dt2=null;
     public Button kel,hal,del,over,sport;
     private static String crunches_week_record;
+    public static int count=0;
+    public static int count2=0;
+    public static TextView textView6;
+    public static TextView textView7;
+    public static TextView textView8;
+    public static TextView textView10;
+    public static TextView textView9;
+    public static CircleLayout circleLayout;
+    public static NavigationView navigationView;
+    public static Menu menu;
+    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout;
+    public static View hView;
 
+    public static Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
 
-    public Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
+    public static RainbowTextView main_title;
+    public static ActionBar actionBar;
+
 
 
 
@@ -286,6 +305,8 @@ public class  MainActivity extends AppCompatActivity
         //editor.clear().commit();
     }
 
+
+
     public static Context getContext() {
         return context;
     }
@@ -331,20 +352,24 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.addDrawerListener(mToggle);//監聽選單按鈕是否被觸擊
         mToggle.syncState();//隱藏顯示箭頭返回
         //讓 ActionBar 中的返回箭號置換成 Drawer 的三條線圖示。並且把這個觸發器指定給 layDrawer 。
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View hView =navigationView.getHeaderView(0);
+        actionBar =getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        hView =navigationView.getHeaderView(0);
         username=(TextView)hView.findViewById(R.id.text_user_name);
         userImage=(ImageView)hView.findViewById(R.id.user_image);
-        final CircleLayout circleLayout = (CircleLayout) findViewById(R.id.circle);
+        circleLayout = (CircleLayout) findViewById(R.id.circle);
+        //circleLayout.setChangeCorner();
         circleLayout.setCanScroll(true);
         //username.setText("123456");
-        Menu menu = navigationView.getMenu();
-        MenuItem menu_email_login = menu.findItem(R.id.email_login);
-        MenuItem menu_email_register = menu.findItem(R.id.email_register);
-        MenuItem menu_chat_room = menu.findItem(R.id.chat_room);
-        MenuItem menu_setting_account = menu.findItem(R.id.setting_account);
-        MenuItem menu_Logout = menu.findItem(R.id.Logout);
+        menu = navigationView.getMenu();
+        menu_email_login = menu.findItem(R.id.email_login);
+        menu_email_register = menu.findItem(R.id.email_register);
+        menu_chat_room = menu.findItem(R.id.chat_room);
+         menu_setting_account = menu.findItem(R.id.setting_account);
+         menu_Logout = menu.findItem(R.id.Logout);
         final String user_id = getIntent().getStringExtra("user_id");
 
          kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
@@ -358,7 +383,14 @@ public class  MainActivity extends AppCompatActivity
         button_of_yoga_monitoring=(Button)findViewById(R.id.button_of_yoga_monitoring);
         button_of_squats_monitoring=(Button)findViewById(R.id.button_of_squats_monitoring);
         button_of_crunches_monitoring=(Button)findViewById(R.id.button_of_crunches_monitoring);
-
+        textView6=(TextView)findViewById(R.id.textView6);
+        textView7=(TextView)findViewById(R.id.textView7);
+        textView8=(TextView)findViewById(R.id.textView8);
+        textView10=(TextView)findViewById(R.id.textView10);
+        textView9=(TextView)findViewById(R.id.textView9);
+        pieView = (PieChart_View) findViewById(R.id.pie_view);
+        main_title=(RainbowTextView)findViewById(R.id.main_title);
+        //mHanlder2.postDelayed(task3,5000);
         button_of_walking_monitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -407,24 +439,10 @@ public class  MainActivity extends AppCompatActivity
                 MainActivity.this.finish();
             }
         });
+        mHanlder.postDelayed(task2,5000);
 
 
 
-
-
-
-
-
-        /*if(Login.user !=null)
-        {
-            menu_login.setTitle("登出");
-            menu_user.setVisible(true);
-        }
-        else
-        {
-            menu_login.setTitle("登入");
-            menu_user.setVisible(false);
-        }*/
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
 
@@ -435,12 +453,26 @@ public class  MainActivity extends AppCompatActivity
 
             Log.i("數據crunches_week_record1",""+crunches_week_record);
             timer.schedule(new TimerTaskTest(), firstTime);
+            main_title.setText("運動監控");
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
             menu_Logout.setVisible(true);
             kel.setVisibility(View.VISIBLE);
+            button_of_walking_monitoring.setVisibility(View.VISIBLE);
+            button_of_running_monitoring.setVisibility(View.VISIBLE);
+            button_of_yoga_monitoring.setVisibility(View.VISIBLE);
+            button_of_squats_monitoring.setVisibility(View.VISIBLE);
+            button_of_crunches_monitoring.setVisibility(View.VISIBLE);
+            pieView.setVisibility(View.VISIBLE);
+            textView6.setVisibility(View.VISIBLE);
+            textView7.setVisibility(View.VISIBLE);
+            textView8.setVisibility(View.VISIBLE);
+            textView10.setVisibility(View.VISIBLE);
+            textView9.setVisibility(View.VISIBLE);
+
+
             mUserRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -463,14 +495,11 @@ public class  MainActivity extends AppCompatActivity
                     float squats_week_record_float=Float.parseFloat(squats_week_record);
                     float walking_week_record_float=Float.parseFloat(walking_week_record);
                     long yoga_week_record_long=Long.parseLong(yoga_week_record);
-                    pieView = (PieChart_View) findViewById(R.id.pie_view);
+
                     ArrayList<PieChartBean> lists = new ArrayList<>();
                     DecimalFormat df = new DecimalFormat("0.00");
-                    TextView textView6=(TextView)findViewById(R.id.textView6);
-                    TextView textView7=(TextView)findViewById(R.id.textView7);
-                    TextView textView8=(TextView)findViewById(R.id.textView8);
-                    TextView textView10=(TextView)findViewById(R.id.textView10);
-                    TextView textView9=(TextView)findViewById(R.id.textView9);
+
+
                     if(Week.equals("一")){
                         if(DateCheck.equals(nowDate)){
                             lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
@@ -538,6 +567,22 @@ public class  MainActivity extends AppCompatActivity
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
             kel.setVisibility(View.INVISIBLE);
+            button_of_walking_monitoring.setVisibility(View.INVISIBLE);
+            button_of_running_monitoring.setVisibility(View.INVISIBLE);
+            button_of_yoga_monitoring.setVisibility(View.INVISIBLE);
+            button_of_squats_monitoring.setVisibility(View.INVISIBLE);
+            button_of_crunches_monitoring.setVisibility(View.INVISIBLE);
+            pieView.setVisibility(View.INVISIBLE);
+            textView6.setVisibility(View.INVISIBLE);
+            textView7.setVisibility(View.INVISIBLE);
+            textView8.setVisibility(View.INVISIBLE);
+            textView10.setVisibility(View.INVISIBLE);
+            textView9.setVisibility(View.INVISIBLE);
+            main_title.setText("点击左上角");
+            //mHanlder2.postDelayed(task3,5000);
+
+
+
 
         }
 
@@ -548,14 +593,7 @@ public class  MainActivity extends AppCompatActivity
             mSwipeLayout.setOnRefreshListener(this);
             mSwipeLayout.setColorSchemeColors(Color.RED);
 
-            //圓餅圖
-        /*if(Login.user != null) {
-            frun = Float.parseFloat(rundata.getText().toString());
-            fwalk = Float.parseFloat(walkdata.getText().toString());
-            fair = Float.parseFloat(airdata.getText().toString());
-            fpush = Float.parseFloat(pushdata.getText().toString());
-            fsit = Float.parseFloat(sitdata.getText().toString());
-        }*/
+
 
         Log.i("數據crunches_week_record3",""+crunches_week_record);
 
@@ -671,6 +709,121 @@ public class  MainActivity extends AppCompatActivity
         });
 
     }
+
+    private Handler mHanlder = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    if (mAuth.getCurrentUser() == null){
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                    }else{
+                        textView6.setTextColor(Color.BLACK);
+                        textView7.setTextColor(Color.WHITE);
+                        textView8.setTextColor(Color.WHITE);
+                        textView10.setTextColor(Color.WHITE);
+                        textView9.setTextColor(Color.WHITE);
+                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingred);
+                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
+                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
+                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
+                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+
+                    }
+                    break;
+                case 2:
+                    if(mAuth.getCurrentUser()==null){
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                    }else {
+                        textView6.setTextColor(Color.WHITE);
+                        textView7.setTextColor(Color.BLACK);
+                        textView8.setTextColor(Color.WHITE);
+                        textView10.setTextColor(Color.WHITE);
+                        textView9.setTextColor(Color.WHITE);
+                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
+                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningred);
+                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
+                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
+                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                    }
+                    break;
+                case 3:
+                    if(mAuth.getCurrentUser()==null){
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                    }{
+                        textView6.setTextColor(Color.WHITE);
+                        textView7.setTextColor(Color.WHITE);
+                        textView8.setTextColor(Color.BLACK);
+                        textView10.setTextColor(Color.WHITE);
+                        textView9.setTextColor(Color.WHITE);
+                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
+                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
+                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogared);
+                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
+                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                    }
+
+
+                    break;
+                case 4:
+                    if(mAuth.getCurrentUser()==null){
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                    }{
+                        textView6.setTextColor(Color.WHITE);
+                        textView7.setTextColor(Color.WHITE);
+                        textView8.setTextColor(Color.WHITE);
+                        textView10.setTextColor(Color.BLACK);
+                        textView9.setTextColor(Color.WHITE);
+                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
+                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
+                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
+                        button_of_squats_monitoring.setBackgroundResource(R.drawable.squatsred);
+                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                    }
+                    break;
+                case 5:
+                    if(mAuth.getCurrentUser()==null){
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                    }{
+                        textView6.setTextColor(Color.WHITE);
+                        textView7.setTextColor(Color.WHITE);
+                        textView8.setTextColor(Color.WHITE);
+                        textView10.setTextColor(Color.WHITE);
+                        textView9.setTextColor(Color.BLACK);
+                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
+                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
+                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
+                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
+                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesred);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    private Runnable task2 = new Runnable() {
+        @Override
+        public void run() {
+            if(count>5){
+                count=0;
+            }
+            count=count+1;
+            mHanlder.sendEmptyMessage(count);
+
+            mHanlder.postDelayed(this, 1 * 500);//延迟5秒,再次执行task本身,实现了循环的效果
+
+        }
+    };
+
+
 
     public theDate getTodayEaetdInfo() {
         if(DL.contains(Today)){
@@ -848,41 +1001,13 @@ public class  MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.email_login) {
-            /*if(Login.user == null) {
-                Login login = Login.newInstance("param1", "param2");
-                FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction().addToBackStack(null).replace(
-                        R.id.content_main,
-                        login,
-                        login.getTag()
-                ).commit();
-
-            }
-            else
-            {
-                Login.user = null;
-                Login.userimage = null;
-                rundata = null;
-                walkdata = null;
-                airdata = null;
-                pushdata = null;
-                sitdata = null;
-                Toast.makeText(MainActivity.this, "登出成功", Toast.LENGTH_SHORT).show();
-            }*/
             Intent i = new Intent(MainActivity.this,LoginActivity.class);
-            //finish();
             startActivity(i);
         }
 
         else if (id == R.id.email_register)
         {
-            /*Register reg=Register.newInstance("param1","param2");
-            FragmentManager manager=getSupportFragmentManager();
-            manager.beginTransaction().addToBackStack(null).replace(
-                    R.id.content_main,
-                    reg,
-                    reg.getTag()
-            ).commit();*/
+
             Intent i = new Intent(MainActivity.this,RegisterActivity.class);
             //finish();
             startActivity(i);

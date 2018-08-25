@@ -13,7 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 public class writeNewExerciseData extends Application{
     public static DatabaseReference mDatabase;
     public static FirebaseAuth mAuth;
-
+    public static String Data_push_id;
 
 
 
@@ -22,6 +22,7 @@ public class writeNewExerciseData extends Application{
             String Totime){
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        Data_push_id=mDatabase.getKey();
         ExerciseData exerciseData = new ExerciseData(start_time,end_time,distance,duration,mean_heart_rate,calorie,incline_distance,decline_distance,max_heart_rate,max_altitude,min_altitude,mean_speed,max_speed);
         mDatabase.child("exercise").child(exercise_type).child(Todate).child(Totime).setValue(exerciseData);
     }
