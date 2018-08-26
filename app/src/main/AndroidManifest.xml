@@ -99,7 +99,10 @@
         <activity android:name="kelvin.tablayout.YogaHistory" />
         <activity android:name="kelvin.tablayout.SquatsDayHistory" />
         <activity android:name="kelvin.tablayout.SquatsHourHistory" />
-        <activity android:name="kelvin.tablayout.SquatsHistory"></activity>
+        <activity android:name="kelvin.tablayout.SquatsHistory" />
+        <activity android:name="kelvin.tablayout.CrunchesDayHistory" />
+        <activity android:name="kelvin.tablayout.CrunchesHourHistory" />
+        <activity android:name="kelvin.tablayout.CrunchesHistory"></activity>
     </application>
 
 </manifest>

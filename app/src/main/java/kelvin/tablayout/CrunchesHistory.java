@@ -16,39 +16,38 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SquatsHistory extends AppCompatActivity {
+public class CrunchesHistory extends AppCompatActivity {
 
-    private Toolbar squats_history_toolbar;
+    private Toolbar crunches_history_toolbar;
     public static ActionBar actionBar;
-    public  static DatabaseReference squats_history_database;
+    public  static DatabaseReference crunches_history_database;
     private static FirebaseAuth mAuth;
-    public static String day_squats_key;
-    public static String hour_squats_key;
-
+    public static String day_crunches_key;
+    public static String hour_crunches_key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_squats_history);
+        setContentView(R.layout.activity_crunches_history);
 
-        squats_history_toolbar=(Toolbar)findViewById(R.id.squats_history_toolbar);
-        setSupportActionBar(squats_history_toolbar);
+        crunches_history_toolbar=(Toolbar)findViewById(R.id.crunches_history_toolbar);
+        setSupportActionBar(crunches_history_toolbar);
         actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("深蹲歷史記錄");
+        actionBar.setTitle("跑步歷史記錄");
         actionBar.setSubtitle("詳細資料");
-        actionBar.setLogo(R.drawable.squatstoolbar);
-        day_squats_key=getIntent().getStringExtra("keyDay");
-        hour_squats_key=getIntent().getStringExtra("keyHour");
-        Log.i("keyHour值",hour_squats_key);
-        Log.i("keyDay值",day_squats_key);
+        actionBar.setLogo(R.drawable.crunchestoolbar);
+        day_crunches_key=getIntent().getStringExtra("keyDay");
+        hour_crunches_key=getIntent().getStringExtra("keyHour");
+        Log.i("keyHour值",hour_crunches_key);
+        Log.i("keyDay值",day_crunches_key);
         mAuth = FirebaseAuth.getInstance();
-        squats_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("squats").child(day_squats_key).child(hour_squats_key);
+        crunches_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("crunches").child(day_crunches_key).child(hour_crunches_key);
 
-        squats_history_database.addValueEventListener(new ValueEventListener() {
+        crunches_history_database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ExerciseData3 newSquatsData=dataSnapshot.getValue(ExerciseData3.class);
-                Log.i("次數1234",""+newSquatsData.count);
+                ExerciseData3 newCrunchesData=dataSnapshot.getValue(ExerciseData3.class);
+                Log.i("次數1234",""+newCrunchesData.count);
             }
 
             @Override
@@ -57,11 +56,12 @@ public class SquatsHistory extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(SquatsHistory.this,SquatsHourHistory.class);
-            intent.putExtra("keyDay",day_squats_key);
+            Intent intent = new Intent(CrunchesHistory.this,CrunchesHourHistory.class);
+            intent.putExtra("keyDay",day_crunches_key);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
