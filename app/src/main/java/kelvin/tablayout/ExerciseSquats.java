@@ -149,7 +149,7 @@ public class ExerciseSquats extends Fragment {
         button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),SquatsMonitor.class);
+                Intent intent = new Intent(getContext(),SquatsDayHistory.class);
                 startActivity(intent);
             }
         });

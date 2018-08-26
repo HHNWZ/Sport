@@ -90,7 +90,16 @@
         <activity android:name="kelvin.tablayout.Exercise_main" />
         <activity android:name="kelvin.tablayout.ExerciseHistory" />
         <activity android:name="kelvin.tablayout.Walking_hour_history" />
-        <activity android:name="kelvin.tablayout.WalkingHistory"></activity>
+        <activity android:name="kelvin.tablayout.WalkingHistory" />
+        <activity android:name="kelvin.tablayout.RunningDayHistory" />
+        <activity android:name="kelvin.tablayout.RunningHourHistory" />
+        <activity android:name="kelvin.tablayout.RunningHistory" />
+        <activity android:name="kelvin.tablayout.YogaDayHistory" />
+        <activity android:name="kelvin.tablayout.YogaHourHistory" />
+        <activity android:name="kelvin.tablayout.YogaHistory" />
+        <activity android:name="kelvin.tablayout.SquatsDayHistory" />
+        <activity android:name="kelvin.tablayout.SquatsHourHistory" />
+        <activity android:name="kelvin.tablayout.SquatsHistory"></activity>
     </application>
 
 </manifest>

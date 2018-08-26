@@ -152,7 +152,7 @@ public class ExerciseYoga extends Fragment {
         button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),YogaMonitor.class);
+                Intent intent = new Intent(getContext(),YogaDayHistory.class);
                 startActivity(intent);
             }
         });

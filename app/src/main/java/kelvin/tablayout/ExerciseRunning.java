@@ -151,7 +151,7 @@ public class ExerciseRunning extends Fragment {
         button_of_sports_monitoring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),RunningMonitor.class);
+                Intent intent = new Intent(getContext(),RunningDayHistory.class);
                 startActivity(intent);
             }
         });
