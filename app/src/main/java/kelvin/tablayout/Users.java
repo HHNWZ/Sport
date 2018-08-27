@@ -10,6 +10,7 @@ public class Users {
     public double running_all_count;
     public double walking_all_count;
     public long yoga_all_count;
+
     public int i;
 
 

@@ -45,7 +45,10 @@ public class FriendsFragment extends Fragment {
     private String mCurrent_user_id;
 
     private View mMainView;
-    public static  int k=0;
+    public static  double k=0;
+    public static int j=0;
+    public static double distance;
+
 
     public FriendsFragment() {
         // Required empty public constructor
@@ -126,6 +129,8 @@ public class FriendsFragment extends Fragment {
                         friendsViewHolder.setUserImage(userThumb, getContext());
 
 
+
+
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -178,7 +183,8 @@ public class FriendsFragment extends Fragment {
             }
 
         };
-
+        k=0;
+        j=0;
         mFriendsList.setAdapter(friendsRecyclerViewAdapter);
 
 

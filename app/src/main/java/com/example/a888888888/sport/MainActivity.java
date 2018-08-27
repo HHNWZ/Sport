@@ -66,19 +66,24 @@ import java.util.Timer;
 import at.markushi.ui.CircleButton;
 import kelvin.tablayout.ChatActivity;
 import kelvin.tablayout.CrunchesMonitor;
+import kelvin.tablayout.Crunches_task;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningMonitor;
+import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
 import kelvin.tablayout.SquatsMonitor;
+import kelvin.tablayout.Squats_task;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.Walking_monitor;
+import kelvin.tablayout.Walking_task;
 import kelvin.tablayout.YogaMonitor;
+import kelvin.tablayout.Yoga_task;
 import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
@@ -153,6 +158,8 @@ public class  MainActivity extends AppCompatActivity
 
     public static RainbowTextView main_title;
     public static ActionBar actionBar;
+    public static DatabaseReference Task_walking;
+    public static DatabaseReference Task_req_walking;
 
 
 
@@ -448,8 +455,16 @@ public class  MainActivity extends AppCompatActivity
 
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            Task_walking=FirebaseDatabase.getInstance().getReference().child("Task_walking").child(mAuth.getCurrentUser().getUid());
+            Task_req_walking=FirebaseDatabase.getInstance().getReference().child("Task_req_walking").child(mAuth.getCurrentUser().getUid());
+
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
+            String to_date= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
+            if(to_date.equals("二")){
+                Task_walking.removeValue();
+                Task_req_walking.removeValue();
+            }
 
             Log.i("數據crunches_week_record1",""+crunches_week_record);
             timer.schedule(new TimerTaskTest(), firstTime);
@@ -1075,7 +1090,7 @@ public class  MainActivity extends AppCompatActivity
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Yoga_task")){
-                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Yoga_task.class);
                     intent.putExtra("ToolbarTitle","瑜伽每週任務");
                     intent.putExtra("exerciseWeekTitle","做瑜伽");
                     intent.putExtra("exerciseWeekUnit","分鐘");
@@ -1083,7 +1098,7 @@ public class  MainActivity extends AppCompatActivity
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Squats_task")){
-                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Squats_task.class);
                     intent.putExtra("ToolbarTitle","深蹲每週任務");
                     intent.putExtra("exerciseWeekTitle","做深蹲");
                     intent.putExtra("exerciseWeekUnit","次");
@@ -1091,7 +1106,7 @@ public class  MainActivity extends AppCompatActivity
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
-                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Running_task.class);
                     intent.putExtra("ToolbarTitle","跑步每週任務");
                     intent.putExtra("exerciseWeekTitle","去跑步");
                     intent.putExtra("exerciseWeekUnit","公里");
@@ -1099,7 +1114,7 @@ public class  MainActivity extends AppCompatActivity
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Crunches_task")){
-                    Intent intent = new Intent(getContext(), Sit_up_task.class);
+                    Intent intent = new Intent(getContext(), Crunches_task.class);
                     intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
                     intent.putExtra("exerciseWeekTitle","做仰臥起坐");
                     intent.putExtra("exerciseWeekUnit","次");
@@ -1107,7 +1122,7 @@ public class  MainActivity extends AppCompatActivity
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
-                    Intent intent = new Intent(getContext(),Sit_up_task.class);
+                    Intent intent = new Intent(getContext(),Walking_task.class);
                     intent.putExtra("ToolbarTitle","步行每週任務");
                     intent.putExtra("exerciseWeekTitle","去步行");
                     intent.putExtra("exerciseWeekUnit","公里");

@@ -102,7 +102,14 @@
         <activity android:name="kelvin.tablayout.SquatsHistory" />
         <activity android:name="kelvin.tablayout.CrunchesDayHistory" />
         <activity android:name="kelvin.tablayout.CrunchesHourHistory" />
-        <activity android:name="kelvin.tablayout.CrunchesHistory"></activity>
+        <activity android:name="kelvin.tablayout.CrunchesHistory" />
+        <activity android:name="kelvin.tablayout.Yoga_task" />
+        <activity android:name="kelvin.tablayout.Squats_task" />
+        <activity android:name="kelvin.tablayout.Running_task" />
+        <activity android:name="kelvin.tablayout.Crunches_task" />
+        <activity android:name="kelvin.tablayout.Walking_task" />
+        <activity android:name="kelvin.tablayout.FriendActivity" />
+        <activity android:name="kelvin.tablayout.TaskProfile"></activity>
     </application>
 
 </manifest>

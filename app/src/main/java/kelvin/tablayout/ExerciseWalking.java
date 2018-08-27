@@ -45,9 +45,11 @@ public class ExerciseWalking extends Fragment {
     public Button button_of_task_execution,button_of_sports_monitoring,button_of_invitation;
     public String pTime;
     public static CircleImageView userImageView,first_image;
-    public static int k=0;
+    public static int k=0,j=0;
     private SwipeRefreshLayout mRefreshLayout;
     public static RelativeLayout background_layout;
+    private DatabaseReference myUsersDatabase;
+    public static double i=0;
 
 
 
@@ -63,6 +65,7 @@ public class ExerciseWalking extends Fragment {
         Log.i("fragment在","creatview");
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mMainView = inflater.inflate(R.layout.fragment_exercise_walking, container, false);
         mUsersList1=(RecyclerView) mMainView.findViewById(R.id.walking_list);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -145,7 +148,7 @@ public class ExerciseWalking extends Fragment {
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                Intent intent = new Intent(getContext(),Walking_task.class);
                 intent.putExtra("ToolbarTitle","步行每週任務");
                 intent.putExtra("exerciseWeekTitle","去步行");
                 intent.putExtra("exerciseWeekUnit","公里");
@@ -200,7 +203,12 @@ public class ExerciseWalking extends Fragment {
                 walkingNewUsersViewHolder.setDisplayName(users.getName());
                 walkingNewUsersViewHolder.setUserStatus("步行全部記錄:");
                 walkingNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
+
                 walkingNewUsersViewHolder.setRunningAllCount(users.getWalking_all_count());
+
+
+
+
 
                 first_image=(CircleImageView)walkingNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
@@ -252,6 +260,7 @@ public class ExerciseWalking extends Fragment {
 
 
         k=0;
+        i=0;
         mUsersList1.setAdapter(firebaseRecyclerAdapter);
     }
 
