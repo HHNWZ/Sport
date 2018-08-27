@@ -120,6 +120,17 @@ public class Time extends Application {
         return endTime;
     }
 
+    public static String getWalking_data(long walking_data){
+        String walkingData="";
+        Calendar walking_data2=Calendar.getInstance();
+        walking_data2.setTimeInMillis(walking_data);
+        int end_day =walking_data2.get(Calendar.DAY_OF_MONTH);
+
+        walkingData=""+end_day+"";
+        return walkingData;
+
+    }
+
 
 
 

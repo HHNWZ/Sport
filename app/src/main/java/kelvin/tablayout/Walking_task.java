@@ -76,19 +76,8 @@ public class Walking_task extends AppCompatActivity {
         myStatus = (TextView) findViewById(R.id.user_single_status);
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
         susses_text_view=(TextView)findViewById(R.id.susses_text_view);
-        myUsersDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String exercise_data =dataSnapshot.child("exercise_data").getValue().toString();
 
-                exercise_week_data.setText(exercise_data);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        exercise_week_data.setText(Time.getWalking_data(System.currentTimeMillis()));
         walking_task_recycler_view=(RecyclerView)findViewById(R.id.walking_task_recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(Walking_task.this);
         walking_task_recycler_view.setHasFixedSize(true);

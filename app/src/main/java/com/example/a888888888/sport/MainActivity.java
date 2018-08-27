@@ -464,6 +464,8 @@ public class  MainActivity extends AppCompatActivity
             if(to_date.equals("二")){
                 Task_walking.removeValue();
                 Task_req_walking.removeValue();
+                mUserRef.child("walking_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
             }
 
             Log.i("數據crunches_week_record1",""+crunches_week_record);

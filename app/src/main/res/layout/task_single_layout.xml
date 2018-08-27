@@ -44,4 +44,12 @@
         android:layout_toEndOf="@+id/user_single_status"
         android:text="" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_below="@+id/user_single_image"/>
+
+
+
 </RelativeLayout>
