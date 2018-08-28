@@ -80,6 +80,11 @@ public class FriendActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
+            if(now_date.equals("二")){
+                Intent intent = new Intent(FriendActivity.this,Running_task.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
 
         }
 

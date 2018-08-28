@@ -138,7 +138,7 @@ public class ExerciseRunning extends Fragment {
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                Intent intent = new Intent(getContext(),Running_task.class);
                 intent.putExtra("ToolbarTitle","跑步每週任務");
                 intent.putExtra("exerciseWeekTitle","去跑步");
                 intent.putExtra("exerciseWeekUnit","公里");

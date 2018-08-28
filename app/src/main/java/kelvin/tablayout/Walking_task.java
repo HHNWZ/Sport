@@ -12,12 +12,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,7 +30,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Walking_task extends AppCompatActivity {
 
-    private Toolbar walking_taskk_toolbar;
+    private Toolbar walking_task_toolbar;
     public static ActionBar actionBar;
     private static FirebaseAuth mAuth;
     private DatabaseReference taskDatabase;
@@ -46,7 +44,7 @@ public class Walking_task extends AppCompatActivity {
     public static String myname,mystatu,my_all_task,friend_point;
     private RecyclerView walking_task_recycler_view;
     private View mMainView;
-    public static double myWaking,userWalking,double_my_all_task,all_task,same_task,double_friend_point;
+    public static double myWalking,userWalking,double_my_all_task,all_task,same_task,double_friend_point;
     public static double k;
     public static int j=0;
     public static String task_statu;
@@ -58,13 +56,13 @@ public class Walking_task extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_task);
         task_statu="還沒完成任務";
-        walking_taskk_toolbar=(Toolbar)findViewById(R.id.walking_taskk_toolbar);
-        setSupportActionBar(walking_taskk_toolbar);
+        walking_task_toolbar=(Toolbar)findViewById(R.id.walking_task_toolbar);
+        setSupportActionBar(walking_task_toolbar);
         actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("步行每週共同任務");
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
-        walking_taskk_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+        walking_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
         Log.i("我的id",""+mAuth.getCurrentUser().getUid());
         taskDatabase= FirebaseDatabase.getInstance().getReference().child("Task_walking").child(mAuth.getCurrentUser().getUid());//共同任務資料庫
@@ -95,11 +93,11 @@ public class Walking_task extends AppCompatActivity {
                 double_my_all_task=Double.parseDouble(my_all_task);
                 double_friend_point=Double.parseDouble(friend_point);
 
-                myWaking=Double.parseDouble(mystatu);
-                all_task=double_my_all_task+myWaking;
+                myWalking=Double.parseDouble(mystatu);
+                all_task=double_my_all_task+myWalking;
                 same_task=Double.parseDouble(exercise_week_data.getText().toString());
                 Log.i("all_task1234",""+double_friend_point);
-                if(all_task>=same_task&&double_my_all_task!=0&&myWaking!=0&&same_task!=0){
+                if(all_task>=same_task&&double_my_all_task!=0&&myWalking!=0&&same_task!=0){
                     susses_text_view.setText("你獲得10點friendpoint");
                     actionBar.setSubtitle("你和朋友完成任務");
 
@@ -239,6 +237,8 @@ public class Walking_task extends AppCompatActivity {
         j=0;
         k=0;
         walking_task_recycler_view.setAdapter(walkingTaskViewHolderFirebaseRecyclerAdapter);
+        j=0;
+        k=0;
     }
 
     public static class WalkingTaskViewHolder extends RecyclerView.ViewHolder {
@@ -272,9 +272,5 @@ public class Walking_task extends AppCompatActivity {
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
-
-
-
-
     }
 }

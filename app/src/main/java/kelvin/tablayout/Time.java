@@ -124,11 +124,54 @@ public class Time extends Application {
         String walkingData="";
         Calendar walking_data2=Calendar.getInstance();
         walking_data2.setTimeInMillis(walking_data);
-        int end_day =walking_data2.get(Calendar.DAY_OF_MONTH);
+        int walkingdata =walking_data2.get(Calendar.DAY_OF_MONTH);
 
-        walkingData=""+end_day+"";
+        if(walkingdata==1||walkingdata==7||walkingdata==13||walkingdata==19||walkingdata==25){
+            walkingData="5";
+        }
+        if(walkingdata==2||walkingdata==8||walkingdata==14||walkingdata==20||walkingdata==26){
+            walkingData="6";
+        }
+        if(walkingdata==3||walkingdata==9||walkingdata==15||walkingdata==21||walkingdata==27){
+            walkingData="7";
+        }
+        if(walkingdata==4||walkingdata==10||walkingdata==16||walkingdata==22||walkingdata==28){
+            walkingData="8";
+        }
+        if(walkingdata==5||walkingdata==11||walkingdata==17||walkingdata==23||walkingdata==29){
+            walkingData="9";
+        }
+        if(walkingdata==6||walkingdata==12||walkingdata==18||walkingdata==24||walkingdata==30||walkingdata==31){
+            walkingData="10";
+        }
         return walkingData;
+    }
 
+    public static String getRunning_data(long running_data){
+        String runningData="";
+        Calendar running_data2=Calendar.getInstance();
+        running_data2.setTimeInMillis(running_data);
+        int runningdata =running_data2.get(Calendar.DAY_OF_MONTH);
+
+        if(runningdata==1||runningdata==7||runningdata==13||runningdata==19||runningdata==25){
+            runningData="5";
+        }
+        if(runningdata==2||runningdata==8||runningdata==14||runningdata==20||runningdata==26){
+            runningData="6";
+        }
+        if(runningdata==3||runningdata==9||runningdata==15||runningdata==21||runningdata==27){
+            runningData="7";
+        }
+        if(runningdata==4||runningdata==10||runningdata==16||runningdata==22||runningdata==28){
+            runningData="8";
+        }
+        if(runningdata==5||runningdata==11||runningdata==17||runningdata==23||runningdata==29){
+            runningData="9";
+        }
+        if(runningdata==6||runningdata==12||runningdata==18||runningdata==24||runningdata==30||runningdata==31){
+            runningData="10";
+        }
+        return runningData;
     }
 
 

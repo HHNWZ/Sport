@@ -7,14 +7,14 @@
     tools:context="kelvin.tablayout.Walking_task">
 
     <include
-        android:id="@+id/walking_taskk_toolbar"
+        android:id="@+id/walking_task_toolbar"
         layout="@layout/app_bar_layout" />
 
     <TextView
         android:id="@+id/exercise_week_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/walking_taskk_toolbar"
+        android:layout_below="@+id/walking_task_toolbar"
         android:layout_centerHorizontal="true"
         android:text="步行"
         android:textSize="20sp"
