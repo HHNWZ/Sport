@@ -160,6 +160,15 @@ public class  MainActivity extends AppCompatActivity
     public static ActionBar actionBar;
     public static DatabaseReference Task_walking;
     public static DatabaseReference Task_req_walking;
+    public static DatabaseReference Task_running;
+    public static DatabaseReference Task_req_running;
+    public static DatabaseReference Task_yoga;
+    public static DatabaseReference Task_req_yoga;
+    public static DatabaseReference Task_squats;
+    public static DatabaseReference Task_req_squats;
+    public static DatabaseReference Task_crunches;
+    public static DatabaseReference Task_req_crunches;
+
 
 
 
@@ -457,15 +466,111 @@ public class  MainActivity extends AppCompatActivity
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             Task_walking=FirebaseDatabase.getInstance().getReference().child("Task_walking").child(mAuth.getCurrentUser().getUid());
             Task_req_walking=FirebaseDatabase.getInstance().getReference().child("Task_req_walking").child(mAuth.getCurrentUser().getUid());
+            Task_running=FirebaseDatabase.getInstance().getReference().child("Task_running").child(mAuth.getCurrentUser().getUid());
+            Task_req_running=FirebaseDatabase.getInstance().getReference().child("Task_req_running").child(mAuth.getCurrentUser().getUid());
+            Task_yoga=FirebaseDatabase.getInstance().getReference().child("Task_yoga").child(mAuth.getCurrentUser().getUid());
+            Task_req_yoga=FirebaseDatabase.getInstance().getReference().child("Task_req_yoga").child(mAuth.getCurrentUser().getUid());
+            Task_squats=FirebaseDatabase.getInstance().getReference().child("Task_squats").child(mAuth.getCurrentUser().getUid());
+            Task_req_squats=FirebaseDatabase.getInstance().getReference().child("Task_req_squats").child(mAuth.getCurrentUser().getUid());
+            Task_crunches=FirebaseDatabase.getInstance().getReference().child("Task_crunches").child(mAuth.getCurrentUser().getUid());
+            Task_req_crunches=FirebaseDatabase.getInstance().getReference().child("Task_req_crunches").child(mAuth.getCurrentUser().getUid());
 
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
             String to_date= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
+
+            if(to_date.equals("一")){
+                Task_running.removeValue();
+                Task_req_running.removeValue();
+                mUserRef.child("running_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
+                Task_yoga.removeValue();
+                Task_req_yoga.removeValue();
+                mUserRef.child("yoga_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
+                Task_squats.removeValue();
+                Task_req_squats.removeValue();
+                mUserRef.child("squats_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
+                Task_crunches.removeValue();
+                Task_req_crunches.removeValue();
+                mUserRef.child("crunches_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
+            }
+
             if(to_date.equals("二")){
                 Task_walking.removeValue();
                 Task_req_walking.removeValue();
                 mUserRef.child("walking_task_status").setValue("還沒完成");
                 mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
+                Task_yoga.removeValue();
+                Task_req_yoga.removeValue();
+                mUserRef.child("yoga_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
+                Task_squats.removeValue();
+                Task_req_squats.removeValue();
+                mUserRef.child("squats_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
+                Task_crunches.removeValue();
+                Task_req_crunches.removeValue();
+                mUserRef.child("crunches_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
+            }
+            if(to_date.equals("三")){
+                Task_running.removeValue();
+                Task_req_running.removeValue();
+                mUserRef.child("running_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
+                Task_walking.removeValue();
+                Task_req_walking.removeValue();
+                mUserRef.child("walking_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
+                Task_squats.removeValue();
+                Task_req_squats.removeValue();
+                mUserRef.child("squats_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
+                Task_crunches.removeValue();
+                Task_req_crunches.removeValue();
+                mUserRef.child("crunches_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
+            }
+            if(to_date.equals("四")){
+                Task_running.removeValue();
+                Task_req_running.removeValue();
+                mUserRef.child("running_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
+                Task_walking.removeValue();
+                Task_req_walking.removeValue();
+                mUserRef.child("walking_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
+                Task_yoga.removeValue();
+                Task_req_yoga.removeValue();
+                mUserRef.child("yoga_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
+                Task_crunches.removeValue();
+                Task_req_crunches.removeValue();
+                mUserRef.child("crunches_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
+
+            }
+            if(to_date.equals("五")){
+                Task_running.removeValue();
+                Task_req_running.removeValue();
+                mUserRef.child("running_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
+                Task_walking.removeValue();
+                Task_req_walking.removeValue();
+                mUserRef.child("walking_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
+                Task_yoga.removeValue();
+                Task_req_yoga.removeValue();
+                mUserRef.child("yoga_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
+                Task_squats.removeValue();
+                Task_req_squats.removeValue();
+                mUserRef.child("squats_task_status").setValue("還沒完成");
+                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
+
             }
 
             Log.i("數據crunches_week_record1",""+crunches_week_record);

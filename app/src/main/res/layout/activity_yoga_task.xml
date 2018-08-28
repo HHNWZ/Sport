@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="kelvin.tablayout.Yoga_task">
 
-</android.support.constraint.ConstraintLayout>
+    <include
+        android:id="@+id/yoga_task_toolbar"
+        layout="@layout/app_bar_layout" />
+
+    <TextView
+        android:id="@+id/exercise_week_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/yoga_task_toolbar"
+        android:layout_centerHorizontal="true"
+        android:text="瑜伽"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        tools:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/exercise_week_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exercise_week_title"
+        android:text="0"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/exercise_week_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exercise_week_data"
+        android:layout_centerHorizontal="true"
+        android:text="公里"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/susses_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercise_week_unit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="當前完成"
+        />
+
+    <TextView
+        android:id="@+id/my_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/user_single_image"
+        android:layout_marginBottom="5dp"
+        android:text="你的資料"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_single_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/default_avatar" />
+
+    <TextView
+        android:id="@+id/user_single_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/user_single_image"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/user_single_image"
+        android:text="Display Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/user_single_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/user_single_name"
+        android:layout_below="@+id/user_single_name"
+        android:layout_marginTop="10dp"
+        android:text="今天運動量" />
+
+    <TextView
+        android:id="@+id/friend_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_single_image"
+
+        android:layout_marginBottom="5dp"
+        android:text="參與的朋友"
+        android:layout_centerHorizontal="true"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/yoga_task_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/friend_data"/>
+
+</RelativeLayout>

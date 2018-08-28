@@ -139,7 +139,7 @@ public class ExerciseYoga extends Fragment {
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                Intent intent = new Intent(getContext(),Yoga_task.class);
                 intent.putExtra("ToolbarTitle","瑜伽每週任務");
                 intent.putExtra("exerciseWeekTitle","做瑜伽");
                 intent.putExtra("exerciseWeekUnit","分鐘");

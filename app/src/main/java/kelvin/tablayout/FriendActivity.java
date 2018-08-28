@@ -85,6 +85,11 @@ public class FriendActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
+            if(now_date.equals("三")){
+                Intent intent = new Intent(FriendActivity.this,Yoga_task.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
 
         }
 

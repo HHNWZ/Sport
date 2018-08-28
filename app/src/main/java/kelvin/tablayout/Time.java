@@ -174,6 +174,34 @@ public class Time extends Application {
         return runningData;
     }
 
+    public static String getYoga_data(long yoga_data){
+        String yogaData="";
+        Calendar yoga_data2=Calendar.getInstance();
+        yoga_data2.setTimeInMillis(yoga_data);
+        int yogadata =yoga_data2.get(Calendar.DAY_OF_MONTH);
+
+        if(yogadata==1||yogadata==7||yogadata==13||yogadata==19||yogadata==25){
+            yogaData="10";
+        }
+        if(yogadata==2||yogadata==8||yogadata==14||yogadata==20||yogadata==26){
+            yogaData="12";
+        }
+        if(yogadata==3||yogadata==9||yogadata==15||yogadata==21||yogadata==27){
+            yogaData="14";
+        }
+        if(yogadata==4||yogadata==10||yogadata==16||yogadata==22||yogadata==28){
+            yogaData="16";
+        }
+        if(yogadata==5||yogadata==11||yogadata==17||yogadata==23||yogadata==29){
+            yogaData="18";
+        }
+        if(yogadata==6||yogadata==12||yogadata==18||yogadata==24||yogadata==30||yogadata==31){
+            yogaData="20";
+        }
+        return yogaData;
+    }
+
+
 
 
 

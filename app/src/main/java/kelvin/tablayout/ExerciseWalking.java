@@ -262,6 +262,8 @@ public class ExerciseWalking extends Fragment {
         k=0;
         i=0;
         mUsersList1.setAdapter(firebaseRecyclerAdapter);
+        k=0;
+        i=0;
     }
 
     public static class WalkingNewUsersViewHolder extends RecyclerView.ViewHolder {

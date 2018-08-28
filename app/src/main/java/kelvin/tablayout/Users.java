@@ -10,6 +10,8 @@ public class Users {
     public double running_all_count;
     public double walking_all_count;
     public long yoga_all_count;
+    public double walking_to_day_count;
+    public double running_to_day_count;
 
     public int i;
 
@@ -19,7 +21,7 @@ public class Users {
 
     }
 
-    public Users(String name, String image, String status, String thumb_image,int crunches_all_count,int squats_all_count,int running_all_count,int walking_all_count,long yoga_all_count,int i) {
+    public Users(String name, String image, String status, String thumb_image,int crunches_all_count,int squats_all_count,int running_all_count,int walking_all_count,long yoga_all_count,int i,double walking_to_day_count,double running_to_day_count) {
         this.name = name;
         this.image = image;
         this.status = status;
@@ -30,6 +32,8 @@ public class Users {
         this.walking_all_count=walking_all_count;
         this.yoga_all_count=yoga_all_count;
         this.i=i;
+        this.walking_to_day_count=walking_to_day_count;
+        this.running_to_day_count=running_to_day_count;
 
     }
 
@@ -111,5 +115,19 @@ public class Users {
         this.i = i;
     }
 
+    public double getWalking_to_day_count() {
+        return walking_to_day_count;
+    }
 
+    public void setWalking_to_day_count(double walking_to_day_count) {
+        this.walking_to_day_count = walking_to_day_count;
+    }
+
+    public double getRunning_to_day_count() {
+        return running_to_day_count;
+    }
+
+    public void setRunning_to_day_count(double running_to_day_count) {
+        this.running_to_day_count = running_to_day_count;
+    }
 }

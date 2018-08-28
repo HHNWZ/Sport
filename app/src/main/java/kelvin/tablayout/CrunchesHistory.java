@@ -24,6 +24,7 @@ public class CrunchesHistory extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     public static String day_crunches_key;
     public static String hour_crunches_key;
+    public static ExerciseData3 newCrunchesData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +44,23 @@ public class CrunchesHistory extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         crunches_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("crunches").child(day_crunches_key).child(hour_crunches_key);
 
-        crunches_history_database.addValueEventListener(new ValueEventListener() {
+        crunches_history_database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ExerciseData3 newCrunchesData=dataSnapshot.getValue(ExerciseData3.class);
-                Log.i("次數1234",""+newCrunchesData.count);
+                newCrunchesData=dataSnapshot.getValue(ExerciseData3.class);
+                Log.i("次數1234",""+newCrunchesData.getCount());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        crunches_history_database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
             }
 
             @Override
