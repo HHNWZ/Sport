@@ -200,7 +200,59 @@ public class Time extends Application {
         }
         return yogaData;
     }
+    public static String getSquats_data(long squats_data){
+        String squatsData="";
+        Calendar squats_data2=Calendar.getInstance();
+        squats_data2.setTimeInMillis(squats_data);
+        int squatsdata =squats_data2.get(Calendar.DAY_OF_MONTH);
 
+        if(squatsdata==1||squatsdata==7||squatsdata==13||squatsdata==19||squatsdata==25){
+            squatsData="50";
+        }
+        if(squatsdata==2||squatsdata==8||squatsdata==14||squatsdata==20||squatsdata==26){
+            squatsData="60";
+        }
+        if(squatsdata==3||squatsdata==9||squatsdata==15||squatsdata==21||squatsdata==27){
+            squatsData="70";
+        }
+        if(squatsdata==4||squatsdata==10||squatsdata==16||squatsdata==22||squatsdata==28){
+            squatsData="80";
+        }
+        if(squatsdata==5||squatsdata==11||squatsdata==17||squatsdata==23||squatsdata==29){
+            squatsData="90";
+        }
+        if(squatsdata==6||squatsdata==12||squatsdata==18||squatsdata==24||squatsdata==30||squatsdata==31){
+            squatsData="100";
+        }
+        return squatsData;
+    }
+
+    public static String getCrunches_data(long crunches_data){
+        String crunchesData="";
+        Calendar crunches_data2=Calendar.getInstance();
+        crunches_data2.setTimeInMillis(crunches_data);
+        int crunchesdata =crunches_data2.get(Calendar.DAY_OF_MONTH);
+
+        if(crunchesdata==1||crunchesdata==7||crunchesdata==13||crunchesdata==19||crunchesdata==25){
+            crunchesData="50";
+        }
+        if(crunchesdata==2||crunchesdata==8||crunchesdata==14||crunchesdata==20||crunchesdata==26){
+            crunchesData="60";
+        }
+        if(crunchesdata==3||crunchesdata==9||crunchesdata==15||crunchesdata==21||crunchesdata==27){
+            crunchesData="70";
+        }
+        if(crunchesdata==4||crunchesdata==10||crunchesdata==16||crunchesdata==22||crunchesdata==28){
+            crunchesData="80";
+        }
+        if(crunchesdata==5||crunchesdata==11||crunchesdata==17||crunchesdata==23||crunchesdata==29){
+            crunchesData="90";
+        }
+        if(crunchesdata==6||crunchesdata==12||crunchesdata==18||crunchesdata==24||crunchesdata==30||crunchesdata==31){
+            crunchesData="100";
+        }
+        return crunchesData;
+    }
 
 
 

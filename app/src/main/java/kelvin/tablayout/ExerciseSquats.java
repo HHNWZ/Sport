@@ -136,7 +136,7 @@ public class ExerciseSquats extends Fragment {
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                Intent intent = new Intent(getContext(),Squats_task.class);
                 intent.putExtra("ToolbarTitle","深蹲每週任務");
                 intent.putExtra("exerciseWeekTitle","做深蹲");
                 intent.putExtra("exerciseWeekUnit","次");

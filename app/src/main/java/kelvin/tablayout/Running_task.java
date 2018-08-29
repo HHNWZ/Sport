@@ -120,7 +120,7 @@ public class Running_task extends AppCompatActivity {
                             myUsersDatabase.child("running_task_status").setValue("還沒完成");
                         }
                         myName.setText(myname);
-                        myStatus.setText("今日跑步距離:"+mystatu+"公里");
+                        myStatus.setText("跑步今天記錄:"+mystatu+"公里");
                         if(!image.equals("default")){
                             Picasso.with(Running_task.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                                     .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
@@ -222,7 +222,7 @@ public class Running_task extends AppCompatActivity {
                                 String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
                                 String userStatus=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
                                 userRunning=Double.parseDouble(userStatus);
-                                running_data.setFriend_running_task_data(userRunning);
+
                                 Log.i("最終get&set","已經set");
                                 Log.i("k3值",""+k);
                                 Log.i("j3值",""+j);
@@ -230,7 +230,7 @@ public class Running_task extends AppCompatActivity {
                                     Log.i("k4值",""+k);
                                     k=k+userRunning;
                                     Log.i("k5值",""+k);
-                                    myUsersDatabase.child("exercise_count").child("running").child("task_record").setValue(k);
+                                    running_data.setFriend_running_task_data(k);
                                     Log.i("j4值",""+j);
                                     j=j+1;
                                     Log.i("j5值",""+j);

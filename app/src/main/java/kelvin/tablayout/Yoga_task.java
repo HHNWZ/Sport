@@ -26,6 +26,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +55,7 @@ public class Yoga_task extends AppCompatActivity {
     public static int i;
     public int int_friend_point;
     public Data yoga_data=new Data();
+    public static DecimalFormat formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class Yoga_task extends AppCompatActivity {
         setSupportActionBar(yoga_task_toolbar);
         actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("跑步每週共同任務");
+        actionBar.setTitle("瑜伽每週共同任務");
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         yoga_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
@@ -94,15 +96,22 @@ public class Yoga_task extends AppCompatActivity {
                         myname = dataSnapshot.child("name").getValue().toString();
                         final String image = dataSnapshot.child("thumb_image").getValue().toString();
                         friend_point=dataSnapshot.child("friend_point").getValue().toString();
-                        mystatu=dataSnapshot.child("exercise_count").child("yoga").child("today_record").getValue().toString();
+                        mystatu=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
                         String yoga_task_status=dataSnapshot.child("yoga_task_status").getValue().toString();
                         int_friend_point=Integer.parseInt(friend_point);
                         myYoga=Long.parseLong(mystatu);
-
+                        Log.i("朋友的時間",""+yoga_data.getFriend_yoga_task_data());
+                        Log.i("我的時間",""+myYoga);
                         all_task=yoga_data.getFriend_yoga_task_data()+myYoga;
+                        Log.i("合計時間",""+all_task);
                         chang_task=Time.yogaWeekminute(all_task);
+                        Log.i("轉換時間",""+chang_task);
                         same_task=Float.parseFloat(exercise_week_data.getText().toString());
-                        if(all_task>=same_task&&yoga_data.getFriend_yoga_task_data()!=0&&myYoga!=0&&same_task!=0){
+
+
+
+
+                        if(chang_task>=same_task&&yoga_data.getFriend_yoga_task_data()!=0&&myYoga!=0&&same_task!=0){
                             susses_text_view.setText("你獲得10點friendpoint");
                             actionBar.setSubtitle("你和朋友完成任務");
 
@@ -113,11 +122,11 @@ public class Yoga_task extends AppCompatActivity {
                             }
 
                         }else {
-                            susses_text_view.setText("當前完成"+all_task+"公里");
+                            susses_text_view.setText("當前完成"+Time.changeYogaTime(all_task));
                             myUsersDatabase.child("yoga_task_status").setValue("還沒完成");
                         }
                         myName.setText(myname);
-                        myStatus.setText("今日跑步距離:"+mystatu+"公里");
+                        myStatus.setText("瑜伽今日記錄:"+Time.changeYogaTime(myYoga));
                         if(!image.equals("default")){
                             Picasso.with(Yoga_task.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                                     .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
@@ -214,9 +223,9 @@ public class Yoga_task extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         final String userName = dataSnapshot.child("name").getValue().toString();
                         String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                        String userStatus=dataSnapshot.child("exercise_count").child("yoga").child("today_record").getValue().toString();
+                        String userStatus=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
                         userYoga=Long.parseLong(userStatus);
-                        yoga_data.setFriend_yoga_task_data(userYoga);
+
                         Log.i("最終get&set","已經set");
                         Log.i("k3值",""+k);
                         Log.i("j3值",""+j);
@@ -224,7 +233,7 @@ public class Yoga_task extends AppCompatActivity {
                             Log.i("k4值",""+k);
                             k=k+userYoga;
                             Log.i("k5值",""+k);
-                            myUsersDatabase.child("exercise_count").child("yoga").child("task_record").setValue(k);
+                            yoga_data.setFriend_yoga_task_data(k);
                             Log.i("j4值",""+j);
                             j=j+1;
                             Log.i("j5值",""+j);
@@ -232,7 +241,7 @@ public class Yoga_task extends AppCompatActivity {
 
                         Log.i("朋友跑步距離",""+k);
                         viewHolder.setName(userName);
-                        viewHolder.setSatus("跑步今天記錄:"+userStatus+"公里");
+                        viewHolder.setSatus("瑜伽今日記錄:"+Time.changeYogaTime(userYoga));
                         viewHolder.setUserImage(userThumb,getApplication());
                     }
 

@@ -117,7 +117,7 @@ public class Walking_task extends AppCompatActivity {
                         }
 
                         myName.setText(myname);
-                        myStatus.setText("今日跑步距離:"+mystatu+"公里");
+                        myStatus.setText("步行今天記錄:"+mystatu+"公里");
                         if(!image.equals("default")){
                             Picasso.with(Walking_task.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                                     .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
@@ -214,22 +214,23 @@ public class Walking_task extends AppCompatActivity {
                         String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
                         String userStatus=dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
                         userWalking=Double.parseDouble(userStatus);
-                        walking_data.setFriend_walking_task_data(userWalking);
+
                         Log.i("k3值",""+k);
                         Log.i("j3值",""+j);
                         if(j<=getItenCount()){
                             Log.i("k4值",""+k);
                             k=k+userWalking;
                             Log.i("k5值",""+k);
-                            myUsersDatabase.child("exercise_count").child("walking").child("task_record").setValue(k);
+                            walking_data.setFriend_walking_task_data(k);
+
                             Log.i("j4值",""+j);
                             j=j+1;
                             Log.i("j5值",""+j);
                         }
 
-                        Log.i("朋友跑步距離",""+k);
+                        Log.i("朋友步行距離",""+k);
                         viewHolder.setName(userName);
-                        viewHolder.setSatus("跑步今天記錄:"+userStatus+"公里");
+                        viewHolder.setSatus("步行今天記錄:"+userStatus+"公里");
                         viewHolder.setUserImage(userThumb,getApplication());
                     }
 

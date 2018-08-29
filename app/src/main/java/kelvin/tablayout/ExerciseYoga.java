@@ -94,8 +94,12 @@ public class ExerciseYoga extends Fragment {
                 Log.i("現在是1",DateCheck);
                 Log.i("現在是",nowDate);
                 if(DateCheck.equals(nowDate)){
-                    text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
-                }else {
+                    Log.i("我進來了","是");
+                    Log.i("今天瑜伽運動量",""+today_time1);
+                    Log.i("轉換後的運動量",""+Time.changeYogaTime(today_time1));
+                    text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_time1));
+
+                }else{
 
                     mDatabase.child("exercise_count").child("yoga").child("DateCheck").setValue(nowDate);
                     mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(0);

@@ -136,7 +136,7 @@ public class ExerciseCrunches extends Fragment {
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Sit_up_task.class);
+                Intent intent = new Intent(getContext(),Crunches_task.class);
                 intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
                 intent.putExtra("exerciseWeekTitle","做仰臥起坐");
                 intent.putExtra("exerciseWeekUnit","次");
