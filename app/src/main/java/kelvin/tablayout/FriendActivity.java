@@ -90,6 +90,16 @@ public class FriendActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
+            if(now_date.equals("四")){
+                Intent intent = new Intent(FriendActivity.this,Squats_task.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+            if(now_date.equals("五")){
+                Intent intent = new Intent(FriendActivity.this,Crunches_task.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
 
         }
 

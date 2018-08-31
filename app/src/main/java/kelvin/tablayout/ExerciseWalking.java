@@ -4,8 +4,10 @@ package kelvin.tablayout;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -50,6 +52,8 @@ public class ExerciseWalking extends Fragment {
     public static RelativeLayout background_layout;
     private DatabaseReference myUsersDatabase;
     public static double i=0;
+    private kelvin.tablayout.Color color=new kelvin.tablayout.Color();
+    public static int a=0;
 
 
 
@@ -309,6 +313,7 @@ public class ExerciseWalking extends Fragment {
 
 
     }
+
 
 
 

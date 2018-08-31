@@ -273,11 +273,13 @@ public class Walking_monitor extends AppCompatActivity {
                     String today_record=dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
                     String all_record=dataSnapshot.child("exercise_count").child("walking").child("all_record").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
+                    String week_calorie=dataSnapshot.child("exercise_count").child("walking").child("week_calorie").getValue().toString();
                     double longDistance=Double.parseDouble(long_distance);
                     double shortDistance=Double.parseDouble(short_distance);
                     double today_record1=Double.parseDouble(today_record);
                     double all_record1=Double.parseDouble(all_record);
                     double week_record1=Double.parseDouble(week_record);
+                    int week_calorie1=Integer.parseInt(week_calorie);
                     if(UnitConversion.get_kilometer(walking_distance)>longDistance){
                         mDatabase.child("exercise_count").child("walking").child("long_distance").setValue(UnitConversion.get_kilometer(walking_distance));
                         Log.i("追踪1","新的距離大於最長距離");
@@ -310,12 +312,14 @@ public class Walking_monitor extends AppCompatActivity {
                         today_record1=today_record1+UnitConversion.get_kilometer(walking_distance);
                         all_record1=all_record1+UnitConversion.get_kilometer(walking_distance);
                         week_record1=week_record1+UnitConversion.get_kilometer(walking_distance);
+                        week_calorie1=week_calorie1+walking_calorie;
                         DecimalFormat df = new DecimalFormat("0.00");
                         mDatabase.child("exercise_count").child("walking").child("today_record").setValue(df.format(today_record1));
                         mDatabase.child("exercise_count").child("walking").child("all_record").setValue(df.format(all_record1));
                         mDatabase.child("exercise_count").child("walking").child("week_record").setValue(df.format(week_record1));
                         mDatabase.child("exercise_count").child("walking").child("DataIdcheck").setValue(walking_UUID);
                         mDatabase.child("exercise_count").child("walking").child("distance").setValue(UnitConversion.get_kilometer(walking_distance));
+                        mDatabase.child("exercise_count").child("walking").child("week_record").setValue(week_record1);
                         mDatabase.child("walking_all_count").setValue(all_record1);
                         mDatabase.child("walking_all_count_sort").setValue(-all_record1);
 

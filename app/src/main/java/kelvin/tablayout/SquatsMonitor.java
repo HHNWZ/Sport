@@ -217,12 +217,14 @@ public class SquatsMonitor extends AppCompatActivity {
                     String all_count=dataSnapshot.child("exercise_count").child("squats").child("all_count").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
                     String DataIdcheck=dataSnapshot.child("exercise_count").child("squats").child("DataIdcheck").getValue().toString();
+                    String week_calorie=dataSnapshot.child("exercise_count").child("squats").child("week_calorie").getValue().toString();
 
                     int bigCount=Integer.parseInt(big_count);
                     int smallCount=Integer.parseInt(small_count);
                     int today_count1=Integer.parseInt(today_count);
                     int all_count1=Integer.parseInt(all_count);
                     int week_record1=Integer.parseInt(week_record);
+                    int week_calorie1=Integer.parseInt(week_calorie);
                     if(squats_count>bigCount){
                         mDatabase.child("exercise_count").child("squats").child("big_count").setValue(squats_count);
 
@@ -250,12 +252,14 @@ public class SquatsMonitor extends AppCompatActivity {
                         today_count1=today_count1+squats_count;
                         all_count1=all_count1+squats_count;
                         week_record1=week_record1+squats_count;
+                        week_calorie1=week_calorie1+squats_calorie;
 
                         mDatabase.child("exercise_count").child("squats").child("today_count").setValue(today_count1);
                         mDatabase.child("exercise_count").child("squats").child("all_count").setValue(all_count1);
                         mDatabase.child("exercise_count").child("squats").child("DataIdcheck").setValue(squats_UUID);
                         mDatabase.child("exercise_count").child("squats").child("week_record").setValue(week_record1);
                         mDatabase.child("exercise_count").child("squats").child("count").setValue(squats_count);
+                        mDatabase.child("exercise_count").child("squats").child(" week_calorie").setValue( week_calorie1);
                         mDatabase.child("squats_all_count").setValue(all_count1);
                         mDatabase.child("squats_all_count_sort").setValue(-all_count1);
                     }

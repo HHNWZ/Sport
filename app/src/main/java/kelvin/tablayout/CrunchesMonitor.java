@@ -221,11 +221,13 @@ public class CrunchesMonitor extends AppCompatActivity {
                     String all_count=dataSnapshot.child("exercise_count").child("crunches").child("all_count").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
                     String DataIdcheck=dataSnapshot.child("exercise_count").child("crunches").child("DataIdcheck").getValue().toString();
+                    String week_calorie=dataSnapshot.child("exercise_count").child("crunches").child("week_calorie").getValue().toString();
                     int bigCount=Integer.parseInt(big_count);
                     int smallCount=Integer.parseInt(small_count);
                     int today_count1=Integer.parseInt(today_count);
                     int all_count1=Integer.parseInt(all_count);
                     int week_record1=Integer.parseInt(week_record);
+                    int week_calorie1=Integer.parseInt(week_calorie);
                     if(crunches_count>bigCount){
                         mDatabase.child("exercise_count").child("crunches").child("big_count").setValue(crunches_count);
                         Log.i("追踪1","新的距離大於最長距離");
@@ -256,12 +258,14 @@ public class CrunchesMonitor extends AppCompatActivity {
                         today_count1=today_count1+crunches_count;
                         all_count1=all_count1+crunches_count;
                         week_record1=week_record1+crunches_count;
+                        week_calorie1=week_calorie1+crunches_calorie;
 
                         mDatabase.child("exercise_count").child("crunches").child("today_count").setValue(today_count1);
                         mDatabase.child("exercise_count").child("crunches").child("all_count").setValue(all_count1);
                         mDatabase.child("exercise_count").child("crunches").child("DataIdcheck").setValue(crunches_UUID);
                         mDatabase.child("exercise_count").child("crunches").child("week_record").setValue(week_record1);
                         mDatabase.child("exercise_count").child("crunches").child("count").setValue(crunches_count);
+                        mDatabase.child("exercise_count").child("crunches").child(" week_calorie").setValue( week_calorie1);
                         mDatabase.child("crunches_all_count").setValue(all_count1);
                         mDatabase.child("crunches_all_count_sort").setValue(-all_count1);
 

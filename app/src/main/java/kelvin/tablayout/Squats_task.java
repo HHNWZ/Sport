@@ -30,6 +30,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class Squats_task extends AppCompatActivity {
     private Toolbar squats_task_toolbar;
@@ -52,6 +53,7 @@ public class Squats_task extends AppCompatActivity {
     public static int i;
     public int int_friend_point;
     private Data squats_data=new Data();
+    public CircularSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class Squats_task extends AppCompatActivity {
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-
+        seekBar = (CircularSeekBar) findViewById(R.id.squats_seek_bar);
         myName = (TextView) findViewById(R.id.user_single_name);
         myStatus = (TextView) findViewById(R.id.user_single_status);
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
@@ -80,6 +82,7 @@ public class Squats_task extends AppCompatActivity {
         squats_task_recycler_view.setHasFixedSize(true);
         squats_task_recycler_view.setLayoutManager(layoutManager);
         myUsersDatabase.keepSynced(true);
+        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
         Timer timer=new Timer();
 
         TimerTask mTimerTask =new TimerTask(){
@@ -97,7 +100,7 @@ public class Squats_task extends AppCompatActivity {
                         mySquats=Integer.parseInt(mystatu);
 
                         all_task=squats_data.getFriend_squats_task_data()+mySquats;
-
+                        seekBar.setProgress((float)all_task);
                         same_task=Integer.parseInt(exercise_week_data.getText().toString());
                         if(all_task>=same_task&&squats_data.getFriend_squats_task_data()!=0&&mySquats!=0&&same_task!=0){
                             susses_text_view.setText("你獲得10點friendpoint");

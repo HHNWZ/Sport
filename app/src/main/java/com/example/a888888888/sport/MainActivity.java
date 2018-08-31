@@ -607,6 +607,11 @@ public class  MainActivity extends AppCompatActivity
                     String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
                     String walking_week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
                     String yoga_week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
+                    String crunches_week_calorie=dataSnapshot.child("exercise_count").child("crunches").child("week_calorie").getValue().toString();
+                    String running_week_calorie=dataSnapshot.child("exercise_count").child("running").child("week_calorie").getValue().toString();
+                    String squats_week_calorie=dataSnapshot.child("exercise_count").child("squats").child("week_calorie").getValue().toString();
+                    String walking_week_calorie=dataSnapshot.child("exercise_count").child("walking").child("week_calorie").getValue().toString();
+                    String yoga_week_calorie=dataSnapshot.child("exercise_count").child("yoga").child("week_calorie").getValue().toString();
                     String DateCheck=dataSnapshot.child("DateCheck").getValue().toString();
                     String Week= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
                     String nowDate=Time.getToDate(System.currentTimeMillis());
@@ -617,6 +622,11 @@ public class  MainActivity extends AppCompatActivity
                     float squats_week_record_float=Float.parseFloat(squats_week_record);
                     float walking_week_record_float=Float.parseFloat(walking_week_record);
                     long yoga_week_record_long=Long.parseLong(yoga_week_record);
+                    float crunches_week_calorie_float=Float.parseFloat(crunches_week_calorie);
+                    float running_week_calorie_float=Float.parseFloat(running_week_calorie);
+                    float squats_week_calorie_float=Float.parseFloat(squats_week_calorie);
+                    float walking_week_calorie_float=Float.parseFloat(walking_week_calorie);
+                    float yoga_week_calorie_float=Float.parseFloat(yoga_week_calorie);
 
                     ArrayList<PieChartBean> lists = new ArrayList<>();
                     DecimalFormat df = new DecimalFormat("0.00");
@@ -624,11 +634,11 @@ public class  MainActivity extends AppCompatActivity
 
                     if(Week.equals("一")){
                         if(DateCheck.equals(nowDate)){
-                            lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
-                            lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, ""));//walkdata
-                            lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), ""));//airdata
-                            lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, ""));//pushdata
-                            lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, ""));//sitdata
+                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
+                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#189428"), walking_week_calorie_float, ""));//walkdata
+                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#349bb3"), yoga_week_calorie_float, ""));//airdata
+                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#2671ab"), squats_week_calorie_float, ""));//pushdata
+                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#2c618a"), crunches_week_calorie_float, ""));//sitdata
                             pieView.setData(lists);
                             textView6.setText(""+running_week_record_float+"公里");
                             textView7.setText(""+walking_week_record_float+"公里");
@@ -653,15 +663,20 @@ public class  MainActivity extends AppCompatActivity
                             mUserRef.child("exercise_count").child("squats").child("week_record").setValue(0);
                             mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
                             mUserRef.child("exercise_count").child("yoga").child("week_record").setValue(0);
+                            mUserRef.child("exercise_count").child("crunches").child("week_calorie").setValue(0);
+                            mUserRef.child("exercise_count").child("running").child("week_calorie").setValue(0);
+                            mUserRef.child("exercise_count").child("squats").child("week_calorie").setValue(0);
+                            mUserRef.child("exercise_count").child("walking").child("week_calorie").setValue(0);
+                            mUserRef.child("exercise_count").child("yoga").child("week_calorie").setValue(0);
 
                         }
 
                     }else {
-                        lists.add(new PieChartBean(Color.parseColor("#38b048"), running_week_record_float, ""));//rundata
-                        lists.add(new PieChartBean(Color.parseColor("#189428"), walking_week_record_float, ""));//walkdata
-                        lists.add(new PieChartBean(Color.parseColor("#349bb3"), Time.yogaWeekminute(yoga_week_record_long), ""));//airdata
-                        lists.add(new PieChartBean(Color.parseColor("#2671ab"), squats_week_record_float, ""));//pushdata
-                        lists.add(new PieChartBean(Color.parseColor("#2c618a"), crunches_week_record_float, ""));//sitdata
+                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
+                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#189428"), walking_week_calorie_float, ""));//walkdata
+                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#349bb3"), yoga_week_calorie_float, ""));//airdata
+                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#2671ab"), squats_week_calorie_float, ""));//pushdata
+                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#2c618a"), crunches_week_calorie_float, ""));//sitdata
                         pieView.setData(lists);
                         textView6.setText(""+running_week_record_float+"公里");
                         textView7.setText(""+walking_week_record_float+"公里");

@@ -214,11 +214,13 @@ public class YogaMonitor extends AppCompatActivity {
                     String all_time=dataSnapshot.child("exercise_count").child("yoga").child("all_time").getValue().toString();
                     String week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
                     String DataIdcheck=dataSnapshot.child("exercise_count").child("yoga").child("DataIdcheck").getValue().toString();
+                    String week_calorie=dataSnapshot.child("exercise_count").child("yoga").child("week_calorie").getValue().toString();
                     long longTime=Long.parseLong(long_time);
                     long shortTime=Long.parseLong(short_time);
                     long todayTime=Long.parseLong(today_time);
                     long allTime=Long.parseLong(all_time);
                     long weekRecord=Long.parseLong(week_record);
+                    int week_calorie1=Integer.parseInt(week_calorie);
                     if(yoga_duration>longTime){
                         mDatabase.child("exercise_count").child("yoga").child("long_time").setValue(yoga_duration);
                         Log.i("追踪1","新的距離大於最長距離");
@@ -250,12 +252,14 @@ public class YogaMonitor extends AppCompatActivity {
                         todayTime=todayTime+yoga_duration;
                         allTime=allTime+yoga_duration;
                         weekRecord=weekRecord+yoga_duration;
+                        week_calorie1=week_calorie1+yoga_calorie;
 
                         mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(todayTime);
                         mDatabase.child("exercise_count").child("yoga").child("all_time").setValue(allTime);
                         mDatabase.child("exercise_count").child("yoga").child("DataIdcheck").setValue(yoga_UUID);
                         mDatabase.child("exercise_count").child("yoga").child("week_record").setValue(weekRecord);
                         mDatabase.child("exercise_count").child("yoga").child("time").setValue(yoga_duration);
+                        mDatabase.child("exercise_count").child("yoga").child(" week_calorie").setValue( week_calorie1);
                         mDatabase.child("yoga_all_count").setValue(allTime);
                         mDatabase.child("yoga_all_count_sort").setValue(-allTime);
 
