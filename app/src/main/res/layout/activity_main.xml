@@ -161,29 +161,11 @@
                     android:layout_toLeftOf="@+id/dataLinear1"
                     >
 
-                    <com.hedan.piechart_library.PieChart_View
-
-                        android:id="@+id/pie_view"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toLeftOf="@+id/dataLinear1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:alphaPieColor="#fff"
-                        app:alphaPieTran="255"
-                        android:layout_gravity="center"
-                        android:textSize="14sp"
-                        app:animaDuration="5000"
-                        app:inCricleColor="#eeeeee"
-                        app:isAnimation="true"
-                        app:isTouchFlag="true"
-                        app:mRadius="140dp"
-                        app:name="本週運動量"
-                        app:pieChartWidth="40dp"
-                        app:segmentAngle="0.5"
-                        app:startAngle="180"
-                        app:textColor="#000"
-                        app:textOrientation="path"
-                        />
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/chart1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/pieChart_toolbar" />
 
                 </LinearLayout>
                 <LinearLayout

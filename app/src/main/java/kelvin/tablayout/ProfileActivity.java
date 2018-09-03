@@ -287,7 +287,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
@@ -373,7 +373,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
@@ -469,7 +469,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
@@ -560,7 +560,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
@@ -647,7 +647,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             String strJsonBody = "{"
                                                     + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                                     + "\"large_icon\": \""+my_image.toString()+"\","
-                                                    + "\"small_icon\": \""+R.mipmap.logo+"\","
+                                                    + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                                     + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
 
                                                     + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"

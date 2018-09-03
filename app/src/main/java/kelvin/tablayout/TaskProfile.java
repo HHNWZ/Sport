@@ -2,6 +2,8 @@ package kelvin.tablayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,12 +26,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class TaskProfile extends AppCompatActivity {
     private Toolbar task_profile_app_bar;
@@ -50,12 +58,18 @@ public class TaskProfile extends AppCompatActivity {
     public static String my_name;
     public static String Task_req;
     public static String Task;
+    public String Uid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_profile);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .init();
         task_profile_app_bar=(Toolbar)findViewById(R.id.task_profile_app_bar);
         setSupportActionBar(task_profile_app_bar);
         actionBar=getSupportActionBar();
@@ -191,6 +205,69 @@ public class TaskProfile extends AppCompatActivity {
                             mProfileSendReqBtn.setEnabled(true);
                         }
                     });
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
+
+
+                                try {
+                                    String jsonResponse;
+
+                                    URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setUseCaches(false);
+                                    con.setDoOutput(true);
+                                    con.setDoInput(true);
+
+                                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                    con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                    con.setRequestMethod("POST");
+
+
+                                    String strJsonBody = "{"
+                                            + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                            + "\"large_icon\": \""+my_image.toString()+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                            + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
+
+                                            + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送共同任務給你"+"\"}"
+                                            + "}";
+
+                                    System.out.println("strJsonBody:\n" + strJsonBody);
+
+                                    byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                    con.setFixedLengthStreamingMode(sendBytes.length);
+
+                                    OutputStream outputStream = con.getOutputStream();
+                                    outputStream.write(sendBytes);
+
+                                    int httpResponse = con.getResponseCode();
+                                    System.out.println("httpResponse: " + httpResponse);
+
+                                    if (httpResponse >= HttpURLConnection.HTTP_OK
+                                            && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                        Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    } else {
+                                        Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    }
+                                    System.out.println("jsonResponse:\n" + jsonResponse);
+
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
+                                }
+                            }
+                        }
+                    });
                 }
 
                 //----取消發送共同任務請求----//
@@ -206,6 +283,69 @@ public class TaskProfile extends AppCompatActivity {
                                     mProfileSendReqBtn.setText("發送共同任務請求");
                                 }
                             });
+                        }
+                    });
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
+
+
+                                try {
+                                    String jsonResponse;
+
+                                    URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setUseCaches(false);
+                                    con.setDoOutput(true);
+                                    con.setDoInput(true);
+
+                                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                    con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                    con.setRequestMethod("POST");
+
+
+                                    String strJsonBody = "{"
+                                            + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                            + "\"large_icon\": \""+my_image.toString()+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                            + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
+
+                                            + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的共同任務"+"\"}"
+                                            + "}";
+
+                                    System.out.println("strJsonBody:\n" + strJsonBody);
+
+                                    byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                    con.setFixedLengthStreamingMode(sendBytes.length);
+
+                                    OutputStream outputStream = con.getOutputStream();
+                                    outputStream.write(sendBytes);
+
+                                    int httpResponse = con.getResponseCode();
+                                    System.out.println("httpResponse: " + httpResponse);
+
+                                    if (httpResponse >= HttpURLConnection.HTTP_OK
+                                            && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                        Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    } else {
+                                        Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    }
+                                    System.out.println("jsonResponse:\n" + jsonResponse);
+
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
+                                }
+                            }
                         }
                     });
                 }
@@ -237,6 +377,69 @@ public class TaskProfile extends AppCompatActivity {
                             }
                         }
                     });
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
+
+
+                                try {
+                                    String jsonResponse;
+
+                                    URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setUseCaches(false);
+                                    con.setDoOutput(true);
+                                    con.setDoInput(true);
+
+                                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                    con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                    con.setRequestMethod("POST");
+
+
+                                    String strJsonBody = "{"
+                                            + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                            + "\"large_icon\": \""+my_image.toString()+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                            + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
+
+                                            + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的共同任務給你"+"\"}"
+                                            + "}";
+
+                                    System.out.println("strJsonBody:\n" + strJsonBody);
+
+                                    byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                    con.setFixedLengthStreamingMode(sendBytes.length);
+
+                                    OutputStream outputStream = con.getOutputStream();
+                                    outputStream.write(sendBytes);
+
+                                    int httpResponse = con.getResponseCode();
+                                    System.out.println("httpResponse: " + httpResponse);
+
+                                    if (httpResponse >= HttpURLConnection.HTTP_OK
+                                            && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                        Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    } else {
+                                        Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    }
+                                    System.out.println("jsonResponse:\n" + jsonResponse);
+
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
+                                }
+                            }
+                        }
+                    });
 
                 }
 
@@ -261,6 +464,69 @@ public class TaskProfile extends AppCompatActivity {
                                 Toast.makeText(TaskProfile.this, error, Toast.LENGTH_SHORT).show();
                             }
                             mProfileSendReqBtn.setEnabled(true);
+                        }
+                    });
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                            if (SDK_INT > 8) {
+                                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                        .permitAll().build();
+                                StrictMode.setThreadPolicy(policy);
+
+
+                                try {
+                                    String jsonResponse;
+
+                                    URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                    con.setUseCaches(false);
+                                    con.setDoOutput(true);
+                                    con.setDoInput(true);
+
+                                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                    con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                    con.setRequestMethod("POST");
+
+
+                                    String strJsonBody = "{"
+                                            + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                            + "\"large_icon\": \""+my_image.toString()+"\","
+                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                            + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
+
+                                            + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"取消和你的共同任務"+"\"}"
+                                            + "}";
+
+                                    System.out.println("strJsonBody:\n" + strJsonBody);
+
+                                    byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                    con.setFixedLengthStreamingMode(sendBytes.length);
+
+                                    OutputStream outputStream = con.getOutputStream();
+                                    outputStream.write(sendBytes);
+
+                                    int httpResponse = con.getResponseCode();
+                                    System.out.println("httpResponse: " + httpResponse);
+
+                                    if (httpResponse >= HttpURLConnection.HTTP_OK
+                                            && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                        Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    } else {
+                                        Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                        jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                        scanner.close();
+                                    }
+                                    System.out.println("jsonResponse:\n" + jsonResponse);
+
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
+                                }
+                            }
                         }
                     });
                 }
@@ -288,6 +554,69 @@ public class TaskProfile extends AppCompatActivity {
                         }else {
                             String error = databaseError.getMessage();
                             Toast.makeText(TaskProfile.this, error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                        if (SDK_INT > 8) {
+                            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                    .permitAll().build();
+                            StrictMode.setThreadPolicy(policy);
+
+
+                            try {
+                                String jsonResponse;
+
+                                URL url = new URL("https://onesignal.com/api/v1/notifications");
+                                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                                con.setUseCaches(false);
+                                con.setDoOutput(true);
+                                con.setDoInput(true);
+
+                                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                                con.setRequestProperty("Authorization", "Basic MDliZjEwOTItODYyOC00M2JhLWFjZjktNWFlNDIxNjY2OTdl");
+                                con.setRequestMethod("POST");
+
+
+                                String strJsonBody = "{"
+                                        + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
+                                        + "\"large_icon\": \""+my_image.toString()+"\","
+                                        + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                        + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
+
+                                        + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
+                                        + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的共同任務邀請"+"\"}"
+                                        + "}";
+
+                                System.out.println("strJsonBody:\n" + strJsonBody);
+
+                                byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                                con.setFixedLengthStreamingMode(sendBytes.length);
+
+                                OutputStream outputStream = con.getOutputStream();
+                                outputStream.write(sendBytes);
+
+                                int httpResponse = con.getResponseCode();
+                                System.out.println("httpResponse: " + httpResponse);
+
+                                if (httpResponse >= HttpURLConnection.HTTP_OK
+                                        && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                                    Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                    scanner.close();
+                                } else {
+                                    Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                                    jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                                    scanner.close();
+                                }
+                                System.out.println("jsonResponse:\n" + jsonResponse);
+
+                            } catch (Throwable t) {
+                                t.printStackTrace();
+                            }
                         }
                     }
                 });

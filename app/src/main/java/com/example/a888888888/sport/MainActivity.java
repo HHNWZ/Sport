@@ -31,6 +31,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,6 +80,7 @@ import kelvin.tablayout.Crunches_task;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
+import kelvin.tablayout.PieChartActivity;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningMonitor;
@@ -78,6 +89,7 @@ import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
 import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.Squats_task;
+import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.Walking_monitor;
@@ -105,7 +117,7 @@ public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener,SwipeRefreshLayout.OnRefreshListener {
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener,SwipeRefreshLayout.OnRefreshListener, OnChartValueSelectedListener {
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
@@ -130,7 +142,7 @@ public class  MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
-    private PieChart_View pieView;
+
     private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     private static DatabaseReference mUserRef;
     private FirebaseAuth mAuth;
@@ -168,6 +180,13 @@ public class  MainActivity extends AppCompatActivity
     public static DatabaseReference Task_req_squats;
     public static DatabaseReference Task_crunches;
     public static DatabaseReference Task_req_crunches;
+    private PieChart mChart;
+    private Legend l;
+    private ArrayList<PieEntry> pieEntryList;
+    private ArrayList<Integer> colors;
+    private PieEntry running,walking,yoga,squats,crunches;
+    private PieDataSet pieDataSet;
+    private PieData pieData;
 
 
 
@@ -404,7 +423,8 @@ public class  MainActivity extends AppCompatActivity
         textView8=(TextView)findViewById(R.id.textView8);
         textView10=(TextView)findViewById(R.id.textView10);
         textView9=(TextView)findViewById(R.id.textView9);
-        pieView = (PieChart_View) findViewById(R.id.pie_view);
+        //pieView = (PieChart_View) findViewById(R.id.pie_view);
+        mChart=findViewById(R.id.chart1);
         main_title=(RainbowTextView)findViewById(R.id.main_title);
         //mHanlder2.postDelayed(task3,5000);
         button_of_walking_monitoring.setOnClickListener(new View.OnClickListener() {
@@ -587,12 +607,49 @@ public class  MainActivity extends AppCompatActivity
             button_of_yoga_monitoring.setVisibility(View.VISIBLE);
             button_of_squats_monitoring.setVisibility(View.VISIBLE);
             button_of_crunches_monitoring.setVisibility(View.VISIBLE);
-            pieView.setVisibility(View.VISIBLE);
+            //pieView.setVisibility(View.VISIBLE);
+            mChart.setVisibility(View.VISIBLE);
             textView6.setVisibility(View.VISIBLE);
             textView7.setVisibility(View.VISIBLE);
             textView8.setVisibility(View.VISIBLE);
             textView10.setVisibility(View.VISIBLE);
             textView9.setVisibility(View.VISIBLE);
+
+
+            // 设置 pieChart 图表基本属性
+            mChart.setUsePercentValues(true);            //使用百分比显示
+            mChart.getDescription().setEnabled(false);    //设置pieChart图表的描述
+            mChart.setBackgroundColor(android.graphics.Color.rgb(50,61,77));      //设置pieChart图表背景色
+            mChart.setDragDecelerationFrictionCoef(0.95f);//设置pieChart图表转动阻力摩擦系数[0,1]
+            mChart.setRotationAngle(0);                   //设置pieChart图表起始角度
+            mChart.setRotationEnabled(true);              //设置pieChart图表是否可以手动旋转
+            mChart.setHighlightPerTapEnabled(true);       //设置piecahrt图表点击Item高亮是否可用
+            mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);// 设置pieChart图表展示动画效果
+
+            // 设置 pieChart 图表Item文本属性
+            mChart.setDrawEntryLabels(true);              //设置pieChart是否只显示饼图上百分比不显示文字（true：下面属性才有效果）
+            mChart.setEntryLabelColor(Color.WHITE);       //设置pieChart图表文本字体颜色
+            //mChart.setEntryLabelTypeface(mItalic);
+            mChart.setEntryLabelTextSize(10f);            //设置pieChart图表文本字体大小
+
+            mChart.setDrawHoleEnabled(true);              //是否显示PieChart内部圆环(true:下面属性才有意义)
+            mChart.setHoleRadius(31f);                    //设置PieChart内部圆的半径(这里设置28.0f)
+            mChart.setTransparentCircleRadius(31f);       //设置PieChart内部透明圆的半径(这里设置31.0f)
+            mChart.setTransparentCircleColor(Color.BLACK);//设置PieChart内部透明圆与内部圆间距(31f-28f)填充颜色
+            mChart.setTransparentCircleAlpha(0);         //设置PieChart内部透明圆与内部圆间距(31f-28f)透明度[0~255]数值越小越透明
+            mChart.setHoleColor(Color.rgb(50,61,77));             //设置PieChart内部圆的颜色
+            mChart.setDrawCenterText(true);               //是否绘制PieChart内部中心文本（true：下面属性才有意义）
+
+            mChart.setCenterText("每週\n總消耗\n卡路里");                 //设置PieChart内部圆文字的内容
+            mChart.setCenterTextSize(10f);                //设置PieChart内部圆文字的大小
+            mChart.setCenterTextColor(Color.WHITE);         //设置PieChart内部圆文字的颜色
+
+            l = mChart.getLegend();
+            l.setEnabled(false);                    //是否启用图列（true：下面属性才有意义）
+
+            mChart.setOnChartValueSelectedListener(this);
+
+
 
 
             mUserRef.addValueEventListener(new ValueEventListener() {
@@ -628,30 +685,107 @@ public class  MainActivity extends AppCompatActivity
                     float walking_week_calorie_float=Float.parseFloat(walking_week_calorie);
                     float yoga_week_calorie_float=Float.parseFloat(yoga_week_calorie);
 
-                    ArrayList<PieChartBean> lists = new ArrayList<>();
-                    DecimalFormat df = new DecimalFormat("0.00");
+                    //ArrayList<PieChartBean> lists = new ArrayList<>();
+                    DecimalFormat df = new DecimalFormat("#");
 
 
                     if(Week.equals("一")){
                         if(DateCheck.equals(nowDate)){
-                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
+                            /*lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
                             lists.add(new PieChartBean(android.graphics.Color.parseColor("#189428"), walking_week_calorie_float, ""));//walkdata
                             lists.add(new PieChartBean(android.graphics.Color.parseColor("#349bb3"), yoga_week_calorie_float, ""));//airdata
                             lists.add(new PieChartBean(android.graphics.Color.parseColor("#2671ab"), squats_week_calorie_float, ""));//pushdata
                             lists.add(new PieChartBean(android.graphics.Color.parseColor("#2c618a"), crunches_week_calorie_float, ""));//sitdata
-                            pieView.setData(lists);
+                            pieView.setData(lists);*/
+                            pieEntryList = new ArrayList<PieEntry>();
+                            colors = new ArrayList<Integer>();
+                            colors.add(Color.parseColor("#38b048"));
+                            colors.add(Color.parseColor("#189428"));
+                            colors.add(Color.parseColor("#349bb3"));
+                            colors.add(Color.parseColor("#2671ab"));
+                            colors.add(Color.parseColor("#2c618a"));
+
+                            //饼图实体 PieEntry
+                            running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
+                            walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
+                            yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
+                            squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
+                            crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
+                            pieEntryList.add(running);
+                            pieEntryList.add(walking);
+                            pieEntryList.add(yoga);
+                            pieEntryList.add(squats);
+                            pieEntryList.add(crunches);
+                            //饼状图数据集 PieDataSet
+                            pieDataSet = new PieDataSet(pieEntryList, "每週總消耗卡路里");
+                            pieDataSet.setSliceSpace(3f);           //设置饼状Item之间的间隙
+                            pieDataSet.setSelectionShift(10f);      //设置饼状Item被选中时变化的距离
+                            pieDataSet.setColors(colors);           //为DataSet中的数据匹配上颜色集(饼图Item颜色)
+                            //最终数据 PieData
+                            pieData = new PieData(pieDataSet);
+                            pieData.setDrawValues(false);            //设置是否显示数据实体(百分比，true:以下属性才有意义)
+                            pieData.setValueTextColor(Color.BLUE);  //设置所有DataSet内数据实体（百分比）的文本颜色
+                            pieData.setValueTextSize(20f);          //设置所有DataSet内数据实体（百分比）的文本字体大小
+                            //pieData.setValueTypeface(mTfLight);     //设置所有DataSet内数据实体（百分比）的文本字体样式
+                            pieData.setValueFormatter(new PercentFormatter());//设置所有DataSet内数据实体（百分比）的文本字体格式
+                            mChart.setData(pieData);
+                            mChart.highlightValues(null);
+                            mChart.invalidate();                    //将图表重绘以显示设置的属性和数据
+
+
                             textView6.setText(""+running_week_record_float+"公里");
                             textView7.setText(""+walking_week_record_float+"公里");
                             textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
                             textView10.setText(""+squats_week_record+"次");
                             textView9.setText(""+crunches_week_record+"次");
                         }else{
-                            lists.add(new PieChartBean(Color.parseColor("#38b048"), 0, ""));//rundata
+                            /*lists.add(new PieChartBean(Color.parseColor("#38b048"), 0, ""));//rundata
                             lists.add(new PieChartBean(Color.parseColor("#189428"), 0, ""));//walkdata
                             lists.add(new PieChartBean(Color.parseColor("#349bb3"), 0, ""));//airdata
                             lists.add(new PieChartBean(Color.parseColor("#2671ab"), 0, ""));//pushdata
                             lists.add(new PieChartBean(Color.parseColor("#2c618a"), 0, ""));//sitdata
-                            pieView.setData(lists);
+                            pieView.setData(lists);*/
+
+                            pieEntryList = new ArrayList<PieEntry>();
+                            colors = new ArrayList<Integer>();
+                            colors.add(Color.parseColor("#38b048"));
+                            colors.add(Color.parseColor("#189428"));
+                            colors.add(Color.parseColor("#349bb3"));
+                            colors.add(Color.parseColor("#2671ab"));
+                            colors.add(Color.parseColor("#2c618a"));
+
+                            //饼图实体 PieEntry
+                            running = new PieEntry(0, "跑步:0大卡");
+                            walking = new PieEntry(0, "步行:0大卡");
+                            yoga = new PieEntry(0, "瑜伽:0大卡");
+                            squats = new PieEntry(0, "深蹲:0大卡");
+                            crunches = new PieEntry(0, "仰臥起坐:0大卡");
+                            pieEntryList.add(running);
+                            pieEntryList.add(walking);
+                            pieEntryList.add(yoga);
+                            pieEntryList.add(squats);
+                            pieEntryList.add(crunches);
+                            //饼状图数据集 PieDataSet
+                            pieDataSet = new PieDataSet(pieEntryList, "每週總消耗卡路里");
+                            pieDataSet.setSliceSpace(3f);           //设置饼状Item之间的间隙
+                            pieDataSet.setSelectionShift(10f);      //设置饼状Item被选中时变化的距离
+                            pieDataSet.setColors(colors);           //为DataSet中的数据匹配上颜色集(饼图Item颜色)
+                            //最终数据 PieData
+                            pieData = new PieData(pieDataSet);
+                            pieData.setDrawValues(false);            //设置是否显示数据实体(百分比，true:以下属性才有意义)
+                            pieData.setValueTextColor(Color.BLUE);  //设置所有DataSet内数据实体（百分比）的文本颜色
+                            pieData.setValueTextSize(20f);          //设置所有DataSet内数据实体（百分比）的文本字体大小
+                            //pieData.setValueTypeface(mTfLight);     //设置所有DataSet内数据实体（百分比）的文本字体样式
+                            pieData.setValueFormatter(new PercentFormatter());//设置所有DataSet内数据实体（百分比）的文本字体格式
+                            mChart.setData(pieData);
+                            mChart.highlightValues(null);
+                            mChart.invalidate();                    //将图表重绘以显示设置的属性和数据
+
+
+
+                            //pieChart 选择监听
+
+
                             textView6.setText("0公里");
                             textView7.setText("0公里");
                             textView8.setText("0秒");
@@ -672,12 +806,46 @@ public class  MainActivity extends AppCompatActivity
                         }
 
                     }else {
-                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
+                        /*lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
                         lists.add(new PieChartBean(android.graphics.Color.parseColor("#189428"), walking_week_calorie_float, ""));//walkdata
                         lists.add(new PieChartBean(android.graphics.Color.parseColor("#349bb3"), yoga_week_calorie_float, ""));//airdata
                         lists.add(new PieChartBean(android.graphics.Color.parseColor("#2671ab"), squats_week_calorie_float, ""));//pushdata
                         lists.add(new PieChartBean(android.graphics.Color.parseColor("#2c618a"), crunches_week_calorie_float, ""));//sitdata
-                        pieView.setData(lists);
+                        pieView.setData(lists);*/
+                        pieEntryList = new ArrayList<PieEntry>();
+                        colors = new ArrayList<Integer>();
+                        colors.add(Color.parseColor("#38b048"));
+                        colors.add(Color.parseColor("#189428"));
+                        colors.add(Color.parseColor("#349bb3"));
+                        colors.add(Color.parseColor("#2671ab"));
+                        colors.add(Color.parseColor("#2c618a"));
+
+                        //饼图实体 PieEntry
+                        running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
+                        walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
+                        yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
+                        squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
+                        crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
+                        pieEntryList.add(running);
+                        pieEntryList.add(walking);
+                        pieEntryList.add(yoga);
+                        pieEntryList.add(squats);
+                        pieEntryList.add(crunches);
+                        //饼状图数据集 PieDataSet
+                        pieDataSet = new PieDataSet(pieEntryList, "每週總消耗卡路里");
+                        pieDataSet.setSliceSpace(3f);           //设置饼状Item之间的间隙
+                        pieDataSet.setSelectionShift(10f);      //设置饼状Item被选中时变化的距离
+                        pieDataSet.setColors(colors);           //为DataSet中的数据匹配上颜色集(饼图Item颜色)
+                        //最终数据 PieData
+                        pieData = new PieData(pieDataSet);
+                        pieData.setDrawValues(false);            //设置是否显示数据实体(百分比，true:以下属性才有意义)
+                        pieData.setValueTextColor(Color.BLUE);  //设置所有DataSet内数据实体（百分比）的文本颜色
+                        pieData.setValueTextSize(20f);          //设置所有DataSet内数据实体（百分比）的文本字体大小
+                        //pieData.setValueTypeface(mTfLight);     //设置所有DataSet内数据实体（百分比）的文本字体样式
+                        pieData.setValueFormatter(new PercentFormatter());//设置所有DataSet内数据实体（百分比）的文本字体格式
+                        mChart.setData(pieData);
+                        mChart.highlightValues(null);
+                        mChart.invalidate();                    //将图表重绘以显示设置的属性和数据
                         textView6.setText(""+running_week_record_float+"公里");
                         textView7.setText(""+walking_week_record_float+"公里");
                         textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
@@ -709,7 +877,8 @@ public class  MainActivity extends AppCompatActivity
             button_of_yoga_monitoring.setVisibility(View.INVISIBLE);
             button_of_squats_monitoring.setVisibility(View.INVISIBLE);
             button_of_crunches_monitoring.setVisibility(View.INVISIBLE);
-            pieView.setVisibility(View.INVISIBLE);
+           // pieView.setVisibility(View.INVISIBLE);
+            mChart.setVisibility(View.INVISIBLE);
             textView6.setVisibility(View.INVISIBLE);
             textView7.setVisibility(View.INVISIBLE);
             textView8.setVisibility(View.INVISIBLE);
@@ -866,6 +1035,8 @@ public class  MainActivity extends AppCompatActivity
                         button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
                         button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
                         button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                        mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
+
 
                     }
                     break;
@@ -884,6 +1055,7 @@ public class  MainActivity extends AppCompatActivity
                         button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
                         button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
                         button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                        mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
                 case 3:
@@ -901,6 +1073,7 @@ public class  MainActivity extends AppCompatActivity
                         button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogared);
                         button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
                         button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                        mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
 
 
@@ -920,6 +1093,7 @@ public class  MainActivity extends AppCompatActivity
                         button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
                         button_of_squats_monitoring.setBackgroundResource(R.drawable.squatsred);
                         button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+                        mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
                 case 5:
@@ -937,6 +1111,7 @@ public class  MainActivity extends AppCompatActivity
                         button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
                         button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
                         button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesred);
+                        mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
                 default:
@@ -1173,11 +1348,15 @@ public class  MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
     public static class ExampleNotificationOpenedHandler implements OneSignal.NotificationOpenedHandler {
 
 
-        public String user_id_send,exercise_data_from;
-        public JSONObject data,user_id,exercise_data;
+        public String user_id_send,task_req,task;
+        public JSONObject data,user_id,task_req_data,task_data;
 
         @Override
         public void notificationOpened(OSNotificationOpenResult result) {
@@ -1190,10 +1369,13 @@ public class  MainActivity extends AppCompatActivity
             if (data != null) {
                 activityToBeOpened = data.optString("activityToBeOpened", null);
                 user_id = result.notification.payload.additionalData;
-                exercise_data=result.notification.payload.additionalData;
-               exercise_data_from=exercise_data.optString("exercise_data");
+                task_req_data=result.notification.payload.additionalData;
+                task_data=result.notification.payload.additionalData;
                 user_id_send=user_id.optString("user_id");
-                mUserRef.child("exercise_data").setValue(exercise_data_from);
+                task_req=task_req_data.optString("Task_req");
+                task=task_data.optString("Task");
+
+
 
 
                 if(activityToBeOpened != null && activityToBeOpened.equals("ProfileActivity")){
@@ -1211,43 +1393,11 @@ public class  MainActivity extends AppCompatActivity
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Yoga_task")){
-                    Intent intent = new Intent(getContext(), Yoga_task.class);
-                    intent.putExtra("ToolbarTitle","瑜伽每週任務");
-                    intent.putExtra("exerciseWeekTitle","做瑜伽");
-                    intent.putExtra("exerciseWeekUnit","分鐘");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
-                }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Squats_task")){
-                    Intent intent = new Intent(getContext(), Squats_task.class);
-                    intent.putExtra("ToolbarTitle","深蹲每週任務");
-                    intent.putExtra("exerciseWeekTitle","做深蹲");
-                    intent.putExtra("exerciseWeekUnit","次");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
-                }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Running_task")){
-                    Intent intent = new Intent(getContext(), Running_task.class);
-                    intent.putExtra("ToolbarTitle","跑步每週任務");
-                    intent.putExtra("exerciseWeekTitle","去跑步");
-                    intent.putExtra("exerciseWeekUnit","公里");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
-                }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Crunches_task")){
-                    Intent intent = new Intent(getContext(), Crunches_task.class);
-                    intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
-                    intent.putExtra("exerciseWeekTitle","做仰臥起坐");
-                    intent.putExtra("exerciseWeekUnit","次");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getContext().startActivity(intent);
-                }
-                else if(activityToBeOpened!=null && activityToBeOpened.equals("Walking_task")){
-                    Intent intent = new Intent(getContext(),Walking_task.class);
-                    intent.putExtra("ToolbarTitle","步行每週任務");
-                    intent.putExtra("exerciseWeekTitle","去步行");
-                    intent.putExtra("exerciseWeekUnit","公里");
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("TaskProfile")) {
+                    Intent intent = new Intent(getContext(), TaskProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.putExtra("Task_req", task_req);
+                    intent.putExtra("Task", task);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
@@ -1260,8 +1410,21 @@ public class  MainActivity extends AppCompatActivity
             }
 
         }
+
     }
 
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+        if (e == null)
+            return;
+        Log.i("VAL SELECTED",
+                "Value: " + e.getY() + ", index: " + h.getX()
+                        + ", DataSet index: " + h.getDataSetIndex());
+    }
 
+    @Override
+    public void onNothingSelected() {
+        Log.i("PieChart", "nothing selected");
+    }
 
 }

@@ -109,7 +109,8 @@
         <activity android:name="kelvin.tablayout.Crunches_task" />
         <activity android:name="kelvin.tablayout.Walking_task" />
         <activity android:name="kelvin.tablayout.FriendActivity" />
-        <activity android:name="kelvin.tablayout.TaskProfile"></activity>
+        <activity android:name="kelvin.tablayout.TaskProfile" />
+        <activity android:name="kelvin.tablayout.PieChartActivity"></activity>
     </application>
 
 </manifest>

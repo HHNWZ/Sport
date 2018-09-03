@@ -115,6 +115,7 @@ dependencies {
     implementation "com.hanks:htextview-evaporate:$htextview_version"   // optional
     implementation "com.hanks:htextview-fall:$htextview_version"        // optional
     implementation 'me.tankery.lib:circularSeekBar:1.1.7'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
 }
 apply plugin: 'com.google.gms.google-services'
