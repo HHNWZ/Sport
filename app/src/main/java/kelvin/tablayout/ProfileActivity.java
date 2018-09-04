@@ -289,7 +289,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
+                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"邀請你成為朋友"+"\"}"
                                             + "}";
@@ -375,7 +375,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
+                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"取消對你的朋友邀請"+"\"}"
                                             + "}";
@@ -471,7 +471,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
+                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的朋友邀請"+"\"}"
                                             + "}";
@@ -562,7 +562,7 @@ public class ProfileActivity extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
+                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"刪除和你的朋友關係"+"\"}"
                                             + "}";
@@ -649,7 +649,7 @@ public class ProfileActivity extends AppCompatActivity {
                                                     + "\"large_icon\": \""+my_image.toString()+"\","
                                                     + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                                     + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-
+                                                    + "\"android_sound\": \"messagechat\","
                                                     + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                                     + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕和你的朋友"+"\"}"
                                                     + "}";

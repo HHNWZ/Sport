@@ -319,6 +319,7 @@ public class ChatActivity extends AppCompatActivity {
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                            + "\"android_sound\": \"messagechat\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"android_background_layout\": " +
                                             // "{\"image\": \"http://3.bp.blogspot.com/-5GNtI62kFFw/U4DK7M_fNkI/AAAAAAAAADA/nvF-d_CfBsg/s1600/wp917d5eab_06.png\","
