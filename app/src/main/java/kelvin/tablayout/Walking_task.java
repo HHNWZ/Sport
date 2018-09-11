@@ -30,6 +30,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class Walking_task extends AppCompatActivity {
 
@@ -53,6 +54,7 @@ public class Walking_task extends AppCompatActivity {
     public static int i;
     public int int_friend_point;
     private Data walking_data=new Data();
+    public CircularSeekBar seekBar;
 
 
     @Override
@@ -71,7 +73,7 @@ public class Walking_task extends AppCompatActivity {
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-
+        seekBar = (CircularSeekBar) findViewById(R.id.walking_seek_bar);
         myName = (TextView) findViewById(R.id.user_single_name);
         myStatus = (TextView) findViewById(R.id.user_single_status);
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
@@ -81,7 +83,9 @@ public class Walking_task extends AppCompatActivity {
         LinearLayoutManager layoutManager=new LinearLayoutManager(Walking_task.this);
         walking_task_recycler_view.setHasFixedSize(true);
         walking_task_recycler_view.setLayoutManager(layoutManager);
+        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
         myUsersDatabase.keepSynced(true);
+
         Timer timer=new Timer();
 
         TimerTask mTimerTask =new TimerTask(){
@@ -99,7 +103,7 @@ public class Walking_task extends AppCompatActivity {
                         myWalking=Double.parseDouble(mystatu);
 
                         all_task=walking_data.getFriend_walking_task_data()+myWalking;
-
+                        seekBar.setProgress((float)all_task);
                         same_task=Double.parseDouble(exercise_week_data.getText().toString());
                         if(all_task>=same_task&&walking_data.getFriend_walking_task_data()!=0&&myWalking!=0&&same_task!=0){
                             susses_text_view.setText("你獲得10點friendpoint");

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.ToxicBakery.viewpager.transforms.CubeInTransformer;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,6 +71,7 @@ public class MainActivityFireBase extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setPageTransformer(true,new CubeInTransformer());
 
         mTabLayout = (TabLayout) findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);

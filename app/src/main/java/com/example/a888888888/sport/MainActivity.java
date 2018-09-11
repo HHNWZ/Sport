@@ -117,7 +117,7 @@ public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener,SwipeRefreshLayout.OnRefreshListener, OnChartValueSelectedListener {
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener, OnChartValueSelectedListener {
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
@@ -293,25 +293,7 @@ public class  MainActivity extends AppCompatActivity
             //Toast.makeText(this, "資料量："+DATAsize, Toast.LENGTH_SHORT).show();
         }
     }
-    @Override
-    public void onRefresh() {
 
-        // 模仿更新 ( 2秒
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable(){
-
-            @Override
-            public void run() {
-
-                // 結束更新動畫
-                mSwipeLayout.setRefreshing(false);
-                Intent intent = new Intent(MainActivity.this,MainActivity.class);
-                startActivity(intent);
-                MainActivity.this.finish();
-                Toast.makeText(MainActivity.this, "Refresh Success", Toast.LENGTH_SHORT).show();
-
-            }}, 2000);
-    }
     public void writAllDiaryDATA(){//將當前日記陣列存入檔案
         //Toast.makeText(this, "日期數量："+DL.size()+"，日記數量："+diarys.size(), Toast.LENGTH_SHORT).show();
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
@@ -475,7 +457,7 @@ public class  MainActivity extends AppCompatActivity
                 MainActivity.this.finish();
             }
         });
-        mHanlder.postDelayed(task2,5000);
+        //mHanlder.postDelayed(task2,5000);
 
 
 
@@ -894,10 +876,8 @@ public class  MainActivity extends AppCompatActivity
 
 
         navigationView.setNavigationItemSelectedListener(this);//清單觸發監聽事件
-            //下拉更新
-            mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-            mSwipeLayout.setOnRefreshListener(this);
-            mSwipeLayout.setColorSchemeColors(Color.RED);
+
+
 
 
 

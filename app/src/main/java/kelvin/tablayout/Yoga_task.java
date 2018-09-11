@@ -31,6 +31,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class Yoga_task extends AppCompatActivity {
 
@@ -56,6 +57,7 @@ public class Yoga_task extends AppCompatActivity {
     public int int_friend_point;
     public Data yoga_data=new Data();
     public static DecimalFormat formatter;
+    public CircularSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class Yoga_task extends AppCompatActivity {
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-
+        seekBar = (CircularSeekBar) findViewById(R.id.yoga_seek_bar);
         myName = (TextView) findViewById(R.id.user_single_name);
         myStatus = (TextView) findViewById(R.id.user_single_status);
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
@@ -85,6 +87,7 @@ public class Yoga_task extends AppCompatActivity {
         yoga_task_recycler_view.setLayoutManager(layoutManager);
         myUsersDatabase.keepSynced(true);
         //yoga_data.setYoga_task_status("還沒完成");
+        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
         Timer timer=new Timer();
 
         TimerTask mTimerTask =new TimerTask(){
@@ -103,6 +106,7 @@ public class Yoga_task extends AppCompatActivity {
                         Log.i("朋友的時間",""+yoga_data.getFriend_yoga_task_data());
                         Log.i("我的時間",""+myYoga);
                         all_task=yoga_data.getFriend_yoga_task_data()+myYoga;
+                        seekBar.setProgress((float)all_task);
                         Log.i("合計時間",""+all_task);
                         chang_task=Time.yogaWeekminute(all_task);
                         Log.i("轉換時間",""+chang_task);

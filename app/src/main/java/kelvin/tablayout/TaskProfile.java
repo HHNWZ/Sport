@@ -32,8 +32,6 @@ import com.squareup.picasso.Picasso;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -584,7 +582,7 @@ public class TaskProfile extends AppCompatActivity {
                                 String strJsonBody = "{"
                                         + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                         + "\"large_icon\": \""+my_image.toString()+"\","
-                                        + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                        + "\"small_icon\": \""+R.drawable.testicon +"\","
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
                                         + "\"android_sound\": \"messagechat\","
                                         + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"

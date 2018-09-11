@@ -102,6 +102,7 @@
     <string name="log_out">登出</string>
     <string name="chat_room">運動聊天室</string>
     <string name="task_friend">邀請朋友</string>
+    <string name="gear_fit">連接運動手環</string>
 
 
     <string name="default_status">做運動真好</string>

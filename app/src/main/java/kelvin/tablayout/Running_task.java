@@ -33,6 +33,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 public class Running_task extends AppCompatActivity {
 
@@ -56,6 +57,7 @@ public class Running_task extends AppCompatActivity {
     public static int i;
     public int int_friend_point;
     public Data running_data=new Data();
+    public CircularSeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +76,7 @@ public class Running_task extends AppCompatActivity {
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-
+        seekBar = (CircularSeekBar) findViewById(R.id.running_seek_bar);
         myName = (TextView) findViewById(R.id.user_single_name);
         myStatus = (TextView) findViewById(R.id.user_single_status);
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
@@ -86,7 +88,9 @@ public class Running_task extends AppCompatActivity {
         running_task_recycler_view.setLayoutManager(layoutManager);
         myUsersDatabase.keepSynced(true);
         //running_data.setRunning_task_status("還沒完成");
+        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
         Timer timer=new Timer();
+
 
         TimerTask mTimerTask =new TimerTask(){
             @Override
@@ -104,7 +108,7 @@ public class Running_task extends AppCompatActivity {
 
                         all_task=running_data.getFriend_running_task_data()+myRunning;
                         same_task=Double.parseDouble(exercise_week_data.getText().toString());
-
+                        seekBar.setProgress((float)all_task);
                         if(all_task>=same_task&&running_data.getFriend_running_task_data()!=0&&myRunning!=0&&same_task!=0){
                             susses_text_view.setText("你獲得10點friendpoint");
                             actionBar.setSubtitle("你和朋友完成任務");

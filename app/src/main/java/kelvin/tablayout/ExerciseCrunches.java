@@ -115,11 +115,9 @@ public class ExerciseCrunches extends Fragment {
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kelvin_sit_up_invitation kelvin_sit_up_invitation1=kelvin_sit_up_invitation.newInstance("仰臥起坐邀請內容","做仰臥起坐:","次");
-                FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content1_main,kelvin_sit_up_invitation1);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getContext(),Crunches_dare.class);
+
+                startActivity(intent);
             }
 
         });

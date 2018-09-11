@@ -19,7 +19,7 @@
         <me.tankery.lib.circularseekbar.CircularSeekBar
             android:id="@+id/squats_seek_bar"
             android:layout_width="match_parent"
-            android:layout_height="105dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             app:cs_maintain_equal_circle="true"

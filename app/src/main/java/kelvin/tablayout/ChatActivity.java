@@ -20,15 +20,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
-import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -318,11 +315,9 @@ public class ChatActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
-                                            + "\"android_sound\": \"messagechat\","
+                                            + "\"small_icon\": \""+R.drawable.testicon +"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"android_background_layout\": " +
-                                            // "{\"image\": \"http://3.bp.blogspot.com/-5GNtI62kFFw/U4DK7M_fNkI/AAAAAAAAADA/nvF-d_CfBsg/s1600/wp917d5eab_06.png\","
                                             "{\"headings_color\": \"9C27B0\"," +
                                             "\"contents_color\": \"00695C\"},"
                                             + "\"data\": {\"activityToBeOpened\":\"ChatActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"

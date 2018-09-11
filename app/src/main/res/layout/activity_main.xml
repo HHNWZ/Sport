@@ -6,11 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.a888888888.sport.MainActivity">
-    <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/main_toolbar1">
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -312,7 +308,7 @@
 
             </RelativeLayout>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <LinearLayout
         android:id="@+id/content_main"

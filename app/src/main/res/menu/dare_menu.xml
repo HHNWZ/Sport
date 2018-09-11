@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kelvin.tablayout.Walking_task"
+    >
+
+    <item android:id="@+id/task_friend"
+        android:title="@string/task_friend"
+        android:orderInCategory="80"
+        android:icon="@drawable/friendsicon"
+        app:showAsAction="ifRoom"
+        />
+
+    <item android:id="@+id/gear_fit"
+        android:title="@string/task_friend"
+        android:orderInCategory="90"
+        android:icon="@drawable/gearfit"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

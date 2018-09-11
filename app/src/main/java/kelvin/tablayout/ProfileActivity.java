@@ -19,19 +19,13 @@ import com.example.a888888888.sport.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.onesignal.OSNotificationAction;
-import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONObject;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -647,9 +641,8 @@ public class ProfileActivity extends AppCompatActivity {
                                             String strJsonBody = "{"
                                                     + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                                     + "\"large_icon\": \""+my_image.toString()+"\","
-                                                    + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+                                                    + "\"small_icon\": \""+R.drawable.testicon +"\","
                                                     + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
-                                                    + "\"android_sound\": \"messagechat\","
                                                     + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                                     + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕和你的朋友"+"\"}"
                                                     + "}";
