@@ -9,5 +9,163 @@
     <include
         android:id="@+id/crunches_dare_app_bar"
         layout="@layout/app_bar_layout" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/data_layout"
+        android:layout_below="@+id/crunches_dare_app_bar"
+        android:background="@android:color/holo_red_light"
+        android:layout_above="@+id/my_dare">
+
+        <TextView
+            android:id="@+id/exercise_week_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="仰臥起坐"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            tools:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/exercise_week_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exercise_week_title"
+            android:text="0"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/exercise_week_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exercise_week_data"
+            android:layout_centerHorizontal="true"
+            android:text="次"
+            android:textColor="@android:color/black"
+
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/my_dare"
+        android:layout_width="wrap_content"
+        android:layout_height="266dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_single_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/default_avatar"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/user_single_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Display Name"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_below="@+id/user_single_image"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/crunches_finish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_gravity="center"
+            android:text="完成時間"/>
+        <TextView
+            android:id="@+id/crunches_finish_time_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/crunches_finish_time"
+            android:text="0分0秒"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/crunches_finish_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/crunches_finish_time"
+            android:text="次數"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/crunches_finish_count_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/crunches_finish_time"
+            android:text="0"
+            android:layout_gravity="center"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/friend_dare"
+        android:layout_width="wrap_content"
+        android:layout_height="266dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friend_single_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/default_avatar"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_single_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Display Name"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_below="@+id/user_single_image"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/friend_finish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:text="完成時間"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_finish_time_dtaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/crunches_finish_time"
+            android:text="0分0秒"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_crunches_finish_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/crunches_finish_time"
+            android:text="次數"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_crunches_finish_count_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/crunches_finish_time"
+            android:text="0"
+            android:layout_gravity="center"/>
+
+
+
+    </LinearLayout>
 
 </RelativeLayout>

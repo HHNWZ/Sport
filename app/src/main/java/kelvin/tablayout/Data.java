@@ -11,6 +11,10 @@ public class Data {
     private String yoga_task_status;
     private String squats_task_status;
     private String crunches_task_status;
+    private String crunches_dare_myName;
+    private String crunches_dare_myImage;
+    private long crunches_dare_myFinishTime;
+    private int crunches_dare_myCount;
 
 
     public double getFriend_running_task_data() {
@@ -92,6 +96,38 @@ public class Data {
 
     public void setCrunches_task_status(String crunches_task_status) {
         this.crunches_task_status = crunches_task_status;
+    }
+
+    public String getCrunches_dare_myName() {
+        return crunches_dare_myName;
+    }
+
+    public void setCrunches_dare_myName(String crunches_dare_myName) {
+        this.crunches_dare_myName = crunches_dare_myName;
+    }
+
+    public String getCrunches_dare_myImage() {
+        return crunches_dare_myImage;
+    }
+
+    public void setCrunches_dare_myImage(String crunches_dare_myImage) {
+        this.crunches_dare_myImage = crunches_dare_myImage;
+    }
+
+    public long getCrunches_dare_myFinishTime() {
+        return crunches_dare_myFinishTime;
+    }
+
+    public void setCrunches_dare_myFinishTime(long crunches_dare_myFinishTime) {
+        this.crunches_dare_myFinishTime = crunches_dare_myFinishTime;
+    }
+
+    public int getCrunches_dare_myCount() {
+        return crunches_dare_myCount;
+    }
+
+    public void setCrunches_dare_myCount(int crunches_dare_myCount) {
+        this.crunches_dare_myCount = crunches_dare_myCount;
     }
 }
 

@@ -134,6 +134,7 @@ public class CrunchesReporter {
                     }
                 }
 
+
                 CrunchesMonitor.getInstance().drawCrunches(crunches_duration, crunches_mean_heart_rate, crunches_start_time, crunches_end_time, crunches_calorie, crunches_max_heart_rate,crunches_UUID,crunches_count);
             }
         };
