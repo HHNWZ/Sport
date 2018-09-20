@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.MainActivity;
@@ -27,12 +26,12 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FriendActivity extends AppCompatActivity {
+public class CrunchesDareFriend extends AppCompatActivity {
 
-    private Toolbar activity_friend_toolbar;
+    private Toolbar activity_crunches_dare_friend_toolbar;
     public static ActionBar actionBar;
-    public static String now_date;
-    private RecyclerView activity_friend_recycler_view;
+    
+    private RecyclerView activity_crunches_dare_friend_recycler_view;
 
     private DatabaseReference mFriendsDatabase;
     private DatabaseReference mUsersDatabase;
@@ -41,75 +40,44 @@ public class FriendActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private String mCurrent_user_id;
-    private String Task_reg;
-    private String Task;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friend);
+        setContentView(R.layout.activity_crunches_dare_friend);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
-        activity_friend_toolbar=(Toolbar)findViewById(R.id.activity_friend_toolbar);
-        setSupportActionBar(activity_friend_toolbar);
+        activity_crunches_dare_friend_toolbar=(Toolbar)findViewById(R.id.activity_crunches_dare_friend_toolbar);
+        setSupportActionBar(activity_crunches_dare_friend_toolbar);
         actionBar=getSupportActionBar();
         actionBar.setTitle("朋友列表");
-        actionBar.setSubtitle("點擊列表");
+        actionBar.setSubtitle("點擊要挑戰的朋友");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        now_date=Week.getWeek(System.currentTimeMillis());
-        activity_friend_recycler_view=(RecyclerView)findViewById(R.id.activity_friend_recycler_view);
+        activity_crunches_dare_friend_recycler_view=(RecyclerView)findViewById(R.id.activity_crunches_dare_friend_recycler_view);
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
-        Task_reg=getIntent().getStringExtra("Task_req");
-        Task=getIntent().getStringExtra("Task");
+        
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         friendDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(FriendActivity.this);
-        activity_friend_recycler_view.setHasFixedSize(true);
-        activity_friend_recycler_view.setLayoutManager(layoutManager);
-
+        LinearLayoutManager layoutManager=new LinearLayoutManager(CrunchesDareFriend.this);
+        activity_crunches_dare_friend_recycler_view.setHasFixedSize(true);
+        activity_crunches_dare_friend_recycler_view.setLayoutManager(layoutManager);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if(now_date.equals("一")){
-                Intent intent = new Intent(FriendActivity.this,Walking_task.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-            if(now_date.equals("二")){
-                Intent intent = new Intent(FriendActivity.this,Running_task.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-            if(now_date.equals("三")){
-                Intent intent = new Intent(FriendActivity.this,Yoga_task.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-            if(now_date.equals("四")){
-                Intent intent = new Intent(FriendActivity.this,Squats_task.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-            if(now_date.equals("五")){
-                Intent intent = new Intent(FriendActivity.this,Crunches_task.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId()==android.R.id.home){
+            Intent intent = new Intent(CrunchesDareFriend.this,Crunches_dare.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -117,14 +85,14 @@ public class FriendActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        FirebaseRecyclerAdapter<Friends,ActivityFriendsViewHolder> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivityFriendsViewHolder>(
+        FirebaseRecyclerAdapter<Friends,ActivityCrunchesDareFriendsViewHolderew> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivityCrunchesDareFriendsViewHolderew>(
                 Friends.class,
                 R.layout.users_single_layout,
-                ActivityFriendsViewHolder.class,
+                ActivityCrunchesDareFriendsViewHolderew.class,
                 mFriendsDatabase
         ) {
             @Override
-            protected void populateViewHolder(ActivityFriendsViewHolder viewHolder, Friends model, int position) {
+            protected void populateViewHolder(ActivityCrunchesDareFriendsViewHolderew viewHolder, Friends model, int position) {
                 final String list_user_id = getRef(position).getKey();
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -139,10 +107,9 @@ public class FriendActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 Intent taskIntent = new Intent();
-                                taskIntent.setClass(FriendActivity.this  , TaskProfile.class);
+                                taskIntent.setClass(CrunchesDareFriend.this  , CrunchesDareFriendProfile.class);
                                 taskIntent.putExtra("user_id",list_user_id);
-                                taskIntent.putExtra("Task_req",Task_reg);
-                                taskIntent.putExtra("Task",Task);
+                                
                                 startActivity(taskIntent);
                             }
                         });
@@ -155,14 +122,14 @@ public class FriendActivity extends AppCompatActivity {
                 });
             }
         };
-        activity_friend_recycler_view.setAdapter(activityFriendsViewHolderFirebaseRecyclerAdapter);
+        activity_crunches_dare_friend_recycler_view.setAdapter(activityFriendsViewHolderFirebaseRecyclerAdapter);
     }
 
-    public static class ActivityFriendsViewHolder extends RecyclerView.ViewHolder {
+    public static class ActivityCrunchesDareFriendsViewHolderew extends RecyclerView.ViewHolder {
 
         View mView;
 
-        public ActivityFriendsViewHolder(View itemView) {
+        public ActivityCrunchesDareFriendsViewHolderew(View itemView) {
             super(itemView);
 
             mView = itemView;
@@ -196,4 +163,5 @@ public class FriendActivity extends AppCompatActivity {
 
 
     }
+
 }

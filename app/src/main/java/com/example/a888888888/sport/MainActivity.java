@@ -75,6 +75,7 @@ import java.util.Timer;
 
 import at.markushi.ui.CircleButton;
 import kelvin.tablayout.ChatActivity;
+import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Crunches_task;
 import kelvin.tablayout.Exercise_main;
@@ -1378,6 +1379,12 @@ public class  MainActivity extends AppCompatActivity
                     intent.putExtra("user_id", user_id_send);
                     intent.putExtra("Task_req", task_req);
                     intent.putExtra("Task", task);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("CrunchesDareFriendProfile")) {
+                    Intent intent = new Intent(getContext(), CrunchesDareFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }

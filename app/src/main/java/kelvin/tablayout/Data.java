@@ -15,6 +15,8 @@ public class Data {
     private String crunches_dare_myImage;
     private long crunches_dare_myFinishTime;
     private int crunches_dare_myCount;
+    private String friend_id;
+    private int crunches_dare_friend_point;
 
 
     public double getFriend_running_task_data() {
@@ -128,6 +130,22 @@ public class Data {
 
     public void setCrunches_dare_myCount(int crunches_dare_myCount) {
         this.crunches_dare_myCount = crunches_dare_myCount;
+    }
+
+    public String getFriend_id() {
+        return friend_id;
+    }
+
+    public void setFriend_id(String friend_id) {
+        this.friend_id = friend_id;
+    }
+
+    public int getCrunches_dare_friend_point() {
+        return crunches_dare_friend_point;
+    }
+
+    public void setCrunches_dare_friend_point(int crunches_dare_friend_point) {
+        this.crunches_dare_friend_point = crunches_dare_friend_point;
     }
 }
 
