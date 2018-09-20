@@ -3,7 +3,6 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,9 +17,7 @@ import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
-import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,16 +40,16 @@ import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Crunches_dare extends AppCompatActivity {
-    private Toolbar crunches_dare_app_bar;
+public class Running_dare extends AppCompatActivity {
+    private Toolbar running_dare_app_bar;
     public static ActionBar actionBar;
     private HealthDataStore mStore;
     private HealthConnectionErrorResult mConnError;
     private Set<HealthPermissionManager.PermissionKey> mKeySet;
     private final int MENU_ITEM_PERMISSION_SETTING = 1;
     public static final String APP_TAG = "Sport";
-    private static Crunches_dare mInstance = null;
-    private CrunchesDareReporter cReporter;
+    private static Running_dare mInstance = null;
+    private RunningDareReporter cReporter;
 
     private DatabaseReference dareDatabase;
     private DatabaseReference friendDatabase;
@@ -61,40 +58,39 @@ public class Crunches_dare extends AppCompatActivity {
     private DatabaseReference friend_point_database;
     private DatabaseReference clear_dareDatabase;
 
-
     private static FirebaseAuth mAuth;
-    private static TextView exercise_week_data,user_single_name,crunches_finish_time_data,crunches_finish_count_data;
-    private static TextView friend_single_name,friend_finish_time_data,friend_crunches_finish_count_data;
+    private static TextView exercise_week_data,user_single_name,running_finish_time_data,running_finish_distance_data;
+    private static TextView friend_single_name,friend_finish_time_data,friend_running_finish_distance_data;
     private static TextView text_VS,text_winner;
-    private static TextView friend_finish_time,friend_crunches_finish_count;
+    private static TextView friend_finish_time,friend_running_finish_distance;
     private static Button confirm_dare;
     private CircleImageView mDisplayImage,friend_single_image;
     private static String myName,myImage,myFinishTime,myCount,friend_point;
     private static String friendName,friendImage,friendFinishTime,friendCount;
-    public Data crunches_dare_data=new Data();
+    public Data running_dare_data=new Data();
     private static long myFinishTimeLong;
-    private static int myCountInt;
+    private static double myCountDouble;
     private static long FriendFinishTimeLong;
-    private static int FriendCountInt;
+    private static double FriendCountDouble;
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crunches_dare);
+        setContentView(R.layout.activity_running_dare);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
 
-        crunches_dare_app_bar = (Toolbar) findViewById(R.id.crunches_dare_app_bar);
-        setSupportActionBar(crunches_dare_app_bar);
+        running_dare_app_bar = (Toolbar) findViewById(R.id.running_dare_app_bar);
+        setSupportActionBar(running_dare_app_bar);
         actionBar = getSupportActionBar();
-        actionBar.setTitle("仰臥起坐挑戰");
+        actionBar.setTitle("跑步挑戰");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        crunches_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
+        running_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
         myDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         friend_point_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
@@ -106,18 +102,18 @@ public class Crunches_dare extends AppCompatActivity {
 
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
         user_single_name=(TextView)findViewById(R.id.user_single_name);
-        crunches_finish_time_data=(TextView)findViewById(R.id.crunches_finish_time_data);
-        crunches_finish_count_data=(TextView)findViewById(R.id.crunches_finish_count_data);
+        running_finish_time_data=(TextView)findViewById(R.id.running_finish_time_data);
+        running_finish_distance_data=(TextView)findViewById(R.id.running_finish_distance_data);
 
         friend_single_name=(TextView)findViewById(R.id.friend_single_name);
         friend_finish_time_data=(TextView)findViewById(R.id.friend_finish_time_data);
-        friend_crunches_finish_count_data=(TextView)findViewById(R.id.friend_crunches_finish_count_data);
+        friend_running_finish_distance_data=(TextView)findViewById(R.id.friend_running_finish_distance_data);
 
         text_VS=(TextView)findViewById(R.id.text_VS);
         text_winner=(TextView)findViewById(R.id.text_winner);
 
         friend_finish_time=(TextView)findViewById(R.id.friend_finish_time);
-        friend_crunches_finish_count=(TextView)findViewById(R.id.friend_crunches_finish_count);
+        friend_running_finish_distance=(TextView)findViewById(R.id.friend_running_finish_distance);
 
         confirm_dare=(Button)findViewById(R.id.confirm_dare);
 
@@ -129,22 +125,23 @@ public class Crunches_dare extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 myName=dataSnapshot.child("name").getValue().toString();
                 myImage=dataSnapshot.child("thumb_image").getValue().toString();
-                myFinishTime=dataSnapshot.child("crunches_dare").child("time").getValue().toString();
-                myCount=dataSnapshot.child("crunches_dare").child("count").getValue().toString();
+                myFinishTime=dataSnapshot.child("running_dare").child("time").getValue().toString();
+                myCount=dataSnapshot.child("running_dare").child("distance").getValue().toString();
                 friend_point=dataSnapshot.child("friend_point").getValue().toString();
                 Int_friend_point=Integer.parseInt(friend_point);
-                crunches_dare_data.setCrunches_dare_friend_point(Int_friend_point);
+                running_dare_data.setRunning_dare_friend_point(Int_friend_point);
 
                 myFinishTimeLong=Long.parseLong(myFinishTime);
-                myCountInt=Integer.parseInt(myCount);
+
+                myCountDouble=Double.parseDouble(myCount);
                 user_single_name.setText(myName);
-                crunches_finish_count_data.setText(myCountInt+"次");
-                crunches_finish_time_data.setText(Time.changeYogaTime(myFinishTimeLong));
-                crunches_dare_data.setCrunches_dare_myFinishTime(myFinishTimeLong);
-                crunches_dare_data.setCrunches_dare_myCount(myCountInt);
+                running_finish_distance_data.setText(myCountDouble+"次");
+                running_finish_time_data.setText(Time.changeYogaTime(myFinishTimeLong));
+                running_dare_data.setRunning_dare_myFinishTime(myFinishTimeLong);
+                running_dare_data.setRunning_dare_myCount(myCountDouble);
 
                 if(!myImage.equals("default")){
-                    Picasso.with(Crunches_dare.this).load(myImage).networkPolicy(NetworkPolicy.OFFLINE)
+                    Picasso.with(Running_dare.this).load(myImage).networkPolicy(NetworkPolicy.OFFLINE)
                             .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -154,18 +151,18 @@ public class Crunches_dare extends AppCompatActivity {
                         @Override
                         public void onError() {
 
-                            Picasso.with(Crunches_dare.this).load(myImage).placeholder(R.drawable.default_avatar).into(mDisplayImage);
+                            Picasso.with(Running_dare.this).load(myImage).placeholder(R.drawable.default_avatar).into(mDisplayImage);
 
                         }
                     });
                 }
 
-                dareDatabase.child("Crunches_Dare").addValueEventListener(new ValueEventListener() {
+                dareDatabase.child("Running_Dare").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Log.i("12345",""+mAuth.getCurrentUser().getUid());
                         if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
-                            crunches_dare_app_bar.setOnMenuItemClickListener(null);
+                            running_dare_app_bar.setOnMenuItemClickListener(null);
                             final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
                             Log.i("朋友id1234",""+list_user_id);
                             text_VS.setVisibility(View.VISIBLE);
@@ -175,26 +172,27 @@ public class Crunches_dare extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     friendName=dataSnapshot.child("name").getValue().toString();
                                     friendImage=dataSnapshot.child("thumb_image").getValue().toString();
-                                    friendFinishTime=dataSnapshot.child("crunches_dare").child("time").getValue().toString();
-                                    friendCount=dataSnapshot.child("crunches_dare").child("count").getValue().toString();
+                                    friendFinishTime=dataSnapshot.child("running_dare").child("time").getValue().toString();
+                                    friendCount=dataSnapshot.child("running_dare").child("distance").getValue().toString();
                                     FriendFinishTimeLong=Long.parseLong(friendFinishTime);
-                                    FriendCountInt=Integer.parseInt(friendCount);
 
-                                    if(FriendFinishTimeLong!=0&&FriendCountInt!=0) {
+                                    FriendCountDouble=Double.parseDouble(friendCount);
+
+                                    if(FriendFinishTimeLong!=0&&FriendCountDouble!=0) {
                                         friend_single_image.setVisibility(View.VISIBLE);
                                         friend_single_name.setVisibility(View.VISIBLE);
                                         friend_finish_time.setVisibility(View.VISIBLE);
                                         friend_finish_time_data.setVisibility(View.VISIBLE);
-                                        friend_crunches_finish_count.setVisibility(View.VISIBLE);
-                                        friend_crunches_finish_count_data.setVisibility(View.VISIBLE);
+                                        friend_running_finish_distance.setVisibility(View.VISIBLE);
+                                        friend_running_finish_distance_data.setVisibility(View.VISIBLE);
                                     }
 
                                     friend_single_name.setText(friendName);
                                     friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
-                                    friend_crunches_finish_count_data.setText(FriendCountInt+"次");
+                                    friend_running_finish_distance_data.setText(FriendCountDouble+"次");
 
                                     if(!friendImage.equals("default")){
-                                        Picasso.with(Crunches_dare.this).load(friendImage).networkPolicy(NetworkPolicy.OFFLINE)
+                                        Picasso.with(Running_dare.this).load(friendImage).networkPolicy(NetworkPolicy.OFFLINE)
                                                 .placeholder(R.drawable.default_avatar).into(friend_single_image, new Callback() {
                                             @Override
                                             public void onSuccess() {
@@ -204,46 +202,46 @@ public class Crunches_dare extends AppCompatActivity {
                                             @Override
                                             public void onError() {
 
-                                                Picasso.with(Crunches_dare.this).load(friendImage).placeholder(R.drawable.default_avatar).into(friend_single_image);
+                                                Picasso.with(Running_dare.this).load(friendImage).placeholder(R.drawable.default_avatar).into(friend_single_image);
 
                                             }
                                         });
                                     }
-                                    Log.i("1",""+ crunches_dare_data.getCrunches_dare_myFinishTime());
-                                    Log.i("12",""+ crunches_dare_data.getCrunches_dare_myCount());
+                                    Log.i("1",""+ running_dare_data.getRunning_dare_myFinishTime());
+                                    Log.i("12",""+ running_dare_data.getRunning_dare_myCount());
                                     Log.i("123",""+ FriendFinishTimeLong);
-                                    Log.i("1234",""+ FriendCountInt);
+                                    Log.i("1234",""+ FriendCountDouble);
                                     Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
-                                    if(crunches_dare_data.getCrunches_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&crunches_dare_data.getCrunches_dare_myCount()!=0&&FriendCountInt!=0){
+                                    if(running_dare_data.getRunning_dare_myCount()==Int_exercise_week_dat&&FriendCountDouble==Int_exercise_week_dat&&running_dare_data.getRunning_dare_myCount()!=0&&FriendCountDouble!=0){
                                         text_winner.setVisibility(View.VISIBLE);
-                                        if(crunches_dare_data.getCrunches_dare_myFinishTime()>FriendFinishTimeLong){
+                                        if(running_dare_data.getRunning_dare_myFinishTime()>FriendFinishTimeLong){
                                             text_winner.setText("勝利方是朋友");
-                                        }else if(crunches_dare_data.getCrunches_dare_myFinishTime()<FriendFinishTimeLong){
+                                        }else if(running_dare_data.getRunning_dare_myFinishTime()<FriendFinishTimeLong){
                                             text_winner.setText("勝利方是你");
-                                            Log.i("你之前的friend_pint",""+crunches_dare_data.getCrunches_dare_friend_point());
+                                            Log.i("你之前的friend_pint",""+running_dare_data.getRunning_dare_friend_point());
                                         }
                                         confirm_dare.setVisibility(View.VISIBLE);
                                         confirm_dare.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
-                                                confirm_database.child("Crunches_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
+                                                confirm_database.child("Running_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
                                                 confirm_dare.setVisibility(View.INVISIBLE);
                                                 friend_single_image.setVisibility(View.INVISIBLE);
                                                 friend_single_name.setVisibility(View.INVISIBLE);
                                                 friend_finish_time.setVisibility(View.INVISIBLE);
                                                 friend_finish_time_data.setVisibility(View.INVISIBLE);
-                                                friend_crunches_finish_count.setVisibility(View.INVISIBLE);
-                                                friend_crunches_finish_count_data.setVisibility(View.INVISIBLE);
+                                                friend_running_finish_distance.setVisibility(View.INVISIBLE);
+                                                friend_running_finish_distance_data.setVisibility(View.INVISIBLE);
                                                 text_VS.setVisibility(View.INVISIBLE);
                                                 text_winner.setVisibility(View.INVISIBLE);
-                                                if(crunches_dare_data.getCrunches_dare_myFinishTime()>FriendFinishTimeLong){
+                                                if(running_dare_data.getRunning_dare_myFinishTime()>FriendFinishTimeLong){
                                                     Log.i("勝利方是:","朋友");
-                                                    Toast.makeText(Crunches_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                }else if(crunches_dare_data.getCrunches_dare_myFinishTime()<FriendFinishTimeLong){
-                                                    Log.i("你之前的friend_pint",""+crunches_dare_data.getCrunches_dare_friend_point());
-                                                    friend_point_database.child("friend_point").setValue(crunches_dare_data.getCrunches_dare_friend_point()+10);
+                                                    Toast.makeText(Running_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                }else if(running_dare_data.getRunning_dare_myFinishTime()<FriendFinishTimeLong){
+                                                    Log.i("你之前的friend_pint",""+running_dare_data.getRunning_dare_friend_point());
+                                                    friend_point_database.child("friend_point").setValue(running_dare_data.getRunning_dare_friend_point()+10);
                                                     Log.i("勝利方是:","你");
-                                                    Toast.makeText(Crunches_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(Running_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
                                                 }
 
 
@@ -295,14 +293,11 @@ public class Crunches_dare extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(Crunches_dare.this, Exercise_main.class);
+            Intent intent = new Intent(Running_dare.this, Exercise_main.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
@@ -317,12 +312,12 @@ public class Crunches_dare extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.task_friend:
-                        Intent intent = new Intent(Crunches_dare.this,CrunchesDareFriend.class);
+                        Intent intent = new Intent(Running_dare.this,RunningDareFriend.class);
                         startActivity(intent);
                         Log.i("點擊", "成功");
                         break;
                     case R.id.gear_fit:
-                        connect_crunches();
+                        connect_running();
                         break;
                 }
                 return true;
@@ -343,7 +338,7 @@ public class Crunches_dare extends AppCompatActivity {
             Log.d(APP_TAG, "健康數據服務已連接。");
             HealthPermissionManager pmsManager = new HealthPermissionManager(mStore);
             //mReporter = new StepCountReporter(mStore);
-            cReporter = new CrunchesDareReporter(mStore);
+            cReporter = new RunningDareReporter(mStore);
 
             try {
                 // 檢查是否獲取了此應用程序所需的權限
@@ -351,7 +346,7 @@ public class Crunches_dare extends AppCompatActivity {
 
                 if (resultMap.containsValue(Boolean.FALSE)) {
                     //如果未獲取，則請求讀取步數的權限
-                    pmsManager.requestPermissions(mKeySet, Crunches_dare.this).setResultListener(mPermissionListener);
+                    pmsManager.requestPermissions(mKeySet, Running_dare.this).setResultListener(mPermissionListener);
                 } else {
                     //獲取當前步數並顯示它
 
@@ -394,15 +389,15 @@ public class Crunches_dare extends AppCompatActivity {
                 }
             };
 
-    public void drawCrunchesDare(long crunches_duration,int crunches_count) {
-        if (crunches_count != 0) {
-            myDatabase.child("crunches_dare").child("count").setValue(crunches_count);
-            myDatabase.child("crunches_dare").child("time").setValue(crunches_duration);
+    public void drawRunningDare(long running_duration,int running_distance) {
+        if (running_distance != 0) {
+            myDatabase.child("running_dare").child("distance").setValue(running_distance);
+            myDatabase.child("running_dare").child("time").setValue(running_duration);
         }
 
     }
 
-    public static  Crunches_dare getInstance(){
+    public static  Running_dare getInstance(){
         return mInstance;
     }
 
@@ -411,7 +406,7 @@ public class Crunches_dare extends AppCompatActivity {
             return;
         }
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(Crunches_dare.this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(Running_dare.this);
         alert.setTitle("注意");
         alert.setMessage("應獲取所有權限");
         alert.setPositiveButton("OK", null);
@@ -462,10 +457,8 @@ public class Crunches_dare extends AppCompatActivity {
         alert.show();
     }
 
-    public void connect_crunches(){
+    public void connect_running(){
         mStore = new HealthDataStore(this, mConnectionListener);
         mStore.connectService();
     }
-
-
 }

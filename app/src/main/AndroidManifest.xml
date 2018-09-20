@@ -113,7 +113,10 @@
         <activity android:name="kelvin.tablayout.PieChartActivity" />
         <activity android:name="kelvin.tablayout.Crunches_dare" />
         <activity android:name="kelvin.tablayout.CrunchesDareFriend" />
-        <activity android:name="kelvin.tablayout.CrunchesDareFriendProfile"></activity>
+        <activity android:name="kelvin.tablayout.CrunchesDareFriendProfile" />
+        <activity android:name="kelvin.tablayout.Running_dare" />
+        <activity android:name="kelvin.tablayout.RunningDareFriend" />
+        <activity android:name="kelvin.tablayout.RunningDareFriendProfile"></activity>
     </application>
 
 </manifest>
