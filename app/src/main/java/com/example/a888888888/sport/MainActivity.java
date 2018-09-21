@@ -89,11 +89,13 @@ import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.Sit_up_task;
+import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.Squats_task;
 import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
+import kelvin.tablayout.WalkingDareFriendProfile;
 import kelvin.tablayout.Walking_monitor;
 import kelvin.tablayout.Walking_task;
 import kelvin.tablayout.YogaMonitor;
@@ -1391,6 +1393,18 @@ public class  MainActivity extends AppCompatActivity
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("RunningDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), RunningDareFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("SquatsDareFriendProfile")) {
+                    Intent intent = new Intent(getContext(), SquatsDareFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("WalkingDareFriendProfile")) {
+                    Intent intent = new Intent(getContext(), WalkingDareFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);

@@ -15,11 +15,17 @@ public class Data {
     private String crunches_dare_myImage;
     private long crunches_dare_myFinishTime;
     private int crunches_dare_myCount;
+    private long squats_dare_myFinishTime;
+    private int squats_dare_myCount;
     private String friend_id;
     private int crunches_dare_friend_point;
     private int running_dare_friend_point;
+    private int squats_dare_friend_point;
+    private int walking_dare_friend_point;
     private long running_dare_myFinishTime;
     private double running_dare_myCount;
+    private long walking_dare_myFinishTime;
+    private double walking_dare_myCount;
 
 
 
@@ -174,6 +180,54 @@ public class Data {
 
     public void setRunning_dare_myCount(double running_dare_myCount) {
         this.running_dare_myCount = running_dare_myCount;
+    }
+
+    public long getSquats_dare_myFinishTime() {
+        return squats_dare_myFinishTime;
+    }
+
+    public void setSquats_dare_myFinishTime(long squats_dare_myFinishTime) {
+        this.squats_dare_myFinishTime = squats_dare_myFinishTime;
+    }
+
+    public int getSquats_dare_myCount() {
+        return squats_dare_myCount;
+    }
+
+    public void setSquats_dare_myCount(int squats_dare_myCount) {
+        this.squats_dare_myCount = squats_dare_myCount;
+    }
+
+    public int getSquats_dare_friend_point() {
+        return squats_dare_friend_point;
+    }
+
+    public void setSquats_dare_friend_point(int squats_dare_friend_point) {
+        this.squats_dare_friend_point = squats_dare_friend_point;
+    }
+
+    public int getWalking_dare_friend_point() {
+        return walking_dare_friend_point;
+    }
+
+    public void setWalking_dare_friend_point(int walking_dare_friend_point) {
+        this.walking_dare_friend_point = walking_dare_friend_point;
+    }
+
+    public long getWalking_dare_myFinishTime() {
+        return walking_dare_myFinishTime;
+    }
+
+    public void setWalking_dare_myFinishTime(long walking_dare_myFinishTime) {
+        this.walking_dare_myFinishTime = walking_dare_myFinishTime;
+    }
+
+    public double getWalking_dare_myCount() {
+        return walking_dare_myCount;
+    }
+
+    public void setWalking_dare_myCount(double walking_dare_myCount) {
+        this.walking_dare_myCount = walking_dare_myCount;
     }
 }
 

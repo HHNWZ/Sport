@@ -116,7 +116,13 @@
         <activity android:name="kelvin.tablayout.CrunchesDareFriendProfile" />
         <activity android:name="kelvin.tablayout.Running_dare" />
         <activity android:name="kelvin.tablayout.RunningDareFriend" />
-        <activity android:name="kelvin.tablayout.RunningDareFriendProfile"></activity>
+        <activity android:name="kelvin.tablayout.RunningDareFriendProfile" />
+        <activity android:name="kelvin.tablayout.Squats_dare" />
+        <activity android:name="kelvin.tablayout.SquatsDareFriend" />
+        <activity android:name="kelvin.tablayout.SquatsDareFriendProfile" />
+        <activity android:name="kelvin.tablayout.Walking_dare" />
+        <activity android:name="kelvin.tablayout.WalkingDareFriend" />
+        <activity android:name="kelvin.tablayout.WalkingDareFriendProfile"></activity>
     </application>
 
 </manifest>
