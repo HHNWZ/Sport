@@ -98,6 +98,7 @@ import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.WalkingDareFriendProfile;
 import kelvin.tablayout.Walking_monitor;
 import kelvin.tablayout.Walking_task;
+import kelvin.tablayout.YogaDareFriendProfile;
 import kelvin.tablayout.YogaMonitor;
 import kelvin.tablayout.Yoga_task;
 import necowneco.tablayout.habaActivity;
@@ -1405,6 +1406,12 @@ public class  MainActivity extends AppCompatActivity
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("WalkingDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), WalkingDareFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("YogaDareFriendProfile")) {
+                    Intent intent = new Intent(getContext(), YogaDareFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);

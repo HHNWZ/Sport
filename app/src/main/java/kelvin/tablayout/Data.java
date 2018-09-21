@@ -16,12 +16,15 @@ public class Data {
     private long crunches_dare_myFinishTime;
     private int crunches_dare_myCount;
     private long squats_dare_myFinishTime;
-    private int squats_dare_myCount;
+    private int squats_dare_myCount;//CALORIE
+    private int yoga_dare_myCalorie;
+    private long yoga_dare_myFinishTime;
     private String friend_id;
     private int crunches_dare_friend_point;
     private int running_dare_friend_point;
     private int squats_dare_friend_point;
     private int walking_dare_friend_point;
+    private int yoga_dare_friend_point;
     private long running_dare_myFinishTime;
     private double running_dare_myCount;
     private long walking_dare_myFinishTime;
@@ -228,6 +231,30 @@ public class Data {
 
     public void setWalking_dare_myCount(double walking_dare_myCount) {
         this.walking_dare_myCount = walking_dare_myCount;
+    }
+
+    public int getYoga_dare_myCalorie() {
+        return yoga_dare_myCalorie;
+    }
+
+    public void setYoga_dare_myCalorie(int yoga_dare_myCalorie) {
+        this.yoga_dare_myCalorie = yoga_dare_myCalorie;
+    }
+
+    public long getYoga_dare_myFinishTime() {
+        return yoga_dare_myFinishTime;
+    }
+
+    public void setYoga_dare_myFinishTime(long yoga_dare_myFinshTime) {
+        this.yoga_dare_myFinishTime = yoga_dare_myFinshTime;
+    }
+
+    public int getYoga_dare_friend_point() {
+        return yoga_dare_friend_point;
+    }
+
+    public void setYoga_dare_friend_point(int yoga_dare_friend_point) {
+        this.yoga_dare_friend_point = yoga_dare_friend_point;
     }
 }
 

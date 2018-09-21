@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.Yoga_dare">
+
+    <include
+        android:id="@+id/yoga_dare_app_bar"
+        layout="@layout/app_bar_layout" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/data_layout"
+        android:layout_below="@+id/yoga_dare_app_bar"
+        android:background="@android:color/holo_red_light"
+        android:layout_above="@+id/my_dare">
+
+        <TextView
+            android:id="@+id/exercise_week_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="做瑜伽"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            tools:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/exercise_week_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exercise_week_title"
+            android:text="0"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/black"
+
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/exercise_week_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exercise_week_data"
+            android:layout_centerHorizontal="true"
+            android:text="分鐘"
+            android:textColor="@android:color/black"
+
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/my_dare"
+        android:layout_width="wrap_content"
+        android:layout_height="266dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_single_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/default_avatar"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/user_single_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你的名字"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_below="@+id/user_single_image"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/yoga_finish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_gravity="center"
+            android:text="完成時間"/>
+        <TextView
+            android:id="@+id/yoga_finish_time_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/yoga_finish_time"
+            android:text="0分0秒"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/yoga_finish_calorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/yoga_finish_time"
+            android:text="消耗的卡路里"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/yoga_finish_calorie_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/yoga_finish_time"
+            android:text="0"
+            android:layout_gravity="center"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/friend_dare"
+        android:layout_width="wrap_content"
+        android:layout_height="266dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:layout_marginRight="5dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friend_single_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/default_avatar"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/friend_single_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="朋友的名字"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_below="@+id/user_single_image"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            />
+        <TextView
+            android:id="@+id/friend_finish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:text="完成時間"
+            android:visibility="invisible"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_finish_time_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/yoga_finish_time"
+            android:text="0分0秒"
+            android:visibility="invisible"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_yoga_finish_calorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/yoga_finish_time"
+            android:text="消耗的卡路里"
+            android:visibility="invisible"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/friend_yoga_finish_calorie_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_single_name"
+            android:layout_toRightOf="@+id/yoga_finish_time"
+            android:text="0"
+            android:visibility="invisible"
+            android:layout_gravity="center"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/data_layout"
+        android:layout_toRightOf="@+id/my_dare"
+        android:layout_toLeftOf="@+id/friend_dare"
+        android:id="@+id/duel"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/text_VS"
+            android:text="VS"
+            android:gravity="center"
+            android:textSize="100sp"
+            android:visibility="invisible"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/duel"
+        android:layout_toRightOf="@+id/my_dare"
+        android:layout_toLeftOf="@+id/friend_dare"
+
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/text_winner"
+            android:text="勝利者是"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:visibility="invisible"
+            />
+        <Button
+            android:id="@+id/confirm_dare"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="確認"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+</RelativeLayout>

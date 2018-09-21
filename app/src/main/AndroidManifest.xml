@@ -122,7 +122,10 @@
         <activity android:name="kelvin.tablayout.SquatsDareFriendProfile" />
         <activity android:name="kelvin.tablayout.Walking_dare" />
         <activity android:name="kelvin.tablayout.WalkingDareFriend" />
-        <activity android:name="kelvin.tablayout.WalkingDareFriendProfile"></activity>
+        <activity android:name="kelvin.tablayout.WalkingDareFriendProfile" />
+        <activity android:name="kelvin.tablayout.Yoga_dare" />
+        <activity android:name="kelvin.tablayout.YogaDareFriend" />
+        <activity android:name="kelvin.tablayout.YogaDareFriendProfile"></activity>
     </application>
 
 </manifest>

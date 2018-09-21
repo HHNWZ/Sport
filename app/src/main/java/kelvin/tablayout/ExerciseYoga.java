@@ -122,11 +122,9 @@ public class ExerciseYoga extends Fragment {
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                kelvin_sit_up_invitation kelvin_sit_up_invitation1=kelvin_sit_up_invitation.newInstance("瑜伽邀請內容","做瑜伽:","分鐘");
-                FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.add(R.id.content1_main,kelvin_sit_up_invitation1);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getContext(),Yoga_dare.class);
+
+                startActivity(intent);
             }
 
         });
