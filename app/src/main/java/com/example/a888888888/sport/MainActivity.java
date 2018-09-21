@@ -84,6 +84,7 @@ import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.PieChartActivity;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
+import kelvin.tablayout.RunningDareFriendProfile;
 import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.Running_task;
 import kelvin.tablayout.SettingsActivity;
@@ -1384,6 +1385,12 @@ public class  MainActivity extends AppCompatActivity
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("CrunchesDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), CrunchesDareFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("RunningDareFriendProfile")) {
+                    Intent intent = new Intent(getContext(), RunningDareFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);

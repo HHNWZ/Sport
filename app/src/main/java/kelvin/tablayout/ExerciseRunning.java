@@ -117,7 +117,7 @@ public class ExerciseRunning extends Fragment {
         button_of_invitation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Running_task.class);
+                Intent intent = new Intent(getContext(),Running_dare.class);
 
                 startActivity(intent);
             }

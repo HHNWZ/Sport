@@ -135,7 +135,7 @@ public class Running_dare extends AppCompatActivity {
 
                 myCountDouble=Double.parseDouble(myCount);
                 user_single_name.setText(myName);
-                running_finish_distance_data.setText(myCountDouble+"次");
+                running_finish_distance_data.setText(myCountDouble+"公里");
                 running_finish_time_data.setText(Time.changeYogaTime(myFinishTimeLong));
                 running_dare_data.setRunning_dare_myFinishTime(myFinishTimeLong);
                 running_dare_data.setRunning_dare_myCount(myCountDouble);
@@ -166,6 +166,12 @@ public class Running_dare extends AppCompatActivity {
                             final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
                             Log.i("朋友id1234",""+list_user_id);
                             text_VS.setVisibility(View.VISIBLE);
+                            friend_single_image.setVisibility(View.VISIBLE);
+                            friend_single_name.setVisibility(View.VISIBLE);
+                            friend_finish_time.setVisibility(View.VISIBLE);
+                            friend_finish_time_data.setVisibility(View.VISIBLE);
+                            friend_running_finish_distance.setVisibility(View.VISIBLE);
+                            friend_running_finish_distance_data.setVisibility(View.VISIBLE);
 
                             friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -178,18 +184,11 @@ public class Running_dare extends AppCompatActivity {
 
                                     FriendCountDouble=Double.parseDouble(friendCount);
 
-                                    if(FriendFinishTimeLong!=0&&FriendCountDouble!=0) {
-                                        friend_single_image.setVisibility(View.VISIBLE);
-                                        friend_single_name.setVisibility(View.VISIBLE);
-                                        friend_finish_time.setVisibility(View.VISIBLE);
-                                        friend_finish_time_data.setVisibility(View.VISIBLE);
-                                        friend_running_finish_distance.setVisibility(View.VISIBLE);
-                                        friend_running_finish_distance_data.setVisibility(View.VISIBLE);
-                                    }
+
 
                                     friend_single_name.setText(friendName);
                                     friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
-                                    friend_running_finish_distance_data.setText(FriendCountDouble+"次");
+                                    friend_running_finish_distance_data.setText(FriendCountDouble+"公里");
 
                                     if(!friendImage.equals("default")){
                                         Picasso.with(Running_dare.this).load(friendImage).networkPolicy(NetworkPolicy.OFFLINE)
@@ -312,9 +311,12 @@ public class Running_dare extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.task_friend:
-                        Intent intent = new Intent(Running_dare.this,RunningDareFriend.class);
-                        startActivity(intent);
-                        Log.i("點擊", "成功");
+                        if(text_VS.getVisibility()==View.INVISIBLE){
+                            Intent intent = new Intent(Running_dare.this,RunningDareFriend.class);
+                            startActivity(intent);
+                            Log.i("點擊", "成功");
+                        }
+
                         break;
                     case R.id.gear_fit:
                         connect_running();
@@ -389,9 +391,9 @@ public class Running_dare extends AppCompatActivity {
                 }
             };
 
-    public void drawRunningDare(long running_duration,int running_distance) {
+    public void drawRunningDare(long running_duration,double running_distance) {
         if (running_distance != 0) {
-            myDatabase.child("running_dare").child("distance").setValue(running_distance);
+            myDatabase.child("running_dare").child("distance").setValue(UnitConversion.get_kilometer(running_distance));
             myDatabase.child("running_dare").child("time").setValue(running_duration);
         }
 

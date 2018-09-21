@@ -34,7 +34,7 @@ public class RunningDareReporter {
 
         HealthDataResolver.ReadRequest request = new HealthDataResolver.ReadRequest.Builder()
                 .setDataType(HealthConstants.Exercise.HEALTH_DATA_TYPE)
-                .setProperties(new String[]{HealthConstants.Exercise.DISTANCE,
+                .setProperties(new String[]{
                         HealthConstants.Exercise.DURATION,
                         HealthConstants.Exercise.DISTANCE,
                 })
@@ -64,15 +64,15 @@ public class RunningDareReporter {
         mListener = new HealthResultHolder.ResultListener<HealthDataResolver.ReadResult>() {
             @Override
             public void onResult(HealthDataResolver.ReadResult result) {
-                long crunches_distance = 0;
-                int crunches_count=0;
+                long running_duration = 0;
+                double running_distance=0;
                 Cursor c = null;
                 try {
                     c = result.getResultCursor();
                     if (c != null) {
                         while (c.moveToNext()) {
-                            crunches_distance = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
-                            crunches_count=c.getInt(c.getColumnIndex(HealthConstants.Exercise.COUNT));
+                            running_duration = c.getLong(c.getColumnIndex(HealthConstants.Exercise.DURATION));
+                            running_distance=c.getDouble(c.getColumnIndex(HealthConstants.Exercise.DISTANCE));
                         }
                     }
                 } finally {
@@ -80,7 +80,7 @@ public class RunningDareReporter {
                         c.close();
                     }
                 }
-                Running_dare.getInstance().drawRunningDare(crunches_distance,crunches_count);
+                Running_dare.getInstance().drawRunningDare(running_duration,running_distance);
             }
         };
     }

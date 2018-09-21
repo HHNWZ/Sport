@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/exercise_week_data"
             android:layout_centerHorizontal="true"
-            android:text="次"
+            android:text="公里"
             android:textColor="@android:color/black"
 
             android:textSize="20sp" />
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_single_name"
             android:layout_toRightOf="@+id/running_finish_time"
-            android:text="公里"
+            android:text="距離"
             android:layout_gravity="center"/>
         <TextView
             android:id="@+id/running_finish_distance_data"

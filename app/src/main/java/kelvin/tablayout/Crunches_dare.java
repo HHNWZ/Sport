@@ -169,6 +169,12 @@ public class Crunches_dare extends AppCompatActivity {
                             final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
                             Log.i("朋友id1234",""+list_user_id);
                             text_VS.setVisibility(View.VISIBLE);
+                            friend_single_image.setVisibility(View.VISIBLE);
+                            friend_single_name.setVisibility(View.VISIBLE);
+                            friend_finish_time.setVisibility(View.VISIBLE);
+                            friend_finish_time_data.setVisibility(View.VISIBLE);
+                            friend_crunches_finish_count.setVisibility(View.VISIBLE);
+                            friend_crunches_finish_count_data.setVisibility(View.VISIBLE);
 
                             friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
@@ -180,14 +186,7 @@ public class Crunches_dare extends AppCompatActivity {
                                     FriendFinishTimeLong=Long.parseLong(friendFinishTime);
                                     FriendCountInt=Integer.parseInt(friendCount);
 
-                                    if(FriendFinishTimeLong!=0&&FriendCountInt!=0) {
-                                        friend_single_image.setVisibility(View.VISIBLE);
-                                        friend_single_name.setVisibility(View.VISIBLE);
-                                        friend_finish_time.setVisibility(View.VISIBLE);
-                                        friend_finish_time_data.setVisibility(View.VISIBLE);
-                                        friend_crunches_finish_count.setVisibility(View.VISIBLE);
-                                        friend_crunches_finish_count_data.setVisibility(View.VISIBLE);
-                                    }
+
 
                                     friend_single_name.setText(friendName);
                                     friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
