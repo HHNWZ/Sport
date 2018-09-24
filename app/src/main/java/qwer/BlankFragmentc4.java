@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +39,7 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int mycm,mykg;
 
     private OnFragmentInteractionListener mListener;
 
@@ -79,6 +81,8 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc4, null);
         view.setOnTouchListener(this);
         final int[] mySport = {0};
+        final EditText userCM=(EditText)view.findViewById(R.id.myCM);
+        final EditText userKG=(EditText)view.findViewById(R.id.myKG);
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportListSpinner);
         final String[] SportList = {"請選擇運動項目","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         final LinearLayout selelayout=(LinearLayout)view.findViewById(R.id.seleLayout);
@@ -104,12 +108,19 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         checkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mySport[0]==0){
+                if(userCM.getText()==null||userKG.getText()==null){
+                    Toast.makeText(getActivity(), "請先輸入身高體重", Toast.LENGTH_SHORT).show();
+
+                }else if(mySport[0]==0){
                     Toast.makeText(getActivity(), "請先選擇運動項目", Toast.LENGTH_SHORT).show();
                 }else{
+                    mycm=Integer.valueOf(userCM.getText().toString());
+                    mykg=Integer.valueOf(userKG.getText().toString());
+                    Toast.makeText(getActivity(), mycm+"、"+mykg, Toast.LENGTH_SHORT).show();
                     selelayout.setVisibility(View.GONE);
-                    sporttarget.setVisibility(View.VISIBLE);
+                    //sporttarget.setVisibility(View.VISIBLE);
                     sportitem.setText(SportList[mySport[0]]);
+                    gototheSport(mycm,mykg,mySport[0]);//前往運動
                 }
             }
         });//選擇運動項目後方可進入下一階段：運動進度
@@ -182,6 +193,29 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             }
         });
         return view;
+    }
+
+    private void gototheSport(int mycm, int mykg, int mysp) {
+        switch (mysp){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3://跑步
+                double TargetKM;
+                TargetKM=((mycm*6.25-105)+(mykg*10))/(mykg*1.036)*0.2;
+                Toast.makeText(getContext(), "="+TargetKM+"KM", Toast.LENGTH_SHORT).show();
+                //請以參數 TargetKM 作為目標距離進行運動偵測
+                break;
+            case 4:
+                break;
+
+            case 5:
+                break;
+            default:
+                break;
+
+        }
     }
 
     private String getEatedString(int[] foods) {
