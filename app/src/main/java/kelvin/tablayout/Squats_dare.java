@@ -210,7 +210,7 @@ public class Squats_dare extends AppCompatActivity {
                                     Log.i("123",""+ FriendFinishTimeLong);
                                     Log.i("1234",""+ FriendCountInt);
                                     Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
-                                    if(squats_dare_data.getSquats_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&squats_dare_data.getSquats_dare_myCount()!=0&&FriendCountInt!=0){
+                                    if(squats_dare_data.getSquats_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&squats_dare_data.getSquats_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
                                         text_winner.setVisibility(View.VISIBLE);
                                         if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
                                             text_winner.setText("勝利方是朋友");

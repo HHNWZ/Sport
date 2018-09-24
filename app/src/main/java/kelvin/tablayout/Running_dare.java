@@ -211,7 +211,7 @@ public class Running_dare extends AppCompatActivity {
                                     Log.i("123",""+ FriendFinishTimeLong);
                                     Log.i("1234",""+ FriendCountDouble);
                                     Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
-                                    if(running_dare_data.getRunning_dare_myCount()==Int_exercise_week_dat&&FriendCountDouble==Int_exercise_week_dat&&running_dare_data.getRunning_dare_myCount()!=0&&FriendCountDouble!=0){
+                                    if(running_dare_data.getRunning_dare_myCount()==Int_exercise_week_dat&&FriendCountDouble==Int_exercise_week_dat&&running_dare_data.getRunning_dare_myCount()!=0&&FriendCountDouble!=0&&text_VS.getVisibility()==View.VISIBLE){
                                         text_winner.setVisibility(View.VISIBLE);
                                         if(running_dare_data.getRunning_dare_myFinishTime()>FriendFinishTimeLong){
                                             text_winner.setText("勝利方是朋友");

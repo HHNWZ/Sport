@@ -211,7 +211,7 @@ public class Yoga_dare extends AppCompatActivity {
                                     Log.i("1234",""+ FriendCalorieInt);
                                     Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString())*60*1000;
 
-                                    if(yoga_dare_data.getYoga_dare_myFinishTime()==Int_exercise_week_dat&&FriendFinishTimeLong==Int_exercise_week_dat&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0){
+                                    if(yoga_dare_data.getYoga_dare_myFinishTime()==Int_exercise_week_dat&&FriendFinishTimeLong==Int_exercise_week_dat&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0&&text_VS.getVisibility()==View.VISIBLE){
                                         text_winner.setVisibility(View.VISIBLE);
                                         if(yoga_dare_data.getYoga_dare_myCalorie()<FriendCalorieInt){
                                             text_winner.setText("勝利方是朋友");

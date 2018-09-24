@@ -25,12 +25,9 @@ import java.util.Timer;
 import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
 public class Exercise_main extends AppCompatActivity implements
-        kelvin_push_up_invitation.OnFragmentInteractionListener,
-        FriendsFragment2.OnFragmentInteractionListener,
-        kelvin_aerobic_exercise_invitation.OnFragmentInteractionListener,
-        kelvin_running_invitation.OnFragmentInteractionListener,
-        kelvin_sit_up_invitation.OnFragmentInteractionListener,
-        kelvin_walking_invitation.OnFragmentInteractionListener
+
+        FriendsFragment2.OnFragmentInteractionListener
+
 {
 
     private CoordinatorTabLayout mCoordinatorTabLayout;
@@ -45,7 +42,7 @@ public class Exercise_main extends AppCompatActivity implements
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
-                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())//1234
                 .init();
         mViewPager = (ViewPager) findViewById(R.id.vp);
 
