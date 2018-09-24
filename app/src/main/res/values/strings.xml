@@ -106,4 +106,7 @@
 
 
     <string name="default_status">做運動真好</string>
+    <string name="title_activity_photo_dlog">運動論壇</string>
+    <string name="title_activity_photo_blog">運動信息分享</string>
+    <string name="action_search_text">Search</string>
 </resources>

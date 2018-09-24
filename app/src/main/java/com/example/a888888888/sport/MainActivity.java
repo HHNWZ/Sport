@@ -76,6 +76,7 @@ import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
+import kelvin.tablayout.PhotoBlog;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningDareFriendProfile;
@@ -407,7 +408,7 @@ public class  MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, Walking_monitor.class);
+                intent.setClass(MainActivity.this, PhotoBlog.class);
                 startActivity(intent);
                 MainActivity.this.finish();
             }
