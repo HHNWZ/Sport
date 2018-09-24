@@ -51,6 +51,49 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView63"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="身高：" />
+
+                <EditText
+                    android:id="@+id/myCM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="請輸入身高(CM)"
+                    android:inputType="number"
+                    android:text="" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textView64"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="體重：" />
+
+                <EditText
+                    android:id="@+id/myKG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="請輸入體重(KG)"
+                    android:inputType="number"
+                    android:text="" /></LinearLayout>
+
             <Spinner
                 android:id="@+id/SportListSpinner"
                 android:layout_width="match_parent"
@@ -102,11 +145,14 @@
                 android:src="@drawable/sportfinish"
                 android:visibility="gone" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/TodayFoodKKL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -136,6 +182,84 @@
                 android:layout_height="wrap_content"
                 android:text="今日累計熱量：0" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/title_need_running_exercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="需要的運動量" />
+
+                <TextView
+                    android:id="@+id/need_running_exercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5公里" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/title_database_today_running_exercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="偵測到的運動量" />
+
+                <TextView
+                    android:id="@+id/database_today_running_exercise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5公里" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/title_check_exercise_running"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="判斷" />
+
+                <TextView
+                    android:id="@+id/check_exercise_running"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="不達標" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
 
     </LinearLayout>
     <LinearLayout

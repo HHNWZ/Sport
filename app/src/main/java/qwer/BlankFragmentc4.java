@@ -3,6 +3,7 @@ package qwer;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,6 +22,16 @@ import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DecimalFormat;
+
+import kelvin.tablayout.Data;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +50,15 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int mycm,mykg;
+    private TextView title_need_running_exercise,need_running_exercise,title_database_today_running_exercise,database_today_running_exercise,title_check_exercise_running,check_exercise_running;
+    private Data need_exercise_data;
+    private DecimalFormat df = new DecimalFormat("0.00");
+    private DatabaseReference runningDatabase;
+    private static FirebaseAuth mAuth;
+    private static double double_today_running_record;
+    public static double TargetKM;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -79,12 +100,26 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc4, null);
         view.setOnTouchListener(this);
         final int[] mySport = {0};
+        final EditText userCM=(EditText)view.findViewById(R.id.myCM);
+        final EditText userKG=(EditText)view.findViewById(R.id.myKG);
         final Spinner spinner=(Spinner)view.findViewById(R.id.SportListSpinner);
         final String[] SportList = {"請選擇運動項目","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
         final LinearLayout selelayout=(LinearLayout)view.findViewById(R.id.seleLayout);
         final LinearLayout sporttarget=(LinearLayout)view.findViewById(R.id.SportTargetLayout);
         final TextView sportitem=(TextView)view.findViewById(R.id.SportItem);
         final TextView progressnum=(TextView)view.findViewById(R.id.SportProgressNum);
+        need_running_exercise=(TextView)view.findViewById(R.id.need_running_exercise);
+        title_need_running_exercise=(TextView)view.findViewById(R.id.title_need_running_exercise);
+        title_database_today_running_exercise=(TextView)view.findViewById(R.id.title_database_today_running_exercise);
+        database_today_running_exercise=(TextView)view.findViewById(R.id.database_today_running_exercise);
+        title_check_exercise_running=(TextView)view.findViewById(R.id.title_check_exercise_running);
+        check_exercise_running=(TextView)view.findViewById(R.id.check_exercise_running);
+        need_running_exercise.setVisibility(View.INVISIBLE);
+        title_need_running_exercise.setVisibility(View.INVISIBLE);
+        title_database_today_running_exercise.setVisibility(View.INVISIBLE);
+        database_today_running_exercise.setVisibility(View.INVISIBLE);
+        title_check_exercise_running.setVisibility(View.INVISIBLE);
+        check_exercise_running.setVisibility(View.INVISIBLE);
         ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
                 view.getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
@@ -104,12 +139,21 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         checkbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mySport[0]==0){
+                if(userCM.getText()==null||userKG.getText()==null){
+                    Toast.makeText(getActivity(), "請先輸入身高體重", Toast.LENGTH_SHORT).show();
+
+                }else if(mySport[0]==0){
                     Toast.makeText(getActivity(), "請先選擇運動項目", Toast.LENGTH_SHORT).show();
                 }else{
-                    selelayout.setVisibility(View.GONE);
-                    sporttarget.setVisibility(View.VISIBLE);
+                    mycm=Integer.valueOf(userCM.getText().toString());
+                    mykg=Integer.valueOf(userKG.getText().toString());
+                    Toast.makeText(getActivity(), mycm+"、"+mykg, Toast.LENGTH_SHORT).show();
+                    //selelayout.setVisibility(View.GONE);
+
+                    //sporttarget.setVisibility(View.VISIBLE);
                     sportitem.setText(SportList[mySport[0]]);
+                    gototheSport(mycm,mykg,mySport[0]);//前往運動
+
                 }
             }
         });//選擇運動項目後方可進入下一階段：運動進度
@@ -141,9 +185,9 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         tdkll=(TextView)view.findViewById(R.id.tdKLL);
         theDate todate=((MainActivity)getActivity()).getTodayEaetdInfo();//取得今日日記資訊
         if(todate==null){}else {
-        tdbk.setText("早餐："+Integer.toString(todate.todayKLL(0)));
-        tdlh.setText("午餐："+Integer.toString(todate.todayKLL(1)));
-        tddn.setText("晚餐："+Integer.toString(todate.todayKLL(2)));
+            tdbk.setText("早餐："+Integer.toString(todate.todayKLL(0)));
+            tdlh.setText("午餐："+Integer.toString(todate.todayKLL(1)));
+            tddn.setText("晚餐："+Integer.toString(todate.todayKLL(2)));
             tdkll.setText("今日累計熱量：" + todate.todayKLL() + "大卡");
         }
 
@@ -182,6 +226,68 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             }
         });
         return view;
+    }
+
+    private void gototheSport(int mycm, int mykg, int mysp) {
+        switch (mysp){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3://跑步
+
+                //TargetKM=((mycm*6.25-105)+(mykg*10))/(mykg*1.036)*0.2;
+
+
+                //請以參數 TargetKM 作為目標距離進行運動偵測
+                mAuth = FirebaseAuth.getInstance();
+                Log.i("我的id:",""+mAuth.getCurrentUser().getUid());
+                //need_running_exercise.setVisibility(View.VISIBLE);
+                //title_need_running_exercise.setVisibility(View.VISIBLE);
+                //need_running_exercise.setText(""+df.format(TargetKM)+"公里");
+
+                runningDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+                runningDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        TargetKM=((mycm*6.25-105)+(mykg*10))/(mykg*1.036)*0.2;
+                        need_running_exercise.setVisibility(View.VISIBLE);
+                        title_need_running_exercise.setVisibility(View.VISIBLE);
+                        need_running_exercise.setText(""+df.format(TargetKM)+"公里");
+                        title_database_today_running_exercise.setVisibility(View.VISIBLE);
+                        database_today_running_exercise.setVisibility(View.VISIBLE);
+                        Log.i("比較距離",""+TargetKM);
+                        String today_running_record=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
+                        double_today_running_record=Double.parseDouble(today_running_record);
+                        database_today_running_exercise.setText(""+double_today_running_record+"公里");
+                        title_check_exercise_running.setVisibility(View.VISIBLE);
+                        check_exercise_running.setVisibility(View.VISIBLE);
+                        if(double_today_running_record>=TargetKM){
+                            check_exercise_running.setText("有達標");
+                        }else{
+                            check_exercise_running.setText("沒有達標");
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //title_database_today_running_exercise.setVisibility(View.INVISIBLE);
+                //database_today_running_exercise.setVisibility(View.INVISIBLE);
+
+
+                break;
+            case 4:
+                break;
+
+            case 5:
+                break;
+            default:
+                break;
+
+        }
     }
 
     private String getEatedString(int[] foods) {

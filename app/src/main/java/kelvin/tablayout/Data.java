@@ -29,6 +29,7 @@ public class Data {
     private double running_dare_myCount;
     private long walking_dare_myFinishTime;
     private double walking_dare_myCount;
+    private double running_need_exrcise_data;
 
 
 
@@ -255,6 +256,14 @@ public class Data {
 
     public void setYoga_dare_friend_point(int yoga_dare_friend_point) {
         this.yoga_dare_friend_point = yoga_dare_friend_point;
+    }
+
+    public double getRunning_need_exrcise_data() {
+        return running_need_exrcise_data;
+    }
+
+    public void setRunning_need_exrcise_data(double running_need_exrcise_data) {
+        this.running_need_exrcise_data = running_need_exrcise_data;
     }
 }
 
