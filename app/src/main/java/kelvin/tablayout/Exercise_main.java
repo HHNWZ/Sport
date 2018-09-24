@@ -42,7 +42,7 @@ public class Exercise_main extends AppCompatActivity implements
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
-                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())//
                 .init();
         mViewPager = (ViewPager) findViewById(R.id.vp);
 
