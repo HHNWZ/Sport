@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -60,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mImageBtn;
     private Button gotomainpage;
     private Toolbar user_setting_Toolbar;
-
+    private FirebaseFirestore firebaseFirestore;
 
     private static final int GALLERY_PICK = 1;
 
@@ -102,7 +103,7 @@ public class SettingsActivity extends AppCompatActivity {
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        firebaseFirestore=FirebaseFirestore.getInstance();
         String current_uid = mCurrentUser.getUid();
 
 
@@ -111,6 +112,7 @@ public class SettingsActivity extends AppCompatActivity {
         mUserDatabase.keepSynced(true);
 
         mUserDatabase.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -224,8 +226,8 @@ public class SettingsActivity extends AppCompatActivity {
 
 
                 mProgressDialog = new ProgressDialog(SettingsActivity.this);
-                mProgressDialog.setTitle("Uploading Image...");
-                mProgressDialog.setMessage("Please wait while we upload and process the image.");
+                mProgressDialog.setTitle("上傳圖片...");
+                mProgressDialog.setMessage("我們正在處理上傳圖片請等待.");
                 mProgressDialog.setCanceledOnTouchOutside(false);
                 mProgressDialog.show();
 
@@ -281,7 +283,7 @@ public class SettingsActivity extends AppCompatActivity {
                                                 if(task.isSuccessful()){
 
                                                     mProgressDialog.dismiss();
-                                                    Toast.makeText(SettingsActivity.this, "Success Uploading.", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(SettingsActivity.this, "圖片上傳成功", Toast.LENGTH_LONG).show();
 
                                                 }
 
@@ -291,7 +293,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                                     } else {
 
-                                        Toast.makeText(SettingsActivity.this, "Error in uploading thumbnail.", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SettingsActivity.this, "圖片處理失敗.", Toast.LENGTH_LONG).show();
                                         mProgressDialog.dismiss();
 
                                     }
@@ -304,7 +306,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         } else {
 
-                            Toast.makeText(SettingsActivity.this, "Error in uploading.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SettingsActivity.this, "圖片上傳成功.", Toast.LENGTH_LONG).show();
                             mProgressDialog.dismiss();
 
                         }

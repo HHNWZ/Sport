@@ -82,6 +82,7 @@ import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningDareFriendProfile;
 import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.SettingsActivity;
+import kelvin.tablayout.SetupActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.TaskProfile;
@@ -158,7 +159,7 @@ public class  MainActivity extends AppCompatActivity
     public static CircleLayout circleLayout;
     public static NavigationView navigationView;
     public static Menu menu;
-    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout;
+    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout,blog;
     public static View hView;
 
     public static Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
@@ -378,6 +379,7 @@ public class  MainActivity extends AppCompatActivity
         //username.setText("123456");
         menu = navigationView.getMenu();
         menu_email_login = menu.findItem(R.id.email_login);
+        blog=menu.findItem(R.id.blog);
         menu_email_register = menu.findItem(R.id.email_register);
         menu_chat_room = menu.findItem(R.id.chat_room);
          menu_setting_account = menu.findItem(R.id.setting_account);
@@ -408,7 +410,7 @@ public class  MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PhotoBlog.class);
+                intent.setClass(MainActivity.this, Walking_monitor.class);
                 startActivity(intent);
                 MainActivity.this.finish();
             }
@@ -574,6 +576,7 @@ public class  MainActivity extends AppCompatActivity
             timer.schedule(new TimerTaskTest(), firstTime);
             main_title.setText("運動監控");
             menu_email_login.setVisible(false);
+            blog.setVisible(true);
             menu_email_register.setVisible(false);
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
@@ -848,6 +851,7 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(false);
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
+            blog.setVisible(false);
             kel.setVisibility(View.INVISIBLE);
             button_of_walking_monitoring.setVisibility(View.INVISIBLE);
             button_of_running_monitoring.setVisibility(View.INVISIBLE);
@@ -1305,8 +1309,12 @@ public class  MainActivity extends AppCompatActivity
             startActivity(i);
         }
         else if(id==R.id.setting_account){
-            Intent i = new Intent(MainActivity.this,SettingsActivity.class);
+            Intent i = new Intent(MainActivity.this,SetupActivity.class);
             //finish();
+            startActivity(i);
+        }
+        else if(id==R.id.blog){
+            Intent i= new Intent(MainActivity.this,PhotoBlog.class);
             startActivity(i);
         }
         else if(id==R.id.Logout){

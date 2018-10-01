@@ -2,11 +2,47 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/nav_blog_post"
+        android:title="新增帖文"
+        android:icon="@drawable/add_post2"/>
+    <item
+        android:id="@+id/nav_blog_profile"
+        android:title="個人主頁"
+        android:icon="@drawable/profile_icon2"/>
 
     <item
-        android:id="@+id/action_search_btn"
-        android:icon="@mipmap/action_search"
-        android:title="@string/action_search_text"
-        app:showAsAction="never|always" />
+        android:id="@+id/nav_blog_view_friend_message"
+        android:title="瀏覽朋友運動帖文"
+        android:icon="@drawable/home2"/>
+
+    <item
+        android:id="@+id/nav_blog_friend"
+        android:title="朋友"
+        android:icon="@drawable/friends2"/>
+
+    <item
+        android:id="@+id/nav_blog_find_friend"
+        android:title="尋找朋友"
+        android:icon="@drawable/find_people2"/>
+
+    <item
+        android:id="@+id/nav_blog_messages"
+        android:title="信息"
+        android:icon="@drawable/messages2"/>
+
+    <item
+        android:id="@+id/nav_blog_settings"
+        android:title="設置"
+        android:icon="@drawable/settings2"/>
+
+    <item
+        android:id="@+id/nav_blog_back_main_activity"
+        android:title="返回主頁面"
+        android:icon="@drawable/logout2"/>
+
+
+
+
 
 </menu>

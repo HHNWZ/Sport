@@ -1,8 +1,9 @@
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.example.a888888888.sport"
         minSdkVersion 21
@@ -82,6 +83,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
     implementation 'com.firebase:firebase-client-android:2.4.0'
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
+    implementation 'com.google.firebase:firebase-firestore:11.8.0'
     //implementation 'com.firebaseui:firebase-ui-database:1.2.0'
     //通知管理
     implementation 'com.onesignal:OneSignal:[3.9.3, 3.99.99]'
@@ -119,4 +121,4 @@ dependencies {
 
 }
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+

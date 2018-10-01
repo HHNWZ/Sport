@@ -109,4 +109,6 @@
     <string name="title_activity_photo_dlog">運動論壇</string>
     <string name="title_activity_photo_blog">運動信息分享</string>
     <string name="action_search_text">Search</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
 </resources>

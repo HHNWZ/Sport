@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.onesignal.OneSignal;
 import com.squareup.picasso.Picasso;
 
@@ -51,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference myUsersDatabase;
 
     private DatabaseReference mRootRef;
+
     public static String my_image;
     private static FirebaseUser mCurrent_user;
     private FirebaseAuth mAuth;
@@ -86,6 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);//使用者資料庫
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
 
