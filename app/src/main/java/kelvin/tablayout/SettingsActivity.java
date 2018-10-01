@@ -8,8 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,12 +58,15 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName;
     private TextView mStatus;
-
+    private EditText settingUserName,settingFullName,settingCountryName;
+    private Button settingSaveInformationbutton;
     private Button mStatusBtn;
     private Button mImageBtn;
     private Button gotomainpage;
     private Toolbar user_setting_Toolbar;
     private FirebaseFirestore firebaseFirestore;
+    private ProgressDialog loadingBar;
+
 
     private static final int GALLERY_PICK = 1;
 
@@ -93,12 +98,16 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
-        mName = (TextView) findViewById(R.id.settings_name);
-        mStatus = (TextView) findViewById(R.id.settings_status);
+        //mName = (TextView) findViewById(R.id.settings_name);
+        //mStatus = (TextView) findViewById(R.id.settings_status);
+        settingUserName=(EditText)findViewById(R.id.setting_username);
+        settingFullName=(EditText)findViewById(R.id.setting_full_name);
+        settingCountryName=(EditText)findViewById(R.id.setting_country_name);
+        settingSaveInformationbutton=(Button)findViewById(R.id.setting_information_button);
+        loadingBar = new ProgressDialog(this);
+        //mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
+        //mImageBtn = (Button) findViewById(R.id.settings_image_btn);
 
-        mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
-        mImageBtn = (Button) findViewById(R.id.settings_image_btn);
-        //gotomainpage=(Button) findViewById(R.id.button_go_to_main_page);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
@@ -116,36 +125,41 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                String name = dataSnapshot.child("name").getValue().toString();
-                final String image = dataSnapshot.child("image").getValue().toString();
-                String status = dataSnapshot.child("status").getValue().toString();
-                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
+                if(dataSnapshot.exists()){
 
-                mName.setText(name);
-                mStatus.setText(status);
+                    if(dataSnapshot.hasChild("image")){
+                        final String image = dataSnapshot.child("image").getValue().toString();
+                        if(!image.equals("default")) {
+                            Picasso.with(SettingsActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                                    .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
+                                @Override
+                                public void onSuccess() {
 
-                if(!image.equals("default")) {
+                                }
 
-                    //Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
-
-                    Picasso.with(SettingsActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
+                                @Override
+                                public void onError() {
+                                    Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
+                                }
+                            });
                         }
-
-                        @Override
-                        public void onError() {
-
-                            Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
-
-                        }
-                    });
-
+                    }
+                    if(dataSnapshot.hasChild("name")){
+                        String name = dataSnapshot.child("name").getValue().toString();
+                        settingFullName.setText(name);
+                    }
+                    if(dataSnapshot.hasChild("country")){
+                        String country = dataSnapshot.child("country").getValue().toString();
+                        settingCountryName.setText(country);
+                    }
+                    if(dataSnapshot.hasChild("username")){
+                        String username= dataSnapshot.child("username").getValue().toString();
+                        settingUserName.setText(username);
+                    }
+                    else {
+                        Toast.makeText(SettingsActivity.this,"有資料缺少",Toast.LENGTH_SHORT).show();
+                    }
                 }
-
-
             }
 
             @Override
@@ -154,50 +168,24 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
-        mStatusBtn.setOnClickListener(new View.OnClickListener() {
+        mDisplayImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String status_value = mStatus.getText().toString();
-
-                Intent status_intent = new Intent(SettingsActivity.this, StatusActivity.class);
-                status_intent.putExtra("status_value", status_value);
-                startActivity(status_intent);
-
-            }
-        });
-
-
-        mImageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
 
                 Intent galleryIntent = new Intent();
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
-
-
-                /*
-                CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .start(SettingsActivity.this);
-                        */
-
             }
         });
-        /*gotomainpage.setOnClickListener(new View.OnClickListener() {
+
+        settingSaveInformationbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                SaveAccountSetupInformation();
             }
-        });*/
-
-
+        });
     }
 
     @Override
@@ -212,9 +200,6 @@ public class SettingsActivity extends AppCompatActivity {
                     .setAspectRatio(1, 1)
                     .setMinCropWindowSize(500, 500)
                     .start(this);
-
-            //Toast.makeText(SettingsActivity.this, imageUri, Toast.LENGTH_LONG).show();
-
         }
 
 
@@ -223,7 +208,6 @@ public class SettingsActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
             if (resultCode == RESULT_OK) {
-
 
                 mProgressDialog = new ProgressDialog(SettingsActivity.this);
                 mProgressDialog.setTitle("上傳圖片...");
@@ -238,7 +222,6 @@ public class SettingsActivity extends AppCompatActivity {
 
                 String current_user_id = mCurrentUser.getUid();
 
-
                 Bitmap thumb_bitmap = new Compressor(this)
                         .setMaxWidth(200)
                         .setMaxHeight(200)
@@ -252,7 +235,6 @@ public class SettingsActivity extends AppCompatActivity {
 
                 StorageReference filepath = mImageStorage.child("profile_images").child(current_user_id + ".jpg");
                 final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumbs").child(current_user_id + ".jpg");
-
 
 
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -284,60 +266,84 @@ public class SettingsActivity extends AppCompatActivity {
 
                                                     mProgressDialog.dismiss();
                                                     Toast.makeText(SettingsActivity.this, "圖片上傳成功", Toast.LENGTH_LONG).show();
-
                                                 }
-
                                             }
                                         });
-
-
                                     } else {
-
                                         Toast.makeText(SettingsActivity.this, "圖片處理失敗.", Toast.LENGTH_LONG).show();
                                         mProgressDialog.dismiss();
-
                                     }
-
-
                                 }
                             });
-
-
-
-                        } else {
-
+                        }else{
                             Toast.makeText(SettingsActivity.this, "圖片上傳成功.", Toast.LENGTH_LONG).show();
                             mProgressDialog.dismiss();
-
                         }
-
                     }
                 });
-
-
-
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 
                 Exception error = result.getError();
-
             }
         }
-
-
     }
 
+    private void SaveAccountSetupInformation()
+    {
+        String username = settingUserName.getText().toString();
+        String fullname = settingFullName.getText().toString();
+        String country = settingCountryName.getText().toString();
 
-    public static String random() {
-        Random generator = new Random();
-        StringBuilder randomStringBuilder = new StringBuilder();
-        int randomLength = generator.nextInt(20);
-        char tempChar;
-        for (int i = 0; i < randomLength; i++){
-            tempChar = (char) (generator.nextInt(96) + 32);
-            randomStringBuilder.append(tempChar);
+        if(TextUtils.isEmpty(username))
+        {
+            Toast.makeText(this, "請輸入用戶名", Toast.LENGTH_SHORT).show();
         }
-        return randomStringBuilder.toString();
+        if(TextUtils.isEmpty(fullname))
+        {
+            Toast.makeText(this, "請輸入全名", Toast.LENGTH_SHORT).show();
+        }
+        if(TextUtils.isEmpty(country))
+        {
+            Toast.makeText(this, "請輸入國籍", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            loadingBar.setTitle("正在儲存資料");
+            loadingBar.setMessage("請等待，正在更改資料");
+            loadingBar.show();
+            loadingBar.setCanceledOnTouchOutside(true);
+
+            HashMap userMap = new HashMap();
+            userMap.put("name", fullname);
+            userMap.put("username", username);
+            userMap.put("country", country);
+            userMap.put("status", "默認動態");
+            userMap.put("gender", "none");
+            userMap.put("dob", "none");
+            userMap.put("relationshipstatus", "none");
+            mUserDatabase.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task)
+                {
+                    if(task.isSuccessful())
+                    {
+
+                        Toast.makeText(SettingsActivity.this, "資料成功更改", Toast.LENGTH_LONG).show();
+                        loadingBar.dismiss();
+                    }
+                    else
+                    {
+                        String message =  task.getException().getMessage();
+                        Toast.makeText(SettingsActivity.this, "錯誤: " + message, Toast.LENGTH_SHORT).show();
+                        loadingBar.dismiss();
+                    }
+                }
+            });
+        }
     }
+
+
+
 
 
 }

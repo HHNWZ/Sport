@@ -126,7 +126,8 @@
         <activity android:name="kelvin.tablayout.YogaDareFriend" />
         <activity android:name="kelvin.tablayout.YogaDareFriendProfile" />
         <activity android:name="kelvin.tablayout.PhotoBlog" />
-        <activity android:name="kelvin.tablayout.SetupActivity"></activity>
+        <activity android:name="kelvin.tablayout.SetupActivity" />
+        <activity android:name="kelvin.tablayout.PostActivity"></activity>
     </application>
 
 </manifest>

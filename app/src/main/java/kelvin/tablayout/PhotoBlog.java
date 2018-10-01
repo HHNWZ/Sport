@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -25,6 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onesignal.OneSignal;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PhotoBlog extends AppCompatActivity {
     private Toolbar photo_blog_app_bar;
@@ -36,6 +41,9 @@ public class PhotoBlog extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private RecyclerView postList;
     private Toolbar mToolbar;
+    private CircleImageView NavProfileImage;
+    private TextView NavProfileName;
+    private ImageButton AddNewPostButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,7 @@ public class PhotoBlog extends AppCompatActivity {
         mToolbar=(Toolbar)findViewById(R.id.activity_photo_blog_toolbar) ;
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("運動社交平台");
+        AddNewPostButton=(ImageButton)findViewById(R.id.add_new_post_button);
         drawerLayout=(DrawerLayout) findViewById(R.id.drawable_layout);
         actionBarDrawerToggle=new ActionBarDrawerToggle(PhotoBlog.this,drawerLayout,R.string.drawer_open,R.string.drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -66,11 +75,28 @@ public class PhotoBlog extends AppCompatActivity {
 
         navigationView=(NavigationView)findViewById(R.id.navigation_view);
         View navView=navigationView.inflateHeaderView(R.layout.navigation_header_photo_blog);
+        NavProfileImage=(CircleImageView)navView.findViewById(R.id.nav_profile_image);
+        NavProfileName=(TextView)navView.findViewById(R.id.nav_user_full_name);
         myName2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String myName=dataSnapshot.child("name").getValue().toString();
-                Log.i("我的名字",""+myName);
+                if(dataSnapshot.exists()){
+
+                    if(dataSnapshot.hasChild("name")){
+                        String myName=dataSnapshot.child("name").getValue().toString();
+                        NavProfileName.setText(myName);
+                    }
+                    if(dataSnapshot.hasChild("thumb_image")){
+                        String myImage=dataSnapshot.child("thumb_image").getValue().toString();
+                        Picasso.with(PhotoBlog.this).load(myImage).placeholder(R.drawable.profile_icon2).into(NavProfileImage);
+                    }
+                    else {
+                        Toast.makeText(PhotoBlog.this,"資料讀取錯誤",Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+
             }
 
             @Override
@@ -87,8 +113,21 @@ public class PhotoBlog extends AppCompatActivity {
             }
         });
 
+        AddNewPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendUserToPostActivity();
+            }
+        });
+
 
     }
+
+    private void SendUserToPostActivity() {
+        Intent addNewPostIntent = new Intent(PhotoBlog.this,PostActivity.class);
+        startActivity(addNewPostIntent);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(actionBarDrawerToggle.onOptionsItemSelected(item)){
@@ -109,7 +148,7 @@ public class PhotoBlog extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case  R.id.nav_blog_post:
-                Toast.makeText(this,"新增帖文",Toast.LENGTH_SHORT).show();
+                SendUserToPostActivity();
                 break;
             case  R.id.nav_blog_view_friend_message:
                 Toast.makeText(this,"瀏覽朋友運動帖文",Toast.LENGTH_SHORT).show();

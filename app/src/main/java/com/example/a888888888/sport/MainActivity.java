@@ -1309,7 +1309,7 @@ public class  MainActivity extends AppCompatActivity
             startActivity(i);
         }
         else if(id==R.id.setting_account){
-            Intent i = new Intent(MainActivity.this,SetupActivity.class);
+            Intent i = new Intent(MainActivity.this,SettingsActivity.class);
             //finish();
             startActivity(i);
         }

@@ -55,7 +55,7 @@ public class Exercise_main extends AppCompatActivity implements
                 R.mipmap.bg_ios,
                 R.mipmap.bg_js,
                 R.mipmap.bg_other,
-                R.mipmap.bg_other,};
+                R.mipmap.bg_sit_upgif};
         mColorArray = new int[]{
                 R.color.colorPrimary,
                 R.color.colorPrimary,

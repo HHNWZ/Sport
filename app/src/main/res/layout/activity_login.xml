@@ -85,7 +85,8 @@
             android:layout_height="wrap_content"
             android:hint="密碼"
             android:background="@drawable/inputs"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            />
     </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>
