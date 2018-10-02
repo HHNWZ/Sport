@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -164,12 +161,16 @@ public class PhotoBlog extends AppCompatActivity {
                     @Override
                     protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position)
                     {
+                        final String Postkey=getRef(position).getKey();
+
                         viewHolder.setFullname(model.getFullname());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());
                         viewHolder.setDescription(model.getDescription());
                         viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
                         viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
+
+
                     }
                 };
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -213,13 +214,13 @@ public class PhotoBlog extends AppCompatActivity {
 
         public void setDescription(String description)
         {
-            TextView PostDescription = (TextView) mView.findViewById(R.id.post_description);
+            TextView PostDescription = (TextView) mView.findViewById(R.id.click_post_description);
             PostDescription.setText(description);
         }
 
         public void setPostimage(Context ctx1,  String postimage)
         {
-            ImageView PostImage = (ImageView) mView.findViewById(R.id.post_image);
+            ImageView PostImage = (ImageView) mView.findViewById(R.id.click_post_image);
             Picasso.with(ctx1).load(postimage).into(PostImage);
         }
     }

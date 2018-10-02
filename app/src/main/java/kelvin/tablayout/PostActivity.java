@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -70,7 +69,7 @@ public class PostActivity extends AppCompatActivity {
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_post_image);
         UpdatePostButton = (Button) findViewById(R.id.update_post_button);
-        PostDescription =(EditText) findViewById(R.id.post_description);
+        PostDescription =(EditText) findViewById(R.id.click_post_description);
         loadingBar = new ProgressDialog(this);
 
 

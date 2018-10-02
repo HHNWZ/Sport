@@ -164,7 +164,7 @@ public class  MainActivity extends AppCompatActivity
 
     public static Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
 
-    public static RainbowTextView main_title;
+    public static TextView main_title;
     public static ActionBar actionBar;
     public static DatabaseReference Task_walking;
     public static DatabaseReference Task_req_walking;
@@ -404,7 +404,7 @@ public class  MainActivity extends AppCompatActivity
         textView9=(TextView)findViewById(R.id.textView9);
         //pieView = (PieChart_View) findViewById(R.id.pie_view);
         mChart=findViewById(R.id.chart1);
-        main_title=(RainbowTextView)findViewById(R.id.main_title);
+        main_title=(TextView)findViewById(R.id.main_title);
         //mHanlder2.postDelayed(task3,5000);
         button_of_walking_monitoring.setOnClickListener(new View.OnClickListener() {
             @Override

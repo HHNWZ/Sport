@@ -76,7 +76,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/button"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="#73c4d9"
         android:textColor="@android:color/white"
         android:text="儲存" />
 
