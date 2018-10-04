@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -45,9 +46,10 @@ public class PhotoBlog extends AppCompatActivity {
     private ImageButton AddNewPostButton;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef, PostsRef;
+    private DatabaseReference UsersRef, PostsRef,LikesRef;
 
     String currentUserID;
+    Boolean LikeChecker=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,13 @@ public class PhotoBlog extends AppCompatActivity {
         currentUserID = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        LikesRef=FirebaseDatabase.getInstance().getReference().child("Likes");
 
 
         mToolbar = (Toolbar) findViewById(R.id.activity_photo_blog_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("運動經驗交流");
+
 
 
         AddNewPostButton = (ImageButton) findViewById(R.id.add_new_post_button);
@@ -161,6 +165,8 @@ public class PhotoBlog extends AppCompatActivity {
                     @Override
                     protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position)
                     {
+
+                        Log.i("我在這裡:","1");
                         final String Postkey=getRef(position).getKey();
 
                         viewHolder.setFullname(model.getFullname());
@@ -170,6 +176,8 @@ public class PhotoBlog extends AppCompatActivity {
                         viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
                         viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
 
+                        viewHolder.setLikeButtonStatus(Postkey);
+
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -177,6 +185,44 @@ public class PhotoBlog extends AppCompatActivity {
                                 clickPostIntent.putExtra("PostKey",Postkey);
                                 startActivity(clickPostIntent);
 
+                            }
+                        });
+
+                        viewHolder.CommentPostButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent commentsIntent =new Intent(PhotoBlog.this,CommentsActivity.class);
+                                commentsIntent.putExtra("PostKey",Postkey);
+                                startActivity(commentsIntent);
+                            }
+                        });
+
+                        Log.i("我在這裡:","2");
+                        viewHolder.LikePostButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                LikeChecker=true;
+                                Log.i("我在這裡:","3");
+                                LikesRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        Log.i("我在這裡:","4");
+                                        if(LikeChecker.equals(true)){
+                                            if(dataSnapshot.child(Postkey).hasChild(currentUserID)){
+                                                LikesRef.child(Postkey).child(currentUserID).removeValue();
+                                                LikeChecker=false;
+                                            }else {
+                                                LikesRef.child(Postkey).child(currentUserID).setValue(true);
+                                                LikeChecker=false;
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
                         });
                     }
@@ -192,6 +238,9 @@ public class PhotoBlog extends AppCompatActivity {
 
         ImageButton LikePostButton,CommentPostButton;
         TextView DisplayNoOfLikes;
+        int countLikes;
+        String currentUserId;
+        DatabaseReference LikesRef;
 
         public PostsViewHolder(View itemView)
         {
@@ -201,6 +250,32 @@ public class PhotoBlog extends AppCompatActivity {
             LikePostButton=(ImageButton)mView.findViewById(R.id.like_button);
             CommentPostButton=(ImageButton)mView.findViewById(R.id.comment_button);
             DisplayNoOfLikes=(TextView)mView.findViewById(R.id.display_no_of_like);
+
+            LikesRef=FirebaseDatabase.getInstance().getReference().child("Likes");
+            currentUserId=FirebaseAuth.getInstance().getCurrentUser().getUid();
+        }
+
+        public void setLikeButtonStatus(final String PostKey){
+            LikesRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(PostKey).hasChild(currentUserId))
+                    {
+                        countLikes=(int)dataSnapshot.child(PostKey).getChildrenCount();
+                        LikePostButton.setImageResource(R.drawable.like);
+                        DisplayNoOfLikes.setText((Integer.toString(countLikes))+(" 個贊"));
+                    }else {
+                        countLikes=(int)dataSnapshot.child(PostKey).getChildrenCount();
+                        LikePostButton.setImageResource(R.drawable.dislike2);
+                        DisplayNoOfLikes.setText((Integer.toString(countLikes))+(" 個贊"));
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
 
         public void setFullname(String fullname)
