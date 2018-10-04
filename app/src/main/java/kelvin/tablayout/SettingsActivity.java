@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,7 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -46,6 +47,8 @@ import java.util.Random;
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
+import static com.example.a888888888.sport.MainActivity.getContext;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -58,13 +61,14 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName;
     private TextView mStatus;
-    private EditText settingUserName,settingFullName,settingCountryName;
+    private EditText setting_username_text_view,settingFullName,settingCountryName;
     private Button settingSaveInformationbutton;
+    private TextInputLayout setting_username_text_input_layout;
     private Button mStatusBtn;
     private Button mImageBtn;
     private Button gotomainpage;
     private Toolbar user_setting_Toolbar;
-    private FirebaseFirestore firebaseFirestore;
+
     private ProgressDialog loadingBar;
 
 
@@ -100,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
         //mName = (TextView) findViewById(R.id.settings_name);
         //mStatus = (TextView) findViewById(R.id.settings_status);
-        settingUserName=(EditText)findViewById(R.id.setting_username);
+        setting_username_text_view=(EditText)findViewById(R.id.setting_username);
         settingFullName=(EditText)findViewById(R.id.setting_full_name);
         settingCountryName=(EditText)findViewById(R.id.setting_country_name);
         settingSaveInformationbutton=(Button)findViewById(R.id.setting_information_button);
@@ -109,10 +113,11 @@ public class SettingsActivity extends AppCompatActivity {
         //mImageBtn = (Button) findViewById(R.id.settings_image_btn);
 
 
+
         mImageStorage = FirebaseStorage.getInstance().getReference();
 
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-        firebaseFirestore=FirebaseFirestore.getInstance();
+
         String current_uid = mCurrentUser.getUid();
 
 
@@ -154,7 +159,9 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                     if(dataSnapshot.hasChild("username")){
                         String username= dataSnapshot.child("username").getValue().toString();
-                        settingUserName.setText(username);
+                        setting_username_text_view.setText(username);
+
+
                     }
                     else {
                         Toast.makeText(SettingsActivity.this,"有資料缺少",Toast.LENGTH_SHORT).show();
@@ -290,7 +297,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void SaveAccountSetupInformation()
     {
-        String username = settingUserName.getText().toString();
+        String username = setting_username_text_view.getText().toString();
         String fullname = settingFullName.getText().toString();
         String country = settingCountryName.getText().toString();
 

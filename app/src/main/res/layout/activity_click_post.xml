@@ -9,21 +9,31 @@
 
     <ImageView
         android:id="@+id/click_post_image"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
 
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:scaleType="centerInside"
+
         app:srcCompat="@drawable/select_image2" />
+
+    <TextView
+        android:id="@+id/show_post_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/click_post_image"
+        android:layout_marginLeft="10dp"
+        android:text="你的帖文內容"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/click_post_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/click_post_image"
+        android:layout_below="@+id/show_post_description"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/inputs"
@@ -43,7 +53,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/button"
         android:backgroundTint="#73c4d9"
-        android:text="Edit Post"
+        android:text="修改帖文"
         android:textSize="20sp" />
 
     <Button
@@ -57,6 +67,6 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/button"
         android:backgroundTint="#73c4d9"
-        android:text="DELEDTE POST"
-        android:textSize="20sp"/>
+        android:text="刪除帖文"
+        android:textSize="20sp" />
 </RelativeLayout>

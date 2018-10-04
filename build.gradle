@@ -14,7 +14,7 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.4.0'
         //classpath 'com.google.gms:google-services:3.2.1'
-        classpath 'com.google.gms:google-services:4.0.1'
+        classpath 'com.google.gms:google-services:4.1.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.11.1, 0.99.99]'

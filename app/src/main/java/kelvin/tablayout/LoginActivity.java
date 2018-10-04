@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mToolbar = (Toolbar) findViewById(R.id.login_toolbar);
-        mToolbar.setTitle("登錄賬號");
+        mToolbar.setTitle("登錄帳號");
         mToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginEmail = (TextInputLayout) findViewById(R.id.login_email);
         mLoginPassword = (TextInputLayout) findViewById(R.id.login_password);
         mLogin_btn = (Button) findViewById(R.id.login_btn);
+
 
         mLogin_btn.setOnClickListener(new View.OnClickListener() {
             @Override

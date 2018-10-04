@@ -170,7 +170,15 @@ public class PhotoBlog extends AppCompatActivity {
                         viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
                         viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
 
+                        viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent clickPostIntent =new Intent(PhotoBlog.this,ClickPostActivity.class);
+                                clickPostIntent.putExtra("PostKey",Postkey);
+                                startActivity(clickPostIntent);
 
+                            }
+                        });
                     }
                 };
         postList.setAdapter(firebaseRecyclerAdapter);
@@ -182,10 +190,17 @@ public class PhotoBlog extends AppCompatActivity {
     {
         View mView;
 
+        ImageButton LikePostButton,CommentPostButton;
+        TextView DisplayNoOfLikes;
+
         public PostsViewHolder(View itemView)
         {
             super(itemView);
             mView = itemView;
+
+            LikePostButton=(ImageButton)mView.findViewById(R.id.like_button);
+            CommentPostButton=(ImageButton)mView.findViewById(R.id.comment_button);
+            DisplayNoOfLikes=(TextView)mView.findViewById(R.id.display_no_of_like);
         }
 
         public void setFullname(String fullname)

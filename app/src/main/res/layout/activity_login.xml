@@ -23,70 +23,60 @@
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/button"
         android:backgroundTint="#73c4d9"
+        android:padding="8dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:text="登錄"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/login_password"
-        android:background="@drawable/button"
-        android:padding="8dp"/>
-
-    <TextView
-        android:id="@+id/login_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
-        android:text="登錄你的賬號"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/login_password" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/login_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_label">
+        app:layout_constraintTop_toBottomOf="@+id/login_toolbar">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="你的電郵"
             android:background="@drawable/inputs"
-            android:padding="8dp"/>
+            android:hint="你的電郵"
+            android:padding="8dp"
+            android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/login_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_email">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="密碼"
             android:background="@drawable/inputs"
-            android:padding="8dp"
-            />
+            android:hint="密碼"
+            android:inputType="textPassword"
+            android:padding="8dp" />
     </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>

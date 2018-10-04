@@ -5,7 +5,8 @@
     android:id="@+id/drawable_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.PhotoBlog">
+    tools:context="kelvin.tablayout.PhotoBlog"
+    android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,6 +40,7 @@
             android:layout_marginBottom="4dp"
             android:layout_marginRight="12dp"
             android:background="@color/colorPrimary"
+
             android:baselineAlignBottom="false"
             android:focusableInTouchMode="false"/>
     </RelativeLayout>
