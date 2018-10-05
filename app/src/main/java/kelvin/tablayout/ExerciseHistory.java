@@ -55,7 +55,6 @@ public class ExerciseHistory extends AppCompatActivity {
         actionBar.setLogo(R.drawable.walkingtoolbar);
         //actionBar.setDisplayShowTitleEnabled(false);
         Log.i("i值",""+i);
-        mHanlder.postDelayed(task,1);
         mAuth = FirebaseAuth.getInstance();
         walking_day_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("walking");
         //newDabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("walking");
@@ -78,46 +77,7 @@ public class ExerciseHistory extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private Handler mHanlder = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor( android.R.color.holo_blue_light)));
 
-                    break;
-                case 2:
-                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor( android.R.color.holo_red_light)));
-                    break;
-                case 3:
-                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor( android.R.color.holo_orange_light)));
-                    break;
-                case 4:
-                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor( android.R.color.holo_green_light)));
-                    break;
-                case 5:
-                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-                    break;
-                default:
-                    break;
-            }
-            super.handleMessage(msg);
-        }
-    };
-
-    private Runnable task = new Runnable() {
-        @Override
-        public void run() {
-            if(i>5){
-                i=0;
-            }
-            i=i+1;
-            mHanlder.sendEmptyMessage(i);
-
-            mHanlder.postDelayed(this, 1 * 1000);//延迟5秒,再次执行task本身,实现了循环的效果
-
-        }
-    };
     @Override
     public void onStart(){
         super.onStart();

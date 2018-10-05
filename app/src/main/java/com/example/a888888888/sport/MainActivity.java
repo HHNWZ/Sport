@@ -159,7 +159,7 @@ public class  MainActivity extends AppCompatActivity
     public static CircleLayout circleLayout;
     public static NavigationView navigationView;
     public static Menu menu;
-    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout,blog;
+    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout;
     public static View hView;
 
     public static Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
@@ -378,7 +378,7 @@ public class  MainActivity extends AppCompatActivity
         //username.setText("123456");
         menu = navigationView.getMenu();
         menu_email_login = menu.findItem(R.id.email_login);
-        blog=menu.findItem(R.id.blog);
+        //blog=menu.findItem(R.id.blog);
         menu_email_register = menu.findItem(R.id.email_register);
         menu_chat_room = menu.findItem(R.id.chat_room);
          menu_setting_account = menu.findItem(R.id.setting_account);
@@ -460,6 +460,7 @@ public class  MainActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
 
+            Log.i("我在這裡","2");
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             Task_walking=FirebaseDatabase.getInstance().getReference().child("Task_walking").child(mAuth.getCurrentUser().getUid());
@@ -575,7 +576,6 @@ public class  MainActivity extends AppCompatActivity
             timer.schedule(new TimerTaskTest(), firstTime);
             main_title.setText("運動監控");
             menu_email_login.setVisible(false);
-            blog.setVisible(true);
             menu_email_register.setVisible(false);
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
@@ -670,12 +670,7 @@ public class  MainActivity extends AppCompatActivity
 
                     if(Week.equals("一")){
                         if(DateCheck.equals(nowDate)){
-                            /*lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
-                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#189428"), walking_week_calorie_float, ""));//walkdata
-                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#349bb3"), yoga_week_calorie_float, ""));//airdata
-                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#2671ab"), squats_week_calorie_float, ""));//pushdata
-                            lists.add(new PieChartBean(android.graphics.Color.parseColor("#2c618a"), crunches_week_calorie_float, ""));//sitdata
-                            pieView.setData(lists);*/
+
                             pieEntryList = new ArrayList<PieEntry>();
                             colors = new ArrayList<Integer>();
                             colors.add(Color.parseColor("#38b048"));
@@ -785,12 +780,6 @@ public class  MainActivity extends AppCompatActivity
                         }
 
                     }else {
-                        /*lists.add(new PieChartBean(android.graphics.Color.parseColor("#38b048"), running_week_calorie_float, ""));//rundata
-                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#189428"), walking_week_calorie_float, ""));//walkdata
-                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#349bb3"), yoga_week_calorie_float, ""));//airdata
-                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#2671ab"), squats_week_calorie_float, ""));//pushdata
-                        lists.add(new PieChartBean(android.graphics.Color.parseColor("#2c618a"), crunches_week_calorie_float, ""));//sitdata
-                        pieView.setData(lists);*/
                         pieEntryList = new ArrayList<PieEntry>();
                         colors = new ArrayList<Integer>();
                         colors.add(Color.parseColor("#38b048"));
@@ -850,7 +839,6 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(false);
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
-            blog.setVisible(false);
             kel.setVisibility(View.INVISIBLE);
             button_of_walking_monitoring.setVisibility(View.INVISIBLE);
             button_of_running_monitoring.setVisibility(View.INVISIBLE);
@@ -915,44 +903,20 @@ public class  MainActivity extends AppCompatActivity
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true) {
+
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, Exercise_main.class);
-
                     startActivity(intent);
                     MainActivity.this.finish();
-                }
-                else
-                {
-                    Ifnotuserdata ifnotuserdata = new Ifnotuserdata();
-                    FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().addToBackStack(null).replace(
-                            R.id.content_main,
-                            ifnotuserdata,
-                            ifnotuserdata.getTag()
-                    ).commit();
-                }
             }
         });
         hal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true) {//IF條件：Login.user != null
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, habaActivity.class);
-                    startActivity(intent);
-                    MainActivity.this.finish();
-                }
-                else
-                {
-                    Ifnotuserdata ifnotuserdata = new Ifnotuserdata();
-                    FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().addToBackStack(null).replace(
-                            R.id.content_main,
-                            ifnotuserdata,
-                            ifnotuserdata.getTag()
-                    ).commit();
-                }
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, PhotoBlog.class);
+                startActivity(intent);
+                MainActivity.this.finish();
             }
         });
         del.setOnClickListener(new View.OnClickListener() {
@@ -994,7 +958,7 @@ public class  MainActivity extends AppCompatActivity
 
     }
 
-    private Handler mHanlder = new Handler() {
+    /*private Handler mHanlder = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -1111,7 +1075,7 @@ public class  MainActivity extends AppCompatActivity
             mHanlder.postDelayed(this, 1 * 500);//延迟5秒,再次执行task本身,实现了循环的效果
 
         }
-    };
+    };*/
 
 
 
@@ -1272,6 +1236,7 @@ public class  MainActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
+        Log.i("我在這裡","1");
 
     }
     @Override
@@ -1312,10 +1277,10 @@ public class  MainActivity extends AppCompatActivity
             //finish();
             startActivity(i);
         }
-        else if(id==R.id.blog){
+        /*else if(id==R.id.blog){
             Intent i= new Intent(MainActivity.this,PhotoBlog.class);
             startActivity(i);
-        }
+        }*/
         else if(id==R.id.Logout){
 
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ededed"
+    android:background="@color/colorPrimary"
     tools:context="kelvin.tablayout.ChatActivity">
 
     <include
@@ -34,27 +34,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="3dp"
         android:layout_alignParentStart="true"
-        android:background="@android:color/white"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:weightSum="10">
 
         <ImageButton
             android:id="@+id/chat_add_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:alpha="0.5"
-            android:background="@android:color/white"
+            android:background="@color/colorPrimary"
             android:padding="10dp"
-            app:srcCompat="@drawable/ic_add_black_24dp" />
+            app:srcCompat="@drawable/ic_add_blue_24dp" />
 
         <EditText
             android:id="@+id/chat_message_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="8"
-            android:background="@android:color/white"
+            android:background="@drawable/inputs"
             android:ems="10"
             android:hint="輸入信息"
             android:inputType="textMultiLine|textPersonName"
@@ -66,12 +66,11 @@
         <ImageButton
             android:id="@+id/chat_send_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:alpha="0.5"
-            android:background="@android:color/white"
+            android:background="@color/colorPrimary"
             android:padding="10dp"
-            app:srcCompat="@drawable/ic_send_black_24dp" />
+            app:srcCompat="@drawable/post_comment" />
     </LinearLayout>
 
 </RelativeLayout>

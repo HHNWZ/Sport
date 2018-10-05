@@ -32,12 +32,12 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="會員資料設定" />
     </group>
-    <group android:checkableBehavior="single">
+    <!--<group android:checkableBehavior="single">
         <item
             android:id="@+id/blog"
             android:icon="@drawable/blogger"
             android:title="部落格" />
-    </group>
+    </group>-->
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/Logout"

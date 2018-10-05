@@ -8,17 +8,33 @@
     android:layout_height="match_parent"
     tools:context="kelvin.tablayout.Exercise_main"
     android:id="@+id/content1_main">
-    <cn.hugeterry.coordinatortablayout.CoordinatorTabLayout
-        android:id="@+id/coordinatortablayout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp"
+        <include layout="@layout/app_bar_layout" android:id="@+id/exercise_main_toolbar" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/exercise_main_tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </cn.hugeterry.coordinatortablayout.CoordinatorTabLayout>
+            android:layout_height="wrap_content"
+            android:background="#323d4d"
+            app:tabGravity="fill"
+            app:tabTextColor="@android:color/white"
+            app:tabIndicatorColor="#73c4d9"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#73c4d9"></android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/exercise_main_tabPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout">
+
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>
 
 

@@ -14,6 +14,7 @@
         android:id="@+id/walking_day_exercise_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/day_exercise_history_toolbar" />
+        android:layout_below="@id/day_exercise_history_toolbar"
+        android:background="@color/colorPrimary"/>
 
 </RelativeLayout>

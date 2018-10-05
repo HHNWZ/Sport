@@ -1,13 +1,17 @@
 package kelvin.tablayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,10 +49,18 @@ public class CommentsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private String Post_Key,current_user_id;
+    private Toolbar comment_toolbar;
+    private ActionBar comment_action_bar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
+
+        comment_toolbar=(Toolbar)findViewById(R.id.comment_toolbar);
+        setSupportActionBar(comment_toolbar);
+        comment_action_bar=getSupportActionBar();
+        comment_action_bar.setTitle("帖文留言");
+        comment_action_bar.setDisplayHomeAsUpEnabled(true);
 
         Post_Key=getIntent().getExtras().get("PostKey").toString();
         mAuth=FirebaseAuth.getInstance();
@@ -56,6 +68,8 @@ public class CommentsActivity extends AppCompatActivity {
         UsersRef=FirebaseDatabase.getInstance().getReference().child("Users");
         FriendRef=FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef=FirebaseDatabase.getInstance().getReference().child("Posts").child(Post_Key).child("Comments");
+
+
 
 
 
@@ -213,5 +227,14 @@ public class CommentsActivity extends AppCompatActivity {
                     });
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(CommentsActivity.this, PhotoBlog.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

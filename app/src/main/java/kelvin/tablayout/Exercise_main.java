@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,10 +31,11 @@ public class Exercise_main extends AppCompatActivity implements
 
 {
 
-    private CoordinatorTabLayout mCoordinatorTabLayout;
-    private int[] mImageArray, mColorArray;
+    private Toolbar exercise_main_toolbar;
+    private ActionBar exercise_main_action_bar;
     private ExercisePagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    private TabLayout exercise_main_tabs;
+    private ViewPager exercise_main_tabPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,39 +46,24 @@ public class Exercise_main extends AppCompatActivity implements
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())//1234
                 .init();
-        mViewPager = (ViewPager) findViewById(R.id.vp);
+        exercise_main_toolbar=(Toolbar)findViewById(R.id.exercise_main_toolbar);
+        setSupportActionBar(exercise_main_toolbar);
+        exercise_main_action_bar=getSupportActionBar();
+        exercise_main_action_bar.setTitle("運動排行榜");
+        exercise_main_action_bar.setDisplayHomeAsUpEnabled(true);
 
+        exercise_main_tabPager=(ViewPager)findViewById(R.id.exercise_main_tabPager);
         mSectionsPagerAdapter=new ExercisePagerAdapter(getSupportFragmentManager());
 
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        exercise_main_tabPager.setAdapter(mSectionsPagerAdapter);
+        exercise_main_tabPager.setPageTransformer(true,new CubeOutTransformer());
 
-        mImageArray = new int[]{
-                R.mipmap.bg_android,
-                R.mipmap.bg_ios,
-                R.mipmap.bg_js,
-                R.mipmap.bg_other,
-                R.mipmap.bg_sit_upgif};
-        mColorArray = new int[]{
-                R.color.colorPrimary,
-                R.color.colorPrimary,
-                R.color.colorPrimary,
-                R.color.colorPrimary,
-                R.color.colorPrimary};
-
-        mCoordinatorTabLayout = (CoordinatorTabLayout) findViewById(R.id.coordinatortablayout);
-        mCoordinatorTabLayout.setTranslucentStatusBar(this)
-                .setTitle("運動記錄")
-                .setBackEnable(true)
-                .setImageArray(mImageArray, mColorArray)
-                .setupWithViewPager(mViewPager);
+        exercise_main_tabs=(TabLayout)findViewById(R.id.exercise_main_tabs);
+        exercise_main_tabs.setupWithViewPager(exercise_main_tabPager);
 
 
-        mViewPager = (ViewPager) findViewById(R.id.vp);
 
-        mSectionsPagerAdapter=new ExercisePagerAdapter(getSupportFragmentManager());
 
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setPageTransformer(true,new CubeOutTransformer());
 
 
 

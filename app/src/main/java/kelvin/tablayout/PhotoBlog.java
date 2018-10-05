@@ -35,9 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PhotoBlog extends AppCompatActivity {
 
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle actionBarDrawerToggle;
+
     private RecyclerView postList;
     private Toolbar mToolbar;
 
@@ -77,12 +75,9 @@ public class PhotoBlog extends AppCompatActivity {
         AddNewPostButton = (ImageButton) findViewById(R.id.add_new_post_button);
 
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawable_layout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(PhotoBlog.this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
 
 
         postList = (RecyclerView) findViewById(R.id.all_users_post_list);
@@ -91,51 +86,6 @@ public class PhotoBlog extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
-
-
-        View navView = navigationView.inflateHeaderView(R.layout.navigation_header_photo_blog);
-        NavProfileImage = (CircleImageView) navView.findViewById(R.id.nav_profile_image);
-        NavProfileUserName = (TextView) navView.findViewById(R.id.nav_user_full_name);
-
-
-        UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(dataSnapshot.exists())
-                {
-                    if(dataSnapshot.hasChild("name"))
-                    {
-                        String fullname = dataSnapshot.child("name").getValue().toString();
-                        NavProfileUserName.setText(fullname);
-                    }
-                    if(dataSnapshot.hasChild("thumb_image"))
-                    {
-                        String image = dataSnapshot.child("thumb_image").getValue().toString();
-                        Picasso.with(PhotoBlog.this).load(image).placeholder(R.drawable.default_avatar).into(NavProfileImage);
-                    }
-                    else
-                    {
-                        Toast.makeText(PhotoBlog.this, "資料讀取錯誤", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item)
-            {
-                UserMenuSelector(item);
-                return false;
-            }
-        });
 
 
         AddNewPostButton.setOnClickListener(new View.OnClickListener() {
@@ -326,44 +276,15 @@ public class PhotoBlog extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
-            return true;
+        if(item.getItemId()==android.R.id.home){
+            Intent intent = new Intent(PhotoBlog.this,MainActivity.class);
+            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void UserMenuSelector(MenuItem item) {
 
-        switch (item.getItemId()){
-            case  R.id.nav_blog_profile:
-                Toast.makeText(this,"個人主頁",Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.nav_blog_back_main_activity:
-                Intent intent = new Intent();
-                intent.setClass(PhotoBlog.this, MainActivity.class);
-                startActivity(intent);
-                break;
-            case  R.id.nav_blog_post:
-                SendUserToPostActivity();
-                break;
-            case  R.id.nav_blog_view_friend_message:
-                Toast.makeText(this,"瀏覽朋友運動帖文",Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.nav_blog_friend:
-                Toast.makeText(this,"朋友",Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.nav_blog_find_friend:
-                Toast.makeText(this,"尋找朋友",Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.nav_blog_messages:
-                Toast.makeText(this,"信息",Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.nav_blog_settings:
-                Toast.makeText(this,"設置",Toast.LENGTH_SHORT).show();
-                break;
-
-        }
-    }
 
 
 }

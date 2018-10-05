@@ -1,5 +1,6 @@
 package kelvin.tablayout;
 
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBar;
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,12 +36,21 @@ public class ClickPostActivity extends AppCompatActivity {
     private DatabaseReference ClickPostRef;
     private String PostKey , currentUserID,databaseUserID,description,image;
 
+    private Toolbar click_post_toolbar;
+    private ActionBar click_post_action_bar;
+
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click_post);
+
+        click_post_toolbar=(Toolbar)findViewById(R.id.click_post_toolbar);
+        setSupportActionBar(click_post_toolbar);
+        click_post_action_bar=getSupportActionBar();
+        click_post_action_bar.setTitle("修改帖文");
+        click_post_action_bar.setDisplayHomeAsUpEnabled(true);
 
         mAuth=FirebaseAuth.getInstance();
         currentUserID=mAuth.getCurrentUser().getUid();
@@ -46,6 +59,7 @@ public class ClickPostActivity extends AppCompatActivity {
         PostDescription=(TextView)findViewById(R.id.click_post_description);
         DeletePostButton=(Button)findViewById(R.id.delete_post_button);
         EditPostButton=(Button)findViewById(R.id.edit_post_button);
+
 
         DeletePostButton.setVisibility(View.INVISIBLE);
         EditPostButton.setVisibility(View.INVISIBLE);
@@ -136,5 +150,14 @@ public class ClickPostActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(ClickPostActivity.this,PhotoBlog.class);
         startActivity(mainIntent);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(ClickPostActivity.this, PhotoBlog.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

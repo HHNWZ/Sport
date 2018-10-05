@@ -111,4 +111,5 @@
     <string name="action_search_text">Search</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="post_menu">發帖</string>
 </resources>

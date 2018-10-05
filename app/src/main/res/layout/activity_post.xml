@@ -20,6 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:scaleType="fitCenter"
+        android:background="@color/colorPrimary"
         app:srcCompat="@drawable/select_image2" />
 
     <EditText
@@ -45,8 +46,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:background="@drawable/button"
-        android:backgroundTint="@android:color/white"
+        android:backgroundTint="@color/object_color"
         android:text="上傳帖文"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/text_color" />
 
 </RelativeLayout>

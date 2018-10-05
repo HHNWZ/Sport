@@ -7,11 +7,15 @@
     android:background="@color/colorPrimary"
     tools:context="kelvin.tablayout.ClickPostActivity">
 
+    <include
+        android:id="@+id/click_post_toolbar"
+        layout="@layout/app_bar_layout" />
+
     <ImageView
         android:id="@+id/click_post_image"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-
+        android:layout_below="@+id/click_post_toolbar"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"

@@ -60,7 +60,7 @@ public class ExerciseSquats extends Fragment {
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
         mRefreshLayout=(SwipeRefreshLayout)mMainView.findViewById(R.id.squats_swipe_layout);
-        mRefreshLayout.setColorSchemeColors(Color.RED);
+        mRefreshLayout.setColorSchemeColors(Color.rgb(115,196,217));
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

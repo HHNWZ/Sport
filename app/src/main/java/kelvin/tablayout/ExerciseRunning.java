@@ -63,7 +63,7 @@ public class ExerciseRunning extends Fragment {
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mUsersDatabase.keepSynced(true);
         mRefreshLayout=(SwipeRefreshLayout)mMainView.findViewById(R.id.running_swipe_layout);
-        mRefreshLayout.setColorSchemeColors(Color.RED);
+        mRefreshLayout.setColorSchemeColors(Color.rgb(115,196,217));
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -190,32 +190,10 @@ public class ExerciseRunning extends Fragment {
                     first_image.setImageResource(R.drawable.bronzemedal);
                 }
 
-                if(k==1){
-                    background_layout.setBackgroundColor(Color.rgb(87,0,255));
-                }
-                if(k==2){
-                    background_layout.setBackgroundColor(Color.rgb(43,0,255));
-                }
-                if(k==3){
-                    background_layout.setBackgroundColor(Color.rgb(0,0,255));
-                }
-                if(k==4){
-                    background_layout.setBackgroundColor(Color.rgb(0,255,0));
-                }
-                if(k==5){
-                    background_layout.setBackgroundColor(Color.rgb(255,255,0));
-                }
-                if(k==6){
-                    background_layout.setBackgroundColor(Color.rgb(255,165,0));
-                }
-                if(k==7){
-                    background_layout.setBackgroundColor(Color.rgb(255,0,0));
-                }
+
                 Log.i("k值",""+k);
 
-                if(k>=7){
-                    k=0;
-                }
+
 
             }
         };

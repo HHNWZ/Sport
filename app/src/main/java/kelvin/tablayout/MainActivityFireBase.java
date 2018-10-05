@@ -71,7 +71,7 @@ public class MainActivityFireBase extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setPageTransformer(true,new CubeInTransformer());
+        //mViewPager.setPageTransformer(true,new CubeInTransformer());
 
         mTabLayout = (TabLayout) findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
