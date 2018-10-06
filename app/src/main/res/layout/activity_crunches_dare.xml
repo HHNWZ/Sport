@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.Crunches_dare">
+    tools:context="kelvin.tablayout.Crunches_dare"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/crunches_dare_app_bar"
@@ -14,8 +15,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/data_layout"
         android:layout_below="@+id/crunches_dare_app_bar"
-        android:background="@android:color/holo_red_light"
+        android:background="#1e2b3d"
         android:layout_above="@+id/my_dare">
+
 
         <TextView
             android:id="@+id/exercise_week_title"
@@ -23,9 +25,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="仰臥起坐"
-            android:textSize="20sp"
+            android:textSize="40sp"
             android:layout_marginTop="20dp"
-            tools:textColor="@android:color/black" />
+            android:textColor="@color/text_color"/>
 
         <TextView
             android:id="@+id/exercise_week_data"
@@ -34,9 +36,9 @@
             android:layout_below="@id/exercise_week_title"
             android:text="0"
             android:layout_centerHorizontal="true"
-            android:textColor="@android:color/black"
-
-            android:textSize="24sp" />
+            android:layout_marginTop="20dp"
+            android:textColor="@color/object_color"
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/exercise_week_unit"
@@ -45,9 +47,9 @@
             android:layout_below="@id/exercise_week_data"
             android:layout_centerHorizontal="true"
             android:text="次"
-            android:textColor="@android:color/black"
-
-            android:textSize="20sp" />
+            android:textColor="@color/text_color"
+            android:layout_marginTop="20dp"
+            android:textSize="40sp" />
     </RelativeLayout>
 
 
@@ -58,7 +60,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:orientation="vertical"
-        android:layout_marginLeft="5dp">
+        android:background="@drawable/post_border"
+        android:padding="15dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_single_image"
             android:layout_width="64dp"
@@ -71,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="你的名字"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:layout_below="@+id/user_single_image"
             android:layout_gravity="center"
@@ -82,7 +85,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/user_single_name"
             android:layout_gravity="center"
-            android:text="完成時間"/>
+            android:text="完成時間"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/crunches_finish_time_data"
             android:layout_width="wrap_content"
@@ -90,7 +94,8 @@
             android:layout_below="@+id/user_single_name"
             android:layout_toRightOf="@+id/crunches_finish_time"
             android:text="0分0秒"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/crunches_finish_count"
             android:layout_width="wrap_content"
@@ -98,7 +103,8 @@
             android:layout_below="@+id/user_single_name"
             android:layout_toRightOf="@+id/crunches_finish_time"
             android:text="次數"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/crunches_finish_count_data"
             android:layout_width="wrap_content"
@@ -106,7 +112,8 @@
             android:layout_below="@+id/user_single_name"
             android:layout_toRightOf="@+id/crunches_finish_time"
             android:text="0"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
 
 
 
@@ -118,7 +125,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:orientation="vertical"
-        android:layout_marginRight="5dp">
+        android:background="@drawable/post_border"
+        android:padding="15dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/friend_single_image"
             android:layout_width="64dp"
@@ -132,12 +140,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="朋友的名字"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_color"
             android:textSize="18sp"
             android:layout_below="@+id/user_single_image"
             android:layout_gravity="center"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
         <TextView
             android:id="@+id/friend_finish_time"
             android:layout_width="wrap_content"
@@ -145,7 +152,8 @@
             android:layout_below="@+id/user_single_name"
             android:text="完成時間"
             android:visibility="invisible"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/friend_finish_time_data"
             android:layout_width="wrap_content"
@@ -154,7 +162,8 @@
             android:layout_toRightOf="@+id/crunches_finish_time"
             android:text="0分0秒"
             android:visibility="invisible"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/friend_crunches_finish_count"
             android:layout_width="wrap_content"
@@ -163,7 +172,8 @@
             android:layout_toRightOf="@+id/crunches_finish_time"
             android:text="次數"
             android:visibility="invisible"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
         <TextView
             android:id="@+id/friend_crunches_finish_count_data"
             android:layout_width="wrap_content"
@@ -172,52 +182,67 @@
             android:layout_toRightOf="@+id/crunches_finish_time"
             android:text="0"
             android:visibility="invisible"
-            android:layout_gravity="center"/>
-
-
-
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_below="@+id/data_layout"
         android:layout_toRightOf="@+id/my_dare"
         android:layout_toLeftOf="@+id/friend_dare"
-        android:id="@+id/duel"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/text_VS"
-            android:text="VS"
-            android:gravity="center"
-            android:textSize="100sp"
-            android:visibility="invisible"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/duel"
-        android:layout_toRightOf="@+id/my_dare"
-        android:layout_toLeftOf="@+id/friend_dare"
+        android:background="@drawable/post_border"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginRight="-3dp"
+        android:id="@+id/due2">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/duel">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/text_VS"
+                android:text="VS"
+                android:gravity="center"
+                android:textSize="100sp"
+                android:visibility="invisible"
+                android:textColor="@color/text_color"/>
+        </LinearLayout>
 
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/text_winner"
-            android:text="勝利者是"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:visibility="invisible"
-            />
-        <Button
-            android:id="@+id/confirm_dare"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="確認"
-            android:visibility="invisible"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/my_dare"
+            android:layout_toLeftOf="@+id/friend_dare"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/text_winner"
+                android:text="勝利者是"
+                android:gravity="center"
+                android:textSize="30sp"
+                android:visibility="invisible"
+                android:textColor="@color/text_color"
+                />
+            <Button
+                android:id="@+id/confirm_dare"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="確認"
+                android:visibility="invisible"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/object_color"
+                android:textColor="@color/text_color"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
     </LinearLayout>
+
+
 
     
 

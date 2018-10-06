@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.CrunchesDayHistory">
+    tools:context="kelvin.tablayout.CrunchesDayHistory"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/crunches_day_exercise_history_toolbar"

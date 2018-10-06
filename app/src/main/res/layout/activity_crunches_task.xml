@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.Crunches_task">
+    tools:context="kelvin.tablayout.Crunches_task"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/crunches_task_toolbar"
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/data_layout"
         android:layout_below="@+id/crunches_task_toolbar"
-        android:background="@android:color/holo_red_light">
+        android:background="@color/colorPrimary">
 
         <me.tankery.lib.circularseekbar.CircularSeekBar
             android:id="@+id/crunches_seek_bar"
@@ -25,99 +26,202 @@
             app:cs_maintain_equal_circle="true"
             app:cs_start_angle="105"
             app:cs_end_angle="430"
-
             app:cs_circle_style="round"
             app:cs_circle_stroke_width="8dp"
-            app:cs_disable_pointer="true" />
+            app:cs_disable_pointer="true"
+            app:cs_circle_color = "@color/text_color"
+            app:cs_circle_progress_color = "@color/object_color"/>
 
         <TextView
-            android:id="@+id/exercise_week_title"
+            android:id="@+id/crunches_task_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="仰臥起坐"
             android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            tools:textColor="@android:color/black" />
+            android:layout_marginTop="40dp"
+            android:textColor="@color/text_color"/>
 
         <TextView
-            android:id="@+id/exercise_week_data"
+            android:id="@+id/crunches_task_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_week_title"
+            android:layout_below="@id/crunches_task_title"
             android:text="0"
             android:layout_centerHorizontal="true"
-            android:textColor="@android:color/black"
-
+            android:textColor="@color/text_color"
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/exercise_week_unit"
+            android:id="@+id/crunches_task_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_week_data"
+            android:layout_below="@id/crunches_task_data"
             android:layout_centerHorizontal="true"
             android:text="次"
-            android:textColor="@android:color/black"
-
+            android:textColor="@color/text_color"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/susses_text_view"
+            android:id="@+id/crunches_susses_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/exercise_week_unit"
+            android:layout_below="@+id/crunches_task_unit"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:text="當前完成"
-            />
+            android:textColor="@color/text_color"
+            android:text="當前完成" />
 
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/my_layout"
-        android:layout_below="@+id/data_layout"
-        android:background="@android:color/holo_green_light">
 
+    <LinearLayout
+        android:id="@+id/my_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        android:layout_below="@+id/data_layout"
+        android:background="@drawable/post_border"
+        android:padding="15dp">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_single_image"
+            android:id="@+id/my_crunches_task_image"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
             android:src="@drawable/default_avatar"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/my_crunches_task_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你的名字"
+            android:textColor="@color/text_color"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            />
+        
+        
+        <TextView
+            android:id="@+id/my_crunches_task_finish_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="次數"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
+        <TextView
+            android:id="@+id/my_crunches_task_finish_count_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/friend_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/data_layout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical"
+        android:background="@drawable/post_border"
+        android:padding="15dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/friend_crunches_task_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/default_avatar"
+            android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
+            android:visibility="invisible"/>
         <TextView
-            android:id="@+id/user_single_name"
+            android:id="@+id/friend_crunches_task_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/user_single_image"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/user_single_image"
-            android:text="Display Name"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
+            android:text="朋友的名字"
+            android:textColor="@color/text_color"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+        
         <TextView
-            android:id="@+id/user_single_status"
+            android:id="@+id/friend_crunches_task_finish_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/user_single_name"
-            android:layout_below="@+id/user_single_name"
-            android:layout_marginTop="10dp"
-            android:text="今天運動量" />
-
-    </RelativeLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/crunches_task_recycler_view"
+            android:text="次數"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
+        <TextView
+            android:id="@+id/friend_crunches_task_finish_count_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/my_layout"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@+id/data_layout"
+        android:layout_toRightOf="@+id/my_task"
+        android:layout_toLeftOf="@+id/friend_task"
+        android:background="@drawable/post_border"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginRight="-3dp"
+        android:id="@+id/crunches_due2">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/crunches_due1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/crunches_task_text_and"
+            android:text="AND"
+            android:gravity="center"
+            android:textSize="50sp"
+            android:visibility="invisible"
+            android:textColor="@color/text_color"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/crunches_task_friend_point"
+            android:text="你們獲得\n10點\nfriend point"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:visibility="invisible"
+            android:textColor="@color/text_color"
+            />
+        <Button
+            android:id="@+id/confirm_crunches_task_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="確認"
+            android:visibility="invisible"
+            android:background="@drawable/button"
+            android:backgroundTint="@color/object_color"
+            android:textColor="@color/text_color"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+    
+    </LinearLayout>
+    
+
+
+
 
 </RelativeLayout>

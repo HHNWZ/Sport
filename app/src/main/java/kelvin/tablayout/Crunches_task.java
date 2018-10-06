@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
@@ -37,24 +38,34 @@ public class Crunches_task extends AppCompatActivity {
     private Toolbar crunches_task_toolbar;
     public static ActionBar actionBar;
     private static FirebaseAuth mAuth;
-    private DatabaseReference taskDatabase;
-    private DatabaseReference mUsersDatabase;
-    private DatabaseReference myUsersDatabase;
-    private CircleImageView mDisplayImage;
-    private TextView myName;
-    private TextView myStatus;
-    public static TextView exercise_week_data;
-    public static TextView susses_text_view;
-    public static String myname,mystatu,friend_point;
-    private RecyclerView crunches_task_recycler_view;
-    private View mMainView;
-    public static int myCrunches,userCrunches,all_task,same_task;
-    public static int k;
-    public static int j=0;
-    public static int i;
-    public int int_friend_point;
+
+    private DatabaseReference crunches_task_Database;
+    private DatabaseReference crunches_task_friendDatabase;
+    private DatabaseReference crunches_task_myDatabase;
+    private DatabaseReference crunches_task_confirm_database;
+    private DatabaseReference crunches_task_friend_point_database;
+
+    private TextView crunches_task_data;
+    private TextView crunches_susses_text_view;
+
+    private CircleImageView my_crunches_task_image;
+    private TextView my_crunches_task_name;
+    private TextView  my_crunches_task_finish_count_data;
+
+    private CircleImageView friend_crunches_task_image;
+    private TextView friend_crunches_task_name;
+    private TextView friend_crunches_task_finish_count;
+    private TextView friend_crunches_task_finish_count_data;
+
+    private TextView crunches_task_text_and;
+    private TextView crunches_task_friend_point;
+    private Button confirm_crunches_task_button;
+
+
     private Data crunches_data=new Data();
-    public CircularSeekBar seekBar;
+    public CircularSeekBar crunches_seek_bar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,84 +79,13 @@ public class Crunches_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-        taskDatabase= FirebaseDatabase.getInstance().getReference().child("Task_crunches").child(mAuth.getCurrentUser().getUid());//共同任務資料庫
-        myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
-        mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-        seekBar = (CircularSeekBar) findViewById(R.id.crunches_seek_bar);
-        myName = (TextView) findViewById(R.id.user_single_name);
-        myStatus = (TextView) findViewById(R.id.user_single_status);
-        exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
-        susses_text_view=(TextView)findViewById(R.id.susses_text_view);
-        exercise_week_data.setText(Time.getCrunches_data(System.currentTimeMillis()));
-        crunches_task_recycler_view=(RecyclerView)findViewById(R.id.crunches_task_recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(Crunches_task.this);
-        crunches_task_recycler_view.setHasFixedSize(true);
-        crunches_task_recycler_view.setLayoutManager(layoutManager);
-        myUsersDatabase.keepSynced(true);
-        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
-        Timer timer=new Timer();
 
-        TimerTask mTimerTask =new TimerTask(){
-            @Override
-            public void run(){
-                myUsersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        myname = dataSnapshot.child("name").getValue().toString();
-                        final String image = dataSnapshot.child("thumb_image").getValue().toString();
-                        friend_point=dataSnapshot.child("friend_point").getValue().toString();
-                        mystatu=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
-                        String crunches_task_status=dataSnapshot.child("crunches_task_status").getValue().toString();
-                        int_friend_point=Integer.parseInt(friend_point);
-                        myCrunches=Integer.parseInt(mystatu);
+        crunches_seek_bar=(CircularSeekBar)findViewById(R.id.crunches_seek_bar);
+        crunches_task_data=(TextView)findViewById(R.id.crunches_task_data);
+        crunches_susses_text_view=(TextView)findViewById(R.id.crunches_susses_text_view);
 
-                        all_task=crunches_data.getFriend_crunches_task_data()+myCrunches;
-                        seekBar.setProgress((float)all_task);
-                        same_task=Integer.parseInt(exercise_week_data.getText().toString());
-                        if(all_task>=same_task&&crunches_data.getFriend_crunches_task_data()!=0&&myCrunches!=0&&same_task!=0){
-                            susses_text_view.setText("你獲得10點friendpoint");
-                            actionBar.setSubtitle("你和朋友完成任務");
 
-                            if(crunches_task_status.equals("還沒完成")){
 
-                                myUsersDatabase.child("friend_point").setValue(int_friend_point+10);
-                                myUsersDatabase.child("crunches_task_status").setValue("完成");
-                            }
-
-                        }else {
-                            susses_text_view.setText("當前完成"+all_task+"次");
-                            myUsersDatabase.child("crunches_task_status").setValue("還沒完成");
-                        }
-
-                        myName.setText(myname);
-                        myStatus.setText("仰臥起坐今日記錄:"+mystatu+"次");
-                        if(!image.equals("default")){
-                            Picasso.with(Crunches_task.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                                    .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
-                                @Override
-                                public void onSuccess() {
-
-                                }
-
-                                @Override
-                                public void onError() {
-
-                                    Picasso.with(Crunches_task.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
-
-                                }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        };
-        timer.schedule(mTimerTask,1000,5000);
     }
 
     @Override
@@ -187,98 +127,6 @@ public class Crunches_task extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Friends,Crunches_task.CrunchesTaskViewHolder> crunchesTaskViewHolderFirebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Friends, Crunches_task.CrunchesTaskViewHolder>(
-                Friends.class,
-                R.layout.task_single_layout,
-                Crunches_task.CrunchesTaskViewHolder.class,
-                taskDatabase
 
-        ) {
-            public int getItenCount(){
-                int itemCount =super.getItemCount();
-
-                return itemCount;
-            }
-
-            @Override
-            protected void populateViewHolder(Crunches_task.CrunchesTaskViewHolder viewHolder, Friends model, int position) {
-                //k=0;
-                final String list_user_id = getRef(position).getKey();
-
-                mUsersDatabase.child(list_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        final String userName = dataSnapshot.child("name").getValue().toString();
-                        String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                        String userStatus=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
-                        userCrunches=Integer.parseInt(userStatus);
-
-                        Log.i("k3值",""+k);
-                        Log.i("j3值",""+j);
-                        if(j<=getItenCount()){
-                            Log.i("k4值",""+k);
-                            k=k+userCrunches;
-                            Log.i("k5值",""+k);
-                            crunches_data.setFriend_crunches_task_data(k);
-
-                            Log.i("j4值",""+j);
-                            j=j+1;
-                            Log.i("j5值",""+j);
-                        }
-
-                        Log.i("朋友次次",""+k);
-                        viewHolder.setName(userName);
-                        viewHolder.setSatus("仰臥起坐今天記錄:"+userStatus+"次");
-                        viewHolder.setUserImage(userThumb,getApplication());
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
-
-
-        };
-        j=0;
-        k=0;
-        crunches_task_recycler_view.setAdapter(crunchesTaskViewHolderFirebaseRecyclerAdapter);
-        j=0;
-        k=0;
-    }
-
-    public static class CrunchesTaskViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public CrunchesTaskViewHolder(View itemView) {
-            super(itemView);
-
-            mView = itemView;
-
-        }
-
-        public void setSatus(String status){
-
-            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
-            userStatusView.setText(status);
-
-        }
-
-        public void setName(String name){
-
-            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
-            userNameView.setText(name);
-
-        }
-
-        public void setUserImage(String thumb_image, Context ctx){
-
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
-
-        }
     }
 }

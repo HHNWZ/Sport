@@ -59,7 +59,7 @@ public class Crunches_dare extends AppCompatActivity {
     private DatabaseReference myDatabase;
     private DatabaseReference confirm_database;
     private DatabaseReference friend_point_database;
-    private DatabaseReference clear_dareDatabase;
+
 
 
     private static FirebaseAuth mAuth;
@@ -101,7 +101,7 @@ public class Crunches_dare extends AppCompatActivity {
         dareDatabase= FirebaseDatabase.getInstance().getReference();
         confirm_database= FirebaseDatabase.getInstance().getReference();
         friendDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
-        clear_dareDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
+
 
 
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
@@ -123,7 +123,7 @@ public class Crunches_dare extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
-        exercise_week_data.setText("3");
+        exercise_week_data.setText("100");
         myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -238,11 +238,13 @@ public class Crunches_dare extends AppCompatActivity {
                                                 if(crunches_dare_data.getCrunches_dare_myFinishTime()>FriendFinishTimeLong){
                                                     Log.i("勝利方是:","朋友");
                                                     Toast.makeText(Crunches_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    crunches_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                 }else if(crunches_dare_data.getCrunches_dare_myFinishTime()<FriendFinishTimeLong){
                                                     Log.i("你之前的friend_pint",""+crunches_dare_data.getCrunches_dare_friend_point());
                                                     friend_point_database.child("friend_point").setValue(crunches_dare_data.getCrunches_dare_friend_point()+10);
                                                     Log.i("勝利方是:","你");
                                                     Toast.makeText(Crunches_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    crunches_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                 }
 
 

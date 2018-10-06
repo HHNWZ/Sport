@@ -31,6 +31,11 @@ public class Data {
     private double walking_dare_myCount;
     private double running_need_exrcise_data;
 
+    private int my_task_friend_point;
+    private int my_task_int_exercise_data;
+    private double my_task_double_exercise_data;
+    private long my_task_long_exercise_data;
+
 
 
     public double getFriend_running_task_data() {
@@ -264,6 +269,38 @@ public class Data {
 
     public void setRunning_need_exrcise_data(double running_need_exrcise_data) {
         this.running_need_exrcise_data = running_need_exrcise_data;
+    }
+
+    public int getMy_task_friend_point() {
+        return my_task_friend_point;
+    }
+
+    public void setMy_task_friend_point(int my_task_friend_point) {
+        this.my_task_friend_point = my_task_friend_point;
+    }
+
+    public int getMy_task_int_exercise_data() {
+        return my_task_int_exercise_data;
+    }
+
+    public void setMy_task_int_exercise_data(int my_task_int_exercise_data) {
+        this.my_task_int_exercise_data = my_task_int_exercise_data;
+    }
+
+    public double getMy_task_double_exercise_data() {
+        return my_task_double_exercise_data;
+    }
+
+    public void setMy_task_double_exercise_data(double my_task_double_exercise_data) {
+        this.my_task_double_exercise_data = my_task_double_exercise_data;
+    }
+
+    public long getMy_task_long_exercise_data() {
+        return my_task_long_exercise_data;
+    }
+
+    public void setMy_task_long_exercise_data(long my_task_long_exercise_data) {
+        this.my_task_long_exercise_data = my_task_long_exercise_data;
     }
 }
 
