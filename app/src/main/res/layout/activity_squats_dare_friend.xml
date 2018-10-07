@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.SquatsDareFriend">
+    tools:context="kelvin.tablayout.SquatsDareFriend"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/activity_squats_dare_friend_toolbar"

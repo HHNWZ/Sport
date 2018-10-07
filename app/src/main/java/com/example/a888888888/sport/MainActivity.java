@@ -581,6 +581,7 @@ public class  MainActivity extends AppCompatActivity
             menu_setting_account.setVisible(true);
             menu_Logout.setVisible(true);
             kel.setVisibility(View.VISIBLE);
+            hal.setVisibility(View.VISIBLE);
             button_of_walking_monitoring.setVisibility(View.VISIBLE);
             button_of_running_monitoring.setVisibility(View.VISIBLE);
             button_of_yoga_monitoring.setVisibility(View.VISIBLE);
@@ -840,6 +841,7 @@ public class  MainActivity extends AppCompatActivity
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
             kel.setVisibility(View.INVISIBLE);
+            hal.setVisibility(View.INVISIBLE);
             button_of_walking_monitoring.setVisibility(View.INVISIBLE);
             button_of_running_monitoring.setVisibility(View.INVISIBLE);
             button_of_yoga_monitoring.setVisibility(View.INVISIBLE);

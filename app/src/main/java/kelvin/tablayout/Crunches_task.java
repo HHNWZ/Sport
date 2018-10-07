@@ -61,9 +61,27 @@ public class Crunches_task extends AppCompatActivity {
     private TextView crunches_task_friend_point;
     private Button confirm_crunches_task_button;
 
+    private static String crunches_task_my_name;
+    private static String crunches_task_my_image;
+    private static String crunches_task_my_count;
+    private static String crunches_task_my_friend_point;
+
+    private static String crunches_task_friend_name;
+    private static String crunches_task_friend_image;
+    private static String crunches_task_friend_count;
+
+    private static int crunches_task_my_count_int;
+    private static int crunches_task_my_friend_point_int;
+    private static int crunches_task_friend_count_int;
+    private static int crunches_progress;
+    private static int crunches_task_data_int;
+
+
+
+
 
     private Data crunches_data=new Data();
-    public CircularSeekBar crunches_seek_bar;
+    public CircularSeekBar crunches_task_seek_bar;
 
 
 
@@ -78,14 +96,165 @@ public class Crunches_task extends AppCompatActivity {
         actionBar.setTitle("仰臥起坐每週共同任務");
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+
         mAuth = FirebaseAuth.getInstance();
 
-        crunches_seek_bar=(CircularSeekBar)findViewById(R.id.crunches_seek_bar);
+        crunches_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        crunches_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        crunches_task_Database=FirebaseDatabase.getInstance().getReference();
+        crunches_task_confirm_database=FirebaseDatabase.getInstance().getReference();
+        crunches_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
+
+        crunches_task_seek_bar=(CircularSeekBar)findViewById(R.id.crunches_task_seek_bar);
         crunches_task_data=(TextView)findViewById(R.id.crunches_task_data);
         crunches_susses_text_view=(TextView)findViewById(R.id.crunches_susses_text_view);
 
+        my_crunches_task_image=(CircleImageView)findViewById(R.id.my_crunches_task_image);
+        my_crunches_task_name=(TextView)findViewById(R.id.my_crunches_task_name);
+        my_crunches_task_finish_count_data=(TextView)findViewById(R.id.my_crunches_task_finish_count_data);
+
+        friend_crunches_task_image=(CircleImageView)findViewById(R.id.friend_crunches_task_image);
+        friend_crunches_task_name=(TextView)findViewById(R.id.friend_crunches_task_name);
+        friend_crunches_task_finish_count=(TextView)findViewById(R.id.friend_crunches_task_finish_count);
+        friend_crunches_task_finish_count_data=(TextView)findViewById(R.id.friend_crunches_task_finish_count_data);
+
+        crunches_task_text_and=(TextView)findViewById(R.id.crunches_task_text_and);
+        crunches_task_friend_point=(TextView)findViewById(R.id.crunches_task_friend_point);
+        confirm_crunches_task_button=(Button)findViewById(R.id.confirm_crunches_task_button);
+
+        crunches_task_data.setText("100");
+        crunches_task_seek_bar.setMax(Float.parseFloat(crunches_task_data.getText().toString()));
+        crunches_susses_text_view.setText("目前沒有朋友");
+
+        crunches_task_myDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                crunches_task_my_name=dataSnapshot.child("name").getValue().toString();
+                crunches_task_my_image=dataSnapshot.child("thumb_image").getValue().toString();
+                crunches_task_my_count=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
+                crunches_task_my_friend_point=dataSnapshot.child("friend_point").getValue().toString();
+
+                crunches_task_my_friend_point_int=Integer.parseInt(crunches_task_my_friend_point);
+                crunches_data.setMy_task_friend_point(crunches_task_my_friend_point_int);
+
+                crunches_task_my_count_int=Integer.parseInt(crunches_task_my_count);
+                crunches_data.setMy_task_int_exercise_data(crunches_task_my_count_int);
+
+                my_crunches_task_name.setText(crunches_task_my_name);
+                my_crunches_task_finish_count_data.setText(crunches_task_my_count+"次");
+
+                if(!crunches_task_my_image.equals("default")){
+                    Picasso.with(Crunches_task.this).load(crunches_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.default_avatar).into(my_crunches_task_image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            Picasso.with(Crunches_task.this).load(crunches_task_my_image).placeholder(R.drawable.default_avatar).into(my_crunches_task_image);
+                        }
+                    });
+                }
+
+                crunches_task_Database.child("Task_crunches").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                            crunches_task_toolbar.setOnMenuItemClickListener(null);
+                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            crunches_task_text_and.setVisibility(View.VISIBLE);
+                            friend_crunches_task_name.setVisibility(View.VISIBLE);
+                            friend_crunches_task_image.setVisibility(View.VISIBLE);
+                            friend_crunches_task_finish_count.setVisibility(View.VISIBLE);
+                            friend_crunches_task_finish_count_data.setVisibility(View.VISIBLE);
+
+                            crunches_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    crunches_task_friend_name=dataSnapshot.child("name").getValue().toString();
+                                    crunches_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
+                                    crunches_task_friend_count=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
+                                    crunches_task_friend_count_int=Integer.parseInt(crunches_task_friend_count);
+
+                                    friend_crunches_task_name.setText(crunches_task_friend_name);
+                                    friend_crunches_task_finish_count_data.setText(crunches_task_friend_count+"次");
 
 
+
+                                    if(!crunches_task_friend_image.equals("default")){
+                                        Picasso.with(Crunches_task.this).load(crunches_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
+                                                .placeholder(R.drawable.default_avatar).into(friend_crunches_task_image, new Callback() {
+                                            @Override
+                                            public void onSuccess() {
+
+                                            }
+
+                                            @Override
+                                            public void onError() {
+                                                Picasso.with(Crunches_task.this).load(crunches_task_my_image).placeholder(R.drawable.default_avatar).into(friend_crunches_task_image);
+                                            }
+                                        });
+                                    }
+
+                                    crunches_progress=crunches_task_friend_count_int+crunches_data.getMy_task_int_exercise_data();
+                                    Log.i("進度條的進度",""+crunches_progress);
+
+                                    crunches_task_data_int=Integer.parseInt(crunches_task_data.getText().toString());
+                                    Log.i("仰臥起坐共同任務運動量",""+crunches_task_data_int);
+                                    if(crunches_progress>=crunches_task_data_int){
+                                        crunches_task_seek_bar.setProgress((float)crunches_task_data_int);
+                                        crunches_susses_text_view.setText("你們已經完成");
+                                        crunches_task_friend_point.setVisibility(View.VISIBLE);
+                                        confirm_crunches_task_button.setVisibility(View.VISIBLE);
+                                        confirm_crunches_task_button.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                crunches_task_text_and.setVisibility(View.INVISIBLE);
+                                                friend_crunches_task_name.setVisibility(View.INVISIBLE);
+                                                friend_crunches_task_image.setVisibility(View.INVISIBLE);
+                                                friend_crunches_task_finish_count.setVisibility(View.INVISIBLE);
+                                                friend_crunches_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                crunches_task_friend_point.setVisibility(View.INVISIBLE);
+                                                crunches_task_Database.child("Task_crunches").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                crunches_task_friend_point_database.child("friend_point").setValue(crunches_data.getMy_task_friend_point()+10);
+                                                crunches_susses_text_view.setText("目前沒有朋友");
+                                                crunches_task_seek_bar.setProgress((0));
+                                                crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                confirm_crunches_task_button.setVisibility(View.INVISIBLE);
+                                            }
+                                        });
+                                    }else if(crunches_progress<crunches_task_data_int){
+                                        crunches_susses_text_view.setText("你們目前完成\n        "+crunches_progress+"次");
+                                        crunches_task_seek_bar.setProgress((float)crunches_progress);
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                            
+                            
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override

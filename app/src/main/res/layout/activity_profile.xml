@@ -20,10 +20,9 @@
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="240dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/default_avatar" />
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_image"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="60dp"
             android:text="Display Name"
             android:textColor="#ffffff"
             android:textSize="24sp" />
@@ -45,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_displayName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
             android:text="Current User Status"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
@@ -54,9 +53,9 @@
             android:id="@+id/profile_totalFriends"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_send_req_btn"
+            android:layout_below="@id/profile_status"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="5dp"
             android:text="Total Friends"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
@@ -65,9 +64,11 @@
             android:id="@+id/profile_send_req_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/delete_send_req_btn"
+            android:layout_below="@id/profile_totalFriends"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:background="@drawable/button"
             android:backgroundTint="@color/colorAccent"
             android:text="發送朋友邀請"
             android:textColor="@android:color/white" />
@@ -76,13 +77,16 @@
             android:id="@+id/delete_send_req_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/profile_send_req_btn"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
+
             android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/button"
+            android:padding="5dp"
             android:text="拒絕朋友邀請"
             android:textColor="@android:color/white"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </RelativeLayout>
 
 

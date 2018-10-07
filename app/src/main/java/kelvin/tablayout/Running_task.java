@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
@@ -40,24 +41,46 @@ public class Running_task extends AppCompatActivity {
     private Toolbar running_task_toolbar;
     public static ActionBar actionBar;
     private static FirebaseAuth mAuth;
-    private DatabaseReference taskDatabase;
-    private DatabaseReference mUsersDatabase;
-    private DatabaseReference myUsersDatabase;
-    private CircleImageView mDisplayImage;
-    private TextView myName;
-    private TextView myStatus;
-    public static TextView exercise_week_data;
-    public static TextView susses_text_view;
-    public static String myname,mystatu,friend_point;
-    private RecyclerView running_task_recycler_view;
-    private View mMainView;
-    public static double myRunning,userRunning,all_task,same_task;
-    public static double k;
-    public static int j=0;
-    public static int i;
-    public int int_friend_point;
-    public Data running_data=new Data();
-    public CircularSeekBar seekBar;
+
+    private DatabaseReference running_task_Database;
+    private DatabaseReference running_task_friendDatabase;
+    private DatabaseReference running_task_myDatabase;
+    private DatabaseReference running_task_confirm_database;
+    private DatabaseReference running_task_friend_point_database;
+
+    private TextView running_task_data;
+    private TextView running_susses_text_view;
+
+    private CircleImageView my_running_task_image;
+    private TextView my_running_task_name;
+    private TextView  my_running_task_finish_count_data;
+
+    private CircleImageView friend_running_task_image;
+    private TextView friend_running_task_name;
+    private TextView friend_running_task_finish_count;
+    private TextView friend_running_task_finish_count_data;
+
+    private TextView running_task_text_and;
+    private TextView running_task_friend_point;
+    private Button confirm_running_task_button;
+
+    private static String running_task_my_name;
+    private static String running_task_my_image;
+    private static String running_task_my_count;
+    private static String running_task_my_friend_point;
+
+    private static String running_task_friend_name;
+    private static String running_task_friend_image;
+    private static String running_task_friend_count;
+
+    private static double running_task_my_count_double;
+    private static int running_task_my_friend_point_int;
+    private static double running_task_friend_count_double;
+    private static double running_progress;
+    private static double running_task_data_double;
+
+    private Data running_data=new Data();
+    public CircularSeekBar running_task_seek_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,74 +95,148 @@ public class Running_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-        taskDatabase= FirebaseDatabase.getInstance().getReference().child("Task_running").child(mAuth.getCurrentUser().getUid());//共同任務資料庫
-        myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
-        mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-        seekBar = (CircularSeekBar) findViewById(R.id.running_seek_bar);
-        myName = (TextView) findViewById(R.id.user_single_name);
-        myStatus = (TextView) findViewById(R.id.user_single_status);
-        exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
-        susses_text_view=(TextView)findViewById(R.id.susses_text_view);
-        exercise_week_data.setText(Time.getRunning_data(System.currentTimeMillis()));
-        running_task_recycler_view=(RecyclerView)findViewById(R.id.running_task_recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(Running_task.this);
-        running_task_recycler_view.setHasFixedSize(true);
-        running_task_recycler_view.setLayoutManager(layoutManager);
-        myUsersDatabase.keepSynced(true);
-        //running_data.setRunning_task_status("還沒完成");
-        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
-        Timer timer=new Timer();
 
+        running_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        running_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        running_task_Database=FirebaseDatabase.getInstance().getReference();
+        running_task_confirm_database=FirebaseDatabase.getInstance().getReference();
+        running_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
 
-        TimerTask mTimerTask =new TimerTask(){
+        running_task_seek_bar=(CircularSeekBar)findViewById(R.id.running_task_seek_bar);
+        running_task_data=(TextView)findViewById(R.id.running_task_data);
+        running_susses_text_view=(TextView)findViewById(R.id.running_susses_text_view);
+
+        my_running_task_image=(CircleImageView)findViewById(R.id.my_running_task_image);
+        my_running_task_name=(TextView)findViewById(R.id.my_running_task_name);
+        my_running_task_finish_count_data=(TextView)findViewById(R.id.my_running_task_finish_count_data);
+
+        friend_running_task_image=(CircleImageView)findViewById(R.id.friend_running_task_image);
+        friend_running_task_name=(TextView)findViewById(R.id.friend_running_task_name);
+        friend_running_task_finish_count=(TextView)findViewById(R.id.friend_running_task_finish_count);
+        friend_running_task_finish_count_data=(TextView)findViewById(R.id.friend_running_task_finish_count_data);
+
+        running_task_text_and=(TextView)findViewById(R.id.running_task_text_and);
+        running_task_friend_point=(TextView)findViewById(R.id.running_task_friend_point);
+        confirm_running_task_button=(Button)findViewById(R.id.confirm_running_task_button);
+
+        running_task_data.setText("100");
+        running_task_seek_bar.setMax(Float.parseFloat(running_task_data.getText().toString()));
+        running_susses_text_view.setText("目前沒有朋友");
+
+        running_task_myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void run(){
-                myUsersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                running_task_my_name=dataSnapshot.child("name").getValue().toString();
+                running_task_my_image=dataSnapshot.child("thumb_image").getValue().toString();
+                running_task_my_count=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
+                running_task_my_friend_point=dataSnapshot.child("friend_point").getValue().toString();
+
+                running_task_my_friend_point_int=Integer.parseInt(running_task_my_friend_point);
+                running_data.setMy_task_friend_point(running_task_my_friend_point_int);
+
+                running_task_my_count_double=Double.parseDouble(running_task_my_count);
+                running_data.setMy_task_double_exercise_data(running_task_my_count_double);
+
+                my_running_task_name.setText(running_task_my_name);
+                my_running_task_finish_count_data.setText(running_task_my_count+"次");
+
+                if(!running_task_my_image.equals("default")){
+                    Picasso.with(Running_task.this).load(running_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.default_avatar).into(my_running_task_image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+                            Picasso.with(Running_task.this).load(running_task_my_image).placeholder(R.drawable.default_avatar).into(my_running_task_image);
+                        }
+                    });
+                }
+
+                running_task_Database.child("Task_running").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        myname = dataSnapshot.child("name").getValue().toString();
-                        final String image = dataSnapshot.child("thumb_image").getValue().toString();
-                        friend_point=dataSnapshot.child("friend_point").getValue().toString();
-                        mystatu=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
-                        String running_task_status=dataSnapshot.child("running_task_status").getValue().toString();
-                        int_friend_point=Integer.parseInt(friend_point);
-                        myRunning=Double.parseDouble(mystatu);
+                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                            running_task_toolbar.setOnMenuItemClickListener(null);
+                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            running_task_text_and.setVisibility(View.VISIBLE);
+                            friend_running_task_name.setVisibility(View.VISIBLE);
+                            friend_running_task_image.setVisibility(View.VISIBLE);
+                            friend_running_task_finish_count.setVisibility(View.VISIBLE);
+                            friend_running_task_finish_count_data.setVisibility(View.VISIBLE);
 
-                        all_task=running_data.getFriend_running_task_data()+myRunning;
-                        same_task=Double.parseDouble(exercise_week_data.getText().toString());
-                        seekBar.setProgress((float)all_task);
-                        if(all_task>=same_task&&running_data.getFriend_running_task_data()!=0&&myRunning!=0&&same_task!=0){
-                            susses_text_view.setText("你獲得10點friendpoint");
-                            actionBar.setSubtitle("你和朋友完成任務");
-
-                            if(running_task_status.equals("還沒完成")){
-
-                                myUsersDatabase.child("friend_point").setValue(int_friend_point+10);
-                                myUsersDatabase.child("running_task_status").setValue("完成");
-                            }
-
-                        }else {
-                            susses_text_view.setText("當前完成"+all_task+"公里");
-                            myUsersDatabase.child("running_task_status").setValue("還沒完成");
-                        }
-                        myName.setText(myname);
-                        myStatus.setText("跑步今天記錄:"+mystatu+"公里");
-                        if(!image.equals("default")){
-                            Picasso.with(Running_task.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                                    .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
+                            running_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
-                                public void onSuccess() {
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    running_task_friend_name=dataSnapshot.child("name").getValue().toString();
+                                    running_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
+                                    running_task_friend_count=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
+                                    running_task_friend_count_double=Double.parseDouble(running_task_friend_count);
+
+                                    friend_running_task_name.setText(running_task_friend_name);
+                                    friend_running_task_finish_count_data.setText(running_task_friend_count+"次");
+
+
+
+                                    if(!running_task_friend_image.equals("default")){
+                                        Picasso.with(Running_task.this).load(running_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
+                                                .placeholder(R.drawable.default_avatar).into(friend_running_task_image, new Callback() {
+                                            @Override
+                                            public void onSuccess() {
+
+                                            }
+
+                                            @Override
+                                            public void onError() {
+                                                Picasso.with(Running_task.this).load(running_task_my_image).placeholder(R.drawable.default_avatar).into(friend_running_task_image);
+                                            }
+                                        });
+                                    }
+
+                                    running_progress=running_task_friend_count_double+running_data.getMy_task_double_exercise_data();
+                                    Log.i("進度條的進度",""+running_progress);
+
+                                    running_task_data_double=Double.parseDouble(running_task_data.getText().toString());
+                                    Log.i("仰臥起坐共同任務運動量",""+running_task_data_double);
+                                    if(running_progress>=running_task_data_double){
+                                        running_task_seek_bar.setProgress((float)running_task_data_double);
+                                        running_susses_text_view.setText("你們已經完成");
+                                        running_task_friend_point.setVisibility(View.VISIBLE);
+                                        confirm_running_task_button.setVisibility(View.VISIBLE);
+                                        confirm_running_task_button.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                running_task_text_and.setVisibility(View.INVISIBLE);
+                                                friend_running_task_name.setVisibility(View.INVISIBLE);
+                                                friend_running_task_image.setVisibility(View.INVISIBLE);
+                                                friend_running_task_finish_count.setVisibility(View.INVISIBLE);
+                                                friend_running_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                running_task_friend_point.setVisibility(View.INVISIBLE);
+                                                running_task_Database.child("Task_running").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point()+10);
+                                                running_susses_text_view.setText("目前沒有朋友");
+                                                running_task_seek_bar.setProgress((0));
+                                                running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                confirm_running_task_button.setVisibility(View.INVISIBLE);
+                                            }
+                                        });
+                                    }else if(running_progress<running_task_data_double){
+                                        running_susses_text_view.setText("你們目前完成\n        "+running_progress+"次");
+                                        running_task_seek_bar.setProgress((float)running_progress);
+                                    }
+
 
                                 }
 
                                 @Override
-                                public void onError() {
-
-                                    Picasso.with(Running_task.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
+                                public void onCancelled(DatabaseError databaseError) {
 
                                 }
                             });
+
+
                         }
                     }
 
@@ -149,8 +246,13 @@ public class Running_task extends AppCompatActivity {
                     }
                 });
             }
-        };
-        timer.schedule(mTimerTask,1000,5000);
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        
 
 
     }
@@ -193,115 +295,12 @@ public class Running_task extends AppCompatActivity {
         return true;
     }
 
-    @Override
+  
 
-    public void onStart() {
-        super.onStart();
-        Log.i("k1值",""+k);
-        Log.i("j1值",""+j);
-        FirebaseRecyclerAdapter<Friends,RunningTaskViewHolder> runningTaskViewHolderFirebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Friends, RunningTaskViewHolder>(
-                Friends.class,
-                R.layout.task_single_layout,
-                RunningTaskViewHolder.class,
-                taskDatabase
-
-        ) {
-            public int getItenCount(){
-                int itemCount =super.getItemCount();
-
-                return itemCount;
-            }
-
-            @Override
-            protected void populateViewHolder(RunningTaskViewHolder viewHolder, Friends model, int position) {
-                //k=0;
-                final String list_user_id = getRef(position).getKey();
-                Log.i("k2值",""+k);
-                Log.i("j2值",""+j);
-
-                        mUsersDatabase.child(list_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                final String userName = dataSnapshot.child("name").getValue().toString();
-                                String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                                String userStatus=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
-                                userRunning=Double.parseDouble(userStatus);
-
-                                Log.i("最終get&set","已經set");
-                                Log.i("k3值",""+k);
-                                Log.i("j3值",""+j);
-                                if(j<=getItenCount()){
-                                    Log.i("k4值",""+k);
-                                    k=k+userRunning;
-                                    Log.i("k5值",""+k);
-                                    running_data.setFriend_running_task_data(k);
-                                    Log.i("j4值",""+j);
-                                    j=j+1;
-                                    Log.i("j5值",""+j);
-                                }
-
-                                Log.i("朋友跑步距離",""+k);
-                                viewHolder.setName(userName);
-                                viewHolder.setSatus("跑步今天記錄:"+userStatus+"公里");
-                                viewHolder.setUserImage(userThumb,getApplication());
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
+    
 
 
-
-
-
-        };
-        Log.i("k6值",""+k);
-        Log.i("j6值",""+j);
-        j=0;
-        k=0;
-        running_task_recycler_view.setAdapter(runningTaskViewHolderFirebaseRecyclerAdapter);
-        j=0;
-        k=0;
-        Log.i("k7值",""+k);
-        Log.i("j7值",""+j);
-    }
-
-
-    public static class RunningTaskViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public RunningTaskViewHolder(View itemView) {
-            super(itemView);
-
-            mView = itemView;
-
-        }
-
-        public void setSatus(String status){
-
-            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
-            userStatusView.setText(status);
-
-        }
-
-        public void setName(String name){
-
-            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
-            userNameView.setText(name);
-
-        }
-
-        public void setUserImage(String thumb_image, Context ctx){
-
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
-
-        }
-    }
+    
 
 
 

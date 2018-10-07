@@ -353,8 +353,8 @@ public class TaskProfile extends AppCompatActivity {
                     final String currentDate = Time.getToDate(System.currentTimeMillis());
 
                     Map friendsMap = new HashMap();
-                    friendsMap.put(""+Task+"/" + mCurrent_user.getUid() + "/" + friend_id + "/date", currentDate);///
-                    friendsMap.put(""+Task+"/" + friend_id + "/"  + mCurrent_user.getUid() + "/date", currentDate);
+                    friendsMap.put(""+Task+"/" + mCurrent_user.getUid() + "/id", friend_id);///
+                    friendsMap.put(""+Task+"/"  + friend_id + "/id", mCurrent_user.getUid());
 
                     friendsMap.put(""+Task_req+"/" + mCurrent_user.getUid() + "/" +friend_id, null);
                     friendsMap.put(""+Task_req+"/" + friend_id + "/" + mCurrent_user.getUid(), null);

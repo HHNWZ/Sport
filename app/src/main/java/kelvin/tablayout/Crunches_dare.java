@@ -59,7 +59,7 @@ public class Crunches_dare extends AppCompatActivity {
     private DatabaseReference myDatabase;
     private DatabaseReference confirm_database;
     private DatabaseReference friend_point_database;
-
+    
 
 
     private static FirebaseAuth mAuth;
@@ -76,7 +76,7 @@ public class Crunches_dare extends AppCompatActivity {
     private static int myCountInt;
     private static long FriendFinishTimeLong;
     private static int FriendCountInt;
-    private static int Int_exercise_week_dat;
+    private static int Int_exercise_week_data;
     private static int Int_friend_point;
 
     @Override
@@ -101,7 +101,7 @@ public class Crunches_dare extends AppCompatActivity {
         dareDatabase= FirebaseDatabase.getInstance().getReference();
         confirm_database= FirebaseDatabase.getInstance().getReference();
         friendDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
-
+        
 
 
         exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
@@ -212,8 +212,8 @@ public class Crunches_dare extends AppCompatActivity {
                                     Log.i("12",""+ crunches_dare_data.getCrunches_dare_myCount());
                                     Log.i("123",""+ FriendFinishTimeLong);
                                     Log.i("1234",""+ FriendCountInt);
-                                    Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
-                                    if(crunches_dare_data.getCrunches_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&crunches_dare_data.getCrunches_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
+                                    Int_exercise_week_data=Integer.parseInt(exercise_week_data.getText().toString());
+                                    if(crunches_dare_data.getCrunches_dare_myCount()==Int_exercise_week_data&&FriendCountInt==Int_exercise_week_data&&crunches_dare_data.getCrunches_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
                                         text_winner.setVisibility(View.VISIBLE);
                                         if(crunches_dare_data.getCrunches_dare_myFinishTime()>FriendFinishTimeLong){
                                             text_winner.setText("勝利方是朋友");

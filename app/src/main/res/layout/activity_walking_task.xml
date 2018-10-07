@@ -4,119 +4,236 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.Walking_task">
+    tools:context="kelvin.tablayout.Walking_task"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/walking_task_toolbar"
         layout="@layout/app_bar_layout" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/data_layout"
-        android:layout_below="@+id/walking_task_toolbar"
-        android:background="@android:color/holo_red_light">
 
-        <me.tankery.lib.circularseekbar.CircularSeekBar
-            android:id="@+id/walking_seek_bar"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            app:cs_maintain_equal_circle="true"
-            app:cs_start_angle="105"
-            app:cs_end_angle="430"
-
-            app:cs_circle_style="round"
-            app:cs_circle_stroke_width="8dp"
-            app:cs_disable_pointer="true" />
-
-        <TextView
-            android:id="@+id/exercise_week_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="步行"
-            android:textSize="20sp"
-            android:layout_marginTop="15dp"
-            tools:textColor="@android:color/black" />
-
-        <TextView
-            android:id="@+id/exercise_week_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_week_title"
-            android:text="0"
-            android:layout_centerHorizontal="true"
-            android:textColor="@android:color/black"
-
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/exercise_week_unit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/exercise_week_data"
-            android:layout_centerHorizontal="true"
-            android:text="公里"
-            android:textColor="@android:color/black"
-
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/susses_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/exercise_week_unit"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:text="當前完成"
-            />
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/my_layout"
-        android:layout_below="@+id/data_layout"
-        android:background="@android:color/holo_green_light">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/user_single_image"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/default_avatar"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:id="@+id/user_single_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/user_single_image"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/user_single_image"
-            android:text="Display Name"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/user_single_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/user_single_name"
-            android:layout_below="@+id/user_single_name"
-            android:layout_marginTop="10dp"
-            android:text="今天運動量" />
-
-    </RelativeLayout>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/walking_task_recycler_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/my_layout"/>
+        android:layout_below="@+id/walking_task_toolbar"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/walking_task_half1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/data_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <me.tankery.lib.circularseekbar.CircularSeekBar
+                    android:id="@+id/walking_task_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    app:cs_circle_color="@color/text_color"
+                    app:cs_circle_progress_color="@color/object_color"
+                    app:cs_circle_stroke_width="8dp"
+                    app:cs_circle_style="round"
+                    app:cs_disable_pointer="true"
+                    app:cs_end_angle="430"
+                    app:cs_maintain_equal_circle="true"
+                    app:cs_start_angle="105" />
+
+                <TextView
+                    android:id="@+id/walking_task_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:text="仰臥起坐"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/walking_task_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/walking_task_title"
+                    android:layout_centerHorizontal="true"
+                    android:text="0"
+                    android:textColor="@color/text_color"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/walking_task_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/walking_task_data"
+                    android:layout_centerHorizontal="true"
+                    android:text="公里"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/walking_susses_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/walking_task_unit"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="當前完成"
+                    android:textColor="@color/text_color" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/my_task"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/post_border"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/my_walking_task_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/default_avatar" />
+
+                <TextView
+                    android:id="@+id/my_walking_task_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的名字"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:id="@+id/my_walking_task_finish_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="公里"
+                    android:textColor="@color/text_color" />
+
+                <TextView
+                    android:id="@+id/my_walking_task_finish_count_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="0"
+                    android:textColor="@color/text_color" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/walking_due1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/post_border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/walking_task_text_and"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="AND"
+                    android:textColor="@color/text_color"
+                    android:textSize="50sp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/walking_task_friend_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="你們獲得\n10點\nfriendpoint"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/confirm_walking_task_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/button"
+                    android:backgroundTint="@color/object_color"
+                    android:text="確認"
+                    android:textColor="@color/text_color"
+                    android:visibility="invisible"
+                    android:layout_margin="10dp"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/friend_task"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/post_border"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/friend_walking_task_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/default_avatar"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/friend_walking_task_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="朋友的名字"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/friend_walking_task_finish_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="公里"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_color"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/friend_walking_task_finish_count_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_color"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

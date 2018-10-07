@@ -254,6 +254,12 @@ public class Time extends Application {
         return crunchesData;
     }
 
+    public static long change_minuteToLong(String minute){
+
+        int minuteLong=Integer.parseInt(minute);
+        long minutelong=minuteLong*60000;
+        return minutelong;
+    }
 
 
 

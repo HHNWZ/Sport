@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
@@ -36,24 +37,50 @@ public class Squats_task extends AppCompatActivity {
     private Toolbar squats_task_toolbar;
     public static ActionBar actionBar;
     private static FirebaseAuth mAuth;
-    private DatabaseReference taskDatabase;
-    private DatabaseReference mUsersDatabase;
-    private DatabaseReference myUsersDatabase;
-    private CircleImageView mDisplayImage;
-    private TextView myName;
-    private TextView myStatus;
-    public static TextView exercise_week_data;
-    public static TextView susses_text_view;
-    public static String myname,mystatu,friend_point;
-    private RecyclerView squats_task_recycler_view;
-    private View mMainView;
-    public static int mySquats,userSquats,all_task,same_task;
-    public static int k;
-    public static int j=0;
-    public static int i;
-    public int int_friend_point;
+
+    private DatabaseReference squats_task_Database;
+    private DatabaseReference squats_task_friendDatabase;
+    private DatabaseReference squats_task_myDatabase;
+    private DatabaseReference squats_task_confirm_database;
+    private DatabaseReference squats_task_friend_point_database;
+
+    private TextView squats_task_data;
+    private TextView squats_susses_text_view;
+
+    private CircleImageView my_squats_task_image;
+    private TextView my_squats_task_name;
+    private TextView  my_squats_task_finish_count_data;
+
+    private CircleImageView friend_squats_task_image;
+    private TextView friend_squats_task_name;
+    private TextView friend_squats_task_finish_count;
+    private TextView friend_squats_task_finish_count_data;
+
+    private TextView squats_task_text_and;
+    private TextView squats_task_friend_point;
+    private Button confirm_squats_task_button;
+
+    private static String squats_task_my_name;
+    private static String squats_task_my_image;
+    private static String squats_task_my_count;
+    private static String squats_task_my_friend_point;
+
+    private static String squats_task_friend_name;
+    private static String squats_task_friend_image;
+    private static String squats_task_friend_count;
+
+    private static int squats_task_my_count_int;
+    private static int squats_task_my_friend_point_int;
+    private static int squats_task_friend_count_int;
+    private static int squats_progress;
+    private static int squats_task_data_int;
+
+
+
+
+
     private Data squats_data=new Data();
-    public CircularSeekBar seekBar;
+    public CircularSeekBar squats_task_seek_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,73 +94,148 @@ public class Squats_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-        taskDatabase= FirebaseDatabase.getInstance().getReference().child("Task_squats").child(mAuth.getCurrentUser().getUid());//共同任務資料庫
-        myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        mUsersDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
-        mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
-        seekBar = (CircularSeekBar) findViewById(R.id.squats_seek_bar);
-        myName = (TextView) findViewById(R.id.user_single_name);
-        myStatus = (TextView) findViewById(R.id.user_single_status);
-        exercise_week_data=(TextView)findViewById(R.id.exercise_week_data);
-        susses_text_view=(TextView)findViewById(R.id.susses_text_view);
-        exercise_week_data.setText(Time.getSquats_data(System.currentTimeMillis()));
-        squats_task_recycler_view=(RecyclerView)findViewById(R.id.squats_task_recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(Squats_task.this);
-        squats_task_recycler_view.setHasFixedSize(true);
-        squats_task_recycler_view.setLayoutManager(layoutManager);
-        myUsersDatabase.keepSynced(true);
-        seekBar.setMax(Float.parseFloat(exercise_week_data.getText().toString()));
-        Timer timer=new Timer();
 
-        TimerTask mTimerTask =new TimerTask(){
+        squats_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        squats_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        squats_task_Database=FirebaseDatabase.getInstance().getReference();
+        squats_task_confirm_database=FirebaseDatabase.getInstance().getReference();
+        squats_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
+
+        squats_task_seek_bar=(CircularSeekBar)findViewById(R.id.squats_task_seek_bar);
+        squats_task_data=(TextView)findViewById(R.id.squats_task_data);
+        squats_susses_text_view=(TextView)findViewById(R.id.squats_susses_text_view);
+
+        my_squats_task_image=(CircleImageView)findViewById(R.id.my_squats_task_image);
+        my_squats_task_name=(TextView)findViewById(R.id.my_squats_task_name);
+        my_squats_task_finish_count_data=(TextView)findViewById(R.id.my_squats_task_finish_count_data);
+
+        friend_squats_task_image=(CircleImageView)findViewById(R.id.friend_squats_task_image);
+        friend_squats_task_name=(TextView)findViewById(R.id.friend_squats_task_name);
+        friend_squats_task_finish_count=(TextView)findViewById(R.id.friend_squats_task_finish_count);
+        friend_squats_task_finish_count_data=(TextView)findViewById(R.id.friend_squats_task_finish_count_data);
+
+        squats_task_text_and=(TextView)findViewById(R.id.squats_task_text_and);
+        squats_task_friend_point=(TextView)findViewById(R.id.squats_task_friend_point);
+        confirm_squats_task_button=(Button)findViewById(R.id.confirm_squats_task_button);
+
+        squats_task_data.setText("100");
+        squats_task_seek_bar.setMax(Float.parseFloat(squats_task_data.getText().toString()));
+        squats_susses_text_view.setText("目前沒有朋友");
+
+        squats_task_myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void run(){
-                myUsersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        myname = dataSnapshot.child("name").getValue().toString();
-                        final String image = dataSnapshot.child("thumb_image").getValue().toString();
-                        friend_point=dataSnapshot.child("friend_point").getValue().toString();
-                        mystatu=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
-                        String squats_task_status=dataSnapshot.child("squats_task_status").getValue().toString();
-                        int_friend_point=Integer.parseInt(friend_point);
-                        mySquats=Integer.parseInt(mystatu);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                squats_task_my_name=dataSnapshot.child("name").getValue().toString();
+                squats_task_my_image=dataSnapshot.child("thumb_image").getValue().toString();
+                squats_task_my_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
+                squats_task_my_friend_point=dataSnapshot.child("friend_point").getValue().toString();
 
-                        all_task=squats_data.getFriend_squats_task_data()+mySquats;
-                        seekBar.setProgress((float)all_task);
-                        same_task=Integer.parseInt(exercise_week_data.getText().toString());
-                        if(all_task>=same_task&&squats_data.getFriend_squats_task_data()!=0&&mySquats!=0&&same_task!=0){
-                            susses_text_view.setText("你獲得10點friendpoint");
-                            actionBar.setSubtitle("你和朋友完成任務");
+                squats_task_my_friend_point_int=Integer.parseInt(squats_task_my_friend_point);
+                squats_data.setMy_task_friend_point(squats_task_my_friend_point_int);
 
-                            if(squats_task_status.equals("還沒完成")){
+                squats_task_my_count_int=Integer.parseInt(squats_task_my_count);
+                squats_data.setMy_task_int_exercise_data(squats_task_my_count_int);
 
-                                myUsersDatabase.child("friend_point").setValue(int_friend_point+10);
-                                myUsersDatabase.child("squats_task_status").setValue("完成");
-                            }
+                my_squats_task_name.setText(squats_task_my_name);
+                my_squats_task_finish_count_data.setText(squats_task_my_count+"次");
 
-                        }else {
-                            susses_text_view.setText("當前完成"+all_task+"次");
-                            myUsersDatabase.child("squats_task_status").setValue("還沒完成");
+                if(!squats_task_my_image.equals("default")){
+                    Picasso.with(Squats_task.this).load(squats_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.default_avatar).into(my_squats_task_image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
                         }
 
-                        myName.setText(myname);
-                        myStatus.setText("深蹲今日記錄:"+mystatu+"次");
-                        if(!image.equals("default")){
-                            Picasso.with(Squats_task.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                                    .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
+                        @Override
+                        public void onError() {
+                            Picasso.with(Squats_task.this).load(squats_task_my_image).placeholder(R.drawable.default_avatar).into(my_squats_task_image);
+                        }
+                    });
+                }
+
+                squats_task_Database.child("Task_squats").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                            squats_task_toolbar.setOnMenuItemClickListener(null);
+                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            squats_task_text_and.setVisibility(View.VISIBLE);
+                            friend_squats_task_name.setVisibility(View.VISIBLE);
+                            friend_squats_task_image.setVisibility(View.VISIBLE);
+                            friend_squats_task_finish_count.setVisibility(View.VISIBLE);
+                            friend_squats_task_finish_count_data.setVisibility(View.VISIBLE);
+
+                            squats_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
-                                public void onSuccess() {
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    squats_task_friend_name=dataSnapshot.child("name").getValue().toString();
+                                    squats_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
+                                    squats_task_friend_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
+                                    squats_task_friend_count_int=Integer.parseInt(squats_task_friend_count);
+
+                                    friend_squats_task_name.setText(squats_task_friend_name);
+                                    friend_squats_task_finish_count_data.setText(squats_task_friend_count+"次");
+
+
+
+                                    if(!squats_task_friend_image.equals("default")){
+                                        Picasso.with(Squats_task.this).load(squats_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
+                                                .placeholder(R.drawable.default_avatar).into(friend_squats_task_image, new Callback() {
+                                            @Override
+                                            public void onSuccess() {
+
+                                            }
+
+                                            @Override
+                                            public void onError() {
+                                                Picasso.with(Squats_task.this).load(squats_task_my_image).placeholder(R.drawable.default_avatar).into(friend_squats_task_image);
+                                            }
+                                        });
+                                    }
+
+                                    squats_progress=squats_task_friend_count_int+squats_data.getMy_task_int_exercise_data();
+                                    Log.i("進度條的進度",""+squats_progress);
+
+                                    squats_task_data_int=Integer.parseInt(squats_task_data.getText().toString());
+                                    Log.i("仰臥起坐共同任務運動量",""+squats_task_data_int);
+                                    if(squats_progress>=squats_task_data_int){
+                                        squats_task_seek_bar.setProgress((float)squats_task_data_int);
+                                        squats_susses_text_view.setText("你們已經完成");
+                                        squats_task_friend_point.setVisibility(View.VISIBLE);
+                                        confirm_squats_task_button.setVisibility(View.VISIBLE);
+                                        confirm_squats_task_button.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                squats_task_text_and.setVisibility(View.INVISIBLE);
+                                                friend_squats_task_name.setVisibility(View.INVISIBLE);
+                                                friend_squats_task_image.setVisibility(View.INVISIBLE);
+                                                friend_squats_task_finish_count.setVisibility(View.INVISIBLE);
+                                                friend_squats_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                squats_task_friend_point.setVisibility(View.INVISIBLE);
+                                                squats_task_Database.child("Task_squats").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                squats_task_friend_point_database.child("friend_point").setValue(squats_data.getMy_task_friend_point()+10);
+                                                squats_susses_text_view.setText("目前沒有朋友");
+                                                squats_task_seek_bar.setProgress((0));
+                                                squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                confirm_squats_task_button.setVisibility(View.INVISIBLE);
+                                            }
+                                        });
+                                    }else if(squats_progress<squats_task_data_int){
+                                        squats_susses_text_view.setText("你們目前完成\n        "+squats_progress+"次");
+                                        squats_task_seek_bar.setProgress((float)squats_progress);
+                                    }
+
 
                                 }
 
                                 @Override
-                                public void onError() {
-
-                                    Picasso.with(Squats_task.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
+                                public void onCancelled(DatabaseError databaseError) {
 
                                 }
                             });
+
+
                         }
                     }
 
@@ -143,8 +245,13 @@ public class Squats_task extends AppCompatActivity {
                     }
                 });
             }
-        };
-        timer.schedule(mTimerTask,1000,5000);
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        
     }
 
     @Override
@@ -183,101 +290,5 @@ public class Squats_task extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseRecyclerAdapter<Friends,Squats_task.SquatsTaskViewHolder> squatsTaskViewHolderFirebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Friends, Squats_task.SquatsTaskViewHolder>(
-                Friends.class,
-                R.layout.task_single_layout,
-                Squats_task.SquatsTaskViewHolder.class,
-                taskDatabase
-
-        ) {
-            public int getItenCount(){
-                int itemCount =super.getItemCount();
-
-                return itemCount;
-            }
-
-            @Override
-            protected void populateViewHolder(Squats_task.SquatsTaskViewHolder viewHolder, Friends model, int position) {
-                //k=0;
-                final String list_user_id = getRef(position).getKey();
-
-                mUsersDatabase.child(list_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        final String userName = dataSnapshot.child("name").getValue().toString();
-                        String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
-                        String userStatus=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
-                        userSquats=Integer.parseInt(userStatus);
-
-                        Log.i("k3值",""+k);
-                        Log.i("j3值",""+j);
-                        if(j<=getItenCount()){
-                            Log.i("k4值",""+k);
-                            k=k+userSquats;
-                            Log.i("k5值",""+k);
-                            squats_data.setFriend_squats_task_data(k);
-                           
-                            Log.i("j4值",""+j);
-                            j=j+1;
-                            Log.i("j5值",""+j);
-                        }
-
-                        Log.i("朋友次次",""+k);
-                        viewHolder.setName(userName);
-                        viewHolder.setSatus("深蹲今天記錄:"+userStatus+"次");
-                        viewHolder.setUserImage(userThumb,getApplication());
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
-
-
-        };
-        j=0;
-        k=0;
-        squats_task_recycler_view.setAdapter(squatsTaskViewHolderFirebaseRecyclerAdapter);
-        j=0;
-        k=0;
-    }
-
-    public static class SquatsTaskViewHolder extends RecyclerView.ViewHolder {
-
-        View mView;
-
-        public SquatsTaskViewHolder(View itemView) {
-            super(itemView);
-
-            mView = itemView;
-
-        }
-
-        public void setSatus(String status){
-
-            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
-            userStatusView.setText(status);
-
-        }
-
-        public void setName(String name){
-
-            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
-            userNameView.setText(name);
-
-        }
-
-        public void setUserImage(String thumb_image, Context ctx){
-
-            CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
-
-        }
-    }
+   
 }
