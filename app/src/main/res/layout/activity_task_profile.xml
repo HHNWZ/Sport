@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.TaskProfile">
+    tools:context="kelvin.tablayout.TaskProfile"
+    android:background="@drawable/userback">
 
     <include
         android:id="@+id/task_profile_app_bar"
@@ -13,7 +14,7 @@
     <ImageView
         android:id="@+id/task_profile_image"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="250dp"
         android:layout_below="@id/task_profile_app_bar"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
@@ -27,7 +28,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="26dp"
         android:text="Display Name"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@color/text_color"/>
 
     <Button
         android:id="@+id/profile_send_req_btn"
@@ -36,6 +38,8 @@
         android:layout_above="@+id/delete_send_req_btn"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/button"
+        android:padding="5dp"
         android:backgroundTint="@color/colorAccent"
         android:text="發送共同任務邀請"
         android:textColor="@android:color/white" />
@@ -50,6 +54,8 @@
         android:backgroundTint="@color/colorAccent"
         android:text="拒絕共同任務邀請"
         android:textColor="@android:color/white"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:background="@drawable/button"
+        android:padding="5dp"/>
 
 </RelativeLayout>

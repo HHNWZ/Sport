@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -41,10 +42,11 @@ public class PhotoBlog extends AppCompatActivity {
 
     private CircleImageView NavProfileImage;
     private TextView NavProfileUserName;
-    private ImageButton AddNewPostButton;
+
 
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef, PostsRef,LikesRef;
+    private FloatingActionButton activity_photo_blog_float_action_button;
 
     String currentUserID;
     Boolean LikeChecker=false;
@@ -72,7 +74,8 @@ public class PhotoBlog extends AppCompatActivity {
 
 
 
-        AddNewPostButton = (ImageButton) findViewById(R.id.add_new_post_button);
+
+        activity_photo_blog_float_action_button=(FloatingActionButton)findViewById(R.id.activity_photo_blog_float_action_button);
 
 
 
@@ -87,14 +90,14 @@ public class PhotoBlog extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
 
-
-        AddNewPostButton.setOnClickListener(new View.OnClickListener() {
+        activity_photo_blog_float_action_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View view) {
                 SendUserToPostActivity();
             }
+
         });
+
 
 
         DisplayAllUsersPosts();

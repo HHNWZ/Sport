@@ -2,19 +2,27 @@ package qwer;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+
 import com.example.a888888888.sport.R;
 
 public class Dietcontrol extends Fragment implements View.OnTouchListener,addDiary.OnFragmentInteractionListener {
 
+
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -23,6 +31,7 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener,addDia
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.qwer_dietcontrol, null);
         view.setOnTouchListener(this);
+
 
         Button angry_btn=(Button)view.findViewById(R.id.angry_btn);
         angry_btn.setOnClickListener(new View.OnClickListener() {

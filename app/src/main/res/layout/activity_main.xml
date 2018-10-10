@@ -321,7 +321,8 @@
         android:background="@drawable/down823"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/menu_navigation"
-        android:layout_gravity="start">
+        android:layout_gravity="start"
+        app:itemTextColor="@color/colorPrimary">
 
     </android.support.design.widget.NavigationView>
 

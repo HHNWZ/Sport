@@ -52,7 +52,6 @@ public class ExerciseWalking extends Fragment {
     public static RelativeLayout background_layout;
     private DatabaseReference myUsersDatabase;
     public static double i=0;
-    private kelvin.tablayout.Color color=new kelvin.tablayout.Color();
     public static int a=0;
 
 

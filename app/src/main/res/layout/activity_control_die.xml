@@ -1,21 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.ControlDie"
     android:background="@color/colorPrimary"
-    android:clickable="true"
-    android:orientation="vertical"
-    tools:context="qwer.Dietcontrol">
+    android:id="@+id/content_control_die">
 
-
-    <!-- TODO: Update blank fragment layout -->
-
+    <include
+        android:id="@+id/activity_control_die_toolbar"
+        layout="@layout/app_bar_layout" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@+id/activity_control_die_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:padding="5dp"
                 android:backgroundTint="@color/object_color">
                 <Button
-                    android:id="@+id/angry_btn"
+                    android:id="@+id/angry_btn_die"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/food"
@@ -47,7 +48,7 @@
                 android:background="@drawable/post_border"
                 android:padding="5dp">
                 <Button
-                    android:id="@+id/angry_bt1"
+                    android:id="@+id/angry_bt1_die"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/tool"
@@ -73,7 +74,7 @@
                 android:padding="5dp"
                 android:backgroundTint="@color/object_color">
                 <Button
-                    android:id="@+id/angry_bt2"
+                    android:id="@+id/angry_bt2_die"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/diary"
@@ -91,16 +92,16 @@
                 android:padding="5dp"
                 android:backgroundTint="@color/object_color">
 
-            <Button
-                android:id="@+id/angry_btn3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/device"
-                android:shadowColor="#86A89B"
-                android:shadowDx="0"
-                android:shadowDy="0"
-                android:shadowRadius="5"
-                android:textSize="24sp" />
+                <Button
+                    android:id="@+id/angry_btn3_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/device"
+                    android:shadowColor="#86A89B"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:textSize="24sp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

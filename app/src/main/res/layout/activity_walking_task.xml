@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="40dp"
-                    android:text="仰臥起坐"
+                    android:text="步行"
                     android:textColor="@color/text_color"
                     android:textSize="20sp" />
 
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="公里"
+                    android:text="距離"
                     android:textColor="@color/text_color" />
 
                 <TextView
@@ -218,7 +218,7 @@
                     android:id="@+id/friend_walking_task_finish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="公里"
+                    android:text="距離"
                     android:textSize="20sp"
                     android:textColor="@color/text_color"
                     android:visibility="invisible" />

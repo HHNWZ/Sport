@@ -102,7 +102,7 @@ public class FriendActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
-            if(now_date.equals("日")){
+            if(now_date.equals("五")){
                 Intent intent = new Intent(FriendActivity.this,Crunches_task.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

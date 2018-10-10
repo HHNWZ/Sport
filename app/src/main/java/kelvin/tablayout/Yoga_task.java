@@ -121,7 +121,7 @@ public class Yoga_task extends AppCompatActivity {
         yoga_task_friend_point=(TextView)findViewById(R.id.yoga_task_friend_point);
         confirm_yoga_task_button=(Button)findViewById(R.id.confirm_yoga_task_button);
 
-        yoga_task_data.setText("100");
+        yoga_task_data.setText("20");
         yoga_task_seek_bar.setMax(Float.parseFloat(yoga_task_data.getText().toString()));
         yoga_susses_text_view.setText("目前沒有朋友");
 
@@ -140,7 +140,7 @@ public class Yoga_task extends AppCompatActivity {
                 yoga_data.setMy_task_long_exercise_data(yoga_task_my_count_long);
 
                 my_yoga_task_name.setText(yoga_task_my_name);
-                my_yoga_task_finish_count_data.setText(yoga_task_my_count+"次");
+                my_yoga_task_finish_count_data.setText(""+Time.yogaWeekminute(yoga_task_my_count_long)+"分鐘");
 
                 if(!yoga_task_my_image.equals("default")){
                     Picasso.with(Yoga_task.this).load(yoga_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
@@ -178,7 +178,7 @@ public class Yoga_task extends AppCompatActivity {
                                     yoga_task_friend_count_long=Long.parseLong(yoga_task_friend_count);
 
                                     friend_yoga_task_name.setText(yoga_task_friend_name);
-                                    friend_yoga_task_finish_count_data.setText(yoga_task_friend_count+"次");
+                                    friend_yoga_task_finish_count_data.setText(""+Time.yogaWeekminute(yoga_task_friend_count_long)+"分鐘");
 
 
 
@@ -201,10 +201,10 @@ public class Yoga_task extends AppCompatActivity {
                                     Log.i("進度條的進度",""+yoga_progress);
 
 
-                                    yoga_task_data_long=Time.change_minuteToLong(yoga_task_data.getText().toString());
+                                    yoga_task_data_long=Long.parseLong(yoga_task_data.getText().toString())*60*1000;
                                     Log.i("仰臥起坐共同任務運動量",""+yoga_task_data_long);
                                     if(yoga_progress>=yoga_task_data_long){
-                                        yoga_task_seek_bar.setProgress((float)yoga_task_data_long);
+                                        yoga_task_seek_bar.setProgress(Float.parseFloat(yoga_task_data.getText().toString()));
                                         yoga_susses_text_view.setText("你們已經完成");
                                         yoga_task_friend_point.setVisibility(View.VISIBLE);
                                         confirm_yoga_task_button.setVisibility(View.VISIBLE);
@@ -226,7 +226,7 @@ public class Yoga_task extends AppCompatActivity {
                                             }
                                         });
                                     }else if(yoga_progress<yoga_task_data_long){
-                                        yoga_susses_text_view.setText("你們目前完成\n        "+Time.changeYogaTime(yoga_progress)+"分鐘");
+                                        yoga_susses_text_view.setText("你們目前完成\n    "+Time.yogaWeekminute(yoga_progress)+"分鐘");
                                         yoga_task_seek_bar.setProgress((float)yoga_progress);
                                     }
 

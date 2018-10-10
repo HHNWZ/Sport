@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
         <item
@@ -14,12 +15,6 @@
             android:icon="@drawable/account_plus"
             android:title="@string/close" />
     </group>
-    <!--<group android:checkableBehavior="single">
-        <item
-            android:id="@+id/navItemAbout"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/open" />
-    </group>-->
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/chat_room"
@@ -32,12 +27,6 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="會員資料設定" />
     </group>
-    <!--<group android:checkableBehavior="single">
-        <item
-            android:id="@+id/blog"
-            android:icon="@drawable/blogger"
-            android:title="部落格" />
-    </group>-->
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/Logout"

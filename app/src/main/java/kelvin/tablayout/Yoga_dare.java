@@ -73,7 +73,7 @@ public class Yoga_dare extends AppCompatActivity {
     private static int myCalorieInt;
     private static long FriendFinishTimeLong;
     private static int FriendCalorieInt;
-    private static int Int_exercise_week_dat;
+    private static long Int_exercise_week_dat;
     private static int Int_friend_point;
     private static long Long_exercise_week_dat;
     @Override
@@ -209,7 +209,7 @@ public class Yoga_dare extends AppCompatActivity {
                                     Log.i("12",""+ yoga_dare_data.getYoga_dare_myCalorie());
                                     Log.i("123",""+ FriendFinishTimeLong);
                                     Log.i("1234",""+ FriendCalorieInt);
-                                    Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString())*60*1000;
+                                    Int_exercise_week_dat=Long.parseLong(exercise_week_data.getText().toString())*60*1000;
 
                                     if(yoga_dare_data.getYoga_dare_myFinishTime()==Int_exercise_week_dat&&FriendFinishTimeLong==Int_exercise_week_dat&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0&&text_VS.getVisibility()==View.VISIBLE){
                                         text_winner.setVisibility(View.VISIBLE);

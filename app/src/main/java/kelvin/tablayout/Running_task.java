@@ -138,7 +138,7 @@ public class Running_task extends AppCompatActivity {
                 running_data.setMy_task_double_exercise_data(running_task_my_count_double);
 
                 my_running_task_name.setText(running_task_my_name);
-                my_running_task_finish_count_data.setText(running_task_my_count+"次");
+                my_running_task_finish_count_data.setText(running_task_my_count+"公里");
 
                 if(!running_task_my_image.equals("default")){
                     Picasso.with(Running_task.this).load(running_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
@@ -176,7 +176,7 @@ public class Running_task extends AppCompatActivity {
                                     running_task_friend_count_double=Double.parseDouble(running_task_friend_count);
 
                                     friend_running_task_name.setText(running_task_friend_name);
-                                    friend_running_task_finish_count_data.setText(running_task_friend_count+"次");
+                                    friend_running_task_finish_count_data.setText(running_task_friend_count+"公里");
 
 
 
@@ -223,7 +223,7 @@ public class Running_task extends AppCompatActivity {
                                             }
                                         });
                                     }else if(running_progress<running_task_data_double){
-                                        running_susses_text_view.setText("你們目前完成\n        "+running_progress+"次");
+                                        running_susses_text_view.setText("你們目前完成\n        "+running_progress+"公里");
                                         running_task_seek_bar.setProgress((float)running_progress);
                                     }
 

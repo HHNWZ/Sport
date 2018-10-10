@@ -134,7 +134,7 @@ public class Walking_task extends AppCompatActivity {
                 walking_data.setMy_task_double_exercise_data(walking_task_my_count_double);
 
                 my_walking_task_name.setText(walking_task_my_name);
-                my_walking_task_finish_count_data.setText(walking_task_my_count+"次");
+                my_walking_task_finish_count_data.setText(walking_task_my_count+"公里");
 
                 if(!walking_task_my_image.equals("default")){
                     Picasso.with(Walking_task.this).load(walking_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)

@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/yoga_task_data"
                     android:layout_centerHorizontal="true"
-                    android:text="時間"
+                    android:text="分钟"
                     android:textColor="@color/text_color"
                     android:textSize="20sp" />
 

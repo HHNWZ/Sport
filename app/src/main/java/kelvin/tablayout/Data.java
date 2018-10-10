@@ -36,6 +36,13 @@ public class Data {
     private double my_task_double_exercise_data;
     private long my_task_long_exercise_data;
 
+    private double running_exercise_plan_data;
+    private double walking_exercise_plan_data;
+    private float yoga_exercise_plan_data;
+    private int squats_exercise_plan_data;
+    private int crunches_exercise_plan_data;
+
+
 
 
     public double getFriend_running_task_data() {
@@ -301,6 +308,46 @@ public class Data {
 
     public void setMy_task_long_exercise_data(long my_task_long_exercise_data) {
         this.my_task_long_exercise_data = my_task_long_exercise_data;
+    }
+
+    public double getRunning_exercise_plan_data() {
+        return running_exercise_plan_data;
+    }
+
+    public void setRunning_exercise_plan_data(double running_exercise_plan_data) {
+        this.running_exercise_plan_data = running_exercise_plan_data;
+    }
+
+    public double getWalking_exercise_plan_data() {
+        return walking_exercise_plan_data;
+    }
+
+    public void setWalking_exercise_plan_data(double walking_exercise_plan_data) {
+        this.walking_exercise_plan_data = walking_exercise_plan_data;
+    }
+
+    public float getYoga_exercise_plan_data() {
+        return yoga_exercise_plan_data;
+    }
+
+    public void setYoga_exercise_plan_data(float yoga_exercise_plan_data) {
+        this.yoga_exercise_plan_data = yoga_exercise_plan_data;
+    }
+
+    public int getSquats_exercise_plan_data() {
+        return squats_exercise_plan_data;
+    }
+
+    public void setSquats_exercise_plan_data(int squats_exercise_plan_data) {
+        this.squats_exercise_plan_data = squats_exercise_plan_data;
+    }
+
+    public int getCrunches_exercise_plan_data() {
+        return crunches_exercise_plan_data;
+    }
+
+    public void setCrunches_exercise_plan_data(int crunches_exercise_plan_data) {
+        this.crunches_exercise_plan_data = crunches_exercise_plan_data;
     }
 }
 

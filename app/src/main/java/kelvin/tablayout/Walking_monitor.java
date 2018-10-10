@@ -197,7 +197,7 @@ public class Walking_monitor extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         if(walking_distance!=0) {
-            List<Location> locationList = Collections.emptyList();
+
             TextView distance_data_of_walking_monitor = (TextView) findViewById(R.id.distance_data_of_walking_monitor);
             TextView duration_data_of_walking_monitor = (TextView) findViewById(R.id.duration_data_of_walking_monitor);
             TextView meanHeartRate_data_of_walking_monitor = (TextView) findViewById(R.id.meanHeartRate_data_of_walking_monitor);
@@ -338,15 +338,7 @@ public class Walking_monitor extends AppCompatActivity {
         }
     }
 
-    public byte[] createLocationData(List<Location> locationList){
-        byte[] zip= HealthDataUtil.getJsonBlob(locationList);
-        return zip;
-    }
 
-    public  List<Location> getLocationData(byte[] zip){
-        List<Location> locationList=HealthDataUtil.getStructuredDataList(zip,Location.class);
-        return  locationList;
-    }
     public static Walking_monitor getInstance() {
         return mInstance;
     }

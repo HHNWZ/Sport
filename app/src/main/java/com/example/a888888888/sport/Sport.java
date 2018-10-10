@@ -68,7 +68,7 @@ public class Sport extends Fragment implements View.OnTouchListener {
         view.setOnTouchListener(this);
         Button run = (Button) view.findViewById(R.id.button5);
         Button walk = (Button) view.findViewById(R.id.button6);
-        Button air = (Button) view.findViewById(R.id.button7);
+
         Button push = (Button) view.findViewById(R.id.button8);
         Button sit = (Button) view.findViewById(R.id.button9);
         run.setOnClickListener(new View.OnClickListener() {
@@ -87,16 +87,6 @@ public class Sport extends Fragment implements View.OnTouchListener {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_main,new Walk(),null)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-        air.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Air(),null)
                         .addToBackStack(null)
                         .commit();
             }

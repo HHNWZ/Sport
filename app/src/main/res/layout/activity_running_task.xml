@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="公里"
+                    android:text="距離"
                     android:textColor="@color/text_color" />
 
                 <TextView
@@ -218,7 +218,7 @@
                     android:id="@+id/friend_running_task_finish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="公里"
+                    android:text="距離"
                     android:textSize="20sp"
                     android:textColor="@color/text_color"
                     android:visibility="invisible" />

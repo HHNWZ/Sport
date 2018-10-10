@@ -129,7 +129,8 @@
         <activity android:name="kelvin.tablayout.SetupActivity" />
         <activity android:name="kelvin.tablayout.PostActivity" />
         <activity android:name="kelvin.tablayout.ClickPostActivity" />
-        <activity android:name="kelvin.tablayout.CommentsActivity"></activity>
+        <activity android:name="kelvin.tablayout.CommentsActivity" />
+        <activity android:name="kelvin.tablayout.ControlDie"></activity>
     </application>
 
 </manifest>

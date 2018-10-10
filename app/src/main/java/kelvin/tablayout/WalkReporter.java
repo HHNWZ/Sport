@@ -150,14 +150,5 @@ public class WalkReporter extends Application{
             readLastWalk();
         }
     };
-    public byte[] createLocationData(List<Location> locationList){
-        byte[] zip= HealthDataUtil.getJsonBlob(locationList);
-        return zip;
-    }
 
-
-    public static List<Location> getLiveData(byte[] zip){
-        List<Location> locationList=HealthDataUtil.getStructuredDataList(zip,Location.class);
-        return  locationList;
-    }
 }

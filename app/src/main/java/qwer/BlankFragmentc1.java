@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,9 @@ import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.NumberFormat;
 
@@ -40,6 +44,8 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FirebaseAuth mAuth;
+    private DatabaseReference exercise_plan_database;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,6 +78,9 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAuth = FirebaseAuth.getInstance();
+        exercise_plan_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise_plan");
+        Log.i("我的id",""+mAuth.getCurrentUser().getUid());
     }
 
     @Override
@@ -215,6 +224,11 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                     qwerb4.setVisibility(View.INVISIBLE);
                     qwerb5.setVisibility(View.INVISIBLE);
                     qwerb6.setVisibility(View.INVISIBLE);
+                    exercise_plan_database.child("crunches").setValue(10);
+                    exercise_plan_database.child("running").setValue(1);
+                    exercise_plan_database.child("squats").setValue(20);
+                    exercise_plan_database.child("walking").setValue(2);
+                    exercise_plan_database.child("yoga").setValue(3);
 
 
                 }
@@ -239,10 +253,20 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                     qwerb4.setVisibility(View.INVISIBLE);
                     qwerb5.setVisibility(View.INVISIBLE);
                     qwerb6.setVisibility(View.INVISIBLE);
+                    exercise_plan_database.child("crunches").setValue(20);
+                    exercise_plan_database.child("running").setValue(2);
+                    exercise_plan_database.child("squats").setValue(40);
+                    exercise_plan_database.child("walking").setValue(4);
+                    exercise_plan_database.child("yoga").setValue(6);
 
                 }
                 else if (24 <=a2 && a2<27)
                 {
+                    exercise_plan_database.child("crunches").setValue(30);
+                    exercise_plan_database.child("running").setValue(3);
+                    exercise_plan_database.child("squats").setValue(60);
+                    exercise_plan_database.child("walking").setValue(6);
+                    exercise_plan_database.child("yoga").setValue(9);
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("檢測報告")
                             .setMessage(getString(R.string.bmi1))
@@ -280,7 +304,11 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (27 <=a2 && a2 < 30)
                 {
-
+                    exercise_plan_database.child("crunches").setValue(40);
+                    exercise_plan_database.child("running").setValue(4);
+                    exercise_plan_database.child("squats").setValue(80);
+                    exercise_plan_database.child("walking").setValue(8);
+                    exercise_plan_database.child("yoga").setValue(12);
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("檢測報告")
                             .setMessage(getString(R.string.bmi1))
@@ -317,7 +345,11 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (30 <= a2 && a2 < 35)
                 {
-
+                    exercise_plan_database.child("crunches").setValue(50);
+                    exercise_plan_database.child("running").setValue(5);
+                    exercise_plan_database.child("squats").setValue(100);
+                    exercise_plan_database.child("walking").setValue(10);
+                    exercise_plan_database.child("yoga").setValue(15);
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("檢測報告")
                             .setMessage(getString(R.string.bmi1))
@@ -355,6 +387,12 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                     else if (a2 >= 35)
                 {
+
+                    exercise_plan_database.child("crunches").setValue(60);
+                    exercise_plan_database.child("running").setValue(6);
+                    exercise_plan_database.child("squats").setValue(120);
+                    exercise_plan_database.child("walking").setValue(12);
+                    exercise_plan_database.child("yoga").setValue(18);
 
                     new android.app.AlertDialog.Builder(getActivity())
                             .setTitle("檢測報告")

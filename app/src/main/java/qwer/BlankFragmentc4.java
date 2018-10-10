@@ -1,6 +1,7 @@
 package qwer;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 
 import kelvin.tablayout.Data;
+import kelvin.tablayout.Time;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,15 +53,35 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private int mycm,mykg;
-    private TextView title_need_running_exercise,need_running_exercise,title_database_today_running_exercise,database_today_running_exercise,title_check_exercise_running,check_exercise_running;
-    private Data need_exercise_data;
-    private DecimalFormat df = new DecimalFormat("0.00");
-    private DatabaseReference runningDatabase;
-    private static FirebaseAuth mAuth;
-    private static double double_today_running_record;
-    public static double TargetKM;
 
+    private DatabaseReference exercise_plan_database,exercise_count_database;
+    private static FirebaseAuth mAuth;
+
+    private static TextView walking_exercise_plan3;
+    private static TextView running_exercise_plan3;
+    private static TextView yoga_exercise_plan3;
+    private static TextView squats_exercise_plan3;
+    private static TextView crunches_exercise_plan3;
+
+    private static TextView walking_exercise_plan4;
+    private static TextView running_exercise_plan4;
+    private static TextView yoga_exercise_plan4;
+    private static TextView squats_exercise_plan4;
+    private static TextView crunches_exercise_plan4;
+
+    private  Button walking_exercise_planning;
+    private  Button running_exercise_planning;
+    private  Button yoga_exercise_planning;
+    private  Button squats_exercise_planning;
+    private  Button crunches_exercise_planning;
+
+    private SeekBar walking_seek_bar;
+    private SeekBar running_seek_bar;
+    private SeekBar yoga_seek_bar;
+    private SeekBar squats_seek_bar;
+    private SeekBar crunches_seek_bar;
+
+    public Data exercise_plan =new Data();
 
     private OnFragmentInteractionListener mListener;
 
@@ -91,6 +114,10 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAuth = FirebaseAuth.getInstance();
+        exercise_plan_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise_plan");
+        exercise_count_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise_count");
+        Log.i("我的id",""+mAuth.getCurrentUser().getUid());
     }
 
     @Override
@@ -99,97 +126,199 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc4, null);
         view.setOnTouchListener(this);
-        final int[] mySport = {0};
-        final EditText userCM=(EditText)view.findViewById(R.id.myCM);
-        final EditText userKG=(EditText)view.findViewById(R.id.myKG);
-        final Spinner spinner=(Spinner)view.findViewById(R.id.SportListSpinner);
-        final String[] SportList = {"請選擇運動項目","有氧運動","走路","跑步","伏地挺身","仰臥起坐"};
-        final LinearLayout selelayout=(LinearLayout)view.findViewById(R.id.seleLayout);
-        final LinearLayout sporttarget=(LinearLayout)view.findViewById(R.id.SportTargetLayout);
-        final TextView sportitem=(TextView)view.findViewById(R.id.SportItem);
-        final TextView progressnum=(TextView)view.findViewById(R.id.SportProgressNum);
-        need_running_exercise=(TextView)view.findViewById(R.id.need_running_exercise);
-        title_need_running_exercise=(TextView)view.findViewById(R.id.title_need_running_exercise);
-        title_database_today_running_exercise=(TextView)view.findViewById(R.id.title_database_today_running_exercise);
-        database_today_running_exercise=(TextView)view.findViewById(R.id.database_today_running_exercise);
-        title_check_exercise_running=(TextView)view.findViewById(R.id.title_check_exercise_running);
-        check_exercise_running=(TextView)view.findViewById(R.id.check_exercise_running);
-        need_running_exercise.setVisibility(View.INVISIBLE);
-        title_need_running_exercise.setVisibility(View.INVISIBLE);
-        title_database_today_running_exercise.setVisibility(View.INVISIBLE);
-        database_today_running_exercise.setVisibility(View.INVISIBLE);
-        title_check_exercise_running.setVisibility(View.INVISIBLE);
-        check_exercise_running.setVisibility(View.INVISIBLE);
-        ArrayAdapter<String> sportlist = new ArrayAdapter<String>(
-                view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                SportList);
-        spinner.setAdapter(sportlist);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        walking_exercise_plan3=(TextView)view.findViewById(R.id.walking_exercise_plan3);
+        running_exercise_plan3=(TextView)view.findViewById(R.id.running_exercise_plan3) ;
+        yoga_exercise_plan3=(TextView)view.findViewById(R.id.yoga_exercise_plan3);
+        squats_exercise_plan3=(TextView)view.findViewById(R.id.squats_exercise_plan3);
+        crunches_exercise_plan3=(TextView)view.findViewById(R.id.crunches_exercise_plan3);
+
+        walking_exercise_plan4=(TextView)view.findViewById(R.id.walking_exercise_plan4);
+        running_exercise_plan4=(TextView)view.findViewById(R.id.running_exercise_plan4) ;
+        yoga_exercise_plan4=(TextView)view.findViewById(R.id.yoga_exercise_plan4);
+        squats_exercise_plan4=(TextView)view.findViewById(R.id.squats_exercise_plan4);
+        crunches_exercise_plan4=(TextView)view.findViewById(R.id.crunches_exercise_plan4);
+
+        walking_exercise_planning=(Button) view.findViewById(R.id.walking_exercise_planning);
+        running_exercise_planning=(Button) view.findViewById(R.id.running_exercise_planning);
+        yoga_exercise_planning=(Button) view.findViewById(R.id.yoga_exercise_planning);
+        squats_exercise_planning=(Button)view.findViewById(R.id.squats_exercise_planning);
+        crunches_exercise_planning=(Button)view.findViewById(R.id.crunches_exercise_planning);
+
+        walking_seek_bar=(SeekBar)view.findViewById(R.id.walking_seek_bar);
+        running_seek_bar=(SeekBar)view.findViewById(R.id.running_seek_bar);
+        yoga_seek_bar=(SeekBar)view.findViewById(R.id.yoga_seek_bar);
+        squats_seek_bar=(SeekBar)view.findViewById(R.id.squats_seek_bar);
+        crunches_seek_bar=(SeekBar)view.findViewById(R.id.crunches_seek_bar);
+        walking_seek_bar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mySport[0] =i;
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
+        });
+        running_seek_bar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                mySport[0] =0;
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
-        });//以下拉式列表選擇運動項目
-        final Button checkbtn=(Button)view.findViewById(R.id.seleSport);
-        checkbtn.setOnClickListener(new View.OnClickListener() {
+        });
+        yoga_seek_bar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                if(userCM.getText()==null||userKG.getText()==null){
-                    Toast.makeText(getActivity(), "請先輸入身高體重", Toast.LENGTH_SHORT).show();
-
-                }else if(mySport[0]==0){
-                    Toast.makeText(getActivity(), "請先選擇運動項目", Toast.LENGTH_SHORT).show();
-                }else{
-                    mycm=Integer.valueOf(userCM.getText().toString());
-                    mykg=Integer.valueOf(userKG.getText().toString());
-                    Toast.makeText(getActivity(), mycm+"、"+mykg, Toast.LENGTH_SHORT).show();
-                    //selelayout.setVisibility(View.GONE);
-
-                    //sporttarget.setVisibility(View.VISIBLE);
-                    sportitem.setText(SportList[mySport[0]]);
-                    gototheSport(mycm,mykg,mySport[0]);//前往運動
-
-                }
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
-        });//選擇運動項目後方可進入下一階段：運動進度
-
-        final ProgressBar sportprogress=(ProgressBar)view.findViewById(R.id.SportProgressBar);
-        final Button dothesport=(Button)view.findViewById(R.id.DoTheSport);
-        final ImageView sportfinishimg=(ImageView)view.findViewById(R.id.SportFinishIMG);
-        int progressMax=100;
-        sportprogress.setMax(progressMax);
-        dothesport.setOnClickListener(new View.OnClickListener() {
+        });
+        squats_seek_bar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                sportprogress.incrementProgressBy(10);//每次點擊時增加進度條(10%)
-                if(sportprogress.getProgress()<progressMax) {//檢查進度條是否已滿
-                    progressnum.setText("目前運動進度：" +
-                            Integer.toString(sportprogress.getProgress()) + "/100");
-                }else{//進度條達到100%，顯示目標達成畫面
-                    progressnum.setText("今天的運動進度已完成(100/100)");
-                    dothesport.setVisibility(View.GONE);
-                    sportfinishimg.setVisibility(View.VISIBLE);
-                }
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+        crunches_seek_bar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
         });
 
-        final TextView tdbk,tdlh,tddn,tdkll;//今日飲食紀錄
-        tdbk=(TextView)view.findViewById(R.id.tdBK);
-        tdlh=(TextView)view.findViewById(R.id.tdLH);
-        tddn=(TextView)view.findViewById(R.id.tdDN);
-        tdkll=(TextView)view.findViewById(R.id.tdKLL);
-        theDate todate=((MainActivity)getActivity()).getTodayEaetdInfo();//取得今日日記資訊
-        if(todate==null){}else {
-            tdbk.setText("早餐："+Integer.toString(todate.todayKLL(0)));
-            tdlh.setText("午餐："+Integer.toString(todate.todayKLL(1)));
-            tddn.setText("晚餐："+Integer.toString(todate.todayKLL(2)));
-            tdkll.setText("今日累計熱量：" + todate.todayKLL() + "大卡");
-        }
+
+        exercise_plan_database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String walking_exercise_plan_data=dataSnapshot.child("walking").getValue().toString();
+                String running_exercise_plan_data=dataSnapshot.child("running").getValue().toString();
+                String squats_exercise_plan_data=dataSnapshot.child("squats").getValue().toString();
+                String crunches_exercise_plan_data=dataSnapshot.child("crunches").getValue().toString();
+                String yoga_exercise_plan_data=dataSnapshot.child("yoga").getValue().toString();
+
+                double walking_exercise_plan_data_double=Double.parseDouble(walking_exercise_plan_data);
+                double running_exercise_plan_data_double=Double.parseDouble(running_exercise_plan_data);
+                float yoga_exercise_plan_data_float=Float.parseFloat(yoga_exercise_plan_data);
+                int squats_exercise_plan_data_int=Integer.parseInt(squats_exercise_plan_data);
+                int crunches_exercise_plan_data_int=Integer.parseInt(crunches_exercise_plan_data);
+
+                exercise_plan.setWalking_exercise_plan_data(walking_exercise_plan_data_double);
+                exercise_plan.setRunning_exercise_plan_data(running_exercise_plan_data_double);
+                exercise_plan.setYoga_exercise_plan_data(yoga_exercise_plan_data_float);
+                exercise_plan.setSquats_exercise_plan_data(squats_exercise_plan_data_int);
+                exercise_plan.setCrunches_exercise_plan_data(crunches_exercise_plan_data_int);
+
+                if (walking_exercise_plan_data_double==0){
+                    Toast.makeText(getContext(),"你未輸入BMI,請點擊BMI計算",Toast.LENGTH_SHORT).show();
+                    walking_exercise_planning.setVisibility(View.INVISIBLE);
+                    running_exercise_planning.setVisibility(View.INVISIBLE);
+                    yoga_exercise_planning.setVisibility(View.INVISIBLE);
+                    squats_exercise_planning.setVisibility(View.INVISIBLE);
+                    crunches_exercise_planning.setVisibility(View.INVISIBLE);
+
+                }else {
+                    walking_exercise_planning.setVisibility(View.VISIBLE);
+                    running_exercise_planning.setVisibility(View.VISIBLE);
+                    yoga_exercise_planning.setVisibility(View.VISIBLE);
+                    squats_exercise_planning.setVisibility(View.VISIBLE);
+                    crunches_exercise_planning.setVisibility(View.VISIBLE);
+                    walking_exercise_plan3.setText("你今天需要步行"+walking_exercise_plan_data+"公里");
+                    running_exercise_plan3.setText("你今天需要跑步"+running_exercise_plan_data+"公里");
+                    yoga_exercise_plan3.setText("你今天需要做瑜伽"+yoga_exercise_plan_data+"分鐘");
+                    squats_exercise_plan3.setText("你今天需要做深蹲"+squats_exercise_plan_data+"次");
+                    crunches_exercise_plan3.setText("你今天需要做仰臥起"+crunches_exercise_plan_data+"次");
+                    exercise_count_database.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String walking_today_record=dataSnapshot.child("walking").child("today_record").getValue().toString();
+                            String running_today_record=dataSnapshot.child("running").child("today_record").getValue().toString();
+                            String yoga_today_time=dataSnapshot.child("yoga").child("today_time").getValue().toString();
+                            String squats_today_count=dataSnapshot.child("squats").child("today_count").getValue().toString();
+                            String crunches_today_count=dataSnapshot.child("crunches").child("today_count").getValue().toString();
+                            double walking_today_record_double=Double.parseDouble(walking_today_record);
+                            double running_today_record_double=Double.parseDouble(running_today_record);
+                            long  yoga_today_record_long=Long.parseLong(yoga_today_time);
+                            float  yoga_today_record_float=Time.yogaWeekminute(yoga_today_record_long);
+                            int squats_today_count_int=Integer.parseInt(squats_today_count);
+                            int crunches_today_count_int=Integer.parseInt(crunches_today_count);
+                            Log.i("步行今天記錄",""+walking_today_record_double);
+                            Log.i("今天需要步行的距離",""+exercise_plan.getWalking_exercise_plan_data());
+                            Log.i("跑步今天記錄",""+running_today_record_double);
+                            Log.i("跑步需要步行的距離",""+exercise_plan.getRunning_exercise_plan_data());
+                            Log.i("瑜伽今天記錄",""+yoga_today_record_float);
+                            Log.i("今天需要做瑜伽的時間",""+exercise_plan.getYoga_exercise_plan_data());
+                            Log.i("深蹲今天記錄",""+squats_today_count_int);
+                            Log.i("今天需要做深蹲的次數",""+exercise_plan.getSquats_exercise_plan_data());
+                            Log.i("仰臥起坐今天記錄",""+crunches_today_count_int);
+                            Log.i("今天需要做仰臥起坐的次數",""+exercise_plan.getCrunches_exercise_plan_data());
+
+                            walking_seek_bar.setMax((int)exercise_plan.getWalking_exercise_plan_data());
+                            running_seek_bar.setMax((int)exercise_plan.getRunning_exercise_plan_data());
+                            yoga_seek_bar.setMax((int)exercise_plan.getYoga_exercise_plan_data());
+                            squats_seek_bar.setMax((int)exercise_plan.getSquats_exercise_plan_data());
+                            crunches_seek_bar.setMax(exercise_plan.getCrunches_exercise_plan_data());
+                            if(walking_today_record_double>=exercise_plan.getWalking_exercise_plan_data()){
+                                walking_exercise_plan4.setText("你已經完成目標");
+                                walking_seek_bar.setProgress((int)exercise_plan.getWalking_exercise_plan_data());
+                                walking_exercise_planning.setVisibility(View.INVISIBLE);
+                            }else if(walking_today_record_double<exercise_plan.getWalking_exercise_plan_data()){
+                                walking_exercise_plan4.setText("你目前完成"+walking_today_record_double+"公里");
+                                walking_seek_bar.setProgress((int)walking_today_record_double);
+                                walking_exercise_planning.setVisibility(View.VISIBLE);
+                            }
+                            if(running_today_record_double>=exercise_plan.getRunning_exercise_plan_data()){
+                                running_exercise_plan4.setText("你已經完成目標");
+                                running_seek_bar.setProgress((int)exercise_plan.getRunning_exercise_plan_data());
+                                running_exercise_planning.setVisibility(View.INVISIBLE);
+                            }else if(running_today_record_double<exercise_plan.getRunning_exercise_plan_data()){
+                                running_exercise_plan4.setText("你目前完成"+running_today_record_double+"公里");
+                                running_seek_bar.setProgress((int)running_today_record_double);
+                                running_exercise_planning.setVisibility(View.VISIBLE);
+                            }
+                            if(yoga_today_record_float>=exercise_plan.getYoga_exercise_plan_data()){
+                                yoga_exercise_plan4.setText("你已經完成目標");
+                                yoga_seek_bar.setProgress((int)exercise_plan.getYoga_exercise_plan_data());
+                                yoga_exercise_planning.setVisibility(View.INVISIBLE);
+                            }else if(yoga_today_record_float<exercise_plan.getYoga_exercise_plan_data()){
+                                yoga_exercise_plan4.setText("你目前完成"+Time.changeYogaTime(yoga_today_record_long));
+                                yoga_seek_bar.setProgress((int)yoga_today_record_float);
+                                yoga_exercise_planning.setVisibility(View.VISIBLE);
+                            }
+                            if(squats_today_count_int>=exercise_plan.getSquats_exercise_plan_data()){
+                                squats_exercise_plan4.setText("你已經完成目標");
+                                squats_seek_bar.setProgress(exercise_plan.getSquats_exercise_plan_data());
+                                squats_exercise_planning.setVisibility(View.INVISIBLE);
+
+                            }else if(squats_today_count_int<exercise_plan.getSquats_exercise_plan_data()){
+                                squats_exercise_plan4.setText("你目前完成"+squats_today_count_int+"次");
+                                squats_seek_bar.setProgress(squats_today_count_int);
+                                squats_exercise_planning.setVisibility(View.VISIBLE);
+                            }
+                            if(crunches_today_count_int>=exercise_plan.getCrunches_exercise_plan_data()){
+                                crunches_exercise_plan4.setText("你已經完成目標");
+                                crunches_seek_bar.setProgress(exercise_plan.getCrunches_exercise_plan_data());
+                                crunches_exercise_planning.setVisibility(View.INVISIBLE);
+
+                            }else if(crunches_today_count_int<exercise_plan.getCrunches_exercise_plan_data()){
+                                crunches_exercise_plan4.setText("你目前完成"+crunches_today_count_int+"次");
+                                crunches_seek_bar.setProgress(crunches_today_count_int);
+                                crunches_exercise_planning.setVisibility(View.VISIBLE);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
 
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
@@ -228,77 +357,7 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         return view;
     }
 
-    private void gototheSport(int mycm, int mykg, int mysp) {
-        switch (mysp){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3://跑步
 
-                //TargetKM=((mycm*6.25-105)+(mykg*10))/(mykg*1.036)*0.2;
-
-
-                //請以參數 TargetKM 作為目標距離進行運動偵測
-                mAuth = FirebaseAuth.getInstance();
-                Log.i("我的id:",""+mAuth.getCurrentUser().getUid());
-                //need_running_exercise.setVisibility(View.VISIBLE);
-                //title_need_running_exercise.setVisibility(View.VISIBLE);
-                //need_running_exercise.setText(""+df.format(TargetKM)+"公里");
-
-                runningDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-                runningDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        TargetKM=((mycm*6.25-105)+(mykg*10))/(mykg*1.036)*0.2;
-                        need_running_exercise.setVisibility(View.VISIBLE);
-                        title_need_running_exercise.setVisibility(View.VISIBLE);
-                        need_running_exercise.setText(""+df.format(TargetKM)+"公里");
-                        title_database_today_running_exercise.setVisibility(View.VISIBLE);
-                        database_today_running_exercise.setVisibility(View.VISIBLE);
-                        Log.i("比較距離",""+TargetKM);
-                        String today_running_record=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
-                        double_today_running_record=Double.parseDouble(today_running_record);
-                        database_today_running_exercise.setText(""+double_today_running_record+"公里");
-                        title_check_exercise_running.setVisibility(View.VISIBLE);
-                        check_exercise_running.setVisibility(View.VISIBLE);
-                        if(double_today_running_record>=TargetKM){
-                            check_exercise_running.setText("有達標");
-                        }else{
-                            check_exercise_running.setText("沒有達標");
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                //title_database_today_running_exercise.setVisibility(View.INVISIBLE);
-                //database_today_running_exercise.setVisibility(View.INVISIBLE);
-
-
-                break;
-            case 4:
-                break;
-
-            case 5:
-                break;
-            default:
-                break;
-
-        }
-    }
-
-    private String getEatedString(int[] foods) {
-        String Count = null;
-        for(int i=0;i<9;i++){
-            if(foods[i]>0){
-                //Count.concat(((MainActivity)getActivity()).food_list.get(i)+"、");
-            }
-        }
-        return "尚未紀錄";
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String Tag, String number) {

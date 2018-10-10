@@ -43,228 +43,347 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="55dp"
-        android:orientation="vertical">
+        android:layout_above="@+id/image_button"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
 
         <LinearLayout
-            android:id="@+id/seleLayout"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView63"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="身高：" />
-
-                <EditText
-                    android:id="@+id/myCM"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="請輸入身高(CM)"
-                    android:inputType="number"
-                    android:text="" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/textView64"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="體重：" />
-
-                <EditText
-                    android:id="@+id/myKG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="請輸入體重(KG)"
-                    android:inputType="number"
-                    android:text="" /></LinearLayout>
-
-            <Spinner
-                android:id="@+id/SportListSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/seleSport"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="選擇此運動" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/SportTargetLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/SportItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="運動項目" />
-
-            <ProgressBar
-                android:id="@+id/SportProgressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/SportProgressNum"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="目前運動進度：0/100" />
-
-            <Button
-                android:id="@+id/DoTheSport"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="做了一單位的運動-->" />
-            <ImageView
-                android:id="@+id/SportFinishIMG"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/sportfinish"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/TodayFoodKKL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="今日的飲食：" />
-
-            <TextView
-                android:id="@+id/tdBK"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="早餐：尚未紀錄" />
-
-            <TextView
-                android:id="@+id/tdLH"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="午餐：尚未記錄" />
-
-            <TextView
-                android:id="@+id/tdDN"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="晚餐：尚未紀錄" />
-
-            <TextView
-                android:id="@+id/tdKLL"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="今日累計熱量：0" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/post_border"
+            android:padding="10dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/title_need_running_exercise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="需要的運動量" />
-
-                <TextView
-                    android:id="@+id/need_running_exercise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5公里" />
-            </LinearLayout>
+                android:src="@drawable/walkingbackground"
+                android:layout_weight="2"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:gravity="center">
-
+                >
                 <TextView
-                    android:id="@+id/title_database_today_running_exercise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="偵測到的運動量" />
+                    android:id="@+id/walking_exercise_plan1"
+                    android:text="依據你的BMI值"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
 
                 <TextView
-                    android:id="@+id/database_today_running_exercise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5公里" />
-
+                    android:id="@+id/walking_exercise_plan3"
+                    android:text="你今天需要步行0公里"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+                <SeekBar
+                    android:id="@+id/walking_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/walking_exercise_plan4"
+                    android:text="你目前完成0公里"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
             </LinearLayout>
+
+            <Button
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/walking_exercise_planning"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/object_color"
+                android:text="去運動吧"
+                android:textColor="@color/text_color"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/post_border"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/runningbackground"
+                android:layout_weight="2"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/running_exercise_plan1"
+                    android:text="依據你的BMI值"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/running_exercise_plan3"
+                    android:text="你今天需要跑步0公里"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+                <SeekBar
+                    android:id="@+id/running_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/running_exercise_plan4"
+                    android:text="你目前完成0公里"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/running_exercise_planning"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/object_color"
+                android:text="去運動吧"
+                android:textColor="@color/text_color"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/post_border"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/yogabackground"
+                android:layout_weight="2"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:layout_weight="1"
-                android:gravity="center">
-
+                >
                 <TextView
-                    android:id="@+id/title_check_exercise_running"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="判斷" />
-
+                    android:id="@+id/yoga_exercise_plan1"
+                    android:text="依據你的BMI值你v"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
                 <TextView
-                    android:id="@+id/check_exercise_running"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="不達標" />
+                    android:id="@+id/yoga_exercise_plan3"
+                    android:text="你今天需要做瑜伽0分鐘"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+                <SeekBar
+                    android:id="@+id/yoga_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/yoga_exercise_plan4"
+                    android:text="你目前完成0分鐘"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
 
             </LinearLayout>
 
+            <Button
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/yoga_exercise_planning"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/object_color"
+                android:text="去運動吧"
+                android:textColor="@color/text_color"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/post_border"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            >
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/suagatsbackground"
+                android:layout_weight="2"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/squats_exercise_plan1"
+                    android:text="依據你的BMI值"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/squats_exercise_plan3"
+                    android:text="你今天需要做深蹲0次"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+                <SeekBar
+                    android:id="@+id/squats_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/squats_exercise_plan4"
+                    android:text="你目前完成0次"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/squats_exercise_planning"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/object_color"
+                android:text="去運動吧"
+                android:textColor="@color/text_color"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/post_border"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/crunchesbackground"
+                android:layout_weight="2"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/crunches_exercise_plan1"
+                    android:text="依據你的BMI值"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/crunches_exercise_plan3"
+                    android:text="你今天需要做仰臥起0次"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+                <SeekBar
+                    android:id="@+id/crunches_seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/crunches_exercise_plan4"
+                    android:text="你目前完成0次"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/crunches_exercise_planning"
+                android:background="@drawable/button"
+                android:backgroundTint="@color/object_color"
+                android:text="去運動吧"
+                android:textColor="@color/text_color"/>
         </LinearLayout>
 
-
-
-
-
-
-
-
-
-
     </LinearLayout>
+
+
+
+
+
+
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:id="@+id/image_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:orientation="horizontal">

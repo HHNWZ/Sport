@@ -71,6 +71,7 @@ import java.util.Map;
 import java.util.Timer;
 
 import kelvin.tablayout.ChatActivity;
+import kelvin.tablayout.ControlDie;
 import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Exercise_main;
@@ -111,7 +112,7 @@ import qwer.theDate;
 
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
-        ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Air.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
+        ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
         ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener, OnChartValueSelectedListener {
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
@@ -905,11 +906,9 @@ public class  MainActivity extends AppCompatActivity
         kel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, Exercise_main.class);
-                    startActivity(intent);
-                    MainActivity.this.finish();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, Exercise_main.class);
+                startActivity(intent);
             }
         });
         hal.setOnClickListener(new View.OnClickListener() {
@@ -918,7 +917,7 @@ public class  MainActivity extends AppCompatActivity
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, PhotoBlog.class);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
         del.setOnClickListener(new View.OnClickListener() {
@@ -1092,7 +1091,7 @@ public class  MainActivity extends AppCompatActivity
         BlankFragmentc4 sportplan=BlankFragmentc4.newInstance(null,null);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_main,
+                R.id.content_control_die,
                 sportplan,
                 sportplan.getTag()
         ).commit();
@@ -1105,7 +1104,7 @@ public class  MainActivity extends AppCompatActivity
         addDiary adddiary=addDiary.newInstance(mydiary,null);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_main,
+                R.id.content_control_die,
                 adddiary,
                 adddiary.getTag()
         ).commit();
@@ -1131,7 +1130,7 @@ public class  MainActivity extends AppCompatActivity
                 theKLL);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_main,
+                R.id.content_control_die,
                 showdiary,
                 showdiary.getTag()
         ).commit();
@@ -1178,7 +1177,7 @@ public class  MainActivity extends AppCompatActivity
                 dateID);//4.日期ID
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_main,
+                R.id.content_control_die,
                 FaK,
                 FaK.getTag()
         ).commit();
