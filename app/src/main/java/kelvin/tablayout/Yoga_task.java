@@ -140,7 +140,7 @@ public class Yoga_task extends AppCompatActivity {
                 yoga_data.setMy_task_long_exercise_data(yoga_task_my_count_long);
 
                 my_yoga_task_name.setText(yoga_task_my_name);
-                my_yoga_task_finish_count_data.setText(""+Time.yogaWeekminute(yoga_task_my_count_long)+"分鐘");
+                my_yoga_task_finish_count_data.setText(""+Time.changeYogaTime(yoga_task_my_count_long));
 
                 if(!yoga_task_my_image.equals("default")){
                     Picasso.with(Yoga_task.this).load(yoga_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
@@ -178,7 +178,7 @@ public class Yoga_task extends AppCompatActivity {
                                     yoga_task_friend_count_long=Long.parseLong(yoga_task_friend_count);
 
                                     friend_yoga_task_name.setText(yoga_task_friend_name);
-                                    friend_yoga_task_finish_count_data.setText(""+Time.yogaWeekminute(yoga_task_friend_count_long)+"分鐘");
+                                    friend_yoga_task_finish_count_data.setText(""+Time.changeYogaTime(yoga_task_friend_count_long));
 
 
 
@@ -226,7 +226,7 @@ public class Yoga_task extends AppCompatActivity {
                                             }
                                         });
                                     }else if(yoga_progress<yoga_task_data_long){
-                                        yoga_susses_text_view.setText("你們目前完成\n    "+Time.yogaWeekminute(yoga_progress)+"分鐘");
+                                        yoga_susses_text_view.setText("你們目前完成\n    "+Time.changeYogaTime(yoga_progress));
                                         yoga_task_seek_bar.setProgress((float)yoga_progress);
                                     }
 

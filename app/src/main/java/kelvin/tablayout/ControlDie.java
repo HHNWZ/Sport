@@ -1,7 +1,6 @@
 package kelvin.tablayout;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,10 +19,8 @@ import com.example.a888888888.sport.R;
 import com.example.a888888888.sport.Register;
 import com.example.a888888888.sport.Run;
 import com.example.a888888888.sport.Sit;
-import com.example.a888888888.sport.Sport;
 import com.example.a888888888.sport.Userdata;
 import com.example.a888888888.sport.Walk;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.onesignal.OneSignal;
 
 import qwer.BlankFragment;
@@ -37,7 +34,7 @@ import qwer.ShowDiary;
 import qwer.addDiary;
 import qwer.foodAndKLL;
 
-public class ControlDie extends AppCompatActivity implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
+public class ControlDie extends AppCompatActivity implements Over.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener
         ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener {

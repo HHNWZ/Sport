@@ -43,11 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="necowneco.tablayout.habaActivity"
-            android:label="@string/title_activity_haba"
-            android:screenOrientation="nosensor"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="kelvin.tablayout.EnlargeImageView" />
         <activity android:name="kelvin.tablayout.MainActivityFireBase" />
         <activity android:name="kelvin.tablayout.StartActivity" />

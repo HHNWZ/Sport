@@ -78,7 +78,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="修改用戶國籍"
+            android:text="修改用戶動態"
             android:id="@+id/edit_country_name"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="10dp"
@@ -93,7 +93,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
             android:background="@drawable/inputs"
-            android:hint="修改用戶國籍"
+            android:hint="修改用戶動態 "
             android:inputType="text"
             android:padding="8dp"
              />

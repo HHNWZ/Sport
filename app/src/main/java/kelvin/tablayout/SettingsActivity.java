@@ -153,8 +153,8 @@ public class SettingsActivity extends AppCompatActivity {
                         String name = dataSnapshot.child("name").getValue().toString();
                         settingFullName.setText(name);
                     }
-                    if(dataSnapshot.hasChild("country")){
-                        String country = dataSnapshot.child("country").getValue().toString();
+                    if(dataSnapshot.hasChild("status")){
+                        String country = dataSnapshot.child("status").getValue().toString();
                         settingCountryName.setText(country);
                     }
                     if(dataSnapshot.hasChild("username")){
@@ -311,7 +311,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if(TextUtils.isEmpty(country))
         {
-            Toast.makeText(this, "請輸入國籍", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "請輸入動態", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -323,11 +323,7 @@ public class SettingsActivity extends AppCompatActivity {
             HashMap userMap = new HashMap();
             userMap.put("name", fullname);
             userMap.put("username", username);
-            userMap.put("country", country);
-            userMap.put("status", "默認動態");
-            userMap.put("gender", "none");
-            userMap.put("dob", "none");
-            userMap.put("relationshipstatus", "none");
+            userMap.put("status", country);
             mUserDatabase.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task)

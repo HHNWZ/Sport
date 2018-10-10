@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -47,7 +45,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-import com.hanks.htextview.rainbow.RainbowTextView;
 
 import com.nelson.circlelayout.CircleLayout;
 import com.onesignal.OSNotificationAction;
@@ -71,7 +68,6 @@ import java.util.Map;
 import java.util.Timer;
 
 import kelvin.tablayout.ChatActivity;
-import kelvin.tablayout.ControlDie;
 import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Exercise_main;
@@ -83,7 +79,6 @@ import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningDareFriendProfile;
 import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.SettingsActivity;
-import kelvin.tablayout.SetupActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.TaskProfile;
@@ -93,7 +88,6 @@ import kelvin.tablayout.WalkingDareFriendProfile;
 import kelvin.tablayout.Walking_monitor;
 import kelvin.tablayout.YogaDareFriendProfile;
 import kelvin.tablayout.YogaMonitor;
-import necowneco.tablayout.habaActivity;
 import qwer.BlankFragment;
 import qwer.BlankFragment2;
 import qwer.BlankFragment3;
@@ -111,7 +105,7 @@ import qwer.theDate;
 
 
 public class  MainActivity extends AppCompatActivity
-        implements Over.OnFragmentInteractionListener,Sport.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
+        implements Over.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
         ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener, OnChartValueSelectedListener {
