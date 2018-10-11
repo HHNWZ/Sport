@@ -73,7 +73,7 @@ public class RequestsFragment extends Fragment {
 
                 newUsersViewHolder.setDisplayName(users.getName());
                 newUsersViewHolder.setUserStatus(users.getStatus());
-                newUsersViewHolder.setUserImage(users.getThumb_image(), getContext());
+                newUsersViewHolder.setUserImage(users.getThumb_image());
                 //newUsersViewHolder.setCrunchesAllCount(users.getCrunches_all_count());
 
 
@@ -123,11 +123,11 @@ public class RequestsFragment extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

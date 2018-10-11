@@ -106,7 +106,7 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
                 String image = dataSnapshot.child("image").getValue().toString();
 
                 mProfileName.setText(display_name);
-                Picasso.with(SquatsDareFriendProfile.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
+                Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
 
                 myUsersDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override

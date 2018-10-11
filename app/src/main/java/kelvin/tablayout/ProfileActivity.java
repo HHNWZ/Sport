@@ -52,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference myUsersDatabase;
 
     private DatabaseReference mRootRef;
+    private DatabaseReference countFriendDatabase;
 
     public static String my_image;
     private static FirebaseUser mCurrent_user;
@@ -60,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     public String Uid;
     private Toolbar profile_app_bar;
     public static String my_name;
-    private static int i=0;
+    private static int count_friend=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +89,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);//使用者資料庫
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
 
 
         mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");//朋友請求資料庫
         mFriendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");//朋友資料庫
+        countFriendDatabase=FirebaseDatabase.getInstance().getReference().child("Friends");
 
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
 
@@ -106,7 +107,8 @@ public class ProfileActivity extends AppCompatActivity {
         delete_send_req_btn=(Button)findViewById(R.id.delete_send_req_btn);
 
         //buuton_send=(Button)findViewById(R.id.button_send);
-        mCurrent_state = "not_friends";//初始判斷不是朋友
+        mCurrent_state = "不是朋友";//初始判斷不是朋友
+        Log.i("朋友邀請目前狀態1",mCurrent_state);
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("加載用戶數據");
@@ -118,20 +120,20 @@ public class ProfileActivity extends AppCompatActivity {
         mUsersDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String user=user_id.toString();
-                Log.i("user_id",user);
+                String user=user_id;
+                Log.i("friend_id",user);
+                Log.i("friend_id2",user_id);
+
                 String display_name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
                 String friend_count=dataSnapshot.child("friend_count").getValue().toString();
 
-                mProfileFriendsCount.setText("朋友數量:"+friend_count);
-
-
+                //mProfileFriendsCount.setText("朋友數量:"+friend_count);
                 mProfileName.setText(display_name);
                 mProfileStatus.setText(status);
 
-                Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
+                Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
 
                 if(mCurrent_user.getUid().equals(user_id)){//判斷到自己的版面
 
@@ -153,6 +155,8 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
 
+
+
                 //--------------- FRIENDS LIST / REQUEST FEATURE -----
 
                 mFriendReqDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {//用自己的UID去朋友邀請資料庫查詢
@@ -165,12 +169,14 @@ public class ProfileActivity extends AppCompatActivity {
 
                             if(req_type.equals("received")){//
 
-                                mCurrent_state = "req_received";
+                                mCurrent_state = "收到朋友邀請";
+                                Log.i("朋友邀請目前狀態2",mCurrent_state);
                                 mProfileSendReqBtn.setText("接受朋友請求");
                                 delete_send_req_btn.setVisibility(View.VISIBLE);
                             }else if(req_type.equals("sent")) {
 
-                                mCurrent_state = "req_sent";
+                                mCurrent_state = "發送朋友邀請";
+                                Log.i("朋友邀請目前狀態3",mCurrent_state);
                                 mProfileSendReqBtn.setText("取消朋友請求");
                             }
 
@@ -181,11 +187,10 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                                     if(dataSnapshot.hasChild(user_id)){//如果有child有要邀請的朋友id
-
-                                        mCurrent_state = "friends";
-                                        mProfileSendReqBtn.setText("與這個人取消聯繫");
+                                        mCurrent_state = "是朋友";
+                                        Log.i("朋友邀請目前狀態4",mCurrent_state);
+                                        mProfileSendReqBtn.setText("刪除朋友");
                                     }
-
                                     mProgressDialog.dismiss();
 
                                 }
@@ -223,24 +228,13 @@ public class ProfileActivity extends AppCompatActivity {
 
                 // --------------- NOT FRIENDS STATE ------------
                 Uid=user_id;
-                //Toast.makeText(ProfileActivity.this, Uid, Toast.LENGTH_SHORT).show();
-
-
-                //DatabaseReference newNotificationref = mRootRef.child("notifications").child(user_id).push();
-                //String newNotificationId = newNotificationref.getKey();
-                if(mCurrent_state.equals("not_friends")){
-
-
-
-                    //HashMap<String, String> notificationData = new HashMap<>();
-                    //notificationData.put("from", mCurrent_user.getUid());
-                    //notificationData.put("type", "request");
+                Log.i("朋友邀請目前狀態5",mCurrent_state);
+                if(mCurrent_state.equals("不是朋友")){
 
                     Map requestMap = new HashMap();
                     requestMap.put("Friend_req/" + mCurrent_user.getUid() + "/" + user_id + "/request_type", "sent");
                     requestMap.put("Friend_req/" + user_id + "/" + mCurrent_user.getUid() + "/request_type", "received");
 
-                    //requestMap.put("notifications/" + user_id + "/" + newNotificationId, notificationData);
 
                     mRootRef.updateChildren(requestMap, new DatabaseReference.CompletionListener() {
                         @Override
@@ -250,7 +244,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                                 Toast.makeText(ProfileActivity.this, "發送請求時出錯", Toast.LENGTH_SHORT).show();
                             }else{
-                                mCurrent_state = "req_sent";
+                                mCurrent_state = "發送朋友邀請";
+                                Log.i("朋友邀請目前狀態6",mCurrent_state);
                                 mProfileSendReqBtn.setText("取消朋友請求");
                             }
 
@@ -325,8 +320,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 // - -------------- CANCEL REQUEST STATE ------------
-
-                if(mCurrent_state.equals("req_sent")){//取消朋友事件觸發
+                Log.i("朋友邀請目前狀態7",mCurrent_state);
+                if(mCurrent_state.equals("發送朋友邀請")){//取消朋友事件觸發
 
 
                     mFriendReqDatabase.child(mCurrent_user.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -337,7 +332,8 @@ public class ProfileActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     mProfileSendReqBtn.setEnabled(true);
-                                    mCurrent_state = "not_friends";
+                                    mCurrent_state = "不是朋友";
+                                    Log.i("朋友邀請目前狀態8",mCurrent_state);
                                     mProfileSendReqBtn.setText("發送朋友請求");
                                 }
                             });
@@ -410,8 +406,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 // ------------ REQ RECEIVED STATE ----------
-
-                if(mCurrent_state.equals("req_received")){//結束朋友事件觸發
+                Log.i("朋友邀請目前狀態9",mCurrent_state);
+                if(mCurrent_state.equals("收到朋友邀請")){//結束朋友事件觸發
 
                     delete_send_req_btn.setVisibility(View.INVISIBLE);
                     final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
@@ -430,8 +426,9 @@ public class ProfileActivity extends AppCompatActivity {
                             if(databaseError == null){
 
                                 mProfileSendReqBtn.setEnabled(true);
-                                mCurrent_state = "not_friends";
-                                mProfileSendReqBtn.setText("");
+                                mCurrent_state = "是朋友";
+                                Log.i("朋友邀請目前狀態10",mCurrent_state);
+                                mProfileSendReqBtn.setText("已經成為朋友");
                             } else {
 
                                 String error = databaseError.getMessage();
@@ -506,8 +503,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 // ------------ UNFRIENDS ---------
-
-                if(mCurrent_state.equals("friends")){
+                Log.i("朋友邀請目前狀態11",mCurrent_state);
+                if(mCurrent_state.equals("是朋友")){
 
                     Map unfriendMap = new HashMap();
                     unfriendMap.put("Friends/" + mCurrent_user.getUid() + "/" + user_id, null);
@@ -520,7 +517,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                             if(databaseError == null){
 
-                                mCurrent_state = "not_friends";
+                                mCurrent_state = "不是朋友";
+                                Log.i("朋友邀請目前狀態12",mCurrent_state);
                                 mProfileSendReqBtn.setText("發送朋友請求");
                             }else {
 
@@ -680,7 +678,8 @@ public class ProfileActivity extends AppCompatActivity {
                                 }
                             });
                             mProfileSendReqBtn.setEnabled(true);
-                            mCurrent_state = "not_friends";
+                            mCurrent_state = "不是朋友";
+                            Log.i("朋友邀請目前狀態13",mCurrent_state);
                             mProfileSendReqBtn.setText("發送朋友邀請");
                             delete_send_req_btn.setVisibility(View.INVISIBLE);
 

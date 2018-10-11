@@ -143,19 +143,10 @@ public class Crunches_task extends AppCompatActivity {
                 my_crunches_task_name.setText(crunches_task_my_name);
                 my_crunches_task_finish_count_data.setText(crunches_task_my_count+"次");
 
-                if(!crunches_task_my_image.equals("default")){
-                    Picasso.with(Crunches_task.this).load(crunches_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(my_crunches_task_image, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            Picasso.with(Crunches_task.this).load(crunches_task_my_image).placeholder(R.drawable.default_avatar).into(my_crunches_task_image);
-                        }
-                    });
+                if(crunches_task_my_image.equals("default")){
+                   Picasso.get().load(R.drawable.default_avatar).into(my_crunches_task_image);
+                }else{
+                    Picasso.get().load(crunches_task_my_image).into(my_crunches_task_image);
                 }
 
                 crunches_task_Database.child("Task_crunches").addValueEventListener(new ValueEventListener() {
@@ -173,64 +164,56 @@ public class Crunches_task extends AppCompatActivity {
                             crunches_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    crunches_task_friend_name=dataSnapshot.child("name").getValue().toString();
-                                    crunches_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
-                                    crunches_task_friend_count=dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
-                                    crunches_task_friend_count_int=Integer.parseInt(crunches_task_friend_count);
+                                    if (crunches_task_text_and.getVisibility() == View.VISIBLE) {
+                                        crunches_task_friend_name = dataSnapshot.child("name").getValue().toString();
+                                        crunches_task_friend_image = dataSnapshot.child("thumb_image").getValue().toString();
+                                        crunches_task_friend_count = dataSnapshot.child("exercise_count").child("crunches").child("today_count").getValue().toString();
+                                        crunches_task_friend_count_int = Integer.parseInt(crunches_task_friend_count);
 
-                                    friend_crunches_task_name.setText(crunches_task_friend_name);
-                                    friend_crunches_task_finish_count_data.setText(crunches_task_friend_count+"次");
+                                        friend_crunches_task_name.setText(crunches_task_friend_name);
+                                        friend_crunches_task_finish_count_data.setText(crunches_task_friend_count + "次");
 
 
+                                        if (crunches_task_friend_image.equals("default")) {
+                                            Picasso.get().load(R.drawable.default_avatar).into(friend_crunches_task_image);
+                                        } else {
+                                            Picasso.get().load(crunches_task_friend_image).into(friend_crunches_task_image);
+                                        }
 
-                                    if(!crunches_task_friend_image.equals("default")){
-                                        Picasso.with(Crunches_task.this).load(crunches_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
-                                                .placeholder(R.drawable.default_avatar).into(friend_crunches_task_image, new Callback() {
-                                            @Override
-                                            public void onSuccess() {
+                                        crunches_progress = crunches_task_friend_count_int + crunches_data.getMy_task_int_exercise_data();
+                                        Log.i("進度條的進度", "" + crunches_progress);
 
-                                            }
+                                        crunches_task_data_int = Integer.parseInt(crunches_task_data.getText().toString());
+                                        Log.i("仰臥起坐共同任務運動量", "" + crunches_task_data_int);
+                                        if (crunches_progress >= crunches_task_data_int) {
+                                            crunches_task_seek_bar.setProgress((float) crunches_task_data_int);
+                                            crunches_susses_text_view.setText("你們已經完成");
+                                            crunches_task_friend_point.setVisibility(View.VISIBLE);
+                                            confirm_crunches_task_button.setVisibility(View.VISIBLE);
+                                            confirm_crunches_task_button.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    crunches_task_text_and.setVisibility(View.INVISIBLE);
+                                                    friend_crunches_task_name.setVisibility(View.INVISIBLE);
+                                                    friend_crunches_task_image.setVisibility(View.INVISIBLE);
+                                                    friend_crunches_task_finish_count.setVisibility(View.INVISIBLE);
+                                                    friend_crunches_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                    crunches_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    crunches_task_Database.child("Task_crunches").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    crunches_task_friend_point_database.child("friend_point").setValue(crunches_data.getMy_task_friend_point() + 10);
+                                                    crunches_susses_text_view.setText("目前沒有朋友");
+                                                    crunches_task_seek_bar.setProgress((0));
+                                                    crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                    confirm_crunches_task_button.setVisibility(View.INVISIBLE);
+                                                }
+                                            });
+                                        } else if (crunches_progress < crunches_task_data_int) {
+                                            crunches_susses_text_view.setText("你們目前完成\n        " + crunches_progress + "次");
+                                            crunches_task_seek_bar.setProgress((float) crunches_progress);
+                                        }
 
-                                            @Override
-                                            public void onError() {
-                                                Picasso.with(Crunches_task.this).load(crunches_task_my_image).placeholder(R.drawable.default_avatar).into(friend_crunches_task_image);
-                                            }
-                                        });
+
                                     }
-
-                                    crunches_progress=crunches_task_friend_count_int+crunches_data.getMy_task_int_exercise_data();
-                                    Log.i("進度條的進度",""+crunches_progress);
-
-                                    crunches_task_data_int=Integer.parseInt(crunches_task_data.getText().toString());
-                                    Log.i("仰臥起坐共同任務運動量",""+crunches_task_data_int);
-                                    if(crunches_progress>=crunches_task_data_int){
-                                        crunches_task_seek_bar.setProgress((float)crunches_task_data_int);
-                                        crunches_susses_text_view.setText("你們已經完成");
-                                        crunches_task_friend_point.setVisibility(View.VISIBLE);
-                                        confirm_crunches_task_button.setVisibility(View.VISIBLE);
-                                        confirm_crunches_task_button.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                crunches_task_text_and.setVisibility(View.INVISIBLE);
-                                                friend_crunches_task_name.setVisibility(View.INVISIBLE);
-                                                friend_crunches_task_image.setVisibility(View.INVISIBLE);
-                                                friend_crunches_task_finish_count.setVisibility(View.INVISIBLE);
-                                                friend_crunches_task_finish_count_data.setVisibility(View.INVISIBLE);
-                                                crunches_task_friend_point.setVisibility(View.INVISIBLE);
-                                                crunches_task_Database.child("Task_crunches").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
-                                                crunches_task_friend_point_database.child("friend_point").setValue(crunches_data.getMy_task_friend_point()+10);
-                                                crunches_susses_text_view.setText("目前沒有朋友");
-                                                crunches_task_seek_bar.setProgress((0));
-                                                crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
-                                                confirm_crunches_task_button.setVisibility(View.INVISIBLE);
-                                            }
-                                        });
-                                    }else if(crunches_progress<crunches_task_data_int){
-                                        crunches_susses_text_view.setText("你們目前完成\n        "+crunches_progress+"次");
-                                        crunches_task_seek_bar.setProgress((float)crunches_progress);
-                                    }
-
-
                                 }
 
                                 @Override
@@ -242,6 +225,7 @@ public class Crunches_task extends AppCompatActivity {
                             
                         }
                     }
+
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {

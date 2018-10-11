@@ -98,7 +98,7 @@ public class WalkingDareFriend extends AppCompatActivity {
                         final String userName = dataSnapshot.child("name").getValue().toString();
                         String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
                         viewHolder.setName(userName);
-                        viewHolder.setUserImage(userThumb, getApplication());
+                        viewHolder.setUserImage(userThumb);
                         viewHolder.setDate("");
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -143,10 +143,10 @@ public class WalkingDareFriend extends AppCompatActivity {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

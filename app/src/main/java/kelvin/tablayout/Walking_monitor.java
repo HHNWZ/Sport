@@ -319,7 +319,7 @@ public class Walking_monitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("walking").child("week_record").setValue(df.format(week_record1));
                         mDatabase.child("exercise_count").child("walking").child("DataIdcheck").setValue(walking_UUID);
                         mDatabase.child("exercise_count").child("walking").child("distance").setValue(UnitConversion.get_kilometer(walking_distance));
-                        mDatabase.child("exercise_count").child("walking").child("week_record").setValue(week_record1);
+                        mDatabase.child("exercise_count").child("walking").child("week_calorie").setValue(week_calorie1);
                         mDatabase.child("walking_all_count").setValue(all_record1);
                         mDatabase.child("walking_all_count_sort").setValue(-all_record1);
 

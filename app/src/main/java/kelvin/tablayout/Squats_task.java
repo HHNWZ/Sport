@@ -139,19 +139,10 @@ public class Squats_task extends AppCompatActivity {
                 my_squats_task_name.setText(squats_task_my_name);
                 my_squats_task_finish_count_data.setText(squats_task_my_count+"次");
 
-                if(!squats_task_my_image.equals("default")){
-                    Picasso.with(Squats_task.this).load(squats_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(my_squats_task_image, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            Picasso.with(Squats_task.this).load(squats_task_my_image).placeholder(R.drawable.default_avatar).into(my_squats_task_image);
-                        }
-                    });
+                if(squats_task_my_image.equals("default")){
+                    Picasso.get().load(R.drawable.default_avatar).into(my_squats_task_image);
+                }else{
+                    Picasso.get().load(squats_task_my_image).into(my_squats_task_image);
                 }
 
                 squats_task_Database.child("Task_squats").addValueEventListener(new ValueEventListener() {
@@ -169,62 +160,56 @@ public class Squats_task extends AppCompatActivity {
                             squats_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    squats_task_friend_name=dataSnapshot.child("name").getValue().toString();
-                                    squats_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
-                                    squats_task_friend_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
-                                    squats_task_friend_count_int=Integer.parseInt(squats_task_friend_count);
+                                    if(squats_task_text_and.getVisibility()==View.VISIBLE){
+                                        squats_task_friend_name=dataSnapshot.child("name").getValue().toString();
+                                        squats_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
+                                        squats_task_friend_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
+                                        squats_task_friend_count_int=Integer.parseInt(squats_task_friend_count);
 
-                                    friend_squats_task_name.setText(squats_task_friend_name);
-                                    friend_squats_task_finish_count_data.setText(squats_task_friend_count+"次");
+                                        friend_squats_task_name.setText(squats_task_friend_name);
+                                        friend_squats_task_finish_count_data.setText(squats_task_friend_count+"次");
 
 
 
-                                    if(!squats_task_friend_image.equals("default")){
-                                        Picasso.with(Squats_task.this).load(squats_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
-                                                .placeholder(R.drawable.default_avatar).into(friend_squats_task_image, new Callback() {
-                                            @Override
-                                            public void onSuccess() {
+                                        if(squats_task_friend_image.equals("default")){
+                                            Picasso.get().load(R.drawable.default_avatar).into(friend_squats_task_image);
+                                        }else {
+                                            Picasso.get().load(squats_task_friend_image).into(friend_squats_task_image);
+                                        }
 
-                                            }
+                                        squats_progress=squats_task_friend_count_int+squats_data.getMy_task_int_exercise_data();
+                                        Log.i("進度條的進度",""+squats_progress);
 
-                                            @Override
-                                            public void onError() {
-                                                Picasso.with(Squats_task.this).load(squats_task_my_image).placeholder(R.drawable.default_avatar).into(friend_squats_task_image);
-                                            }
-                                        });
+                                        squats_task_data_int=Integer.parseInt(squats_task_data.getText().toString());
+                                        Log.i("仰臥起坐共同任務運動量",""+squats_task_data_int);
+                                        if(squats_progress>=squats_task_data_int){
+                                            squats_task_seek_bar.setProgress((float)squats_task_data_int);
+                                            squats_susses_text_view.setText("你們已經完成");
+                                            squats_task_friend_point.setVisibility(View.VISIBLE);
+                                            confirm_squats_task_button.setVisibility(View.VISIBLE);
+                                            confirm_squats_task_button.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    squats_task_text_and.setVisibility(View.INVISIBLE);
+                                                    friend_squats_task_name.setVisibility(View.INVISIBLE);
+                                                    friend_squats_task_image.setVisibility(View.INVISIBLE);
+                                                    friend_squats_task_finish_count.setVisibility(View.INVISIBLE);
+                                                    friend_squats_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                    squats_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    squats_task_Database.child("Task_squats").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    squats_task_friend_point_database.child("friend_point").setValue(squats_data.getMy_task_friend_point()+10);
+                                                    squats_susses_text_view.setText("目前沒有朋友");
+                                                    squats_task_seek_bar.setProgress((0));
+                                                    squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                    confirm_squats_task_button.setVisibility(View.INVISIBLE);
+                                                }
+                                            });
+                                        }else if(squats_progress<squats_task_data_int){
+                                            squats_susses_text_view.setText("你們目前完成\n        "+squats_progress+"次");
+                                            squats_task_seek_bar.setProgress((float)squats_progress);
+                                        }
                                     }
 
-                                    squats_progress=squats_task_friend_count_int+squats_data.getMy_task_int_exercise_data();
-                                    Log.i("進度條的進度",""+squats_progress);
-
-                                    squats_task_data_int=Integer.parseInt(squats_task_data.getText().toString());
-                                    Log.i("仰臥起坐共同任務運動量",""+squats_task_data_int);
-                                    if(squats_progress>=squats_task_data_int){
-                                        squats_task_seek_bar.setProgress((float)squats_task_data_int);
-                                        squats_susses_text_view.setText("你們已經完成");
-                                        squats_task_friend_point.setVisibility(View.VISIBLE);
-                                        confirm_squats_task_button.setVisibility(View.VISIBLE);
-                                        confirm_squats_task_button.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                squats_task_text_and.setVisibility(View.INVISIBLE);
-                                                friend_squats_task_name.setVisibility(View.INVISIBLE);
-                                                friend_squats_task_image.setVisibility(View.INVISIBLE);
-                                                friend_squats_task_finish_count.setVisibility(View.INVISIBLE);
-                                                friend_squats_task_finish_count_data.setVisibility(View.INVISIBLE);
-                                                squats_task_friend_point.setVisibility(View.INVISIBLE);
-                                                squats_task_Database.child("Task_squats").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
-                                                squats_task_friend_point_database.child("friend_point").setValue(squats_data.getMy_task_friend_point()+10);
-                                                squats_susses_text_view.setText("目前沒有朋友");
-                                                squats_task_seek_bar.setProgress((0));
-                                                squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
-                                                confirm_squats_task_button.setVisibility(View.INVISIBLE);
-                                            }
-                                        });
-                                    }else if(squats_progress<squats_task_data_int){
-                                        squats_susses_text_view.setText("你們目前完成\n        "+squats_progress+"次");
-                                        squats_task_seek_bar.setProgress((float)squats_progress);
-                                    }
 
 
                                 }

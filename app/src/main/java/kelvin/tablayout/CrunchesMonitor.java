@@ -265,7 +265,7 @@ public class CrunchesMonitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("crunches").child("DataIdcheck").setValue(crunches_UUID);
                         mDatabase.child("exercise_count").child("crunches").child("week_record").setValue(week_record1);
                         mDatabase.child("exercise_count").child("crunches").child("count").setValue(crunches_count);
-                        mDatabase.child("exercise_count").child("crunches").child(" week_calorie").setValue( week_calorie1);
+                        mDatabase.child("exercise_count").child("crunches").child("week_calorie").setValue(week_calorie1);
                         mDatabase.child("crunches_all_count").setValue(all_count1);
                         mDatabase.child("crunches_all_count_sort").setValue(-all_count1);
 

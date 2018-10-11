@@ -136,19 +136,10 @@ public class Walking_task extends AppCompatActivity {
                 my_walking_task_name.setText(walking_task_my_name);
                 my_walking_task_finish_count_data.setText(walking_task_my_count+"公里");
 
-                if(!walking_task_my_image.equals("default")){
-                    Picasso.with(Walking_task.this).load(walking_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(my_walking_task_image, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            Picasso.with(Walking_task.this).load(walking_task_my_image).placeholder(R.drawable.default_avatar).into(my_walking_task_image);
-                        }
-                    });
+                if(walking_task_my_image.equals("default")){
+                    Picasso.get().load(R.drawable.default_avatar).into(my_walking_task_image);
+                }else{
+                    Picasso.get().load(walking_task_my_image).into(my_walking_task_image);
                 }
 
                 walking_task_Database.child("Task_walking").addValueEventListener(new ValueEventListener() {
@@ -166,64 +157,56 @@ public class Walking_task extends AppCompatActivity {
                             walking_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    walking_task_friend_name=dataSnapshot.child("name").getValue().toString();
-                                    walking_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
-                                    walking_task_friend_count=dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
-                                    walking_task_friend_count_double=Double.parseDouble(walking_task_friend_count);
+                                    if (walking_task_text_and.getVisibility() == View.VISIBLE) {
+                                        walking_task_friend_name = dataSnapshot.child("name").getValue().toString();
+                                        walking_task_friend_image = dataSnapshot.child("thumb_image").getValue().toString();
+                                        walking_task_friend_count = dataSnapshot.child("exercise_count").child("walking").child("today_record").getValue().toString();
+                                        walking_task_friend_count_double = Double.parseDouble(walking_task_friend_count);
 
-                                    friend_walking_task_name.setText(walking_task_friend_name);
-                                    friend_walking_task_finish_count_data.setText(walking_task_friend_count+"次");
+                                        friend_walking_task_name.setText(walking_task_friend_name);
+                                        friend_walking_task_finish_count_data.setText(walking_task_friend_count + "次");
 
 
+                                        if (walking_task_friend_image.equals("default")) {
+                                            Picasso.get().load(R.drawable.default_avatar).into(friend_walking_task_image);
+                                        } else {
+                                            Picasso.get().load(walking_task_friend_image).into(friend_walking_task_image);
+                                        }
 
-                                    if(!walking_task_friend_image.equals("default")){
-                                        Picasso.with(Walking_task.this).load(walking_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
-                                                .placeholder(R.drawable.default_avatar).into(friend_walking_task_image, new Callback() {
-                                            @Override
-                                            public void onSuccess() {
+                                        walking_progress = walking_task_friend_count_double + walking_data.getMy_task_double_exercise_data();
+                                        Log.i("進度條的進度", "" + walking_progress);
 
-                                            }
+                                        walking_task_data_double = Double.parseDouble(walking_task_data.getText().toString());
+                                        Log.i("仰臥起坐共同任務運動量", "" + walking_task_data_double);
+                                        if (walking_progress >= walking_task_data_double) {
+                                            walking_task_seek_bar.setProgress((float) walking_task_data_double);
+                                            walking_susses_text_view.setText("你們已經完成");
+                                            walking_task_friend_point.setVisibility(View.VISIBLE);
+                                            confirm_walking_task_button.setVisibility(View.VISIBLE);
+                                            confirm_walking_task_button.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    walking_task_text_and.setVisibility(View.INVISIBLE);
+                                                    friend_walking_task_name.setVisibility(View.INVISIBLE);
+                                                    friend_walking_task_image.setVisibility(View.INVISIBLE);
+                                                    friend_walking_task_finish_count.setVisibility(View.INVISIBLE);
+                                                    friend_walking_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                    walking_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    walking_task_Database.child("Task_walking").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    walking_task_friend_point_database.child("friend_point").setValue(walking_data.getMy_task_friend_point() + 10);
+                                                    walking_susses_text_view.setText("目前沒有朋友");
+                                                    walking_task_seek_bar.setProgress((0));
+                                                    walking_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                    confirm_walking_task_button.setVisibility(View.INVISIBLE);
+                                                }
+                                            });
+                                        } else if (walking_progress < walking_task_data_double) {
+                                            walking_susses_text_view.setText("你們目前完成\n        " + walking_progress + "次");
+                                            walking_task_seek_bar.setProgress((float) walking_progress);
+                                        }
 
-                                            @Override
-                                            public void onError() {
-                                                Picasso.with(Walking_task.this).load(walking_task_my_image).placeholder(R.drawable.default_avatar).into(friend_walking_task_image);
-                                            }
-                                        });
+
                                     }
-
-                                    walking_progress=walking_task_friend_count_double+walking_data.getMy_task_double_exercise_data();
-                                    Log.i("進度條的進度",""+walking_progress);
-
-                                    walking_task_data_double=Double.parseDouble(walking_task_data.getText().toString());
-                                    Log.i("仰臥起坐共同任務運動量",""+walking_task_data_double);
-                                    if(walking_progress>=walking_task_data_double){
-                                        walking_task_seek_bar.setProgress((float)walking_task_data_double);
-                                        walking_susses_text_view.setText("你們已經完成");
-                                        walking_task_friend_point.setVisibility(View.VISIBLE);
-                                        confirm_walking_task_button.setVisibility(View.VISIBLE);
-                                        confirm_walking_task_button.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                walking_task_text_and.setVisibility(View.INVISIBLE);
-                                                friend_walking_task_name.setVisibility(View.INVISIBLE);
-                                                friend_walking_task_image.setVisibility(View.INVISIBLE);
-                                                friend_walking_task_finish_count.setVisibility(View.INVISIBLE);
-                                                friend_walking_task_finish_count_data.setVisibility(View.INVISIBLE);
-                                                walking_task_friend_point.setVisibility(View.INVISIBLE);
-                                                walking_task_Database.child("Task_walking").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
-                                                walking_task_friend_point_database.child("friend_point").setValue(walking_data.getMy_task_friend_point()+10);
-                                                walking_susses_text_view.setText("目前沒有朋友");
-                                                walking_task_seek_bar.setProgress((0));
-                                                walking_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
-                                                confirm_walking_task_button.setVisibility(View.INVISIBLE);
-                                            }
-                                        });
-                                    }else if(walking_progress<walking_task_data_double){
-                                        walking_susses_text_view.setText("你們目前完成\n        "+walking_progress+"次");
-                                        walking_task_seek_bar.setProgress((float)walking_progress);
-                                    }
-
-
                                 }
 
                                 @Override

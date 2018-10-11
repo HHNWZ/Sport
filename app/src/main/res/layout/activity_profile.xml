@@ -58,7 +58,8 @@
             android:layout_marginTop="5dp"
             android:text="Total Friends"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/profile_send_req_btn"
@@ -86,7 +87,7 @@
             android:padding="5dp"
             android:text="拒絕朋友邀請"
             android:textColor="@android:color/white"
-            android:visibility="visible" />
+            android:visibility="invisible" />
     </RelativeLayout>
 
 

@@ -224,7 +224,7 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
                         }
 
                         friendsViewHolder.setName(userName);
-                        friendsViewHolder.setUserImage(userThumb, getContext());
+                        friendsViewHolder.setUserImage(userThumb);
 
                         friendsViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -297,10 +297,10 @@ public class FriendsFragment2 extends Fragment implements View.OnTouchListener{
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

@@ -174,7 +174,7 @@ public class ExerciseRunning extends Fragment {
                 background_layout=(RelativeLayout)runningNewUsersViewHolder.mView.findViewById(R.id.user_single_layout);
                 runningNewUsersViewHolder.setDisplayName(users.getName());
                 runningNewUsersViewHolder.setUserStatus("跑步全部記錄:");
-                runningNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
+                runningNewUsersViewHolder.setUserImage(users.getThumb_image());
                 runningNewUsersViewHolder.setRunningAllCount(users.getRunning_all_count());
                 first_image=(CircleImageView)runningNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
@@ -227,11 +227,11 @@ public class ExerciseRunning extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

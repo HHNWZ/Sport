@@ -150,7 +150,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     String image = dataSnapshot.child("thumb_image").getValue().toString();
 
                     viewHolder.displayName.setText(name);
-                    Picasso.with(viewHolder.profileImage.getContext()).load(image).placeholder(R.drawable.default_avatar).into(viewHolder.profileImage);
+                    Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(viewHolder.profileImage);
                 }
 
                 @Override
@@ -169,7 +169,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             } else {
 
                 viewHolder.messageText.setVisibility(View.INVISIBLE);
-                Picasso.with(viewHolder.profileImage.getContext()).load(c.getMessage())
+                Picasso.get().load(c.getMessage())
                         .placeholder(R.drawable.default_avatar).into(viewHolder.messageImage);
             }
 
@@ -200,7 +200,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                     String image = dataSnapshot.child("thumb_image").getValue().toString();
 
                     viewHolder.mydisplayName.setText(name);
-                    Picasso.with(viewHolder.myprofileImage.getContext()).load(image).placeholder(R.drawable.default_avatar).into(viewHolder.myprofileImage);
+                    Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(viewHolder.myprofileImage);
                 }
 
                 @Override
@@ -217,8 +217,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             } else {
 
                 viewHolder.mymessageText.setVisibility(View.INVISIBLE);
-                Picasso.with(viewHolder.profileImage.getContext()).load(c.getMessage())
-                        .placeholder(R.drawable.default_avatar).into(viewHolder.messageImage);
+                Picasso.get().load(c.getMessage()).placeholder(R.drawable.default_avatar).into(viewHolder.messageImage);
             }
         }
 

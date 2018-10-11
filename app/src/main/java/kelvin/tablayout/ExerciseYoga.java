@@ -174,7 +174,7 @@ public class ExerciseYoga extends Fragment {
             protected void populateViewHolder(YogaNewUsersViewHolder yogaNewUsersViewHolder, Users users, int position) {
                 yogaNewUsersViewHolder.setDisplayName(users.getName());
                 yogaNewUsersViewHolder.setUserStatus("瑜伽全部記錄:");
-                yogaNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
+                yogaNewUsersViewHolder.setUserImage(users.getThumb_image());
                 yogaNewUsersViewHolder.setYogaAllCount(Time.changeYogaTime(users.getYoga_all_count()));
                 first_image=(CircleImageView)yogaNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
@@ -220,11 +220,11 @@ public class ExerciseYoga extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

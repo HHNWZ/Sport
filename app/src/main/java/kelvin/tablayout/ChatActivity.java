@@ -157,7 +157,7 @@ public class ChatActivity extends AppCompatActivity {
         end_hour_of_invitation=getIntent().getStringExtra("end_hour_of_invitation");
         end_minute_of_invitation=getIntent().getStringExtra("end_minute_of_invitation");
 
-
+        Log.i("錯誤1","錯誤1");
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//查找xml文件並套用
         View action_bar_view = inflater.inflate(R.layout.chat_custom_bar, null);
 
@@ -177,8 +177,9 @@ public class ChatActivity extends AppCompatActivity {
 
         mMessagesList = (RecyclerView) findViewById(R.id.messages_list);
         mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_swipe_layout);
-        mLinearLayout = new LinearLayoutManager(this);
+        mLinearLayout = new LinearLayoutManager(ChatActivity.this);
 
+        Log.i("錯誤2","錯誤2");
         mMessagesList.setHasFixedSize(true);
         mMessagesList.setLayoutManager(mLinearLayout);
 
@@ -217,7 +218,7 @@ public class ChatActivity extends AppCompatActivity {
                 online = dataSnapshot.child("online").getValue().toString();
                 image = dataSnapshot.child("image").getValue().toString();
                 String userName= dataSnapshot.child("name").getValue().toString();
-                Picasso.with(ChatActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
+                Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
                 mTitleView.setText(userName);
                 if(online.equals("true")) {
 

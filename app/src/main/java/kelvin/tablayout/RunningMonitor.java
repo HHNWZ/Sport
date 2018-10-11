@@ -288,7 +288,7 @@ public class RunningMonitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("running").child("week_record").setValue(df.format(week_record1));
                         mDatabase.child("exercise_count").child("running").child("DataIdcheck").setValue(running_UUID);
                         mDatabase.child("exercise_count").child("running").child("distance").setValue(UnitConversion.get_kilometer(running_distance));
-                        mDatabase.child("exercise_count").child("running").child(" week_calorie").setValue( week_calorie1);
+                        mDatabase.child("exercise_count").child("running").child("week_calorie").setValue( week_calorie1);
                         mDatabase.child("running_all_count").setValue(all_record1);
                         mDatabase.child("running_all_count_sort").setValue(-all_record1);
 

@@ -2,6 +2,7 @@ package kelvin.tablayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,10 +30,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
+
+import id.zelory.compressor.Compressor;
 
 public class PostActivity extends AppCompatActivity {
     private Toolbar mToolbar;
@@ -58,7 +66,7 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
-
+        Log.i("為什麼我會在這裡",""+1);
         mAuth = FirebaseAuth.getInstance();
         current_user_id = mAuth.getCurrentUser().getUid();
 
@@ -93,6 +101,7 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                Log.i("為什麼我會在這裡",""+2);
                 ValidatePostInfo();
             }
         });
@@ -102,6 +111,7 @@ public class PostActivity extends AppCompatActivity {
 
     private void ValidatePostInfo()
     {
+        Log.i("為什麼我會在這裡",""+3);
         Description = PostDescription.getText().toString();
 
         if(ImageUri == null)
@@ -114,11 +124,12 @@ public class PostActivity extends AppCompatActivity {
         }
         else
         {
+            Log.i("為什麼我會在這裡",""+4);
             loadingBar.setTitle("新增帖文");
             loadingBar.setMessage("請等待,我們正在上傳你得帖文");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
-
+            Log.i("為什麼我會在這裡",""+5);
             StoringImageToFirebaseStorage();
         }
     }
@@ -127,6 +138,7 @@ public class PostActivity extends AppCompatActivity {
 
     private void StoringImageToFirebaseStorage()
     {
+        Log.i("為什麼我會在這裡",""+6);
         Calendar calFordDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
         saveCurrentDate = currentDate.format(calFordDate.getTime());
@@ -137,6 +149,7 @@ public class PostActivity extends AppCompatActivity {
 
         postRandomName = saveCurrentDate + saveCurrentTime;
 
+        Log.i("為什麼我會在這裡",""+7);
 
         StorageReference filePath = PostsImagesRefrence.child("Post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
 
@@ -146,9 +159,10 @@ public class PostActivity extends AppCompatActivity {
             {
                 if(task.isSuccessful())
                 {
+                    Log.i("為什麼我會在這裡",""+8);
                     downloadUrl = task.getResult().getDownloadUrl().toString();
                     Toast.makeText(PostActivity.this, "帖文圖片正處理成功", Toast.LENGTH_SHORT).show();
-
+                    Log.i("為什麼我會在這裡",""+9);
                     SavingPostInformationToDatabase();
 
                 }
@@ -166,12 +180,14 @@ public class PostActivity extends AppCompatActivity {
 
     private void SavingPostInformationToDatabase()
     {
-        UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+        Log.i("為什麼我會在這裡",""+10);
+        UsersRef.child(current_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.i("為什麼我會在這裡",""+11);
                 if(dataSnapshot.exists())
                 {
+                    Log.i("為什麼我會在這裡",""+12);
                     String userFullName = dataSnapshot.child("name").getValue().toString();
                     String userProfileImage = dataSnapshot.child("thumb_image").getValue().toString();
 
@@ -183,14 +199,17 @@ public class PostActivity extends AppCompatActivity {
                     postsMap.put("postimage", downloadUrl);
                     postsMap.put("profileimage", userProfileImage);
                     postsMap.put("fullname", userFullName);
+                    Log.i("為什麼我會在這裡",""+13);
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
                                 public void onComplete(@NonNull Task task)
                                 {
+                                    Log.i("為什麼我會在這裡",""+14);
                                     if(task.isSuccessful())
                                     {
-                                        SendUserToMainActivity();
+                                        //SendUserToMainActivity();
+                                        Log.i("為什麼我會在這裡",""+15);
                                         Toast.makeText(PostActivity.this, "帖文上傳成功", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
@@ -233,6 +252,7 @@ public class PostActivity extends AppCompatActivity {
             ImageUri = data.getData();
             SelectPostImage.setImageURI(ImageUri);
         }
+
     }
 
 
@@ -255,6 +275,9 @@ public class PostActivity extends AppCompatActivity {
     private void SendUserToMainActivity()
     {
         Intent mainIntent = new Intent(PostActivity.this, PhotoBlog.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(mainIntent);
+
     }
 }

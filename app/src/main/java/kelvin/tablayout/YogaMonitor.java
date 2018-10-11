@@ -259,7 +259,7 @@ public class YogaMonitor extends AppCompatActivity {
                         mDatabase.child("exercise_count").child("yoga").child("DataIdcheck").setValue(yoga_UUID);
                         mDatabase.child("exercise_count").child("yoga").child("week_record").setValue(weekRecord);
                         mDatabase.child("exercise_count").child("yoga").child("time").setValue(yoga_duration);
-                        mDatabase.child("exercise_count").child("yoga").child(" week_calorie").setValue( week_calorie1);
+                        mDatabase.child("exercise_count").child("yoga").child("week_calorie").setValue(week_calorie1);
                         mDatabase.child("yoga_all_count").setValue(allTime);
                         mDatabase.child("yoga_all_count_sort").setValue(-allTime);
 

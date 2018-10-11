@@ -134,19 +134,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                     if(dataSnapshot.hasChild("image")){
                         final String image = dataSnapshot.child("image").getValue().toString();
-                        if(!image.equals("default")) {
-                            Picasso.with(SettingsActivity.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                                    .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
-                                @Override
-                                public void onSuccess() {
-
-                                }
-
-                                @Override
-                                public void onError() {
-                                    Picasso.with(SettingsActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mDisplayImage);
-                                }
-                            });
+                        if(image.equals("default")) {
+                            Picasso.get().load(R.drawable.default_avatar).into(mDisplayImage);
+                        }else{
+                            Picasso.get().load(image).into(mDisplayImage);
                         }
                     }
                     if(dataSnapshot.hasChild("name")){

@@ -171,7 +171,7 @@ public class ExerciseCrunches extends Fragment {
             protected void populateViewHolder(CrunchesNewUsersViewHolder crunchesNewUsersViewHolder, Users users, int position) {
                 crunchesNewUsersViewHolder.setDisplayName(users.getName());
                 crunchesNewUsersViewHolder.setUserStatus("仰臥起坐全部記錄:");
-                crunchesNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
+                crunchesNewUsersViewHolder.setUserImage(users.getThumb_image());
                 crunchesNewUsersViewHolder.setCrunchesAllCount(users.getCrunches_all_count());
                 first_image=(CircleImageView)crunchesNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
@@ -225,11 +225,11 @@ public class ExerciseCrunches extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

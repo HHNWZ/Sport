@@ -150,7 +150,7 @@ public class ChatsFragment extends Fragment {
                         }
 
                         convViewHolder.setName(userName);
-                        convViewHolder.setUserImage(userThumb, getContext());
+                        convViewHolder.setUserImage(userThumb);
 
                         convViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -160,6 +160,8 @@ public class ChatsFragment extends Fragment {
                                 Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                 chatIntent.putExtra("user_id", list_user_id);
                                 chatIntent.putExtra("user_name", userName);
+                                chatIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                chatIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 startActivity(chatIntent);
 
                             }
@@ -212,10 +214,10 @@ public class ChatsFragment extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
             CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

@@ -140,21 +140,11 @@ public class Yoga_dare extends AppCompatActivity {
                 yoga_dare_data.setYoga_dare_myFinishTime(myFinishTimeLong);
                 yoga_dare_data.setYoga_dare_myCalorie(myCalorieInt);
 
-                if(!myImage.equals("default")){
-                    Picasso.with(Yoga_dare.this).load(myImage).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
+                if(myImage.equals("default")){
+                    Picasso.get().load(R.drawable.default_avatar).into(mDisplayImage);
 
-                        }
-
-                        @Override
-                        public void onError() {
-
-                            Picasso.with(Yoga_dare.this).load(myImage).placeholder(R.drawable.default_avatar).into(mDisplayImage);
-
-                        }
-                    });
+                }else{
+                    Picasso.get().load(myImage).into(mDisplayImage);
                 }
 
                 dareDatabase.child("Yoga_Dare").addValueEventListener(new ValueEventListener() {
@@ -176,79 +166,68 @@ public class Yoga_dare extends AppCompatActivity {
                             friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    friendName=dataSnapshot.child("name").getValue().toString();
-                                    friendImage=dataSnapshot.child("thumb_image").getValue().toString();
-                                    friendFinishTime=dataSnapshot.child("yoga_dare").child("time").getValue().toString();
-                                    friendCalorie=dataSnapshot.child("yoga_dare").child("calorie").getValue().toString();
-                                    FriendFinishTimeLong=Long.parseLong(friendFinishTime);
-                                    FriendCalorieInt=Integer.parseInt(friendCalorie);
+                                    if (text_VS.getVisibility() == View.VISIBLE) {
+                                        friendName = dataSnapshot.child("name").getValue().toString();
+                                        friendImage = dataSnapshot.child("thumb_image").getValue().toString();
+                                        friendFinishTime = dataSnapshot.child("yoga_dare").child("time").getValue().toString();
+                                        friendCalorie = dataSnapshot.child("yoga_dare").child("calorie").getValue().toString();
+                                        FriendFinishTimeLong = Long.parseLong(friendFinishTime);
+                                        FriendCalorieInt = Integer.parseInt(friendCalorie);
 
 
+                                        friend_single_name.setText(friendName);
+                                        friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
+                                        friend_yoga_finish_calorie_data.setText(FriendCalorieInt + "卡路里");
 
-                                    friend_single_name.setText(friendName);
-                                    friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
-                                    friend_yoga_finish_calorie_data.setText(FriendCalorieInt+"卡路里");
-
-                                    if(!friendImage.equals("default")){
-                                        Picasso.with(Yoga_dare.this).load(friendImage).networkPolicy(NetworkPolicy.OFFLINE)
-                                                .placeholder(R.drawable.default_avatar).into(friend_single_image, new Callback() {
-                                            @Override
-                                            public void onSuccess() {
-
-                                            }
-
-                                            @Override
-                                            public void onError() {
-
-                                                Picasso.with(Yoga_dare.this).load(friendImage).placeholder(R.drawable.default_avatar).into(friend_single_image);
-
-                                            }
-                                        });
-                                    }
-                                    Log.i("1",""+ yoga_dare_data.getYoga_dare_myFinishTime());
-                                    Log.i("12",""+ yoga_dare_data.getYoga_dare_myCalorie());
-                                    Log.i("123",""+ FriendFinishTimeLong);
-                                    Log.i("1234",""+ FriendCalorieInt);
-                                    Int_exercise_week_dat=Long.parseLong(exercise_week_data.getText().toString())*60*1000;
-
-                                    if(yoga_dare_data.getYoga_dare_myFinishTime()==Int_exercise_week_dat&&FriendFinishTimeLong==Int_exercise_week_dat&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0&&text_VS.getVisibility()==View.VISIBLE){
-                                        text_winner.setVisibility(View.VISIBLE);
-                                        if(yoga_dare_data.getYoga_dare_myCalorie()<FriendCalorieInt){
-                                            text_winner.setText("勝利方是朋友");
-                                        }else if(yoga_dare_data.getYoga_dare_myCalorie()>FriendCalorieInt){
-                                            text_winner.setText("勝利方是你");
-                                            Log.i("你之前的friend_pint",""+yoga_dare_data.getYoga_dare_friend_point());
+                                        if (friendImage.equals("default")) {
+                                            Picasso.get().load(R.drawable.default_avatar).into(friend_single_image);
+                                        } else {
+                                            Picasso.get().load(friendImage).into(friend_single_image);
                                         }
-                                        confirm_dare.setVisibility(View.VISIBLE);
-                                        confirm_dare.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                confirm_database.child("Yoga_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
-                                                confirm_dare.setVisibility(View.INVISIBLE);
-                                                friend_single_image.setVisibility(View.INVISIBLE);
-                                                friend_single_name.setVisibility(View.INVISIBLE);
-                                                friend_finish_time.setVisibility(View.INVISIBLE);
-                                                friend_finish_time_data.setVisibility(View.INVISIBLE);
-                                                friend_yoga_finish_calorie.setVisibility(View.INVISIBLE);
-                                                friend_yoga_finish_calorie_data.setVisibility(View.INVISIBLE);
-                                                text_VS.setVisibility(View.INVISIBLE);
-                                                text_winner.setVisibility(View.INVISIBLE);
-                                                if(yoga_dare_data.getYoga_dare_myCalorie()<FriendCalorieInt){
-                                                    Log.i("勝利方是:","朋友");
-                                                    Toast.makeText(Yoga_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                }else if(yoga_dare_data.getYoga_dare_myCalorie()>FriendCalorieInt){
-                                                    Log.i("你之前的friend_pint",""+yoga_dare_data.getYoga_dare_friend_point());
-                                                    friend_point_database.child("friend_point").setValue(yoga_dare_data.getYoga_dare_friend_point()+10);
-                                                    Log.i("勝利方是:","你");
-                                                    Toast.makeText(Yoga_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                }
+                                        Log.i("1", "" + yoga_dare_data.getYoga_dare_myFinishTime());
+                                        Log.i("12", "" + yoga_dare_data.getYoga_dare_myCalorie());
+                                        Log.i("123", "" + FriendFinishTimeLong);
+                                        Log.i("1234", "" + FriendCalorieInt);
+                                        Int_exercise_week_dat = Long.parseLong(exercise_week_data.getText().toString()) * 60 * 1000;
 
-
-
+                                        if (yoga_dare_data.getYoga_dare_myFinishTime() == Int_exercise_week_dat && FriendFinishTimeLong == Int_exercise_week_dat && yoga_dare_data.getYoga_dare_myCalorie() != 0 && FriendCalorieInt != 0 && text_VS.getVisibility() == View.VISIBLE) {
+                                            text_winner.setVisibility(View.VISIBLE);
+                                            if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt) {
+                                                text_winner.setText("勝利方是朋友");
+                                            } else if (yoga_dare_data.getYoga_dare_myCalorie() > FriendCalorieInt) {
+                                                text_winner.setText("勝利方是你");
+                                                Log.i("你之前的friend_pint", "" + yoga_dare_data.getYoga_dare_friend_point());
                                             }
-                                        });
-                                    }
+                                            confirm_dare.setVisibility(View.VISIBLE);
+                                            confirm_dare.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    confirm_database.child("Yoga_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
+                                                    confirm_dare.setVisibility(View.INVISIBLE);
+                                                    friend_single_image.setVisibility(View.INVISIBLE);
+                                                    friend_single_name.setVisibility(View.INVISIBLE);
+                                                    friend_finish_time.setVisibility(View.INVISIBLE);
+                                                    friend_finish_time_data.setVisibility(View.INVISIBLE);
+                                                    friend_yoga_finish_calorie.setVisibility(View.INVISIBLE);
+                                                    friend_yoga_finish_calorie_data.setVisibility(View.INVISIBLE);
+                                                    text_VS.setVisibility(View.INVISIBLE);
+                                                    text_winner.setVisibility(View.INVISIBLE);
+                                                    if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt) {
+                                                        Log.i("勝利方是:", "朋友");
+                                                        Toast.makeText(Yoga_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    } else if (yoga_dare_data.getYoga_dare_myCalorie() > FriendCalorieInt) {
+                                                        Log.i("你之前的friend_pint", "" + yoga_dare_data.getYoga_dare_friend_point());
+                                                        friend_point_database.child("friend_point").setValue(yoga_dare_data.getYoga_dare_friend_point() + 10);
+                                                        Log.i("勝利方是:", "你");
+                                                        Toast.makeText(Yoga_dare.this, "你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    }
 
+
+                                                }
+                                            });
+                                        }
+
+                                    }
                                 }
 
                                 @Override

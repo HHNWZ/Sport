@@ -203,7 +203,7 @@ public class ExerciseWalking extends Fragment {
                 background_layout=(RelativeLayout)walkingNewUsersViewHolder.mView.findViewById(R.id.user_single_layout);
                 walkingNewUsersViewHolder.setDisplayName(users.getName());
                 walkingNewUsersViewHolder.setUserStatus("步行全部記錄:");
-                walkingNewUsersViewHolder.setUserImage(users.getThumb_image(),getContext());
+                walkingNewUsersViewHolder.setUserImage(users.getThumb_image());
 
                 walkingNewUsersViewHolder.setRunningAllCount(users.getWalking_all_count());
 
@@ -271,11 +271,11 @@ public class ExerciseWalking extends Fragment {
 
         }
 
-        public void setUserImage(String thumb_image, Context ctx){
+        public void setUserImage(String thumb_image){
 
              userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
 
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
 
         }
 

@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/comment_toolbar"
         android:layout_above="@+id/comment_below_layout"
-        android:layout_alignParentStart="true"
         android:layout_margin="5dp" />
 
     <LinearLayout

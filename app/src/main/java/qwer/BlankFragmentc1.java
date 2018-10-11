@@ -3,6 +3,7 @@ package qwer;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
@@ -21,11 +22,14 @@ import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +52,7 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
     private DatabaseReference exercise_plan_database;
 
     private OnFragmentInteractionListener mListener;
+
 
     public BlankFragmentc1() {
         // Required empty public constructor
@@ -224,6 +229,8 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                     qwerb4.setVisibility(View.INVISIBLE);
                     qwerb5.setVisibility(View.INVISIBLE);
                     qwerb6.setVisibility(View.INVISIBLE);
+
+
                     exercise_plan_database.child("crunches").setValue(10);
                     exercise_plan_database.child("running").setValue(1);
                     exercise_plan_database.child("squats").setValue(20);
@@ -253,6 +260,8 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                     qwerb4.setVisibility(View.INVISIBLE);
                     qwerb5.setVisibility(View.INVISIBLE);
                     qwerb6.setVisibility(View.INVISIBLE);
+                    HashMap<String,Integer>exercise_plan_data =new HashMap<>();
+
                     exercise_plan_database.child("crunches").setValue(20);
                     exercise_plan_database.child("running").setValue(2);
                     exercise_plan_database.child("squats").setValue(40);
@@ -262,6 +271,7 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (24 <=a2 && a2<27)
                 {
+
                     exercise_plan_database.child("crunches").setValue(30);
                     exercise_plan_database.child("running").setValue(3);
                     exercise_plan_database.child("squats").setValue(60);
@@ -304,6 +314,7 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (27 <=a2 && a2 < 30)
                 {
+
                     exercise_plan_database.child("crunches").setValue(40);
                     exercise_plan_database.child("running").setValue(4);
                     exercise_plan_database.child("squats").setValue(80);
@@ -345,6 +356,7 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
                 }
                 else if (30 <= a2 && a2 < 35)
                 {
+
                     exercise_plan_database.child("crunches").setValue(50);
                     exercise_plan_database.child("running").setValue(5);
                     exercise_plan_database.child("squats").setValue(100);

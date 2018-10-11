@@ -75,9 +75,7 @@ public class CommentsActivity extends AppCompatActivity {
 
         CommentsList=(RecyclerView)findViewById(R.id.comment_list);
         CommentsList.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setStackFromEnd(true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(CommentsActivity.this,LinearLayoutManager.VERTICAL,false);
         CommentsList.setLayoutManager(linearLayoutManager);
 
 
@@ -126,7 +124,7 @@ public class CommentsActivity extends AppCompatActivity {
                 viewHolder.setComment(model.getComment());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setTime(model.getTime());
-                viewHolder.setUid(model.getUid(),getApplication());
+                viewHolder.setUid(model.getUid());
             }
         };
 
@@ -162,7 +160,7 @@ public class CommentsActivity extends AppCompatActivity {
             myTime.setText(" 時間: "+time);
         }
 
-        public void setUid(String uid,Context ctx){
+        public void setUid(String uid){
             Log.i("123456",uid);
             FriendRef.child(uid).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -171,7 +169,7 @@ public class CommentsActivity extends AppCompatActivity {
                         String thumb_image=dataSnapshot.child("thumb_image").getValue().toString();
                         Log.i("123456",thumb_image);
                         CircleImageView userImageView = (CircleImageView) mView.findViewById(R.id.comment_username_image);
-                        Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+                        Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
                     }
 
                 }
@@ -220,6 +218,7 @@ public class CommentsActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(CommentsActivity.this,"你的留言已經上傳",Toast.LENGTH_SHORT).show();
+                                CommentInputText.setText("");
                             }else{
                                 Toast.makeText(CommentsActivity.this,"你的留言有錯",Toast.LENGTH_SHORT).show();
                             }
@@ -233,6 +232,8 @@ public class CommentsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(CommentsActivity.this, PhotoBlog.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

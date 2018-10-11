@@ -73,22 +73,18 @@ public class PhotoBlog extends AppCompatActivity {
         getSupportActionBar().setTitle("運動經驗交流");
 
 
-
-
         activity_photo_blog_float_action_button=(FloatingActionButton)findViewById(R.id.activity_photo_blog_float_action_button);
-
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         postList = (RecyclerView) findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PhotoBlog.this,LinearLayoutManager.VERTICAL,true);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
+
+        DisplayAllUsersPosts();
 
         activity_photo_blog_float_action_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,9 +96,10 @@ public class PhotoBlog extends AppCompatActivity {
 
 
 
-        DisplayAllUsersPosts();
+
 
     }
+
 
     private void DisplayAllUsersPosts()
     {
@@ -121,13 +118,15 @@ public class PhotoBlog extends AppCompatActivity {
 
                         Log.i("我在這裡:","1");
                         final String Postkey=getRef(position).getKey();
+                        Log.i("帖文id",Postkey);
 
                         viewHolder.setFullname(model.getFullname());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());
                         viewHolder.setDescription(model.getDescription());
-                        viewHolder.setProfileimage(getApplicationContext(), model.getProfileimage());
-                        viewHolder.setPostimage(getApplicationContext(), model.getPostimage());
+                        viewHolder.setProfileimage(model.getProfileimage());
+                        viewHolder.setPostimage(model.getPostimage());
+                        Log.i("圖片id",model.getPostimage());
 
                         viewHolder.setLikeButtonStatus(Postkey);
 
@@ -237,10 +236,10 @@ public class PhotoBlog extends AppCompatActivity {
             username.setText(fullname);
         }
 
-        public void setProfileimage(Context ctx, String profileimage)
+        public void setProfileimage(String profileimage)
         {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.post_profile_image);
-            Picasso.with(ctx).load(profileimage).into(image);
+            Picasso.get().load(profileimage).into(image);
         }
 
         public void setTime(String time)
@@ -261,10 +260,10 @@ public class PhotoBlog extends AppCompatActivity {
             PostDescription.setText(description);
         }
 
-        public void setPostimage(Context ctx1,  String postimage)
+        public void setPostimage(String postimage)
         {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.click_post_image);
-            Picasso.with(ctx1).load(postimage).into(PostImage);
+            Picasso.get().load(postimage).into(PostImage);
         }
     }
 
@@ -282,7 +281,6 @@ public class PhotoBlog extends AppCompatActivity {
         if(item.getItemId()==android.R.id.home){
             Intent intent = new Intent(PhotoBlog.this,MainActivity.class);
             startActivity(intent);
-            finish();
         }
         return super.onOptionsItemSelected(item);
     }

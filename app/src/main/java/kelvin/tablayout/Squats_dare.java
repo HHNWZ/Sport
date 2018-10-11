@@ -120,7 +120,7 @@ public class Squats_dare extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
-        exercise_week_data.setText("3");
+        exercise_week_data.setText("100");
         myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -140,21 +140,11 @@ public class Squats_dare extends AppCompatActivity {
                 squats_dare_data.setSquats_dare_myFinishTime(myFinishTimeLong);
                 squats_dare_data.setSquats_dare_myCount(myCountInt);
 
-                if(!myImage.equals("default")){
-                    Picasso.with(Squats_dare.this).load(myImage).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(mDisplayImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
+                if(myImage.equals("default")){
+                    Picasso.get().load(R.drawable.default_avatar).into(mDisplayImage);
 
-                        }
-
-                        @Override
-                        public void onError() {
-
-                            Picasso.with(Squats_dare.this).load(myImage).placeholder(R.drawable.default_avatar).into(mDisplayImage);
-
-                        }
-                    });
+                }else{
+                    Picasso.get().load(myImage).into(mDisplayImage);
                 }
 
                 dareDatabase.child("Squats_Dare").addValueEventListener(new ValueEventListener() {
@@ -176,77 +166,69 @@ public class Squats_dare extends AppCompatActivity {
                             friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    friendName=dataSnapshot.child("name").getValue().toString();
-                                    friendImage=dataSnapshot.child("thumb_image").getValue().toString();
-                                    friendFinishTime=dataSnapshot.child("squats_dare").child("time").getValue().toString();
-                                    friendCount=dataSnapshot.child("squats_dare").child("count").getValue().toString();
-                                    FriendFinishTimeLong=Long.parseLong(friendFinishTime);
-                                    FriendCountInt=Integer.parseInt(friendCount);
+                                    if(text_VS.getVisibility()==View.VISIBLE){
+                                        friendName=dataSnapshot.child("name").getValue().toString();
+                                        friendImage=dataSnapshot.child("thumb_image").getValue().toString();
+                                        friendFinishTime=dataSnapshot.child("squats_dare").child("time").getValue().toString();
+                                        friendCount=dataSnapshot.child("squats_dare").child("count").getValue().toString();
+                                        FriendFinishTimeLong=Long.parseLong(friendFinishTime);
+                                        FriendCountInt=Integer.parseInt(friendCount);
 
 
 
-                                    friend_single_name.setText(friendName);
-                                    friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
-                                    friend_squats_finish_count_data.setText(FriendCountInt+"次");
+                                        friend_single_name.setText(friendName);
+                                        friend_finish_time_data.setText(Time.changeYogaTime(FriendFinishTimeLong));
+                                        friend_squats_finish_count_data.setText(FriendCountInt+"次");
 
-                                    if(!friendImage.equals("default")){
-                                        Picasso.with(Squats_dare.this).load(friendImage).networkPolicy(NetworkPolicy.OFFLINE)
-                                                .placeholder(R.drawable.default_avatar).into(friend_single_image, new Callback() {
-                                            @Override
-                                            public void onSuccess() {
-
-                                            }
-
-                                            @Override
-                                            public void onError() {
-
-                                                Picasso.with(Squats_dare.this).load(friendImage).placeholder(R.drawable.default_avatar).into(friend_single_image);
-
-                                            }
-                                        });
-                                    }
-                                    Log.i("1",""+ squats_dare_data.getSquats_dare_myFinishTime());
-                                    Log.i("12",""+ squats_dare_data.getSquats_dare_myCount());
-                                    Log.i("123",""+ FriendFinishTimeLong);
-                                    Log.i("1234",""+ FriendCountInt);
-                                    Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
-                                    if(squats_dare_data.getSquats_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&squats_dare_data.getSquats_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
-                                        text_winner.setVisibility(View.VISIBLE);
-                                        if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
-                                            text_winner.setText("勝利方是朋友");
-                                        }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
-                                            text_winner.setText("勝利方是你");
-                                            Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
+                                        if(friendImage.equals("default")){
+                                            Picasso.get().load(R.drawable.default_avatar).into(friend_single_image);
+                                        }else {
+                                            Picasso.get().load(friendImage).into(friend_single_image);
                                         }
-                                        confirm_dare.setVisibility(View.VISIBLE);
-                                        confirm_dare.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                confirm_database.child("Squats_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
-                                                confirm_dare.setVisibility(View.INVISIBLE);
-                                                friend_single_image.setVisibility(View.INVISIBLE);
-                                                friend_single_name.setVisibility(View.INVISIBLE);
-                                                friend_finish_time.setVisibility(View.INVISIBLE);
-                                                friend_finish_time_data.setVisibility(View.INVISIBLE);
-                                                friend_squats_finish_count.setVisibility(View.INVISIBLE);
-                                                friend_squats_finish_count_data.setVisibility(View.INVISIBLE);
-                                                text_VS.setVisibility(View.INVISIBLE);
-                                                text_winner.setVisibility(View.INVISIBLE);
-                                                if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
-                                                    Log.i("勝利方是:","朋友");
-                                                    Toast.makeText(Squats_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
-                                                    Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
-                                                    friend_point_database.child("friend_point").setValue(squats_dare_data.getSquats_dare_friend_point()+10);
-                                                    Log.i("勝利方是:","你");
-                                                    Toast.makeText(Squats_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                }
-
-
-
+                                        Log.i("1",""+ squats_dare_data.getSquats_dare_myFinishTime());
+                                        Log.i("12",""+ squats_dare_data.getSquats_dare_myCount());
+                                        Log.i("123",""+ FriendFinishTimeLong);
+                                        Log.i("1234",""+ FriendCountInt);
+                                        Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
+                                        if(squats_dare_data.getSquats_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&squats_dare_data.getSquats_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
+                                            text_winner.setVisibility(View.VISIBLE);
+                                            if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
+                                                text_winner.setText("勝利方是朋友");
+                                            }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
+                                                text_winner.setText("勝利方是你");
+                                                Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                             }
-                                        });
+                                            confirm_dare.setVisibility(View.VISIBLE);
+                                            confirm_dare.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    confirm_database.child("Squats_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
+                                                    confirm_dare.setVisibility(View.INVISIBLE);
+                                                    friend_single_image.setVisibility(View.INVISIBLE);
+                                                    friend_single_name.setVisibility(View.INVISIBLE);
+                                                    friend_finish_time.setVisibility(View.INVISIBLE);
+                                                    friend_finish_time_data.setVisibility(View.INVISIBLE);
+                                                    friend_squats_finish_count.setVisibility(View.INVISIBLE);
+                                                    friend_squats_finish_count_data.setVisibility(View.INVISIBLE);
+                                                    text_VS.setVisibility(View.INVISIBLE);
+                                                    text_winner.setVisibility(View.INVISIBLE);
+                                                    if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
+                                                        Log.i("勝利方是:","朋友");
+                                                        Toast.makeText(Squats_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
+                                                        Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
+                                                        friend_point_database.child("friend_point").setValue(squats_dare_data.getSquats_dare_friend_point()+10);
+                                                        Log.i("勝利方是:","你");
+                                                        Toast.makeText(Squats_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                    }
+
+
+
+                                                }
+                                            });
+                                        }
                                     }
+
 
                                 }
 

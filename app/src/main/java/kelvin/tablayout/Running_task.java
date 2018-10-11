@@ -140,19 +140,10 @@ public class Running_task extends AppCompatActivity {
                 my_running_task_name.setText(running_task_my_name);
                 my_running_task_finish_count_data.setText(running_task_my_count+"公里");
 
-                if(!running_task_my_image.equals("default")){
-                    Picasso.with(Running_task.this).load(running_task_my_image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.default_avatar).into(my_running_task_image, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-
-                        @Override
-                        public void onError() {
-                            Picasso.with(Running_task.this).load(running_task_my_image).placeholder(R.drawable.default_avatar).into(my_running_task_image);
-                        }
-                    });
+                if(running_task_my_image.equals("default")){
+                    Picasso.get().load(R.drawable.default_avatar).into(my_running_task_image);
+                }else{
+                    Picasso.get().load(running_task_my_image).into(my_running_task_image);
                 }
 
                 running_task_Database.child("Task_running").addValueEventListener(new ValueEventListener() {
@@ -170,64 +161,56 @@ public class Running_task extends AppCompatActivity {
                             running_task_friendDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    running_task_friend_name=dataSnapshot.child("name").getValue().toString();
-                                    running_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
-                                    running_task_friend_count=dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
-                                    running_task_friend_count_double=Double.parseDouble(running_task_friend_count);
+                                    if (running_task_text_and.getVisibility() == View.VISIBLE) {
+                                        running_task_friend_name = dataSnapshot.child("name").getValue().toString();
+                                        running_task_friend_image = dataSnapshot.child("thumb_image").getValue().toString();
+                                        running_task_friend_count = dataSnapshot.child("exercise_count").child("running").child("today_record").getValue().toString();
+                                        running_task_friend_count_double = Double.parseDouble(running_task_friend_count);
 
-                                    friend_running_task_name.setText(running_task_friend_name);
-                                    friend_running_task_finish_count_data.setText(running_task_friend_count+"公里");
+                                        friend_running_task_name.setText(running_task_friend_name);
+                                        friend_running_task_finish_count_data.setText(running_task_friend_count + "公里");
 
 
+                                        if (running_task_friend_image.equals("default")) {
+                                            Picasso.get().load(R.drawable.default_avatar).into(friend_running_task_image);
+                                        } else {
+                                            Picasso.get().load(running_task_friend_image).into(friend_running_task_image);
+                                        }
 
-                                    if(!running_task_friend_image.equals("default")){
-                                        Picasso.with(Running_task.this).load(running_task_friend_image).networkPolicy(NetworkPolicy.OFFLINE)
-                                                .placeholder(R.drawable.default_avatar).into(friend_running_task_image, new Callback() {
-                                            @Override
-                                            public void onSuccess() {
+                                        running_progress = running_task_friend_count_double + running_data.getMy_task_double_exercise_data();
+                                        Log.i("進度條的進度", "" + running_progress);
 
-                                            }
+                                        running_task_data_double = Double.parseDouble(running_task_data.getText().toString());
+                                        Log.i("仰臥起坐共同任務運動量", "" + running_task_data_double);
+                                        if (running_progress >= running_task_data_double) {
+                                            running_task_seek_bar.setProgress((float) running_task_data_double);
+                                            running_susses_text_view.setText("你們已經完成");
+                                            running_task_friend_point.setVisibility(View.VISIBLE);
+                                            confirm_running_task_button.setVisibility(View.VISIBLE);
+                                            confirm_running_task_button.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    running_task_text_and.setVisibility(View.INVISIBLE);
+                                                    friend_running_task_name.setVisibility(View.INVISIBLE);
+                                                    friend_running_task_image.setVisibility(View.INVISIBLE);
+                                                    friend_running_task_finish_count.setVisibility(View.INVISIBLE);
+                                                    friend_running_task_finish_count_data.setVisibility(View.INVISIBLE);
+                                                    running_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    running_task_Database.child("Task_running").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point() + 10);
+                                                    running_susses_text_view.setText("目前沒有朋友");
+                                                    running_task_seek_bar.setProgress((0));
+                                                    running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                    confirm_running_task_button.setVisibility(View.INVISIBLE);
+                                                }
+                                            });
+                                        } else if (running_progress < running_task_data_double) {
+                                            running_susses_text_view.setText("你們目前完成\n        " + running_progress + "公里");
+                                            running_task_seek_bar.setProgress((float) running_progress);
+                                        }
 
-                                            @Override
-                                            public void onError() {
-                                                Picasso.with(Running_task.this).load(running_task_my_image).placeholder(R.drawable.default_avatar).into(friend_running_task_image);
-                                            }
-                                        });
+
                                     }
-
-                                    running_progress=running_task_friend_count_double+running_data.getMy_task_double_exercise_data();
-                                    Log.i("進度條的進度",""+running_progress);
-
-                                    running_task_data_double=Double.parseDouble(running_task_data.getText().toString());
-                                    Log.i("仰臥起坐共同任務運動量",""+running_task_data_double);
-                                    if(running_progress>=running_task_data_double){
-                                        running_task_seek_bar.setProgress((float)running_task_data_double);
-                                        running_susses_text_view.setText("你們已經完成");
-                                        running_task_friend_point.setVisibility(View.VISIBLE);
-                                        confirm_running_task_button.setVisibility(View.VISIBLE);
-                                        confirm_running_task_button.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                running_task_text_and.setVisibility(View.INVISIBLE);
-                                                friend_running_task_name.setVisibility(View.INVISIBLE);
-                                                friend_running_task_image.setVisibility(View.INVISIBLE);
-                                                friend_running_task_finish_count.setVisibility(View.INVISIBLE);
-                                                friend_running_task_finish_count_data.setVisibility(View.INVISIBLE);
-                                                running_task_friend_point.setVisibility(View.INVISIBLE);
-                                                running_task_Database.child("Task_running").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
-                                                running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point()+10);
-                                                running_susses_text_view.setText("目前沒有朋友");
-                                                running_task_seek_bar.setProgress((0));
-                                                running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
-                                                confirm_running_task_button.setVisibility(View.INVISIBLE);
-                                            }
-                                        });
-                                    }else if(running_progress<running_task_data_double){
-                                        running_susses_text_view.setText("你們目前完成\n        "+running_progress+"公里");
-                                        running_task_seek_bar.setProgress((float)running_progress);
-                                    }
-
-
                                 }
 
                                 @Override

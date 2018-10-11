@@ -815,9 +815,10 @@ public class  MainActivity extends AppCompatActivity
                         textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
                         textView10.setText(""+squats_week_record+"次");
                         textView9.setText(""+crunches_week_record+"次");
+                        del.setVisibility(View.VISIBLE);
                     }
 
-                    Picasso.with(MainActivity.this).load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
+                    Picasso.get().load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                 }
 
                 @Override
@@ -849,6 +850,7 @@ public class  MainActivity extends AppCompatActivity
             textView8.setVisibility(View.INVISIBLE);
             textView10.setVisibility(View.INVISIBLE);
             textView9.setVisibility(View.INVISIBLE);
+            del.setVisibility(View.INVISIBLE);
             main_title.setText("点击左上角");
             //mHanlder2.postDelayed(task3,5000);
 
@@ -910,6 +912,8 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, PhotoBlog.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
             }
@@ -1264,7 +1268,8 @@ public class  MainActivity extends AppCompatActivity
         }
         else if(id==R.id.chat_room){
             Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
-            //finish();
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
             startActivity(i);
         }
         else if(id==R.id.setting_account){

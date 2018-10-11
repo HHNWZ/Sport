@@ -77,7 +77,8 @@ public class ClickPostActivity extends AppCompatActivity {
                     databaseUserID=dataSnapshot.child("uid").getValue().toString();
 
                     PostDescription.setText(description);
-                    Picasso.with(ClickPostActivity.this).load(image).into(PostImage);
+                    Picasso.get().load(image).into(PostImage);
+
 
                     if(currentUserID.equals(databaseUserID))
                     {
@@ -135,7 +136,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
         Dialog dialog=builder.create();
         dialog.show();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.rgb(115,196,217)));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.rgb(255,255,255)));
     }
 
     private void DeleteCurrentPost() {
@@ -148,7 +149,10 @@ public class ClickPostActivity extends AppCompatActivity {
     private void SendUserToMainActivity() {
 
         Intent mainIntent = new Intent(ClickPostActivity.this,PhotoBlog.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(mainIntent);
+
 
     }
 
@@ -156,6 +160,8 @@ public class ClickPostActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(ClickPostActivity.this, PhotoBlog.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
