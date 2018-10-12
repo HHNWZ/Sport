@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -179,21 +180,54 @@ public class SquatsMonitor extends AppCompatActivity {
 
     public void drawSquats(long squats_duration,int squats_mean_heart_rate,long squats_start_time,long squats_end_time, int squats_calorie,int squats_max_heart_rate,String squats_UUID,int squats_count){
         if(squats_count!=0){
-            TextView duration_data_of_squats_monitor= (TextView) findViewById(R.id.duration_data_of_squats_monitor);
-            TextView calorie_data_of_squats_monitor= (TextView) findViewById(R.id.calorie_data_of_squats_monitor);
-            TextView meanHeartRate_data_of_squats_monitor= (TextView) findViewById(R.id.meanHeartRate_data_of_squats_monitor);
-            TextView max_heart_rate_data_of_squats_monitor= (TextView) findViewById(R.id.max_heart_rate_data_of_squats_monitor);
-            TextView squats_start_time_data= (TextView) findViewById(R.id.squats_start_time_data);
-            TextView squats_end_time_data= (TextView) findViewById(R.id.squats_end_time_data);
-            TextView count_squats_data=(TextView)findViewById(R.id.count_squats_data);
+            PhilText count_squats_data=(PhilText) findViewById(R.id.count_squats_data);
 
-            duration_data_of_squats_monitor.setText(""+Time.get_duration_time(squats_duration));
-            calorie_data_of_squats_monitor.setText(""+squats_calorie+"大卡");
-            meanHeartRate_data_of_squats_monitor.setText(""+squats_mean_heart_rate+"次/分");
-            max_heart_rate_data_of_squats_monitor.setText(""+squats_max_heart_rate+"次/分");
-            squats_start_time_data.setText(""+Time.get_start_time(squats_start_time));
-            squats_end_time_data.setText(""+Time.get_end_time(squats_end_time));
-            count_squats_data.setText(""+squats_count+"次");
+            PhilText duration_of_squats_of_minute=(PhilText)findViewById(R.id.duration_of_squats_of_minute);
+            PhilText duration_of_squats_of_second=(PhilText)findViewById(R.id.duration_of_squats_of_second);
+            PhilText squats_start_year=(PhilText)findViewById(R.id.squats_start_year);
+            PhilText squats_start_month=(PhilText)findViewById(R.id.squats_start_month);
+            PhilText squats_start_day=(PhilText)findViewById(R.id.squats_start_day);
+            TextView squats_start_week_text_view=(TextView)findViewById(R.id.squats_start_week_text_view);
+            PhilText squats_start_hour=(PhilText) findViewById(R.id.squats_start_hour);
+            PhilText squats_start_minute=(PhilText)findViewById(R.id.squats_start_minute);
+            PhilText squats_start_second=(PhilText)findViewById(R.id.squats_start_second);
+            PhilText squats_finish_year=(PhilText)findViewById(R.id.squats_finish_year);
+            PhilText squats_finish_month=(PhilText)findViewById(R.id.squats_finish_month);
+            PhilText squats_finish_day=(PhilText)findViewById(R.id.squats_finish_day);
+            TextView squats_finish_week_text_view=(TextView)findViewById(R.id.squats_finish_week_text_view);
+            PhilText squats_finish_hour=(PhilText) findViewById(R.id.squats_finish_hour);
+            PhilText squats_finish_minute=(PhilText)findViewById(R.id.squats_finish_minute);
+            PhilText squats_finish_second=(PhilText)findViewById(R.id.squats_finish_second);
+            PhilText calorie_squats_data=(PhilText) findViewById(R.id.calorie_squats_data);
+            PhilText mean_HeartRat_squats_data=(PhilText) findViewById(R.id.mean_HeartRat_squats_data);
+            PhilText max_heart_rate_squats_data=(PhilText) findViewById(R.id.max_heart_rate_squats_data);
+
+
+            count_squats_data.setText(""+squats_count);
+
+            duration_of_squats_of_minute.setText(Time.get_duration_minute(squats_duration));
+            duration_of_squats_of_second.setText(Time.get_duration_second(squats_duration));
+            squats_start_year.setText(Time.get_start_time_year(squats_start_time));
+            squats_start_month.setText(Time.get_start_time_month(squats_start_time));
+            squats_start_day.setText(Time.get_start_time_day(squats_start_time));
+            squats_start_week_text_view.setText(Time.get_start_week(squats_start_time));
+            squats_start_hour.setText(Time.get_start_time_hour(squats_start_time));
+            squats_start_minute.setText(Time.get_start_time_minute(squats_start_time));
+            squats_start_second.setText(Time.get_start_time_second(squats_start_time));
+            squats_finish_year.setText(Time.get_finish_time_year(squats_end_time));
+            squats_finish_month.setText(Time.get_finish_time_month(squats_end_time));
+            squats_finish_day.setText(Time.get_finish_time_day(squats_end_time));
+            squats_finish_week_text_view.setText(Time.get_finish_week(squats_end_time));
+            squats_finish_hour.setText(Time.get_finish_time_hour(squats_end_time));
+            squats_finish_minute.setText(Time.get_finish_time_minute(squats_end_time));
+            squats_finish_second.setText(Time.get_finish_time_second(squats_end_time));
+            calorie_squats_data.setText(""+squats_calorie);
+            mean_HeartRat_squats_data.setText(""+squats_mean_heart_rate);
+            max_heart_rate_squats_data.setText(""+squats_max_heart_rate);
+
+
+
+
 
             writeNewExerciseData.setNewExerciseData3("squats",
                     Time.get_start_time(squats_start_time),

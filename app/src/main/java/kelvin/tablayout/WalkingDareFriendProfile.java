@@ -227,7 +227,6 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"WalkingDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送步行挑戰給你"+"\"}"
                                             + "}";
@@ -400,7 +399,6 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"WalkingDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的步行挑戰給你"+"\"}"
                                             + "}";
@@ -580,7 +578,6 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
                                         + "\"large_icon\": \""+my_image.toString()+"\","
                                         + "\"small_icon\": \""+R.drawable.testicon +"\","
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                        + "\"android_sound\": \"messagechat\","
                                         + "\"data\": {\"activityToBeOpened\":\"WalkingDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的步行挑戰邀請"+"\"}"
                                         + "}";

@@ -232,7 +232,6 @@ public class TaskProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送共同任務給你"+"\"}"
                                             + "}";
@@ -404,7 +403,6 @@ public class TaskProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的共同任務給你"+"\"}"
                                             + "}";
@@ -584,7 +582,6 @@ public class TaskProfile extends AppCompatActivity {
                                         + "\"large_icon\": \""+my_image.toString()+"\","
                                         + "\"small_icon\": \""+R.drawable.testicon +"\","
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                        + "\"android_sound\": \"messagechat\","
                                         + "\"data\": {\"activityToBeOpened\":\"TaskProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\",\"Task_req\":\""+Task_req+"\",\"Task\":\""+Task+"\"},"
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的共同任務邀請"+"\"}"
                                         + "}";

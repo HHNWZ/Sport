@@ -23,6 +23,42 @@ public class Time extends Application {
         return durationTime;
     }
 
+    public static String get_duration_hour(long duration_milliseconds){
+        String duration_Hour="";
+
+        Calendar duration_time = Calendar.getInstance();
+        duration_time.setTimeInMillis(duration_milliseconds);
+        int duration_hour = duration_time.get(Calendar.HOUR);//12小时制
+        duration_Hour=""+duration_hour;
+
+        return duration_Hour;
+
+    }
+
+    public static String get_duration_minute(long duration_milliseconds){
+        String duration_Minute="";
+
+        Calendar duration_time = Calendar.getInstance();
+        duration_time.setTimeInMillis(duration_milliseconds);
+        int duration_minute = duration_time.get(Calendar.MINUTE);
+        duration_Minute=""+duration_minute;
+
+        return duration_Minute;
+    }
+
+    public static String get_duration_second(long duration_milliseconds){
+        String duration_Second="";
+
+        Calendar duration_time = Calendar.getInstance();
+        duration_time.setTimeInMillis(duration_milliseconds);
+        int duration_second = duration_time.get(Calendar.SECOND);
+        duration_Second=""+duration_second;
+
+        return duration_Second;
+    }
+
+
+
     public static String get_start_time(long start_milliseconds){
         String startTime ="";
         Calendar start_calendar=Calendar.getInstance();
@@ -37,6 +73,137 @@ public class Time extends Application {
         startTime=""+start_year+"年"+start_month+"月"+start_day+"日 週"+start_week+" "+start_hour+"時 "+start_minute+"分鐘 "+start_second+"秒 ";
 
         return startTime;
+    }
+    public static String get_start_time_year(long start_milliseconds){
+        String StartTimeYear="";
+        Calendar start_calendar=Calendar.getInstance();
+        start_calendar.setTimeInMillis(start_milliseconds);
+        int start_year = start_calendar.get(Calendar.YEAR);
+        StartTimeYear=""+start_year;
+
+        return StartTimeYear;
+    }
+
+    public static String get_start_time_month(long start_milliseconds){
+        String StartTimeMonth="";
+        Calendar start_calendar=Calendar.getInstance();
+        start_calendar.setTimeInMillis(start_milliseconds);
+        int start_month = start_calendar.get(Calendar.MONTH)+1;
+        StartTimeMonth=""+start_month;
+
+        return StartTimeMonth;
+    }
+
+    public static String get_start_time_day(long start_milliseconds){
+        String StartTimeDay="";
+        Calendar start_calendar=Calendar.getInstance();
+        start_calendar.setTimeInMillis(start_milliseconds);
+        int start_day = start_calendar.get(Calendar.DAY_OF_MONTH);
+        StartTimeDay=""+start_day;
+
+        return StartTimeDay;
+    }
+
+    public static String get_start_time_hour(long start_milliseconds){
+        String StartTimeHour="";
+        Calendar start_calendar=Calendar.getInstance();
+        start_calendar.setTimeInMillis(start_milliseconds);
+        int start_hour = start_calendar.get(Calendar.HOUR_OF_DAY);
+        StartTimeHour=""+start_hour;
+
+        return StartTimeHour;
+    }
+
+    public static String get_start_time_minute(long start_milliseconds){
+        String StartTimeMinute="";
+        Calendar start_calendar=Calendar.getInstance();
+        start_calendar.setTimeInMillis(start_milliseconds);
+        int start_minute = start_calendar.get(Calendar.MINUTE);
+        StartTimeMinute=""+start_minute;
+
+        return StartTimeMinute;
+    }
+
+    public static String get_start_time_second(long start_milliseconds){
+        String StartTimeSecond="";
+        Calendar start_calendar=Calendar.getInstance();
+        start_calendar.setTimeInMillis(start_milliseconds);
+        int start_second = start_calendar.get(Calendar.MINUTE);
+        StartTimeSecond=""+start_second;
+
+        return StartTimeSecond;
+    }
+
+    public static String get_start_week(long start_milliseconds){
+        String start_week=Week.getWeek(start_milliseconds);
+
+        return start_week;
+    }
+
+    public static String get_finish_week(long start_milliseconds){
+        String end_week=Week.getWeek(start_milliseconds);
+
+        return end_week;
+    }
+
+    public static String get_finish_time_year(long end_milliseconds){
+        String EndTimeYear="";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(end_milliseconds);
+        int end_year = end_calendar.get(Calendar.YEAR);
+        EndTimeYear=""+end_year;
+
+        return EndTimeYear;
+    }
+
+    public static String get_finish_time_month(long end_milliseconds){
+        String EndTimeMonth="";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(end_milliseconds);
+        int end_month = end_calendar.get(Calendar.MONTH)+1;
+        EndTimeMonth=""+end_month;
+
+        return EndTimeMonth;
+    }
+
+    public static String get_finish_time_day(long end_milliseconds){
+        String EndTimeDay="";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(end_milliseconds);
+        int end_day = end_calendar.get(Calendar.DAY_OF_MONTH);
+        EndTimeDay=""+end_day;
+
+        return EndTimeDay;
+    }
+
+    public static String get_finish_time_hour(long end_milliseconds){
+        String EndTimeHour="";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(end_milliseconds);
+        int end_hour = end_calendar.get(Calendar.HOUR_OF_DAY);
+        EndTimeHour=""+end_hour;
+
+        return EndTimeHour;
+    }
+
+    public static String get_finish_time_minute(long end_milliseconds){
+        String EndTimeMinute="";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(end_milliseconds);
+        int end_minute = end_calendar.get(Calendar.MINUTE);
+        EndTimeMinute=""+end_minute;
+
+        return EndTimeMinute;
+    }
+
+    public static String get_finish_time_second(long end_milliseconds){
+        String EndTimeSecond="";
+        Calendar end_calendar=Calendar.getInstance();
+        end_calendar.setTimeInMillis(end_milliseconds);
+        int end_second = end_calendar.get(Calendar.MINUTE);
+        EndTimeSecond=""+end_second;
+
+        return EndTimeSecond;
     }
 
     public static String get_end_time(long end_milliseconds){

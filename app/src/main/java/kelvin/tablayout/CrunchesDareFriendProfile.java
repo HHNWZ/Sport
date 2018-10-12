@@ -228,7 +228,6 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"CrunchesDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送仰臥起坐挑戰給你"+"\"}"
                                             + "}";
@@ -401,7 +400,6 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
                                             + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"android_sound\": \"messagechat\","
                                             + "\"data\": {\"activityToBeOpened\":\"CrunchesDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的仰臥起坐挑戰給你"+"\"}"
                                             + "}";
@@ -581,7 +579,6 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                         + "\"large_icon\": \""+my_image.toString()+"\","
                                         + "\"small_icon\": \""+R.drawable.testicon +"\","
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                        + "\"android_sound\": \"messagechat\","
                                         + "\"data\": {\"activityToBeOpened\":\"CrunchesDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                         + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的仰臥起坐挑戰邀請"+"\"}"
                                         + "}";
