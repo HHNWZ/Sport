@@ -190,12 +190,12 @@ public class BlankFragmentc3 extends Fragment implements View.OnTouchListener {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {//Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();預設顯示日期
                 if(date== ((MainActivity)getActivity()).seleDAY) {//雙擊日期時
-                   /* BlankFragmentDay blankfragmentday=BlankFragmentDay.newInstance(day1.getText().toString(),day2.getText().toString());
+                   BlankFragmentDay blankfragmentday=BlankFragmentDay.newInstance(day1.getText().toString(),day2.getText().toString());
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.content_main,blankfragmentday,null)
                             .addToBackStack(null)
-                            .commit();*/
+                            .commit();
                     ((MainActivity)getActivity()).toBFD(day1.getText().toString(),day2.getText().toString());//傳值到主頁面
                 }else {//單擊日期時
                     Toast.makeText(getActivity(),

@@ -25,6 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_above="@id/buttonLinear"
+                    android:background="@drawable/main_border"
                     android:layout_below="@+id/nav_action">
 
 
@@ -95,7 +96,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#323d4d"
-
                     android:id="@+id/buttonLinear"
                     android:layout_above="@+id/dataLinear1">
 
@@ -104,7 +104,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#323d4d"
+                        android:background="@drawable/main_border"
+                        android:padding="5dp"
                         android:drawableTop="@drawable/write1"
                         android:text="經驗交流"
                         android:textColor="#ffffff" />
@@ -114,7 +115,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#323d4d"
+                        android:background="@drawable/main_border"
+                        android:padding="5dp"
                         android:drawableTop="@drawable/food1"
                         android:text="飲食控制"
                         android:textColor="#ffffff" />
@@ -124,7 +126,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#323d4d"
+                        android:background="@drawable/main_border"
+                        android:padding="5dp"
                         android:drawableTop="@drawable/rank1"
                         android:text="排行榜"
                         android:textColor="#ffffff" />
@@ -134,7 +137,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#323d4d"
+                        android:background="@drawable/main_border"
+                        android:padding="5dp"
                         android:drawableTop="@drawable/stream1"
                         android:text="直播"
                         android:textColor="#ffffff" />
@@ -146,6 +150,8 @@
                     android:orientation="vertical"
                     android:layout_below="@id/buttonLinear"
                     android:layout_alignParentBottom="true"
+                    android:background="@drawable/main_border"
+                    android:padding="5dp"
                     android:layout_toLeftOf="@+id/dataLinear1"
                     >
 
@@ -162,7 +168,9 @@
                     android:layout_height="200dp"
                     android:orientation="vertical"
                     android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true">
+                    android:background="@drawable/main_border"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp">
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -173,15 +181,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#38b048"
+                            android:background="@drawable/running_background"
                             >
                             <TextView
                                 android:id="@+id/textView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:text="跑步:"
+
                                 android:textColor="#ffffff"
-                                android:paddingRight="2.5dp"
                                 android:layout_gravity="right"
                                 android:gravity="center_vertical"/>
 
@@ -197,7 +205,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#189428">
+                            android:background="@drawable/walking_background">
                             <TextView
                                 android:id="@+id/TextView1"
                                 android:layout_width="match_parent"
@@ -220,7 +228,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#349bb3">
+                            android:background="@drawable/yoga_background">
                             <TextView
                                 android:id="@+id/textView3"
                                 android:layout_width="match_parent"
@@ -244,7 +252,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#2671ab">
+                            android:background="@drawable/squats_background">
                             <TextView
                                 android:id="@+id/textView5"
                                 android:layout_width="match_parent"
@@ -267,7 +275,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="#2c618a">
+                            android:background="@drawable/crunches_background">
                             <TextView
                                 android:id="@+id/textView4"
                                 android:layout_width="match_parent"

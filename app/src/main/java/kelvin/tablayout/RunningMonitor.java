@@ -184,35 +184,66 @@ public class RunningMonitor extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         if(running_distance!=0) {
-            TextView distance_data_of_running_monitor = (TextView) findViewById(R.id.distance_data_of_running_monitor);
-            TextView duration_data_of_running_monitor = (TextView) findViewById(R.id.duration_data_of_running_monitor);
-            TextView meanHeartRate_data_of_running_monitor = (TextView) findViewById(R.id.meanHeartRate_data_of_running_monitor);
-            TextView start_time_data_of_running_monitor = (TextView) findViewById(R.id.start_time_data_of_running_monitor);
-            TextView end_time_data_of_running_monitor = (TextView) findViewById(R.id.end_time_data_of_running_monitor);
-            TextView calorie_data_of_running_monitor = (TextView) findViewById(R.id.calorie_data_of_running_monitor);
-            TextView incline_distance_data_of_running_monitor = (TextView) findViewById(R.id.incline_distance_data_of_running_monitor);
-            TextView decline_distance_data_of_running_monitor = (TextView) findViewById(R.id.decline_distance_data_of_running_monitor);
-            TextView max_heart_rate_data_of_running_monitor = (TextView) findViewById(R.id.max_heart_rate_data_of_running_monitor);
-            TextView max_altitude_data_of_running_monitor = (TextView) findViewById(R.id.max_altitude_data_of_running_monitor);
-            TextView min_altitude_data_of_running_monitor = (TextView) findViewById(R.id.min_altitude_data_of_running_monitor);
-            TextView mean_speed_data_of_running_monitor = (TextView) findViewById(R.id.mean_speed_data_of_running_monitor);
-            TextView max_speed_data_of_running_monitor = (TextView) findViewById(R.id.max_speed_data_of_running_monitor);
+
+            PhilText distance_running_data=(PhilText) findViewById(R.id.distance_running_data);
+
+            PhilText duration_of_running_of_minute=(PhilText)findViewById(R.id.duration_of_running_of_minute);
+            PhilText duration_of_running_of_second=(PhilText)findViewById(R.id.duration_of_running_of_second);
+            PhilText running_start_year=(PhilText)findViewById(R.id.running_start_year);
+            PhilText running_start_month=(PhilText)findViewById(R.id.running_start_month);
+            PhilText running_start_day=(PhilText)findViewById(R.id.running_start_day);
+            TextView running_start_week_text_view=(TextView)findViewById(R.id.running_start_week_text_view);
+            PhilText running_start_hour=(PhilText) findViewById(R.id.running_start_hour);
+            PhilText running_start_minute=(PhilText)findViewById(R.id.running_start_minute);
+            PhilText running_start_second=(PhilText)findViewById(R.id.running_start_second);
+            PhilText running_finish_year=(PhilText)findViewById(R.id.running_finish_year);
+            PhilText running_finish_month=(PhilText)findViewById(R.id.running_finish_month);
+            PhilText running_finish_day=(PhilText)findViewById(R.id.running_finish_day);
+            TextView running_finish_week_text_view=(TextView)findViewById(R.id.running_finish_week_text_view);
+            PhilText running_finish_hour=(PhilText) findViewById(R.id.running_finish_hour);
+            PhilText running_finish_minute=(PhilText)findViewById(R.id.running_finish_minute);
+            PhilText running_finish_second=(PhilText)findViewById(R.id.running_finish_second);
+            PhilText calorie_running_data=(PhilText) findViewById(R.id.calorie_running_data);
+            PhilText mean_HeartRat_running_data=(PhilText) findViewById(R.id.mean_HeartRat_running_data);
+            PhilText max_heart_rate_running_data=(PhilText) findViewById(R.id.max_heart_rate_running_data);
+            PhilText incline_distance_data_of_running_monitor=(PhilText)findViewById(R.id.incline_distance_data_of_running_monitor);
+            PhilText decline_distance_data_of_running_monitor=(PhilText)findViewById(R.id.decline_distance_data_of_running_monitor);
+            PhilText max_altitude_data_of_running_monitor=(PhilText)findViewById(R.id.max_altitude_data_of_running_monitor);
+            PhilText min_altitude_data_of_running_monitor=(PhilText)findViewById(R.id.min_altitude_data_of_running_monitor);
+            PhilText mean_speed_data_of_running_monitor=(PhilText)findViewById(R.id.mean_speed_data_of_running_monitor);
+            PhilText max_speed_data_of_running_monitor=(PhilText)findViewById(R.id.max_speed_data_of_running_monitor);
 
 
+            distance_running_data.setText("" + UnitConversion.get_kilometer(running_distance));
 
-            distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_distance)+"公里");
-            meanHeartRate_data_of_running_monitor.setText("" + running_mean_heart_rate+"次/分");
-            duration_data_of_running_monitor.setText(Time.get_duration_time(running_duration));
-            start_time_data_of_running_monitor.setText(Time.get_start_time(running_start_time));
-            end_time_data_of_running_monitor.setText(Time.get_end_time(running_end_time));
-            calorie_data_of_running_monitor.setText("" + running_calorie+"大卡");
-            incline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_incline_distance)+"公里");
-            decline_distance_data_of_running_monitor.setText("" + UnitConversion.get_kilometer(running_decline_distance)+"公里");
-            max_heart_rate_data_of_running_monitor.setText("" + running_max_heart_rate+"次/分");
-            max_altitude_data_of_running_monitor.setText("" + running_max_altitude+"米");
-            min_altitude_data_of_running_monitor.setText("" + running_min_altitude+"米");
-            mean_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_mean_speed)+"公里/小時");
-            max_speed_data_of_running_monitor.setText("" + UnitConversion.get_kilometer_per_hour(running_max_speed)+"公里小時");
+            duration_of_running_of_minute.setText(Time.get_duration_minute(running_duration));
+            duration_of_running_of_second.setText(Time.get_duration_second(running_duration));
+            running_start_year.setText(Time.get_start_time_year(running_start_time));
+            running_start_month.setText(Time.get_start_time_month(running_start_time));
+            running_start_day.setText(Time.get_start_time_day(running_start_time));
+            running_start_week_text_view.setText(Time.get_start_week(running_start_time));
+            running_start_hour.setText(Time.get_start_time_hour(running_start_time));
+            running_start_minute.setText(Time.get_start_time_minute(running_start_time));
+            running_start_second.setText(Time.get_start_time_second(running_start_time));
+            running_finish_year.setText(Time.get_finish_time_year(running_end_time));
+            running_finish_month.setText(Time.get_finish_time_month(running_end_time));
+            running_finish_day.setText(Time.get_finish_time_day(running_end_time));
+            running_finish_week_text_view.setText(Time.get_finish_week(running_end_time));
+            running_finish_hour.setText(Time.get_finish_time_hour(running_end_time));
+            running_finish_minute.setText(Time.get_finish_time_minute(running_end_time));
+            running_finish_second.setText(Time.get_finish_time_second(running_end_time));
+            calorie_running_data.setText(""+running_calorie);
+            mean_HeartRat_running_data.setText(""+running_mean_heart_rate);
+            max_heart_rate_running_data.setText(""+running_max_heart_rate);
+            incline_distance_data_of_running_monitor.setText(""+UnitConversion.get_kilometer(running_incline_distance));
+            decline_distance_data_of_running_monitor.setText(""+UnitConversion.get_kilometer(running_decline_distance));
+            max_altitude_data_of_running_monitor.setText(""+running_max_altitude);
+            min_altitude_data_of_running_monitor.setText(""+running_min_altitude);
+            mean_speed_data_of_running_monitor.setText(""+UnitConversion.get_kilometer_per_hour(running_mean_speed));
+            max_speed_data_of_running_monitor.setText(""+UnitConversion.get_kilometer_per_hour(running_max_speed));
+
+
+            
 
             writeNewExerciseData.setNewExerciseData("running",
                     Time.get_start_time(running_start_time),

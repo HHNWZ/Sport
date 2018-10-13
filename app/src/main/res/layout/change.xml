@@ -24,24 +24,26 @@
         android:padding="5dp"
         android:orientation="horizontal">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/max_heart_rate_image"
+            android:id="@+id/max_speed_image"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@drawable/suagatsbackground"
             app:civ_border_color="@color/object_color"
-            app:civ_border_width="5dp"/>
+            app:civ_border_width="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"/>
         <TextView
-            android:id="@+id/max_heart_rate_squats_text_view"
+            android:id="@+id/max_speed_of_running_monitor_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="次數:"
+            android:text="最高坡度:"
             android:layout_gravity="right"
             android:gravity="center_vertical"
             android:textColor="@color/text_color"
             android:layout_marginLeft="5dp"
             android:textSize="20sp"/>
         <kelvin.tablayout.PhilText
-            android:id="@+id/max_heart_rate_squats_data"
+            android:id="@+id/max_speed_data_of_running_monitor"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="10"
@@ -49,10 +51,10 @@
             android:textColor="@color/object_color"
             android:textSize="20sp"/>
         <TextView
-            android:id="@+id/max_heart_rate_squats_data_text_view"
+            android:id="@+id/max_speed_data_of_running_monitor_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="次"
+            android:text="公里/小時"
             android:gravity="center_vertical"
             android:textColor="@color/text_color"
             android:textSize="20sp"/>

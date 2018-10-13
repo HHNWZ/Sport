@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -108,7 +110,7 @@ public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener, BlankFragment.OnFragmentInteractionListener, BlankFragment2.OnFragmentInteractionListener, BlankFragment3.OnFragmentInteractionListener
         ,Run.OnFragmentInteractionListener,Walk.OnFragmentInteractionListener,Sit.OnFragmentInteractionListener,Push.OnFragmentInteractionListener,Login.OnFragmentInteractionListener,
         ShowDiary.OnFragmentInteractionListener,addDiary.OnFragmentInteractionListener,BlankFragmentc1.OnFragmentInteractionListener , BlankFragmentc2.OnFragmentInteractionListener , BlankFragmentc3.OnFragmentInteractionListener , BlankFragmentc4.OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener
-        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener, OnChartValueSelectedListener {
+        ,Userdata.OnFragmentInteractionListener, foodAndKLL.OnFragmentInteractionListener,Ifnotuserdata.OnFragmentInteractionListener,Register.OnFragmentInteractionListener, OnChartValueSelectedListener,BlankFragmentDay.OnFragmentInteractionListener {
     public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
     public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
     public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
@@ -448,7 +450,7 @@ public class  MainActivity extends AppCompatActivity
                 MainActivity.this.finish();
             }
         });
-        //mHanlder.postDelayed(task2,5000);
+        mHanlder.postDelayed(task2,5000);
 
 
 
@@ -577,6 +579,7 @@ public class  MainActivity extends AppCompatActivity
             menu_Logout.setVisible(true);
             kel.setVisibility(View.VISIBLE);
             hal.setVisibility(View.VISIBLE);
+            over.setVisibility(View.VISIBLE);
             button_of_walking_monitoring.setVisibility(View.VISIBLE);
             button_of_running_monitoring.setVisibility(View.VISIBLE);
             button_of_yoga_monitoring.setVisibility(View.VISIBLE);
@@ -851,6 +854,7 @@ public class  MainActivity extends AppCompatActivity
             textView10.setVisibility(View.INVISIBLE);
             textView9.setVisibility(View.INVISIBLE);
             del.setVisibility(View.INVISIBLE);
+            over.setVisibility(View.INVISIBLE);
             main_title.setText("点击左上角");
             //mHanlder2.postDelayed(task3,5000);
 
@@ -957,25 +961,16 @@ public class  MainActivity extends AppCompatActivity
 
     }
 
-    /*private Handler mHanlder = new Handler() {
+    private Handler mHanlder = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
                     if (mAuth.getCurrentUser() == null){
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
+                        mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }else{
-                        textView6.setTextColor(Color.BLACK);
-                        textView7.setTextColor(Color.WHITE);
-                        textView8.setTextColor(Color.WHITE);
-                        textView10.setTextColor(Color.WHITE);
-                        textView9.setTextColor(Color.WHITE);
-                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingred);
-                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
-                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
-                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
-                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
 
 
@@ -983,37 +978,18 @@ public class  MainActivity extends AppCompatActivity
                     break;
                 case 2:
                     if(mAuth.getCurrentUser()==null){
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                        mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                     }else {
-                        textView6.setTextColor(Color.WHITE);
-                        textView7.setTextColor(Color.BLACK);
-                        textView8.setTextColor(Color.WHITE);
-                        textView10.setTextColor(Color.WHITE);
-                        textView9.setTextColor(Color.WHITE);
-                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
-                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningred);
-                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
-                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
-                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
                 case 3:
                     if(mAuth.getCurrentUser()==null){
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
+                        mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }{
-                        textView6.setTextColor(Color.WHITE);
-                        textView7.setTextColor(Color.WHITE);
-                        textView8.setTextColor(Color.BLACK);
-                        textView10.setTextColor(Color.WHITE);
-                        textView9.setTextColor(Color.WHITE);
-                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
-                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
-                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogared);
-                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
-                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
 
@@ -1021,37 +997,19 @@ public class  MainActivity extends AppCompatActivity
                     break;
                 case 4:
                     if(mAuth.getCurrentUser()==null){
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
+                        mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                     }{
-                        textView6.setTextColor(Color.WHITE);
-                        textView7.setTextColor(Color.WHITE);
-                        textView8.setTextColor(Color.WHITE);
-                        textView10.setTextColor(Color.BLACK);
-                        textView9.setTextColor(Color.WHITE);
-                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
-                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
-                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
-                        button_of_squats_monitoring.setBackgroundResource(R.drawable.squatsred);
-                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesbackground);
+
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
                 case 5:
                     if(mAuth.getCurrentUser()==null){
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonred);
-                        mToolboar.setNavigationIcon(R.drawable.menubuttonyellow);
+                        mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
+                        mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }{
-                        textView6.setTextColor(Color.WHITE);
-                        textView7.setTextColor(Color.WHITE);
-                        textView8.setTextColor(Color.WHITE);
-                        textView10.setTextColor(Color.WHITE);
-                        textView9.setTextColor(Color.BLACK);
-                        button_of_walking_monitoring.setBackgroundResource(R.drawable.walkingbackground);
-                        button_of_running_monitoring.setBackgroundResource(R.drawable.runningbackground);
-                        button_of_yoga_monitoring.setBackgroundResource(R.drawable.yogabackground);
-                        button_of_squats_monitoring.setBackgroundResource(R.drawable.suagatsbackground);
-                        button_of_crunches_monitoring.setBackgroundResource(R.drawable.crunchesred);
+
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
@@ -1065,16 +1023,17 @@ public class  MainActivity extends AppCompatActivity
     private Runnable task2 = new Runnable() {
         @Override
         public void run() {
+
+            count=count+1;
             if(count>5){
                 count=0;
             }
-            count=count+1;
             mHanlder.sendEmptyMessage(count);
 
             mHanlder.postDelayed(this, 1 * 500);//延迟5秒,再次执行task本身,实现了循环的效果
 
         }
-    };*/
+    };
 
 
 
@@ -1089,7 +1048,7 @@ public class  MainActivity extends AppCompatActivity
         BlankFragmentc4 sportplan=BlankFragmentc4.newInstance(null,null);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_control_die,
+                R.id.content_main,
                 sportplan,
                 sportplan.getTag()
         ).commit();
@@ -1102,7 +1061,7 @@ public class  MainActivity extends AppCompatActivity
         addDiary adddiary=addDiary.newInstance(mydiary,null);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_control_die,
+                R.id.content_main,
                 adddiary,
                 adddiary.getTag()
         ).commit();
@@ -1128,7 +1087,7 @@ public class  MainActivity extends AppCompatActivity
                 theKLL);
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_control_die,
+                R.id.content_main,
                 showdiary,
                 showdiary.getTag()
         ).commit();
@@ -1175,7 +1134,7 @@ public class  MainActivity extends AppCompatActivity
                 dateID);//4.日期ID
         FragmentManager manager=getSupportFragmentManager();
         manager.beginTransaction().addToBackStack(null).replace(
-                R.id.content_control_die,
+                R.id.content_main,
                 FaK,
                 FaK.getTag()
         ).commit();
