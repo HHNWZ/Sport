@@ -330,6 +330,7 @@ public class  MainActivity extends AppCompatActivity
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
+        Log.i("我在這裡","2");
 
         Calendar cal=Calendar.getInstance();
         int y=cal.get(Calendar.YEAR);
@@ -407,8 +408,10 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, Walking_monitor.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
         button_of_running_monitoring.setOnClickListener(new View.OnClickListener() {
@@ -416,8 +419,10 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, RunningMonitor.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
 
@@ -426,8 +431,10 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, YogaMonitor.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
 
@@ -436,8 +443,10 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, SquatsMonitor.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
 
@@ -446,8 +455,10 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, CrunchesMonitor.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                MainActivity.this.finish();
+
             }
         });
         mHanlder.postDelayed(task2,5000);
@@ -457,7 +468,7 @@ public class  MainActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
 
-            Log.i("我在這裡","2");
+            Log.i("我在這裡1234","2");
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             Task_walking=FirebaseDatabase.getInstance().getReference().child("Task_walking").child(mAuth.getCurrentUser().getUid());
@@ -908,6 +919,8 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, Exercise_main.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });
@@ -1215,40 +1228,47 @@ public class  MainActivity extends AppCompatActivity
 
         if (id == R.id.email_login) {
             Intent i = new Intent(MainActivity.this,LoginActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
+
         }
 
         else if (id == R.id.email_register)
         {
 
             Intent i = new Intent(MainActivity.this,RegisterActivity.class);
-            //finish();
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
         else if(id==R.id.chat_room){
             Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
         else if(id==R.id.setting_account){
             Intent i = new Intent(MainActivity.this,SettingsActivity.class);
-            //finish();
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
-        /*else if(id==R.id.blog){
+        /*else if(id==R.id.control_die){
             Intent i= new Intent(MainActivity.this,PhotoBlog.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }*/
         else if(id==R.id.Logout){
 
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
             OneSignal.deleteTag("Uid");
-            //OneSignal.deleteTag("User_ID");
+
 
             FirebaseAuth.getInstance().signOut();
             Intent i = new Intent(MainActivity.this,MainActivity.class);
-            //finish();
+
             startActivity(i);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

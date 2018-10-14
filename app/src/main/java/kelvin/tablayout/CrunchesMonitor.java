@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -44,6 +45,7 @@ public class CrunchesMonitor extends AppCompatActivity {
     private CrunchesReporter cReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
+    private ActionBar crunches_monitor_action_bar;
 
 
     @Override
@@ -58,18 +60,11 @@ public class CrunchesMonitor extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         crunches_monitor_toolbar=(Toolbar)findViewById(R.id.crunches_monitor_toolbar);
-        crunches_monitor_toolbar.setTitle("仰臥起坐監控");
         setSupportActionBar(crunches_monitor_toolbar);
+        crunches_monitor_action_bar=getSupportActionBar();
+        crunches_monitor_action_bar.setTitle("仰臥起坐監控");
+        crunches_monitor_action_bar.setDisplayHomeAsUpEnabled(true);
 
-        crunches_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        crunches_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(CrunchesMonitor.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
 
         mInstance = this;
         mKeySet = new HashSet<>();
@@ -113,6 +108,13 @@ public class CrunchesMonitor extends AppCompatActivity {
                 Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
                 Log.e(APP_TAG, "權限設置失敗。");
             }
+        }
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(CrunchesMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
         }
 
         //noinspection SimplifiableIfStatement
@@ -183,21 +185,50 @@ public class CrunchesMonitor extends AppCompatActivity {
 
     public void drawCrunches(long crunches_duration,int crunches_mean_heart_rate,long crunches_start_time,long crunches_end_time, int crunches_calorie,int crunches_max_heart_rate,String crunches_UUID,int crunches_count){
         if(crunches_count!=0){
-            TextView duration_data_of_crunches_monitor= (TextView) findViewById(R.id.duration_data_of_crunches_monitor);
-            TextView calorie_data_of_crunches_monitor= (TextView) findViewById(R.id.calorie_data_of_crunches_monitor);
-            TextView meanHeartRate_data_of_crunches_monitor= (TextView) findViewById(R.id.meanHeartRate_data_of_crunches_monitor);
-            TextView max_heart_rate_data_of_crunches_monitor= (TextView) findViewById(R.id.max_heart_rate_data_of_crunches_monitor);
-            TextView crunches_start_time_data= (TextView) findViewById(R.id.crunches_start_time_data);
-            TextView crunches_end_time_data= (TextView) findViewById(R.id.crunches_end_time_data);
-            TextView count_crunches_data=(TextView)findViewById(R.id.count_crunches_data);
+            PhilText count_crunches_data=(PhilText) findViewById(R.id.count_crunches_data);
 
-            duration_data_of_crunches_monitor.setText(""+Time.get_duration_time(crunches_duration));
-            calorie_data_of_crunches_monitor.setText(""+crunches_calorie);
-            meanHeartRate_data_of_crunches_monitor.setText(""+crunches_mean_heart_rate);
-            max_heart_rate_data_of_crunches_monitor.setText(""+crunches_max_heart_rate);
-            crunches_start_time_data.setText(""+Time.get_start_time(crunches_start_time));
-            crunches_end_time_data.setText(""+Time.get_end_time(crunches_end_time));
+            PhilText duration_of_crunches_of_minute=(PhilText)findViewById(R.id.duration_of_crunches_of_minute);
+            PhilText duration_of_crunches_of_second=(PhilText)findViewById(R.id.duration_of_crunches_of_second);
+            PhilText crunches_start_year=(PhilText)findViewById(R.id.crunches_start_year);
+            PhilText crunches_start_month=(PhilText)findViewById(R.id.crunches_start_month);
+            PhilText crunches_start_day=(PhilText)findViewById(R.id.crunches_start_day);
+            TextView crunches_start_week_text_view=(TextView)findViewById(R.id.crunches_start_week_text_view);
+            PhilText crunches_start_hour=(PhilText) findViewById(R.id.crunches_start_hour);
+            PhilText crunches_start_minute=(PhilText)findViewById(R.id.crunches_start_minute);
+            PhilText crunches_start_second=(PhilText)findViewById(R.id.crunches_start_second);
+            PhilText crunches_finish_year=(PhilText)findViewById(R.id.crunches_finish_year);
+            PhilText crunches_finish_month=(PhilText)findViewById(R.id.crunches_finish_month);
+            PhilText crunches_finish_day=(PhilText)findViewById(R.id.crunches_finish_day);
+            TextView crunches_finish_week_text_view=(TextView)findViewById(R.id.crunches_finish_week_text_view);
+            PhilText crunches_finish_hour=(PhilText) findViewById(R.id.crunches_finish_hour);
+            PhilText crunches_finish_minute=(PhilText)findViewById(R.id.crunches_finish_minute);
+            PhilText crunches_finish_second=(PhilText)findViewById(R.id.crunches_finish_second);
+            PhilText calorie_crunches_data=(PhilText) findViewById(R.id.calorie_crunches_data);
+            PhilText mean_HeartRat_crunches_data=(PhilText) findViewById(R.id.mean_HeartRat_crunches_data);
+            PhilText max_heart_rate_crunches_data=(PhilText) findViewById(R.id.max_heart_rate_crunches_data);
+
+
             count_crunches_data.setText(""+crunches_count);
+
+            duration_of_crunches_of_minute.setText(Time.get_duration_minute(crunches_duration));
+            duration_of_crunches_of_second.setText(Time.get_duration_second(crunches_duration));
+            crunches_start_year.setText(Time.get_start_time_year(crunches_start_time));
+            crunches_start_month.setText(Time.get_start_time_month(crunches_start_time));
+            crunches_start_day.setText(Time.get_start_time_day(crunches_start_time));
+            crunches_start_week_text_view.setText("週"+Time.get_start_week(crunches_start_time));
+            crunches_start_hour.setText(Time.get_start_time_hour(crunches_start_time));
+            crunches_start_minute.setText(Time.get_start_time_minute(crunches_start_time));
+            crunches_start_second.setText(Time.get_start_time_second(crunches_start_time));
+            crunches_finish_year.setText(Time.get_finish_time_year(crunches_end_time));
+            crunches_finish_month.setText(Time.get_finish_time_month(crunches_end_time));
+            crunches_finish_day.setText(Time.get_finish_time_day(crunches_end_time));
+            crunches_finish_week_text_view.setText(Time.get_finish_week(crunches_end_time));
+            crunches_finish_hour.setText(Time.get_finish_time_hour(crunches_end_time));
+            crunches_finish_minute.setText(Time.get_finish_time_minute(crunches_end_time));
+            crunches_finish_second.setText(Time.get_finish_time_second(crunches_end_time));
+            calorie_crunches_data.setText(""+crunches_calorie);
+            mean_HeartRat_crunches_data.setText(""+crunches_mean_heart_rate);
+            max_heart_rate_crunches_data.setText(""+crunches_max_heart_rate);
 
             writeNewExerciseData.setNewExerciseData3("crunches",
                     Time.get_start_time(crunches_start_time),

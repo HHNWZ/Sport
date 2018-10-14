@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +24,8 @@ import com.onesignal.OneSignal;
 public class MainActivityFireBase extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Toolbar mToolbar;
+    private Toolbar main_activity_fire_base_tool_bar;
+    private ActionBar mian_activity_fire_base_action_bar;
 
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -45,17 +47,12 @@ public class MainActivityFireBase extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUserRef=FirebaseDatabase.getInstance().getReference();
 
-        mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
-        mToolbar.setTitle("運動聊天室");
-        mToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivityFireBase.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        main_activity_fire_base_tool_bar = (Toolbar) findViewById(R.id.main_page_toolbar);
+        setSupportActionBar(main_activity_fire_base_tool_bar);
+        mian_activity_fire_base_action_bar=getSupportActionBar();
+        mian_activity_fire_base_action_bar.setTitle("運動排行榜");
+        mian_activity_fire_base_action_bar.setDisplayHomeAsUpEnabled(true);
+
 
 
         if (mAuth.getCurrentUser() != null) {
@@ -71,7 +68,6 @@ public class MainActivityFireBase extends AppCompatActivity {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        //mViewPager.setPageTransformer(true,new CubeInTransformer());
 
         mTabLayout = (TabLayout) findViewById(R.id.main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -84,20 +80,7 @@ public class MainActivityFireBase extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        /*FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser == null){
-
-            Intent startIntent = new Intent(MainActivityFireBase.this, StartActivity.class);
-            startActivity(startIntent);
-            finish();
-
-        } else {
-
-            mUserRef.child("online").setValue("true");
-
-        }*/
 
     }
 
@@ -106,25 +89,9 @@ public class MainActivityFireBase extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        /*FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser != null) {
-
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
-
-
-        }*/
 
     }
-
-    private void sendToStart() {
-
-        Intent startIntent = new Intent(MainActivityFireBase.this, MainActivity.class);
-        startActivity(startIntent);
-        finish();
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,30 +108,12 @@ public class MainActivityFireBase extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        /*if(item.getItemId() == R.id.main_logout_btn){
-
-            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
-
-            FirebaseAuth.getInstance().signOut();
-            sendToStart();
-
-        }*/
-
-        if(item.getItemId() == R.id.main_settings_btn){
-
-            Intent settingsIntent = new Intent(MainActivityFireBase.this, SettingsActivity.class);
-            startActivity(settingsIntent);
-
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(MainActivityFireBase.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
         }
-        if(item.getItemId() == R.id.go_to_mainpage){
-
-            Intent settingsIntent = new Intent(MainActivityFireBase.this, MainActivity.class);
-            startActivity(settingsIntent);
-
-        }
-
-
-
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }

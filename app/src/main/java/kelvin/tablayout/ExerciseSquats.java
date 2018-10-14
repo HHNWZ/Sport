@@ -116,7 +116,8 @@ public class ExerciseSquats extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Squats_dare.class);
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
 
@@ -135,9 +136,8 @@ public class ExerciseSquats extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Squats_task.class);
-                intent.putExtra("ToolbarTitle","深蹲每週任務");
-                intent.putExtra("exerciseWeekTitle","做深蹲");
-                intent.putExtra("exerciseWeekUnit","次");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
             }
@@ -148,6 +148,8 @@ public class ExerciseSquats extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),SquatsDayHistory.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });

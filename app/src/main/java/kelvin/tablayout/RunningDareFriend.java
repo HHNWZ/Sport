@@ -74,7 +74,8 @@ public class RunningDareFriend extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home){
             Intent intent = new Intent(RunningDareFriend.this,Running_dare.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

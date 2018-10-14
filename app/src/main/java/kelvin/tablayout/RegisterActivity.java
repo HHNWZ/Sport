@@ -4,12 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
@@ -27,13 +30,16 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextInputLayout mDisplayName;
-    private TextInputLayout mEmail;
-    private TextInputLayout mPassword;
-    private Button mCreateBtn;
 
 
-    private Toolbar mToolbar;
+
+    private Toolbar register_toolbar;
+    private ActionBar register_action_bar;
+    private EditText register_email_edit_text;
+    private EditText register_password_edit_text;
+    private EditText register_name_edit_text;
+
+    private Button register_button;
 
     private DatabaseReference UserDataBase;
     private DatabaseReference UserDataBase_Int;
@@ -63,17 +69,11 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //Toolbar Set
-        mToolbar = (Toolbar) findViewById(R.id.register_toolbar);
-        mToolbar.setTitle("註冊帳號");
-        mToolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        register_toolbar = (Toolbar) findViewById(R.id.register_toolbar);
+        setSupportActionBar(register_toolbar);
+        register_action_bar=getSupportActionBar();
+        register_action_bar.setTitle("請輸入註冊資料");
+        register_action_bar.setDisplayHomeAsUpEnabled(true);
 
 
         mRegProgress = new ProgressDialog(this);
@@ -87,19 +87,22 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Android Fields
 
-        mDisplayName = (TextInputLayout) findViewById(R.id.register_display_name);
-        mEmail = (TextInputLayout) findViewById(R.id.register_email);
-        mPassword = (TextInputLayout) findViewById(R.id.reg_password);
-        mCreateBtn = (Button) findViewById(R.id.reg_create_btn);
 
 
-        mCreateBtn.setOnClickListener(new View.OnClickListener() {
+        register_email_edit_text=(EditText)findViewById(R.id.register_email_edit_text);
+        register_password_edit_text=(EditText)findViewById(R.id.register_password_edit_text);
+        register_name_edit_text=(EditText)findViewById(R.id.register_name_edit_text); 
+        
+        register_button=(Button)findViewById(R.id.register_button);
+
+
+        register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String display_name = mDisplayName.getEditText().getText().toString();//使用者名稱
-                String email = mEmail.getEditText().getText().toString();//使用者電郵
-                String password = mPassword.getEditText().getText().toString();//使用者密碼
+                String display_name = register_email_edit_text.getText().toString();//使用者名稱
+                String email = register_password_edit_text.toString();//使用者電郵
+                String password = register_name_edit_text.getText().toString();//使用者密碼
 
                 if(!TextUtils.isEmpty(display_name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
 
@@ -373,5 +376,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

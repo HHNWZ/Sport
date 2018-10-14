@@ -64,7 +64,6 @@ public class RunningHistory extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(RunningHistory.this,RunningHourHistory.class);
             intent.putExtra("keyDay",day_running_key);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 

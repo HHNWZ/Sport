@@ -64,7 +64,6 @@ public class YogaHistory extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(YogaHistory.this,YogaHourHistory.class);
             intent.putExtra("keyDay",day_yoga_key);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 

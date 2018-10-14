@@ -19,7 +19,8 @@
         <item
             android:id="@+id/chat_room"
             android:icon="@drawable/chatroom"
-            android:title="@string/chat_room" />
+            android:title="@string/chat_room"
+            android:actionLayout="@layout/activity_chat"/>
     </group>
     <group android:checkableBehavior="single">
         <item
@@ -31,7 +32,8 @@
         <item
             android:id="@+id/Logout"
             android:icon="@drawable/logout"
-            android:title="登出" />
+            android:title="登出"
+            />
     </group>
 
 </menu>

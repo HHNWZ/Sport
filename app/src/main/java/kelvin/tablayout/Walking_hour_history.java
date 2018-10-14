@@ -39,6 +39,7 @@ public class Walking_hour_history extends AppCompatActivity{
         actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setSubtitle("以時間顯示");
+        actionBar.setTitle("步行歷史記錄");
         actionBar.setLogo(R.drawable.walkingtoolbar);
         day_walking_key=getIntent().getStringExtra("keyDay");
         Log.i("key值",day_walking_key);
@@ -56,7 +57,6 @@ public class Walking_hour_history extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(Walking_hour_history.this,ExerciseHistory.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 

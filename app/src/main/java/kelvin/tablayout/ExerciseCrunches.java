@@ -116,7 +116,8 @@ public class ExerciseCrunches extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Crunches_dare.class);
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
 
@@ -135,9 +136,8 @@ public class ExerciseCrunches extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Crunches_task.class);
-                intent.putExtra("ToolbarTitle","仰臥起坐每週任務");
-                intent.putExtra("exerciseWeekTitle","做仰臥起坐");
-                intent.putExtra("exerciseWeekUnit","次");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
             }
@@ -148,6 +148,8 @@ public class ExerciseCrunches extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),CrunchesDayHistory.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });

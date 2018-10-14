@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +44,7 @@ public class YogaMonitor extends AppCompatActivity {
     private YogaReporter yReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
+    private ActionBar yoga_monitor_action_bar;
     //public static String time;
 
     @Override
@@ -57,18 +59,13 @@ public class YogaMonitor extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         yoga_monitor_toolbar=(Toolbar)findViewById(R.id.yoga_monitor_toolBar);
-        yoga_monitor_toolbar.setTitle("瑜伽監控");
         setSupportActionBar(yoga_monitor_toolbar);
+        yoga_monitor_action_bar=getSupportActionBar();
+        yoga_monitor_action_bar.setTitle("瑜伽監控");
+        yoga_monitor_action_bar.setDisplayHomeAsUpEnabled(true);
 
-        yoga_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        yoga_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(YogaMonitor.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+
+
 
         mInstance = this;
         mKeySet = new HashSet<>();
@@ -112,6 +109,14 @@ public class YogaMonitor extends AppCompatActivity {
                 Log.e(APP_TAG, "權限設置失敗。");
             }
         }
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(YogaMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
+        }
+
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -179,19 +184,45 @@ public class YogaMonitor extends AppCompatActivity {
 
     public void drawYoga(long yoga_duration,int yoga_mean_heart_rate,long yoga_start_time,long yoga_end_time, int yoga_calorie,int yoga_max_heart_rate,String yoga_UUID){
         if(yoga_duration!=0){
-            TextView duration_data_of_yoga_monitor= (TextView) findViewById(R.id.duration_data_of_yoga_monitor);
-            TextView calorie_data_of_yoga_monitor= (TextView) findViewById(R.id.calorie_data_of_yoga_monitor);
-            TextView meanHeartRate_data_of_yoga_monitor= (TextView) findViewById(R.id.meanHeartRate_data_of_yoga_monitor);
-            TextView max_heart_rate_data_of_yoga_monitor= (TextView) findViewById(R.id.max_heart_rate_data_of_yoga_monitor);
-            TextView yoga_start_time_data= (TextView) findViewById(R.id.yoga_start_time_data);
-            TextView yoga_end_time_data= (TextView) findViewById(R.id.yoga_end_time_data);
+            PhilText duration_of_yoga_of_minute=(PhilText)findViewById(R.id.duration_of_yoga_of_minute);
+            PhilText duration_of_yoga_of_second=(PhilText)findViewById(R.id.duration_of_yoga_of_second);
+            PhilText yoga_start_year=(PhilText)findViewById(R.id.yoga_start_year);
+            PhilText yoga_start_month=(PhilText)findViewById(R.id.yoga_start_month);
+            PhilText yoga_start_day=(PhilText)findViewById(R.id.yoga_start_day);
+            TextView yoga_start_week_text_view=(TextView)findViewById(R.id.yoga_start_week_text_view);
+            PhilText yoga_start_hour=(PhilText) findViewById(R.id.yoga_start_hour);
+            PhilText yoga_start_minute=(PhilText)findViewById(R.id.yoga_start_minute);
+            PhilText yoga_start_second=(PhilText)findViewById(R.id.yoga_start_second);
+            PhilText yoga_finish_year=(PhilText)findViewById(R.id.yoga_finish_year);
+            PhilText yoga_finish_month=(PhilText)findViewById(R.id.yoga_finish_month);
+            PhilText yoga_finish_day=(PhilText)findViewById(R.id.yoga_finish_day);
+            TextView yoga_finish_week_text_view=(TextView)findViewById(R.id.yoga_finish_week_text_view);
+            PhilText yoga_finish_hour=(PhilText) findViewById(R.id.yoga_finish_hour);
+            PhilText yoga_finish_minute=(PhilText)findViewById(R.id.yoga_finish_minute);
+            PhilText yoga_finish_second=(PhilText)findViewById(R.id.yoga_finish_second);
+            PhilText calorie_yoga_data=(PhilText) findViewById(R.id.calorie_yoga_data);
+            PhilText mean_HeartRat_yoga_data=(PhilText) findViewById(R.id.mean_HeartRat_yoga_data);
+            PhilText max_heart_rate_yoga_data=(PhilText) findViewById(R.id.max_heart_rate_yoga_data);
 
-            duration_data_of_yoga_monitor.setText(""+Time.get_duration_time(yoga_duration));
-            calorie_data_of_yoga_monitor.setText(""+yoga_calorie+"大卡");
-            meanHeartRate_data_of_yoga_monitor.setText(""+yoga_mean_heart_rate+"次/分");
-            max_heart_rate_data_of_yoga_monitor.setText(""+yoga_max_heart_rate+"次/分");
-            yoga_start_time_data.setText(""+Time.get_start_time(yoga_start_time));
-            yoga_end_time_data.setText(""+Time.get_end_time(yoga_end_time));
+            duration_of_yoga_of_minute.setText(Time.get_duration_minute(yoga_duration));
+            duration_of_yoga_of_second.setText(Time.get_duration_second(yoga_duration));
+            yoga_start_year.setText(Time.get_start_time_year(yoga_start_time));
+            yoga_start_month.setText(Time.get_start_time_month(yoga_start_time));
+            yoga_start_day.setText(Time.get_start_time_day(yoga_start_time));
+            yoga_start_week_text_view.setText("週"+Time.get_start_week(yoga_start_time));
+            yoga_start_hour.setText(Time.get_start_time_hour(yoga_start_time));
+            yoga_start_minute.setText(Time.get_start_time_minute(yoga_start_time));
+            yoga_start_second.setText(Time.get_start_time_second(yoga_start_time));
+            yoga_finish_year.setText(Time.get_finish_time_year(yoga_end_time));
+            yoga_finish_month.setText(Time.get_finish_time_month(yoga_end_time));
+            yoga_finish_day.setText(Time.get_finish_time_day(yoga_end_time));
+            yoga_finish_week_text_view.setText(Time.get_finish_week(yoga_end_time));
+            yoga_finish_hour.setText(Time.get_finish_time_hour(yoga_end_time));
+            yoga_finish_minute.setText(Time.get_finish_time_minute(yoga_end_time));
+            yoga_finish_second.setText(Time.get_finish_time_second(yoga_end_time));
+            calorie_yoga_data.setText(""+yoga_calorie);
+            mean_HeartRat_yoga_data.setText(""+yoga_mean_heart_rate);
+            max_heart_rate_yoga_data.setText(""+yoga_max_heart_rate);
 
             writeNewExerciseData.setNewExerciseData2("yoga",
                     Time.get_start_time(yoga_start_time),
@@ -280,6 +311,8 @@ public class YogaMonitor extends AppCompatActivity {
 
         }
     }
+
+
 
     public static YogaMonitor getInstance() {
         return mInstance;

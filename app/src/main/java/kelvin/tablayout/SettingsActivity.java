@@ -6,10 +6,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,6 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mImageBtn;
     private Button gotomainpage;
     private Toolbar user_setting_Toolbar;
+    private ActionBar user_setting_action_bar;
 
     private ProgressDialog loadingBar;
 
@@ -90,27 +93,18 @@ public class SettingsActivity extends AppCompatActivity {
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
         user_setting_Toolbar=(Toolbar)findViewById(R.id.user_setting_Toolbar);
-        user_setting_Toolbar.setTitle("修改會員資料");
-        user_setting_Toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        user_setting_Toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SettingsActivity.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        setSupportActionBar(user_setting_Toolbar);
+        user_setting_action_bar=getSupportActionBar();
+        user_setting_action_bar.setTitle("修改會員資料");
+        user_setting_action_bar.setDisplayHomeAsUpEnabled(true);
 
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
-        //mName = (TextView) findViewById(R.id.settings_name);
-        //mStatus = (TextView) findViewById(R.id.settings_status);
         setting_username_text_view=(EditText)findViewById(R.id.setting_username);
         settingFullName=(EditText)findViewById(R.id.setting_full_name);
         settingCountryName=(EditText)findViewById(R.id.setting_country_name);
         settingSaveInformationbutton=(Button)findViewById(R.id.setting_information_button);
         loadingBar = new ProgressDialog(this);
-        //mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
-        //mImageBtn = (Button) findViewById(R.id.settings_image_btn);
+
 
 
 
@@ -334,6 +328,16 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

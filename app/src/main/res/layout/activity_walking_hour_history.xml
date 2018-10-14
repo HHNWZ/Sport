@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.Walking_hour_history">
+    tools:context="kelvin.tablayout.Walking_hour_history"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/hour_walking_history_toolbar"

@@ -1,5 +1,6 @@
 package kelvin.tablayout;
 
+import android.support.v7.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,6 +54,7 @@ public class Walking_monitor extends AppCompatActivity {
     public static String check_date=" ";
 
     public byte[]walking_location;
+    private ActionBar walking_monitor_action_bar;
 
 
 
@@ -69,19 +71,11 @@ public class Walking_monitor extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         keydatabse=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("walking");
         walking_monitor_toolbar=(Toolbar)findViewById(R.id.walking_monitor_toolBar);
-        walking_monitor_toolbar.setTitle("步行監控");
         setSupportActionBar(walking_monitor_toolbar);
+        walking_monitor_action_bar=getSupportActionBar();
+        walking_monitor_action_bar.setTitle("步行監控");
+        walking_monitor_action_bar.setDisplayHomeAsUpEnabled(true);
 
-        walking_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        walking_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Walking_monitor.this,MainActivity.class);
-                //intent.putExtra("id",2);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
 
         //Log.e("距離1", today_distance1);
         mInstance = this;
@@ -126,6 +120,14 @@ public class Walking_monitor extends AppCompatActivity {
                 Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
                 Log.e(APP_TAG, "權限設置失敗。");
             }
+        }
+
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(Walking_monitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
         }
 
         //noinspection SimplifiableIfStatement
@@ -198,41 +200,62 @@ public class Walking_monitor extends AppCompatActivity {
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         if(walking_distance!=0) {
 
-            TextView distance_data_of_walking_monitor = (TextView) findViewById(R.id.distance_data_of_walking_monitor);
-            TextView duration_data_of_walking_monitor = (TextView) findViewById(R.id.duration_data_of_walking_monitor);
-            TextView meanHeartRate_data_of_walking_monitor = (TextView) findViewById(R.id.meanHeartRate_data_of_walking_monitor);
-            TextView start_time_data_of_walking_monitor = (TextView) findViewById(R.id.start_time_data_of_walking_monitor);
-            TextView end_time_data_of_walking_monitor = (TextView) findViewById(R.id.end_time_data_of_walking_monitor);
-            TextView calorie_data_of_walking_monitor = (TextView) findViewById(R.id.calorie_data_of_walking_monitor);
-            TextView incline_distance_data_of_walking_monitor = (TextView) findViewById(R.id.incline_distance_data_of_walking_monitor);
-            TextView decline_distance_data_of_walking_monitor = (TextView) findViewById(R.id.decline_distance_data_of_walking_monitor);
-            TextView max_heart_rate_data_of_walking_monitor = (TextView) findViewById(R.id.max_heart_rate_data_of_walking_monitor);
-            TextView max_altitude_data_of_walking_monitor = (TextView) findViewById(R.id.max_altitude_data_of_walking_monitor);
-            TextView min_altitude_data_of_walking_monitor = (TextView) findViewById(R.id.min_altitude_data_of_walking_monitor);
-            TextView mean_speed_data_of_walking_monitor = (TextView) findViewById(R.id.mean_speed_data_of_walking_monitor);
-            TextView max_speed_data_of_walking_monitor = (TextView) findViewById(R.id.max_speed_data_of_walking_monitor);
+            PhilText distance_walking_data=(PhilText) findViewById(R.id.distance_walking_data);
 
-            walking_location=walking_location_data;
-            //createLocationData(locationList);
+            PhilText duration_of_walking_of_minute=(PhilText)findViewById(R.id.duration_of_walking_of_minute);
+            PhilText duration_of_walking_of_second=(PhilText)findViewById(R.id.duration_of_walking_of_second);
+            PhilText walking_start_year=(PhilText)findViewById(R.id.walking_start_year);
+            PhilText walking_start_month=(PhilText)findViewById(R.id.walking_start_month);
+            PhilText walking_start_day=(PhilText)findViewById(R.id.walking_start_day);
+            TextView walking_start_week_text_view=(TextView)findViewById(R.id.walking_start_week_text_view);
+            PhilText walking_start_hour=(PhilText) findViewById(R.id.walking_start_hour);
+            PhilText walking_start_minute=(PhilText)findViewById(R.id.walking_start_minute);
+            PhilText walking_start_second=(PhilText)findViewById(R.id.walking_start_second);
+            PhilText walking_finish_year=(PhilText)findViewById(R.id.walking_finish_year);
+            PhilText walking_finish_month=(PhilText)findViewById(R.id.walking_finish_month);
+            PhilText walking_finish_day=(PhilText)findViewById(R.id.walking_finish_day);
+            TextView walking_finish_week_text_view=(TextView)findViewById(R.id.walking_finish_week_text_view);
+            PhilText walking_finish_hour=(PhilText) findViewById(R.id.walking_finish_hour);
+            PhilText walking_finish_minute=(PhilText)findViewById(R.id.walking_finish_minute);
+            PhilText walking_finish_second=(PhilText)findViewById(R.id.walking_finish_second);
+            PhilText calorie_walking_data=(PhilText) findViewById(R.id.calorie_walking_data);
+            PhilText mean_HeartRat_walking_data=(PhilText) findViewById(R.id.mean_HeartRat_walking_data);
+            PhilText max_heart_rate_walking_data=(PhilText) findViewById(R.id.max_heart_rate_walking_data);
+            PhilText incline_distance_data_of_walking_monitor=(PhilText)findViewById(R.id.incline_distance_data_of_walking_monitor);
+            PhilText decline_distance_data_of_walking_monitor=(PhilText)findViewById(R.id.decline_distance_data_of_walking_monitor);
+            PhilText max_altitude_data_of_walking_monitor=(PhilText)findViewById(R.id.max_altitude_data_of_walking_monitor);
+            PhilText min_altitude_data_of_walking_monitor=(PhilText)findViewById(R.id.min_altitude_data_of_walking_monitor);
+            PhilText mean_speed_data_of_walking_monitor=(PhilText)findViewById(R.id.mean_speed_data_of_walking_monitor);
+            PhilText max_speed_data_of_walking_monitor=(PhilText)findViewById(R.id.max_speed_data_of_walking_monitor);
 
-            //byte[] zip_walking_location=
-            //zip_walking_location=createLocationData(locationList);
-            //createLocationData(locationList);
-            //Log.i("追踪11",""+zip_walking_location.length);
 
-            distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_distance)+"公里");
-            meanHeartRate_data_of_walking_monitor.setText("" + walking_mean_heart_rate+"次/分");
-            duration_data_of_walking_monitor.setText(Time.get_duration_time(walking_duration));
-            start_time_data_of_walking_monitor.setText(Time.get_start_time(walking_start_time));
-            end_time_data_of_walking_monitor.setText(Time.get_end_time(walking_end_time));
-            calorie_data_of_walking_monitor.setText("" + walking_calorie+"大卡");
-            incline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_incline_distance)+"公里");
-            decline_distance_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer(walking_decline_distance)+"公里");
-            max_heart_rate_data_of_walking_monitor.setText("" + walking_max_heart_rate+"次/分");
-            max_altitude_data_of_walking_monitor.setText("" + walking_max_altitude+"米");
-            min_altitude_data_of_walking_monitor.setText("" + walking_min_altitude+"米");
-            mean_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_mean_speed));
-            max_speed_data_of_walking_monitor.setText("" + UnitConversion.get_kilometer_per_hour(walking_max_speed));
+            distance_walking_data.setText("" + UnitConversion.get_kilometer(walking_distance));
+
+            duration_of_walking_of_minute.setText(Time.get_duration_minute(walking_duration));
+            duration_of_walking_of_second.setText(Time.get_duration_second(walking_duration));
+            walking_start_year.setText(Time.get_start_time_year(walking_start_time));
+            walking_start_month.setText(Time.get_start_time_month(walking_start_time));
+            walking_start_day.setText(Time.get_start_time_day(walking_start_time));
+            walking_start_week_text_view.setText("週"+Time.get_start_week(walking_start_time));
+            walking_start_hour.setText(Time.get_start_time_hour(walking_start_time));
+            walking_start_minute.setText(Time.get_start_time_minute(walking_start_time));
+            walking_start_second.setText(Time.get_start_time_second(walking_start_time));
+            walking_finish_year.setText(Time.get_finish_time_year(walking_end_time));
+            walking_finish_month.setText(Time.get_finish_time_month(walking_end_time));
+            walking_finish_day.setText(Time.get_finish_time_day(walking_end_time));
+            walking_finish_week_text_view.setText(Time.get_finish_week(walking_end_time));
+            walking_finish_hour.setText(Time.get_finish_time_hour(walking_end_time));
+            walking_finish_minute.setText(Time.get_finish_time_minute(walking_end_time));
+            walking_finish_second.setText(Time.get_finish_time_second(walking_end_time));
+            calorie_walking_data.setText(""+walking_calorie);
+            mean_HeartRat_walking_data.setText(""+walking_mean_heart_rate);
+            max_heart_rate_walking_data.setText(""+walking_max_heart_rate);
+            incline_distance_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer(walking_incline_distance));
+            decline_distance_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer(walking_decline_distance));
+            max_altitude_data_of_walking_monitor.setText(""+walking_max_altitude);
+            min_altitude_data_of_walking_monitor.setText(""+walking_min_altitude);
+            mean_speed_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer_per_hour(walking_mean_speed));
+            max_speed_data_of_walking_monitor.setText(""+UnitConversion.get_kilometer_per_hour(walking_max_speed));
 
 
 

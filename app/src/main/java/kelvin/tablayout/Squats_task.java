@@ -243,7 +243,8 @@ public class Squats_task extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(Squats_task.this,Exercise_main.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -257,7 +258,6 @@ public class Squats_task extends AppCompatActivity {
                     Intent intent = new Intent(Squats_task.this,FriendActivity.class);
                     intent.putExtra("Task_req","Task_req_squats");
                     intent.putExtra("Task","Task_squats");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

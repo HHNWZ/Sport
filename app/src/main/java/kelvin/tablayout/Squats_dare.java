@@ -278,7 +278,8 @@ public class Squats_dare extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -295,6 +296,8 @@ public class Squats_dare extends AppCompatActivity {
                         if(text_VS.getVisibility()==View.INVISIBLE) {
                             Intent intent = new Intent(Squats_dare.this, SquatsDareFriend.class);
                             startActivity(intent);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             Log.i("點擊", "成功");
                         }
                         break;

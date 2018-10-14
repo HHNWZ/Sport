@@ -123,7 +123,8 @@ public class ExerciseYoga extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Yoga_dare.class);
-
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
 
@@ -142,9 +143,8 @@ public class ExerciseYoga extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Yoga_task.class);
-                intent.putExtra("ToolbarTitle","瑜伽每週任務");
-                intent.putExtra("exerciseWeekTitle","做瑜伽");
-                intent.putExtra("exerciseWeekUnit","分鐘");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
             }
@@ -155,6 +155,8 @@ public class ExerciseYoga extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),YogaDayHistory.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });

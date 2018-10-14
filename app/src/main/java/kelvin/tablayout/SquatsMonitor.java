@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +36,7 @@ import java.util.Set;
 
 public class SquatsMonitor extends AppCompatActivity {
     private Toolbar squats_monitor_toolbar;
+    private ActionBar squats_monitor_action_bar;
     private HealthDataStore mStore;
     private HealthConnectionErrorResult mConnError;
     private Set<HealthPermissionManager.PermissionKey> mKeySet;
@@ -57,18 +59,10 @@ public class SquatsMonitor extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         squats_monitor_toolbar=(Toolbar)findViewById(R.id.squats_monitor_toolbar);
-        squats_monitor_toolbar.setTitle("深蹲監控");
         setSupportActionBar(squats_monitor_toolbar);
-
-        squats_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        squats_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(SquatsMonitor.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        squats_monitor_action_bar=getSupportActionBar();
+        squats_monitor_action_bar.setTitle("深蹲監控");
+        squats_monitor_action_bar.setDisplayHomeAsUpEnabled(true);
         mInstance = this;
         mKeySet = new HashSet<>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.Exercise.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -110,6 +104,14 @@ public class SquatsMonitor extends AppCompatActivity {
                 Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
                 Log.e(APP_TAG, "權限設置失敗。");
             }
+        }
+
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(SquatsMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
         }
 
         //noinspection SimplifiableIfStatement
@@ -210,7 +212,7 @@ public class SquatsMonitor extends AppCompatActivity {
             squats_start_year.setText(Time.get_start_time_year(squats_start_time));
             squats_start_month.setText(Time.get_start_time_month(squats_start_time));
             squats_start_day.setText(Time.get_start_time_day(squats_start_time));
-            squats_start_week_text_view.setText(Time.get_start_week(squats_start_time));
+            squats_start_week_text_view.setText("週"+Time.get_start_week(squats_start_time));
             squats_start_hour.setText(Time.get_start_time_hour(squats_start_time));
             squats_start_minute.setText(Time.get_start_time_minute(squats_start_time));
             squats_start_second.setText(Time.get_start_time_second(squats_start_time));

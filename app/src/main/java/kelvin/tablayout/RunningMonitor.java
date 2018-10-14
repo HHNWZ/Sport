@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -38,6 +39,7 @@ import java.util.Set;
 
 public class RunningMonitor extends AppCompatActivity {
     private Toolbar running_monitor_toolbar;
+    private ActionBar running_monitor_action_bar;
     private HealthDataStore mStore;
     private HealthConnectionErrorResult mConnError;
     private Set<HealthPermissionManager.PermissionKey> mKeySet;
@@ -61,17 +63,10 @@ public class RunningMonitor extends AppCompatActivity {
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
         running_monitor_toolbar=(Toolbar)findViewById(R.id.running_monitor_toolBar);
-        running_monitor_toolbar.setTitle("跑步監控");
         setSupportActionBar(running_monitor_toolbar);
-        running_monitor_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        running_monitor_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RunningMonitor.this,MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        running_monitor_action_bar=getSupportActionBar();
+        running_monitor_action_bar.setTitle("跑步監控");
+        running_monitor_action_bar.setDisplayHomeAsUpEnabled(true);
 
 
         mInstance = this;
@@ -114,6 +109,13 @@ public class RunningMonitor extends AppCompatActivity {
                 Log.e(APP_TAG, e.getClass().getName() + " - " + e.getMessage());
                 Log.e(APP_TAG, "權限設置失敗。");
             }
+        }
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(RunningMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            return super.onOptionsItemSelected(item);
         }
 
         //noinspection SimplifiableIfStatement
@@ -221,7 +223,7 @@ public class RunningMonitor extends AppCompatActivity {
             running_start_year.setText(Time.get_start_time_year(running_start_time));
             running_start_month.setText(Time.get_start_time_month(running_start_time));
             running_start_day.setText(Time.get_start_time_day(running_start_time));
-            running_start_week_text_view.setText(Time.get_start_week(running_start_time));
+            running_start_week_text_view.setText("週"+Time.get_start_week(running_start_time));
             running_start_hour.setText(Time.get_start_time_hour(running_start_time));
             running_start_minute.setText(Time.get_start_time_minute(running_start_time));
             running_start_second.setText(Time.get_start_time_second(running_start_time));

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.YogaMonitor">
+    tools:context="kelvin.tablayout.YogaMonitor"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/yoga_monitor_toolBar"
@@ -12,178 +13,539 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_below="@+id/yoga_monitor_toolBar">
+
+        
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <TableLayout
-                android:layout_below="@+id/walking_monitor_toolBar1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/duration_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/duration_time"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/duration_of_yoga_monitor_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="運動時間:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <kelvin.tablayout.PhilText
+                android:id="@+id/duration_of_yoga_of_minute"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="12"
+                android:textColor="@color/object_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/duration_of_yoga_of_minute_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="分鐘"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <kelvin.tablayout.PhilText
+                android:id="@+id/duration_of_yoga_of_second"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="12"
+                android:textColor="@color/object_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/duration_of_yoga_of_second_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="秒"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/start_time_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/start_time"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/yoga_start_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="運動開始時間:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="5dp">
-                <TableRow
-                    android:layout_width="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/distance_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/yoga" />
-                    <TextView
-                        android:id="@+id/duration_of_yoga_monitor_text_view"
-                        android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_start_year"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="時間:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="2018"
+                        android:textColor="@color/object_color" />
 
-
-                        />
                     <TextView
-                        android:id="@+id/duration_data_of_yoga_monitor"
-                        android:layout_width="match_parent"
+                        android:id="@+id/yoga_start_year_text_view"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="時間資料資料"
-                        android:gravity="center_vertical"
-                        />
+                        android:gravity="center"
+                        android:text="年"
+                        android:textColor="@color/text_color" />
 
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_start_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/yoga_start_month_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="月"
+                        android:textColor="@color/text_color" />
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_start_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_start_day_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="日"
+                        android:textColor="@color/text_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_start_week_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="週三"
+                        android:textColor="@color/text_color" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/calorie_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/calorie" />
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_start_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
 
                     <TextView
-                        android:id="@+id/calorie_of_yoga_monitor_text_view"
-                        android:layout_width="match_parent"
+                        android:id="@+id/yoga_start_hour_text_view"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="消耗熱量:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/calorie_data_of_yoga_monitor"
-                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:text="時"
+                        android:textColor="@color/text_color" />
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_start_minute"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="消耗熱量資料"
-                        android:gravity="center_vertical" />
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/mean_HeartRat_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/meanheart" />
-                    <TextView
-                        android:id="@+id/mean_HeartRate_of_yoga_monitor_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="平均心跳:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/meanHeartRate_data_of_yoga_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="平均心跳資料"
-                        android:gravity="center_vertical" />
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/max_heart_rate_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/maxheart" />
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
 
                     <TextView
-                        android:id="@+id/max_heart_rate_of_yoga_monitor_text_view"
-                        android:layout_width="match_parent"
+                        android:id="@+id/yoga_start_minute_text_view"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="最高心跳:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/max_heart_rate_data_of_yoga_monitor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="最高心跳資料"
-                        android:gravity="center_vertical" />
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/start_time_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/start" />
-                    <TextView
-                        android:id="@+id/yoga_start_time_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="開始時間:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
-                    <TextView
-                        android:id="@+id/yoga_start_time_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="開始時間資料"
-                        android:gravity="center_vertical" />
+                        android:gravity="center"
+                        android:text="分"
+                        android:textColor="@color/text_color" />
 
-                </TableRow>
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/end_time_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/finishline" />
-                    <TextView
-                        android:id="@+id/yoga_end_time_text_view"
-                        android:layout_width="match_parent"
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_start_second"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="結束時間:"
-                        android:paddingRight="2.5dp"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical" />
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
                     <TextView
-                        android:id="@+id/yoga_end_time_data"
-                        android:layout_width="match_parent"
+                        android:id="@+id/yoga_start_second_text_view"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="結束時間資料"
-                        android:gravity="center_vertical" />
-
-                </TableRow>
-
-            </TableLayout>
+                        android:gravity="center"
+                        android:text="秒"
+                        android:textColor="@color/text_color" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/finish_time_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/finish_time"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/yoga_finish_time_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="運動結束時間:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_finish_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="2018"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_year_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="年"
+                        android:textColor="@color/text_color" />
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_finish_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_month_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="月"
+                        android:textColor="@color/text_color" />
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_finish_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_day_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="日"
+                        android:textColor="@color/text_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_week_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingLeft="5dp"
+                        android:text="週三"
+                        android:textColor="@color/text_color" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_finish_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_hour_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="時"
+                        android:textColor="@color/text_color" />
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_finish_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_minute_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="分"
+                        android:textColor="@color/text_color" />
+
+                    <kelvin.tablayout.PhilText
+                        android:id="@+id/yoga_finish_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/object_color" />
+
+                    <TextView
+                        android:id="@+id/yoga_finish_second_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="秒"
+                        android:textColor="@color/text_color" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/calorie_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/calories_icon"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/calorie_yoga_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="消耗的卡路里:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"/>
+
+            <kelvin.tablayout.PhilText
+                android:id="@+id/calorie_yoga_data"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="10"
+                android:textColor="@color/object_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/calorie_yoga_data_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="大卡"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/mean_HeartRat_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/mean_heart_icon"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/mean_HeartRat_yoga_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="平均心跳:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <kelvin.tablayout.PhilText
+                android:id="@+id/mean_HeartRat_yoga_data"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="10"
+                android:textColor="@color/object_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/mean_HeartRat_yoga_data_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="次/份"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/max_heart_rate_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/max_heart_icon"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/max_heart_rate_yoga_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="最高心跳:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            <kelvin.tablayout.PhilText
+                android:id="@+id/max_heart_rate_yoga_data"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="10"
+                android:textColor="@color/object_color"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/max_heart_rate_yoga_data_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="次/分"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

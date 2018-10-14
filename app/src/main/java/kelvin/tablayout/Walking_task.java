@@ -240,7 +240,8 @@ public class Walking_task extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(Walking_task.this,Exercise_main.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -254,7 +255,6 @@ public class Walking_task extends AppCompatActivity {
                     Intent intent = new Intent(Walking_task.this,FriendActivity.class);
                     intent.putExtra("Task_req","Task_req_walking");
                     intent.putExtra("Task","Task_walking");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

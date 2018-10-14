@@ -244,7 +244,8 @@ public class Running_task extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(Running_task.this,Exercise_main.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -257,11 +258,11 @@ public class Running_task extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.task_friend:
                     Intent intent = new Intent(Running_task.this,FriendActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("Task_req","Task_req_running");
                     intent.putExtra("Task","Task_running");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
-                    finish();
                     Log.i("點擊","成功");
                     break;
             }

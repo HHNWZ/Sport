@@ -62,7 +62,6 @@ public class SquatsHistory extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(SquatsHistory.this,SquatsHourHistory.class);
             intent.putExtra("keyDay",day_squats_key);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 

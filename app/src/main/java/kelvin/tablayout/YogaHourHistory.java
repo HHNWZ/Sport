@@ -54,7 +54,6 @@ public class YogaHourHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(YogaHourHistory.this,YogaDayHistory.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 
@@ -85,7 +84,6 @@ public class YogaHourHistory extends AppCompatActivity {
                         intent_key.setClass(YogaHourHistory.this  , YogaHistory.class);
                         intent_key.putExtra("keyHour",keyHour);
                         intent_key.putExtra("keyDay",day_yoga_key);
-
                         startActivity(intent_key);
                     }
                 });

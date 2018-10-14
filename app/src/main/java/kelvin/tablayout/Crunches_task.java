@@ -245,7 +245,8 @@ public class Crunches_task extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(Crunches_task.this,Exercise_main.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -259,7 +260,6 @@ public class Crunches_task extends AppCompatActivity {
                     Intent intent = new Intent(Crunches_task.this,FriendActivity.class);
                     intent.putExtra("Task_req","Task_req_crunches");
                     intent.putExtra("Task","Task_crunches");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

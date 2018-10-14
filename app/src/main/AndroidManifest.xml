@@ -45,7 +45,6 @@
         </activity>
         <activity android:name="kelvin.tablayout.EnlargeImageView" />
         <activity android:name="kelvin.tablayout.MainActivityFireBase" />
-        <activity android:name="kelvin.tablayout.StartActivity" />
         <activity
             android:name="kelvin.tablayout.RegisterActivity"
             android:parentActivityName=".MainActivity" />
@@ -53,9 +52,6 @@
             android:name="kelvin.tablayout.LoginActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name="kelvin.tablayout.SettingsActivity" />
-        <activity
-            android:name="kelvin.tablayout.StatusActivity"
-            android:parentActivityName="kelvin.tablayout.SettingsActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -104,7 +100,6 @@
         <activity android:name="kelvin.tablayout.Walking_task" />
         <activity android:name="kelvin.tablayout.FriendActivity" />
         <activity android:name="kelvin.tablayout.TaskProfile" />
-        <activity android:name="kelvin.tablayout.PieChartActivity" />
         <activity android:name="kelvin.tablayout.Crunches_dare" />
         <activity android:name="kelvin.tablayout.CrunchesDareFriend" />
         <activity android:name="kelvin.tablayout.CrunchesDareFriendProfile" />
@@ -121,7 +116,6 @@
         <activity android:name="kelvin.tablayout.YogaDareFriend" />
         <activity android:name="kelvin.tablayout.YogaDareFriendProfile" />
         <activity android:name="kelvin.tablayout.PhotoBlog" />
-        <activity android:name="kelvin.tablayout.SetupActivity" />
         <activity android:name="kelvin.tablayout.PostActivity" />
         <activity android:name="kelvin.tablayout.ClickPostActivity" />
         <activity android:name="kelvin.tablayout.CommentsActivity" />

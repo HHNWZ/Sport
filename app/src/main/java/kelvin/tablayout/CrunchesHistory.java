@@ -75,7 +75,6 @@ public class CrunchesHistory extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(CrunchesHistory.this,CrunchesHourHistory.class);
             intent.putExtra("keyDay",day_crunches_key);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
 

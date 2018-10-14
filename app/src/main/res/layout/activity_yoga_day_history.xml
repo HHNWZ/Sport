@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.YogaDayHistory">
+    tools:context="kelvin.tablayout.YogaDayHistory"
+    android:background="@color/colorPrimary">
 
     <include
         android:id="@+id/yoga_day_exercise_history_toolbar"

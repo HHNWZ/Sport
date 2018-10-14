@@ -1,5 +1,6 @@
 package kelvin.tablayout;
 
+import android.support.v7.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,6 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
     private String mCurrent_state;
     public String Uid;
     private Toolbar profile_app_bar;
+    private ActionBar profile_action_bar;
     public static String my_name;
     private static int count_friend=0;
 
@@ -74,16 +77,10 @@ public class ProfileActivity extends AppCompatActivity {
                 .init();
 
         profile_app_bar=(Toolbar)findViewById(R.id.profile_app_bar);
-        profile_app_bar.setTitle("使用者個人資料");
-        profile_app_bar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
-        profile_app_bar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(ProfileActivity.this,MainActivityFireBase.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+        setSupportActionBar(profile_app_bar);
+        profile_action_bar=getSupportActionBar();
+        profile_action_bar.setTitle("使用者個人資料");
+        profile_action_bar.setDisplayHomeAsUpEnabled(true);
 
         final String user_id = getIntent().getStringExtra("user_id");//衝外面帶進來的UID
 
@@ -694,6 +691,14 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(ProfileActivity.this,MainActivityFireBase.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 
