@@ -74,7 +74,7 @@
                 android:padding="5dp"
                 android:backgroundTint="@color/object_color">
                 <Button
-                    android:id="@+id/angry_bt2_die"
+                    android:id="@+id/go_to_diary_calendar_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/diary"
@@ -93,7 +93,7 @@
                 android:backgroundTint="@color/object_color">
 
                 <Button
-                    android:id="@+id/angry_btn3_die"
+                    android:id="@+id/die2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/device"

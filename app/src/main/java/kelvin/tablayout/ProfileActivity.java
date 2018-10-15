@@ -77,10 +77,17 @@ public class ProfileActivity extends AppCompatActivity {
                 .init();
 
         profile_app_bar=(Toolbar)findViewById(R.id.profile_app_bar);
-        setSupportActionBar(profile_app_bar);
-        profile_action_bar=getSupportActionBar();
-        profile_action_bar.setTitle("使用者個人資料");
-        profile_action_bar.setDisplayHomeAsUpEnabled(true);
+        profile_app_bar.setTitle("使用者個人資料");
+        profile_app_bar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        profile_app_bar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(ProfileActivity.this,MainActivityFireBase.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
 
         final String user_id = getIntent().getStringExtra("user_id");//衝外面帶進來的UID
 
@@ -692,14 +699,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(ProfileActivity.this,MainActivityFireBase.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }
 
 

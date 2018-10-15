@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.DiaryCalendar"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/diary_calendar_toolbar"
+        layout="@layout/app_bar_layout"></include>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/diary_calendar_toolbar"
+        >
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/text_color"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_margin="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/text_color"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="详细性息"
+            android:id="@+id/diary_message_button"
+            android:textColor="@color/text_color"
+            android:background="@drawable/button"
+            android:backgroundTint="@color/object_color"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

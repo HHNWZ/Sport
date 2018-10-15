@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +25,11 @@ public class SquatsHistory extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     public static String day_squats_key;
     public static String hour_squats_key;
+    private TextView count_squats_history_text_view;
+    private TextView duration_of_squats_history_text_view;
+    private TextView calorie_squats_history_text_view;
+    private TextView mean_HeartRat_squats_history_text_view;
+    private TextView max_heart_rate_squats_history_text_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,11 @@ public class SquatsHistory extends AppCompatActivity {
         hour_squats_key=getIntent().getStringExtra("keyHour");
         Log.i("keyHour值",hour_squats_key);
         Log.i("keyDay值",day_squats_key);
+        count_squats_history_text_view=(TextView)findViewById(R.id.count_squats_history_text_view);
+        duration_of_squats_history_text_view=(TextView)findViewById(R.id.duration_of_squats_history_text_view);
+        calorie_squats_history_text_view=(TextView)findViewById(R.id.calorie_squats_history_text_view);
+        mean_HeartRat_squats_history_text_view=(TextView)findViewById(R.id.mean_HeartRat_squats_history_text_view);
+        max_heart_rate_squats_history_text_view=(TextView)findViewById(R.id.max_heart_rate_squats_history_text_view);
         mAuth = FirebaseAuth.getInstance();
         squats_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("squats").child(day_squats_key).child(hour_squats_key);
 
@@ -49,6 +60,11 @@ public class SquatsHistory extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ExerciseData3 newSquatsData=dataSnapshot.getValue(ExerciseData3.class);
                 Log.i("次數1234",""+newSquatsData.count);
+                count_squats_history_text_view.setText("次數:"+newSquatsData.count+"次");
+                duration_of_squats_history_text_view.setText("運輸時間:"+newSquatsData.duration);
+                calorie_squats_history_text_view.setText("消耗的卡路里:"+newSquatsData.calorie+"大卡");
+                mean_HeartRat_squats_history_text_view.setText("平均心跳:"+newSquatsData.mean_heart_rate+"次分");
+                max_heart_rate_squats_history_text_view.setText("最高心跳:"+newSquatsData.max_heart_rate+"次/分");
             }
 
             @Override

@@ -2,9 +2,14 @@ package kelvin.tablayout;
 
 import android.app.Application;
 
+import org.threeten.bp.format.DateTimeFormatter;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Time extends Application {
+    private static final String formaterCalender ="yyyy年MMMd日 EEE";
     public static  String get_duration_time(long duration_milliseconds){
         String durationTime = "";
 
@@ -233,6 +238,17 @@ public class Time extends Application {
         Todate=""+y+"年"+m+"月"+d+"日 週"+DateWeek ;
         return  Todate;
     }
+    public static String getToDate2(long CalendarMillisecond){
+        String Todate ="";
+        Calendar date=Calendar.getInstance();
+        date.setTimeInMillis(CalendarMillisecond);
+        int y=date.get(Calendar.YEAR);
+        int m=date.get(Calendar.MONTH)+1;
+        int d=date.get(Calendar.DAY_OF_MONTH);
+        String DateWeek=Week.getWeek(CalendarMillisecond);
+        Todate=""+y+"-"+m+"-"+d+"" ;
+        return  Todate;
+    }
 
     public static  String getTime(long Timemilliseconds){
         String Time ="";
@@ -427,6 +443,14 @@ public class Time extends Application {
         long minutelong=minuteLong*60000;
         return minutelong;
     }
+
+    public static String formatCalendar(long milliseconds) {
+        Date date = new Date(milliseconds);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formaterCalender);
+        return simpleDateFormat.format(date);
+    }
+
+
 
 
 

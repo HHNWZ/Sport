@@ -63,6 +63,11 @@ public class YogaHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
+        day_yoga_key=getIntent().getStringExtra("keyDay");
+        Log.i("key值",day_yoga_key);
+        mAuth = FirebaseAuth.getInstance();
+        yoga_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("yoga").child(day_yoga_key);
+        yoga_hour_exercise_history_database.keepSynced(true);
 
         FirebaseRecyclerAdapter<ExerciseData,HourYogaHistoryViewHolder> firebaseRecyclerAdapter =new FirebaseRecyclerAdapter<ExerciseData, HourYogaHistoryViewHolder>(
                 ExerciseData.class,

@@ -41,6 +41,7 @@ public class Data {
     private float yoga_exercise_plan_data;
     private int squats_exercise_plan_data;
     private int crunches_exercise_plan_data;
+    private boolean date_is_red_point;
 
 
 
@@ -348,6 +349,14 @@ public class Data {
 
     public void setCrunches_exercise_plan_data(int crunches_exercise_plan_data) {
         this.crunches_exercise_plan_data = crunches_exercise_plan_data;
+    }
+
+    public boolean isDate_is_red_point() {
+        return date_is_red_point;
+    }
+
+    public void setDate_is_red_point(boolean date_is_red_point) {
+        this.date_is_red_point = date_is_red_point;
     }
 }
 

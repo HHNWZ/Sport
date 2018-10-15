@@ -82,7 +82,8 @@ public class ExerciseHistory extends AppCompatActivity {
     @Override
     public void onStart(){
         super.onStart();
-
+        mAuth = FirebaseAuth.getInstance();
+        walking_day_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("walking");
         FirebaseRecyclerAdapter<ExerciseData,WalkingDayExerciseHistoryViewHolder> firebaseRecyclerAdapter =new FirebaseRecyclerAdapter<ExerciseData, WalkingDayExerciseHistoryViewHolder>(
                 ExerciseData.class,
                 R.layout.exercise_history_layout,

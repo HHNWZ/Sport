@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.example.a888888888.sport"
         minSdkVersion 21
@@ -61,7 +61,7 @@ dependencies {
     implementation 'cz.msebera.android:httpclient:4.4.1.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
-    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.0'
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.1'

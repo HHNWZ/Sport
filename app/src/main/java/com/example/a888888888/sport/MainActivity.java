@@ -70,6 +70,7 @@ import java.util.Map;
 import java.util.Timer;
 
 import kelvin.tablayout.ChatActivity;
+import kelvin.tablayout.ControlDie;
 import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Exercise_main;
@@ -156,7 +157,7 @@ public class  MainActivity extends AppCompatActivity
     public static CircleLayout circleLayout;
     public static NavigationView navigationView;
     public static Menu menu;
-    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout;
+    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout,control_die;
     public static View hView;
 
     public static Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
@@ -249,15 +250,15 @@ public class  MainActivity extends AppCompatActivity
         DL.add(date);
         diarys.add(new theDate(diary));
     }
-    private CalendarDay getOneDate(int myYEAR,int myMONTH,int myDAY){//將字串資料轉換為日期型態
+    /*private CalendarDay getOneDate(int myYEAR,int myMONTH,int myDAY){//將字串資料轉換為日期型態
         Calendar c = Calendar.getInstance();//先定義為今日
         //c.getCalendar().set(myYEAR, myMONTH, myDAY);
         int YearDif=myYEAR-seleDAY.getYear();c.add(Calendar.YEAR,YearDif);//傳值與今日的年之差
         int MonthDif=myMONTH-seleDAY.getMonth();c.add(Calendar.MONTH,MonthDif);//傳值與今日的月之差
         int DayDif=myDAY-seleDAY.getDay();c.add(Calendar.DATE,DayDif);//傳值與今日的日之差
         //將變數c調整至傳直指定之日期
-        return CalendarDay.from(c);//將變數c轉變為要求型態CalendarDay
-    }
+        return CalendarDay.from();//將變數c轉變為要求型態CalendarDay
+    }*/
     public void readMyDiaryDATA(){//從檔案中讀取日記，若無則陣列歸零
         SharedPreferences spref = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = spref.edit();
@@ -266,7 +267,7 @@ public class  MainActivity extends AppCompatActivity
         if(num==0) {//驗證檔案內存在日記資料
             //Toast.makeText(this, "目前尚無日記", Toast.LENGTH_SHORT).show();
 
-        }else{
+        }/*else{
             DL.clear();
             diarys.clear();
             for(int i=0;i<num;i++){
@@ -284,7 +285,7 @@ public class  MainActivity extends AppCompatActivity
 
             }
             //Toast.makeText(this, "資料量："+DATAsize, Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     public void writAllDiaryDATA(){//將當前日記陣列存入檔案
@@ -378,6 +379,7 @@ public class  MainActivity extends AppCompatActivity
         menu_email_login = menu.findItem(R.id.email_login);
         //blog=menu.findItem(R.id.blog);
         menu_email_register = menu.findItem(R.id.email_register);
+        control_die=menu.findItem(R.id.control_die);
         menu_chat_room = menu.findItem(R.id.chat_room);
          menu_setting_account = menu.findItem(R.id.setting_account);
          menu_Logout = menu.findItem(R.id.Logout);
@@ -585,9 +587,11 @@ public class  MainActivity extends AppCompatActivity
             main_title.setText("運動監控");
             menu_email_login.setVisible(false);
             menu_email_register.setVisible(false);
+
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
             menu_Logout.setVisible(true);
+            control_die.setVisible(true);
             kel.setVisibility(View.VISIBLE);
             hal.setVisibility(View.VISIBLE);
             over.setVisibility(View.VISIBLE);
@@ -847,6 +851,7 @@ public class  MainActivity extends AppCompatActivity
         }else {
             menu_email_login.setVisible(true);
             menu_email_register.setVisible(true);
+            control_die.setVisible(false);
             menu_chat_room.setVisible(false);
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
@@ -1244,8 +1249,6 @@ public class  MainActivity extends AppCompatActivity
         }
         else if(id==R.id.chat_room){
             Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
         else if(id==R.id.setting_account){
@@ -1254,12 +1257,12 @@ public class  MainActivity extends AppCompatActivity
             i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
-        /*else if(id==R.id.control_die){
-            Intent i= new Intent(MainActivity.this,PhotoBlog.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        else if(id==R.id.control_die){
+            Intent i= new Intent(MainActivity.this,ControlDie.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
-        }*/
+        }
         else if(id==R.id.Logout){
 
             mUserRef.child("online").setValue(ServerValue.TIMESTAMP);

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,17 +51,12 @@ public class MainActivityFireBase extends AppCompatActivity {
         main_activity_fire_base_tool_bar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(main_activity_fire_base_tool_bar);
         mian_activity_fire_base_action_bar=getSupportActionBar();
-        mian_activity_fire_base_action_bar.setTitle("運動排行榜");
+        mian_activity_fire_base_action_bar.setTitle("運動聊天室");
         mian_activity_fire_base_action_bar.setDisplayHomeAsUpEnabled(true);
 
 
 
-        if (mAuth.getCurrentUser() != null) {
 
-
-            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-
-        }
 
 
         //Tabs
@@ -80,7 +76,7 @@ public class MainActivityFireBase extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
+        Log.i("我在","main_activity_fire_base的onStart");
 
     }
 

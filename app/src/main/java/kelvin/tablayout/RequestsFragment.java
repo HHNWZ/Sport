@@ -59,7 +59,6 @@ public class RequestsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
         FirebaseRecyclerAdapter<Users, NewUsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, NewUsersViewHolder>(
 
                 Users.class,

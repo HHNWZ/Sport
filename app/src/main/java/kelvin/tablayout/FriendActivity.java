@@ -121,7 +121,8 @@ public class FriendActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
+        Task_reg=getIntent().getStringExtra("Task_req");
+        Task=getIntent().getStringExtra("Task");
         FirebaseRecyclerAdapter<Friends,ActivityFriendsViewHolder> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivityFriendsViewHolder>(
                 Friends.class,
                 R.layout.users_single_layout,

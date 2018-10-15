@@ -63,6 +63,11 @@ public class SquatsHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
+        day_squats_key=getIntent().getStringExtra("keyDay");
+        Log.i("key值",day_squats_key);
+        mAuth = FirebaseAuth.getInstance();
+        squats_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("squats").child(day_squats_key);
+        squats_hour_exercise_history_database.keepSynced(true);
         FirebaseRecyclerAdapter<ExerciseData3,HourSquatsHistoryViewHolder>firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<ExerciseData3, HourSquatsHistoryViewHolder>(
                 ExerciseData3.class,
                 R.layout.exercise_history_layout,

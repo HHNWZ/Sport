@@ -63,6 +63,11 @@ public class RunningHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
+        day_running_key=getIntent().getStringExtra("keyDay");
+        Log.i("key值",day_running_key);
+        mAuth = FirebaseAuth.getInstance();
+        running_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("running").child(day_running_key);
+        running_hour_exercise_history_database.keepSynced(true);
 
         FirebaseRecyclerAdapter<ExerciseData,HourRunningHistoryViewHolder>firebaseRecyclerAdapter =new FirebaseRecyclerAdapter<ExerciseData, HourRunningHistoryViewHolder>(
                 ExerciseData.class,

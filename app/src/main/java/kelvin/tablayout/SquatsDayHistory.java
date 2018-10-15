@@ -60,6 +60,8 @@ public class SquatsDayHistory extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        squats_day_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("squats");
         FirebaseRecyclerAdapter<ExerciseData3,SquatsDayExerciseHistoryViewHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ExerciseData3, SquatsDayExerciseHistoryViewHolder>(
                 ExerciseData3.class,
                 R.layout.exercise_history_layout,

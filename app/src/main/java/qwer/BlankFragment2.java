@@ -19,6 +19,8 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
+import org.threeten.bp.DayOfWeek;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -82,7 +84,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         TextView test=(TextView)view.findViewById(R.id.testText);
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
-                .setFirstDayOfWeek(Calendar.MONDAY)
+                .setFirstDayOfWeek(DayOfWeek.MONDAY)
                 .setMinimumDate(CalendarDay.from(2017,12,31))
                 .setMaximumDate(CalendarDay.from(2100,12,31))
                 .setCalendarDisplayMode(CalendarMode.MONTHS)

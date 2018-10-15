@@ -59,6 +59,8 @@ public class CrunchesDayHistory extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        mAuth = FirebaseAuth.getInstance();
+        crunches_day_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("crunches");
         FirebaseRecyclerAdapter<ExerciseData3,CrunchesDayExerciseHistoryViewHolder>firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<ExerciseData3, CrunchesDayExerciseHistoryViewHolder>(
                 ExerciseData3.class,
                 R.layout.exercise_history_layout,

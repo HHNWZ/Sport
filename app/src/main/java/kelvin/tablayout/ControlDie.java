@@ -38,7 +38,7 @@ public class ControlDie extends AppCompatActivity {
 
     private Toolbar activity_control_die_toolbar;
     private ActionBar activity_control_die_action_bar;
-    private Button angry_btn_die,angry_btn1_die,angry_btn2_die,angry_btn3_die;
+    private Button go_to_diary_calendar_button,angry_btn1_die,angry_btn2_die,angry_btn3_die;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +54,16 @@ public class ControlDie extends AppCompatActivity {
         activity_control_die_action_bar=getSupportActionBar();
         activity_control_die_action_bar.setTitle("飲食控制");
         activity_control_die_action_bar.setDisplayHomeAsUpEnabled(true);
-        angry_btn_die=(Button)findViewById(R.id.angry_btn_die);
-        angry_btn1_die=(Button)findViewById(R.id.angry_bt1_die);
-        angry_btn2_die=(Button)findViewById(R.id.angry_bt2_die);
-        angry_btn3_die=(Button)findViewById(R.id.angry_btn3_die);
+        go_to_diary_calendar_button=(Button)findViewById(R.id.go_to_diary_calendar_button);
+        go_to_diary_calendar_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ControlDie.this,DiaryCalendar.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
 
 
     }

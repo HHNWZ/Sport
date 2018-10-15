@@ -9,4 +9,177 @@
     <include
         android:id="@+id/crunches_history_toolbar"
         layout="@layout/app_bar_layout" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/crunches_history_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/count_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/suagatsbackground"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/count_crunches_history_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="次數:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/distance_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/duration_time"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/duration_of_crunches_history_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="運動時間:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            
+        </LinearLayout>
+
+        
+
+        
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/calorie_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/calories_icon"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/calorie_crunches_history_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="消耗的卡路里:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"/>
+
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/mean_HeartRat_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/mean_heart_icon"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/mean_HeartRat_crunches_history_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="平均心跳:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/post_border"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_weight="1">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/max_heart_rate_image"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/max_heart_icon"
+                app:civ_border_color="@color/object_color"
+                app:civ_border_width="5dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/max_heart_rate_crunches_history_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="最高心跳:"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+
+            
+        </LinearLayout>
+
+
+    </LinearLayout>
 </RelativeLayout>

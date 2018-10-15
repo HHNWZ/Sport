@@ -657,7 +657,7 @@
                     android:id="@+id/decline_distance_of_running_monitor_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="總下坡公里:"
+                    android:text="總下坡距離:"
                     android:layout_gravity="right"
                     android:gravity="center_vertical"
                     android:textColor="@color/text_color"
