@@ -10,6 +10,7 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="fill_parent"
@@ -17,26 +18,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:srcCompat="@android:color/white" />
+    <include android:id="@+id/long_see_food_toolbar"
+        layout="@layout/app_bar_layout"></include>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/long_see_food_toolbar">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:text="常見食物熱量"
-                android:textColor="#323d4d"
-                android:textSize="24dp" />
+
 
             <LinearLayout
                 android:id="@+id/linearLayout"

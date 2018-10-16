@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -73,7 +74,7 @@ public class SettingsActivity extends AppCompatActivity {
     private ActionBar user_setting_action_bar;
 
     private ProgressDialog loadingBar;
-
+    public Data setting_data=new Data();
 
     private static final int GALLERY_PICK = 1;
 
@@ -243,7 +244,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
 
                                     String thumb_downloadUrl = thumb_task.getResult().getDownloadUrl().toString();
-
+                                    setting_data.setImage_uri(thumb_downloadUrl);
                                     if(thumb_task.isSuccessful()){
 
                                         Map update_hashMap = new HashMap();
@@ -285,6 +286,7 @@ public class SettingsActivity extends AppCompatActivity {
         String username = setting_username_text_view.getText().toString();
         String fullname = settingFullName.getText().toString();
         String country = settingCountryName.getText().toString();
+        //Log.i("壓縮圖片",setting_data.getImage_uri());
 
         if(TextUtils.isEmpty(username))
         {

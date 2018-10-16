@@ -42,6 +42,7 @@ public class Data {
     private int squats_exercise_plan_data;
     private int crunches_exercise_plan_data;
     private boolean date_is_red_point;
+    private String image_uri;
 
 
 
@@ -357,6 +358,14 @@ public class Data {
 
     public void setDate_is_red_point(boolean date_is_red_point) {
         this.date_is_red_point = date_is_red_point;
+    }
+
+    public String getImage_uri() {
+        return image_uri;
+    }
+
+    public void setImage_uri(String image_uri) {
+        this.image_uri = image_uri;
     }
 }
 

@@ -1,5 +1,6 @@
 package qwer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
 public class Dietcontrol extends Fragment implements View.OnTouchListener,addDiary.OnFragmentInteractionListener {
 
 
-
+    private Toolbar qwer_dietcontrol_toolbar;
 
 
     @Override
@@ -31,6 +33,16 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener,addDia
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.qwer_dietcontrol, null);
         view.setOnTouchListener(this);
+        qwer_dietcontrol_toolbar=(Toolbar)view.findViewById(R.id.qwer_dietcontrol_toolbar);
+        qwer_dietcontrol_toolbar.setTitle("飲食控制");
+        qwer_dietcontrol_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        qwer_dietcontrol_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         Button angry_btn=(Button)view.findViewById(R.id.angry_btn);

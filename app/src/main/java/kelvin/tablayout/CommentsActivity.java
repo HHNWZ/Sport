@@ -87,7 +87,7 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
+                UsersRef.child(current_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
