@@ -15,11 +15,14 @@
         android:layout_alignParentTop="true"
         android:src="@android:color/white" />
 
+    <include android:id="@+id/what_cal_toolbar"
+        layout="@layout/app_bar_layout"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="385dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/left2"
+        android:layout_below="@+id/what_cal_toolbar"
         android:visibility="visible">
 
         <LinearLayout

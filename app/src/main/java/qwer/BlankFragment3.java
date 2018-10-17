@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 
 import com.example.a888888888.sport.R;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
@@ -33,6 +35,8 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Toolbar need_food_toolbar;
 
     private OnFragmentInteractionListener mListener;
 
@@ -74,10 +78,20 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
 
         View view = inflater.inflate(R.layout.fragment_blank_fragment4, null);
         view.setOnTouchListener(this);
-        TextView textView1=(TextView)view.findViewById(R.id.textView15);
-        textView1.setText("攝取建議");//主標題
 
-
+        need_food_toolbar=(Toolbar)view.findViewById(R.id.need_food_toolbar);
+        need_food_toolbar.setTitle("攝取建議");
+        need_food_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        need_food_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new Dietcontrol(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         ExpandableTextView expTv1 = (ExpandableTextView)view.findViewById(R.id.expand_text_view);
         // IMPORTANT - call setText on the ExpandableTextView to set the text content to display
         expTv1.setText(getString(R.string.texta));

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -85,6 +86,8 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
 
     private OnFragmentInteractionListener mListener;
 
+    private Toolbar exercise_planning_toolbar;
+
     public BlankFragmentc4() {
         // Required empty public constructor
     }
@@ -126,6 +129,19 @@ public class BlankFragmentc4 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc4, null);
         view.setOnTouchListener(this);
+        exercise_planning_toolbar=(Toolbar)view.findViewById(R.id.exercise_planning_toolbar);
+        exercise_planning_toolbar.setTitle("運動方案");
+        exercise_planning_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        exercise_planning_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new Dietcontrol(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         walking_exercise_plan3=(TextView)view.findViewById(R.id.walking_exercise_plan3);
         running_exercise_plan3=(TextView)view.findViewById(R.id.running_exercise_plan3) ;

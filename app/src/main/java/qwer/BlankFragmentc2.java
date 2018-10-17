@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -40,6 +41,8 @@ public class BlankFragmentc2 extends Fragment implements View.OnTouchListener {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private Toolbar calorie_toolbar;
 
     public BlankFragmentc2() {
         // Required empty public constructor
@@ -90,6 +93,19 @@ public class BlankFragmentc2 extends Fragment implements View.OnTouchListener {
 
         final View view = inflater.inflate(R.layout.fragment_blank_fragmentc2, null);
         view.setOnTouchListener(this);
+        calorie_toolbar=(Toolbar)view.findViewById(R.id.calorie_toolbar);
+        calorie_toolbar.setTitle("所需卡路里計算");
+        calorie_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        calorie_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new Dietcontrol(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         ImageButton qwera1=(ImageButton)view.findViewById(R.id.imageButtona1);
         qwera1.setOnClickListener(new View.OnClickListener() {
             @Override

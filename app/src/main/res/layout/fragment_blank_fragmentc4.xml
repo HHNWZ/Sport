@@ -16,26 +16,8 @@
         android:layout_alignParentTop="true"
         app:srcCompat="@android:color/white" />
 
-    <android.support.v7.widget.Toolbar
-        android:background="#323d4d"
-        android:id="@+id/toolbar"
-        android:minHeight="?actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-    </android.support.v7.widget.Toolbar>
-
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="14dp"
-        android:gravity="center_horizontal"
-        android:text="運動方案"
-        android:textColor="#73c4d9"
-        android:textSize="22sp" />
+    <include android:id="@+id/exercise_planning_toolbar"
+        layout="@layout/app_bar_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"

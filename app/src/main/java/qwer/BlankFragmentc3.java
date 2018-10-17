@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -57,6 +58,8 @@ public class BlankFragmentc3 extends Fragment implements View.OnTouchListener {
     private int cdaymonth;
     private int cdayday;
 
+    private Toolbar phy_cal_toolbar;
+
     public BlankFragmentc3() {
         // Required empty public constructor
     }
@@ -100,6 +103,19 @@ public class BlankFragmentc3 extends Fragment implements View.OnTouchListener {
         final String asd="123";
         View view = inflater.inflate(R.layout.fragment_blank_fragmentc3, null);
         view.setOnTouchListener(this);
+        phy_cal_toolbar=(Toolbar)view.findViewById(R.id.phy_cal_toolbar);
+        phy_cal_toolbar.setTitle("生理期計算工具");
+        phy_cal_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        phy_cal_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new Dietcontrol(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);
         ListView listView=(ListView)view.findViewById(R.id.dynamic);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(),

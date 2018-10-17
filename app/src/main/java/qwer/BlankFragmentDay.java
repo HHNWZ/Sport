@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class BlankFragmentDay extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Toolbar what_cal_toolbar;
 
     public BlankFragmentDay() {
         // Required empty public constructor
@@ -66,6 +68,19 @@ public class BlankFragmentDay extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_blank_fragment_day, container, false);
+        what_cal_toolbar=(Toolbar)view.findViewById(R.id.what_cal_toolbar);
+        what_cal_toolbar.setTitle("？？？？");
+        what_cal_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        what_cal_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new BlankFragmentc3(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         // Inflate the layout for this fragment
 
 

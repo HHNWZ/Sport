@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,6 +44,7 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Toolbar diary_toolbar;
 
     public BlankFragment2() {
         // Required empty public constructor
@@ -82,6 +84,19 @@ public class BlankFragment2 extends Fragment implements View.OnTouchListener {
         View view = inflater.inflate(R.layout.fragment_blank_fragment3, null);
         view.setOnTouchListener(this);
         TextView test=(TextView)view.findViewById(R.id.testText);
+        diary_toolbar=(Toolbar)view.findViewById(R.id.diary_toolbar);
+        diary_toolbar.setTitle("日記");
+        diary_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        diary_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new Dietcontrol(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
         materialCalendarView.state().edit()
                 .setFirstDayOfWeek(DayOfWeek.MONDAY)

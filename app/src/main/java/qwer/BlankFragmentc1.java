@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
     private DatabaseReference exercise_plan_database;
 
     private OnFragmentInteractionListener mListener;
+    private Toolbar bmi_toolbar;
 
 
     public BlankFragmentc1() {
@@ -86,6 +88,7 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
         mAuth = FirebaseAuth.getInstance();
         exercise_plan_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise_plan");
         Log.i("我的id",""+mAuth.getCurrentUser().getUid());
+
     }
 
     @Override
@@ -94,6 +97,19 @@ public class BlankFragmentc1 extends Fragment implements View.OnTouchListener {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_blank_fragmentc1, null);
         view.setOnTouchListener(this);
+        bmi_toolbar=(Toolbar)view.findViewById(R.id.bmi_toolbar);
+        bmi_toolbar.setTitle("bmi檢測工具");
+        bmi_toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_48);
+        bmi_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main,new Dietcontrol(),null)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         ImageButton qwera2=(ImageButton)view.findViewById(R.id.imageButtona2);//按鈕點擊觸發事件,開啟按鈕
         qwera2.setOnClickListener(new View.OnClickListener() {
             @Override

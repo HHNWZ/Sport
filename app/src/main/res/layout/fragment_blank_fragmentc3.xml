@@ -14,27 +14,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         app:srcCompat="@android:color/white" />
-    <android.support.v7.widget.Toolbar
-        android:background="#323d4d"
-        android:id="@+id/toolbar"
-        android:minHeight="?actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-    </android.support.v7.widget.Toolbar>
-
-
-    <TextView
-        android:id="@+id/textView42"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center"
-        android:text="生理期計算工具"
-        android:textColor="#73c4d9"
-        android:textSize="24dp" />
+    <include android:id="@+id/phy_cal_toolbar"
+        layout="@layout/app_bar_layout"/>
 
     <TextView
         android:id="@+id/textView43"
@@ -51,7 +32,7 @@
         android:id="@+id/left1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/phy_cal_toolbar"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/textView43"
