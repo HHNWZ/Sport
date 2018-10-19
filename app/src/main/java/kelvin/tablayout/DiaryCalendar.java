@@ -44,7 +44,7 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
     @BindView(R.id.textView)
     TextView textView;
 
-    private Button diary_message_button;
+
     private Toolbar diary_calendar_toolbar;
     private ActionBar diary_calendar_actionbar;
 
@@ -66,11 +66,11 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
         diary_calendar_actionbar=getSupportActionBar();
         diary_calendar_actionbar.setTitle("日記");
         diary_calendar_actionbar.setDisplayHomeAsUpEnabled(true);
-        diary_message_button=(Button)findViewById(R.id.diary_message_button);
+
 
         Log.i("日期12345",""+Time.formatCalendar(System.currentTimeMillis()));
 
-      widget.addDecorator(new EventDecorator(Color.RED,doInBackground()));
+      //widget.addDecorator(new EventDecorator(Color.RED,doInBackground()));
 
 
 
@@ -84,14 +84,12 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
     public void onDateSelected(
             @NonNull MaterialCalendarView widget,
             @NonNull CalendarDay date,
-            boolean selected) {
+            boolean selected){
                 textView.setText(selected ? FORMATTER.format(date.getDate()) : "沒有選擇日期");
-                diary_message_button.setVisibility(View.VISIBLE);
+
+            }
 
 
-
-
-    }
 
 
 

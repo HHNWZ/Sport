@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/data_layout"
         android:layout_below="@+id/crunches_dare_app_bar"
-        android:background="#1e2b3d"
+        android:background="@drawable/task_and_dare_background"
         android:layout_above="@+id/my_dare">
 
 
