@@ -369,7 +369,7 @@ public class DiarySelect extends AppCompatActivity {
                         if(food_note.isSelected()){
                             total_cal=total_cal+food_note.getFood_calorie();
                             responseText.append(food_note.getFood_name()+" "+food_note.getNumber_food_component()+" "+food_note.getNumber_food_component_unit()+"卡路里是:"+food_note.getFood_calorie()+"\n");
-                            food_note_database.child(time_slot_select).child("food_item"+food_item).setValue(food_note.getFood_name()+" "+food_note.getNumber_food_component()+food_note.getNumber_food_component_unit()+"卡路里是:"+food_note.getFood_calorie());
+                            food_note_database.child(time_slot_select).child("food_item"+food_item).setValue(food_note.getFood_name()+" "+food_note.getNumber_food_component()+food_note.getNumber_food_component_unit()+" 卡路里是:"+food_note.getFood_calorie()+"大卡");
                             food_item=food_item+1;
                         }
                     }

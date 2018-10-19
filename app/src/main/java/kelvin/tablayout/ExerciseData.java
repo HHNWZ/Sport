@@ -1,18 +1,18 @@
 package kelvin.tablayout;
 
 public class ExerciseData {
-    public String start_time;
+    public String start_time2;
     public String end_time;
     public double distance;
     public String duration;
     public int mean_heart_rate;
 
     public String getStart_time() {
-        return start_time;
+        return start_time2;
     }
 
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
+    public void setStart_time(String start_time2) {
+        this.start_time2 = start_time2;
     }
 
     public String getEnd_time() {
@@ -124,8 +124,8 @@ public class ExerciseData {
 
     }
 
-    public  ExerciseData(String start_time,String end_time,double distance,String duration,int mean_heart_rate,int calorie,double incline_distance,double decline_distance,int max_heart_rate,int max_altitude,int min_altitude,double mean_speed,double max_speed){
-        this.start_time =start_time;
+    public  ExerciseData(String start_time2,String end_time,double distance,String duration,int mean_heart_rate,int calorie,double incline_distance,double decline_distance,int max_heart_rate,int max_altitude,int min_altitude,double mean_speed,double max_speed){
+        this.start_time2 =start_time2;
         this.end_time = end_time;
         this.distance=distance;
         this.duration=duration;

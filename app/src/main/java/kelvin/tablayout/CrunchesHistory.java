@@ -59,8 +59,8 @@ public class CrunchesHistory extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ExerciseData3 newCrunchesData=dataSnapshot.getValue(ExerciseData3.class);
-                Log.i("次數1234",""+newCrunchesData.count);
-                count_crunches_history_text_view.setText("次數:"+newCrunchesData.count+"次");
+                Log.i("次數1234",""+newCrunchesData.count2);
+                count_crunches_history_text_view.setText("次數:"+newCrunchesData.count2+"次");
                 duration_of_crunches_history_text_view.setText("運輸時間:"+newCrunchesData.duration);
                 calorie_crunches_history_text_view.setText("消耗的卡路里:"+newCrunchesData.calorie+"大卡");
                 mean_HeartRat_crunches_history_text_view.setText("平均心跳:"+newCrunchesData.mean_heart_rate+"次分");

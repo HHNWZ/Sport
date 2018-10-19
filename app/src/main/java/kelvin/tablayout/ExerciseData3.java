@@ -7,20 +7,20 @@ public class ExerciseData3 {
     public int mean_heart_rate;
     public int calorie;
     public int max_heart_rate;
-    public int count;
+    public int count2;
 
     public ExerciseData3(){
 
     }
 
-    public  ExerciseData3(String start_time,String end_time,String duration,int mean_heart_rate,int calorie,int max_heart_rate,int count){
+    public  ExerciseData3(String start_time,String end_time,String duration,int mean_heart_rate,int calorie,int max_heart_rate,int count2){
         this.start_time =start_time;
         this.end_time = end_time;
         this.duration=duration;
         this.mean_heart_rate=mean_heart_rate;
         this.calorie=calorie;
         this.max_heart_rate=max_heart_rate;
-        this.count=count;
+        this.count2=count2;
     }
 
     public String getStart_time() {
@@ -72,10 +72,10 @@ public class ExerciseData3 {
     }
 
     public int getCount() {
-        return count;
+        return count2;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount(int count2) {
+        this.count2 = count2;
     }
 }

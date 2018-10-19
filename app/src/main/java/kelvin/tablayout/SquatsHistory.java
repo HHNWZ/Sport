@@ -59,8 +59,8 @@ public class SquatsHistory extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ExerciseData3 newSquatsData=dataSnapshot.getValue(ExerciseData3.class);
-                Log.i("次數1234",""+newSquatsData.count);
-                count_squats_history_text_view.setText("次數:"+newSquatsData.count+"次");
+                Log.i("次數1234",""+newSquatsData.count2);
+                count_squats_history_text_view.setText("次數:"+newSquatsData.count2+"次");
                 duration_of_squats_history_text_view.setText("運輸時間:"+newSquatsData.duration);
                 calorie_squats_history_text_view.setText("消耗的卡路里:"+newSquatsData.calorie+"大卡");
                 mean_HeartRat_squats_history_text_view.setText("平均心跳:"+newSquatsData.mean_heart_rate+"次分");
