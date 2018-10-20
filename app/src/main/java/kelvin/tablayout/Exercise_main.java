@@ -25,9 +25,7 @@ import java.util.Timer;
 
 import cn.hugeterry.coordinatortablayout.CoordinatorTabLayout;
 
-public class Exercise_main extends AppCompatActivity implements
-
-        FriendsFragment2.OnFragmentInteractionListener
+public class Exercise_main extends AppCompatActivity
 
 {
 
@@ -69,10 +67,7 @@ public class Exercise_main extends AppCompatActivity implements
 
     }
 
-    @Override
-    public void onFragmentInteraction(String Tag, String number) {
 
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

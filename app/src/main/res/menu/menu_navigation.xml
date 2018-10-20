@@ -35,12 +35,6 @@
             android:title="登出"
             />
     </group>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/control_die"
-            android:icon="@drawable/logout"
-            android:title="飲食控制"
-            />
-    </group>
+
 
 </menu>

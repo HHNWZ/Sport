@@ -41,6 +41,7 @@ public class ControlDie extends AppCompatActivity{
         Button go_to_diary_calendar_button =  findViewById(R.id.go_to_diary_calendar_button);
         Button common_food_calories_button = findViewById(R.id.common_food_calories_button);
         Button ingestion_advice_button=findViewById(R.id.ingestion_advice_button);
+        Button monitoring_tool_button=findViewById(R.id.monitoring_tool_button);
         go_to_diary_calendar_button.setOnClickListener(v -> {
             Intent intent = new Intent(ControlDie.this,DiaryCalendar.class);
             startActivity(intent);
@@ -51,6 +52,10 @@ public class ControlDie extends AppCompatActivity{
         });
         ingestion_advice_button.setOnClickListener(v -> {
             Intent intent = new Intent(ControlDie.this,IngestionAdvice.class);
+            startActivity(intent);
+        });
+        monitoring_tool_button.setOnClickListener(v -> {
+            Intent intent = new Intent(ControlDie.this,MonitoringTool.class);
             startActivity(intent);
         });
 

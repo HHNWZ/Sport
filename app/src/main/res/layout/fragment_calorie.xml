@@ -1,0 +1,242 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.Calorie">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:background="@color/colorPrimary">
+
+        <!-- TODO: Update blank fragment layout -->
+
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="265dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textView22"
+            android:layout_marginEnd="7dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonboy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/radioGroup"
+                android:layout_alignTop="@+id/radioGroup"
+                android:layout_weight="1"
+                android:text="男生"
+                android:textColor="@color/text_color"
+                android:buttonTint="@color/object_color"/>
+
+            <RadioButton
+                android:id="@+id/radioButtongirl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView26"
+                android:layout_alignTop="@+id/radioGroup"
+                android:layout_weight="1"
+                android:text="女生"
+                android:textColor="@color/text_color"
+                android:buttonTint="@color/object_color"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calorie_toolbar"
+            android:layout_marginTop="30dp"
+            android:layout_toStartOf="@+id/radioGroup"
+            android:text="性別:"
+            android:textColor="@color/text_color"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView22"
+            android:layout_below="@+id/radioGroup"
+            android:layout_marginTop="29dp"
+            android:text="年齡:"
+            android:textColor="@color/text_color"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView24"
+            android:layout_below="@+id/editText3"
+            android:layout_marginTop="13dp"
+            android:text="體重:"
+            android:textColor="@color/text_color"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView26"
+            android:layout_below="@+id/editText4"
+            android:layout_marginTop="15dp"
+            android:text="身高:"
+            android:textColor="@color/text_color"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/textView24"
+            android:layout_marginEnd="17dp"
+            android:layout_toStartOf="@+id/button19"
+            android:background="@drawable/bg_edittext"
+            android:gravity="center"
+            android:inputType="number"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText3"
+            android:layout_alignTop="@+id/textView26"
+            android:background="@drawable/bg_edittext"
+            android:gravity="center"
+            android:inputType="number"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:textSize="20dp" /><![CDATA[" />
+
+    ]]>
+
+        <EditText
+            android:id="@+id/editText5"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText4"
+            android:layout_alignTop="@+id/textView25"
+            android:background="@drawable/bg_edittext"
+            android:gravity="center"
+            android:inputType="number"
+            android:padding="5dip"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/button19"
+            android:layout_width="wrap_content"
+            android:layout_height="148dp"
+            android:layout_alignBottom="@+id/editText5"
+            android:layout_alignEnd="@+id/radioGroup"
+            android:layout_marginEnd="11dp"
+            android:text="確定送出"
+            android:background="@color/object_color"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:textColor="@color/text_color" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView40"
+            android:layout_alignBottom="@+id/textView40"
+            android:layout_alignEnd="@+id/radioGroup2"
+            android:background="@drawable/bg_view_border"
+            android:gravity="center"
+            android:text="卡路里"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView25"
+            android:layout_below="@+id/editText5"
+            android:layout_marginTop="20dp"
+            android:text="活動程度:"
+            android:textSize="20dp"
+            android:textColor="@color/text_color"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView40"
+            android:layout_below="@+id/textView41"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/radioGroup2"
+                android:layout_alignTop="@+id/radioGroup2"
+                android:layout_weight="1"
+                android:text="輕度工作"
+                android:buttonTint="@color/object_color"
+                android:textColor="@color/text_color"/>
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="中度工作"
+                android:buttonTint="@color/object_color"
+                android:textColor="@color/text_color"/>
+
+            <RadioButton
+                android:id="@+id/radioButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="重度工作"
+                android:buttonTint="@color/object_color"
+                android:textColor="@color/text_color"/>
+
+        </RadioGroup>
+
+        <ScrollView
+            android:id="@+id/scrollView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/radioGroup2"
+            android:layout_marginTop="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/radioGroup2"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/activity" />
+            </LinearLayout>
+        </ScrollView>
+
+
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>

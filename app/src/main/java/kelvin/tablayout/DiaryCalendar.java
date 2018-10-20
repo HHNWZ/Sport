@@ -42,8 +42,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import qwer.Dietcontrol;
-import qwer.EventDecorator;
 
 public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedListener, OnDateLongClickListener {
 

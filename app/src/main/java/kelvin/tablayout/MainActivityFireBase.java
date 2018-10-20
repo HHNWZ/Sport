@@ -84,20 +84,9 @@ public class MainActivityFireBase extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
-
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
 
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-
-        return true;
-    }
 
 
     @Override
