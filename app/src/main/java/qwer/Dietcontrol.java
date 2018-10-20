@@ -15,6 +15,8 @@ import android.widget.Button;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 
+import kelvin.tablayout.DiaryCalendar;
+
 public class Dietcontrol extends Fragment implements View.OnTouchListener,addDiary.OnFragmentInteractionListener {
 
 
@@ -71,11 +73,7 @@ public class Dietcontrol extends Fragment implements View.OnTouchListener,addDia
         angry_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new BlankFragment2(),null)
-                        .addToBackStack(null)
-                        .commit();
+
             }
         });
         Button angry_btn3=(Button)view.findViewById(R.id.angry_btn3);

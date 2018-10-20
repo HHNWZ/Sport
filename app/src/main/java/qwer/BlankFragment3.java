@@ -1,6 +1,8 @@
 package qwer;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,8 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
+
+import kelvin.tablayout.ControlDie;
+import kelvin.tablayout.YogaMonitor;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,11 +91,8 @@ public class BlankFragment3 extends Fragment implements View.OnTouchListener {
         need_food_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content_main,new Dietcontrol(),null)
-                        .addToBackStack(null)
-                        .commit();
+                Intent intent =new Intent(getContext(),ControlDie.class);
+                startActivity(intent);
             }
         });
         ExpandableTextView expTv1 = (ExpandableTextView)view.findViewById(R.id.expand_text_view);

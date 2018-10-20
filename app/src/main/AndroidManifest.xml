@@ -121,7 +121,10 @@
         <activity android:name="kelvin.tablayout.CommentsActivity" />
         <activity android:name="kelvin.tablayout.ControlDie" />
         <activity android:name="kelvin.tablayout.DiaryCalendar" />
-        <activity android:name="kelvin.tablayout.DiarySelect"></activity>
+        <activity android:name="kelvin.tablayout.DiarySelect" />
+        <activity android:name="kelvin.tablayout.CommonFoodCalories" />
+        <activity android:name="kelvin.tablayout.IngestionAdvice" />
+        <activity android:name="kelvin.tablayout.MonitoringTool"></activity>
     </application>
 
 </manifest>

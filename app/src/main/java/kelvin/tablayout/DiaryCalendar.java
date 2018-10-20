@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import qwer.Dietcontrol;
 import qwer.EventDecorator;
 
 public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedListener, OnDateLongClickListener {
@@ -255,7 +257,6 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
                                 }
                                 if(dataSnapshot.child("breakfast").hasChild("total_cal")){
                                     String breakfast_total_cal=dataSnapshot.child("breakfast").child("total_cal").getValue().toString();
-                                    Log.i("早餐總卡路里",breakfast_total_cal);
                                     breakfast_cal.setVisibility(View.VISIBLE);
                                     breakfast_cal.setText("早餐總攝取卡路里:"+breakfast_total_cal+"大卡");
                                     int breakfast_total_cal_int=Integer.parseInt(breakfast_total_cal);
@@ -556,6 +557,7 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

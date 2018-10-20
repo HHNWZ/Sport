@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,16 +21,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/post_border"
                 android:padding="5dp"
-                android:backgroundTint="@color/object_color">
+                android:backgroundTint="@color/object_color"
+                tools:ignore="NestedWeights">
                 <Button
-                    android:id="@+id/angry_btn_die"
+                    android:id="@+id/common_food_calories_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/food"
@@ -64,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -72,7 +74,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/post_border"
                 android:padding="5dp"
-                android:backgroundTint="@color/object_color">
+                android:backgroundTint="@color/object_color"
+                tools:ignore="NestedWeights">
                 <Button
                     android:id="@+id/go_to_diary_calendar_button"
                     android:layout_width="wrap_content"
@@ -93,7 +96,7 @@
                 android:backgroundTint="@color/object_color">
 
                 <Button
-                    android:id="@+id/die2"
+                    android:id="@+id/ingestion_advice_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@mipmap/device"

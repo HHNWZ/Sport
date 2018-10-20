@@ -112,4 +112,13 @@
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
     <string name="post_menu">發帖</string>
+    <string name="common_food_calories">常見的食物熱量</string>
+    <string name="food_name">食物名稱</string>
+    <string name="select_ead_time_slot">選擇用餐時段</string>
+    <string name="breakfast">早餐</string>
+    <string name="lunch">午餐</string>
+    <string name="dinner">晚餐</string>
+    <string name="confirm">確認</string>
+    <string name="common_food_calories_layout_name_unit">◎食物分量與單位</string>
+    <string name="common_food_calories_layout_data">※食物卡路里數據</string>
 </resources>
