@@ -45,7 +45,7 @@ public class PhotoBlog extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef, PostsRef,LikesRef;
+    private DatabaseReference UsersRef, PostsRef,LikesRef,userDataBase;
     private FloatingActionButton activity_photo_blog_float_action_button;
 
     String currentUserID;
@@ -72,7 +72,7 @@ public class PhotoBlog extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("運動經驗交流");
 
-
+        userDataBase=FirebaseDatabase.getInstance().getReference().child("Users");
         activity_photo_blog_float_action_button=(FloatingActionButton)findViewById(R.id.activity_photo_blog_float_action_button);
 
 
@@ -120,14 +120,34 @@ public class PhotoBlog extends AppCompatActivity {
                         final String Postkey=getRef(position).getKey();
                         Log.i("帖文id",Postkey);
 
-                        viewHolder.setFullname(model.getFullname());
+                        //viewHolder.setFullname(model.getFullname());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());
                         viewHolder.setDescription(model.getDescription());
-                        viewHolder.setProfileimage(model.getProfileimage());
+                        //viewHolder.setProfileimage(model.getProfileimage());
                         viewHolder.setPostimage(model.getPostimage());
-                        Log.i("圖片id",model.getPostimage());
+                        final String post_user_id=model.getUid();
+                        Log.i("post_user_id"+position,post_user_id);
+                        userDataBase.child(post_user_id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.hasChildren()){
+                                    if(dataSnapshot.hasChild("name")){
+                                        String postUserName=dataSnapshot.child("name").getValue().toString();
+                                        viewHolder.setFullname(postUserName);
+                                    }
+                                    if(dataSnapshot.hasChild("thumb_image")){
+                                        String postUserImage=dataSnapshot.child("thumb_image").getValue().toString();
+                                        viewHolder.setProfileimage(postUserImage);
+                                    }
+                                }
+                            }
 
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                         viewHolder.setLikeButtonStatus(Postkey);
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {

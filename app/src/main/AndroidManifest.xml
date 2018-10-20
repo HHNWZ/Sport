@@ -36,14 +36,16 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="kelvin.tablayout.EnlargeImageView" />
+        <activity
+            android:name=".MainActivity">
+        </activity>
         <activity android:name="kelvin.tablayout.MainActivityFireBase" />
         <activity
             android:name="kelvin.tablayout.RegisterActivity"
@@ -124,7 +126,8 @@
         <activity android:name="kelvin.tablayout.DiarySelect" />
         <activity android:name="kelvin.tablayout.CommonFoodCalories" />
         <activity android:name="kelvin.tablayout.IngestionAdvice" />
-        <activity android:name="kelvin.tablayout.MonitoringTool"></activity>
+        <activity android:name="kelvin.tablayout.MonitoringTool" />
+
     </application>
 
 </manifest>

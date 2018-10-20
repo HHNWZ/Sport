@@ -450,6 +450,22 @@ public class Time extends Application {
         return simpleDateFormat.format(date);
     }
 
+    public static String get_post_time(long post_milliseconds){
+        String postTime ="";
+        Calendar post_calendar=Calendar.getInstance();
+        post_calendar.setTimeInMillis(post_milliseconds);
+        int post_year = post_calendar.get(Calendar.YEAR);
+        int post_month= post_calendar.get(Calendar.MONTH)+1;
+        int post_day =post_calendar.get(Calendar.DAY_OF_MONTH);
+        int post_hour = post_calendar.get(Calendar.HOUR_OF_DAY);
+        int post_minute=post_calendar.get(Calendar.MINUTE);
+        int post_second=post_calendar.get(Calendar.SECOND);
+        String post_week=Week.getWeek(post_milliseconds);
+        postTime=""+post_year+"年"+post_month+"月"+post_day+"日 週"+post_week+" "+post_hour+"時 "+post_minute+"分鐘 "+post_second+"秒 ";
+
+        return postTime;
+    }
+
 
 
 

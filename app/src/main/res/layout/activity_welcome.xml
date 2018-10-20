@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="necowneco.tablayout.habaActivity"
-    tools:showIn="@layout/app_bar_haba">
+    tools:context=".WelcomeActivity"
+    android:background="@color/colorPrimary">
 
-    <RelativeLayout
-        android:id="@+id/haba"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/welcome_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_centerInParent="true"
+        android:src="@drawable/logo"
+        app:civ_border_color="@color/object_color"
+        app:civ_border_width="5dp"/>
 
-    </RelativeLayout>
 </RelativeLayout>

@@ -64,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName;
     private TextView mStatus;
-    private EditText setting_username_text_view,settingFullName,settingCountryName;
+    private EditText setting_username_text_view,settingCountryName;
     private Button settingSaveInformationbutton;
     private TextInputLayout setting_username_text_input_layout;
     private Button mStatusBtn;
@@ -101,7 +101,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
         setting_username_text_view=(EditText)findViewById(R.id.setting_username);
-        settingFullName=(EditText)findViewById(R.id.setting_full_name);
         settingCountryName=(EditText)findViewById(R.id.setting_country_name);
         settingSaveInformationbutton=(Button)findViewById(R.id.setting_information_button);
         loadingBar = new ProgressDialog(this);
@@ -137,7 +136,6 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                     if(dataSnapshot.hasChild("name")){
                         String name = dataSnapshot.child("name").getValue().toString();
-                        settingFullName.setText(name);
                     }
                     if(dataSnapshot.hasChild("status")){
                         String country = dataSnapshot.child("status").getValue().toString();
@@ -284,7 +282,6 @@ public class SettingsActivity extends AppCompatActivity {
     private void SaveAccountSetupInformation()
     {
         String username = setting_username_text_view.getText().toString();
-        String fullname = settingFullName.getText().toString();
         String country = settingCountryName.getText().toString();
         //Log.i("壓縮圖片",setting_data.getImage_uri());
 
@@ -292,10 +289,7 @@ public class SettingsActivity extends AppCompatActivity {
         {
             Toast.makeText(this, "請輸入用戶名", Toast.LENGTH_SHORT).show();
         }
-        if(TextUtils.isEmpty(fullname))
-        {
-            Toast.makeText(this, "請輸入全名", Toast.LENGTH_SHORT).show();
-        }
+
         if(TextUtils.isEmpty(country))
         {
             Toast.makeText(this, "請輸入動態", Toast.LENGTH_SHORT).show();
@@ -308,7 +302,6 @@ public class SettingsActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
 
             HashMap userMap = new HashMap();
-            userMap.put("name", fullname);
             userMap.put("username", username);
             userMap.put("status", country);
             mUserDatabase.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {

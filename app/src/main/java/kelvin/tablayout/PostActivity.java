@@ -147,7 +147,7 @@ public class PostActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
         saveCurrentTime = currentTime.format(calFordDate.getTime());
 
-        postRandomName = saveCurrentDate + saveCurrentTime;
+        postRandomName = Time.get_post_time(System.currentTimeMillis());
 
         Log.i("為什麼我會在這裡",""+7);
 
@@ -181,53 +181,35 @@ public class PostActivity extends AppCompatActivity {
     private void SavingPostInformationToDatabase()
     {
         Log.i("為什麼我會在這裡",""+10);
-        UsersRef.child(current_user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i("為什麼我會在這裡",""+11);
-                if(dataSnapshot.exists())
-                {
-                    Log.i("為什麼我會在這裡",""+12);
-                    String userFullName = dataSnapshot.child("name").getValue().toString();
-                    String userProfileImage = dataSnapshot.child("thumb_image").getValue().toString();
+        HashMap postsMap = new HashMap();
+        postsMap.put("uid", current_user_id);
+        postsMap.put("date", saveCurrentDate);
+        postsMap.put("time", saveCurrentTime);
+        postsMap.put("description", Description);
+        postsMap.put("postimage", downloadUrl);
+        Log.i("為什麼我會在這裡",""+13);
+        PostsRef.child(postRandomName+current_user_id).updateChildren(postsMap)
+                .addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task)
+                    {
+                        Log.i("為什麼我會在這裡",""+14);
+                        if(task.isSuccessful())
+                        {
+                            //SendUserToMainActivity();
+                            Log.i("為什麼我會在這裡",""+15);
+                            Toast.makeText(PostActivity.this, "帖文上傳成功", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                            SendUserToMainActivity();
 
-                    HashMap postsMap = new HashMap();
-                    postsMap.put("uid", current_user_id);
-                    postsMap.put("date", saveCurrentDate);
-                    postsMap.put("time", saveCurrentTime);
-                    postsMap.put("description", Description);
-                    postsMap.put("postimage", downloadUrl);
-                    postsMap.put("profileimage", userProfileImage);
-                    postsMap.put("fullname", userFullName);
-                    Log.i("為什麼我會在這裡",""+13);
-                    PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
-                            .addOnCompleteListener(new OnCompleteListener() {
-                                @Override
-                                public void onComplete(@NonNull Task task)
-                                {
-                                    Log.i("為什麼我會在這裡",""+14);
-                                    if(task.isSuccessful())
-                                    {
-                                        //SendUserToMainActivity();
-                                        Log.i("為什麼我會在這裡",""+15);
-                                        Toast.makeText(PostActivity.this, "帖文上傳成功", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(PostActivity.this, "帖文上傳失敗", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    }
-                                }
-                            });
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+                        }
+                        else
+                        {
+                            Toast.makeText(PostActivity.this, "帖文上傳失敗", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
+                    }
+                });
     }
 
 

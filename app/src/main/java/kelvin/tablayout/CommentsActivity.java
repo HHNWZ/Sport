@@ -92,7 +92,7 @@ public class CommentsActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists())
                         {
-                            String userName=dataSnapshot.child("username").getValue().toString();
+                            String userName=dataSnapshot.child("name").getValue().toString();
 
                             ValidateComment(userName);
 
@@ -201,7 +201,7 @@ public class CommentsActivity extends AppCompatActivity {
             SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
             final String saveCurrentTime = currentTime.format(calFordDate.getTime());
 
-            final String RandomKey =current_user_id + saveCurrentDate+saveCurrentTime;
+            final String RandomKey =Time.get_post_time(System.currentTimeMillis())+current_user_id;
 
             HashMap commentsMap = new HashMap();
                 commentsMap.put("uid",current_user_id);
