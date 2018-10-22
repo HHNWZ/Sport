@@ -16,6 +16,7 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <application
+        android:name="kelvin.tablayout.GlobalVariable"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"

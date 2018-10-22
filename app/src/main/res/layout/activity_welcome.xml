@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/text_color">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/welcome_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo"
-        app:civ_border_color="@color/object_color"
-        app:civ_border_width="5dp"/>
+        android:src="@drawable/logo2"
+       />
 
 </RelativeLayout>

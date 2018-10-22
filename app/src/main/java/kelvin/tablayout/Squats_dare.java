@@ -3,6 +3,7 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -75,9 +78,12 @@ public class Squats_dare extends AppCompatActivity {
     private static int FriendCountInt;
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
+    private String myID;
+    private static String winner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("我在Exercise_main的","OnCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squats_dare);
         OneSignal.startInit(this)
@@ -90,11 +96,14 @@ public class Squats_dare extends AppCompatActivity {
         setSupportActionBar(squats_dare_app_bar);
         actionBar = getSupportActionBar();
         actionBar.setTitle("深蹲挑戰");
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
+        Log.i("MainActivity的值",""+User.getTask());
         actionBar.setDisplayHomeAsUpEnabled(true);
         squats_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-        myDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        friend_point_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        myDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        friend_point_database= FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         dareDatabase= FirebaseDatabase.getInstance().getReference();
         confirm_database= FirebaseDatabase.getInstance().getReference();
         friendDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
@@ -151,9 +160,9 @@ public class Squats_dare extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Log.i("12345",""+mAuth.getCurrentUser().getUid());
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        if(dataSnapshot.hasChild(myID)){
                             squats_dare_app_bar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             Log.i("朋友id1234",""+list_user_id);
                             text_VS.setVisibility(View.VISIBLE);
                             friend_single_image.setVisibility(View.VISIBLE);
@@ -191,10 +200,12 @@ public class Squats_dare extends AppCompatActivity {
                                         Log.i("1234",""+ FriendCountInt);
                                         Int_exercise_week_dat=Integer.parseInt(exercise_week_data.getText().toString());
                                         if(squats_dare_data.getSquats_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&squats_dare_data.getSquats_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
-                                            text_winner.setVisibility(View.VISIBLE);
-                                            if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
+
+                                            if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
+                                                text_winner.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是朋友");
-                                            }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
+                                            }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
+                                                text_winner.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                             }
@@ -264,6 +275,7 @@ public class Squats_dare extends AppCompatActivity {
 
 
 
+
         mInstance = this;
         mKeySet = new HashSet<>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.Exercise.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
@@ -281,6 +293,7 @@ public class Squats_dare extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -445,5 +458,40 @@ public class Squats_dare extends AppCompatActivity {
     public void connect_squats(){
         mStore = new HealthDataStore(this, mConnectionListener);
         mStore.connectService();
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.i("我在Squats_dare的","onStart");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在Squats_dare的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.i("我在Squats_dare的","onRestart");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在Squats_dare的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在Squats_dare的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在Squats_dare的","onDestroy");
     }
 }

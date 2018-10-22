@@ -34,10 +34,17 @@ public class Exercise_main extends AppCompatActivity
     private ExercisePagerAdapter mSectionsPagerAdapter;
     private TabLayout exercise_main_tabs;
     private ViewPager exercise_main_tabPager;
+    private  static String getStringFormMainActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("我在Exercise_main的","OnCreate");
+        //getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
+        //Log.i("MainActivity的值",""+User.getTask());
+        //Log.i("haha的值",""+User.getWord());
         setContentView(R.layout.activity_exercise_main);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -58,13 +65,7 @@ public class Exercise_main extends AppCompatActivity
 
         exercise_main_tabs=(TabLayout)findViewById(R.id.exercise_main_tabs);
         exercise_main_tabs.setupWithViewPager(exercise_main_tabPager);
-
-
-
-
-
-
-
+        User.setTask_reg("Exercise_main");
     }
 
 
@@ -75,6 +76,7 @@ public class Exercise_main extends AppCompatActivity
             Intent intent = new Intent(Exercise_main.this,MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
             startActivity(intent);
         }
 
@@ -82,8 +84,51 @@ public class Exercise_main extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        return super.onCreateOptionsMenu(menu);
+    protected void onStart(){
+        super.onStart();
+        Log.i("我在Exercise_main的","onStart");
+        getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        Log.i("我在Em的OS接收值",""+getStringFormMainActivity);
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在Exercise_main的","onResume");
+        //getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        Log.i("我在Em的OR接收值",""+getStringFormMainActivity);
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.i("我在Exercise_main的","onRestart");
+        //getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        Log.i("我在Em的ORS接收值",""+getStringFormMainActivity);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在Exercise_main的","onPause");
+        //getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        Log.i("我在Em的OP接收值",""+getStringFormMainActivity);
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在Exercise_main的","onStop");
+        //getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        Log.i("我在Em的OST接收值",""+getStringFormMainActivity);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在Exercise_main的","onDestroy");
+        //getStringFormMainActivity=getIntent().getStringExtra("我在MainActivity傳值給");
+        Log.i("我在Em的OD接收值",""+getStringFormMainActivity);
+    }
+
+
 }

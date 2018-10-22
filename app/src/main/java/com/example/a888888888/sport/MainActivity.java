@@ -74,6 +74,7 @@ import kelvin.tablayout.ControlDie;
 import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.Exercise_main;
+import kelvin.tablayout.GlobalVariable;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.PhotoBlog;
@@ -84,6 +85,7 @@ import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
+import kelvin.tablayout.Squats_dare;
 import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
@@ -167,6 +169,8 @@ public class  MainActivity extends AppCompatActivity
     private PieEntry running,walking,yoga,squats,crunches;
     private PieDataSet pieDataSet;
     private PieData pieData;
+    private String exercise_main;
+
 
 
 
@@ -246,8 +250,10 @@ public class  MainActivity extends AppCompatActivity
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new ExampleNotificationOpenedHandler())
                 .init();
-        Log.i("我在這裡","2");
-
+        Log.i("我在MainActivity的","onCreate");
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
+        User.setTask("MainActivity");
+        Log.i("Exercise_mainOC的值",""+User.getTask_reg());
         Calendar cal=Calendar.getInstance();
         int y=cal.get(Calendar.YEAR);
         int m=cal.get(Calendar.MONTH)+1;
@@ -836,6 +842,7 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, Exercise_main.class);
+                intent.putExtra("我在MainActivity傳值給","Exercise_main");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -973,37 +980,41 @@ public class  MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-    @Override
-    protected void onStart() {
+    protected void onStart(){
         super.onStart();
-        Log.i("我在這裡","1");
+        Log.i("我在MainActivity的","onStart");
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在MainActivity的","onResume");
     }
     @Override
-    protected void onRestart() {
+    protected void onRestart(){
         super.onRestart();
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
+        Log.i("我在MainActivity的","onRestart");
+        Log.i("Exercise_mainOR的值",""+User.getTask_reg());
+        User.setWord("haha");
+    }
 
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在MainActivity的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在MainActivity的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在MainActivity的","onDestroy");
     }
 
     @Override
@@ -1049,9 +1060,9 @@ public class  MainActivity extends AppCompatActivity
 
 
             FirebaseAuth.getInstance().signOut();
-            Intent i = new Intent(MainActivity.this,MainActivity.class);
+            Toast.makeText(MainActivity.this,"您已經登出,並回到桌布",Toast.LENGTH_LONG).show();
+            finish();
 
-            startActivity(i);
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -1139,6 +1150,7 @@ public class  MainActivity extends AppCompatActivity
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
+
             }
 
             if (actionType == OSNotificationAction.ActionType.ActionTaken){

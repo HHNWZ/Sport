@@ -300,6 +300,8 @@ public class PhotoBlog extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home){
             Intent intent = new Intent(PhotoBlog.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
