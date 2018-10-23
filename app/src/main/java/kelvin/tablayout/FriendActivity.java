@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,6 +50,7 @@ public class FriendActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("我在FriendActivity的","onCreate");
         setContentView(R.layout.activity_friend);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -66,8 +68,11 @@ public class FriendActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
-        Task_reg=getIntent().getStringExtra("Task_req");
-        Task=getIntent().getStringExtra("Task");
+        GlobalVariable friend_activity=(GlobalVariable)getApplicationContext();
+        Task_reg=friend_activity.getTask_reg();
+        Task=friend_activity.getTask();
+        Log.i("Task_reg是",Task_reg);
+        Log.i("Task是",Task);
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends").child(mCurrent_user_id);
         mFriendsDatabase.keepSynced(true);
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -121,6 +126,7 @@ public class FriendActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        Log.i("我在FriendActivity的","onStart");
         Task_reg=getIntent().getStringExtra("Task_req");
         Task=getIntent().getStringExtra("Task");
         FirebaseRecyclerAdapter<Friends,ActivityFriendsViewHolder> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivityFriendsViewHolder>(
@@ -147,8 +153,6 @@ public class FriendActivity extends AppCompatActivity {
                                 Intent taskIntent = new Intent();
                                 taskIntent.setClass(FriendActivity.this  , TaskProfile.class);
                                 taskIntent.putExtra("user_id",list_user_id);
-                                taskIntent.putExtra("Task_req",Task_reg);
-                                taskIntent.putExtra("Task",Task);
                                 startActivity(taskIntent);
                             }
                         });
@@ -201,5 +205,36 @@ public class FriendActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在FriendActivity的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.i("我在FriendActivity的","onRestart");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在FriendActivity的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在FriendActivity的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在FriendActivity的","onDestroy");
     }
 }

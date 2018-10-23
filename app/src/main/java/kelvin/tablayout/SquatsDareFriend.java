@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class SquatsDareFriend extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("我在SquatsDareFriend的","onCreate");
         setContentView(R.layout.activity_squats_dare_friend);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -82,6 +84,7 @@ public class SquatsDareFriend extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        Log.i("我在SquatsDareFriend的","onStart");
 
         FirebaseRecyclerAdapter<Friends,ActivitySquatsDareFriendsViewHolderew> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivitySquatsDareFriendsViewHolderew>(
                 Friends.class,
@@ -107,7 +110,6 @@ public class SquatsDareFriend extends AppCompatActivity {
                                 Intent taskIntent = new Intent();
                                 taskIntent.setClass(SquatsDareFriend.this  , SquatsDareFriendProfile.class);
                                 taskIntent.putExtra("user_id",list_user_id);
-
                                 startActivity(taskIntent);
                             }
                         });
@@ -160,5 +162,36 @@ public class SquatsDareFriend extends AppCompatActivity {
 
 
 
+    }
+
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在SquatsDareFriend的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.i("我在SquatsDareFriend的","onRestart");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在SquatsDareFriend的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在SquatsDareFriend的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在SquatsDareFriend的","onDestroy");
     }
 }

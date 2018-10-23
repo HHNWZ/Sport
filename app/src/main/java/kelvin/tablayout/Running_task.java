@@ -85,7 +85,11 @@ public class Running_task extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("我在Running_task的","onCreate");
         setContentView(R.layout.activity_running_task);
+        GlobalVariable task=(GlobalVariable)getApplicationContext();
+        task.setTask("Task_walking");
+        task.setTask_reg("Task_walking");
 
         running_task_toolbar=(Toolbar)findViewById(R.id.running_task_toolbar);
         setSupportActionBar(running_task_toolbar);
@@ -258,10 +262,6 @@ public class Running_task extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.task_friend:
                     Intent intent = new Intent(Running_task.this,FriendActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    intent.putExtra("Task_req","Task_req_running");
-                    intent.putExtra("Task","Task_running");
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;
@@ -279,6 +279,40 @@ public class Running_task extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.i("我在Running_task的","onStart");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在Running_task的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.i("我在Running_task的","onRestart");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在Running_task的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在Running_task的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在Running_task的","onDestroy");
+    }
   
 
     

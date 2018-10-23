@@ -74,8 +74,11 @@ public class TaskProfile extends AppCompatActivity {
         actionBar.setTitle("朋友資訊");
         actionBar.setDisplayHomeAsUpEnabled(true);
         final String friend_id=getIntent().getStringExtra("user_id");
-        Task_req=getIntent().getStringExtra("Task_req");
-        Task=getIntent().getStringExtra("Task");
+        GlobalVariable friend_activity=(GlobalVariable)getApplicationContext();
+        Task_req=friend_activity.getTask_reg();
+        Task=friend_activity.getTask();
+        Log.i("Task_reg是",Task_req);
+        Log.i("Task是",Task);
         Log.i("朋友id",friend_id);
         Log.i("Task_req",Task_req);
         Log.i("Task1234",Task);
@@ -627,9 +630,8 @@ public class TaskProfile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(TaskProfile.this,FriendActivity.class);
-            intent.putExtra("Task_req",Task_req);
-            intent.putExtra("Task",Task);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
