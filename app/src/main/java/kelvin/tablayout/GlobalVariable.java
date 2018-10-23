@@ -6,6 +6,8 @@ public class GlobalVariable  extends Application {
     private String Word;     //要傳送的字串
     private String Task;
     private String Task_reg;
+    private String keyDay;
+    private String KeyHour;
     //修改 變數字串
     public void setWord(String word){
         this.Word = word;
@@ -29,5 +31,21 @@ public class GlobalVariable  extends Application {
 
     public void setTask_reg(String task_reg) {
         Task_reg = task_reg;
+    }
+
+    public String getKeyDay() {
+        return keyDay;
+    }
+
+    public void setKeyDay(String keyDay) {
+        this.keyDay = keyDay;
+    }
+
+    public String getKeyHour() {
+        return KeyHour;
+    }
+
+    public void setKeyHour(String keyHour) {
+        KeyHour = keyHour;
     }
 }

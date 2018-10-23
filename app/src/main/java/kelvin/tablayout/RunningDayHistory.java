@@ -78,9 +78,10 @@ public class RunningDayHistory extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable running_history=(GlobalVariable)getApplicationContext();
+                        running_history.setKeyDay(keyDay);
                         Intent intent_key = new Intent();
                         intent_key.setClass(RunningDayHistory.this  , RunningHourHistory.class);
-                        intent_key.putExtra("keyDay",keyDay);
                         startActivity(intent_key);
                     }
                 });
@@ -101,9 +102,9 @@ public class RunningDayHistory extends AppCompatActivity {
 
 
 
-        public void setDayKey(String walking){
+        public void setDayKey(String running){
             TextView day_exercise_history_text_view=(TextView)mView.findViewById(R.id.day_exercise_history_text_view);
-            day_exercise_history_text_view.setText(walking);
+            day_exercise_history_text_view.setText(running);
         }
     }
 }

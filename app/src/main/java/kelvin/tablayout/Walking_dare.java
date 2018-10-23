@@ -74,6 +74,8 @@ public class Walking_dare extends AppCompatActivity {
     private static double FriendCountDouble;
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
+    private String myID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +93,9 @@ public class Walking_dare extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         walking_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-        myDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        friend_point_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        myDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        friend_point_database= FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         dareDatabase= FirebaseDatabase.getInstance().getReference();
         confirm_database= FirebaseDatabase.getInstance().getReference();
         friendDatabase= FirebaseDatabase.getInstance().getReference().child("Users");
@@ -149,10 +152,10 @@ public class Walking_dare extends AppCompatActivity {
                 dareDatabase.child("Walking_Dare").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.i("12345",""+mAuth.getCurrentUser().getUid());
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        Log.i("12345",""+myID);
+                        if(dataSnapshot.hasChild(myID)){
                             walking_dare_app_bar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             Log.i("朋友id1234",""+list_user_id);
                             text_VS.setVisibility(View.VISIBLE);
                             friend_single_image.setVisibility(View.VISIBLE);
@@ -190,10 +193,12 @@ public class Walking_dare extends AppCompatActivity {
                                         Log.i("1234", "" + FriendCountDouble);
                                         Int_exercise_week_dat = Integer.parseInt(exercise_week_data.getText().toString());
                                         if (walking_dare_data.getWalking_dare_myCount() == Int_exercise_week_dat && FriendCountDouble == Int_exercise_week_dat && walking_dare_data.getWalking_dare_myCount() != 0 && FriendCountDouble != 0 && text_VS.getVisibility() == View.VISIBLE && text_VS.getVisibility() == View.VISIBLE) {
-                                            text_winner.setVisibility(View.VISIBLE);
-                                            if (walking_dare_data.getWalking_dare_myFinishTime() > FriendFinishTimeLong) {
+
+                                            if (walking_dare_data.getWalking_dare_myFinishTime() > FriendFinishTimeLong&&walking_dare_data.getWalking_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
+                                                text_winner.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是朋友");
-                                            } else if (walking_dare_data.getWalking_dare_myFinishTime() < FriendFinishTimeLong) {
+                                            } else if (walking_dare_data.getWalking_dare_myFinishTime() < FriendFinishTimeLong&&walking_dare_data.getWalking_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
+                                                text_winner.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint", "" + walking_dare_data.getWalking_dare_friend_point());
                                             }
@@ -201,7 +206,7 @@ public class Walking_dare extends AppCompatActivity {
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    confirm_database.child("Walking_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
+                                                    confirm_database.child("Walking_Dare").child(myID).child("id").setValue(null);
                                                     confirm_dare.setVisibility(View.INVISIBLE);
                                                     friend_single_image.setVisibility(View.INVISIBLE);
                                                     friend_single_name.setVisibility(View.INVISIBLE);

@@ -81,6 +81,7 @@ public class Running_task extends AppCompatActivity {
 
     private Data running_data=new Data();
     public CircularSeekBar running_task_seek_bar;
+    private String myID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +89,8 @@ public class Running_task extends AppCompatActivity {
         Log.i("我在Running_task的","onCreate");
         setContentView(R.layout.activity_running_task);
         GlobalVariable task=(GlobalVariable)getApplicationContext();
-        task.setTask("Task_walking");
-        task.setTask_reg("Task_walking");
+        task.setTask("Task_running");
+        task.setTask_reg("Task_req_running");
 
         running_task_toolbar=(Toolbar)findViewById(R.id.running_task_toolbar);
         setSupportActionBar(running_task_toolbar);
@@ -99,9 +100,9 @@ public class Running_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-
-        running_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        running_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        running_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        running_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         running_task_Database=FirebaseDatabase.getInstance().getReference();
         running_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         running_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
@@ -153,9 +154,9 @@ public class Running_task extends AppCompatActivity {
                 running_task_Database.child("Task_running").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        if(dataSnapshot.hasChild(myID)){
                             running_task_toolbar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             running_task_text_and.setVisibility(View.VISIBLE);
                             friend_running_task_name.setVisibility(View.VISIBLE);
                             friend_running_task_image.setVisibility(View.VISIBLE);
@@ -200,7 +201,7 @@ public class Running_task extends AppCompatActivity {
                                                     friend_running_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_running_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     running_task_friend_point.setVisibility(View.INVISIBLE);
-                                                    running_task_Database.child("Task_running").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    running_task_Database.child("Task_running").child(myID).child("id").removeValue();
                                                     running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point() + 10);
                                                     running_susses_text_view.setText("目前沒有朋友");
                                                     running_task_seek_bar.setProgress((0));

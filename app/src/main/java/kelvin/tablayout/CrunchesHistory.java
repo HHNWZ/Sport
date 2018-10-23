@@ -43,8 +43,9 @@ public class CrunchesHistory extends AppCompatActivity {
         actionBar.setTitle("跑步歷史記錄");
         actionBar.setSubtitle("詳細資料");
         actionBar.setLogo(R.drawable.crunchestoolbar);
-        day_crunches_key=getIntent().getStringExtra("keyDay");
-        hour_crunches_key=getIntent().getStringExtra("keyHour");
+        GlobalVariable crunches_history=(GlobalVariable)getApplicationContext();
+        day_crunches_key=crunches_history.getKeyDay();
+        hour_crunches_key=crunches_history.getKeyHour();
         Log.i("keyHour值",hour_crunches_key);
         Log.i("keyDay值",day_crunches_key);
         count_crunches_history_text_view=(TextView)findViewById(R.id.count_crunches_history_text_view);
@@ -80,7 +81,8 @@ public class CrunchesHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(CrunchesHistory.this,CrunchesHourHistory.class);
-            intent.putExtra("keyDay",day_crunches_key);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 

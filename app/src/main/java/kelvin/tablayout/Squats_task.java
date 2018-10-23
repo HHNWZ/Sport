@@ -74,7 +74,7 @@ public class Squats_task extends AppCompatActivity {
     private static int squats_task_friend_count_int;
     private static int squats_progress;
     private static int squats_task_data_int;
-
+    private String myID;
 
 
 
@@ -86,6 +86,9 @@ public class Squats_task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squats_task);
+        GlobalVariable task=(GlobalVariable)getApplicationContext();
+        task.setTask("Task_squats");
+        task.setTask_reg("Task_req_squats");
         squats_task_toolbar=(Toolbar)findViewById(R.id.squats_task_toolbar);
         setSupportActionBar(squats_task_toolbar);
         actionBar=getSupportActionBar();
@@ -94,9 +97,9 @@ public class Squats_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-
-        squats_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        squats_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        squats_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        squats_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         squats_task_Database=FirebaseDatabase.getInstance().getReference();
         squats_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         squats_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
@@ -148,9 +151,9 @@ public class Squats_task extends AppCompatActivity {
                 squats_task_Database.child("Task_squats").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        if(dataSnapshot.hasChild(myID)){
                             squats_task_toolbar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             squats_task_text_and.setVisibility(View.VISIBLE);
                             friend_squats_task_name.setVisibility(View.VISIBLE);
                             friend_squats_task_image.setVisibility(View.VISIBLE);
@@ -196,7 +199,7 @@ public class Squats_task extends AppCompatActivity {
                                                     friend_squats_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_squats_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     squats_task_friend_point.setVisibility(View.INVISIBLE);
-                                                    squats_task_Database.child("Task_squats").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    squats_task_Database.child("Task_squats").child(myID).child("id").removeValue();
                                                     squats_task_friend_point_database.child("friend_point").setValue(squats_data.getMy_task_friend_point()+10);
                                                     squats_susses_text_view.setText("目前沒有朋友");
                                                     squats_task_seek_bar.setProgress((0));

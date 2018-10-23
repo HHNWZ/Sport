@@ -43,8 +43,9 @@ public class SquatsHistory extends AppCompatActivity {
         actionBar.setTitle("深蹲歷史記錄");
         actionBar.setSubtitle("詳細資料");
         actionBar.setLogo(R.drawable.squatstoolbar);
-        day_squats_key=getIntent().getStringExtra("keyDay");
-        hour_squats_key=getIntent().getStringExtra("keyHour");
+        GlobalVariable squats_history=(GlobalVariable)getApplicationContext();
+        day_squats_key=squats_history.getKeyDay();
+        hour_squats_key=squats_history.getKeyHour();
         Log.i("keyHour值",hour_squats_key);
         Log.i("keyDay值",day_squats_key);
         count_squats_history_text_view=(TextView)findViewById(R.id.count_squats_history_text_view);
@@ -77,7 +78,8 @@ public class SquatsHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(SquatsHistory.this,SquatsHourHistory.class);
-            intent.putExtra("keyDay",day_squats_key);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 

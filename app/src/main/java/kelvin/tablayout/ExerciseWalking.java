@@ -131,8 +131,6 @@ public class ExerciseWalking extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Walking_dare.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
 
@@ -151,8 +149,6 @@ public class ExerciseWalking extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Walking_task.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
             }
@@ -163,8 +159,6 @@ public class ExerciseWalking extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),ExerciseHistory.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });

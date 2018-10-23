@@ -50,8 +50,9 @@ public class RunningHistory extends AppCompatActivity {
         actionBar.setTitle("跑步歷史記錄");
         actionBar.setSubtitle("詳細資料");
         actionBar.setLogo(R.drawable.runningtoolbar);
-        day_running_key=getIntent().getStringExtra("keyDay");
-        hour_running_key=getIntent().getStringExtra("keyHour");
+        GlobalVariable running_history=(GlobalVariable)getApplicationContext();
+        day_running_key=running_history.getKeyDay();
+        hour_running_key=running_history.getKeyHour();
         Log.i("keyHour值",hour_running_key);
         Log.i("keyDay值",day_running_key);
         distance_running_history_text_view=(TextView)findViewById(R.id.distance_running_history_text_view);
@@ -102,7 +103,8 @@ public class RunningHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(RunningHistory.this,RunningHourHistory.class);
-            intent.putExtra("keyDay",day_running_key);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 

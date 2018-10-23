@@ -78,11 +78,15 @@ public class Walking_task extends AppCompatActivity {
 
     private Data walking_data=new Data();
     public CircularSeekBar walking_task_seek_bar;
+    private String myID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_task);
+        GlobalVariable task=(GlobalVariable)getApplicationContext();
+        task.setTask("Task_walking");
+        task.setTask_reg("Task_req_walking");
         walking_task_toolbar=(Toolbar)findViewById(R.id.walking_task_toolbar);
         setSupportActionBar(walking_task_toolbar);
         actionBar=getSupportActionBar();
@@ -91,9 +95,9 @@ public class Walking_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         walking_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-
-        walking_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        walking_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        walking_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        walking_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         walking_task_Database=FirebaseDatabase.getInstance().getReference();
         walking_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         walking_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
@@ -145,9 +149,9 @@ public class Walking_task extends AppCompatActivity {
                 walking_task_Database.child("Task_walking").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        if(dataSnapshot.hasChild(myID)){
                             walking_task_toolbar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             walking_task_text_and.setVisibility(View.VISIBLE);
                             friend_walking_task_name.setVisibility(View.VISIBLE);
                             friend_walking_task_image.setVisibility(View.VISIBLE);
@@ -192,7 +196,7 @@ public class Walking_task extends AppCompatActivity {
                                                     friend_walking_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_walking_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     walking_task_friend_point.setVisibility(View.INVISIBLE);
-                                                    walking_task_Database.child("Task_walking").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    walking_task_Database.child("Task_walking").child(myID).child("id").removeValue();
                                                     walking_task_friend_point_database.child("friend_point").setValue(walking_data.getMy_task_friend_point() + 10);
                                                     walking_susses_text_view.setText("目前沒有朋友");
                                                     walking_task_seek_bar.setProgress((0));
@@ -253,8 +257,6 @@ public class Walking_task extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.task_friend:
                     Intent intent = new Intent(Walking_task.this,FriendActivity.class);
-                    intent.putExtra("Task_req","Task_req_walking");
-                    intent.putExtra("Task","Task_walking");
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

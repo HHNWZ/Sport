@@ -39,7 +39,8 @@ public class SquatsHourHistory extends AppCompatActivity {
         actionBar.setTitle("深蹲歷史記錄");
         actionBar.setSubtitle("以時間顯示");
         actionBar.setLogo(R.drawable.squatstoolbar);
-        day_squats_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable squats_history=(GlobalVariable)getApplicationContext();
+        day_squats_key=squats_history.getKeyDay();
         Log.i("key值",day_squats_key);
         mAuth = FirebaseAuth.getInstance();
         squats_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("squats").child(day_squats_key);
@@ -54,6 +55,8 @@ public class SquatsHourHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(SquatsHourHistory.this,SquatsDayHistory.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -63,7 +66,8 @@ public class SquatsHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
-        day_squats_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable squats_history=(GlobalVariable)getApplicationContext();
+        day_squats_key=squats_history.getKeyDay();
         Log.i("key值",day_squats_key);
         mAuth = FirebaseAuth.getInstance();
         squats_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("squats").child(day_squats_key);
@@ -81,14 +85,14 @@ public class SquatsHourHistory extends AppCompatActivity {
                 viewHolder.setHourKey(hour_squats_key);
 
                 final String keyHour =getRef(position).getKey();
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable squats_history=(GlobalVariable)getApplicationContext();
+                        squats_history.setKeyHour(keyHour);
                         Intent intent_key = new Intent();
                         intent_key.setClass(SquatsHourHistory.this  , SquatsHistory.class);
-                        intent_key.putExtra("keyHour",keyHour);
-                        intent_key.putExtra("keyDay",day_squats_key);
-
                         startActivity(intent_key);
                     }
                 });
@@ -106,9 +110,9 @@ public class SquatsHourHistory extends AppCompatActivity {
             mView=itemView;
         }
 
-        public void setHourKey(String walking){
+        public void setHourKey(String squats){
             TextView day_exercise_history_text_view=(TextView)mView.findViewById(R.id.day_exercise_history_text_view);
-            day_exercise_history_text_view.setText(walking);
+            day_exercise_history_text_view.setText(squats);
         }
     }
 }

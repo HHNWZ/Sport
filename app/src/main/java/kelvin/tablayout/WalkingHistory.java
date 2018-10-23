@@ -48,8 +48,9 @@ public class WalkingHistory extends AppCompatActivity {
         actionBar.setTitle("步行歷史記錄");
         actionBar.setSubtitle("詳細資料");
         actionBar.setLogo(R.drawable.walkingtoolbar);
-        day_walking_key=getIntent().getStringExtra("keyDay");
-        hour_walking_key=getIntent().getStringExtra("keyHour");
+        GlobalVariable walking_history=(GlobalVariable)getApplicationContext();
+        day_walking_key=walking_history.getKeyDay();
+        hour_walking_key=walking_history.getKeyHour();
         Log.i("keyHour值",hour_walking_key);
         Log.i("keyDay值",day_walking_key);
         distance_walking_history_text_view=(TextView)findViewById(R.id.distance_walking_history_text_view);
@@ -98,7 +99,8 @@ public class WalkingHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(WalkingHistory.this,Walking_hour_history.class);
-            intent.putExtra("keyDay",day_walking_key);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 

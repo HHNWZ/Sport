@@ -98,12 +98,14 @@ public class ExerciseHistory extends AppCompatActivity {
 
                 final String keyDay = getRef(position).getKey();
 
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable walking_history=(GlobalVariable)getApplicationContext();
+                        walking_history.setKeyDay(keyDay);
                         Intent intent_key = new Intent();
                         intent_key.setClass(ExerciseHistory.this  , Walking_hour_history.class);
-                        intent_key.putExtra("keyDay",keyDay);
                         startActivity(intent_key);
                     }
                 });

@@ -43,8 +43,9 @@ public class YogaHistory extends AppCompatActivity {
         actionBar.setTitle("瑜伽歷史記錄");
         actionBar.setSubtitle("詳細資料");
         actionBar.setLogo(R.drawable.yogatoolbar);
-        day_yoga_key=getIntent().getStringExtra("keyDay");
-        hour_yoga_key=getIntent().getStringExtra("keyHour");
+        GlobalVariable yoga_history=(GlobalVariable)getApplicationContext();
+        day_yoga_key=yoga_history.getKeyDay();
+        hour_yoga_key=yoga_history.getKeyHour();
         Log.i("keyHour值",hour_yoga_key);
         Log.i("keyDay值",day_yoga_key);
         duration_of_yoga_history_text_view=(TextView)findViewById(R.id.duration_of_yoga_history_text_view);

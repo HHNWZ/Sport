@@ -76,7 +76,7 @@ public class Yoga_task extends AppCompatActivity {
     private static long yoga_task_friend_count_long;
     private static long yoga_progress;
     private static long yoga_task_data_long;
-
+    private String myID;
 
 
 
@@ -89,6 +89,9 @@ public class Yoga_task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yoga_task);
+        GlobalVariable task=(GlobalVariable)getApplicationContext();
+        task.setTask("Task_yoga");
+        task.setTask_reg("Task_req_yoga");
         yoga_task_toolbar=(Toolbar)findViewById(R.id.yoga_task_toolbar);
         setSupportActionBar(yoga_task_toolbar);
         actionBar=getSupportActionBar();
@@ -97,9 +100,9 @@ public class Yoga_task extends AppCompatActivity {
         actionBar.setSubtitle("點擊右邊的圖標和朋友一起完成");
         yoga_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
-
-        yoga_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        yoga_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        yoga_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        yoga_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         yoga_task_Database=FirebaseDatabase.getInstance().getReference();
         yoga_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         yoga_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
@@ -151,9 +154,9 @@ public class Yoga_task extends AppCompatActivity {
                 yoga_task_Database.child("Task_yoga").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        if(dataSnapshot.hasChild(myID)){
                             yoga_task_toolbar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             yoga_task_text_and.setVisibility(View.VISIBLE);
                             friend_yoga_task_name.setVisibility(View.VISIBLE);
                             friend_yoga_task_image.setVisibility(View.VISIBLE);
@@ -199,7 +202,7 @@ public class Yoga_task extends AppCompatActivity {
                                                     friend_yoga_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_yoga_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     yoga_task_friend_point.setVisibility(View.INVISIBLE);
-                                                    yoga_task_Database.child("Task_yoga").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    yoga_task_Database.child("Task_yoga").child(myID).child("id").removeValue();
                                                     yoga_task_friend_point_database.child("friend_point").setValue(yoga_data.getMy_task_friend_point() + 10);
                                                     yoga_susses_text_view.setText("目前沒有朋友");
                                                     yoga_task_seek_bar.setProgress((0));
@@ -259,8 +262,6 @@ public class Yoga_task extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.task_friend:
                     Intent intent = new Intent(Yoga_task.this,FriendActivity.class);
-                    intent.putExtra("Task_req","Task_req_yoga");
-                    intent.putExtra("Task","Task_yoga");
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

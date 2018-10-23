@@ -77,9 +77,10 @@ public class YogaDayHistory extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable yoga_history=(GlobalVariable)getApplicationContext();
+                        yoga_history.setKeyDay(keyDay);
                         Intent intent_key = new Intent();
                         intent_key.setClass(YogaDayHistory.this  , YogaHourHistory.class);
-                        intent_key.putExtra("keyDay",keyDay);
                         startActivity(intent_key);
                     }
                 });
@@ -100,9 +101,9 @@ public class YogaDayHistory extends AppCompatActivity {
 
 
 
-        public void setDayKey(String walking){
+        public void setDayKey(String yoga){
             TextView day_exercise_history_text_view=(TextView)mView.findViewById(R.id.day_exercise_history_text_view);
-            day_exercise_history_text_view.setText(walking);
+            day_exercise_history_text_view.setText(yoga);
         }
     }
 }

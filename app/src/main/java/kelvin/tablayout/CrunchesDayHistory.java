@@ -74,12 +74,14 @@ public class CrunchesDayHistory extends AppCompatActivity {
                 viewHolder.setDayKey(key);
 
                 final String keyDay = getRef(position).getKey();
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable crunches_history=(GlobalVariable)getApplicationContext();
+                        crunches_history.setKeyDay(keyDay);
                         Intent intent_key = new Intent();
                         intent_key.setClass(CrunchesDayHistory.this  , CrunchesHourHistory.class);
-                        intent_key.putExtra("keyDay",keyDay);
                         startActivity(intent_key);
                     }
                 });

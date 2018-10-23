@@ -62,6 +62,7 @@ public class TaskProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("我在TaskProfile的","onCreate");
         setContentView(R.layout.activity_task_profile);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -636,5 +637,40 @@ public class TaskProfile extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.i("我在TaskProfile的","onStart");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在TaskProfile的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        Log.i("我在TaskProfile的","onRestart");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在TaskProfile的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在TaskProfile的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在TaskProfile的","onDestroy");
     }
 }

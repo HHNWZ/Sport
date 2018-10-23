@@ -58,7 +58,8 @@
         android:background="@drawable/button"
         android:backgroundTint="#73c4d9"
         android:text="修改帖文"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/text_color"/>
 
     <Button
         android:id="@+id/delete_post_button"
@@ -72,5 +73,6 @@
         android:background="@drawable/button"
         android:backgroundTint="#73c4d9"
         android:text="刪除帖文"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@color/text_color"/>
 </RelativeLayout>

@@ -39,7 +39,8 @@ public class RunningHourHistory extends AppCompatActivity {
         actionBar.setTitle("跑步歷史記錄");
         actionBar.setSubtitle("以時間顯示");
         actionBar.setLogo(R.drawable.runningtoolbar);
-        day_running_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable running_history=(GlobalVariable)getApplicationContext();
+        day_running_key=running_history.getKeyDay();
         Log.i("key值",day_running_key);
         mAuth = FirebaseAuth.getInstance();
         running_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("running").child(day_running_key);
@@ -54,6 +55,8 @@ public class RunningHourHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(RunningHourHistory.this,RunningDayHistory.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -63,7 +66,8 @@ public class RunningHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
-        day_running_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable running_history=(GlobalVariable)getApplicationContext();
+        day_running_key=running_history.getKeyDay();
         Log.i("key值",day_running_key);
         mAuth = FirebaseAuth.getInstance();
         running_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("running").child(day_running_key);
@@ -85,10 +89,11 @@ public class RunningHourHistory extends AppCompatActivity {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable running_history=(GlobalVariable)getApplicationContext();
+                        running_history.setKeyHour(keyHour);
                         Intent intent_key = new Intent();
                         intent_key.setClass(RunningHourHistory.this  , RunningHistory.class);
-                        intent_key.putExtra("keyHour",keyHour);
-                        intent_key.putExtra("keyDay",day_running_key);
+                        
 
                         startActivity(intent_key);
                     }
@@ -110,9 +115,9 @@ public class RunningHourHistory extends AppCompatActivity {
             mView=itemView;
         }
 
-        public void setHourKey(String walking){
+        public void setHourKey(String running){
             TextView day_exercise_history_text_view=(TextView)mView.findViewById(R.id.day_exercise_history_text_view);
-            day_exercise_history_text_view.setText(walking);
+            day_exercise_history_text_view.setText(running);
         }
     }
 }

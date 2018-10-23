@@ -39,7 +39,8 @@ public class YogaHourHistory extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setSubtitle("以時間顯示");
         actionBar.setLogo(R.drawable.yogatoolbar);
-        day_yoga_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable yoga_history=(GlobalVariable)getApplicationContext();
+        day_yoga_key=yoga_history.getKeyDay();
         Log.i("key值",day_yoga_key);
         mAuth = FirebaseAuth.getInstance();
         yoga_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("yoga").child(day_yoga_key);
@@ -54,6 +55,8 @@ public class YogaHourHistory extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(YogaHourHistory.this,YogaDayHistory.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
 
@@ -63,7 +66,8 @@ public class YogaHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
-        day_yoga_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable yoga_history=(GlobalVariable)getApplicationContext();
+        day_yoga_key=yoga_history.getKeyDay();
         Log.i("key值",day_yoga_key);
         mAuth = FirebaseAuth.getInstance();
         yoga_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("yoga").child(day_yoga_key);
@@ -82,13 +86,14 @@ public class YogaHourHistory extends AppCompatActivity {
                 viewHolder.setHourKey(hour_yoga_key);
 
                 final String keyHour =getRef(position).getKey();
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable yoga_history=(GlobalVariable)getApplicationContext();
+                        yoga_history.setKeyHour(keyHour);
                         Intent intent_key = new Intent();
                         intent_key.setClass(YogaHourHistory.this  , YogaHistory.class);
-                        intent_key.putExtra("keyHour",keyHour);
-                        intent_key.putExtra("keyDay",day_yoga_key);
                         startActivity(intent_key);
                     }
                 });
@@ -109,9 +114,9 @@ public class YogaHourHistory extends AppCompatActivity {
             mView=itemView;
         }
 
-        public void setHourKey(String walking){
+        public void setHourKey(String yoga){
             TextView day_exercise_history_text_view=(TextView)mView.findViewById(R.id.day_exercise_history_text_view);
-            day_exercise_history_text_view.setText(walking);
+            day_exercise_history_text_view.setText(yoga);
         }
     }
 }

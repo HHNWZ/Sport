@@ -79,7 +79,7 @@ public class Squats_dare extends AppCompatActivity {
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
     private String myID;
-    private static String winner;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +159,7 @@ public class Squats_dare extends AppCompatActivity {
                 dareDatabase.child("Squats_Dare").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.i("12345",""+mAuth.getCurrentUser().getUid());
+                        Log.i("12345",""+myID);
                         if(dataSnapshot.hasChild(myID)){
                             squats_dare_app_bar.setOnMenuItemClickListener(null);
                             final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
@@ -213,7 +213,7 @@ public class Squats_dare extends AppCompatActivity {
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    confirm_database.child("Squats_Dare").child(mAuth.getCurrentUser().getUid()).child("id").setValue(null);
+                                                    confirm_database.child("Squats_Dare").child(myID).child("id").setValue(null);
                                                     confirm_dare.setVisibility(View.INVISIBLE);
                                                     friend_single_image.setVisibility(View.INVISIBLE);
                                                     friend_single_name.setVisibility(View.INVISIBLE);

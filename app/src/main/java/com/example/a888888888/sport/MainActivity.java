@@ -1046,8 +1046,6 @@ public class  MainActivity extends AppCompatActivity
         }
         else if(id==R.id.setting_account){
             Intent i = new Intent(MainActivity.this,SettingsActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
         else if(id==R.id.Logout){

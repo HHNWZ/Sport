@@ -38,7 +38,8 @@ public class CrunchesHourHistory extends AppCompatActivity {
         actionBar.setTitle("仰臥起坐歷史記錄");
         actionBar.setSubtitle("以時間顯示");
         actionBar.setLogo(R.drawable.crunchestoolbar);
-        day_crunches_key=getIntent().getStringExtra("keyDay");
+        GlobalVariable crunches_history=(GlobalVariable)getApplicationContext();
+        day_crunches_key=crunches_history.getKeyDay();
         Log.i("key值",day_crunches_key);
         mAuth = FirebaseAuth.getInstance();
         crunches_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("crunches").child(day_crunches_key);
@@ -51,11 +52,6 @@ public class CrunchesHourHistory extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        day_crunches_key=getIntent().getStringExtra("keyDay");
-        Log.i("key值",day_crunches_key);
-        mAuth = FirebaseAuth.getInstance();
-        crunches_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("crunches").child(day_crunches_key);
-        crunches_hour_exercise_history_database.keepSynced(true);
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent(CrunchesHourHistory.this,CrunchesDayHistory.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -69,6 +65,12 @@ public class CrunchesHourHistory extends AppCompatActivity {
     @Override
     public  void  onStart() {
         super.onStart();
+        GlobalVariable crunches_history=(GlobalVariable)getApplicationContext();
+        day_crunches_key=crunches_history.getKeyDay();
+        Log.i("key值",day_crunches_key);
+        mAuth = FirebaseAuth.getInstance();
+        crunches_hour_exercise_history_database= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("exercise").child("crunches").child(day_crunches_key);
+        crunches_hour_exercise_history_database.keepSynced(true);
         FirebaseRecyclerAdapter<ExerciseData3,HourCrunchesHistoryViewHolder>firebaseRecyclerAdapter= new FirebaseRecyclerAdapter<ExerciseData3, HourCrunchesHistoryViewHolder>(
                 ExerciseData3.class,
                 R.layout.exercise_history_layout,
@@ -82,14 +84,14 @@ public class CrunchesHourHistory extends AppCompatActivity {
                 viewHolder.setHourKey(hour_crunches_key);
 
                 final String keyHour =getRef(position).getKey();
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable crunches_history=(GlobalVariable)getApplicationContext();
+                        crunches_history.setKeyHour(keyHour);
                         Intent intent_key = new Intent();
                         intent_key.setClass(CrunchesHourHistory.this  , CrunchesHistory.class);
-                        intent_key.putExtra("keyHour",keyHour);
-                        intent_key.putExtra("keyDay",day_crunches_key);
-
                         startActivity(intent_key);
                     }
                 });

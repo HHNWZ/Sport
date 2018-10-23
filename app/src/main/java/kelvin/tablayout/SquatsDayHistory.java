@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -75,12 +76,15 @@ public class SquatsDayHistory extends AppCompatActivity {
                 viewHolder.setDayKey(key);
 
                 final String keyDay = getRef(position).getKey();
+                Log.i("SquatsDayKey",""+keyDay);
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        GlobalVariable squats_history=(GlobalVariable)getApplicationContext();
+                        squats_history.setKeyDay(keyDay);
                         Intent intent_key = new Intent();
                         intent_key.setClass(SquatsDayHistory.this  , SquatsHourHistory.class);
-                        intent_key.putExtra("keyDay",keyDay);
                         startActivity(intent_key);
                     }
                 });
@@ -101,9 +105,9 @@ public class SquatsDayHistory extends AppCompatActivity {
 
 
 
-        public void setDayKey(String walking){
+        public void setDayKey(String squats){
             TextView day_exercise_history_text_view=(TextView)mView.findViewById(R.id.day_exercise_history_text_view);
-            day_exercise_history_text_view.setText(walking);
+            day_exercise_history_text_view.setText(squats);
         }
     }
 }

@@ -75,7 +75,7 @@ public class Crunches_task extends AppCompatActivity {
     private static int crunches_task_friend_count_int;
     private static int crunches_progress;
     private static int crunches_task_data_int;
-
+    private String myID;
 
 
 
@@ -85,10 +85,14 @@ public class Crunches_task extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crunches_task);
+        GlobalVariable task=(GlobalVariable)getApplicationContext();
+        task.setTask("Task_crunches");
+        task.setTask_reg("Task_req_crunches");
         crunches_task_toolbar=(Toolbar)findViewById(R.id.crunches_task_toolbar);
         setSupportActionBar(crunches_task_toolbar);
         actionBar=getSupportActionBar();
@@ -98,9 +102,9 @@ public class Crunches_task extends AppCompatActivity {
         crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
 
         mAuth = FirebaseAuth.getInstance();
-
-        crunches_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-        crunches_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        myID = mAuth.getCurrentUser().getUid();
+        crunches_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
+        crunches_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         crunches_task_Database=FirebaseDatabase.getInstance().getReference();
         crunches_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         crunches_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
@@ -152,9 +156,9 @@ public class Crunches_task extends AppCompatActivity {
                 crunches_task_Database.child("Task_crunches").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(mAuth.getCurrentUser().getUid())){
+                        if(dataSnapshot.hasChild(myID)){
                             crunches_task_toolbar.setOnMenuItemClickListener(null);
-                            final String list_user_id =dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("id").getValue().toString();
+                            final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
                             crunches_task_text_and.setVisibility(View.VISIBLE);
                             friend_crunches_task_name.setVisibility(View.VISIBLE);
                             friend_crunches_task_image.setVisibility(View.VISIBLE);
@@ -199,7 +203,7 @@ public class Crunches_task extends AppCompatActivity {
                                                     friend_crunches_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_crunches_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     crunches_task_friend_point.setVisibility(View.INVISIBLE);
-                                                    crunches_task_Database.child("Task_crunches").child(mAuth.getCurrentUser().getUid()).child("id").removeValue();
+                                                    crunches_task_Database.child("Task_crunches").child(myID).child("id").removeValue();
                                                     crunches_task_friend_point_database.child("friend_point").setValue(crunches_data.getMy_task_friend_point() + 10);
                                                     crunches_susses_text_view.setText("目前沒有朋友");
                                                     crunches_task_seek_bar.setProgress((0));
@@ -258,8 +262,6 @@ public class Crunches_task extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.task_friend:
                     Intent intent = new Intent(Crunches_task.this,FriendActivity.class);
-                    intent.putExtra("Task_req","Task_req_crunches");
-                    intent.putExtra("Task","Task_crunches");
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;
