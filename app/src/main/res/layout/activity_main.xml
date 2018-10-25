@@ -11,298 +11,326 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#323d4d"
+                android:background="#323d4d">
 
-                android:layout_alignParentStart="true"
-
-                >
                 <include layout="@layout/navigation_actionbox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@id/buttonLinear"
-                    android:background="@drawable/main_border"
-                    android:layout_below="@+id/nav_action">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/main_title"
-                        android:text="運動監控"
-                        android:gravity="center"
-                        android:textSize="25sp"
-                        android:textColor="@android:color/white"/>
-
-
-                    <com.nelson.circlelayout.CircleLayout
-                        android:id="@+id/circle"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        app:radium="100dp"
-                        >
-                        <!--步行-->
-                       <Button
-                           android:layout_width="match_parent"
-                           android:layout_height="match_parent"
-                           android:background="@drawable/walkingbackground"
-                           android:id="@+id/button_of_walking_monitoring"/>
-
-
-                        <!--跑步-->
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/runningbackground"
-                            android:id="@+id/button_of_running_monitoring"/>
-
-                        <!--瑜伽-->
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/yogabackground"
-                            android:id="@+id/button_of_yoga_monitoring"/>
-
-                        <!--深蹲-->
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/suagatsbackground"
-                            android:id="@+id/button_of_squats_monitoring"/>
-
-                        <!--仰臥起坐-->
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/crunchesbackground"
-                            android:id="@+id/button_of_crunches_monitoring"/>
-
-
-
-
-                    </com.nelson.circlelayout.CircleLayout>
-
-                </RelativeLayout>
-
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#323d4d"
-                    android:id="@+id/buttonLinear"
-                    android:layout_above="@+id/dataLinear1">
-
-                    <Button
-                        android:id="@+id/button1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/main_border"
-                        android:padding="5dp"
-                        android:drawableTop="@drawable/write1"
-                        android:text="經驗交流"
-                        android:textColor="#ffffff" />
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/main_border"
-                        android:padding="5dp"
-                        android:drawableTop="@drawable/food1"
-                        android:text="飲食控制"
-                        android:textColor="#ffffff" />
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/main_border"
-                        android:padding="5dp"
-                        android:drawableTop="@drawable/rank1"
-                        android:text="排行榜"
-                        android:textColor="#ffffff" />
-
-                    <Button
-                        android:id="@+id/button3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/main_border"
-                        android:padding="5dp"
-                        android:drawableTop="@drawable/stream1"
-                        android:text="直播"
-                        android:textColor="#ffffff" />
-
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_below="@id/buttonLinear"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/main_border"
-                    android:padding="5dp"
-                    android:layout_toLeftOf="@+id/dataLinear1"
-                    >
+                    android:layout_below="@+id/nav_action"
+                    android:id="@+id/main_activity_linear_layout1"
+                    android:orientation="vertical">
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/chart1"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_below="@+id/pieChart_toolbar" />
+                        android:background="@drawable/main_border"
+                        android:layout_weight="1">
 
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/dataLinear1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:orientation="vertical"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/main_border"
-                    android:layout_alignParentRight="true"
-                    android:padding="5dp">
 
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        >
-                        <TableRow
+
+
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/running_background"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
                             >
                             <TextView
-                                android:id="@+id/textView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="跑步:"
+                                android:id="@+id/main_title"
+                                android:text="運動監控"
+                                android:gravity="center"
+                                android:textSize="25sp"
+                                android:textColor="@android:color/white"
+                                android:background="@drawable/over_background"/>
 
-                                android:textColor="#ffffff"
-                                android:layout_gravity="right"
-                                android:gravity="center_vertical"/>
+                            <com.nelson.circlelayout.CircleLayout
+                                android:id="@+id/circle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                app:radium="100dp"
+                                android:gravity="center">
+                                <!--步行-->
+                                <Button
+                                    android:id="@+id/button_of_walking_monitoring"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/walkingbackground" />
 
-                            <TextView
-                                android:id="@+id/textView6"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="10000公里"
-                                android:textColor="#ffffff"
-                                android:gravity="center_vertical"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/walking_background">
-                            <TextView
-                                android:id="@+id/TextView1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="走路:"
-                                android:textColor="#ffffff"
-                                android:paddingRight="2.5dp"
-                                android:layout_gravity="right"
-                                android:gravity="center_vertical"/>
 
-                            <TextView
-                                android:id="@+id/textView7"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="1000公里"
-                                android:textColor="#ffffff"
-                                android:gravity="center_vertical"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/yoga_background">
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="瑜伽:"
-                                android:textColor="#ffffff"
-                                android:paddingRight="2.5dp"
-                                android:layout_gravity="right"
-                                android:gravity="center_vertical"/>
+                                <!--跑步-->
+                                <Button
+                                    android:id="@+id/button_of_running_monitoring"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/runningbackground" />
 
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="23小时59分"
-                                android:textColor="#ffffff"
-                                android:gravity="center_vertical"
-                                android:paddingRight="5dp"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/squats_background">
-                            <TextView
-                                android:id="@+id/textView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="深蹲:"
-                                android:textColor="#ffffff"
-                                android:paddingRight="2.5dp"
-                                android:layout_gravity="right"
-                                android:gravity="center_vertical"/>
+                                <!--瑜伽-->
+                                <Button
+                                    android:id="@+id/button_of_yoga_monitoring"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/yogabackground" />
 
-                            <TextView
-                                android:id="@+id/textView10"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="1000次"
-                                android:textColor="#ffffff"
-                                android:gravity="center_vertical"/>
-                        </TableRow>
-                        <TableRow
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/crunches_background">
-                            <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="仰臥起坐:"
-                                android:textColor="#ffffff"
-                                android:paddingRight="2.5dp"
-                                android:layout_gravity="right"
-                                android:gravity="center_vertical"
-                                android:paddingLeft="5dp"/>
+                                <!--深蹲-->
+                                <Button
+                                    android:id="@+id/button_of_squats_monitoring"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/suagatsbackground" />
 
-                            <TextView
-                                android:id="@+id/textView9"
+                                <!--仰臥起坐-->
+                                <Button
+                                    android:id="@+id/button_of_crunches_monitoring"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/crunchesbackground" />
+
+
+                            </com.nelson.circlelayout.CircleLayout>
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#323d4d"
+                                android:id="@+id/buttonLinear"
+                                >
+
+                                <Button
+                                    android:id="@+id/button1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/main_border"
+                                    android:padding="5dp"
+                                    android:drawableTop="@drawable/write1"
+                                    android:text="經驗交流"
+                                    android:textColor="#ffffff" />
+
+                                <Button
+                                    android:id="@+id/button2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/main_border"
+                                    android:padding="5dp"
+                                    android:drawableTop="@drawable/food1"
+                                    android:text="飲食控制"
+                                    android:textColor="#ffffff" />
+
+                                <Button
+                                    android:id="@+id/button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/main_border"
+                                    android:padding="5dp"
+                                    android:drawableTop="@drawable/rank1"
+                                    android:text="排行榜"
+                                    android:textColor="#ffffff" />
+
+                                <Button
+                                    android:id="@+id/button3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/main_border"
+                                    android:padding="5dp"
+                                    android:drawableTop="@drawable/stream1"
+                                    android:text="直播"
+                                    android:textColor="#ffffff" />
+
+                            </LinearLayout>
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="1000次"
-                                android:textColor="#ffffff"
-                                android:gravity="center_vertical"/>
-                        </TableRow>
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/main_border"
+                                    android:padding="5dp"
+                                    android:layout_weight="1">
 
-                    </TableLayout>
+                                    <com.github.mikephil.charting.charts.PieChart
+                                        android:id="@+id/chart1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_below="@+id/pieChart_toolbar" />
+
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/main_border"
+
+                                    android:layout_weight="2">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/main_border"
+                                        >
+                                        <TextView
+                                            android:id="@+id/textView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="跑步:"
+                                            android:textColor="#ffffff"
+                                            android:gravity="center"
+                                            android:layout_weight="1"/>
+
+                                        <TextView
+                                            android:id="@+id/textView6"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="1000公里"
+                                            android:gravity="center"
+                                            android:textColor="@color/object_color"
+                                            android:layout_weight="1"/>
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/main_border"
+                                        >
+
+                                        <TextView
+                                            android:id="@+id/TextView1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="走路:"
+                                            android:textColor="#ffffff"
+                                            android:gravity="center"
+                                            android:layout_weight="1"/>
+
+                                        <TextView
+                                            android:id="@+id/textView7"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="1000公里"
+                                            android:textColor="@color/object_color"
+                                            android:gravity="center"
+                                            android:layout_weight="1"/>
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/main_border"
+
+                                        >
+                                        <TextView
+                                            android:id="@+id/textView3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="瑜伽:"
+                                            android:textColor="#ffffff"
+                                            android:gravity="center"
+                                            android:layout_weight="1"/>
+
+                                        <TextView
+                                            android:id="@+id/textView8"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="23小时59分59秒"
+                                            android:textColor="@color/object_color"
+                                            android:layout_marginRight="2dp"
+                                            android:gravity="center"
+                                            android:layout_weight="1"
+                                            android:textSize="11sp"
+                                            />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/main_border">
+                                        <TextView
+                                            android:id="@+id/textView5"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="深蹲:"
+                                            android:textColor="#ffffff"
+                                            android:layout_weight="1"
+                                            android:gravity="center"/>
+
+                                        <TextView
+                                            android:id="@+id/textView10"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="1000次"
+                                            android:textColor="@color/object_color"
+                                            android:layout_weight="1"
+                                            android:gravity="center"/>
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/main_border">
+
+                                        <TextView
+                                            android:id="@+id/textView4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="仰臥起坐:"
+                                            android:textColor="#ffffff"
+                                            android:gravity="center"
+                                            android:layout_weight="1"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/textView9"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:text="1000次"
+                                            android:textColor="@color/object_color"
+                                            android:gravity="center"
+                                            android:layout_weight="1"/>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+
+                    </RelativeLayout>
+
+
 
                 </LinearLayout>
 
 
 
-                <!--更新-->
 
 
 
@@ -330,7 +358,8 @@
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/menu_navigation"
         android:layout_gravity="start"
-        app:itemTextColor="@color/colorPrimary">
+        app:itemTextColor="#1e2b3d"
+        app:itemIconTint="#1e2b3d">
 
     </android.support.design.widget.NavigationView>
 

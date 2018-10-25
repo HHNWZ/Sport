@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -46,7 +47,7 @@ public class PhotoBlog extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef, PostsRef,LikesRef,userDataBase;
-    private FloatingActionButton activity_photo_blog_float_action_button;
+
 
     String currentUserID;
     Boolean LikeChecker=false;
@@ -73,11 +74,11 @@ public class PhotoBlog extends AppCompatActivity {
         getSupportActionBar().setTitle("運動經驗交流");
 
         userDataBase=FirebaseDatabase.getInstance().getReference().child("Users");
-        activity_photo_blog_float_action_button=(FloatingActionButton)findViewById(R.id.activity_photo_blog_float_action_button);
+
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        mToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         postList = (RecyclerView) findViewById(R.id.all_users_post_list);
         postList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PhotoBlog.this,LinearLayoutManager.VERTICAL,true);
@@ -86,13 +87,7 @@ public class PhotoBlog extends AppCompatActivity {
 
         DisplayAllUsersPosts();
 
-        activity_photo_blog_float_action_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SendUserToPostActivity();
-            }
 
-        });
 
 
 
@@ -306,6 +301,30 @@ public class PhotoBlog extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private final Toolbar.OnMenuItemClickListener onMenuItemClickListener;
+
+    {
+        onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.post:
+                        SendUserToPostActivity();
+                        break;
+
+                }
+                return true;
+            }
+        };
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
+        getMenuInflater().inflate(R.menu.photoblog_menu, menu);
+        return true;
+    }
+
 
 
 

@@ -673,6 +673,7 @@ public class ChatActivity extends AppCompatActivity {
             Intent intent = new Intent(ChatActivity.this,MainActivityFireBase.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            finish();
             startActivity(intent);
         }
 

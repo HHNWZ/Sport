@@ -78,6 +78,14 @@ public class TaskProfile extends AppCompatActivity {
         GlobalVariable friend_activity=(GlobalVariable)getApplicationContext();
         Task_req=friend_activity.getTask_reg();
         Task=friend_activity.getTask();
+        Log.i("friend_activity_getTask",""+Task);
+        if(Task.equals("MainActivity")){
+            Log.i("當Task_req和Task==null","haha");
+            Task_req=getIntent().getStringExtra("Task_req");
+            friend_activity.setTask_reg(Task_req);
+            Task=getIntent().getStringExtra("Task");
+            friend_activity.setTask(Task);
+        }
         Log.i("Task_reg是",Task_req);
         Log.i("Task是",Task);
         Log.i("朋友id",friend_id);
@@ -633,6 +641,7 @@ public class TaskProfile extends AppCompatActivity {
             Intent intent = new Intent(TaskProfile.this,FriendActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            finish();
             startActivity(intent);
         }
 

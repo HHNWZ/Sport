@@ -626,6 +626,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
             Intent intent = new Intent(CrunchesDareFriendProfile.this,CrunchesDareFriend.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            finish();
             startActivity(intent);
         }
 

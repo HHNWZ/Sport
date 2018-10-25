@@ -11,102 +11,112 @@
         android:id="@+id/activity_control_die_toolbar"
         layout="@layout/app_bar_layout" />
 
+
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@+id/activity_control_die_toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal"
-            tools:ignore="DisableBaselineAlignment">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:background="@drawable/post_border"
-                android:padding="5dp"
-                android:backgroundTint="@color/object_color"
-                tools:ignore="NestedWeights">
+                android:background="@drawable/main_border"
+                android:padding="5dp">
+
                 <Button
                     android:id="@+id/common_food_calories_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@mipmap/food"
                     android:shadowColor="#86A89B"
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="5"
                     android:textSize="24sp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:background="@drawable/post_border"
+                android:background="@drawable/main_border"
                 android:padding="5dp">
+
                 <Button
                     android:id="@+id/monitoring_tool_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@mipmap/tool"
                     android:shadowColor="#A8A319"
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="5"
                     android:textSize="24sp" />
-            </RelativeLayout>
-        </LinearLayout>
 
+            </LinearLayout>
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="horizontal"
-            tools:ignore="DisableBaselineAlignment">
+            android:layout_weight="1">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:background="@drawable/post_border"
-                android:padding="5dp"
-                android:backgroundTint="@color/object_color"
-                tools:ignore="NestedWeights">
+                android:background="@drawable/main_border"
+                android:padding="5dp">
                 <Button
                     android:id="@+id/go_to_diary_calendar_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@mipmap/diary"
                     android:shadowColor="#86A89B"
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="5"
                     android:textSize="24sp" />
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:background="@drawable/post_border"
-                android:padding="5dp"
-                android:backgroundTint="@color/object_color">
+                android:background="@drawable/main_border"
+                android:padding="5dp">
 
                 <Button
                     android:id="@+id/ingestion_advice_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:background="@mipmap/device"
                     android:shadowColor="#86A89B"
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="5"
                     android:textSize="24sp" />
-            </RelativeLayout>
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
+
+
+
     </LinearLayout>
 
 </RelativeLayout>

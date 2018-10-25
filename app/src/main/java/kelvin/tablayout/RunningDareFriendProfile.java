@@ -713,6 +713,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
             Intent intent = new Intent(RunningDareFriendProfile.this,RunningDareFriend.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            finish();
             startActivity(intent);
         }
 

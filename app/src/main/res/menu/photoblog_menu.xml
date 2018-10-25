@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="kelvin.tablayout.PhotoBlog">
+
+    <item android:id="@+id/post"
+        android:title="@string/post"
+        android:orderInCategory="80"
+        android:icon="@drawable/pencil"
+        app:showAsAction="ifRoom"
+        />
+</menu>

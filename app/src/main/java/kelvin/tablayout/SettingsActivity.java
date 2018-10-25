@@ -136,17 +136,13 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                     if(dataSnapshot.hasChild("name")){
                         String name = dataSnapshot.child("name").getValue().toString();
+                        setting_username_text_view.setText(name);
                     }
                     if(dataSnapshot.hasChild("status")){
                         String country = dataSnapshot.child("status").getValue().toString();
                         settingCountryName.setText(country);
                     }
-                    if(dataSnapshot.hasChild("username")){
-                        String username= dataSnapshot.child("username").getValue().toString();
-                        setting_username_text_view.setText(username);
 
-
-                    }
                     else {
                         Toast.makeText(SettingsActivity.this,"有資料缺少",Toast.LENGTH_SHORT).show();
                     }
@@ -281,11 +277,11 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void SaveAccountSetupInformation()
     {
-        String username = setting_username_text_view.getText().toString();
+        String name = setting_username_text_view.getText().toString();
         String country = settingCountryName.getText().toString();
         //Log.i("壓縮圖片",setting_data.getImage_uri());
 
-        if(TextUtils.isEmpty(username))
+        if(TextUtils.isEmpty(name))
         {
             Toast.makeText(this, "請輸入用戶名", Toast.LENGTH_SHORT).show();
         }
@@ -302,7 +298,7 @@ public class SettingsActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(true);
 
             HashMap userMap = new HashMap();
-            userMap.put("username", username);
+            userMap.put("name", name);
             userMap.put("status", country);
             mUserDatabase.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override

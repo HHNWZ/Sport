@@ -8,6 +8,7 @@ public class GlobalVariable  extends Application {
     private String Task_reg;
     private String keyDay;
     private String KeyHour;
+    private String chat_id_send;
     //修改 變數字串
     public void setWord(String word){
         this.Word = word;
@@ -47,5 +48,13 @@ public class GlobalVariable  extends Application {
 
     public void setKeyHour(String keyHour) {
         KeyHour = keyHour;
+    }
+
+    public String getChat_id_send() {
+        return chat_id_send;
+    }
+
+    public void setChat_id_send(String chat_id_send) {
+        this.chat_id_send = chat_id_send;
     }
 }

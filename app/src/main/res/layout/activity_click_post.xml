@@ -29,11 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/click_post_image"
         android:layout_marginLeft="10dp"
-        android:text="你的帖文內容"
+        android:text="帖文內容"
         android:textColor="@android:color/white"
         android:textSize="16sp" />
 
-    <TextView
+    <EditText
         android:id="@+id/click_post_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

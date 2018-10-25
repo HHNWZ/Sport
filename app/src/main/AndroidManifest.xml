@@ -18,9 +18,9 @@
     <application
         android:name="kelvin.tablayout.GlobalVariable"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@drawable/logo2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data

@@ -147,7 +147,7 @@ public class BmiCalculation extends Fragment {
                         || "".equals(edi2.getText().toString())) )//避免沒有輸入參數
                 {
                     ImageView qwerbb=(ImageView)view.findViewById((R.id.imageView4));
-                    qwerbb.setVisibility(View.INVISIBLE);
+                    qwerbb.setVisibility(View.GONE);
                     ImageView qwerb1 =(ImageView)view.findViewById((R.id.imageView15));
                     ImageView qwerb2 =(ImageView)view.findViewById((R.id.imageView16));
                     ImageView qwerb3 =(ImageView)view.findViewById((R.id.imageView17));
@@ -163,6 +163,8 @@ public class BmiCalculation extends Fragment {
                     h=h/100;h=h*h;a2=w/h;a3=nf.format(w/h);//int->string
                     AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                     dialog.setTitle("檢測報告");
+                    tviw12.setVisibility(View.VISIBLE);
+                    tviw39.setVisibility(View.VISIBLE);
                     tviw39.setText(a3);
                     tviw39.setTextColor(0xFF00FF00);
                     if(a2<18.5)
@@ -181,11 +183,11 @@ public class BmiCalculation extends Fragment {
                         tviw34.setTextColor(0xFF000000);
                         tviw35.setTextColor(0xFF000000);
                         qwerb1.setVisibility(View.VISIBLE);
-                        qwerb2.setVisibility(View.INVISIBLE);
-                        qwerb3.setVisibility(View.INVISIBLE);
-                        qwerb4.setVisibility(View.INVISIBLE);
-                        qwerb5.setVisibility(View.INVISIBLE);
-                        qwerb6.setVisibility(View.INVISIBLE);
+                        qwerb2.setVisibility(View.GONE);
+                        qwerb3.setVisibility(View.GONE);
+                        qwerb4.setVisibility(View.GONE);
+                        qwerb5.setVisibility(View.GONE);
+                        qwerb6.setVisibility(View.GONE);
 
 
                         exercise_plan_database.child("crunches").setValue(10);
@@ -212,11 +214,11 @@ public class BmiCalculation extends Fragment {
                         tviw34.setTextColor(0xFF000000);
                         tviw35.setTextColor(0xFF000000);
                         qwerb2.setVisibility(View.VISIBLE);
-                        qwerb1.setVisibility(View.INVISIBLE);
-                        qwerb3.setVisibility(View.INVISIBLE);
-                        qwerb4.setVisibility(View.INVISIBLE);
-                        qwerb5.setVisibility(View.INVISIBLE);
-                        qwerb6.setVisibility(View.INVISIBLE);
+                        qwerb1.setVisibility(View.GONE);
+                        qwerb3.setVisibility(View.GONE);
+                        qwerb4.setVisibility(View.GONE);
+                        qwerb5.setVisibility(View.GONE);
+                        qwerb6.setVisibility(View.GONE);
                         HashMap<String,Integer> exercise_plan_data =new HashMap<>();
 
                         exercise_plan_database.child("crunches").setValue(20);
@@ -262,11 +264,11 @@ public class BmiCalculation extends Fragment {
                         tviw34.setTextColor(0xFF000000);
                         tviw35.setTextColor(0xFF000000);
                         qwerb3.setVisibility(View.VISIBLE);
-                        qwerb1.setVisibility(View.INVISIBLE);
-                        qwerb2.setVisibility(View.INVISIBLE);
-                        qwerb4.setVisibility(View.INVISIBLE);
-                        qwerb5.setVisibility(View.INVISIBLE);
-                        qwerb6.setVisibility(View.INVISIBLE);
+                        qwerb1.setVisibility(View.GONE);
+                        qwerb2.setVisibility(View.GONE);
+                        qwerb4.setVisibility(View.GONE);
+                        qwerb5.setVisibility(View.GONE);
+                        qwerb6.setVisibility(View.GONE);
 
                     }
                     else if (27 <=a2 && a2 < 30)
@@ -304,11 +306,11 @@ public class BmiCalculation extends Fragment {
                         tviw34.setTextColor(0xFF000000);
                         tviw35.setTextColor(0xFF000000);
                         qwerb4.setVisibility(View.VISIBLE);
-                        qwerb1.setVisibility(View.INVISIBLE);
-                        qwerb2.setVisibility(View.INVISIBLE);
-                        qwerb3.setVisibility(View.INVISIBLE);
-                        qwerb5.setVisibility(View.INVISIBLE);
-                        qwerb6.setVisibility(View.INVISIBLE);
+                        qwerb1.setVisibility(View.GONE);
+                        qwerb2.setVisibility(View.GONE);
+                        qwerb3.setVisibility(View.GONE);
+                        qwerb5.setVisibility(View.GONE);
+                        qwerb6.setVisibility(View.GONE);
 
                     }
                     else if (30 <= a2 && a2 < 35)
@@ -348,11 +350,11 @@ public class BmiCalculation extends Fragment {
                         tviw29.setTextColor(0xFF000000);
                         tviw35.setTextColor(0xFF000000);
                         qwerb5.setVisibility(View.VISIBLE);
-                        qwerb1.setVisibility(View.INVISIBLE);
-                        qwerb2.setVisibility(View.INVISIBLE);
-                        qwerb3.setVisibility(View.INVISIBLE);
-                        qwerb4.setVisibility(View.INVISIBLE);
-                        qwerb6.setVisibility(View.INVISIBLE);
+                        qwerb1.setVisibility(View.GONE);
+                        qwerb2.setVisibility(View.GONE);
+                        qwerb3.setVisibility(View.GONE);
+                        qwerb4.setVisibility(View.GONE);
+                        qwerb6.setVisibility(View.GONE);
 
                     }
                     else if (a2 >= 35)
@@ -392,11 +394,11 @@ public class BmiCalculation extends Fragment {
                         tviw34.setTextColor(0xFF000000);
                         tviw29.setTextColor(0xFF000000);
                         qwerb6.setVisibility(View.VISIBLE);
-                        qwerb1.setVisibility(View.INVISIBLE);
-                        qwerb2.setVisibility(View.INVISIBLE);
-                        qwerb3.setVisibility(View.INVISIBLE);
-                        qwerb4.setVisibility(View.INVISIBLE);
-                        qwerb5.setVisibility(View.INVISIBLE);
+                        qwerb1.setVisibility(View.GONE);
+                        qwerb2.setVisibility(View.GONE);
+                        qwerb3.setVisibility(View.GONE);
+                        qwerb4.setVisibility(View.GONE);
+                        qwerb5.setVisibility(View.GONE);
 
                     }
 

@@ -31,7 +31,7 @@ import com.squareup.picasso.Picasso;
 public class ClickPostActivity extends AppCompatActivity {
 
     private ImageView PostImage;
-    private TextView PostDescription;
+    private EditText PostDescription;
     private Button DeletePostButton,EditPostButton;
     private DatabaseReference ClickPostRef;
     private String PostKey , currentUserID,databaseUserID,description,image;
@@ -56,7 +56,7 @@ public class ClickPostActivity extends AppCompatActivity {
         currentUserID=mAuth.getCurrentUser().getUid();
 
         PostImage=(ImageView)findViewById(R.id.click_post_image);
-        PostDescription=(TextView)findViewById(R.id.click_post_description);
+        PostDescription=(EditText)findViewById(R.id.click_post_description);
         DeletePostButton=(Button)findViewById(R.id.delete_post_button);
         EditPostButton=(Button)findViewById(R.id.edit_post_button);
 
@@ -90,7 +90,8 @@ public class ClickPostActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            EditPostButton(description);
+                            ClickPostRef.child("description").setValue(PostDescription.getText().toString());
+                            Toast.makeText(ClickPostActivity.this,"帖文更新成功",Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -110,34 +111,7 @@ public class ClickPostActivity extends AppCompatActivity {
         });
     }
 
-    private void EditPostButton(String description) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(ClickPostActivity.this);
-        builder.setTitle("修改帖文:");
-
-        final EditText inputField = new EditText(ClickPostActivity.this);
-        inputField.setText(description);
-        builder.setView(inputField);
-
-        builder.setPositiveButton("更新", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ClickPostRef.child("description").setValue(inputField.getText().toString());
-                Toast.makeText(ClickPostActivity.this,"帖文更新成功",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        Dialog dialog=builder.create();
-        dialog.show();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.rgb(255,255,255)));
-    }
 
     private void DeleteCurrentPost() {
 
@@ -165,5 +139,14 @@ public class ClickPostActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent( ClickPostActivity.this,PhotoBlog.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        finish();
+        startActivity(intent);
     }
 }
