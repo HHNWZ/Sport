@@ -33,7 +33,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/walkingbackground"
                     android:layout_weight="2"
                     app:civ_border_color="@color/object_color"
@@ -97,7 +97,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/runningbackground"
                     android:layout_weight="2"
                     app:civ_border_color="@color/object_color"
@@ -162,7 +162,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/yogabackground"
                     android:layout_weight="2"
                     app:civ_border_color="@color/object_color"
@@ -181,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/yoga_exercise_plan1"
-                        android:text="依據你的BMI值你v"
+                        android:text="依據你的BMI值你"
                         android:layout_weight="1"
                         android:textColor="@color/text_color"/>
                     <TextView
@@ -227,7 +227,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/suagatsbackground"
                     android:layout_weight="2"
                     app:civ_border_color="@color/object_color"
@@ -291,7 +291,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@drawable/crunchesbackground"
                     android:layout_weight="2"
                     app:civ_border_color="@color/object_color"

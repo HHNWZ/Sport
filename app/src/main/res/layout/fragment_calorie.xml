@@ -4,239 +4,360 @@
     android:layout_height="match_parent"
     tools:context="kelvin.tablayout.Calorie">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
+        android:orientation="vertical"
         android:background="@color/colorPrimary">
 
-        <!-- TODO: Update blank fragment layout -->
-
-
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="265dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/textView22"
-            android:layout_marginEnd="7dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButtonboy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/radioGroup"
-                android:layout_alignTop="@+id/radioGroup"
-                android:layout_weight="1"
-                android:text="男生"
-                android:textColor="@color/text_color"
-                android:buttonTint="@color/object_color"/>
-
-            <RadioButton
-                android:id="@+id/radioButtongirl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/textView26"
-                android:layout_alignTop="@+id/radioGroup"
-                android:layout_weight="1"
-                android:text="女生"
-                android:textColor="@color/text_color"
-                android:buttonTint="@color/object_color"/>
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/calorie_toolbar"
-            android:layout_marginTop="30dp"
-            android:layout_toStartOf="@+id/radioGroup"
-            android:text="性別:"
-            android:textColor="@color/text_color"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView22"
-            android:layout_below="@+id/radioGroup"
-            android:layout_marginTop="29dp"
-            android:text="年齡:"
-            android:textColor="@color/text_color"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView24"
-            android:layout_below="@+id/editText3"
-            android:layout_marginTop="13dp"
-            android:text="體重:"
-            android:textColor="@color/text_color"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView26"
-            android:layout_below="@+id/editText4"
-            android:layout_marginTop="15dp"
-            android:text="身高:"
-            android:textColor="@color/text_color"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textView24"
-            android:layout_marginEnd="17dp"
-            android:layout_toStartOf="@+id/button19"
-            android:background="@drawable/bg_edittext"
-            android:gravity="center"
-            android:inputType="number"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColorHint="#AAAAAA"
-            android:textSize="20dp" />
-
-        <EditText
-            android:id="@+id/editText4"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/editText3"
-            android:layout_alignTop="@+id/textView26"
-            android:background="@drawable/bg_edittext"
-            android:gravity="center"
-            android:inputType="number"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColorHint="#AAAAAA"
-            android:textSize="20dp" /><![CDATA[" />
-
-    ]]>
-
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/editText4"
-            android:layout_alignTop="@+id/textView25"
-            android:background="@drawable/bg_edittext"
-            android:gravity="center"
-            android:inputType="number"
-            android:padding="5dip"
-            android:singleLine="true"
-            android:textColorHint="#AAAAAA"
-            android:textSize="20dp" />
-
-        <Button
-            android:id="@+id/button19"
-            android:layout_width="wrap_content"
-            android:layout_height="148dp"
-            android:layout_alignBottom="@+id/editText5"
-            android:layout_alignEnd="@+id/radioGroup"
-            android:layout_marginEnd="11dp"
-            android:text="確定送出"
-            android:background="@color/object_color"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:id="@+id/textView41"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView40"
-            android:layout_alignBottom="@+id/textView40"
-            android:layout_alignEnd="@+id/radioGroup2"
-            android:background="@drawable/bg_view_border"
-            android:gravity="center"
-            android:text="卡路里"
-            android:textSize="20dp" />
-
-        <TextView
-            android:id="@+id/textView40"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView25"
-            android:layout_below="@+id/editText5"
-            android:layout_marginTop="20dp"
-            android:text="活動程度:"
-            android:textSize="20dp"
-            android:textColor="@color/text_color"/>
-
-        <RadioGroup
-            android:id="@+id/radioGroup2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView40"
-            android:layout_below="@+id/textView41"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/radioGroup2"
-                android:layout_alignTop="@+id/radioGroup2"
-                android:layout_weight="1"
-                android:text="輕度工作"
-                android:buttonTint="@color/object_color"
-                android:textColor="@color/text_color"/>
-
-            <RadioButton
-                android:id="@+id/radioButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="中度工作"
-                android:buttonTint="@color/object_color"
-                android:textColor="@color/text_color"/>
-
-            <RadioButton
-                android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="重度工作"
-                android:buttonTint="@color/object_color"
-                android:textColor="@color/text_color"/>
-
-        </RadioGroup>
-
-        <ScrollView
-            android:id="@+id/scrollView3"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/radioGroup2"
-            android:layout_marginTop="7dp">
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:background="@drawable/main_border">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:padding="5dp"
+                android:background="@drawable/main_border">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/radioGroup2"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/activity" />
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="性別:"
+                    android:textColor="@color/object_color"
+                    android:textSize="30sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/main_border">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonboy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="男生"
+                        android:padding="5dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/text_color"
+                        android:buttonTint="@color/object_color"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButtongirl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:text="女生"
+                        android:padding="5dp"
+                        android:textColor="@color/text_color"
+                        android:buttonTint="@color/object_color"/>
+                </RadioGroup>
+
             </LinearLayout>
-        </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/textView24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="年齡:"
+                            android:textColor="@color/text_color"
+                            android:textSize="30sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/textView26"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="體重:"
+                            android:textColor="@color/text_color"
+                            android:textSize="30sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="身高:"
+                            android:textColor="@color/text_color"
+                            android:textSize="30sp" />
+
+
+                    </LinearLayout>
 
 
 
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center">
+
+                        <EditText
+                            android:id="@+id/editText3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="請输入..."
+                            android:background="@drawable/bg_edittext"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColorHint="#AAAAAA"
+                            android:textSize="30sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center">
+
+                        <EditText
+                            android:id="@+id/editText4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="請输入..."
+                            android:background="@drawable/bg_edittext"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColorHint="#AAAAAA"
+                            android:textSize="30sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center">
+
+                        <EditText
+                            android:id="@+id/editText5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="請输入..."
+                            android:background="@drawable/bg_edittext"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColorHint="#AAAAAA"
+                            android:textSize="30sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:background="@drawable/main_border"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/button19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="確定送出"
+                        android:background="@drawable/button"
+                        android:backgroundTint="@color/object_color"
+                        android:textColor="@color/text_color"
+                        android:textSize="30sp"
+                        android:padding="10dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/main_border">
+
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="活動程度:"
+                        android:textSize="30sp"
+                        android:textColor="@color/text_color"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@drawable/main_border">
+
+                    <TextView
+                        android:id="@+id/textView41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="卡路里"
+                        android:textSize="30sp"
+                        android:textColor="@color/object_color"/>
+                    <TextView
+                        android:id="@+id/textCalorie_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="大卡"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="30sp"
+                        android:textColor="@color/object_color"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:gravity="center">
+
+                <RadioGroup
+                    android:id="@+id/radioGroup2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/main_border">
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="輕度工作"
+                        android:padding="10dp"
+
+                        android:buttonTint="@color/object_color"
+                        android:textColor="@color/text_color"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="中度工作"
+
+                        android:padding="10dp"
+
+                        android:buttonTint="@color/object_color"
+                        android:textColor="@color/text_color"/>
+
+                    <RadioButton
+                        android:id="@+id/radioButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="重度工作"
+
+                        android:padding="10dp"
+
+                        android:buttonTint="@color/object_color"
+                        android:textColor="@color/text_color"/>
+
+                </RadioGroup>
 
 
-    </RelativeLayout>
 
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:background="@drawable/main_border"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:src="@drawable/activity" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 </FrameLayout>
