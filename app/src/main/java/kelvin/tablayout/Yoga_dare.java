@@ -288,6 +288,15 @@ public class Yoga_dare extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Yoga_dare.this, Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        finish();
+        startActivity(intent);
+    }
+
     private final Toolbar.OnMenuItemClickListener onMenuItemClickListener;
 
     {

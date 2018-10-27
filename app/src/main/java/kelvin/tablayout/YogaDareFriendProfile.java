@@ -60,6 +60,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("我在YDFP的","onCreate");
         setContentView(R.layout.activity_yoga_dare_friend_profile);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -137,24 +138,6 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setText("取消瑜伽挑戰請求");
                             }
                             mProgressDialog.dismiss();
-                        }else {
-                            YogaDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.hasChild(friend_id)){
-                                        dare_state="瑜伽挑戰執行中";
-                                        mProfileSendReqBtn.setText("刪除瑜伽挑戰");
-                                    }
-
-                                    mProgressDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    mProgressDialog.dismiss();
-                                }
-                            });
                         }
                     }
 
@@ -163,6 +146,9 @@ public class YogaDareFriendProfile extends AppCompatActivity {
 
                     }
                 });
+
+
+
 
             }
 
@@ -173,6 +159,27 @@ public class YogaDareFriendProfile extends AppCompatActivity {
 
             }
         });
+
+        YogaDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("id")){
+                    dare_state="瑜伽挑戰執行中";
+                    Log.i("我在這裡","gogo");
+                    mProfileSendReqBtn.setText("已接受瑜伽挑戰");
+                    mProfileSendReqBtn.setEnabled(false);
+                }
+
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+
+            }
+        });
+
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -363,7 +370,8 @@ public class YogaDareFriendProfile extends AppCompatActivity {
 
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "瑜伽挑戰執行中";
-                                mProfileSendReqBtn.setText("刪除瑜伽挑戰");
+                                mProfileSendReqBtn.setText("已接受瑜伽挑戰");
+                                mProfileSendReqBtn.setEnabled(false);
                             } else {
 
                                 String error = databaseError.getMessage();
@@ -637,5 +645,42 @@ public class YogaDareFriendProfile extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.i("我在YDFP的","onStart");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在YDFP的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
+        Log.i("我在YDFP的","onRestart");
+
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在YDFP的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在YDFP的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在YDFP的","onDestroy");
     }
 }

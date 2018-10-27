@@ -964,9 +964,7 @@ public class  MainActivity extends AppCompatActivity
     }
     @Override
     public void onBackPressed() {
-        if (!BackHandlerHelper.handleBackPress(this)) {
-            super.onBackPressed();
-        }
+        finish();
     }
 
     @Override
@@ -1143,8 +1141,7 @@ public class  MainActivity extends AppCompatActivity
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("YogaDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), YogaDareFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
 
@@ -1173,5 +1170,7 @@ public class  MainActivity extends AppCompatActivity
     public void onNothingSelected() {
         Log.i("PieChart", "nothing selected");
     }
+
+
 
 }

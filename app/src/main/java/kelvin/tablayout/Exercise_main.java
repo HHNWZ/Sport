@@ -82,6 +82,15 @@ public class Exercise_main extends AppCompatActivity
     }
 
     @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Exercise_main.this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        finish();
+        startActivity(intent);
+    }
+
+    @Override
     protected void onStart(){
         super.onStart();
         Log.i("我在Exercise_main的","onStart");
