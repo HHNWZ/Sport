@@ -82,6 +82,7 @@ public class Running_task extends AppCompatActivity {
     private Data running_data=new Data();
     public CircularSeekBar running_task_seek_bar;
     private String myID;
+    private TextView running_susses_text_view_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +125,11 @@ public class Running_task extends AppCompatActivity {
         running_task_friend_point=(TextView)findViewById(R.id.running_task_friend_point);
         confirm_running_task_button=(Button)findViewById(R.id.confirm_running_task_button);
 
+        running_susses_text_view_data=(TextView)findViewById(R.id.running_susses_text_view_data);
+
         running_task_data.setText("100");
         running_task_seek_bar.setMax(Float.parseFloat(running_task_data.getText().toString()));
+        running_susses_text_view_data.setVisibility(View.GONE);
         running_susses_text_view.setText("目前沒有朋友");
 
         running_task_myDatabase.addValueEventListener(new ValueEventListener() {
@@ -189,6 +193,7 @@ public class Running_task extends AppCompatActivity {
                                         Log.i("仰臥起坐共同任務運動量", "" + running_task_data_double);
                                         if (running_progress >= running_task_data_double) {
                                             running_task_seek_bar.setProgress((float) running_task_data_double);
+                                            running_susses_text_view_data.setVisibility(View.GONE);
                                             running_susses_text_view.setText("你們已經完成");
                                             running_task_friend_point.setVisibility(View.VISIBLE);
                                             confirm_running_task_button.setVisibility(View.VISIBLE);
@@ -204,6 +209,7 @@ public class Running_task extends AppCompatActivity {
                                                     running_task_Database.child("Task_running").child(myID).child("id").removeValue();
                                                     running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point() + 10);
                                                     running_susses_text_view.setText("目前沒有朋友");
+                                                    running_susses_text_view_data.setVisibility(View.GONE);
                                                     running_task_seek_bar.setProgress((0));
                                                     running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_running_task_button.setVisibility(View.INVISIBLE);
@@ -211,6 +217,8 @@ public class Running_task extends AppCompatActivity {
                                             });
                                         } else if (running_progress < running_task_data_double) {
                                             running_susses_text_view.setText("你們目前完成\n        " + running_progress + "公里");
+                                            running_susses_text_view_data.setVisibility(View.VISIBLE);
+                                            running_susses_text_view_data.setText(running_progress +"公里");
                                             running_task_seek_bar.setProgress((float) running_progress);
                                         }
 

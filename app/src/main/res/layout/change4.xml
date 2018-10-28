@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kelvin.tablayout.Running_task"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
 
     <include
@@ -125,7 +123,7 @@
                     android:src="@drawable/default_avatar"
                     android:layout_weight="1"
                     app:civ_border_color="@color/object_color"
-                    android:layout_gravity="center"
+                    android:layout_gravity=""
                     />
 
                 <TextView
@@ -187,7 +185,7 @@
                     android:gravity="bottom"
                     android:text="你們獲得"
                     android:textColor="@color/text_color"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:visibility="visible" />
 
                 <TextView
@@ -196,7 +194,7 @@
                     android:id="@+id/running_task_friend_point1"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="25sp"
+                    android:textSize="30sp"
                     android:text="10點"
                     android:textColor="@color/text_color"/>
 
@@ -206,7 +204,7 @@
                     android:id="@+id/running_task_friend_point2"
                     android:layout_weight="1"
                     android:gravity="top"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     android:textColor="@color/text_color"
                     android:text="friendpoint"/>
 

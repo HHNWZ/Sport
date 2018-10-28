@@ -61,7 +61,7 @@
                                     android:id="@+id/button_of_walking_monitoring"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/walkingbackground" />
+                                    android:background="@drawable/walk_main" />
 
 
                                 <!--跑步-->
@@ -69,28 +69,28 @@
                                     android:id="@+id/button_of_running_monitoring"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/runningbackground" />
+                                    android:background="@drawable/run_main" />
 
                                 <!--瑜伽-->
                                 <Button
                                     android:id="@+id/button_of_yoga_monitoring"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/yogabackground" />
+                                    android:background="@drawable/yoga_main" />
 
                                 <!--深蹲-->
                                 <Button
                                     android:id="@+id/button_of_squats_monitoring"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/suagatsbackground" />
+                                    android:background="@drawable/squat_main" />
 
                                 <!--仰臥起坐-->
                                 <Button
                                     android:id="@+id/button_of_crunches_monitoring"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:background="@drawable/crunchesbackground" />
+                                    android:background="@drawable/situp_main" />
 
 
                             </com.nelson.circlelayout.CircleLayout>
