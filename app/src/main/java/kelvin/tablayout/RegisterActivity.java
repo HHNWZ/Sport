@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -100,11 +101,16 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String display_name = register_email_edit_text.getText().toString();//使用者名稱
-                String email = register_password_edit_text.toString();//使用者電郵
-                String password = register_name_edit_text.getText().toString();//使用者密碼
-
+                String  email= register_email_edit_text.getText().toString();//使用者名稱
+                String password = register_password_edit_text.getText().toString();//使用者電郵
+                String display_name = register_name_edit_text.getText().toString();//使用者密碼
+                Log.i("名字1",display_name);
+                Log.i("電郵1",email);
+                Log.i("密碼1",password);
                 if(!TextUtils.isEmpty(display_name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
+                    Log.i("名字",display_name);
+                    Log.i("電郵",email);
+                    Log.i("密碼",password);
 
                     mRegProgress.setTitle("註冊用戶");
                     mRegProgress.setMessage("我們正在創建您的帳戶，請稍候");
@@ -112,7 +118,11 @@ public class RegisterActivity extends AppCompatActivity {
                     mRegProgress.show();
 
                     register_user(display_name, email, password);
-
+                }else {
+                    Toast.makeText(RegisterActivity.this,"請重新輸入",Toast.LENGTH_LONG).show();
+                    register_email_edit_text.setText("");
+                    register_password_edit_text.setText("");
+                    register_name_edit_text.setText("");
                 }
 
 
@@ -133,6 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                    Log.i("註冊成功",current_user.getUid());
                     String uid = current_user.getUid();
 
                     UserDataBase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
@@ -369,7 +380,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
 
                     mRegProgress.hide();
-                    Toast.makeText(RegisterActivity.this, "無法登錄。請檢查表單然後重試。", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "無法註冊。請檢查表單然後重試。", Toast.LENGTH_LONG).show();
 
                 }
 
