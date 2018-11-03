@@ -33,7 +33,7 @@
                 android:id="@+id/duration_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/duration_time"
+                android:src="@drawable/yoga_white"
                 app:civ_border_color="@color/object_color"
                 app:civ_border_width="5dp"
                 android:layout_gravity="center"

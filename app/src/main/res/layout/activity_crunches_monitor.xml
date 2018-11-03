@@ -31,7 +31,7 @@
                 android:id="@+id/count_image"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
-                android:src="@drawable/suagatsbackground"
+                android:src="@drawable/situp_white"
                 app:civ_border_color="@color/object_color"
                 app:civ_border_width="5dp"
                 android:layout_gravity="center"

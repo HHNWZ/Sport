@@ -137,8 +137,7 @@
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:text="最低記錄"
-                               android:textColor="@color/text_color"
-                               android:textSize="15dp" />
+                               android:textColor="@color/text_color" />
 
 
                        </LinearLayout>
@@ -174,8 +173,7 @@
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:text="公里"
-                               android:textColor="@color/text_color"
-                               android:textSize="15dp" />
+                               android:textColor="@color/text_color" />
 
                        </LinearLayout>
 
@@ -201,7 +199,7 @@
                                android:layout_height="wrap_content"
                                android:text="今日記錄"
                                android:textColor="@color/text_color"
-                               android:textSize="15dp"
+
                                />
 
                        </LinearLayout>
@@ -240,7 +238,7 @@
                                android:layout_height="wrap_content"
                                android:text="公里"
                                android:textColor="@color/text_color"
-                               android:textSize="15dp" />
+                               />
 
                        </LinearLayout>
 
@@ -265,8 +263,7 @@
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:text="最高記錄"
-                               android:textColor="@color/text_color"
-                               android:textSize="15dp" />
+                               android:textColor="@color/text_color" />
 
                        </LinearLayout>
                        <LinearLayout
@@ -301,7 +298,7 @@
                                android:layout_height="wrap_content"
                                android:text="公里"
                                android:textColor="@color/text_color"
-                               android:textSize="15dp" />
+                                />
 
 
                        </LinearLayout>
