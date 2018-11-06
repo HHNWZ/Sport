@@ -59,6 +59,9 @@ public class Walking_task extends AppCompatActivity {
 
     private TextView walking_task_text_and;
     private TextView walking_task_friend_point;
+    private TextView walking_task_friend_point1;
+    private TextView walking_task_friend_point2;
+    private TextView walking_susses_text_view_data;
     private Button confirm_walking_task_button;
 
     private static String walking_task_my_name;
@@ -105,6 +108,7 @@ public class Walking_task extends AppCompatActivity {
         walking_task_seek_bar=(CircularSeekBar)findViewById(R.id.walking_task_seek_bar);
         walking_task_data=(TextView)findViewById(R.id.walking_task_data);
         walking_susses_text_view=(TextView)findViewById(R.id.walking_susses_text_view);
+        walking_susses_text_view_data=(TextView)findViewById(R.id.walking_susses_text_view_data);
 
         my_walking_task_image=(CircleImageView)findViewById(R.id.my_walking_task_image);
         my_walking_task_name=(TextView)findViewById(R.id.my_walking_task_name);
@@ -117,6 +121,8 @@ public class Walking_task extends AppCompatActivity {
 
         walking_task_text_and=(TextView)findViewById(R.id.walking_task_text_and);
         walking_task_friend_point=(TextView)findViewById(R.id.walking_task_friend_point);
+        walking_task_friend_point1=(TextView)findViewById(R.id.walking_task_friend_point1);
+        walking_task_friend_point2=(TextView)findViewById(R.id.walking_task_friend_point2);
         confirm_walking_task_button=(Button)findViewById(R.id.confirm_walking_task_button);
 
         walking_task_data.setText("100");
@@ -186,6 +192,8 @@ public class Walking_task extends AppCompatActivity {
                                             walking_task_seek_bar.setProgress((float) walking_task_data_double);
                                             walking_susses_text_view.setText("你們已經完成");
                                             walking_task_friend_point.setVisibility(View.VISIBLE);
+                                            walking_task_friend_point1.setVisibility(View.VISIBLE);
+                                            walking_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_walking_task_button.setVisibility(View.VISIBLE);
                                             confirm_walking_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -196,16 +204,21 @@ public class Walking_task extends AppCompatActivity {
                                                     friend_walking_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_walking_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     walking_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    walking_task_friend_point1.setVisibility(View.INVISIBLE);
+                                                    walking_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     walking_task_Database.child("Task_walking").child(myID).child("id").removeValue();
                                                     walking_task_friend_point_database.child("friend_point").setValue(walking_data.getMy_task_friend_point() + 10);
                                                     walking_susses_text_view.setText("目前沒有朋友");
+                                                    walking_susses_text_view_data.setVisibility(View.GONE);
                                                     walking_task_seek_bar.setProgress((0));
                                                     walking_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_walking_task_button.setVisibility(View.INVISIBLE);
                                                 }
                                             });
                                         } else if (walking_progress < walking_task_data_double) {
-                                            walking_susses_text_view.setText("你們目前完成\n        " + walking_progress + "次");
+                                            walking_susses_text_view.setText("你們目前完成");
+                                            walking_susses_text_view_data.setVisibility(View.VISIBLE);
+                                            walking_susses_text_view_data.setText(walking_progress+"次");
                                             walking_task_seek_bar.setProgress((float) walking_progress);
                                         }
 
@@ -250,6 +263,13 @@ public class Walking_task extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Walking_task.this,Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
     private Toolbar.OnMenuItemClickListener onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
         @Override

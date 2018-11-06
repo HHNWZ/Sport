@@ -138,23 +138,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                             }
                             mProgressDialog.dismiss();
                         }else {
-                            CrunchesDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.hasChild(friend_id)){
-                                        dare_state="仰臥起坐挑戰執行中";
-                                        mProfileSendReqBtn.setText("刪除仰臥起坐挑戰");
-                                    }
-
-                                    mProgressDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    mProgressDialog.dismiss();
-                                }
-                            });
+                            
                         }
                     }
 
@@ -171,6 +155,23 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        CrunchesDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("id")){
+                    dare_state="仰臥起坐挑戰執行中";
+                    mProfileSendReqBtn.setText("已接受仰臥起坐挑戰");
+                }
+
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                mProgressDialog.dismiss();
             }
         });
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -363,7 +364,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
 
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "仰臥起坐挑戰執行中";
-                                mProfileSendReqBtn.setText("刪除仰臥起坐挑戰");
+                                mProfileSendReqBtn.setText("已接受仰臥起坐挑戰");
                             } else {
 
                                 String error = databaseError.getMessage();
@@ -631,6 +632,14 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(CrunchesDareFriendProfile.this,CrunchesDareFriend.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        finish();
+        startActivity(intent);
     }
     
 }

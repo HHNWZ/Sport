@@ -62,6 +62,9 @@ public class Running_task extends AppCompatActivity {
 
     private TextView running_task_text_and;
     private TextView running_task_friend_point;
+    private TextView running_task_friend_point1;
+    private TextView running_task_friend_point2;
+
     private Button confirm_running_task_button;
 
     private static String running_task_my_name;
@@ -123,6 +126,8 @@ public class Running_task extends AppCompatActivity {
 
         running_task_text_and=(TextView)findViewById(R.id.running_task_text_and);
         running_task_friend_point=(TextView)findViewById(R.id.running_task_friend_point);
+        running_task_friend_point1=(TextView)findViewById(R.id.running_task_friend_point1);
+        running_task_friend_point2=(TextView)findViewById(R.id.running_task_friend_point2);
         confirm_running_task_button=(Button)findViewById(R.id.confirm_running_task_button);
 
         running_susses_text_view_data=(TextView)findViewById(R.id.running_susses_text_view_data);
@@ -196,6 +201,8 @@ public class Running_task extends AppCompatActivity {
                                             running_susses_text_view_data.setVisibility(View.GONE);
                                             running_susses_text_view.setText("你們已經完成");
                                             running_task_friend_point.setVisibility(View.VISIBLE);
+                                            running_task_friend_point1.setVisibility(View.VISIBLE);
+                                            running_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_running_task_button.setVisibility(View.VISIBLE);
                                             confirm_running_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -206,6 +213,8 @@ public class Running_task extends AppCompatActivity {
                                                     friend_running_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_running_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     running_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    running_task_friend_point1.setVisibility(View.INVISIBLE);
+                                                    running_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     running_task_Database.child("Task_running").child(myID).child("id").removeValue();
                                                     running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point() + 10);
                                                     running_susses_text_view.setText("目前沒有朋友");
@@ -216,7 +225,7 @@ public class Running_task extends AppCompatActivity {
                                                 }
                                             });
                                         } else if (running_progress < running_task_data_double) {
-                                            running_susses_text_view.setText("你們目前完成\n        " + running_progress + "公里");
+                                            running_susses_text_view.setText("你們目前完成");
                                             running_susses_text_view_data.setVisibility(View.VISIBLE);
                                             running_susses_text_view_data.setText(running_progress +"公里");
                                             running_task_seek_bar.setProgress((float) running_progress);
@@ -263,6 +272,13 @@ public class Running_task extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Running_task.this,Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 
     private Toolbar.OnMenuItemClickListener onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {

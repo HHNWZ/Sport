@@ -137,23 +137,7 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
                             }
                             mProgressDialog.dismiss();
                         }else {
-                            WalkingDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.hasChild(friend_id)){
-                                        dare_state="步行挑戰執行中";
-                                        mProfileSendReqBtn.setText("刪除步行挑戰");
-                                    }
-
-                                    mProgressDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    mProgressDialog.dismiss();
-                                }
-                            });
+                            
                         }
                     }
 
@@ -170,6 +154,23 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        WalkingDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("id")){
+                    dare_state="步行挑戰執行中";
+                    mProfileSendReqBtn.setText("以接受步行挑戰");
+                }
+
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                mProgressDialog.dismiss();
             }
         });
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -362,7 +363,7 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
 
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "步行挑戰執行中";
-                                mProfileSendReqBtn.setText("刪除步行挑戰");
+                                mProfileSendReqBtn.setText("以接受步行挑戰");
                             } else {
 
                                 String error = databaseError.getMessage();
@@ -717,5 +718,14 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(WalkingDareFriendProfile.this,WalkingDareFriend.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        finish();
+        startActivity(intent);
     }
 }

@@ -203,13 +203,15 @@ public class Squats_dare extends AppCompatActivity {
 
                                             if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是朋友");
                                             }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                             }
-                                            confirm_dare.setVisibility(View.VISIBLE);
+
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -296,6 +298,14 @@ public class Squats_dare extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 
     private final Toolbar.OnMenuItemClickListener onMenuItemClickListener;

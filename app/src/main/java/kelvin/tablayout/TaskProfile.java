@@ -154,23 +154,7 @@ public class TaskProfile extends AppCompatActivity {
                             }
                             mProgressDialog.dismiss();
                         }else {
-                            taskDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.hasChild(friend_id)){
-                                        task_state="共同任務執行中";
-                                        mProfileSendReqBtn.setText("刪除共同任務");
-                                    }
 
-                                    mProgressDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                    mProgressDialog.dismiss();
-                                }
-                            });
                         }
                     }
 
@@ -187,6 +171,23 @@ public class TaskProfile extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        taskDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("id")){
+                    task_state="共同任務執行中";
+                    mProfileSendReqBtn.setText("以接受共同任務");
+                }
+
+                mProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+                mProgressDialog.dismiss();
             }
         });
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -378,7 +379,7 @@ public class TaskProfile extends AppCompatActivity {
 
                                 mProfileSendReqBtn.setEnabled(true);
                                 task_state = "共同任務執行中";
-                                mProfileSendReqBtn.setText("刪除共同任務");
+                                mProfileSendReqBtn.setText("已接受共同任務");
                             } else {
 
                                 String error = databaseError.getMessage();
@@ -646,6 +647,14 @@ public class TaskProfile extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(TaskProfile.this,FriendActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        finish();
+        startActivity(intent);
     }
 
     @Override

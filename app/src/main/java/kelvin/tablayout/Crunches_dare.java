@@ -198,13 +198,15 @@ public class Crunches_dare extends AppCompatActivity {
 
                                             if (crunches_dare_data.getCrunches_dare_myFinishTime() > FriendFinishTimeLong&&crunches_dare_data.getCrunches_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是朋友");
                                             } else if (crunches_dare_data.getCrunches_dare_myFinishTime() < FriendFinishTimeLong&&crunches_dare_data.getCrunches_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint", "" + crunches_dare_data.getCrunches_dare_friend_point());
                                             }
-                                            confirm_dare.setVisibility(View.VISIBLE);
+
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -293,7 +295,13 @@ public class Crunches_dare extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Crunches_dare.this, Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
     private final Toolbar.OnMenuItemClickListener onMenuItemClickListener;
 
     {

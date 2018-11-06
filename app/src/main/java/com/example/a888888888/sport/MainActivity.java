@@ -1088,54 +1088,47 @@ public class  MainActivity extends AppCompatActivity
                     Log.i("OneSignalExample", "customkey set with value: " + activityToBeOpened);
                     Log.i("我在這裡","Chat_send_id："+user_id_send);
                     Intent intent = new Intent(getContext(), ProfileActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("user_id",user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
 
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("ChatActivity")){
                     Intent intent = new Intent(getContext(), ChatActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("user_id",user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("TaskProfile")) {
                     Intent intent = new Intent(getContext(), TaskProfile.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("user_id", user_id_send);
                     intent.putExtra("Task_req", task_req);
                     intent.putExtra("Task", task);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("CrunchesDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), CrunchesDareFriendProfile.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("RunningDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), RunningDareFriendProfile.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("SquatsDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), SquatsDareFriendProfile.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("WalkingDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), WalkingDareFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("YogaDareFriendProfile")) {

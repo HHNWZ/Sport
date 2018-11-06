@@ -47,6 +47,7 @@ public class Crunches_task extends AppCompatActivity {
 
     private TextView crunches_task_data;
     private TextView crunches_susses_text_view;
+    private TextView crunches_susses_text_view_data;
 
     private CircleImageView my_crunches_task_image;
     private TextView my_crunches_task_name;
@@ -59,6 +60,8 @@ public class Crunches_task extends AppCompatActivity {
 
     private TextView crunches_task_text_and;
     private TextView crunches_task_friend_point;
+    private TextView crunches_task_friend_point1;
+    private TextView crunches_task_friend_point2;
     private Button confirm_crunches_task_button;
 
     private static String crunches_task_my_name;
@@ -112,6 +115,7 @@ public class Crunches_task extends AppCompatActivity {
         crunches_task_seek_bar=(CircularSeekBar)findViewById(R.id.crunches_task_seek_bar);
         crunches_task_data=(TextView)findViewById(R.id.crunches_task_data);
         crunches_susses_text_view=(TextView)findViewById(R.id.crunches_susses_text_view);
+        crunches_susses_text_view_data=(TextView)findViewById(R.id.crunches_susses_text_view_data);
 
         my_crunches_task_image=(CircleImageView)findViewById(R.id.my_crunches_task_image);
         my_crunches_task_name=(TextView)findViewById(R.id.my_crunches_task_name);
@@ -124,6 +128,8 @@ public class Crunches_task extends AppCompatActivity {
 
         crunches_task_text_and=(TextView)findViewById(R.id.crunches_task_text_and);
         crunches_task_friend_point=(TextView)findViewById(R.id.crunches_task_friend_point);
+        crunches_task_friend_point1=(TextView)findViewById(R.id.crunches_task_friend_point1);
+        crunches_task_friend_point2=(TextView)findViewById(R.id.crunches_task_friend_point2);
         confirm_crunches_task_button=(Button)findViewById(R.id.confirm_crunches_task_button);
 
         crunches_task_data.setText("100");
@@ -193,6 +199,8 @@ public class Crunches_task extends AppCompatActivity {
                                             crunches_task_seek_bar.setProgress((float) crunches_task_data_int);
                                             crunches_susses_text_view.setText("你們已經完成");
                                             crunches_task_friend_point.setVisibility(View.VISIBLE);
+                                            crunches_task_friend_point1.setVisibility(View.VISIBLE);
+                                            crunches_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_crunches_task_button.setVisibility(View.VISIBLE);
                                             confirm_crunches_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -203,16 +211,21 @@ public class Crunches_task extends AppCompatActivity {
                                                     friend_crunches_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_crunches_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     crunches_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    crunches_task_friend_point1.setVisibility(View.INVISIBLE);
+                                                    crunches_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     crunches_task_Database.child("Task_crunches").child(myID).child("id").removeValue();
                                                     crunches_task_friend_point_database.child("friend_point").setValue(crunches_data.getMy_task_friend_point() + 10);
                                                     crunches_susses_text_view.setText("目前沒有朋友");
+                                                    crunches_susses_text_view_data.setVisibility(View.GONE);
                                                     crunches_task_seek_bar.setProgress((0));
                                                     crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_crunches_task_button.setVisibility(View.INVISIBLE);
                                                 }
                                             });
                                         } else if (crunches_progress < crunches_task_data_int) {
-                                            crunches_susses_text_view.setText("你們目前完成\n        " + crunches_progress + "次");
+                                            crunches_susses_text_view.setText("你們目前完成");
+                                            crunches_susses_text_view_data.setVisibility(View.VISIBLE);
+                                            crunches_susses_text_view_data.setText(+crunches_progress+"次");
                                             crunches_task_seek_bar.setProgress((float) crunches_progress);
                                         }
 
@@ -255,6 +268,13 @@ public class Crunches_task extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Crunches_task.this,Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
     private Toolbar.OnMenuItemClickListener onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
         @Override

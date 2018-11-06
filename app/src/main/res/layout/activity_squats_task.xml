@@ -18,100 +18,115 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/squats_task_half1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:gravity="center">
+            android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/data_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
                 <me.tankery.lib.circularseekbar.CircularSeekBar
                     android:id="@+id/squats_task_seek_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
                     app:cs_circle_color="@color/text_color"
                     app:cs_circle_progress_color="@color/object_color"
                     app:cs_circle_stroke_width="8dp"
                     app:cs_circle_style="round"
+                    android:layout_centerHorizontal="true"
                     app:cs_disable_pointer="true"
                     app:cs_end_angle="430"
                     app:cs_maintain_equal_circle="true"
                     app:cs_start_angle="105" />
 
-                <TextView
-                    android:id="@+id/squats_task_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:text="深蹲"
-                    android:textColor="@color/text_color"
-                    android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/squats_task_data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/squats_task_title"
-                    android:layout_centerHorizontal="true"
-                    android:text="0"
-                    android:textColor="@color/text_color"
-                    android:textSize="24sp" />
+                    <TextView
+                        android:id="@+id/squats_task_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="深蹲"
+                        android:layout_weight="1"
+                        android:textColor="@color/text_color"
+                        android:textSize="25sp"
+                        android:gravity="bottom"/>
+                    <TextView
+                        android:id="@+id/squats_task_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="0"
+                        android:textColor="@color/text_color"
+                        android:textSize="25sp"
+                        android:gravity="center"/>
 
-                <TextView
-                    android:id="@+id/squats_task_unit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/squats_task_data"
-                    android:layout_centerHorizontal="true"
-                    android:text="次"
-                    android:textColor="@color/text_color"
-                    android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/squats_task_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="次數"
+                        android:textColor="@color/text_color"
+                        android:textSize="25sp"
+                        android:gravity="top"/>
 
-                <TextView
-                    android:id="@+id/squats_susses_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/squats_task_unit"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
-                    android:text="當前完成"
-                    android:textColor="@color/text_color" />
+                    <TextView
+                        android:id="@+id/squats_susses_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="當前完成"
+                        android:textColor="@color/text_color"
+                        android:textSize="25sp"
+                        android:gravity="top"/>
+
+                    <TextView
+                        android:id="@+id/squats_susses_text_view_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="12公里"
+                        android:visibility="gone"
+                        android:textColor="@color/text_color"
+                        android:textSize="25sp"
+                        android:gravity="top"/>
+
+                </LinearLayout>
 
             </RelativeLayout>
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/my_task"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/post_border"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:background="@drawable/main_border"
+                android:gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/my_squats_task_image"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="5dp"
-                    android:src="@drawable/default_avatar" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/default_avatar"
+                    android:layout_weight="1"
+                    app:civ_border_color="@color/object_color"
+                    android:layout_gravity=""
+                    />
 
                 <TextView
                     android:id="@+id/my_squats_task_name"
@@ -119,7 +134,9 @@
                     android:layout_height="wrap_content"
                     android:text="我的名字"
                     android:textColor="@color/text_color"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"/>
 
 
                 <TextView
@@ -127,8 +144,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="次數"
-                    android:textColor="@color/text_color" />
+                    android:text="距離"
+                    android:textColor="@color/text_color"
+                    android:layout_weight="1"
+                    android:gravity="center"/>
 
                 <TextView
                     android:id="@+id/my_squats_task_finish_count_data"
@@ -136,24 +155,25 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="0"
-                    android:textColor="@color/text_color" />
+                    android:textColor="@color/text_color"
+                    android:layout_weight="1"/>
+
             </LinearLayout>
-
-
             <LinearLayout
-                android:id="@+id/squats_due1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_weight="1"
-                android:background="@drawable/post_border"
-                android:orientation="vertical">
+                android:background="@drawable/main_border"
+                android:gravity="center"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/squats_task_text_and"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:text="AND"
                     android:textColor="@color/text_color"
                     android:textSize="50sp"
@@ -161,67 +181,88 @@
 
                 <TextView
                     android:id="@+id/squats_task_friend_point"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="你們獲得"
+                    android:textColor="@color/text_color"
+                    android:textSize="30sp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/squats_task_friend_point1"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="你們獲得\n10點\nfriendpoint"
+                    android:textSize="30sp"
+                    android:text="10點"
+                    android:visibility="invisible"
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/squats_task_friend_point2"
+                    android:layout_weight="1"
+                    android:gravity="top"
+                    android:textSize="25sp"
+                    android:visibility="invisible"
                     android:textColor="@color/text_color"
-                    android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:text="friendpoint"/>
 
                 <Button
                     android:id="@+id/confirm_squats_task_button"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/button"
                     android:backgroundTint="@color/object_color"
                     android:text="確認"
                     android:textColor="@color/text_color"
                     android:visibility="invisible"
-                    android:layout_margin="10dp"/>
+                    />
 
             </LinearLayout>
-
-
             <LinearLayout
-                android:id="@+id/friend_task"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@drawable/post_border"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_weight="1"
+                android:background="@drawable/main_border"
+                android:gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/friend_squats_task_image"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/default_avatar"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/friend_squats_task_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:gravity="bottom"
                     android:text="朋友的名字"
                     android:textColor="@color/text_color"
                     android:textSize="20sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/friend_squats_task_finish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="次數"
+                    android:text="距離"
+                    android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/text_color"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/friend_squats_task_finish_count_data"
@@ -230,7 +271,9 @@
                     android:text="0"
                     android:textSize="20sp"
                     android:textColor="@color/text_color"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    android:layout_weight="1"/>
+
             </LinearLayout>
 
         </LinearLayout>

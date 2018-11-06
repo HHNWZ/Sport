@@ -121,7 +121,7 @@ public class Running_dare extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
-        exercise_week_data.setText("3");
+        exercise_week_data.setText("100");
         myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -196,13 +196,15 @@ public class Running_dare extends AppCompatActivity {
 
                                             if (running_dare_data.getRunning_dare_myFinishTime() > FriendFinishTimeLong&&running_dare_data.getRunning_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是朋友");
                                             } else if (running_dare_data.getRunning_dare_myFinishTime() < FriendFinishTimeLong&&running_dare_data.getRunning_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint", "" + running_dare_data.getRunning_dare_friend_point());
                                             }
-                                            confirm_dare.setVisibility(View.VISIBLE);
+
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -285,6 +287,14 @@ public class Running_dare extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Running_dare.this, Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 
     private final Toolbar.OnMenuItemClickListener onMenuItemClickListener;

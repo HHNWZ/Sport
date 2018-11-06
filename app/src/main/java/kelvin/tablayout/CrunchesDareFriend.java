@@ -83,6 +83,14 @@ public class CrunchesDareFriend extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(CrunchesDareFriend.this,Crunches_dare.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
