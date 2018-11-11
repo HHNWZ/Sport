@@ -134,7 +134,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String image = dataSnapshot.child("image").getValue().toString();
                 String friend_count=dataSnapshot.child("friend_count").getValue().toString();
 
-                //mProfileFriendsCount.setText("朋友數量:"+friend_count);
+
                 mProfileName.setText(display_name);
                 mProfileStatus.setText(status);
 
@@ -216,6 +216,22 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        countFriendDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(user_id)){
+                    Log.i("朋友數量",""+dataSnapshot.child(user_id).getChildrenCount());
+                    mProfileFriendsCount.setText("朋友數量"+dataSnapshot.child(user_id).getChildrenCount()+"人");
+                }else {
+                    mProfileFriendsCount.setText("朋友數量0人");
+                }
             }
 
             @Override
