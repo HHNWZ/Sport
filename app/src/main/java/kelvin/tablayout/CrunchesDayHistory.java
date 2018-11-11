@@ -55,6 +55,13 @@ public class CrunchesDayHistory extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(CrunchesDayHistory.this,Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
     @Override
     public void onStart() {

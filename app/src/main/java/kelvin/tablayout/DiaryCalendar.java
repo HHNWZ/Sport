@@ -559,6 +559,13 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(DiaryCalendar.this,ControlDie.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
     protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
         try {
             Thread.sleep(2000);

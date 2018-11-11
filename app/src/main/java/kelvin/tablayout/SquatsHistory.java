@@ -85,4 +85,10 @@ public class SquatsHistory extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(SquatsHistory.this,SquatsHourHistory.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 }

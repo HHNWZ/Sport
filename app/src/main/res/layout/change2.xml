@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="跑步"
+                    android:text="瑜伽"
                     android:textSize="40sp"
 
                     android:textColor="@color/text_color"/>
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/exercise_week_data"
                     android:layout_centerHorizontal="true"
-                    android:text="公里"
+                    android:text="分鐘"
                     android:textColor="@color/text_color"
 
                     android:textSize="40sp" />
@@ -97,7 +97,7 @@
                     android:layout_weight="1"
                     />
                 <TextView
-                    android:id="@+id/running_finish_time"
+                    android:id="@+id/yoga_finish_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_color"
@@ -106,7 +106,7 @@
                     android:textSize="18sp"
                     android:text="完成時間"/>
                 <TextView
-                    android:id="@+id/running_finish_time_data"
+                    android:id="@+id/yoga_finish_time_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0分0秒"
@@ -115,16 +115,16 @@
                     android:textSize="18sp"
                     android:textColor="@color/text_color"/>
                 <TextView
-                    android:id="@+id/running_finish_distance"
+                    android:id="@+id/yoga_finish_calorie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="距離"
+                    android:text="消耗的卡路里"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:textSize="18sp"
                     android:textColor="@color/text_color"/>
                 <TextView
-                    android:id="@+id/running_finish_distance_data"
+                    android:id="@+id/yoga_finish_calorie_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -202,8 +202,6 @@
                     android:text="朋友的名字"
                     android:textColor="@color/text_color"
 
-                    android:layout_below="@+id/user_single_image"
-
                     android:gravity="center"
                     android:layout_weight="1"
                     android:textSize="18sp"
@@ -233,19 +231,19 @@
                     android:textSize="18sp"
                     android:textColor="@color/text_color"/>
                 <TextView
-                    android:id="@+id/friend_running_finish_distance"
+                    android:id="@+id/friend_yoga_finish_calorie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/user_single_name"
                     android:layout_toRightOf="@+id/running_finish_time"
-                    android:text="距離"
+                    android:text="消耗的卡路里"
                     android:visibility="visible"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:textSize="18sp"
                     android:textColor="@color/text_color"/>
                 <TextView
-                    android:id="@+id/friend_running_finish_distance_data"
+                    android:id="@+id/friend_yoga_finish_calorie_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/user_single_name"

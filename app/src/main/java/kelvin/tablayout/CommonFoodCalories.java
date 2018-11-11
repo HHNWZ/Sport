@@ -49,6 +49,13 @@ public class CommonFoodCalories extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(CommonFoodCalories.this,ControlDie.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
     private void initImageBitmaps(){
 

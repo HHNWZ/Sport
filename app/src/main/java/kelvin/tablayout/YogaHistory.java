@@ -85,4 +85,9 @@ public class YogaHistory extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(YogaHistory.this,YogaHourHistory.class);
+        intent.putExtra("keyDay",day_yoga_key);
+        startActivity(intent);
+    }
 }

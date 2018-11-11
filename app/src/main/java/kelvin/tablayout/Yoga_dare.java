@@ -196,13 +196,15 @@ public class Yoga_dare extends AppCompatActivity {
 
                                             if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是朋友");
                                             } else if (yoga_dare_data.getYoga_dare_myCalorie() > FriendCalorieInt&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
+                                                confirm_dare.setVisibility(View.VISIBLE);
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint", "" + yoga_dare_data.getYoga_dare_friend_point());
                                             }
-                                            confirm_dare.setVisibility(View.VISIBLE);
+
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {

@@ -58,6 +58,12 @@ public class SquatsDayHistory extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(SquatsDayHistory.this,Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
     public void onStart() {
         super.onStart();

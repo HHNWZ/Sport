@@ -65,6 +65,12 @@ public class Walking_hour_history extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(Walking_hour_history.this,ExerciseHistory.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
     @Override
     public  void  onStart(){

@@ -24,7 +24,7 @@
                android:layout_height="wrap_content"
                android:layout_weight="1"
                android:background="@drawable/main_border"
-               android:padding="5dp"
+               android:padding="5sp"
                android:textSize="16sp"
                android:drawableTop="@drawable/alert1"
                android:text="運動記錄"
@@ -36,7 +36,7 @@
                android:layout_height="wrap_content"
                android:layout_weight="1"
                android:background="@drawable/main_border"
-               android:padding="5dp"
+               android:padding="5sp"
                android:drawableTop="@drawable/check1"
                android:text="任務執行"
                android:textSize="16sp"
@@ -48,7 +48,7 @@
                android:layout_height="wrap_content"
                android:layout_weight="1"
                android:background="@drawable/main_border"
-               android:padding="5dp"
+               android:padding="5sp"
                android:drawableTop="@drawable/play1"
                android:text="邀請朋友運動"
                android:textSize="16sp"
@@ -95,7 +95,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:orientation="horizontal"
-                   android:padding="5dp"
+                   android:padding="5sp"
                    android:background="@drawable/main_border"
                    android:layout_weight="2"
                    android:gravity="center">
@@ -106,7 +106,7 @@
                        android:layout_height="wrap_content"
                        android:text="跑步個人記錄"
                        android:textColor="@color/text_color"
-                       android:textSize="30dp"
+                       android:textSize="30sp"
                        android:textStyle="bold" />
 
                </LinearLayout>
@@ -155,7 +155,7 @@
                                android:layout_height="wrap_content"
                                android:text="0"
                                android:textColor="#73c4d9"
-                               android:textSize="40dp" />
+                               android:textSize="40sp" />
 
 
 
@@ -217,7 +217,7 @@
                                android:layout_height="wrap_content"
                                android:text="0"
                                android:textColor="#73c4d9"
-                               android:textSize="40dp" />
+                               android:textSize="40sp" />
 
 
 
@@ -280,7 +280,7 @@
                                android:layout_height="wrap_content"
                                android:text="0"
                                android:textColor="#73c4d9"
-                               android:textSize="40dp" />
+                               android:textSize="40sp" />
 
 
                        </LinearLayout>

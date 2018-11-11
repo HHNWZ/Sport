@@ -252,6 +252,11 @@ public class PostActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed(){
+        SendUserToMainActivity();
+    }
+
 
 
     private void SendUserToMainActivity()

@@ -27,7 +27,7 @@
                 android:padding="10dp">
 
                 <me.tankery.lib.circularseekbar.CircularSeekBar
-                    android:id="@+id/running_task_seek_bar"
+                    android:id="@+id/yoga_task_seek_bar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cs_circle_color="@color/text_color"
@@ -47,16 +47,16 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/running_task_title"
+                        android:id="@+id/yoga_task_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="跑步"
+                        android:text="瑜伽"
                         android:layout_weight="1"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
                         android:gravity="bottom"/>
                     <TextView
-                        android:id="@+id/running_task_data"
+                        android:id="@+id/yoga_task_data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -66,17 +66,17 @@
                         android:gravity="center"/>
 
                     <TextView
-                        android:id="@+id/running_task_unit"
+                        android:id="@+id/yoga_task_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="公里"
+                        android:text="分鐘"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
                         android:gravity="top"/>
 
                     <TextView
-                        android:id="@+id/running_susses_text_view"
+                        android:id="@+id/yoga_susses_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -86,11 +86,11 @@
                         android:gravity="top"/>
 
                     <TextView
-                        android:id="@+id/running_susses_text_view_data"
+                        android:id="@+id/yoga_susses_text_view_data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="12公里"
+                        android:text="12分鐘"
                         android:visibility="gone"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
@@ -117,7 +117,7 @@
                 android:gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/my_running_task_image"
+                    android:id="@+id/my_yoga_task_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:src="@drawable/default_avatar"
@@ -127,7 +127,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/my_running_task_name"
+                    android:id="@+id/my_yoga_task_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我的名字"
@@ -138,17 +138,17 @@
 
 
                 <TextView
-                    android:id="@+id/my_running_task_finish_count"
+                    android:id="@+id/my_yoga_task_finish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="距離"
+                    android:text="時間"
                     android:textColor="@color/text_color"
                     android:layout_weight="1"
                     android:gravity="center"/>
 
                 <TextView
-                    android:id="@+id/my_running_task_finish_count_data"
+                    android:id="@+id/my_yoga_task_finish_count_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
@@ -167,7 +167,7 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/running_task_text_and"
+                    android:id="@+id/yoga_task_text_and"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -178,7 +178,7 @@
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/running_task_friend_point"
+                    android:id="@+id/yoga_task_friend_point"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -191,7 +191,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/running_task_friend_point1"
+                    android:id="@+id/yoga_task_friend_point1"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="30sp"
@@ -201,7 +201,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/running_task_friend_point2"
+                    android:id="@+id/yoga_task_friend_point2"
                     android:layout_weight="1"
                     android:gravity="top"
                     android:textSize="25sp"
@@ -209,7 +209,7 @@
                     android:text="friendpoint"/>
 
                 <Button
-                    android:id="@+id/confirm_running_task_button"
+                    android:id="@+id/confirm_yoga_task_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -230,7 +230,7 @@
                 android:gravity="center">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/friend_running_task_image"
+                    android:id="@+id/friend_yoga_task_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginTop="5dp"
@@ -239,7 +239,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/friend_running_task_name"
+                    android:id="@+id/friend_yoga_task_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -250,10 +250,10 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/friend_running_task_finish_count"
+                    android:id="@+id/friend_yoga_task_finish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="距離"
+                    android:text="時間"
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/text_color"
@@ -261,7 +261,7 @@
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/friend_running_task_finish_count_data"
+                    android:id="@+id/friend_yoga_task_finish_count_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0"

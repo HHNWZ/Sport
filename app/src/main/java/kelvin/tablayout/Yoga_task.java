@@ -48,6 +48,7 @@ public class Yoga_task extends AppCompatActivity {
 
     private TextView yoga_task_data;
     private TextView yoga_susses_text_view;
+    private TextView yoga_susses_text_view_data;
 
     private CircleImageView my_yoga_task_image;
     private TextView my_yoga_task_name;
@@ -60,6 +61,8 @@ public class Yoga_task extends AppCompatActivity {
 
     private TextView yoga_task_text_and;
     private TextView yoga_task_friend_point;
+    private TextView yoga_task_friend_point1;
+    private TextView yoga_task_friend_point2;
     private Button confirm_yoga_task_button;
 
     private static String yoga_task_my_name;
@@ -110,6 +113,7 @@ public class Yoga_task extends AppCompatActivity {
         yoga_task_seek_bar=(CircularSeekBar)findViewById(R.id.yoga_task_seek_bar);
         yoga_task_data=(TextView)findViewById(R.id.yoga_task_data);
         yoga_susses_text_view=(TextView)findViewById(R.id.yoga_susses_text_view);
+        yoga_susses_text_view_data=(TextView)findViewById(R.id.yoga_susses_text_view_data);
 
         my_yoga_task_image=(CircleImageView)findViewById(R.id.my_yoga_task_image);
         my_yoga_task_name=(TextView)findViewById(R.id.my_yoga_task_name);
@@ -122,6 +126,8 @@ public class Yoga_task extends AppCompatActivity {
 
         yoga_task_text_and=(TextView)findViewById(R.id.yoga_task_text_and);
         yoga_task_friend_point=(TextView)findViewById(R.id.yoga_task_friend_point);
+        yoga_task_friend_point1=(TextView)findViewById(R.id.yoga_task_friend_point1);
+        yoga_task_friend_point2=(TextView)findViewById(R.id.yoga_task_friend_point2);
         confirm_yoga_task_button=(Button)findViewById(R.id.confirm_yoga_task_button);
 
         yoga_task_data.setText("20");
@@ -192,6 +198,8 @@ public class Yoga_task extends AppCompatActivity {
                                             yoga_task_seek_bar.setProgress(Float.parseFloat(yoga_task_data.getText().toString()));
                                             yoga_susses_text_view.setText("你們已經完成");
                                             yoga_task_friend_point.setVisibility(View.VISIBLE);
+                                            yoga_task_friend_point1.setVisibility(View.VISIBLE);
+                                            yoga_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_yoga_task_button.setVisibility(View.VISIBLE);
                                             confirm_yoga_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -202,16 +210,21 @@ public class Yoga_task extends AppCompatActivity {
                                                     friend_yoga_task_finish_count.setVisibility(View.INVISIBLE);
                                                     friend_yoga_task_finish_count_data.setVisibility(View.INVISIBLE);
                                                     yoga_task_friend_point.setVisibility(View.INVISIBLE);
+                                                    yoga_task_friend_point1.setVisibility(View.INVISIBLE);
+                                                    yoga_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     yoga_task_Database.child("Task_yoga").child(myID).child("id").removeValue();
                                                     yoga_task_friend_point_database.child("friend_point").setValue(yoga_data.getMy_task_friend_point() + 10);
                                                     yoga_susses_text_view.setText("目前沒有朋友");
+                                                    yoga_susses_text_view_data.setVisibility(View.GONE);
                                                     yoga_task_seek_bar.setProgress((0));
                                                     yoga_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_yoga_task_button.setVisibility(View.INVISIBLE);
                                                 }
                                             });
                                         } else if (yoga_progress < yoga_task_data_long) {
-                                            yoga_susses_text_view.setText("你們目前完成\n    " + Time.changeYogaTime(yoga_progress));
+                                            yoga_susses_text_view.setText("你們目前完成");
+                                            yoga_susses_text_view_data.setVisibility(View.VISIBLE);
+                                            yoga_susses_text_view_data.setText(Time.changeYogaTime(yoga_progress));
                                             yoga_task_seek_bar.setProgress((float) yoga_progress);
                                         }
 
@@ -254,6 +267,13 @@ public class Yoga_task extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Yoga_task.this,Exercise_main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
     }
 
     private Toolbar.OnMenuItemClickListener onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {

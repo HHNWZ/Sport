@@ -121,6 +121,12 @@ public class SquatsMonitor extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(SquatsMonitor.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
 

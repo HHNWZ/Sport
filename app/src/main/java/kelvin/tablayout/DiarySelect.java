@@ -332,6 +332,13 @@ public class DiarySelect extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(DiarySelect.this, DiaryCalendar.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+    }
 
     private void checkButtonClick(){
         Button confirm_food_note_button=(Button)findViewById(R.id.confirm_food_note_button);
