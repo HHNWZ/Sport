@@ -24,6 +24,9 @@ public class MonitoringToolPagerAdapter extends FragmentPagerAdapter {
             case 2:
                 ExercisePlanning exercisePlanning = new ExercisePlanning();
                 return exercisePlanning;
+            case 3:
+                MenustrualCycle menustrualCycle = new MenustrualCycle();
+                return menustrualCycle;
 
             default:
                 return  null;
@@ -33,7 +36,7 @@ public class MonitoringToolPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     public CharSequence getPageTitle(int position){
@@ -47,6 +50,9 @@ public class MonitoringToolPagerAdapter extends FragmentPagerAdapter {
 
             case 2:
                 return "運動方案";
+            case 3:
+                return "生理期";
+
 
 
 

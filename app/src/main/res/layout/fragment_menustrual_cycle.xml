@@ -1,0 +1,126 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="kelvin.tablayout.MenustrualCycle">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/theday_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="持續天數:"
+                android:textColor="@color/text_color"
+
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/subday"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/sub_food_component_icon" />
+
+            <EditText
+                android:id="@+id/theday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:ems="5"
+                android:gravity="center"
+                android:inputType="number"
+                android:background="@drawable/inputs"
+                android:padding="8dp"
+                android:textColor="@color/object_color"/>
+
+            <Button
+                android:id="@+id/addday"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_food_component_icon" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/thetimes_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="間隔時期:"
+                android:textColor="@color/text_color"
+
+                android:textSize="20sp"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/subtimes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/sub_food_component_icon" />
+
+            <EditText
+                android:id="@+id/thetimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:ems="5"
+                android:gravity="center"
+                android:inputType="number"
+                android:background="@drawable/inputs"
+                android:padding="8dp"
+                android:textColor="@color/object_color"/>
+
+            <Button
+                android:id="@+id/addtimes"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/add_food_component_icon" />
+        </LinearLayout>
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shownWeekCount="4"
+            app:mcv_selectionColor="#00F"
+            app:mcv_showOtherDates="all"
+            android:background="@android:color/white">
+
+        </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

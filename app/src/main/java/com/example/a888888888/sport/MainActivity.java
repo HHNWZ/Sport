@@ -605,11 +605,31 @@ public class  MainActivity extends AppCompatActivity
                             colors.add(Color.parseColor("#2c618a"));
 
                             //饼图实体 PieEntry
-                            running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
-                            walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
-                            yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
-                            squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
-                            crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
+                            if(running_week_calorie_float!=0){
+                                running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
+                            }else {
+                                running = new PieEntry(running_week_calorie_float, "");
+                            }
+                            if(walking_week_calorie_float!=0){
+                                walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
+                            }else {
+                                walking = new PieEntry(walking_week_calorie_float, "");
+                            }
+                            if(yoga_week_calorie_float!=0){
+                                yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
+                            }else {
+                                yoga = new PieEntry(yoga_week_calorie_float, "");
+                            }
+                            if(squats_week_calorie_float!=0){
+                                squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
+                            }else {
+                                squats = new PieEntry(squats_week_calorie_float, "");
+                            }
+                            if(crunches_week_calorie_float!=0){
+                                crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
+                            }else {
+                                crunches = new PieEntry(crunches_week_calorie_float, "");
+                            }
                             pieEntryList.add(running);
                             pieEntryList.add(walking);
                             pieEntryList.add(yoga);
@@ -714,11 +734,35 @@ public class  MainActivity extends AppCompatActivity
                         colors.add(Color.parseColor("#2c618a"));
 
                         //饼图实体 PieEntry
-                        running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
-                        walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
-                        yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
-                        squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
-                        crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
+                        if(running_week_calorie_float!=0){
+                            running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
+                        }else {
+                            running = new PieEntry(running_week_calorie_float, "");
+                        }
+                        if(walking_week_calorie_float!=0){
+                            walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
+                        }else {
+                            walking = new PieEntry(walking_week_calorie_float, "");
+                        }
+                        if(yoga_week_calorie_float!=0){
+                            yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
+                        }else {
+                            yoga = new PieEntry(yoga_week_calorie_float, "");
+                        }
+                        if(squats_week_calorie_float!=0){
+                            squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
+                        }else {
+                            squats = new PieEntry(squats_week_calorie_float, "");
+                        }
+                        if(crunches_week_calorie_float!=0){
+                            crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
+                        }else {
+                            crunches = new PieEntry(crunches_week_calorie_float, "");
+                        }
+
+
+
+
                         pieEntryList.add(running);
                         pieEntryList.add(walking);
                         pieEntryList.add(yoga);
