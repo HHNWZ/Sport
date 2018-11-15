@@ -174,7 +174,7 @@ public class MenustrualCycle extends Fragment {
     private  void setMyDate(CalendarDay date,int daysNumber,int timesNumber){
         dates.clear();
         int overMon=0;
-        ArrayList<Integer> fuck = new ArrayList<>();
+        ArrayList<Integer> ck = new ArrayList<>();
         CalendarDay dirDay=date;
         for(int i=0;i<6;i++){
             for(int j=0;j<daysNumber+timesNumber;j++){
@@ -196,18 +196,18 @@ public class MenustrualCycle extends Fragment {
                                 1
 
                         );
-                        fuck.add(dirDay.getMonth());
+                        ck.add(dirDay.getMonth());
                     }else{//跨年
                         dirDay=CalendarDay.from(
                                 dirDay.getYear()+1,
                                 1,
                                 1
-                        );fuck.add(dirDay.getMonth());
+                        );ck.add(dirDay.getMonth());
                     }
                 }
             }
         }
-        Toast.makeText(getActivity(), "IS："+fuck, Toast.LENGTH_SHORT).show();
+        
     }
 
 
