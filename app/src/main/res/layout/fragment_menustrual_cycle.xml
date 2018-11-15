@@ -36,7 +36,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/sub_food_component_icon" />
+                android:background="@drawable/sub_food_component_icon"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/theday"
@@ -57,7 +58,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/add_food_component_icon" />
+                android:background="@drawable/add_food_component_icon"
+                android:visibility="gone"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,7 +86,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/sub_food_component_icon" />
+                android:background="@drawable/sub_food_component_icon"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/thetimes"
@@ -105,7 +108,8 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/add_food_component_icon" />
+                android:background="@drawable/add_food_component_icon"
+                android:visibility="gone"/>
         </LinearLayout>
 
         <com.prolificinteractive.materialcalendarview.MaterialCalendarView

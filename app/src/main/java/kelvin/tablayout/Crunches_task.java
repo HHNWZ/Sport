@@ -202,6 +202,7 @@ public class Crunches_task extends AppCompatActivity {
                                             crunches_task_friend_point1.setVisibility(View.VISIBLE);
                                             crunches_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_crunches_task_button.setVisibility(View.VISIBLE);
+                                            crunches_susses_text_view_data.setVisibility(View.GONE);
                                             confirm_crunches_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {

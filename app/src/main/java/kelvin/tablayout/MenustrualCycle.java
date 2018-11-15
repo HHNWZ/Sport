@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,13 +61,13 @@ public class MenustrualCycle extends Fragment {
     private int cdayyear;
     private int cdaymonth;
     private int cdayday;
+    private EventDecorator mydates;
     private HashSet<CalendarDay> dates=new HashSet<>();
     private int[] DayNumOfMon={31,28,31,30,31,30,31,31,30,31,30,31};
     private OnFragmentInteractionListener mListener;
 
-    public final CalendarDay Today = CalendarDay.today();//取得今天日期
-    public CalendarDay seleDAY=Today;//選擇預設為今天
-    private EventDecorator mydates;
+
+
     public MenustrualCycle() {
         // Required empty public constructor
     }
@@ -85,6 +86,7 @@ public class MenustrualCycle extends Fragment {
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
         args.putInt(ARG_PARAM2, param2);
+        Log.i("傳值1",""+ARG_PARAM1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -180,7 +182,7 @@ public class MenustrualCycle extends Fragment {
                     dates.add(dirDay);
                 }
                 //Toast.makeText(getActivity(),"IS："+dirDay.getMonth() , Toast.LENGTH_SHORT).show();
-                if(dirDay.getDay()<DayNumOfMon[dirDay.getMonth()]){//跨日
+                if(dirDay.getDay()<DayNumOfMon[dirDay.getMonth()-1]){//跨日
                     dirDay=CalendarDay.from(
                             dirDay.getYear(),
                             dirDay.getMonth(),

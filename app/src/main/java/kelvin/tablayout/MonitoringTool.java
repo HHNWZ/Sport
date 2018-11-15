@@ -19,7 +19,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.util.ArrayList;
 
 public class MonitoringTool extends AppCompatActivity implements MenustrualCycle.OnFragmentInteractionListener{
-    int days=7;
+    int days=6;
     int times=30;
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
@@ -43,7 +43,7 @@ public class MonitoringTool extends AppCompatActivity implements MenustrualCycle
 
         monitoring_tool_tab_pager.setAdapter(monitoringToolPagerAdapter);
         monitoring_tool_tabs.setupWithViewPager(monitoring_tool_tab_pager);
-
+        restart();
     }
 
     @Override

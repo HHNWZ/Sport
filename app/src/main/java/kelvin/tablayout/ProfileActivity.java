@@ -300,7 +300,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"邀請你成為朋友"+"\"}"
@@ -386,7 +386,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"取消對你的朋友邀請"+"\"}"
@@ -482,7 +482,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的朋友邀請"+"\"}"
@@ -573,7 +573,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Uid+"\"}],"
                                             + "\"data\": {\"activityToBeOpened\":\"ProfileActivity\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"刪除和你的朋友關係"+"\"}"

@@ -132,7 +132,7 @@ public class Running_task extends AppCompatActivity {
 
         running_susses_text_view_data=(TextView)findViewById(R.id.running_susses_text_view_data);
 
-        running_task_data.setText("100");
+        running_task_data.setText("10");
         running_task_seek_bar.setMax(Float.parseFloat(running_task_data.getText().toString()));
         running_susses_text_view_data.setVisibility(View.GONE);
         running_susses_text_view.setText("目前沒有朋友");
@@ -204,6 +204,7 @@ public class Running_task extends AppCompatActivity {
                                             running_task_friend_point1.setVisibility(View.VISIBLE);
                                             running_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_running_task_button.setVisibility(View.VISIBLE);
+                                            running_susses_text_view_data.setVisibility(View.GONE);
                                             confirm_running_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {

@@ -218,6 +218,8 @@ public class Walking_dare extends AppCompatActivity {
                                                     friend_walking_finish_distance_data.setVisibility(View.INVISIBLE);
                                                     text_VS.setVisibility(View.INVISIBLE);
                                                     text_winner.setVisibility(View.INVISIBLE);
+                                                    myDatabase.child("walking_dare").child("time").setValue(0);
+                                                    myDatabase.child("walking_dare").child("distance").setValue(0);
                                                     if (walking_dare_data.getWalking_dare_myFinishTime() > FriendFinishTimeLong) {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Walking_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();

@@ -153,9 +153,9 @@
 
                         <EditText
                             android:id="@+id/editText3"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="請输入..."
+                            android:gravity="center"
                             android:background="@drawable/bg_edittext"
                             android:inputType="number"
                             android:singleLine="true"
@@ -174,9 +174,9 @@
 
                         <EditText
                             android:id="@+id/editText4"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="請输入..."
+                            android:gravity="center"
                             android:background="@drawable/bg_edittext"
                             android:inputType="number"
                             android:singleLine="true"
@@ -196,9 +196,9 @@
 
                         <EditText
                             android:id="@+id/editText5"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="請输入..."
+                            android:gravity="center"
                             android:background="@drawable/bg_edittext"
                             android:inputType="number"
                             android:singleLine="true"

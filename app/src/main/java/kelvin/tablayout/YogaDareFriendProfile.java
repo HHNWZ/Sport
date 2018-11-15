@@ -233,7 +233,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                     String strJsonBody = "{"
                                             + "\"app_id\": \"04904fc0-8d20-4c22-be79-77da6073d641\","
                                             + "\"large_icon\": \""+my_image.toString()+"\","
-                                            + "\"small_icon\": \""+R.drawable.roundaccessibilityblack24+"\","
+
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
                                             + "\"data\": {\"activityToBeOpened\":\"YogaDareFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
                                             + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送瑜伽挑戰給你"+"\"}"

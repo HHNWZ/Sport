@@ -125,7 +125,7 @@ public class Crunches_dare extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
-        exercise_week_data.setText("100");
+        exercise_week_data.setText("20");
         myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -220,6 +220,8 @@ public class Crunches_dare extends AppCompatActivity {
                                                     friend_crunches_finish_count_data.setVisibility(View.INVISIBLE);
                                                     text_VS.setVisibility(View.INVISIBLE);
                                                     text_winner.setVisibility(View.INVISIBLE);
+                                                    myDatabase.child("crunches_dare").child("time").setValue(0);
+                                                    myDatabase.child("crunches_dare").child("count").setValue(0);
                                                     if (crunches_dare_data.getCrunches_dare_myFinishTime() > FriendFinishTimeLong) {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Crunches_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();

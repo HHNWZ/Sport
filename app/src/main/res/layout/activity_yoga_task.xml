@@ -187,7 +187,7 @@
                     android:gravity="bottom"
                     android:text="你們獲得"
                     android:textColor="@color/text_color"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:visibility="invisible" />
 
                 <TextView
@@ -196,7 +196,7 @@
                     android:id="@+id/yoga_task_friend_point1"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:text="10點"
                     android:visibility="invisible"
 
@@ -208,7 +208,7 @@
                     android:id="@+id/yoga_task_friend_point2"
                     android:layout_weight="1"
                     android:gravity="top"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textColor="@color/text_color"
                     android:text="friendpoint"
                     android:visibility="invisible"/>

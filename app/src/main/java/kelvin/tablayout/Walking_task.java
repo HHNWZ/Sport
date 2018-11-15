@@ -195,6 +195,7 @@ public class Walking_task extends AppCompatActivity {
                                             walking_task_friend_point1.setVisibility(View.VISIBLE);
                                             walking_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_walking_task_button.setVisibility(View.VISIBLE);
+                                            walking_susses_text_view_data.setVisibility(View.GONE);
                                             confirm_walking_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {

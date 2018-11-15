@@ -122,7 +122,7 @@ public class Yoga_dare extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
-        exercise_week_data.setText("3");
+        exercise_week_data.setText("10");
         myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -218,6 +218,8 @@ public class Yoga_dare extends AppCompatActivity {
                                                     friend_yoga_finish_calorie_data.setVisibility(View.INVISIBLE);
                                                     text_VS.setVisibility(View.INVISIBLE);
                                                     text_winner.setVisibility(View.INVISIBLE);
+                                                    myDatabase.child("yoga_dare").child("time").setValue(0);
+                                                    myDatabase.child("yoga_dare").child("calorie").setValue(0);
                                                     if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt) {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Yoga_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();

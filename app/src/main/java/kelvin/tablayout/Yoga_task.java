@@ -130,7 +130,7 @@ public class Yoga_task extends AppCompatActivity {
         yoga_task_friend_point2=(TextView)findViewById(R.id.yoga_task_friend_point2);
         confirm_yoga_task_button=(Button)findViewById(R.id.confirm_yoga_task_button);
 
-        yoga_task_data.setText("20");
+        yoga_task_data.setText("40");
         yoga_task_seek_bar.setMax(Float.parseFloat(yoga_task_data.getText().toString()));
         yoga_susses_text_view.setText("目前沒有朋友");
 
@@ -201,6 +201,7 @@ public class Yoga_task extends AppCompatActivity {
                                             yoga_task_friend_point1.setVisibility(View.VISIBLE);
                                             yoga_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_yoga_task_button.setVisibility(View.VISIBLE);
+                                            yoga_susses_text_view_data.setVisibility(View.GONE);
                                             confirm_yoga_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
