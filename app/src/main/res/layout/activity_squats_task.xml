@@ -53,7 +53,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="深蹲"
-                        android:layout_weight="1"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
                         android:gravity="bottom"/>
@@ -61,7 +60,7 @@
                         android:id="@+id/squats_task_data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+
                         android:text="0"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
@@ -71,8 +70,8 @@
                         android:id="@+id/squats_task_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="次數"
+
+                        android:text="次"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
                         android:gravity="top"/>
@@ -81,7 +80,7 @@
                         android:id="@+id/squats_susses_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+
                         android:text="當前完成"
                         android:textColor="@color/text_color"
                         android:textSize="25sp"
@@ -91,7 +90,7 @@
                         android:id="@+id/squats_susses_text_view_data"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+
                         android:text="12公里"
                         android:visibility="gone"
                         android:textColor="@color/text_color"
@@ -125,7 +124,7 @@
                     android:src="@drawable/default_avatar"
                     android:layout_weight="1"
                     app:civ_border_color="@color/object_color"
-                    android:layout_gravity=""
+                    android:layout_gravity="center"
                     />
 
                 <TextView
@@ -144,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="距離"
+                    android:text="次數"
                     android:textColor="@color/text_color"
                     android:layout_weight="1"
                     android:gravity="center"/>
@@ -187,7 +186,7 @@
                     android:gravity="bottom"
                     android:text="你們獲得"
                     android:textColor="@color/text_color"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:visibility="invisible" />
 
                 <TextView
@@ -196,7 +195,7 @@
                     android:id="@+id/squats_task_friend_point1"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:text="10點"
                     android:visibility="invisible"
                     android:textColor="@color/text_color"/>
@@ -207,7 +206,7 @@
                     android:id="@+id/squats_task_friend_point2"
                     android:layout_weight="1"
                     android:gravity="top"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:visibility="invisible"
                     android:textColor="@color/text_color"
                     android:text="friendpoint"/>
@@ -240,7 +239,8 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/default_avatar"
                     android:visibility="invisible"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/friend_squats_task_name"
@@ -257,7 +257,7 @@
                     android:id="@+id/friend_squats_task_finish_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="距離"
+                    android:text="次數"
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textColor="@color/text_color"

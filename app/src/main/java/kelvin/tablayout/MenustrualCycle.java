@@ -187,7 +187,7 @@ public class MenustrualCycle extends Fragment {
                             dirDay.getDay()+1
                     );
                 }else{
-                    if(dirDay.getMonth()<11){//跨月
+                    if(dirDay.getMonth()<12){//跨月
                         dirDay=CalendarDay.from(
                                 dirDay.getYear(),
                                 dirDay.getMonth()+1,
@@ -198,7 +198,7 @@ public class MenustrualCycle extends Fragment {
                     }else{//跨年
                         dirDay=CalendarDay.from(
                                 dirDay.getYear()+1,
-                                0,
+                                1,
                                 1
                         );fuck.add(dirDay.getMonth());
                     }

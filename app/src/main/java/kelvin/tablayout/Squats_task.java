@@ -197,6 +197,7 @@ public class Squats_task extends AppCompatActivity {
                                             squats_task_friend_point1.setVisibility(View.VISIBLE);
                                             squats_task_friend_point2.setVisibility(View.VISIBLE);
                                             confirm_squats_task_button.setVisibility(View.VISIBLE);
+                                            squats_susses_text_view_data.setVisibility(View.GONE);
                                             confirm_squats_task_button.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -218,7 +219,7 @@ public class Squats_task extends AppCompatActivity {
                                                 }
                                             });
                                         }else if(squats_progress<squats_task_data_int){
-                                            squats_susses_text_view.setText(squats_progress+"次");
+                                            squats_susses_text_view.setText("目前完成");
                                             squats_susses_text_view_data.setVisibility(View.VISIBLE);
                                             squats_susses_text_view_data.setText(squats_progress+"次");
                                             squats_task_seek_bar.setProgress((float)squats_progress);
