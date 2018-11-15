@@ -1,7 +1,10 @@
 package kelvin.tablayout;
 
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +12,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import org.threeten.bp.DayOfWeek;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashSet;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,10 +36,10 @@ public class MenustrualCycle extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private int mParam1;
+    private int mParam2;
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
     private EditText theday;
     private EditText thetimes;
     private View view;
@@ -43,8 +57,16 @@ public class MenustrualCycle extends Fragment {
     private int adddayInt;
     private int subtimesInt;
     private int addtimesInt;
+    private int cdayyear;
+    private int cdaymonth;
+    private int cdayday;
+    private HashSet<CalendarDay> dates=new HashSet<>();
+    private int[] DayNumOfMon={31,28,31,30,31,30,31,31,30,31,30,31};
+    private OnFragmentInteractionListener mListener;
 
-
+    public final CalendarDay Today = CalendarDay.today();//取得今天日期
+    public CalendarDay seleDAY=Today;//選擇預設為今天
+    private EventDecorator mydates;
     public MenustrualCycle() {
         // Required empty public constructor
     }
@@ -58,11 +80,11 @@ public class MenustrualCycle extends Fragment {
      * @return A new instance of fragment MenustrualCycle.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenustrualCycle newInstance(String param1, String param2) {
+    public static MenustrualCycle newInstance(int param1, int param2) {
         MenustrualCycle fragment = new MenustrualCycle();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,8 +93,8 @@ public class MenustrualCycle extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
+            mParam2 = getArguments().getInt(ARG_PARAM2);
         }
     }
 
@@ -81,37 +103,146 @@ public class MenustrualCycle extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_menustrual_cycle, null);
-        theday=(EditText) view.findViewById(R.id.theday);
-        thetimes=(EditText)view.findViewById(R.id.thetimes);
-        subday=(Button)view.findViewById(R.id.subday);
-        addday=(Button)view.findViewById(R.id.addday);
-        addtimes=(Button)view.findViewById(R.id.addtimes);
-        subtimes=(Button)view.findViewById(R.id.subtimes);
-        theday.setText("7");
-        thetimes.setText("30");
-        subdayString=theday.getText().toString();
-        subdayInt=Integer.parseInt(subdayString);
-        subtimesString=thetimes.getText().toString();
-        subtimesInt=Integer.parseInt(subtimesString);
-
-        if(subtimesInt<=1){
-            subtimes.setVisibility(View.INVISIBLE);
-        }else {
-            subtimes.setVisibility(View.VISIBLE);
-        }
-        subday.setOnClickListener(new View.OnClickListener() {
+        EditText myday=view.findViewById(R.id.theday);
+        EditText mytimes=view.findViewById(R.id.thetimes);
+        myday.setText(Integer.toString(mParam1));
+        mytimes.setText(Integer.toString(mParam2));
+        Button adD=view.findViewById(R.id.addday);
+        adD.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                subdayInt=subdayInt-1;
-                theday.setText(""+subdayInt);
-                if(subdayInt<=1){
-                    subday.setVisibility(View.INVISIBLE);
-                }else {
-                    subday.setVisibility(View.VISIBLE);
+            public void onClick(View view) {
+                ((MonitoringTool)getActivity()).days++;
+                ((MonitoringTool)getActivity()).restart();
+            }
+        });
+        Button suD=view.findViewById(R.id.subday);
+        suD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mParam1>0){
+                    ((MonitoringTool)getActivity()).days--;
+                    ((MonitoringTool)getActivity()).restart();
                 }
             }
         });
+        Button adT=view.findViewById(R.id.addtimes);
+        adT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MonitoringTool)getActivity()).times++;
+                ((MonitoringTool)getActivity()).restart();
+            }
+        });
+        Button suT=view.findViewById(R.id.subtimes);
+        suT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mParam2>0){
+                    ((MonitoringTool)getActivity()).times--;
+                    ((MonitoringTool)getActivity()).restart();
+                }
+            }
+        });
+        final MaterialCalendarView materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
+        materialCalendarView.state().edit()
+                .setFirstDayOfWeek(DayOfWeek.of(Calendar.MONDAY))
+                .setMinimumDate(CalendarDay.from(2017,12,31))
+                .setMaximumDate(CalendarDay.from(2100,12,31))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
+        materialCalendarView.setDateSelected(((MonitoringTool)getActivity()).seleDAY,true);//預設選擇今天
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {//Toast.makeText(getActivity(),""+date,Toast.LENGTH_LONG).show();預設顯示日期
+                Toast.makeText(getActivity(),
+                        showTrueDate1(date),
+                        Toast.LENGTH_LONG).show();
+                ((MonitoringTool) getActivity()).myDayChanged(date);//選擇日期
+                setMyDate(date,((MonitoringTool)getActivity()).days,((MonitoringTool)getActivity()).times);
+                mydates=new EventDecorator(Color.RED,dates);
+                widget.removeDecorators();
+                widget.addDecorator(mydates);
+            }
+        });
+
         return view;
+    }
+
+    private  void setMyDate(CalendarDay date,int daysNumber,int timesNumber){
+        dates.clear();
+        int overMon=0;
+        ArrayList<Integer> fuck = new ArrayList<>();
+        CalendarDay dirDay=date;
+        for(int i=0;i<6;i++){
+            for(int j=0;j<daysNumber+timesNumber;j++){
+                if(j<daysNumber) {
+                    dates.add(dirDay);
+                }
+                //Toast.makeText(getActivity(),"IS："+dirDay.getMonth() , Toast.LENGTH_SHORT).show();
+                if(dirDay.getDay()<DayNumOfMon[dirDay.getMonth()]){//跨日
+                    dirDay=CalendarDay.from(
+                            dirDay.getYear(),
+                            dirDay.getMonth(),
+                            dirDay.getDay()+1
+                    );
+                }else{
+                    if(dirDay.getMonth()<11){//跨月
+                        dirDay=CalendarDay.from(
+                                dirDay.getYear(),
+                                dirDay.getMonth()+1,
+                                1
+
+                        );
+                        fuck.add(dirDay.getMonth());
+                    }else{//跨年
+                        dirDay=CalendarDay.from(
+                                dirDay.getYear()+1,
+                                0,
+                                1
+                        );fuck.add(dirDay.getMonth());
+                    }
+                }
+            }
+        }
+        Toast.makeText(getActivity(), "IS："+fuck, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private String showTrueDate1(CalendarDay cDay){//抓取分別的年月日
+        cdayyear=cDay.getYear();
+        cdaymonth=(cDay.getMonth()+1);
+        cdayday=cDay.getDay();
+        return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
+    }//
+
+
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(String Tag,String number) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(Tag,number);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(String Tag,String number);
     }
 
 }

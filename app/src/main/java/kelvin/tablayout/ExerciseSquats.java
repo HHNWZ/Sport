@@ -125,7 +125,7 @@ public class ExerciseSquats extends Fragment {
 
 
         button_of_task_execution=(Button)mMainView.findViewById(R.id.button_of_task_execution);
-        if(pTime.equals("四")){
+        if(pTime.equals("四")||pTime.equals("一")||pTime.equals("二")||pTime.equals("三")||pTime.equals("五")||pTime.equals("六")||pTime.equals("日")){
             button_of_task_execution.setVisibility(View.VISIBLE);
         }else{
             button_of_task_execution.setVisibility(View.INVISIBLE);

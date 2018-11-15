@@ -1,7 +1,9 @@
 package kelvin.tablayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +14,17 @@ import android.view.MenuItem;
 
 
 import com.example.a888888888.sport.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-public class MonitoringTool extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MonitoringTool extends AppCompatActivity implements MenustrualCycle.OnFragmentInteractionListener{
+    int days=7;
+    int times=30;
+    public final CalendarDay Today = CalendarDay.today();//取得今天日期
+    public CalendarDay seleDAY=Today;//選擇預設為今天
+    public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
+    public int dateID;//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,5 +64,51 @@ public class MonitoringTool extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
+    }
+    public void restart(){
+        MenustrualCycle myF=MenustrualCycle.newInstance(days,times);
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(
+                R.id.myfrag,
+                myF,
+                myF.getTag()
+        ).commit();
+    }
+    public void myDayChanged(CalendarDay mydate) {//選擇日期
+        seleDAY=mydate;//紀錄選擇日期
+    }
+    private String showTrueDate(CalendarDay cDay){
+        return cDay.getYear()+"/"+(cDay.getMonth()+1)+"/"+cDay.getDay();
+    }
+    public void readMyDATAWord(){//從檔案中讀取，若無則重設陣列
+        SharedPreferences spref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = spref.edit();
+        /*int DATAsize=spref.getAll().size();
+        if(spref.contains("EW_10")){
+        myWordList_ew.clear();
+        myWordList_cw.clear();
+        for(int i=0;i<DATAsize/3;i++){
+        addNewWord(spref.getString("EW_"+Integer.toString(i),"NO！！"),
+        spref.getString("CW_"+Integer.toString(i),"沒字！！")
+        );
+        }
+        }else{
+        resetNewWord();
+        }*/
+    }
+    public void writeNewWordtoDATA(){//將當前陣列存入檔案
+        SharedPreferences spref = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = spref.edit();
+        editor.clear();
+        /*for(int i=0;i<myWordList_ew.size();i++){
+        editor.putString("EW_"+Integer.toString(i),myWordList_ew.get(i))
+        .putString("CW_"+Integer.toString(i),myWordList_cw.get(i))
+        .commit();
+        }*/
+    }
+
+
+    public void onFragmentInteraction(String Tag, String number) {
+
     }
 }

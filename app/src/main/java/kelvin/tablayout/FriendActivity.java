@@ -87,31 +87,31 @@ public class FriendActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            if(now_date.equals("一")){
+            if(now_date.equals("八")){
                 Intent intent = new Intent(FriendActivity.this,Walking_task.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
-            if(now_date.equals("二")){
+            if(now_date.equals("九")){
                 Intent intent = new Intent(FriendActivity.this,Running_task.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
-            if(now_date.equals("三")){
+            if(now_date.equals("十")){
                 Intent intent = new Intent(FriendActivity.this,Yoga_task.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
-            if(now_date.equals("四")){
+            if(now_date.equals("四")||now_date.equals("一")||now_date.equals("二")||now_date.equals("三")||now_date.equals("五")||now_date.equals("六")||now_date.equals("日")){
                 Intent intent = new Intent(FriendActivity.this,Squats_task.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
-            if(now_date.equals("五")){
+            if(now_date.equals("十一")){
                 Intent intent = new Intent(FriendActivity.this,Crunches_task.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

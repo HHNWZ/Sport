@@ -125,7 +125,7 @@ public class ExerciseRunning extends Fragment {
         pTime=Week.getWeek(System.currentTimeMillis());
         Log.i("今天是",pTime);
         button_of_task_execution=(Button)mMainView.findViewById(R.id.button_of_task_execution);
-        if(pTime.equals("二")){
+        if(pTime.equals("九")){
             button_of_task_execution.setVisibility(View.VISIBLE);
         }else{
             button_of_task_execution.setVisibility(View.INVISIBLE);

@@ -132,7 +132,7 @@ public class ExerciseYoga extends Fragment {
 
 
         button_of_task_execution=(Button)mMainView.findViewById(R.id.button_of_task_execution);
-        if(pTime.equals("三")){
+        if(pTime.equals("十")){
             button_of_task_execution.setVisibility(View.VISIBLE);
         }else{
             button_of_task_execution.setVisibility(View.INVISIBLE);
