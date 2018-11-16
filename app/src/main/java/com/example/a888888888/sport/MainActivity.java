@@ -902,15 +902,7 @@ public class  MainActivity extends AppCompatActivity
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(true) {
-                    Over overs = Over.newInstance("param1", "param2");
-                    FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().addToBackStack(null).replace(
-                            R.id.content_main,
-                            overs,
-                            overs.getTag()
-                    ).commit();
-                }
+
 
             }
         });

@@ -57,7 +57,7 @@ public class PostActivity extends AppCompatActivity {
     private DatabaseReference UsersRef, PostsRef;
     private FirebaseAuth mAuth;
 
-    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id;
+    private String saveCurrentDate, saveCurrentTime, postRandomName, downloadUrl, current_user_id,fileName;
 
 
     @Override
@@ -161,6 +161,7 @@ public class PostActivity extends AppCompatActivity {
                 {
                     Log.i("為什麼我會在這裡",""+8);
                     downloadUrl = task.getResult().getDownloadUrl().toString();
+                    fileName=ImageUri.getLastPathSegment() + postRandomName + ".jpg";
                     Toast.makeText(PostActivity.this, "帖文圖片正處理成功", Toast.LENGTH_SHORT).show();
                     Log.i("為什麼我會在這裡",""+9);
                     SavingPostInformationToDatabase();
@@ -187,6 +188,7 @@ public class PostActivity extends AppCompatActivity {
         postsMap.put("time", saveCurrentTime);
         postsMap.put("description", Description);
         postsMap.put("postimage", downloadUrl);
+        postsMap.put("file_name",fileName);
         Log.i("為什麼我會在這裡",""+13);
         PostsRef.child(postRandomName+current_user_id).updateChildren(postsMap)
                 .addOnCompleteListener(new OnCompleteListener() {

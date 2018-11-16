@@ -46,7 +46,7 @@ public class PhotoBlog extends AppCompatActivity {
 
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef, PostsRef,LikesRef,userDataBase;
+    private DatabaseReference UsersRef, PostsRef,LikesRef,userDataBase,FileNameRef;
 
 
     String currentUserID;
@@ -67,6 +67,7 @@ public class PhotoBlog extends AppCompatActivity {
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef=FirebaseDatabase.getInstance().getReference().child("Likes");
+        FileNameRef=FirebaseDatabase.getInstance().getReference().child("Posts");
 
 
         mToolbar = (Toolbar) findViewById(R.id.activity_photo_blog_toolbar);
@@ -143,6 +144,22 @@ public class PhotoBlog extends AppCompatActivity {
 
                             }
                         });
+                        FileNameRef.child(Postkey).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.hasChild("file_name")){
+                                    String file_name=dataSnapshot.child("file_name").getValue().toString();
+                                    Log.i("圖片名稱",file_name);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
                         viewHolder.setLikeButtonStatus(Postkey);
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {

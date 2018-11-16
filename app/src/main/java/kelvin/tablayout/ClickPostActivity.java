@@ -6,9 +6,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,12 +22,16 @@ import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBar;
 import com.example.a888888888.sport.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class ClickPostActivity extends AppCompatActivity {
@@ -34,7 +40,7 @@ public class ClickPostActivity extends AppCompatActivity {
     private EditText PostDescription;
     private Button DeletePostButton,EditPostButton;
     private DatabaseReference ClickPostRef;
-    private String PostKey , currentUserID,databaseUserID,description,image;
+    private String PostKey , currentUserID,databaseUserID,description,image,file_name;
 
     private Toolbar click_post_toolbar;
     private ActionBar click_post_action_bar;
@@ -45,7 +51,7 @@ public class ClickPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_click_post);
-
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
         click_post_toolbar=(Toolbar)findViewById(R.id.click_post_toolbar);
         setSupportActionBar(click_post_toolbar);
         click_post_action_bar=getSupportActionBar();
@@ -68,6 +74,7 @@ public class ClickPostActivity extends AppCompatActivity {
         PostKey=getIntent().getExtras().get("PostKey").toString();
         ClickPostRef=FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
 
+
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -76,8 +83,10 @@ public class ClickPostActivity extends AppCompatActivity {
                     description =dataSnapshot.child("description").getValue().toString();
                     image =dataSnapshot.child("postimage").getValue().toString();
                     databaseUserID=dataSnapshot.child("uid").getValue().toString();
-
+                    file_name=dataSnapshot.child("file_name").getValue().toString();
+                    Log.i("文件名稱",file_name);
                     PostDescription.setText(description);
+                    User.setFile_name(file_name);
                     Picasso.get().load(image).into(PostImage);
 
 
@@ -108,7 +117,27 @@ public class ClickPostActivity extends AppCompatActivity {
         DeletePostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DeleteCurrentPost();
+                String delete_file_name=User.getFile_name();
+                Log.i("被刪除文件的名稱",""+delete_file_name);
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference storageRef = storage.getReference();
+                StorageReference desertRef = storageRef.child("Post Images").child(delete_file_name);
+                ClickPostRef.removeValue();
+                desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i("圖片成功刪除","haha");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Uh-oh, an error occurred!
+                    }
+                });
+
+                SendUserToMainActivity();
+                Toast.makeText(ClickPostActivity.this,"帖文已經刪除.",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -117,9 +146,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
     private void DeleteCurrentPost() {
 
-        ClickPostRef.removeValue();
-        SendUserToMainActivity();
-        Toast.makeText(this,"帖文已經刪除.",Toast.LENGTH_SHORT).show();
+
     }
 
     private void SendUserToMainActivity() {

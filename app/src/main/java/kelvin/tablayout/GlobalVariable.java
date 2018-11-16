@@ -9,6 +9,7 @@ public class GlobalVariable  extends Application {
     private String keyDay;
     private String KeyHour;
     private String chat_id_send;
+    private String file_name;
     //修改 變數字串
     public void setWord(String word){
         this.Word = word;
@@ -56,5 +57,13 @@ public class GlobalVariable  extends Application {
 
     public void setChat_id_send(String chat_id_send) {
         this.chat_id_send = chat_id_send;
+    }
+
+    public String getFile_name() {
+        return file_name;
+    }
+
+    public void setFile_name(String file_name) {
+        this.file_name = file_name;
     }
 }
