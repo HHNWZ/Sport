@@ -63,6 +63,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
         DeletePostButton.setVisibility(View.INVISIBLE);
         EditPostButton.setVisibility(View.INVISIBLE);
+        PostDescription.setVisibility(View.INVISIBLE);
 
         PostKey=getIntent().getExtras().get("PostKey").toString();
         ClickPostRef=FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
@@ -70,7 +71,7 @@ public class ClickPostActivity extends AppCompatActivity {
         ClickPostRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists())
+                if(dataSnapshot.hasChildren())
                 {
                     description =dataSnapshot.child("description").getValue().toString();
                     image =dataSnapshot.child("postimage").getValue().toString();
@@ -84,6 +85,7 @@ public class ClickPostActivity extends AppCompatActivity {
                     {
                         DeletePostButton.setVisibility(View.VISIBLE);
                         EditPostButton.setVisibility(View.VISIBLE);
+                        PostDescription.setVisibility(View.VISIBLE);
                     }
 
                     EditPostButton.setOnClickListener(new View.OnClickListener() {

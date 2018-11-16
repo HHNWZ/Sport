@@ -29,6 +29,7 @@ public class Calorie extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private  View view;
 
 
     public Calorie() {
@@ -77,7 +78,7 @@ public class Calorie extends Fragment {
         final double[] dowm20 = new double[1];
         final double[] dowm10 = new double[1];
         final int[] boygirl = {0};
-        final View view = inflater.inflate(R.layout.fragment_calorie, null);
+        view = inflater.inflate(R.layout.fragment_calorie, null);
         Button qa1=(Button)view.findViewById(R.id.button19);
         final EditText edi3=(EditText)view.findViewById(R.id.editText3);
         final EditText edi4=(EditText)view.findViewById(R.id.editText4);
