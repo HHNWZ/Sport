@@ -164,10 +164,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                 //--------------- FRIENDS LIST / REQUEST FEATURE -----
 
-                mFriendReqDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {//用自己的UID去朋友邀請資料庫查詢
+                mFriendReqDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
                         if(dataSnapshot.hasChild(user_id)){//如果有child有要邀請的朋友邀請id
 
                             String req_type = dataSnapshot.child(user_id).child("request_type").getValue().toString();
@@ -187,24 +186,20 @@ public class ProfileActivity extends AppCompatActivity {
 
                             mProgressDialog.dismiss();
                         }else{//如果沒有child有要邀請的朋友邀請id
-                            mFriendDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {//就去朋友資料庫用自己的id查詢
+                            mFriendDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-
                                     if(dataSnapshot.hasChild(user_id)){//如果有child有要邀請的朋友id
                                         mCurrent_state = "是朋友";
                                         Log.i("朋友邀請目前狀態4",mCurrent_state);
                                         mProfileSendReqBtn.setText("刪除朋友");
                                     }
                                     mProgressDialog.dismiss();
-
                                 }
 
                                 @Override
                                 public void onCancelled(DatabaseError databaseError) {
-
                                     mProgressDialog.dismiss();
-
                                 }
                             });
 
@@ -216,6 +211,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                 });
+
             }
 
             @Override
