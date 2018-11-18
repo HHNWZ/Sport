@@ -108,7 +108,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
 
                 mProfileName.setText(display_name);
                 Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
-
+                mProgressDialog.dismiss();
                 myUsersDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -123,7 +123,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                     }
                 });
                 //--------------------用自己的UID去瑜伽挑戰邀請資料庫查詢--------//
-                ReqYogaDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                ReqYogaDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(friend_id)){
@@ -137,7 +137,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 dare_state="發送請求";
                                 mProfileSendReqBtn.setText("取消瑜伽挑戰請求");
                             }
-                            mProgressDialog.dismiss();
+
                         }
                     }
 
@@ -160,7 +160,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
             }
         });
 
-        YogaDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        YogaDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("id")){
@@ -169,13 +169,10 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                     mProfileSendReqBtn.setText("已接受瑜伽挑戰");
                     mProfileSendReqBtn.setEnabled(false);
                 }
-
-                mProgressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
 
             }
         });
@@ -285,7 +282,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                             });
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -347,7 +344,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
                 //-----接收瑜伽挑戰請求---//
                 if(dare_state.equals("接收請求")){
@@ -379,7 +376,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -440,7 +437,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
 
                 }
 
@@ -467,7 +464,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                             mProfileSendReqBtn.setEnabled(true);
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -529,7 +526,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -558,7 +555,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                         }
                     }
                 });
-                AsyncTask.execute(new Runnable() {
+                /*AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -619,7 +616,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     }
-                });
+                });*/
 
             }
         });
