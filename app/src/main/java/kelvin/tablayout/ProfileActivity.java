@@ -559,7 +559,7 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                             mProfileSendReqBtn.setEnabled(true);
                         }
-                    });
+                    });///
                     /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
