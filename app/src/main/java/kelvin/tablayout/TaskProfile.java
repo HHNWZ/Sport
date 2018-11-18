@@ -123,7 +123,7 @@ public class TaskProfile extends AppCompatActivity {
 
                 mProfileName.setText(display_name);
                 Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
-
+                mProgressDialog.dismiss();
                 myUsersDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -138,9 +138,10 @@ public class TaskProfile extends AppCompatActivity {
                     }
                 });
                 //--------------------用自己的UID去共同任務邀請資料庫查詢--------//
-                taskReqDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                taskReqDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
                         if(dataSnapshot.hasChild(friend_id)){
                             String req_type=dataSnapshot.child(friend_id).child("request_type").getValue().toString();
 
@@ -152,10 +153,9 @@ public class TaskProfile extends AppCompatActivity {
                                 task_state="發送請求";
                                 mProfileSendReqBtn.setText("取消共同任務請求");
                             }
-                            mProgressDialog.dismiss();
-                        }else {
-
                         }
+
+
                     }
 
                     @Override
@@ -173,21 +173,18 @@ public class TaskProfile extends AppCompatActivity {
 
             }
         });
-        taskDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        taskDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("id")){
                     task_state="共同任務執行中";
-                    mProfileSendReqBtn.setText("以接受共同任務");
+                    mProfileSendReqBtn.setText("已接受共同任務");
                 }
-
-                mProgressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                mProgressDialog.dismiss();
             }
         });
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -295,7 +292,7 @@ public class TaskProfile extends AppCompatActivity {
                             });
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -357,7 +354,7 @@ public class TaskProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
                 //-----接收共同任務請求---//
                 if(task_state.equals("接收請求")){
@@ -387,7 +384,7 @@ public class TaskProfile extends AppCompatActivity {
                             }
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -448,7 +445,7 @@ public class TaskProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
 
                 }
 
@@ -475,7 +472,7 @@ public class TaskProfile extends AppCompatActivity {
                             mProfileSendReqBtn.setEnabled(true);
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -537,7 +534,7 @@ public class TaskProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -566,7 +563,7 @@ public class TaskProfile extends AppCompatActivity {
                         }
                     }
                 });
-                AsyncTask.execute(new Runnable() {
+                /*AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -627,7 +624,7 @@ public class TaskProfile extends AppCompatActivity {
                             }
                         }
                     }
-                });
+                });*/
 
             }
         });
