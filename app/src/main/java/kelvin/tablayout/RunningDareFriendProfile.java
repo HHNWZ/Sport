@@ -107,7 +107,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
 
                 mProfileName.setText(display_name);
                 Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
-
+                mProgressDialog.dismiss();
                 myUsersDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -122,7 +122,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                     }
                 });
                 //--------------------用自己的UID去跑步挑戰邀請資料庫查詢--------//
-                ReqRunningDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                ReqRunningDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(friend_id)){
@@ -136,7 +136,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                                 dare_state="發送請求";
                                 mProfileSendReqBtn.setText("取消跑步挑戰請求");
                             }
-                            mProgressDialog.dismiss();
+
                         }else {
 
                         }
@@ -157,21 +157,18 @@ public class RunningDareFriendProfile extends AppCompatActivity {
 
             }
         });
-        RunningDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        RunningDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="跑步挑戰執行中";
                     mProfileSendReqBtn.setText("已接受跑步挑戰");
                 }
-
-                mProgressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                mProgressDialog.dismiss();
             }
         });
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +276,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                             });
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -341,7 +338,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
                 //-----接收跑步挑戰請求---//
                 if(dare_state.equals("接收請求")){
@@ -372,7 +369,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -433,7 +430,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
 
                 }
 
@@ -460,7 +457,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                             mProfileSendReqBtn.setEnabled(true);
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -522,7 +519,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -551,7 +548,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                         }
                     }
                 });
-                AsyncTask.execute(new Runnable() {
+                /*AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -612,7 +609,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     }
-                });
+                });*/
 
             }
         });
@@ -640,7 +637,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                         }
                     }
                 });
-                AsyncTask.execute(new Runnable() {
+                /*AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -702,7 +699,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     }
-                });
+                });*/
 
             }
         });

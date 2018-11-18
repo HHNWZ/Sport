@@ -107,7 +107,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
 
                 mProfileName.setText(display_name);
                 Picasso.get().load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
-
+                mProgressDialog.dismiss();
                 myUsersDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -122,7 +122,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                     }
                 });
                 //--------------------用自己的UID去仰臥起坐挑戰邀請資料庫查詢--------//
-                ReqCrunchesDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                ReqCrunchesDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(friend_id)){
@@ -136,9 +136,9 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                 dare_state="發送請求";
                                 mProfileSendReqBtn.setText("取消仰臥起坐挑戰請求");
                             }
-                            mProgressDialog.dismiss();
+
                         }else {
-                            
+
                         }
                     }
 
@@ -157,21 +157,18 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
 
             }
         });
-        CrunchesDareDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        CrunchesDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="仰臥起坐挑戰執行中";
                     mProfileSendReqBtn.setText("已接受仰臥起坐挑戰");
                 }
-
-                mProgressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
-                mProgressDialog.dismiss();
             }
         });
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +276,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                             });
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -341,7 +338,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
                 //-----接收仰臥起坐挑戰請求---//
                 if(dare_state.equals("接收請求")){
@@ -372,7 +369,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -433,7 +430,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
 
                 }
 
@@ -460,7 +457,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                             mProfileSendReqBtn.setEnabled(true);
                         }
                     });
-                    AsyncTask.execute(new Runnable() {
+                    /*AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -522,7 +519,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                 }
                             }
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -551,7 +548,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                         }
                     }
                 });
-                AsyncTask.execute(new Runnable() {
+                /*AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         int SDK_INT = android.os.Build.VERSION.SDK_INT;
@@ -612,7 +609,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                             }
                         }
                     }
-                });
+                });*/
 
             }
         });
