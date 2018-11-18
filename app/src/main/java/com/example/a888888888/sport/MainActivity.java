@@ -825,7 +825,7 @@ public class  MainActivity extends AppCompatActivity
             textView9.setVisibility(View.INVISIBLE);
             del.setVisibility(View.INVISIBLE);
             over.setVisibility(View.INVISIBLE);
-            main_title.setText("点击左上角");
+            main_title.setText("點擊左上角");
             //mHanlder2.postDelayed(task3,5000);
 
 
