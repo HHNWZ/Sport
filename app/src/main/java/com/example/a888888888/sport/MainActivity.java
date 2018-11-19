@@ -85,6 +85,7 @@ import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
+import kelvin.tablayout.SquatsTaskFriendProfile;
 import kelvin.tablayout.Squats_dare;
 import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
@@ -1157,6 +1158,12 @@ public class  MainActivity extends AppCompatActivity
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("SquatsDareFriendProfile")) {
                     Intent intent = new Intent(getContext(), SquatsDareFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("SquatsTaskFriendProfile")) {
+                    Intent intent = new Intent(getContext(), SquatsTaskFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);

@@ -12,18 +12,22 @@ public class Time extends Application {
     private static final String formaterCalender ="yyyy年MMMd日 EEE";
     public static  String get_duration_time(long duration_milliseconds){
         String durationTime = "";
-
+        String duration_minute_str;
+        String duration_hour_str;
+        String duration_second_str;
         Calendar duration_time = Calendar.getInstance();
         duration_time.setTimeInMillis(duration_milliseconds);
         int duration_hour = duration_time.get(Calendar.HOUR);//12小时制
         int duration_minute = duration_time.get(Calendar.MINUTE);
         int duration_second = duration_time.get(Calendar.SECOND);
-
+        duration_hour_str=String.format("%02d",duration_hour);
+        duration_second_str=String.format("%02d",duration_second);
+        duration_minute_str=String.format("%02d",duration_minute);
         if(duration_milliseconds<3600000){
-            durationTime=""+duration_minute+"分鐘"+duration_second+"秒";
+            durationTime=""+duration_minute_str+"分鐘"+duration_second_str+"秒";
         }
         if(duration_milliseconds>=3600000){
-            durationTime=""+duration_hour+"時"+duration_minute+"分鐘"+duration_second+"秒";
+            durationTime=""+duration_hour_str+"時"+duration_minute_str+"分鐘"+duration_second_str+"秒";
         }
         return durationTime;
     }
@@ -46,6 +50,7 @@ public class Time extends Application {
         Calendar duration_time = Calendar.getInstance();
         duration_time.setTimeInMillis(duration_milliseconds);
         int duration_minute = duration_time.get(Calendar.MINUTE);
+
         duration_Minute=""+duration_minute;
 
         return duration_Minute;
@@ -53,11 +58,12 @@ public class Time extends Application {
 
     public static String get_duration_second(long duration_milliseconds){
         String duration_Second="";
-
+        String duration_second_str;
         Calendar duration_time = Calendar.getInstance();
         duration_time.setTimeInMillis(duration_milliseconds);
         int duration_second = duration_time.get(Calendar.SECOND);
-        duration_Second=""+duration_second;
+        duration_second_str=String.format("%02d",duration_second);
+        duration_Second=""+duration_second_str;
 
         return duration_Second;
     }
@@ -75,7 +81,7 @@ public class Time extends Application {
         int start_minute=start_calendar.get(Calendar.MINUTE);
         int start_second=start_calendar.get(Calendar.SECOND);
         String start_week=Week.getWeek(start_milliseconds);
-        startTime=""+start_year+"年"+start_month+"月"+start_day+"日 週"+start_week+" "+start_hour+"時 "+start_minute+"分鐘 "+start_second+"秒 ";
+        startTime=""+start_year+"年"+String.format("%02d",start_month)+"月"+String.format("%02d",start_day)+"日 週"+start_week+" "+String.format("%02d",start_hour)+"時 "+String.format("%02d",start_minute)+"分鐘 "+String.format("%02d",start_second)+"秒 ";
 
         return startTime;
     }
@@ -84,7 +90,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_year = start_calendar.get(Calendar.YEAR);
-        StartTimeYear=""+start_year;
+        StartTimeYear=String.format("%02d",start_year);
 
         return StartTimeYear;
     }
@@ -94,7 +100,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_month = start_calendar.get(Calendar.MONTH)+1;
-        StartTimeMonth=""+start_month;
+        StartTimeMonth=String.format("%02d",start_month);
 
         return StartTimeMonth;
     }
@@ -104,7 +110,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_day = start_calendar.get(Calendar.DAY_OF_MONTH);
-        StartTimeDay=""+start_day;
+        StartTimeDay=String.format("%02d",start_day);
 
         return StartTimeDay;
     }
@@ -114,7 +120,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_hour = start_calendar.get(Calendar.HOUR_OF_DAY);
-        StartTimeHour=""+start_hour;
+        StartTimeHour=String.format("%02d",start_hour);
 
         return StartTimeHour;
     }
@@ -124,7 +130,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_minute = start_calendar.get(Calendar.MINUTE);
-        StartTimeMinute=""+start_minute;
+        StartTimeMinute=String.format("%02d",start_minute);
 
         return StartTimeMinute;
     }
@@ -134,7 +140,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_second = start_calendar.get(Calendar.MINUTE);
-        StartTimeSecond=""+start_second;
+        StartTimeSecond=String.format("%02d",start_second);
 
         return StartTimeSecond;
     }

@@ -18,13 +18,13 @@
     <application
         android:name="kelvin.tablayout.GlobalVariable"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@drawable/logo2"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@drawable/logo2"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true">
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.exercise" />
@@ -46,9 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name="kelvin.tablayout.MainActivityFireBase" />
         <activity
             android:name="kelvin.tablayout.RegisterActivity"
@@ -130,7 +128,8 @@
         <activity android:name="kelvin.tablayout.CommonFoodCalories" />
         <activity android:name="kelvin.tablayout.IngestionAdvice" />
         <activity android:name="kelvin.tablayout.MonitoringTool" />
-
+        <activity android:name="kelvin.tablayout.SquatsTaskFriend" />
+        <activity android:name="kelvin.tablayout.SquatsTaskFriendProfile"></activity>
     </application>
 
 </manifest>

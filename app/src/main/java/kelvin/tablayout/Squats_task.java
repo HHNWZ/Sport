@@ -90,7 +90,7 @@ public class Squats_task extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squats_task);
         GlobalVariable task=(GlobalVariable)getApplicationContext();
-        task.setTask("Task_squats");
+        task.setTask("Squats_Task");
         task.setTask_reg("Task_req_squats");
         squats_task_toolbar=(Toolbar)findViewById(R.id.squats_task_toolbar);
         setSupportActionBar(squats_task_toolbar);
@@ -153,9 +153,10 @@ public class Squats_task extends AppCompatActivity {
                     Picasso.get().load(squats_task_my_image).into(my_squats_task_image);
                 }
 
-                squats_task_Database.child("Task_squats").addValueEventListener(new ValueEventListener() {
+                squats_task_Database.child("Squats_Task").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.i("12345",""+myID);
                         if(dataSnapshot.hasChild(myID)){
                             squats_task_toolbar.setOnMenuItemClickListener(null);
                             final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
@@ -209,7 +210,7 @@ public class Squats_task extends AppCompatActivity {
                                                     squats_task_friend_point.setVisibility(View.INVISIBLE);
                                                     squats_task_friend_point1.setVisibility(View.INVISIBLE);
                                                     squats_task_friend_point2.setVisibility(View.INVISIBLE);
-                                                    squats_task_Database.child("Task_squats").child(myID).child("id").removeValue();
+                                                    squats_task_Database.child("Squats_Task").child(myID).child("id").removeValue();
                                                     squats_task_friend_point_database.child("friend_point").setValue(squats_data.getMy_task_friend_point()+10);
                                                     squats_susses_text_view.setText("目前沒有朋友");
                                                     squats_susses_text_view_data.setVisibility(View.GONE);
@@ -277,9 +278,9 @@ public class Squats_task extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.task_friend:
-                    Intent intent = new Intent(Squats_task.this,FriendActivity.class);
-                    intent.putExtra("Task_req","Task_req_squats");
-                    intent.putExtra("Task","Task_squats");
+                    Intent intent = new Intent(Squats_task.this,SquatsTaskFriend.class);
+                    //intent.putExtra("Task_req","Task_req_squats");
+                    //intent.putExtra("Task","Squats_Task");
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

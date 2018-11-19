@@ -225,7 +225,7 @@ public class SquatsMonitor extends AppCompatActivity {
             squats_finish_year.setText(Time.get_finish_time_year(squats_end_time));
             squats_finish_month.setText(Time.get_finish_time_month(squats_end_time));
             squats_finish_day.setText(Time.get_finish_time_day(squats_end_time));
-            squats_finish_week_text_view.setText(Time.get_finish_week(squats_end_time));
+            squats_finish_week_text_view.setText("週"+Time.get_finish_week(squats_end_time));
             squats_finish_hour.setText(Time.get_finish_time_hour(squats_end_time));
             squats_finish_minute.setText(Time.get_finish_time_minute(squats_end_time));
             squats_finish_second.setText(Time.get_finish_time_second(squats_end_time));
