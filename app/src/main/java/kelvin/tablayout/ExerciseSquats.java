@@ -170,15 +170,16 @@ public class ExerciseSquats extends Fragment {
                 if(position==0){
                     first_image.setVisibility(View.VISIBLE);
                     first_image.setImageResource(R.drawable.goldmedal);
-                }
-                if(position==1){
+                }else if(position==1){
                     first_image.setVisibility(View.VISIBLE);
                     first_image.setImageResource(R.drawable.secondprize);
-                }
-                if(position==2){
+                }else if(position==2){
                     first_image.setVisibility(View.VISIBLE);
                     first_image.setImageResource(R.drawable.bronzemedal);
+                } else{
+                    first_image.setVisibility(View.INVISIBLE);
                 }
+                Log.i("代號",""+position);
 
             }
         };

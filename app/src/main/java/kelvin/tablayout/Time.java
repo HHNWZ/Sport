@@ -90,7 +90,7 @@ public class Time extends Application {
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
         int start_year = start_calendar.get(Calendar.YEAR);
-        StartTimeYear=String.format("%02d",start_year);
+        StartTimeYear=""+start_year;
 
         return StartTimeYear;
     }
@@ -139,7 +139,7 @@ public class Time extends Application {
         String StartTimeSecond="";
         Calendar start_calendar=Calendar.getInstance();
         start_calendar.setTimeInMillis(start_milliseconds);
-        int start_second = start_calendar.get(Calendar.MINUTE);
+        int start_second = start_calendar.get(Calendar.SECOND);
         StartTimeSecond=String.format("%02d",start_second);
 
         return StartTimeSecond;
@@ -172,7 +172,7 @@ public class Time extends Application {
         Calendar end_calendar=Calendar.getInstance();
         end_calendar.setTimeInMillis(end_milliseconds);
         int end_month = end_calendar.get(Calendar.MONTH)+1;
-        EndTimeMonth=""+end_month;
+        EndTimeMonth=String.format("%02d",end_month);
 
         return EndTimeMonth;
     }
@@ -182,7 +182,7 @@ public class Time extends Application {
         Calendar end_calendar=Calendar.getInstance();
         end_calendar.setTimeInMillis(end_milliseconds);
         int end_day = end_calendar.get(Calendar.DAY_OF_MONTH);
-        EndTimeDay=""+end_day;
+        EndTimeDay=String.format("%02d",end_day);
 
         return EndTimeDay;
     }
@@ -192,7 +192,7 @@ public class Time extends Application {
         Calendar end_calendar=Calendar.getInstance();
         end_calendar.setTimeInMillis(end_milliseconds);
         int end_hour = end_calendar.get(Calendar.HOUR_OF_DAY);
-        EndTimeHour=""+end_hour;
+        EndTimeHour=String.format("%02d",end_hour);
 
         return EndTimeHour;
     }
@@ -202,7 +202,7 @@ public class Time extends Application {
         Calendar end_calendar=Calendar.getInstance();
         end_calendar.setTimeInMillis(end_milliseconds);
         int end_minute = end_calendar.get(Calendar.MINUTE);
-        EndTimeMinute=""+end_minute;
+        EndTimeMinute=String.format("%02d",end_minute);
 
         return EndTimeMinute;
     }
@@ -211,8 +211,8 @@ public class Time extends Application {
         String EndTimeSecond="";
         Calendar end_calendar=Calendar.getInstance();
         end_calendar.setTimeInMillis(end_milliseconds);
-        int end_second = end_calendar.get(Calendar.MINUTE);
-        EndTimeSecond=""+end_second;
+        int end_second = end_calendar.get(Calendar.SECOND);
+        EndTimeSecond=String.format("%02d",end_second);
 
         return EndTimeSecond;
     }
@@ -228,7 +228,7 @@ public class Time extends Application {
         int end_minute=end_calendar.get(Calendar.MINUTE);
         int end_second=end_calendar.get(Calendar.SECOND);
         String end_week=Week.getWeek(end_milliseconds);
-        endTime=""+end_year+"年"+end_month+"月"+end_day+"日 週"+end_week+" "+end_hour+"時 "+end_minute+"分鐘 "+end_second+"秒 ";
+        endTime=""+end_year+"年"+String.format("%02d",end_month)+"月"+String.format("%02d",end_day)+"日 週"+end_week+" "+String.format("%02d",end_hour)+"時 "+String.format("%02d",end_minute)+"分鐘 "+String.format("%02d",end_second)+"秒 ";
 
         return endTime;
     }
@@ -241,7 +241,7 @@ public class Time extends Application {
         int m=date.get(Calendar.MONTH)+1;
         int d=date.get(Calendar.DAY_OF_MONTH);
         String DateWeek=Week.getWeek(Datemilliseconds);
-        Todate=""+y+"年"+m+"月"+d+"日 週"+DateWeek ;
+        Todate=""+y+"年"+String.format("%02d",m)+"月"+String.format("%02d",d)+"日 週"+DateWeek ;
         return  Todate;
     }
     public static String getToDate2(long CalendarMillisecond){
@@ -263,7 +263,7 @@ public class Time extends Application {
         int H=time.get(Calendar.HOUR_OF_DAY);
         int m=time.get(Calendar.MINUTE);
         int s=time.get(Calendar.SECOND);
-        Time=""+H+"時"+m+"分"+s+"秒";
+        Time=String.format("%02d",H)+"時"+String.format("%02d",m)+"分"+String.format("%02d",s)+"秒";
         return Time;
     }
 
@@ -275,11 +275,11 @@ public class Time extends Application {
         int yoga_minute = yoga_time.get(Calendar.MINUTE);
         int yoga_second = yoga_time.get(Calendar.SECOND);
         if(yogaMilliseconds<60000){
-            yogaTime=""+yoga_second+"秒";
+            yogaTime=String.format("%02d",yoga_second)+"秒";
         }else if(yogaMilliseconds>=60000||yogaMilliseconds<3600000){
-            yogaTime=""+yoga_minute+"分鐘"+yoga_second+"秒";
+            yogaTime=String.format("%02d",yoga_minute)+"分鐘"+String.format("%02d",yoga_second)+"秒";
         }else if(yogaMilliseconds>=3600000){
-            yogaTime=""+yoga_hour+"時"+yoga_minute+"分鐘"+yoga_second+"秒";
+            yogaTime=String.format("%02d",yoga_hour)+"時"+String.format("%02d",yoga_minute)+"分鐘"+String.format("%02d",yoga_second)+"秒";
         }
         return yogaTime;
 
@@ -304,7 +304,7 @@ public class Time extends Application {
         int end_minute=end_calendar.get(Calendar.MINUTE);
         //int end_second=end_calendar.get(Calendar.SECOND);
         String end_week=Week.getWeek(chat_milliseconds);
-        endTime=""+end_year+"年"+end_month+"月"+end_day+"日 週"+end_week+" "+end_hour+"時 "+end_minute+"分鐘  ";
+        endTime=""+end_year+"年"+String.format("%02d",end_month)+"月"+String.format("%02d",end_day)+"日 週"+end_week+" "+String.format("%02d",end_hour)+"時 "+String.format("%02d",end_minute)+"分鐘  ";
 
         return endTime;
     }
@@ -467,7 +467,7 @@ public class Time extends Application {
         int post_minute=post_calendar.get(Calendar.MINUTE);
         int post_second=post_calendar.get(Calendar.SECOND);
         String post_week=Week.getWeek(post_milliseconds);
-        postTime=""+post_year+"年"+post_month+"月"+post_day+"日 週"+post_week+" "+post_hour+"時 "+post_minute+"分鐘 "+post_second+"秒 ";
+        postTime=""+post_year+"年"+String.format("%02d",post_month)+"月"+String.format("%02d",post_day)+"日 週"+post_week+" "+String.format("%02d",post_hour)+"時 "+String.format("%02d",post_minute)+"分鐘 "+String.format("%02d",post_second)+"秒 ";
 
         return postTime;
     }
