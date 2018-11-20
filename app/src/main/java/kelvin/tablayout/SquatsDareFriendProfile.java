@@ -164,6 +164,11 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="深蹲挑戰執行中";
                     mProfileSendReqBtn.setText("已接受深蹲挑戰");
+                    Intent intent = new Intent(SquatsDareFriendProfile.this,Squats_dare.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    finish();
+                    startActivity(intent);
                 }
             }
 
@@ -362,6 +367,11 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "深蹲挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受深蹲挑戰");
+                                Intent intent = new Intent(SquatsDareFriendProfile.this,Squats_dare.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                finish();
+                                startActivity(intent);
                             } else {
 
                                 String error = databaseError.getMessage();

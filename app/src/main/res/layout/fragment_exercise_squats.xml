@@ -89,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="2"
+                android:layout_weight="1.6"
                 android:background="#1e2b3d">
 
                 <LinearLayout
@@ -149,6 +149,7 @@
                             android:background="@drawable/main_border"
                             android:orientation="horizontal"
                             android:layout_weight="1"
+
                             android:gravity="center">
 
                             <TextView
