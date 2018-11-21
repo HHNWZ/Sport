@@ -2,6 +2,8 @@ package kelvin.tablayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.a888888888.sport.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.github.mikephil.charting.animation.Easing;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +40,7 @@ public class Squats_task extends AppCompatActivity {
     private Toolbar squats_task_toolbar;
     public static ActionBar actionBar;
     private static FirebaseAuth mAuth;
-
+    public static int count=0;
     private DatabaseReference squats_task_Database;
     private DatabaseReference squats_task_friendDatabase;
     private DatabaseReference squats_task_myDatabase;
@@ -90,6 +93,7 @@ public class Squats_task extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squats_task);
         GlobalVariable task=(GlobalVariable)getApplicationContext();
+
         task.setTask("Squats_Task");
         task.setTask_reg("Task_req_squats");
         squats_task_toolbar=(Toolbar)findViewById(R.id.squats_task_toolbar);
@@ -139,9 +143,11 @@ public class Squats_task extends AppCompatActivity {
                 squats_task_my_friend_point=dataSnapshot.child("friend_point").getValue().toString();
 
                 squats_task_my_friend_point_int=Integer.parseInt(squats_task_my_friend_point);
+
                 squats_data.setMy_task_friend_point(squats_task_my_friend_point_int);
 
                 squats_task_my_count_int=Integer.parseInt(squats_task_my_count);
+                task.setMy_squats_count(squats_task_my_count_int);
                 squats_data.setMy_task_int_exercise_data(squats_task_my_count_int);
 
                 my_squats_task_name.setText(squats_task_my_name);
@@ -158,8 +164,10 @@ public class Squats_task extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Log.i("12345",""+myID);
                         if(dataSnapshot.hasChild(myID)){
+                            //mHanlder.postDelayed(task2,2000);
                             squats_task_toolbar.setOnMenuItemClickListener(null);
                             final String list_user_id =dataSnapshot.child(myID).child("id").getValue().toString();
+                            task.setChat_id_send(list_user_id);
                             squats_task_text_and.setVisibility(View.VISIBLE);
                             friend_squats_task_name.setVisibility(View.VISIBLE);
                             friend_squats_task_image.setVisibility(View.VISIBLE);
@@ -174,7 +182,7 @@ public class Squats_task extends AppCompatActivity {
                                         squats_task_friend_image=dataSnapshot.child("thumb_image").getValue().toString();
                                         squats_task_friend_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
                                         squats_task_friend_count_int=Integer.parseInt(squats_task_friend_count);
-
+                                        task.setFriend_squats_count(squats_task_friend_count_int);
                                         friend_squats_task_name.setText(squats_task_friend_name);
                                         friend_squats_task_finish_count_data.setText(squats_task_friend_count+"次");
 
@@ -215,6 +223,7 @@ public class Squats_task extends AppCompatActivity {
                                                     squats_susses_text_view.setText("目前沒有朋友");
                                                     squats_susses_text_view_data.setVisibility(View.GONE);
                                                     squats_task_seek_bar.setProgress((0));
+
                                                     squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_squats_task_button.setVisibility(View.INVISIBLE);
                                                 }
@@ -253,6 +262,7 @@ public class Squats_task extends AppCompatActivity {
 
             }
         });
+
         
     }
 
@@ -281,6 +291,7 @@ public class Squats_task extends AppCompatActivity {
                     Intent intent = new Intent(Squats_task.this,SquatsTaskFriend.class);
                     //intent.putExtra("Task_req","Task_req_squats");
                     //intent.putExtra("Task","Squats_Task");
+                    squats_task_myDatabase.child("exercise_count").child("squats").child("today_count").setValue(10);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;
@@ -297,6 +308,51 @@ public class Squats_task extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.task_menu, menu);
         return true;
     }
+
+    private Handler mHanlder = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            GlobalVariable task3=(GlobalVariable)getApplicationContext();
+            switch (msg.what) {
+
+                case 1:
+                    Log.i("我的深蹲",""+task3.getMy_squats_count());
+                    Log.i("朋友的深蹲",""+task3.getFriend_squats_count());
+
+                    if(task3.getMy_squats_count()<task3.getFriend_squats_count()){
+                        Log.i("誰比較小","我");
+                        squats_task_myDatabase.child("exercise_count").child("squats").child("today_count").setValue(60);
+                    }else if(task3.getMy_squats_count()>task3.getFriend_squats_count()){
+                        Log.i("誰比較小","朋友");
+                        squats_task_friendDatabase.child(task3.getFriend_id()).child("exercise_count").child("squats").child("today_count").setValue(60);
+                    }
+                    break;
+                case 2:
+
+                    Log.i("完成","對的");
+                    break;
+                default:
+                    break;
+
+            }
+            super.handleMessage(msg);
+        }
+    };
+
+    private Runnable task2 = new Runnable() {
+        @Override
+        public void run() {
+
+            count=count+1;
+            if(count>10){
+                count=0;
+            }
+            mHanlder.sendEmptyMessage(count);
+
+            mHanlder.postDelayed(this, 1 * 1000);//延迟5秒,再次执行task本身,实现了循环的效果
+
+        }
+    };
 
    
 }

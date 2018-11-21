@@ -26,12 +26,11 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SquatsTaskFriend extends AppCompatActivity {
-
-    private Toolbar activity_squats_task_friend_toolbar;
+public class RunningTaskFriend extends AppCompatActivity {
+    private Toolbar activity_running_task_friend_toolbar;
     public static ActionBar actionBar;
 
-    private RecyclerView activity_squats_task_friend_recycler_view;
+    private RecyclerView activity_running_task_friend_recycler_view;
 
     private DatabaseReference mFriendsDatabase;
     private DatabaseReference mUsersDatabase;
@@ -43,20 +42,19 @@ public class SquatsTaskFriend extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_squats_task_friend);
-
+        setContentView(R.layout.activity_running_task_friend);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
-        activity_squats_task_friend_toolbar=(Toolbar)findViewById(R.id.activity_squats_task_friend_toolbar);
-        setSupportActionBar(activity_squats_task_friend_toolbar);
+        activity_running_task_friend_toolbar=(Toolbar)findViewById(R.id.activity_running_task_friend_toolbar);
+        setSupportActionBar(activity_running_task_friend_toolbar);
         actionBar=getSupportActionBar();
         actionBar.setTitle("朋友列表");
         actionBar.setSubtitle("點擊要挑戰的朋友");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        activity_squats_task_friend_recycler_view=(RecyclerView)findViewById(R.id.activity_squats_task_friend_recycler_view);
+        activity_running_task_friend_recycler_view=(RecyclerView)findViewById(R.id.activity_running_task_friend_recycler_view);
         mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
@@ -66,25 +64,24 @@ public class SquatsTaskFriend extends AppCompatActivity {
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         friendDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrent_user_id);
         mUsersDatabase.keepSynced(true);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(SquatsTaskFriend.this);
-        activity_squats_task_friend_recycler_view.setHasFixedSize(true);
-        activity_squats_task_friend_recycler_view.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(RunningTaskFriend.this);
+        activity_running_task_friend_recycler_view.setHasFixedSize(true);
+        activity_running_task_friend_recycler_view.setLayoutManager(layoutManager);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home){
-            Intent intent = new Intent(SquatsTaskFriend.this,Squats_task.class);
+            Intent intent = new Intent(RunningTaskFriend.this,Running_task.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(SquatsTaskFriend.this,Squats_task.class);
+        Intent intent = new Intent(RunningTaskFriend.this,Running_task.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
@@ -93,16 +90,16 @@ public class SquatsTaskFriend extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("我在SquatsTaskFriend的","onStart");
+        Log.i("我在RunningTaskFriend的","onStart");
 
-        FirebaseRecyclerAdapter<Friends,ActivitySquatsTaskFriendsViewHolderew> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivitySquatsTaskFriendsViewHolderew>(
+        FirebaseRecyclerAdapter<Friends,ActivityRunningTaskFriendsViewHolderew> activityFriendsViewHolderFirebaseRecyclerAdapter= new FirebaseRecyclerAdapter<Friends, ActivityRunningTaskFriendsViewHolderew>(
                 Friends.class,
                 R.layout.users_single_layout,
-                ActivitySquatsTaskFriendsViewHolderew.class,
+                ActivityRunningTaskFriendsViewHolderew.class,
                 mFriendsDatabase
         ) {
             @Override
-            protected void populateViewHolder(ActivitySquatsTaskFriendsViewHolderew viewHolder, Friends model, int position) {
+            protected void populateViewHolder(ActivityRunningTaskFriendsViewHolderew viewHolder, Friends model, int position) {
                 final String list_user_id = getRef(position).getKey();
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -117,7 +114,7 @@ public class SquatsTaskFriend extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 Intent taskIntent = new Intent();
-                                taskIntent.setClass(SquatsTaskFriend.this  , SquatsTaskFriendProfile.class);
+                                taskIntent.setClass(RunningTaskFriend.this  , RunningTaskFriendProfile.class);
                                 taskIntent.putExtra("user_id",list_user_id);
                                 startActivity(taskIntent);
                             }
@@ -131,14 +128,14 @@ public class SquatsTaskFriend extends AppCompatActivity {
                 });
             }
         };
-        activity_squats_task_friend_recycler_view.setAdapter(activityFriendsViewHolderFirebaseRecyclerAdapter);
+        activity_running_task_friend_recycler_view.setAdapter(activityFriendsViewHolderFirebaseRecyclerAdapter);
     }
 
-    public static class ActivitySquatsTaskFriendsViewHolderew extends RecyclerView.ViewHolder {
+    public static class ActivityRunningTaskFriendsViewHolderew extends RecyclerView.ViewHolder {
 
         View mView;
 
-        public ActivitySquatsTaskFriendsViewHolderew(View itemView) {
+        public ActivityRunningTaskFriendsViewHolderew(View itemView) {
             super(itemView);
             mView = itemView;
         }

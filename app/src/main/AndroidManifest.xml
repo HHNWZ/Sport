@@ -129,7 +129,15 @@
         <activity android:name="kelvin.tablayout.IngestionAdvice" />
         <activity android:name="kelvin.tablayout.MonitoringTool" />
         <activity android:name="kelvin.tablayout.SquatsTaskFriend" />
-        <activity android:name="kelvin.tablayout.SquatsTaskFriendProfile"></activity>
+        <activity android:name="kelvin.tablayout.SquatsTaskFriendProfile" />
+        <activity android:name="kelvin.tablayout.CrunchesTaskFriend" />
+        <activity android:name="kelvin.tablayout.RunningTaskFriend" />
+        <activity android:name="kelvin.tablayout.WalkingTaskFriend" />
+        <activity android:name="kelvin.tablayout.YogaTaskFriend" />
+        <activity android:name="kelvin.tablayout.CrunchesTaskFriendProfile" />
+        <activity android:name="kelvin.tablayout.RunningTaskFriendProfile" />
+        <activity android:name="kelvin.tablayout.WalkingTaskFriendProfile" />
+        <activity android:name="kelvin.tablayout.YogaTaskFriendProfile"></activity>
     </application>
 
 </manifest>

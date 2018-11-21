@@ -275,11 +275,18 @@ public class Time extends Application {
         int yoga_minute = yoga_time.get(Calendar.MINUTE);
         int yoga_second = yoga_time.get(Calendar.SECOND);
         if(yogaMilliseconds<60000){
-            yogaTime=String.format("%02d",yoga_second)+"秒";
+            yogaTime=""+yoga_second+"秒";
         }else if(yogaMilliseconds>=60000||yogaMilliseconds<3600000){
-            yogaTime=String.format("%02d",yoga_minute)+"分鐘"+String.format("%02d",yoga_second)+"秒";
+            if(yoga_second==0){
+                yogaTime=""+yoga_minute+"分鐘";
+            }else if(yoga_second>=1&&yoga_second<=9){
+                yogaTime=""+yoga_minute+"分鐘"+String.format("%02d",yoga_second)+"秒";
+            }else {
+                yogaTime=""+yoga_minute+"分鐘"+yoga_second+"秒";
+            }
+
         }else if(yogaMilliseconds>=3600000){
-            yogaTime=String.format("%02d",yoga_hour)+"時"+String.format("%02d",yoga_minute)+"分鐘"+String.format("%02d",yoga_second)+"秒";
+            yogaTime=""+yoga_hour+"時"+yoga_minute+"分鐘"+yoga_second+"秒";
         }
         return yogaTime;
 

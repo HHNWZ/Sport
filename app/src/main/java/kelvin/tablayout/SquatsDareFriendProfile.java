@@ -49,6 +49,7 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
     private DatabaseReference myUsersDatabase;
     private DatabaseReference mUsersDatabase;
     private DatabaseReference mRootRef;
+    private DatabaseReference squats_dare_database;
     public static String my_image;
     private static FirebaseUser mCurrent_user;
     private String dare_state;
@@ -82,6 +83,7 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(friend_id);//朋友資料庫資料庫
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
+        squats_dare_database=FirebaseDatabase.getInstance().getReference().child("Users");
         ReqSquatsDareDatabase=FirebaseDatabase.getInstance().getReference().child(Squats_Dare_Req);//深蹲挑戰邀請資料庫
         SquatsDareDatabase=FirebaseDatabase.getInstance().getReference().child(Squats_Dare);//深蹲挑戰資料庫
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
@@ -161,9 +163,14 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
         SquatsDareDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String friendID=friend_id.toString();
                 if(dataSnapshot.hasChild("id")){
                     dare_state="深蹲挑戰執行中";
                     mProfileSendReqBtn.setText("已接受深蹲挑戰");
+                    squats_dare_database.child(mCurrent_user.getUid()).child("squats_dare").child("count").setValue(20);
+                    squats_dare_database.child(mCurrent_user.getUid()).child("squats_dare").child("time").setValue(71000);
+                    squats_dare_database.child(friend_id).child("squats_dare").child("count").setValue(20);
+                    squats_dare_database.child(friend_id).child("squats_dare").child("time").setValue(120000);
                     Intent intent = new Intent(SquatsDareFriendProfile.this,Squats_dare.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -367,6 +374,10 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "深蹲挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受深蹲挑戰");
+                                squats_dare_database.child(mCurrent_user.getUid()).child("squats_dare").child("count").setValue(20);
+                                squats_dare_database.child(mCurrent_user.getUid()).child("squats_dare").child("time").setValue(71000);
+                                squats_dare_database.child(friend_id).child("squats_dare").child("count").setValue(20);
+                                squats_dare_database.child(friend_id).child("squats_dare").child("time").setValue(120000);
                                 Intent intent = new Intent(SquatsDareFriendProfile.this,Squats_dare.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

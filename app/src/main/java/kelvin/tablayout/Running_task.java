@@ -132,7 +132,7 @@ public class Running_task extends AppCompatActivity {
 
         running_susses_text_view_data=(TextView)findViewById(R.id.running_susses_text_view_data);
 
-        running_task_data.setText("10");
+        running_task_data.setText("30");
         running_task_seek_bar.setMax(Float.parseFloat(running_task_data.getText().toString()));
         running_susses_text_view_data.setVisibility(View.GONE);
         running_susses_text_view.setText("目前沒有朋友");
@@ -160,7 +160,7 @@ public class Running_task extends AppCompatActivity {
                     Picasso.get().load(running_task_my_image).into(my_running_task_image);
                 }
 
-                running_task_Database.child("Task_running").addValueEventListener(new ValueEventListener() {
+                running_task_Database.child("Running_Task").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(myID)){

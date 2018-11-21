@@ -73,6 +73,7 @@ import kelvin.tablayout.ChatActivity;
 import kelvin.tablayout.ControlDie;
 import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
+import kelvin.tablayout.CrunchesTaskFriendProfile;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.GlobalVariable;
 import kelvin.tablayout.LoginActivity;
@@ -82,6 +83,7 @@ import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningDareFriendProfile;
 import kelvin.tablayout.RunningMonitor;
+import kelvin.tablayout.RunningTaskFriendProfile;
 import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
@@ -91,11 +93,11 @@ import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
 import kelvin.tablayout.WalkingDareFriendProfile;
+import kelvin.tablayout.WalkingTaskFriendProfile;
 import kelvin.tablayout.Walking_monitor;
 import kelvin.tablayout.YogaDareFriendProfile;
 import kelvin.tablayout.YogaMonitor;
-
-
+import kelvin.tablayout.YogaTaskFriendProfile;
 
 
 public class  MainActivity extends AppCompatActivity
@@ -1164,6 +1166,30 @@ public class  MainActivity extends AppCompatActivity
                 }
                 else if(activityToBeOpened!=null && activityToBeOpened.equals("SquatsTaskFriendProfile")) {
                     Intent intent = new Intent(getContext(), SquatsTaskFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("CrunchesTaskFriendProfile")) {
+                    Intent intent = new Intent(getContext(), CrunchesTaskFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("WalkingTaskFriendProfile")) {
+                    Intent intent = new Intent(getContext(), WalkingTaskFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("RunningTaskFriendProfile")) {
+                    Intent intent = new Intent(getContext(), RunningTaskFriendProfile.class);
+                    intent.putExtra("user_id", user_id_send);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+                else if(activityToBeOpened!=null && activityToBeOpened.equals("YogaTaskFriendProfile")) {
+                    Intent intent = new Intent(getContext(), YogaTaskFriendProfile.class);
                     intent.putExtra("user_id", user_id_send);
                     intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                     getContext().startActivity(intent);

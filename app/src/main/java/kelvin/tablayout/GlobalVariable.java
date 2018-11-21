@@ -10,6 +10,9 @@ public class GlobalVariable  extends Application {
     private String KeyHour;
     private String chat_id_send;
     private String file_name;
+    private int my_squats_count;
+    private int friend_squats_count;
+    private  String friend_id;
     //修改 變數字串
     public void setWord(String word){
         this.Word = word;
@@ -65,5 +68,29 @@ public class GlobalVariable  extends Application {
 
     public void setFile_name(String file_name) {
         this.file_name = file_name;
+    }
+
+    public int getMy_squats_count() {
+        return my_squats_count;
+    }
+
+    public void setMy_squats_count(int my_squats_count) {
+        this.my_squats_count = my_squats_count;
+    }
+
+    public int getFriend_squats_count() {
+        return friend_squats_count;
+    }
+
+    public void setFriend_squats_count(int friend_squats_count) {
+        this.friend_squats_count = friend_squats_count;
+    }
+
+    public String getFriend_id() {
+        return friend_id;
+    }
+
+    public void setFriend_id(String friend_id) {
+        this.friend_id = friend_id;
     }
 }

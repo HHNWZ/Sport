@@ -152,7 +152,7 @@ public class Walking_task extends AppCompatActivity {
                     Picasso.get().load(walking_task_my_image).into(my_walking_task_image);
                 }
 
-                walking_task_Database.child("Task_walking").addValueEventListener(new ValueEventListener() {
+                walking_task_Database.child("Walking_Task").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(myID)){

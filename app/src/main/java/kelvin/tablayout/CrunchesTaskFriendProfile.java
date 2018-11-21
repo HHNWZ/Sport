@@ -36,42 +36,40 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SquatsTaskFriendProfile extends AppCompatActivity {
+public class CrunchesTaskFriendProfile extends AppCompatActivity {
 
-    private Toolbar squats_task_friend_profile_toolbar;
+    private Toolbar crunches_task_friend_profile_toolbar;
     public static ActionBar actionBar;
     private FirebaseAuth mAuth;
     private ImageView mProfileImage;
     public static TextView mProfileName;
     private Button mProfileSendReqBtn,delete_send_req_btn;
     private ProgressDialog mProgressDialog;
-    private DatabaseReference ReqSquatsTaskDatabase;
-    private DatabaseReference SquatsTaskDatabase;
+    private DatabaseReference ReqCrunchesTaskDatabase;
+    private DatabaseReference CrunchesTaskDatabase;
     private DatabaseReference myUsersDatabase;
     private DatabaseReference mUsersDatabase;
-    private DatabaseReference SquatsDatabase;
-
     private DatabaseReference mRootRef;
     public static String my_image;
     private static FirebaseUser mCurrent_user;
     private String task_state;
     public String Fid;
     public static String my_name;
-    public static String Squats_Task_Req="Squats_Task_Req";
-    public static String Squats_Task="Squats_Task";
+    public static String Crunches_Task_Req="Crunches_Task_Req";
+    public static String Crunches_Task="Crunches_Task";
     public String Uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_squats_task_friend_profile);
+        setContentView(R.layout.activity_crunches_task_friend_profile);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
-        squats_task_friend_profile_toolbar=(Toolbar)findViewById(R.id.squats_task_friend_profile_toolbar);
-        setSupportActionBar(squats_task_friend_profile_toolbar);
+        crunches_task_friend_profile_toolbar=(Toolbar)findViewById(R.id.crunches_task_friend_profile_toolbar);
+        setSupportActionBar(crunches_task_friend_profile_toolbar);
         actionBar=getSupportActionBar();
         actionBar.setTitle("朋友資訊");
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -85,12 +83,11 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(friend_id);//朋友資料庫資料庫
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
-        SquatsDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        ReqSquatsTaskDatabase=FirebaseDatabase.getInstance().getReference().child(Squats_Task_Req);//深蹲邀請邀請資料庫
-        SquatsTaskDatabase=FirebaseDatabase.getInstance().getReference().child(Squats_Task);//深蹲邀請資料庫
+        ReqCrunchesTaskDatabase=FirebaseDatabase.getInstance().getReference().child(Crunches_Task_Req);//仰臥起坐邀請邀請資料庫
+        CrunchesTaskDatabase=FirebaseDatabase.getInstance().getReference().child(Crunches_Task);//仰臥起坐邀請資料庫
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
-        mProfileImage = (ImageView) findViewById(R.id.squats_task_friend_profile_image);
-        mProfileName = (TextView) findViewById(R.id.squats_task_friend_profile_displayName);
+        mProfileImage = (ImageView) findViewById(R.id.crunches_task_friend_profile_image);
+        mProfileName = (TextView) findViewById(R.id.crunches_task_friend_profile_displayName);
         mProfileSendReqBtn = (Button) findViewById(R.id.profile_send_req_btn);//發送朋友請求按鈕
         delete_send_req_btn=(Button)findViewById(R.id.delete_send_req_btn);
 
@@ -126,8 +123,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
                     }
                 });
-                //--------------------用自己的UID去深蹲邀請邀請資料庫查詢--------//
-                ReqSquatsTaskDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
+                //--------------------用自己的UID去仰臥起坐邀請邀請資料庫查詢--------//
+                ReqCrunchesTaskDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(friend_id)){
@@ -135,11 +132,11 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
                             if(req_type.equals("接收")){
                                 task_state="接收請求";
-                                mProfileSendReqBtn.setText("接受深蹲共同任務");
+                                mProfileSendReqBtn.setText("接受仰臥起坐共同任務");
                                 delete_send_req_btn.setVisibility(View.VISIBLE);
                             }else if(req_type.equals("發送")){
                                 task_state="發送請求";
-                                mProfileSendReqBtn.setText("取消深蹲共同任務");
+                                mProfileSendReqBtn.setText("取消仰臥起坐共同任務");
                             }
 
                         }else {
@@ -162,14 +159,13 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
             }
         });
-        SquatsTaskDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
+        CrunchesTaskDatabase.child(mCurrent_user.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("id")){
-                    task_state="深蹲共同任務執行中";
-                    mProfileSendReqBtn.setText("已接受深蹲共同任務");
-
-                    Intent intent = new Intent(SquatsTaskFriendProfile.this,Squats_task.class);
+                    task_state="仰臥起坐共同任務執行中";
+                    mProfileSendReqBtn.setText("已接受仰臥起坐共同任務");
+                    Intent intent = new Intent(CrunchesTaskFriendProfile.this,Crunches_task.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     finish();
@@ -191,19 +187,18 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                 //---如果沒有請求就發送---//
                 if(task_state.equals("還沒有發送")){
                     Map requestMap =new HashMap();
-                    requestMap.put(""+Squats_Task_Req+"/" + mCurrent_user.getUid() + "/" + friend_id + "/request_type", "發送");
-                    requestMap.put(""+Squats_Task_Req+"/" + friend_id + "/" + mCurrent_user.getUid() + "/request_type", "接收");
+                    requestMap.put(""+Crunches_Task_Req+"/" + mCurrent_user.getUid() + "/" + friend_id + "/request_type", "發送");
+                    requestMap.put(""+Crunches_Task_Req+"/" + friend_id + "/" + mCurrent_user.getUid() + "/request_type", "接收");
 
                     mRootRef.updateChildren(requestMap, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                             if(databaseError != null){
 
-                                Toast.makeText(SquatsTaskFriendProfile.this, "發送請求時出錯", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CrunchesTaskFriendProfile.this, "發送請求時出錯", Toast.LENGTH_SHORT).show();
                             }else{
-                                SquatsDatabase.child(friend_id).child("exercise_count").child("squats").child("today_count").setValue(40);
                                 task_state = "發送請求";
-                                mProfileSendReqBtn.setText("取消深蹲共同任務");
+                                mProfileSendReqBtn.setText("取消仰臥起坐共同任務");
                             }
 
                             mProfileSendReqBtn.setEnabled(true);
@@ -238,8 +233,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
 
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"data\": {\"activityToBeOpened\":\"SquatsTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送深蹲共同任務給你"+"\"}"
+                                            + "\"data\": {\"activityToBeOpened\":\"CrunchesTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"發送仰臥起坐共同任務給你"+"\"}"
                                             + "}";
 
                                     System.out.println("strJsonBody:\n" + strJsonBody);
@@ -273,17 +268,17 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                     });
                 }
 
-                //----取消發送深蹲邀請請求----//
+                //----取消發送仰臥起坐邀請請求----//
                 if(task_state.equals("發送請求")){
-                    ReqSquatsTaskDatabase.child(mCurrent_user.getUid()).child(friend_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    ReqCrunchesTaskDatabase.child(mCurrent_user.getUid()).child(friend_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            ReqSquatsTaskDatabase.child(friend_id).child(mCurrent_user.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            ReqCrunchesTaskDatabase.child(friend_id).child(mCurrent_user.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     mProfileSendReqBtn.setEnabled(true);
                                     task_state="還沒有發送";
-                                    mProfileSendReqBtn.setText("發送深蹲共同任務");
+                                    mProfileSendReqBtn.setText("發送仰臥起坐共同任務");
                                 }
                             });
                         }
@@ -317,8 +312,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
 
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"data\": {\"activityToBeOpened\":\"SquatsTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的深蹲邀請"+"\"}"
+                                            + "\"data\": {\"activityToBeOpened\":\"CrunchesTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的仰臥起坐邀請"+"\"}"
                                             + "}";
 
                                     System.out.println("strJsonBody:\n" + strJsonBody);
@@ -351,18 +346,18 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                         }
                     });*/
                 }
-                //-----接收深蹲邀請請求---//
+                //-----接收仰臥起坐邀請請求---//
                 if(task_state.equals("接收請求")){
                     delete_send_req_btn.setVisibility(View.INVISIBLE);
                     final String currentDate = Time.getToDate(System.currentTimeMillis());
 
                     Map friendsMap = new HashMap();
 
-                    friendsMap.put(""+Squats_Task+"/" + mCurrent_user.getUid() + "/id", friend_id);
-                    friendsMap.put(""+Squats_Task+"/" + friend_id + "/id", mCurrent_user.getUid());
+                    friendsMap.put(""+Crunches_Task+"/" + mCurrent_user.getUid() + "/id", friend_id);
+                    friendsMap.put(""+Crunches_Task+"/" + friend_id + "/id", mCurrent_user.getUid());
 
-                    friendsMap.put(""+Squats_Task_Req+"/" + mCurrent_user.getUid() + "/" +friend_id, null);
-                    friendsMap.put(""+Squats_Task_Req+"/" + friend_id + "/" + mCurrent_user.getUid(), null);
+                    friendsMap.put(""+Crunches_Task_Req+"/" + mCurrent_user.getUid() + "/" +friend_id, null);
+                    friendsMap.put(""+Crunches_Task_Req+"/" + friend_id + "/" + mCurrent_user.getUid(), null);
 
                     mRootRef.updateChildren(friendsMap, new DatabaseReference.CompletionListener() {
                         @Override
@@ -371,10 +366,9 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                             if(databaseError == null){
 
                                 mProfileSendReqBtn.setEnabled(true);
-                                task_state = "深蹲共同任務執行中";
-                                mProfileSendReqBtn.setText("已接受深蹲共同任務");
-
-                                Intent intent = new Intent(SquatsTaskFriendProfile.this,Squats_task.class);
+                                task_state = "仰臥起坐共同任務執行中";
+                                mProfileSendReqBtn.setText("已接受仰臥起坐共同任務");
+                                Intent intent = new Intent(CrunchesTaskFriendProfile.this,Crunches_task.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 finish();
@@ -382,7 +376,7 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                             } else {
 
                                 String error = databaseError.getMessage();
-                                Toast.makeText(SquatsTaskFriendProfile.this, error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CrunchesTaskFriendProfile.this, error, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -416,8 +410,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
                                             + "\"android_sound\": \"messagechat\","
-                                            + "\"data\": {\"activityToBeOpened\":\"SquatsTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的深蹲邀請給你"+"\"}"
+                                            + "\"data\": {\"activityToBeOpened\":\"CrunchesTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"接受你的仰臥起坐邀請給你"+"\"}"
                                             + "}";
 
                                     System.out.println("strJsonBody:\n" + strJsonBody);
@@ -452,11 +446,11 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
                 }
 
-                //----取消深蹲邀請---///
-                if(task_state.equals("深蹲共同任務執行中")){
+                //----取消仰臥起坐邀請---///
+                if(task_state.equals("仰臥起坐共同任務執行中")){
                     Map unfriendMap = new HashMap();
-                    unfriendMap.put(""+Squats_Task+"/" + mCurrent_user.getUid() + "/" + friend_id, null);
-                    unfriendMap.put(""+Squats_Task+"/" + friend_id + "/" + mCurrent_user.getUid(), null);
+                    unfriendMap.put(""+Crunches_Task+"/" + mCurrent_user.getUid() + "/" + friend_id, null);
+                    unfriendMap.put(""+Crunches_Task+"/" + friend_id + "/" + mCurrent_user.getUid(), null);
 
                     mRootRef.updateChildren(unfriendMap, new DatabaseReference.CompletionListener() {
                         @Override
@@ -466,11 +460,11 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                             if(databaseError == null){
 
                                 task_state = "還沒有發送";
-                                mProfileSendReqBtn.setText("發送深蹲共同任務請求");
+                                mProfileSendReqBtn.setText("發送仰臥起坐共同任務請求");
                             }else {
 
                                 String error = databaseError.getMessage();
-                                Toast.makeText(SquatsTaskFriendProfile.this, error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CrunchesTaskFriendProfile.this, error, Toast.LENGTH_SHORT).show();
                             }
                             mProfileSendReqBtn.setEnabled(true);
                         }
@@ -504,8 +498,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                                             + "\"large_icon\": \""+my_image.toString()+"\","
 
                                             + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
-                                            + "\"data\": {\"activityToBeOpened\":\"SquatsTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"取消和你的深蹲邀請"+"\"}"
+                                            + "\"data\": {\"activityToBeOpened\":\"CrunchesTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                            + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"取消和你的仰臥起坐邀請"+"\"}"
                                             + "}";
 
                                     System.out.println("strJsonBody:\n" + strJsonBody);
@@ -548,8 +542,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                 mProfileSendReqBtn.setEnabled(false);
 
                 Map friendsMap = new HashMap();
-                friendsMap.put(""+Squats_Task_Req+"/" + mCurrent_user.getUid() + "/" + friend_id, null);
-                friendsMap.put(""+Squats_Task_Req+"/" + friend_id + "/" + mCurrent_user.getUid(), null);
+                friendsMap.put(""+Crunches_Task_Req+"/" + mCurrent_user.getUid() + "/" + friend_id, null);
+                friendsMap.put(""+Crunches_Task_Req+"/" + friend_id + "/" + mCurrent_user.getUid(), null);
 
                 mRootRef.updateChildren(friendsMap, new DatabaseReference.CompletionListener() {
                     @Override
@@ -557,11 +551,11 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                         if(databaseError==null){
                             mProfileSendReqBtn.setEnabled(true);
                             task_state = "還沒有發送";
-                            mProfileSendReqBtn.setText("發送深蹲共同任務請求");
+                            mProfileSendReqBtn.setText("發送仰臥起坐共同任務請求");
                             delete_send_req_btn.setVisibility(View.INVISIBLE);
                         }else {
                             String error = databaseError.getMessage();
-                            Toast.makeText(SquatsTaskFriendProfile.this, error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CrunchesTaskFriendProfile.this, error, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -595,8 +589,8 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                                         + "\"small_icon\": \""+R.drawable.testicon +"\","
                                         + "\"filters\": [{\"field\": \"tag\", \"key\": \"Uid\", \"relation\": \"=\", \"value\": \""+Fid+"\"}],"
                                         + "\"android_sound\": \"messagechat\","
-                                        + "\"data\": {\"activityToBeOpened\":\"SquatsTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
-                                        + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的深蹲邀請邀請"+"\"}"
+                                        + "\"data\": {\"activityToBeOpened\":\"CrunchesTaskFriendProfile\",\"user_id\": \""+mAuth.getCurrentUser().getUid()+"\"},"
+                                        + "\"contents\": {\"en\": \"Friend req\",\"zh-Hant\": \""+my_name.toString()+"拒絕你的仰臥起坐邀請邀請"+"\"}"
                                         + "}";
 
                                 System.out.println("strJsonBody:\n" + strJsonBody);
@@ -631,12 +625,13 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
             }
         });
+        
+        
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(SquatsTaskFriendProfile.this,SquatsTaskFriend.class);
+            Intent intent = new Intent(CrunchesTaskFriendProfile.this,CrunchesTaskFriend.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             finish();
@@ -647,7 +642,7 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(SquatsTaskFriendProfile.this,SquatsTaskFriend.class);
+        Intent intent = new Intent(CrunchesTaskFriendProfile.this,CrunchesTaskFriend.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         finish();

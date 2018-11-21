@@ -159,7 +159,7 @@ public class Crunches_task extends AppCompatActivity {
                     Picasso.get().load(crunches_task_my_image).into(my_crunches_task_image);
                 }
 
-                crunches_task_Database.child("Task_crunches").addValueEventListener(new ValueEventListener() {
+                crunches_task_Database.child("Crunches_Task").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(myID)){
@@ -282,7 +282,7 @@ public class Crunches_task extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.task_friend:
-                    Intent intent = new Intent(Crunches_task.this,FriendActivity.class);
+                    Intent intent = new Intent(Crunches_task.this,CrunchesTaskFriend.class);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

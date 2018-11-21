@@ -157,7 +157,7 @@ public class Yoga_task extends AppCompatActivity {
                     Picasso.get().load(yoga_task_my_image).into(my_yoga_task_image);
                 }
 
-                yoga_task_Database.child("Task_yoga").addValueEventListener(new ValueEventListener() {
+                yoga_task_Database.child("Yoga_Task").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(myID)){
