@@ -79,31 +79,34 @@ public class ExerciseSquats extends Fragment {
         TextView text_view_of_lowest_record_data=(TextView)mMainView.findViewById(R.id.text_view_of_lowest_record_data) ;
         TextView text_view_of_highest_record_data=(TextView)mMainView.findViewById(R.id.text_view_of_highest_record_data);
         Log.i("為什麼","1");
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String big_count=dataSnapshot.child("exercise_count").child("squats").child("big_count").getValue().toString();
-                String small_count=dataSnapshot.child("exercise_count").child("squats").child("small_count").getValue().toString();
-                String today_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
-                String DateCheck=dataSnapshot.child("exercise_count").child("squats").child("DateCheck").getValue().toString();
-                String nowDate=Time.getToDate(System.currentTimeMillis());
-                Log.i("現在是1",DateCheck);
-                Log.i("現在是",nowDate);
-                if(DateCheck.equals(nowDate)){
-                    text_view_of_today_record_data.setText(today_count);
-                }else {
+                if(dataSnapshot.hasChildren()){
+                    String big_count=dataSnapshot.child("exercise_count").child("squats").child("big_count").getValue().toString();
+                    String small_count=dataSnapshot.child("exercise_count").child("squats").child("small_count").getValue().toString();
+                    String today_count=dataSnapshot.child("exercise_count").child("squats").child("today_count").getValue().toString();
+                    String DateCheck=dataSnapshot.child("exercise_count").child("squats").child("DateCheck").getValue().toString();
+                    String nowDate=Time.getToDate(System.currentTimeMillis());
+                    Log.i("現在是1",DateCheck);
+                    Log.i("現在是",nowDate);
+                    if(DateCheck.equals(nowDate)){
+                        text_view_of_today_record_data.setText(today_count);
+                    }else {
 
-                    mDatabase.child("exercise_count").child("squats").child("DateCheck").setValue(nowDate);
-                    mDatabase.child("exercise_count").child("squats").child("today_count").setValue(0);
-                    text_view_of_today_record_data.setText("0");
+                        mDatabase.child("exercise_count").child("squats").child("DateCheck").setValue(nowDate);
+                        mDatabase.child("exercise_count").child("squats").child("today_count").setValue(0);
+                        text_view_of_today_record_data.setText("0");
+                    }
+                    text_view_of_highest_record_data.setText(big_count);
+                    text_view_of_lowest_record_data.setText(small_count);
                 }
-                text_view_of_highest_record_data.setText(big_count);
-                text_view_of_lowest_record_data.setText(small_count);
+
 
 
 
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

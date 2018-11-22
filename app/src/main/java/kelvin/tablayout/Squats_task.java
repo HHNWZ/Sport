@@ -291,7 +291,7 @@ public class Squats_task extends AppCompatActivity {
                     Intent intent = new Intent(Squats_task.this,SquatsTaskFriend.class);
                     //intent.putExtra("Task_req","Task_req_squats");
                     //intent.putExtra("Task","Squats_Task");
-                    squats_task_myDatabase.child("exercise_count").child("squats").child("today_count").setValue(10);
+                    //squats_task_myDatabase.child("exercise_count").child("squats").child("today_count").setValue(57);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;
