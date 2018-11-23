@@ -13,6 +13,7 @@ public class GlobalVariable  extends Application {
     private int my_squats_count;
     private int friend_squats_count;
     private  String friend_id;
+    private String food_note;
     //修改 變數字串
     public void setWord(String word){
         this.Word = word;
@@ -92,5 +93,13 @@ public class GlobalVariable  extends Application {
 
     public void setFriend_id(String friend_id) {
         this.friend_id = friend_id;
+    }
+
+    public String getFood_note() {
+        return food_note;
+    }
+
+    public void setFood_note(String food_note) {
+        this.food_note = food_note;
     }
 }

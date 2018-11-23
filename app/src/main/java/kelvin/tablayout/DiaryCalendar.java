@@ -2,6 +2,7 @@ package kelvin.tablayout;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
@@ -39,6 +40,7 @@ import org.threeten.bp.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,7 +59,7 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
     private Toolbar diary_calendar_toolbar;
     private ActionBar diary_calendar_actionbar;
 
-    private static DatabaseReference breakfast_database,my_database;
+    private static DatabaseReference breakfast_database,my_database,calorie;
     private static FirebaseAuth mAuth;
     private  TextView breakfast_data;
     private  TextView breakfast_data1;
@@ -94,6 +96,7 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
     private TextView dinner_cal;
     private TextView total_cal;
     private static LocalDate min;
+    private TextView consumption_cal;
 
 
 
@@ -118,7 +121,7 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
 
         mAuth = FirebaseAuth.getInstance();
         breakfast_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("Food_note");
-
+        calorie=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         breakfast_data=(TextView)findViewById(R.id.breakfast_data);
         breakfast_data1=(TextView)findViewById(R.id.breakfast_data1);
         breakfast_data2=(TextView)findViewById(R.id.breakfast_data2);
@@ -153,10 +156,11 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
         dinner_data9=(TextView)findViewById(R.id.dinner_data9);
         dinner_cal=(TextView)findViewById(R.id.dinner_cal);
         total_cal=(TextView)findViewById(R.id.total_cal);
+        consumption_cal=(TextView)findViewById(R.id.consumption_cal);
         Log.i("日期12345",""+Time.formatCalendar(System.currentTimeMillis()));
 
       //widget.addDecorator(new EventDecorator(Color.RED,doInBackground()));
-
+        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
 
 
 
@@ -483,7 +487,23 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
 
                             }
                             total_cal.setVisibility(View.VISIBLE);
-                            total_cal.setText("今天所攝取的總卡路里:"+today_calorie);
+                            total_cal.setText("今天所攝取的總卡路里:"+today_calorie+"大卡");
+                            calorie.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if(dataSnapshot.hasChild("calorie")){
+                                        String consumption=dataSnapshot.child("calorie").getValue().toString();
+                                        consumption_cal.setVisibility(View.VISIBLE);
+                                        consumption_cal.setText("今天所消耗的卡路里:"+consumption+"大卡");
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                         }else {
                             breakfast_data.setVisibility(View.GONE);
                             breakfast_data1.setVisibility(View.GONE);
@@ -519,6 +539,7 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
                             dinner_data9.setVisibility(View.GONE);
                             dinner_cal.setVisibility(View.GONE);
                             total_cal.setVisibility(View.GONE);
+                            consumption_cal.setVisibility(View.GONE);
                         }
                     }
 
@@ -566,48 +587,65 @@ public class DiaryCalendar extends AppCompatActivity implements OnDateSelectedLi
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
-    protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        min = LocalDate.of(2018, Month.OCTOBER, 1);
-        LocalDate temp = LocalDate.now().minusMonths(2);
-        LocalDate temp2 = LocalDate.now();
-        final ArrayList<CalendarDay> dates = new ArrayList<>();
-        breakfast_database=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("Food_note");
+    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
 
-        for (int i = 0; i < 36; i++) {
-            final CalendarDay day = CalendarDay.from(min);
-            Log.i("为什么1",""+FORMATTER.format(min));
+        @Override
+        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            LocalDate temp = LocalDate.of(2018,11,1);
+            Log.i("12345",String.valueOf(temp.getDayOfWeek()));
+            final ArrayList<CalendarDay> dates = new ArrayList<>();
+            for (int i = 0; i < 60; i++) {
+                final CalendarDay day = CalendarDay.from(temp);
+                GlobalVariable DiaryCalendar = (GlobalVariable)getApplicationContext();
+                breakfast_database.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-            breakfast_database.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                    Log.i("为什么e",""+FORMATTER.format(min));
-                    if(dataSnapshot.hasChild(FORMATTER.format(min))){
-                        dates.add(day);
-                        Log.i("为什么2",""+dates.add(day));
-                        min = min.plusDays(1);
-                        Log.i("为什么3",""+min.toString());
+                        if(dataSnapshot.hasChild(String.format(FORMATTER.format(day.getDate())))){
+                            Log.i("希望1"+String.format(FORMATTER.format(day.getDate())),"對");
+                            DiaryCalendar.setFood_note("有資料");
+                            dates.add(day);
+                        }else {
+                            Log.i("希望2"+String.format(FORMATTER.format(day.getDate())),"錯");
+                            DiaryCalendar.setFood_note("沒有資料");
+                        }
                     }
 
-                }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-
+                    }
+                });
+                Log.i("希望3 ",""+String.format(FORMATTER.format(day.getDate())));
 
 
+                /*if (DiaryCalendar.getFood_note()!=null){
+                    if(DiaryCalendar.getFood_note().equals("有資料")) {
+                        dates.add(day);
+                    }
+                }*/
+                temp = temp.plusDays(1);
+            }
+
+
+            return dates;
         }
 
-        return dates;
+        @Override
+        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+            super.onPostExecute(calendarDays);
+
+            if (isFinishing()) {
+                return;
+            }
+
+            widget.addDecorator(new EventDecorator(Color.RED, calendarDays));
+        }
     }
 
 
