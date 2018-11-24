@@ -76,9 +76,11 @@ import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.CrunchesTaskFriendProfile;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.GlobalVariable;
+import kelvin.tablayout.Live;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.PhotoBlog;
+import kelvin.tablayout.PlayerActivity;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningDareFriendProfile;
@@ -905,7 +907,10 @@ public class  MainActivity extends AppCompatActivity
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
 
             }
         });
