@@ -335,14 +335,14 @@ public class SquatsMonitor extends AppCompatActivity {
                 }
             });
             if(from_page.equals("ExercisePlanning")){
-                mDatabase.addValueEventListener(new ValueEventListener() {
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child("exercise_plan").hasChild("squats")){
+                        if(dataSnapshot.child("exercise_plan").hasChild("squats")&&from_page.equals("ExercisePlanning")){
                             String squats_now_plan=dataSnapshot.child("exercise_plan").child("squats").getValue().toString();
                             int squats_now_plan_int=Integer.parseInt(squats_now_plan);
                             if(squats_max_heart_rate<160){
-                                double squats_before_plan_int=squats_now_plan_int+(squats_now_plan_int*0.2);
+                                int squats_before_plan_int=squats_now_plan_int+20;
                                 mDatabase.child("exercise_plan").child("squats").setValue(squats_before_plan_int);
                                 Toast.makeText(SquatsMonitor.this,"你的心跳低於正常所以把你的運動方案的運動量提供",Toast.LENGTH_SHORT).show();
                             }

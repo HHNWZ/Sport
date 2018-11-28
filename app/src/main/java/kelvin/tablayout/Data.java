@@ -39,8 +39,8 @@ public class Data {
     private double running_exercise_plan_data;
     private double walking_exercise_plan_data;
     private float yoga_exercise_plan_data;
-    private double squats_exercise_plan_data;
-    private double crunches_exercise_plan_data;
+    private int squats_exercise_plan_data;
+    private int crunches_exercise_plan_data;
     private boolean date_is_red_point;
     private String image_uri;
 
@@ -340,7 +340,7 @@ public class Data {
         return squats_exercise_plan_data;
     }
 
-    public void setSquats_exercise_plan_data(double squats_exercise_plan_data) {
+    public void setSquats_exercise_plan_data(int squats_exercise_plan_data) {
         this.squats_exercise_plan_data = squats_exercise_plan_data;
     }
 
@@ -348,7 +348,7 @@ public class Data {
         return crunches_exercise_plan_data;
     }
 
-    public void setCrunches_exercise_plan_data(double crunches_exercise_plan_data) {
+    public void setCrunches_exercise_plan_data(int crunches_exercise_plan_data) {
         this.crunches_exercise_plan_data = crunches_exercise_plan_data;
     }
 

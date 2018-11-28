@@ -184,8 +184,8 @@ public class ExercisePlanning extends Fragment {
                 double walking_exercise_plan_data_double=Double.parseDouble(walking_exercise_plan_data);
                 double running_exercise_plan_data_double=Double.parseDouble(running_exercise_plan_data);
                 float yoga_exercise_plan_data_float=Float.parseFloat(yoga_exercise_plan_data);
-                double squats_exercise_plan_data_int=Double.parseDouble(squats_exercise_plan_data);
-                double crunches_exercise_plan_data_int=Double.parseDouble(crunches_exercise_plan_data);
+                int squats_exercise_plan_data_int=Integer.parseInt(squats_exercise_plan_data);
+                int crunches_exercise_plan_data_int=Integer.parseInt(crunches_exercise_plan_data);
 
                 exercise_plan.setWalking_exercise_plan_data(walking_exercise_plan_data_double);
                 exercise_plan.setRunning_exercise_plan_data(running_exercise_plan_data_double);
@@ -241,7 +241,7 @@ public class ExercisePlanning extends Fragment {
                             running_seek_bar.setMax((int)exercise_plan.getRunning_exercise_plan_data());
                             yoga_seek_bar.setMax((int)exercise_plan.getYoga_exercise_plan_data());
                             squats_seek_bar.setMax((int)exercise_plan.getSquats_exercise_plan_data());
-                            crunches_seek_bar.setMax(exercise_plan.getCrunches_exercise_plan_data());
+                            crunches_seek_bar.setMax((int) exercise_plan.getCrunches_exercise_plan_data());
                             if(walking_today_record_double>=exercise_plan.getWalking_exercise_plan_data()){
                                 walking_exercise_plan4.setText("你已經完成目標");
                                 walking_seek_bar.setProgress((int)exercise_plan.getWalking_exercise_plan_data());
@@ -271,7 +271,7 @@ public class ExercisePlanning extends Fragment {
                             }
                             if(squats_today_count_int>=exercise_plan.getSquats_exercise_plan_data()){
                                 squats_exercise_plan4.setText("你已經完成目標");
-                                squats_seek_bar.setProgress(exercise_plan.getSquats_exercise_plan_data());
+                                squats_seek_bar.setProgress((int) exercise_plan.getSquats_exercise_plan_data());
                                 squats_exercise_planning.setVisibility(View.INVISIBLE);
 
                             }else if(squats_today_count_int<exercise_plan.getSquats_exercise_plan_data()){
@@ -281,7 +281,7 @@ public class ExercisePlanning extends Fragment {
                             }
                             if(crunches_today_count_int>=exercise_plan.getCrunches_exercise_plan_data()){
                                 crunches_exercise_plan4.setText("你已經完成目標");
-                                crunches_seek_bar.setProgress(exercise_plan.getCrunches_exercise_plan_data());
+                                crunches_seek_bar.setProgress((int)exercise_plan.getCrunches_exercise_plan_data());
                                 crunches_exercise_planning.setVisibility(View.INVISIBLE);
 
                             }else if(crunches_today_count_int<exercise_plan.getCrunches_exercise_plan_data()){
