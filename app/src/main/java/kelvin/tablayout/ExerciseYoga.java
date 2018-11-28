@@ -79,37 +79,35 @@ public class ExerciseYoga extends Fragment {
         TextView text_view_of_lowest_record_data=(TextView)mMainView.findViewById(R.id.text_view_of_lowest_record_data) ;
         TextView text_view_of_highest_record_data=(TextView)mMainView.findViewById(R.id.text_view_of_highest_record_data);
         Log.i("為什麼","1");
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String long_time=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
-                String short_time=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
-                String today_time=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
-                String DateCheck=dataSnapshot.child("exercise_count").child("yoga").child("DateCheck").getValue().toString();
-                long today_time1=Long.parseLong(today_time);
-                long long_time1=Long.parseLong(long_time);
-                long short_time1=Long.parseLong(short_time);
-                String nowDate=Time.getToDate(System.currentTimeMillis());
-                Log.i("現在是1",DateCheck);
-                Log.i("現在是",nowDate);
-                if(DateCheck.equals(nowDate)){
-                    Log.i("我進來了","是");
-                    Log.i("今天瑜伽運動量",""+today_time1);
-                    Log.i("轉換後的運動量",""+Time.changeYogaTime(today_time1));
-                    text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_time1));
+                if(dataSnapshot.hasChildren()){
+                    String long_time=dataSnapshot.child("exercise_count").child("yoga").child("long_time").getValue().toString();
+                    String short_time=dataSnapshot.child("exercise_count").child("yoga").child("short_time").getValue().toString();
+                    String today_time=dataSnapshot.child("exercise_count").child("yoga").child("today_time").getValue().toString();
+                    String DateCheck=dataSnapshot.child("exercise_count").child("yoga").child("DateCheck").getValue().toString();
+                    long today_time1=Long.parseLong(today_time);
+                    long long_time1=Long.parseLong(long_time);
+                    long short_time1=Long.parseLong(short_time);
+                    String nowDate=Time.getToDate(System.currentTimeMillis());
+                    Log.i("現在是1",DateCheck);
+                    Log.i("現在是",nowDate);
+                    if(DateCheck.equals(nowDate)){
+                        Log.i("我進來了","是");
+                        Log.i("今天瑜伽運動量",""+today_time1);
+                        Log.i("轉換後的運動量",""+Time.changeYogaTime(today_time1));
+                        text_view_of_today_record_data.setText(""+Time.changeYogaTime(today_time1));
 
-                }else{
+                    }else{
 
-                    mDatabase.child("exercise_count").child("yoga").child("DateCheck").setValue(nowDate);
-                    mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(0);
-                    text_view_of_today_record_data.setText("0秒");
+                        mDatabase.child("exercise_count").child("yoga").child("DateCheck").setValue(nowDate);
+                        mDatabase.child("exercise_count").child("yoga").child("today_time").setValue(0);
+                        text_view_of_today_record_data.setText("0秒");
+                    }
+                    text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
+                    text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(short_time1));
                 }
-                text_view_of_highest_record_data.setText(""+Time.changeYogaTime(long_time1));
-                text_view_of_lowest_record_data.setText(""+Time.changeYogaTime(short_time1));
-
-
-
             }
 
             @Override
@@ -127,16 +125,11 @@ public class ExerciseYoga extends Fragment {
             }
 
         });
-        pTime=Week.getWeek(System.currentTimeMillis());
-        Log.i("今天是",pTime);
+
 
 
         button_of_task_execution=(Button)mMainView.findViewById(R.id.button_of_task_execution);
-        /*if(pTime.equals("十")){
-            button_of_task_execution.setVisibility(View.VISIBLE);
-        }else{
-            button_of_task_execution.setVisibility(View.INVISIBLE);
-        }*/
+
         button_of_task_execution.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

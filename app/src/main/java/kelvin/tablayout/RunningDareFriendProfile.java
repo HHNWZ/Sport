@@ -163,6 +163,11 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="跑步挑戰執行中";
                     mProfileSendReqBtn.setText("已接受跑步挑戰");
+                    Intent intent = new Intent(RunningDareFriendProfile.this,Running_dare.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    finish();
+                    startActivity(intent);
                 }
             }
 
@@ -362,6 +367,11 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "跑步挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受跑步挑戰");
+                                Intent intent = new Intent(RunningDareFriendProfile.this,Running_dare.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                finish();
+                                startActivity(intent);
                             } else {
 
                                 String error = databaseError.getMessage();

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -46,6 +47,7 @@ public class SquatsMonitor extends AppCompatActivity {
     private SquatsReporter sReporter;
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
+    private String from_page="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class SquatsMonitor extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
+        Bundle bundle=getIntent().getExtras();
+        from_page=bundle.getString("from_page");
+        Log.i("OnCreate的From_page",from_page);
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         squats_monitor_toolbar=(Toolbar)findViewById(R.id.squats_monitor_toolbar);
@@ -107,11 +112,20 @@ public class SquatsMonitor extends AppCompatActivity {
         }
 
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(SquatsMonitor.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            return super.onOptionsItemSelected(item);
+            if(from_page.equals("ExercisePlanning")){
+                Intent intent = new Intent(SquatsMonitor.this, MonitoringTool.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }else if(from_page.equals("MainActivity")){
+                Intent intent = new Intent(SquatsMonitor.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }
+
         }
 
         //noinspection SimplifiableIfStatement
@@ -122,10 +136,18 @@ public class SquatsMonitor extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void onBackPressed(){
-        Intent intent = new Intent(SquatsMonitor.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        if(from_page.equals("ExercisePlanning")){
+            Intent intent = new Intent(SquatsMonitor.this, MonitoringTool.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }else if(from_page.equals("MainActivity")){
+            Intent intent = new Intent(SquatsMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+
     }
 
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
@@ -189,7 +211,7 @@ public class SquatsMonitor extends AppCompatActivity {
     public void drawSquats(long squats_duration,int squats_mean_heart_rate,long squats_start_time,long squats_end_time, int squats_calorie,int squats_max_heart_rate,String squats_UUID,int squats_count){
         if(squats_count!=0){
             PhilText count_squats_data=(PhilText) findViewById(R.id.count_squats_data);
-
+            Log.i("drawSquats的From_page",from_page);
             PhilText duration_of_squats_of_minute=(PhilText)findViewById(R.id.duration_of_squats_of_minute);
             PhilText duration_of_squats_of_second=(PhilText)findViewById(R.id.duration_of_squats_of_second);
             PhilText squats_start_year=(PhilText)findViewById(R.id.squats_start_year);
@@ -312,6 +334,27 @@ public class SquatsMonitor extends AppCompatActivity {
 
                 }
             });
+            if(from_page.equals("ExercisePlanning")){
+                mDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("exercise_plan").hasChild("squats")){
+                            String squats_now_plan=dataSnapshot.child("exercise_plan").child("squats").getValue().toString();
+                            int squats_now_plan_int=Integer.parseInt(squats_now_plan);
+                            if(squats_max_heart_rate<160){
+                                double squats_before_plan_int=squats_now_plan_int+(squats_now_plan_int*0.2);
+                                mDatabase.child("exercise_plan").child("squats").setValue(squats_before_plan_int);
+                                Toast.makeText(SquatsMonitor.this,"你的心跳低於正常所以把你的運動方案的運動量提供",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
 
         }

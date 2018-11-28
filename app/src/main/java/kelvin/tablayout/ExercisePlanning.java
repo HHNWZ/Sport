@@ -1,6 +1,7 @@
 package kelvin.tablayout;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -159,6 +160,16 @@ public class ExercisePlanning extends Fragment {
                 return true;
             }
         });
+        squats_exercise_planning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),SquatsMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExercisePlanning");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
 
         exercise_plan_database.addValueEventListener(new ValueEventListener() {
@@ -173,8 +184,8 @@ public class ExercisePlanning extends Fragment {
                 double walking_exercise_plan_data_double=Double.parseDouble(walking_exercise_plan_data);
                 double running_exercise_plan_data_double=Double.parseDouble(running_exercise_plan_data);
                 float yoga_exercise_plan_data_float=Float.parseFloat(yoga_exercise_plan_data);
-                int squats_exercise_plan_data_int=Integer.parseInt(squats_exercise_plan_data);
-                int crunches_exercise_plan_data_int=Integer.parseInt(crunches_exercise_plan_data);
+                double squats_exercise_plan_data_int=Double.parseDouble(squats_exercise_plan_data);
+                double crunches_exercise_plan_data_int=Double.parseDouble(crunches_exercise_plan_data);
 
                 exercise_plan.setWalking_exercise_plan_data(walking_exercise_plan_data_double);
                 exercise_plan.setRunning_exercise_plan_data(running_exercise_plan_data_double);

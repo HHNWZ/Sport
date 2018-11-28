@@ -58,7 +58,7 @@ public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer
 
             player.setPlayerStyle(YouTubePlayer.PlayerStyle.MINIMAL);
             // You can change the ID.. of the video to be played
-            player.loadVideo("E0jo37SP3-Y");
+            player.loadVideo("u5X_hiHtKkM");
 
 
         }

@@ -105,13 +105,8 @@ import kelvin.tablayout.YogaTaskFriendProfile;
 public class  MainActivity extends AppCompatActivity
         implements Over.OnFragmentInteractionListener,
          NavigationView.OnNavigationItemSelectedListener,OnChartValueSelectedListener {
-    public final ArrayList<String> food_list=new ArrayList<String>();//常見食物清單
-    public final ArrayList<Integer> food_KLL=new ArrayList<Integer>();//食物對應卡路里
-    public final ArrayList<CalendarDay> DL=new ArrayList<>();//日記.日期
-    //public final ArrayList<String> diarys=new ArrayList<>();//日記.內容
-    //public final ArrayList<ArrayList<Integer>> BK_list=new ArrayList<ArrayList<Integer>>();//日記.早餐
-    //public final ArrayList<ArrayList<Integer>> LH_list=new ArrayList<ArrayList<Integer>>();//日記.午餐
-    //public final ArrayList<ArrayList<Integer>> DN_list=new ArrayList<ArrayList<Integer>>();//日記.晚餐
+
+
 
     public int dateID;//
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
@@ -366,6 +361,9 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, SquatsMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","MainActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -848,26 +846,7 @@ public class  MainActivity extends AppCompatActivity
         Log.i("數據crunches_week_record3",""+crunches_week_record);
 
 
-        //食物列表
-        food_list.add("米飯");
-        food_list.add("香蕉");
-        food_list.add("牛奶");
-        food_list.add("牛肉");
-        food_list.add("甜甜圈");
-        food_list.add("魚肉");
-        food_list.add("蔬菜");
-        food_list.add("雞肉");
-        food_list.add("雞蛋");
-        //食物熱量列表
-        food_KLL.add(225);
-        food_KLL.add(120);
-        food_KLL.add(150);
-        food_KLL.add(140);
-        food_KLL.add(270);
-        food_KLL.add(206);
-        food_KLL.add(65);
-        food_KLL.add(239);
-        food_KLL.add(106);
+
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         rundata =(TextView)findViewById(R.id.textView6);

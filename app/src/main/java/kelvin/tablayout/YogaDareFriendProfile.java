@@ -167,7 +167,11 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                     dare_state="瑜伽挑戰執行中";
                     Log.i("我在這裡","gogo");
                     mProfileSendReqBtn.setText("已接受瑜伽挑戰");
-                    mProfileSendReqBtn.setEnabled(false);
+                    Intent intent = new Intent(YogaDareFriendProfile.this,Yoga_dare.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    finish();
+                    startActivity(intent);
                 }
             }
 
@@ -368,7 +372,11 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "瑜伽挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受瑜伽挑戰");
-                                mProfileSendReqBtn.setEnabled(false);
+                                Intent intent = new Intent(YogaDareFriendProfile.this,Yoga_dare.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                finish();
+                                startActivity(intent);
                             } else {
 
                                 String error = databaseError.getMessage();
