@@ -381,6 +381,7 @@ public class  MainActivity extends AppCompatActivity
         });
         mHanlder.postDelayed(task2,5000);
         //circleLayout.animate().rotation(10);
+
         Log.i("我來了這裡","我的天");
 
 
@@ -909,7 +910,7 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
 
                     }else{
-                        circleLayout.setChangeCorner(1.0);
+                        circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
 
 
@@ -920,7 +921,7 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                     }else {
-
+                        circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
@@ -929,6 +930,7 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }{
+                        circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
 
@@ -939,7 +941,7 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                     }{
-
+                        circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
@@ -948,7 +950,7 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }{
-
+                        circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;

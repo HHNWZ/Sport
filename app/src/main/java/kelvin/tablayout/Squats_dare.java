@@ -82,7 +82,7 @@ public class Squats_dare extends AppCompatActivity {
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
     private String myID;
-    private ImageView my_win_icon,friend_win_icon;
+    private ImageView my_win_icon,friend_win_icon,win_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +131,7 @@ public class Squats_dare extends AppCompatActivity {
         confirm_dare=(Button)findViewById(R.id.confirm_dare);
         my_win_icon=findViewById(R.id.my_win_icon);
         friend_win_icon=findViewById(R.id.friend_win_icon);
-
+        win_arrow=findViewById(R.id.win_arrow);
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
         exercise_week_data.setText("20");
@@ -210,23 +210,27 @@ public class Squats_dare extends AppCompatActivity {
                                                 mDisplayImage.setBorderWidth(0);
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
-                                                my_win_icon.setVisibility(View.GONE);
+                                                my_win_icon.setVisibility(View.INVISIBLE);
                                                 friend_win_icon.setVisibility(View.VISIBLE);
                                                 friend_win_icon.animate().rotation(friend_win_icon.getRotation()+720).setDuration(5000).start();
+                                                win_arrow.setVisibility(View.VISIBLE);
+                                                win_arrow.setImageResource(R.drawable.right_arrow);
                                                 //friend_single_image.setBorderWidth(20);
                                                 //friend_single_image.setBorderColor(Color.parseColor("#ff0000"));
-                                                text_winner.setText("勝利方是朋友");
+                                                //text_winner.setText("勝利方是朋友");
                                             }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
                                                 friend_single_image.setBorderWidth(0);
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
                                                 Log.i("我在這裡M","2");
-                                                friend_win_icon.setVisibility(View.GONE);
+                                                friend_win_icon.setVisibility(View.INVISIBLE);
                                                 my_win_icon.setVisibility(View.VISIBLE);
                                                 my_win_icon.animate().rotation(my_win_icon.getRotation()+720).setDuration(5000).start();
+                                                win_arrow.setVisibility(View.VISIBLE);
+                                                win_arrow.setImageResource(R.drawable.left_arrow);
                                                 //mDisplayImage.setBorderWidth(20);
                                                 //mDisplayImage.setBorderColor(Color.parseColor("#ff0000"));
-                                                text_winner.setText("勝利方是你");
+                                                //text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                             }
 
@@ -244,6 +248,7 @@ public class Squats_dare extends AppCompatActivity {
                                                     friend_squats_finish_count_data.setVisibility(View.INVISIBLE);
                                                     text_VS.setVisibility(View.INVISIBLE);
                                                     text_winner.setVisibility(View.INVISIBLE);
+                                                    win_arrow.setVisibility(View.INVISIBLE);
                                                     myDatabase.child("squats_dare").child("time").setValue(0);
                                                     myDatabase.child("squats_dare").child("count").setValue(0);
                                                     if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
@@ -252,8 +257,8 @@ public class Squats_dare extends AppCompatActivity {
                                                         Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                        friend_win_icon.setVisibility(View.GONE);
-                                                        my_win_icon.setVisibility(View.GONE);
+                                                        friend_win_icon.setVisibility(View.INVISIBLE);
+                                                        my_win_icon.setVisibility(View.INVISIBLE);
                                                         startActivity(intent);
 
                                                     }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
@@ -264,8 +269,8 @@ public class Squats_dare extends AppCompatActivity {
                                                         Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                        friend_win_icon.setVisibility(View.GONE);
-                                                        my_win_icon.setVisibility(View.GONE);
+                                                        friend_win_icon.setVisibility(View.INVISIBLE);
+                                                        my_win_icon.setVisibility(View.INVISIBLE);
                                                         startActivity(intent);
                                                     }
 
