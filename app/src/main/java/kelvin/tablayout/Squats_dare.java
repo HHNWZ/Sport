@@ -3,6 +3,8 @@ package kelvin.tablayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,7 +82,7 @@ public class Squats_dare extends AppCompatActivity {
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
     private String myID;
-    
+    private ImageView my_win_icon,friend_win_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +129,8 @@ public class Squats_dare extends AppCompatActivity {
         friend_squats_finish_count=(TextView)findViewById(R.id.friend_squats_finish_count);
 
         confirm_dare=(Button)findViewById(R.id.confirm_dare);
+        my_win_icon=findViewById(R.id.my_win_icon);
+        friend_win_icon=findViewById(R.id.friend_win_icon);
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
@@ -202,15 +207,29 @@ public class Squats_dare extends AppCompatActivity {
                                         if(squats_dare_data.getSquats_dare_myCount()==Int_exercise_week_dat&&FriendCountInt==Int_exercise_week_dat&&squats_dare_data.getSquats_dare_myCount()!=0&&FriendCountInt!=0&&text_VS.getVisibility()==View.VISIBLE){
 
                                             if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
+                                                mDisplayImage.setBorderWidth(0);
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
+                                                my_win_icon.setVisibility(View.GONE);
+                                                friend_win_icon.setVisibility(View.VISIBLE);
+                                                friend_win_icon.animate().rotation(friend_win_icon.getRotation()+720).setDuration(5000).start();
+                                                //friend_single_image.setBorderWidth(20);
+                                                //friend_single_image.setBorderColor(Color.parseColor("#ff0000"));
                                                 text_winner.setText("勝利方是朋友");
                                             }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong&&squats_dare_data.getSquats_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0){
+                                                friend_single_image.setBorderWidth(0);
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
+                                                Log.i("我在這裡M","2");
+                                                friend_win_icon.setVisibility(View.GONE);
+                                                my_win_icon.setVisibility(View.VISIBLE);
+                                                my_win_icon.animate().rotation(my_win_icon.getRotation()+720).setDuration(5000).start();
+                                                //mDisplayImage.setBorderWidth(20);
+                                                //mDisplayImage.setBorderColor(Color.parseColor("#ff0000"));
                                                 text_winner.setText("勝利方是你");
                                                 Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                             }
+
 
                                             confirm_dare.setOnClickListener(new View.OnClickListener() {
                                                 @Override
@@ -230,12 +249,24 @@ public class Squats_dare extends AppCompatActivity {
                                                     if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
                                                         Log.i("勝利方是:","朋友");
                                                         Toast.makeText(Squats_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        friend_win_icon.setVisibility(View.GONE);
+                                                        my_win_icon.setVisibility(View.GONE);
+                                                        startActivity(intent);
+
                                                     }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
                                                         Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                                         friend_point_database.child("friend_point").setValue(squats_dare_data.getSquats_dare_friend_point()+10);
-
                                                         Log.i("勝利方是:","你");
                                                         Toast.makeText(Squats_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        friend_win_icon.setVisibility(View.GONE);
+                                                        my_win_icon.setVisibility(View.GONE);
+                                                        startActivity(intent);
                                                     }
 
 
@@ -267,6 +298,7 @@ public class Squats_dare extends AppCompatActivity {
 
 
 
+
             }
 
             @Override
@@ -274,6 +306,16 @@ public class Squats_dare extends AppCompatActivity {
 
             }
         });
+        if(text_winner.getText().equals("勝利方是你")){
+            Log.i("我在這裡M","3");
+            mDisplayImage.setBorderWidth(5);
+            mDisplayImage.setBorderColor(Color.parseColor("#73c4d9"));
+        }
+        if(text_winner.getText().equals("勝利方是朋友")){
+            Log.i("我在這裡M","4");
+            friend_single_image.setBorderWidth(5);
+            friend_single_image.setBorderColor(Color.parseColor("#73c4d9"));
+        }
 
 
 

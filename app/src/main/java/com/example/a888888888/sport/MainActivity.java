@@ -296,6 +296,7 @@ public class  MainActivity extends AppCompatActivity
         //circleLayout.setChangeCorner();
         circleLayout.setCanScroll(true);
 
+
         //username.setText("123456");
         menu = navigationView.getMenu();
         menu_email_login = menu.findItem(R.id.email_login);
@@ -379,7 +380,8 @@ public class  MainActivity extends AppCompatActivity
             }
         });
         mHanlder.postDelayed(task2,5000);
-
+        //circleLayout.animate().rotation(10);
+        Log.i("我來了這裡","我的天");
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -514,6 +516,7 @@ public class  MainActivity extends AppCompatActivity
             button_of_yoga_monitoring.setVisibility(View.VISIBLE);
             button_of_squats_monitoring.setVisibility(View.VISIBLE);
             button_of_crunches_monitoring.setVisibility(View.VISIBLE);
+            button_of_yoga_monitoring.animate().rotationX(20).start();
             //pieView.setVisibility(View.VISIBLE);
             mChart.setVisibility(View.VISIBLE);
             textView6.setVisibility(View.VISIBLE);

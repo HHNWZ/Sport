@@ -154,7 +154,9 @@
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
                     android:text="0"
-                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+
+                    android:textColor="@color/object_color"
                     android:layout_weight="1"/>
 
             </LinearLayout>
@@ -268,11 +270,12 @@
                     android:id="@+id/friend_squats_task_finish_count_data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="0"
+                    android:textStyle="bold"
+                    android:textColor="@color/object_color"
                     android:textSize="20sp"
-                    android:textColor="@color/text_color"
-                    android:visibility="invisible"
-                    android:layout_weight="1"/>
+                    android:visibility="invisible" />
 
             </LinearLayout>
 

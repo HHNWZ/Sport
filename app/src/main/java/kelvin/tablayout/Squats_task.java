@@ -44,7 +44,7 @@ public class Squats_task extends AppCompatActivity {
     private DatabaseReference squats_task_Database;
     private DatabaseReference squats_task_friendDatabase;
     private DatabaseReference squats_task_myDatabase;
-    private DatabaseReference squats_task_confirm_database;
+    private DatabaseReference kelvin_squats_today_count_database;
     private DatabaseReference squats_task_friend_point_database;
 
     private TextView squats_task_data;
@@ -108,7 +108,7 @@ public class Squats_task extends AppCompatActivity {
         squats_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         squats_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         squats_task_Database=FirebaseDatabase.getInstance().getReference();
-        squats_task_confirm_database=FirebaseDatabase.getInstance().getReference();
+        kelvin_squats_today_count_database=FirebaseDatabase.getInstance().getReference().child("Users");
         squats_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
 
         squats_task_seek_bar=(CircularSeekBar)findViewById(R.id.squats_task_seek_bar);
@@ -220,12 +220,17 @@ public class Squats_task extends AppCompatActivity {
                                                     squats_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     squats_task_Database.child("Squats_Task").child(myID).child("id").removeValue();
                                                     squats_task_friend_point_database.child("friend_point").setValue(squats_data.getMy_task_friend_point()+10);
+                                                    kelvin_squats_today_count_database.child("1jZbs9r78DM54p5FkzANcPruYSG3").child("exercise_count").child("squats").child("today_count").setValue(47);
                                                     squats_susses_text_view.setText("目前沒有朋友");
                                                     squats_susses_text_view_data.setVisibility(View.GONE);
                                                     squats_task_seek_bar.setProgress((0));
 
                                                     squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_squats_task_button.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(Squats_task.this,Exercise_main.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                    startActivity(intent);
                                                 }
                                             });
                                         }else if(squats_progress<squats_task_data_int){
