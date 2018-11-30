@@ -911,6 +911,11 @@ public class  MainActivity extends AppCompatActivity
 
                     }else{
                         circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
+                        button_of_walking_monitoring.animate().rotation(button_of_walking_monitoring.getRotation()-72).start();
+                        button_of_running_monitoring.animate().rotation(button_of_running_monitoring.getRotation()-72).start();
+                        button_of_yoga_monitoring.animate().rotation(button_of_yoga_monitoring.getRotation()-72).start();
+                        button_of_crunches_monitoring.animate().rotation(button_of_crunches_monitoring.getRotation()-72).start();
+                        button_of_squats_monitoring.animate().rotation(button_of_squats_monitoring.getRotation()-72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
 
 
@@ -922,15 +927,26 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                     }else {
                         circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
+                        button_of_walking_monitoring.animate().rotation(button_of_walking_monitoring.getRotation()-72).start();
+                        button_of_running_monitoring.animate().rotation(button_of_running_monitoring.getRotation()-72).start();
+                        button_of_yoga_monitoring.animate().rotation(button_of_yoga_monitoring.getRotation()-72).start();
+                        button_of_crunches_monitoring.animate().rotation(button_of_crunches_monitoring.getRotation()-72).start();
+                        button_of_squats_monitoring.animate().rotation(button_of_squats_monitoring.getRotation()-72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
                 case 3:
                     if(mAuth.getCurrentUser()==null){
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
+                        button_of_walking_monitoring.animate().rotation(button_of_walking_monitoring.getRotation()-72).start();
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }{
                         circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
+                        button_of_walking_monitoring.animate().rotation(button_of_walking_monitoring.getRotation()-72).start();
+                        button_of_running_monitoring.animate().rotation(button_of_running_monitoring.getRotation()-72).start();
+                        button_of_yoga_monitoring.animate().rotation(button_of_yoga_monitoring.getRotation()-72).start();
+                        button_of_crunches_monitoring.animate().rotation(button_of_crunches_monitoring.getRotation()-72).start();
+                        button_of_squats_monitoring.animate().rotation(button_of_squats_monitoring.getRotation()-72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
 
@@ -942,6 +958,11 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubuttonwhite);
                     }{
                         circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
+                        button_of_walking_monitoring.animate().rotation(button_of_walking_monitoring.getRotation()-72).start();
+                        button_of_running_monitoring.animate().rotation(button_of_running_monitoring.getRotation()-72).start();
+                        button_of_yoga_monitoring.animate().rotation(button_of_yoga_monitoring.getRotation()-72).start();
+                        button_of_crunches_monitoring.animate().rotation(button_of_crunches_monitoring.getRotation()-72).start();
+                        button_of_squats_monitoring.animate().rotation(button_of_squats_monitoring.getRotation()-72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
@@ -951,6 +972,11 @@ public class  MainActivity extends AppCompatActivity
                         mToolboar.setNavigationIcon(R.drawable.menubutton_object_color);
                     }{
                         circleLayout.animate().rotation(circleLayout.getRotation()+72).start();
+                        button_of_walking_monitoring.animate().rotation(button_of_walking_monitoring.getRotation()-72).start();
+                        button_of_running_monitoring.animate().rotation(button_of_running_monitoring.getRotation()-72).start();
+                        button_of_yoga_monitoring.animate().rotation(button_of_yoga_monitoring.getRotation()-72).start();
+                        button_of_crunches_monitoring.animate().rotation(button_of_crunches_monitoring.getRotation()-72).start();
+                        button_of_squats_monitoring.animate().rotation(button_of_squats_monitoring.getRotation()-72).start();
                         mChart.spin(500, mChart.getRotationAngle(), mChart.getRotationAngle() + 72, Easing.EasingOption.EaseInCubic);
                     }
                     break;
@@ -971,7 +997,7 @@ public class  MainActivity extends AppCompatActivity
             }
             mHanlder.sendEmptyMessage(count);
 
-            mHanlder.postDelayed(this, 1 * 500);//延迟5秒,再次执行task本身,实现了循环的效果
+            mHanlder.postDelayed(this, 1 * 1500);//延迟5秒,再次执行task本身,实现了循环的效果
 
         }
     };
