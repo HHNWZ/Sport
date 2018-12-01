@@ -94,9 +94,11 @@ import kelvin.tablayout.Squats_dare;
 import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
+import kelvin.tablayout.VideoPlayer;
 import kelvin.tablayout.WalkingDareFriendProfile;
 import kelvin.tablayout.WalkingTaskFriendProfile;
 import kelvin.tablayout.Walking_monitor;
+import kelvin.tablayout.WebView2;
 import kelvin.tablayout.YogaDareFriendProfile;
 import kelvin.tablayout.YogaMonitor;
 import kelvin.tablayout.YogaTaskFriendProfile;
@@ -890,7 +892,7 @@ public class  MainActivity extends AppCompatActivity
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PlayerActivity.class);
+                Intent intent = new Intent(MainActivity.this,WebView2.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
