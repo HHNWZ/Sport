@@ -49,6 +49,7 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
     private DatabaseReference myUsersDatabase;
     private DatabaseReference mUsersDatabase;
     private DatabaseReference mRootRef;
+    private DatabaseReference walking_dare_database;
     public static String my_image;
     private static FirebaseUser mCurrent_user;
     private String dare_state;
@@ -81,7 +82,9 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(friend_id);//朋友資料庫資料庫
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
         ReqWalkingDareDatabase=FirebaseDatabase.getInstance().getReference().child(Walking_Dare_Req);//步行挑戰邀請資料庫
-        WalkingDareDatabase=FirebaseDatabase.getInstance().getReference().child(Walking_Dare);//步行挑戰資料庫
+        WalkingDareDatabase=FirebaseDatabase.getInstance().getReference().child(Walking_Dare);
+        //步行挑戰資料庫
+        walking_dare_database=FirebaseDatabase.getInstance().getReference().child("Users");
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
         mProfileImage = (ImageView) findViewById(R.id.walking_dare_friend_profile_image);
         mProfileName = (TextView) findViewById(R.id.walking_dare_friend_profile_displayName);
@@ -162,6 +165,10 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="步行挑戰執行中";
                     mProfileSendReqBtn.setText("以接受步行挑戰");
+                    walking_dare_database.child(mCurrent_user.getUid()).child("walking_dare").child("distance").setValue(5);
+                    walking_dare_database.child(mCurrent_user.getUid()).child("walking_dare").child("time").setValue(1080000);
+                    walking_dare_database.child(friend_id).child("walking_dare").child("distance").setValue(5);
+                    walking_dare_database.child(friend_id).child("walking_dare").child("time").setValue(1200000);
                     Intent intent = new Intent(WalkingDareFriendProfile.this,Walking_dare.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -367,6 +374,10 @@ public class WalkingDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "步行挑戰執行中";
                                 mProfileSendReqBtn.setText("以接受步行挑戰");
+                                walking_dare_database.child(mCurrent_user.getUid()).child("walking_dare").child("distance").setValue(5);
+                                walking_dare_database.child(mCurrent_user.getUid()).child("walking_dare").child("time").setValue(1080000);
+                                walking_dare_database.child(friend_id).child("walking_dare").child("distance").setValue(5);
+                                walking_dare_database.child(friend_id).child("walking_dare").child("time").setValue(1200000);
                                 Intent intent = new Intent(WalkingDareFriendProfile.this,Walking_dare.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

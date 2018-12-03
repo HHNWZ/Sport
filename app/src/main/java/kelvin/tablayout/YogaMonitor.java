@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -46,6 +47,7 @@ public class YogaMonitor extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     private ActionBar yoga_monitor_action_bar;
     //public static String time;
+    private String from_page="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,9 @@ public class YogaMonitor extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
+        Bundle bundle=getIntent().getExtras();
+        from_page=bundle.getString("from_page");
+        Log.i("OnCreate的From_page",from_page);
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         yoga_monitor_toolbar=(Toolbar)findViewById(R.id.yoga_monitor_toolBar);
@@ -110,11 +115,19 @@ public class YogaMonitor extends AppCompatActivity {
             }
         }
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(YogaMonitor.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            return super.onOptionsItemSelected(item);
+            if(from_page.equals("ExercisePlanning")){
+                Intent intent = new Intent(YogaMonitor.this, MonitoringTool.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }else if(from_page.equals("MainActivity")){
+                Intent intent = new Intent(YogaMonitor.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }
         }
 
 
@@ -126,10 +139,17 @@ public class YogaMonitor extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void onBackPressed(){
-        Intent intent = new Intent(YogaMonitor.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        if(from_page.equals("ExercisePlanning")){
+            Intent intent = new Intent(YogaMonitor.this, MonitoringTool.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }else if(from_page.equals("MainActivity")){
+            Intent intent = new Intent(YogaMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
     }
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
 
@@ -313,6 +333,36 @@ public class YogaMonitor extends AppCompatActivity {
 
                 }
             });
+            if(from_page.equals("ExercisePlanning")){
+                Log.i("我在這裡","1");
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("exercise_plan").hasChild("yoga")&&from_page.equals("ExercisePlanning")&&dataSnapshot.child("exercise_plan").hasChild("yoga_check_time")){
+                            Log.i("我在這裡","2");
+                            String yoga_now_plan=dataSnapshot.child("exercise_plan").child("yoga").getValue().toString();
+                            String yoga_date_check=dataSnapshot.child("exercise_plan").child("yoga_check_time").getValue().toString();
+                            int yoga_now_plan_int=Integer.parseInt(yoga_now_plan);
+                            if(!yoga_date_check.equals(Time.get_start_time(yoga_start_time))){
+                                Log.i("我在這裡","3");
+                                mDatabase.child("exercise_plan").child("yoga_check_time").setValue(Time.get_start_time(yoga_start_time));
+                                if(yoga_mean_heart_rate<160){
+                                    Log.i("我在這裡","4");
+                                    int yoga_before_plan_int=yoga_now_plan_int+20;
+                                    mDatabase.child("exercise_plan").child("yoga").setValue(yoga_before_plan_int);
+                                    Toast.makeText(YogaMonitor.this,"你的心跳低於正常所以把你的運動方案的瑜伽量提高",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
 
         }

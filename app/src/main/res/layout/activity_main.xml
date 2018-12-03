@@ -155,7 +155,7 @@
                                     android:background="@drawable/main_border"
                                     android:padding="5dp"
                                     android:drawableTop="@drawable/stream1"
-                                    android:text="直播"
+                                    android:text="運動教學"
                                     android:textColor="#ffffff" />
 
                             </LinearLayout>

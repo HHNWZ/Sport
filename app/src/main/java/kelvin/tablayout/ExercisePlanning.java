@@ -170,6 +170,48 @@ public class ExercisePlanning extends Fragment {
                 startActivity(intent);
             }
         });
+        running_exercise_planning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),RunningMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExercisePlanning");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        walking_exercise_planning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Walking_monitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExercisePlanning");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        yoga_exercise_planning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),YogaMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExercisePlanning");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        crunches_exercise_planning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),CrunchesMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExercisePlanning");
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         exercise_plan_database.addValueEventListener(new ValueEventListener() {

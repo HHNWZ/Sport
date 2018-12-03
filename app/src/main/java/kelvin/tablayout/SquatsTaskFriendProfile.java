@@ -201,7 +201,7 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
 
                                 Toast.makeText(SquatsTaskFriendProfile.this, "發送請求時出錯", Toast.LENGTH_SHORT).show();
                             }else{
-                                SquatsDatabase.child(friend_id).child("exercise_count").child("squats").child("today_count").setValue(40);
+                                //SquatsDatabase.child(friend_id).child("exercise_count").child("squats").child("today_count").setValue(40);
                                 task_state = "發送請求";
                                 mProfileSendReqBtn.setText("取消深蹲共同任務");
                             }

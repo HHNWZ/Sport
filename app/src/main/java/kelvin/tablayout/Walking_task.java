@@ -78,7 +78,7 @@ public class Walking_task extends AppCompatActivity {
     private static double walking_task_friend_count_double;
     private static double walking_progress;
     private static double walking_task_data_double;
-
+    private DatabaseReference kelvin_walking_today_count_database;
     private Data walking_data=new Data();
     public CircularSeekBar walking_task_seek_bar;
     private String myID;
@@ -104,6 +104,7 @@ public class Walking_task extends AppCompatActivity {
         walking_task_Database=FirebaseDatabase.getInstance().getReference();
         walking_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         walking_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
+        kelvin_walking_today_count_database=FirebaseDatabase.getInstance().getReference().child("Users");
 
         walking_task_seek_bar=(CircularSeekBar)findViewById(R.id.walking_task_seek_bar);
         walking_task_data=(TextView)findViewById(R.id.walking_task_data);
@@ -125,7 +126,7 @@ public class Walking_task extends AppCompatActivity {
         walking_task_friend_point2=(TextView)findViewById(R.id.walking_task_friend_point2);
         confirm_walking_task_button=(Button)findViewById(R.id.confirm_walking_task_button);
 
-        walking_task_data.setText("100");
+        walking_task_data.setText("30");
         walking_task_seek_bar.setMax(Float.parseFloat(walking_task_data.getText().toString()));
         walking_susses_text_view.setText("目前沒有朋友");
 
@@ -152,7 +153,7 @@ public class Walking_task extends AppCompatActivity {
                     Picasso.get().load(walking_task_my_image).into(my_walking_task_image);
                 }
 
-                walking_task_Database.child("Walking_Task").addValueEventListener(new ValueEventListener() {
+                walking_task_Database.child("Task_walking").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(myID)){
@@ -174,7 +175,7 @@ public class Walking_task extends AppCompatActivity {
                                         walking_task_friend_count_double = Double.parseDouble(walking_task_friend_count);
 
                                         friend_walking_task_name.setText(walking_task_friend_name);
-                                        friend_walking_task_finish_count_data.setText(walking_task_friend_count + "次");
+                                        friend_walking_task_finish_count_data.setText(walking_task_friend_count + "公里");
 
 
                                         if (walking_task_friend_image.equals("default")) {
@@ -209,17 +210,22 @@ public class Walking_task extends AppCompatActivity {
                                                     walking_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     walking_task_Database.child("Task_walking").child(myID).child("id").removeValue();
                                                     walking_task_friend_point_database.child("friend_point").setValue(walking_data.getMy_task_friend_point() + 10);
+                                                    kelvin_walking_today_count_database.child("1jZbs9r78DM54p5FkzANcPruYSG3").child("exercise_count").child("walking").child("today_record").setValue(14);
                                                     walking_susses_text_view.setText("目前沒有朋友");
                                                     walking_susses_text_view_data.setVisibility(View.GONE);
                                                     walking_task_seek_bar.setProgress((0));
                                                     walking_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_walking_task_button.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(Walking_task.this,Exercise_main.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                    startActivity(intent);
                                                 }
                                             });
                                         } else if (walking_progress < walking_task_data_double) {
                                             walking_susses_text_view.setText("你們目前完成");
                                             walking_susses_text_view_data.setVisibility(View.VISIBLE);
-                                            walking_susses_text_view_data.setText(walking_progress+"次");
+                                            walking_susses_text_view_data.setText(walking_progress+"公里");
                                             walking_task_seek_bar.setProgress((float) walking_progress);
                                         }
 
@@ -278,7 +284,7 @@ public class Walking_task extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.task_friend:
-                    Intent intent = new Intent(Walking_task.this,FriendActivity.class);
+                    Intent intent = new Intent(Walking_task.this,WalkingTaskFriend.class);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.a888888888.sport.MainActivity;
@@ -46,6 +47,7 @@ public class CrunchesMonitor extends AppCompatActivity {
     private static DatabaseReference mDatabase;
     private static FirebaseAuth mAuth;
     private ActionBar crunches_monitor_action_bar;
+    private String from_page="";
 
 
     @Override
@@ -57,6 +59,9 @@ public class CrunchesMonitor extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
+        Bundle bundle=getIntent().getExtras();
+        from_page=bundle.getString("from_page");
+        Log.i("OnCreate的From_page",from_page);
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         crunches_monitor_toolbar=(Toolbar)findViewById(R.id.crunches_monitor_toolbar);
@@ -110,11 +115,20 @@ public class CrunchesMonitor extends AppCompatActivity {
             }
         }
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(CrunchesMonitor.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            return super.onOptionsItemSelected(item);
+            if(from_page.equals("ExercisePlanning")){
+                Intent intent = new Intent(CrunchesMonitor.this, MonitoringTool.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }else if(from_page.equals("MainActivity")){
+                Intent intent = new Intent(CrunchesMonitor.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }
+
         }
 
         //noinspection SimplifiableIfStatement
@@ -126,10 +140,19 @@ public class CrunchesMonitor extends AppCompatActivity {
     }
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(CrunchesMonitor.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        if(from_page.equals("ExercisePlanning")){
+            Intent intent = new Intent(CrunchesMonitor.this, MonitoringTool.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+
+        }else if(from_page.equals("MainActivity")){
+            Intent intent = new Intent(CrunchesMonitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+
+        }
     }
 
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
@@ -308,13 +331,6 @@ public class CrunchesMonitor extends AppCompatActivity {
                         mDatabase.child("crunches_all_count_sort").setValue(-all_count1);
 
                     }
-
-
-
-
-
-
-
                 }
 
                 @Override
@@ -322,7 +338,36 @@ public class CrunchesMonitor extends AppCompatActivity {
 
                 }
             });
+            if(from_page.equals("ExercisePlanning")){
+                Log.i("我在這裡","1");
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("exercise_plan").hasChild("crunches")&&from_page.equals("ExercisePlanning")&&dataSnapshot.child("exercise_plan").hasChild("crunches_check_time")){
+                            Log.i("我在這裡","2");
+                            String crunches_now_plan=dataSnapshot.child("exercise_plan").child("crunches").getValue().toString();
+                            String crunches_date_check=dataSnapshot.child("exercise_plan").child("crunches_check_time").getValue().toString();
+                            int crunches_now_plan_int=Integer.parseInt(crunches_now_plan);
+                            if(!crunches_date_check.equals(Time.get_start_time(crunches_start_time))){
+                                Log.i("我在這裡","3");
+                                mDatabase.child("exercise_plan").child("crunches_check_time").setValue(Time.get_start_time(crunches_start_time));
+                                if(crunches_mean_heart_rate<160){
+                                    Log.i("我在這裡","4");
+                                    int crunches_before_plan_int=crunches_now_plan_int+20;
+                                    mDatabase.child("exercise_plan").child("crunches").setValue(crunches_before_plan_int);
+                                    Toast.makeText(CrunchesMonitor.this,"你的心跳低於正常所以把你的運動方案的仰臥起坐量提高",Toast.LENGTH_SHORT).show();
+                                }
+                            }
 
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
 
         }
     }

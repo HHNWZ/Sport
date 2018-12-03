@@ -43,7 +43,7 @@ public class Yoga_task extends AppCompatActivity {
     private DatabaseReference yoga_task_Database;
     private DatabaseReference yoga_task_friendDatabase;
     private DatabaseReference yoga_task_myDatabase;
-    private DatabaseReference yoga_task_confirm_database;
+    private DatabaseReference kelvin_yoga_today_count_database;
     private DatabaseReference yoga_task_friend_point_database;
 
     private TextView yoga_task_data;
@@ -107,7 +107,7 @@ public class Yoga_task extends AppCompatActivity {
         yoga_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         yoga_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         yoga_task_Database=FirebaseDatabase.getInstance().getReference();
-        yoga_task_confirm_database=FirebaseDatabase.getInstance().getReference();
+        kelvin_yoga_today_count_database=FirebaseDatabase.getInstance().getReference().child("Users");
         yoga_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
 
         yoga_task_seek_bar=(CircularSeekBar)findViewById(R.id.yoga_task_seek_bar);
@@ -215,11 +215,16 @@ public class Yoga_task extends AppCompatActivity {
                                                     yoga_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     yoga_task_Database.child("Task_yoga").child(myID).child("id").removeValue();
                                                     yoga_task_friend_point_database.child("friend_point").setValue(yoga_data.getMy_task_friend_point() + 10);
+                                                    kelvin_yoga_today_count_database.child("1jZbs9r78DM54p5FkzANcPruYSG3").child("exercise_count").child("yoga").child("today_time").setValue(1140000);
                                                     yoga_susses_text_view.setText("目前沒有朋友");
                                                     yoga_susses_text_view_data.setVisibility(View.GONE);
                                                     yoga_task_seek_bar.setProgress((0));
                                                     yoga_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_yoga_task_button.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(Yoga_task.this,Exercise_main.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                    startActivity(intent);
                                                 }
                                             });
                                         } else if (yoga_progress < yoga_task_data_long) {
@@ -282,7 +287,7 @@ public class Yoga_task extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.task_friend:
-                    Intent intent = new Intent(Yoga_task.this,FriendActivity.class);
+                    Intent intent = new Intent(Yoga_task.this,YogaTaskFriend.class);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

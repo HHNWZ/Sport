@@ -48,6 +48,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
     private DatabaseReference CrunchesDareDatabase;
     private DatabaseReference myUsersDatabase;
     private DatabaseReference mUsersDatabase;
+    private DatabaseReference crunches_dare_database;
     private DatabaseReference mRootRef;
     public static String my_image;
     private static FirebaseUser mCurrent_user;
@@ -83,6 +84,7 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
         ReqCrunchesDareDatabase=FirebaseDatabase.getInstance().getReference().child(Crunches_Dare_Req);//仰臥起坐挑戰邀請資料庫
         CrunchesDareDatabase=FirebaseDatabase.getInstance().getReference().child(Crunches_Dare);//仰臥起坐挑戰資料庫
+        crunches_dare_database=FirebaseDatabase.getInstance().getReference().child("Users");
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
         mProfileImage = (ImageView) findViewById(R.id.crunches_dare_friend_profile_image);
         mProfileName = (TextView) findViewById(R.id.crunches_dare_friend_profile_displayName);
@@ -163,6 +165,10 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="仰臥起坐挑戰執行中";
                     mProfileSendReqBtn.setText("已接受仰臥起坐挑戰");
+                    crunches_dare_database.child(mCurrent_user.getUid()).child("crunches_dare").child("count").setValue(20);
+                    crunches_dare_database.child(mCurrent_user.getUid()).child("crunches_dare").child("time").setValue(71000);
+                    crunches_dare_database.child(friend_id).child("crunches_dare").child("count").setValue(20);
+                    crunches_dare_database.child(friend_id).child("crunches_dare").child("time").setValue(120000);
                     Intent intent = new Intent(CrunchesDareFriendProfile.this,Crunches_dare.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -367,6 +373,10 @@ public class CrunchesDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "仰臥起坐挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受仰臥起坐挑戰");
+                                crunches_dare_database.child(mCurrent_user.getUid()).child("crunches_dare").child("count").setValue(20);
+                                crunches_dare_database.child(mCurrent_user.getUid()).child("crunches_dare").child("time").setValue(71000);
+                                crunches_dare_database.child(friend_id).child("crunches_dare").child("count").setValue(20);
+                                crunches_dare_database.child(friend_id).child("crunches_dare").child("time").setValue(120000);
                                 Intent intent = new Intent(CrunchesDareFriendProfile.this,Crunches_dare.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

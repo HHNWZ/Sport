@@ -86,6 +86,7 @@ public class Running_task extends AppCompatActivity {
     public CircularSeekBar running_task_seek_bar;
     private String myID;
     private TextView running_susses_text_view_data;
+    private DatabaseReference kelvin_running_today_count_database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,7 @@ public class Running_task extends AppCompatActivity {
         running_task_Database=FirebaseDatabase.getInstance().getReference();
         running_task_confirm_database=FirebaseDatabase.getInstance().getReference();
         running_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
+        kelvin_running_today_count_database=FirebaseDatabase.getInstance().getReference().child("Users");
 
         running_task_seek_bar=(CircularSeekBar)findViewById(R.id.running_task_seek_bar);
         running_task_data=(TextView)findViewById(R.id.running_task_data);
@@ -218,11 +220,16 @@ public class Running_task extends AppCompatActivity {
                                                     running_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     running_task_Database.child("Task_running").child(myID).child("id").removeValue();
                                                     running_task_friend_point_database.child("friend_point").setValue(running_data.getMy_task_friend_point() + 10);
+                                                    kelvin_running_today_count_database.child("1jZbs9r78DM54p5FkzANcPruYSG3").child("exercise_count").child("running").child("today_record").setValue(14);
                                                     running_susses_text_view.setText("目前沒有朋友");
                                                     running_susses_text_view_data.setVisibility(View.GONE);
                                                     running_task_seek_bar.setProgress((0));
                                                     running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_running_task_button.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(Running_task.this,Exercise_main.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                    startActivity(intent);
                                                 }
                                             });
                                         } else if (running_progress < running_task_data_double) {
@@ -287,7 +294,7 @@ public class Running_task extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.task_friend:
-                    Intent intent = new Intent(Running_task.this,FriendActivity.class);
+                    Intent intent = new Intent(Running_task.this,RunningTaskFriend.class);
                     startActivity(intent);
                     Log.i("點擊","成功");
                     break;

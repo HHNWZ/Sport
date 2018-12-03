@@ -334,6 +334,9 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, Walking_monitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","MainActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -343,7 +346,9 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, RunningMonitor.class);
-
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","MainActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -354,6 +359,9 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, YogaMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","MainActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -377,6 +385,9 @@ public class  MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, CrunchesMonitor.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","MainActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }

@@ -54,8 +54,8 @@ public class WalkingTaskFriendProfile extends AppCompatActivity {
     private String task_state;
     public String Fid;
     public static String my_name;
-    public static String Walking_Task_Req="Walking_Task_Req";
-    public static String Walking_Task="Walking_Task";
+    public static String Walking_Task_Req="Task_req_walking";
+    public static String Walking_Task="Task_walking";
     public String Uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,11 +163,13 @@ public class WalkingTaskFriendProfile extends AppCompatActivity {
                 if(dataSnapshot.hasChild("id")){
                     task_state="不行共同任務執行中";
                     mProfileSendReqBtn.setText("已接受不行共同任務");
+                    Log.i("我在wfp",""+1);
                     Intent intent = new Intent(WalkingTaskFriendProfile.this,Walking_task.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     finish();
                     startActivity(intent);
+                    Log.i("我在wfp",""+2);
                 }
             }
 
@@ -366,11 +368,13 @@ public class WalkingTaskFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 task_state = "不行共同任務執行中";
                                 mProfileSendReqBtn.setText("已接受不行共同任務");
+                                Log.i("我在wfp",""+3);
                                 Intent intent = new Intent(WalkingTaskFriendProfile.this,Walking_task.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 finish();
                                 startActivity(intent);
+                                Log.i("我在wfp",""+4);
                             } else {
 
                                 String error = databaseError.getMessage();

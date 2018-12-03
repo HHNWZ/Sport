@@ -351,7 +351,7 @@ public class SquatsMonitor extends AppCompatActivity {
                                     Log.i("我在這裡","4");
                                     int squats_before_plan_int=squats_now_plan_int+20;
                                     mDatabase.child("exercise_plan").child("squats").setValue(squats_before_plan_int);
-                                    Toast.makeText(SquatsMonitor.this,"你的心跳低於正常所以把你的運動方案的運動量提供",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SquatsMonitor.this,"你的心跳低於正常所以把你的運動方案的深蹲量提高",Toast.LENGTH_SHORT).show();
                                 }
                             }
 

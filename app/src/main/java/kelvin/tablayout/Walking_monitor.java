@@ -55,6 +55,7 @@ public class Walking_monitor extends AppCompatActivity {
 
     public byte[]walking_location;
     private ActionBar walking_monitor_action_bar;
+    private String from_page="";
 
 
 
@@ -67,6 +68,9 @@ public class Walking_monitor extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
+        Bundle bundle=getIntent().getExtras();
+        from_page=bundle.getString("from_page");
+        Log.i("OnCreate的From_page",from_page);
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         keydatabse=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("walking");
@@ -123,11 +127,19 @@ public class Walking_monitor extends AppCompatActivity {
         }
 
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(Walking_monitor.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
-            return super.onOptionsItemSelected(item);
+            if(from_page.equals("ExercisePlanning")){
+                Intent intent = new Intent(Walking_monitor.this, MonitoringTool.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }else if(from_page.equals("MainActivity")){
+                Intent intent = new Intent(Walking_monitor.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+            }
         }
 
         //noinspection SimplifiableIfStatement
@@ -138,10 +150,17 @@ public class Walking_monitor extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void onBackPressed(){
-        Intent intent = new Intent(Walking_monitor.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        if(from_page.equals("ExercisePlanning")){
+            Intent intent = new Intent(Walking_monitor.this, MonitoringTool.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }else if(from_page.equals("MainActivity")){
+            Intent intent = new Intent(Walking_monitor.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
     }
     private final HealthDataStore.ConnectionListener mConnectionListener = new HealthDataStore.ConnectionListener() {
 
@@ -364,6 +383,36 @@ public class Walking_monitor extends AppCompatActivity {
 
                 }
             });
+            if(from_page.equals("ExercisePlanning")){
+                Log.i("我在這裡","1");
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.child("exercise_plan").hasChild("walking")&&from_page.equals("ExercisePlanning")&&dataSnapshot.child("exercise_plan").hasChild("walking_check_time")){
+                            Log.i("我在這裡","2");
+                            String walking_now_plan=dataSnapshot.child("exercise_plan").child("walking").getValue().toString();
+                            String walking_date_check=dataSnapshot.child("exercise_plan").child("walking_check_time").getValue().toString();
+                            double walking_now_plan_double=Double.parseDouble(walking_now_plan);
+                            if(!walking_date_check.equals(Time.get_start_time(walking_start_time))){
+                                Log.i("我在這裡","3");
+                                mDatabase.child("exercise_plan").child("walking_check_time").setValue(Time.get_start_time(walking_start_time));
+                                if(walking_mean_heart_rate<160){
+                                    Log.i("我在這裡","4");
+                                    double walking_before_plan_double=walking_now_plan_double+16.5;
+                                    mDatabase.child("exercise_plan").child("walking").setValue(walking_before_plan_double);
+                                    Toast.makeText(Walking_monitor.this,"你的心跳低於正常所以把你的運動方案的步行量提高",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
         }
     }
 

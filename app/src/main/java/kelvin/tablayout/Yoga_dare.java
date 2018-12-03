@@ -77,6 +77,7 @@ public class Yoga_dare extends AppCompatActivity {
     private static int Int_friend_point;
     private static long Long_exercise_week_dat;
     private String myID;
+    private DatabaseReference yoga_dare_database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +123,7 @@ public class Yoga_dare extends AppCompatActivity {
 
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
-        exercise_week_data.setText("10");
+        exercise_week_data.setText("20");
         myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -186,12 +187,12 @@ public class Yoga_dare extends AppCompatActivity {
                                         } else {
                                             Picasso.get().load(friendImage).into(friend_single_image);
                                         }
-                                        Log.i("1", "" + yoga_dare_data.getYoga_dare_myFinishTime());
-                                        Log.i("12", "" + yoga_dare_data.getYoga_dare_myCalorie());
-                                        Log.i("123", "" + FriendFinishTimeLong);
-                                        Log.i("1234", "" + FriendCalorieInt);
+                                        Log.i("我在yoga_dare1", "" + yoga_dare_data.getYoga_dare_myFinishTime());
+                                        Log.i("我在yoga_dare2", "" + yoga_dare_data.getYoga_dare_myCalorie());
+                                        Log.i("我在yoga_dare3", "" + FriendFinishTimeLong);
+                                        Log.i("我在yoga_dare4", "" + FriendCalorieInt);
                                         Int_exercise_week_dat = Long.parseLong(exercise_week_data.getText().toString()) * 60 * 1000;
-
+                                        Log.i("我在yoga_dare5",""+Int_exercise_week_dat);
                                         if (yoga_dare_data.getYoga_dare_myFinishTime() == Int_exercise_week_dat && FriendFinishTimeLong == Int_exercise_week_dat && yoga_dare_data.getYoga_dare_myCalorie() != 0 && FriendCalorieInt != 0 && text_VS.getVisibility() == View.VISIBLE) {
 
                                             if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0) {
@@ -223,11 +224,19 @@ public class Yoga_dare extends AppCompatActivity {
                                                     if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt) {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Yoga_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(Yoga_dare.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        startActivity(intent);
                                                     } else if (yoga_dare_data.getYoga_dare_myCalorie() > FriendCalorieInt) {
                                                         Log.i("你之前的friend_pint", "" + yoga_dare_data.getYoga_dare_friend_point());
                                                         friend_point_database.child("friend_point").setValue(yoga_dare_data.getYoga_dare_friend_point() + 10);
                                                         Log.i("勝利方是:", "你");
                                                         Toast.makeText(Yoga_dare.this, "你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        Intent intent = new Intent(Yoga_dare.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        startActivity(intent);
                                                     }
 
 

@@ -42,7 +42,7 @@ public class Crunches_task extends AppCompatActivity {
     private DatabaseReference crunches_task_Database;
     private DatabaseReference crunches_task_friendDatabase;
     private DatabaseReference crunches_task_myDatabase;
-    private DatabaseReference crunches_task_confirm_database;
+    private DatabaseReference kelvin_crunches_today_count_database;
     private DatabaseReference crunches_task_friend_point_database;
 
     private TextView crunches_task_data;
@@ -109,7 +109,7 @@ public class Crunches_task extends AppCompatActivity {
         crunches_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         crunches_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         crunches_task_Database=FirebaseDatabase.getInstance().getReference();
-        crunches_task_confirm_database=FirebaseDatabase.getInstance().getReference();
+        kelvin_crunches_today_count_database=FirebaseDatabase.getInstance().getReference().child("Users");
         crunches_task_friendDatabase=FirebaseDatabase.getInstance().getReference().child("Users");
 
         crunches_task_seek_bar=(CircularSeekBar)findViewById(R.id.crunches_task_seek_bar);
@@ -216,11 +216,16 @@ public class Crunches_task extends AppCompatActivity {
                                                     crunches_task_friend_point2.setVisibility(View.INVISIBLE);
                                                     crunches_task_Database.child("Task_crunches").child(myID).child("id").removeValue();
                                                     crunches_task_friend_point_database.child("friend_point").setValue(crunches_data.getMy_task_friend_point() + 10);
+                                                    kelvin_crunches_today_count_database.child("1jZbs9r78DM54p5FkzANcPruYSG3").child("exercise_count").child("crunches").child("today_count").setValue(47);
                                                     crunches_susses_text_view.setText("目前沒有朋友");
                                                     crunches_susses_text_view_data.setVisibility(View.GONE);
                                                     crunches_task_seek_bar.setProgress((0));
                                                     crunches_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_crunches_task_button.setVisibility(View.INVISIBLE);
+                                                    Intent intent = new Intent(Crunches_task.this,Exercise_main.class);
+                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                    startActivity(intent);
                                                 }
                                             });
                                         } else if (crunches_progress < crunches_task_data_int) {

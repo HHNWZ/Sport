@@ -226,12 +226,20 @@ public class Crunches_dare extends AppCompatActivity {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Crunches_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
                                                         crunches_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                        Intent intent = new Intent(Crunches_dare.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        startActivity(intent);
                                                     } else if (crunches_dare_data.getCrunches_dare_myFinishTime() < FriendFinishTimeLong) {
                                                         Log.i("你之前的friend_pint", "" + crunches_dare_data.getCrunches_dare_friend_point());
                                                         friend_point_database.child("friend_point").setValue(crunches_dare_data.getCrunches_dare_friend_point() + 10);
                                                         Log.i("勝利方是:", "你");
                                                         Toast.makeText(Crunches_dare.this, "你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
                                                         crunches_dare_app_bar.setOnMenuItemClickListener(onMenuItemClickListener);
+                                                        Intent intent = new Intent(Crunches_dare.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        startActivity(intent);
                                                     }
 
 

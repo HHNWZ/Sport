@@ -49,6 +49,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
     private DatabaseReference myUsersDatabase;
     private DatabaseReference mUsersDatabase;
     private DatabaseReference mRootRef;
+    private DatabaseReference yoga_dare_database;
     public static String my_image;
     private static FirebaseUser mCurrent_user;
     private String dare_state;
@@ -84,6 +85,7 @@ public class YogaDareFriendProfile extends AppCompatActivity {
         myUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");//使用者資料庫
         ReqYogaDareDatabase=FirebaseDatabase.getInstance().getReference().child(Yoga_Dare_Req);//瑜伽挑戰邀請資料庫
         YogaDareDatabase=FirebaseDatabase.getInstance().getReference().child(Yoga_Dare);//瑜伽挑戰資料庫
+        yoga_dare_database=FirebaseDatabase.getInstance().getReference().child("Users");
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
         mProfileImage = (ImageView) findViewById(R.id.yoga_dare_friend_profile_image);
         mProfileName = (TextView) findViewById(R.id.yoga_dare_friend_profile_displayName);
@@ -167,6 +169,10 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                     dare_state="瑜伽挑戰執行中";
                     Log.i("我在這裡","gogo");
                     mProfileSendReqBtn.setText("已接受瑜伽挑戰");
+                    yoga_dare_database.child(mCurrent_user.getUid()).child("yoga_dare").child("calorie").setValue(100);
+                    yoga_dare_database.child(mCurrent_user.getUid()).child("yoga_dare").child("time").setValue(1200000);
+                    yoga_dare_database.child(friend_id).child("yoga_dare").child("calorie").setValue(78);
+                    yoga_dare_database.child(friend_id).child("yoga_dare").child("time").setValue(1200000);
                     Intent intent = new Intent(YogaDareFriendProfile.this,Yoga_dare.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -372,6 +378,10 @@ public class YogaDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "瑜伽挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受瑜伽挑戰");
+                                yoga_dare_database.child(mCurrent_user.getUid()).child("yoga_dare").child("calorie").setValue(100);
+                                yoga_dare_database.child(mCurrent_user.getUid()).child("yoga_dare").child("time").setValue(1200000);
+                                yoga_dare_database.child(friend_id).child("yoga_dare").child("calorie").setValue(78);
+                                yoga_dare_database.child(friend_id).child("yoga_dare").child("time").setValue(1200000);
                                 Intent intent = new Intent(YogaDareFriendProfile.this,Yoga_dare.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

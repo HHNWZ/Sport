@@ -48,6 +48,7 @@ public class RunningDareFriendProfile extends AppCompatActivity {
     private DatabaseReference RunningDareDatabase;
     private DatabaseReference myUsersDatabase;
     private DatabaseReference mUsersDatabase;
+    private DatabaseReference running_dare_database;
     private DatabaseReference mRootRef;
     public static String my_image;
     private static FirebaseUser mCurrent_user;
@@ -84,10 +85,13 @@ public class RunningDareFriendProfile extends AppCompatActivity {
         ReqRunningDareDatabase=FirebaseDatabase.getInstance().getReference().child(Running_Dare_Req);//跑步挑戰邀請資料庫
         RunningDareDatabase=FirebaseDatabase.getInstance().getReference().child(Running_Dare);//跑步挑戰資料庫
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();//得到自己的會員id
+
         mProfileImage = (ImageView) findViewById(R.id.running_dare_friend_profile_image);
         mProfileName = (TextView) findViewById(R.id.running_dare_friend_profile_displayName);
         mProfileSendReqBtn = (Button) findViewById(R.id.profile_send_req_btn);//發送朋友請求按鈕
         delete_send_req_btn=(Button)findViewById(R.id.delete_send_req_btn);
+        running_dare_database=FirebaseDatabase.getInstance().getReference().child("Users");
+
 
         dare_state="還沒有發送";
 
@@ -163,6 +167,10 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                 if(dataSnapshot.hasChild("id")){
                     dare_state="跑步挑戰執行中";
                     mProfileSendReqBtn.setText("已接受跑步挑戰");
+                    running_dare_database.child(mCurrent_user.getUid()).child("running_dare").child("distance").setValue(5);
+                    running_dare_database.child(mCurrent_user.getUid()).child("running_dare").child("time").setValue(1080000);
+                    running_dare_database.child(friend_id).child("running_dare").child("distance").setValue(5);
+                    running_dare_database.child(friend_id).child("running_dare").child("time").setValue(1200000);
                     Intent intent = new Intent(RunningDareFriendProfile.this,Running_dare.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -367,6 +375,10 @@ public class RunningDareFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setEnabled(true);
                                 dare_state = "跑步挑戰執行中";
                                 mProfileSendReqBtn.setText("已接受跑步挑戰");
+                                running_dare_database.child(mCurrent_user.getUid()).child("running_dare").child("distance").setValue(5);
+                                running_dare_database.child(mCurrent_user.getUid()).child("running_dare").child("time").setValue(1080000);
+                                running_dare_database.child(friend_id).child("running_dare").child("distance").setValue(5);
+                                running_dare_database.child(friend_id).child("running_dare").child("time").setValue(1200000);
                                 Intent intent = new Intent(RunningDareFriendProfile.this,Running_dare.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
