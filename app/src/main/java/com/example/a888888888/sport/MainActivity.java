@@ -74,6 +74,7 @@ import kelvin.tablayout.ControlDie;
 import kelvin.tablayout.CrunchesDareFriendProfile;
 import kelvin.tablayout.CrunchesMonitor;
 import kelvin.tablayout.CrunchesTaskFriendProfile;
+import kelvin.tablayout.ExerciseTeaching;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.GlobalVariable;
 import kelvin.tablayout.Live;
@@ -903,7 +904,7 @@ public class  MainActivity extends AppCompatActivity
         over.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,WebView2.class);
+                Intent intent = new Intent(MainActivity.this,ExerciseTeaching.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,6 +17,7 @@ import com.onesignal.OneSignal;
 
 public class WebView2 extends AppCompatActivity {
     private WebView webView;
+    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +34,12 @@ public class WebView2 extends AppCompatActivity {
             activity_web_view_action_bar.setTitle("運動姿勢調整");
             activity_web_view_action_bar.setDisplayHomeAsUpEnabled(true);
         }*/
+        Bundle bundle=getIntent().getExtras();
+        url=bundle.getString("URL");
+        Log.i("OnCreate的URL",url);
         webView=findViewById(R.id.web_view);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://192.168.0.3:5500/video_feed");
+        webView.loadUrl(url);
         WebSettings webSettings=webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.getSettings().setUseWideViewPort(true);
@@ -44,7 +49,7 @@ public class WebView2 extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home){
-            Intent intent = new Intent(WebView2.this,MainActivity.class);
+            Intent intent = new Intent(WebView2.this,ExerciseTeaching.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -54,7 +59,7 @@ public class WebView2 extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(WebView2.this,MainActivity.class);
+        Intent intent = new Intent(WebView2.this,ExerciseTeaching.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);

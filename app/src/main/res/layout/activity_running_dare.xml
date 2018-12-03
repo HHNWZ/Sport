@@ -83,14 +83,33 @@
                 android:padding="5dp"
                 android:gravity="center">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/user_single_image"
-                    android:layout_width="64dp"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:src="@drawable/default_avatar"
-                    android:gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    >
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_single_image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/default_avatar"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+
+                        />
+
+                    <ImageView
+                        android:id="@+id/my_win_icon"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginBottom="0dp"
+                        android:src="@drawable/win_icon"
+                        android:visibility="invisible" />
+
+                </RelativeLayout>
                 <TextView
                     android:id="@+id/user_single_name"
                     android:layout_width="wrap_content"
@@ -153,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/text_VS"
                     android:text="VS"
-                    android:layout_weight="1"
+
                     android:textSize="70sp"
                     android:visibility="invisible"
                     android:gravity="center"
@@ -163,17 +182,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_winner"
-                    android:text="勝利者是"
+                    android:text="勝利方"
                     android:textSize="25sp"
-                    android:layout_weight="1"
+
                     android:visibility="invisible"
                     android:gravity="center"
                     android:textColor="@color/text_color"
                     />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/win_arrow"
+                    android:src="@drawable/right_arrow"
+                    android:visibility="invisible"
+                    android:layout_weight="1"/>
                 <Button
                     android:id="@+id/confirm_dare"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="確認"
                     android:visibility="invisible"
                     android:background="@drawable/button"
@@ -191,15 +217,31 @@
                 android:padding="5dp"
                 android:gravity="center">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/friend_single_image"
-                    android:layout_width="64dp"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="64dp"
-                    android:src="@drawable/default_avatar"
-                    android:gravity="center"
                     android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:visibility="invisible"/>
+                    >
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/friend_single_image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/default_avatar"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/friend_win_icon"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/win_icon"
+                        android:visibility="invisible"/>
+
+                </RelativeLayout>
                 <TextView
                     android:id="@+id/friend_single_name"
                     android:layout_width="wrap_content"

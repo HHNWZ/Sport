@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +76,7 @@ public class Walking_dare extends AppCompatActivity {
     private static int Int_exercise_week_dat;
     private static int Int_friend_point;
     private String myID;
+    private ImageView my_win_icon,friend_win_icon,win_arrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +120,9 @@ public class Walking_dare extends AppCompatActivity {
         friend_walking_finish_distance=(TextView)findViewById(R.id.friend_walking_finish_distance);
 
         confirm_dare=(Button)findViewById(R.id.confirm_dare);
-
+        my_win_icon=findViewById(R.id.my_win_icon);
+        friend_win_icon=findViewById(R.id.friend_win_icon);
+        win_arrow=findViewById(R.id.win_arrow);
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
         exercise_week_data.setText("5");
@@ -197,11 +201,19 @@ public class Walking_dare extends AppCompatActivity {
                                             if (walking_dare_data.getWalking_dare_myFinishTime() > FriendFinishTimeLong&&walking_dare_data.getWalking_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
-                                                text_winner.setText("勝利方是朋友");
+                                                my_win_icon.setVisibility(View.INVISIBLE);
+                                                friend_win_icon.setVisibility(View.VISIBLE);
+                                                friend_win_icon.animate().rotation(friend_win_icon.getRotation()+720).setDuration(5000).start();
+                                                win_arrow.setVisibility(View.VISIBLE);
+                                                win_arrow.setImageResource(R.drawable.right_arrow);
                                             } else if (walking_dare_data.getWalking_dare_myFinishTime() < FriendFinishTimeLong&&walking_dare_data.getWalking_dare_myFinishTime()!=0&&FriendFinishTimeLong!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
-                                                text_winner.setText("勝利方是你");
+                                                friend_win_icon.setVisibility(View.INVISIBLE);
+                                                my_win_icon.setVisibility(View.VISIBLE);
+                                                my_win_icon.animate().rotation(my_win_icon.getRotation()+720).setDuration(5000).start();
+                                                win_arrow.setVisibility(View.VISIBLE);
+                                                win_arrow.setImageResource(R.drawable.left_arrow);
                                                 Log.i("你之前的friend_pint", "" + walking_dare_data.getWalking_dare_friend_point());
                                             }
 
@@ -218,11 +230,14 @@ public class Walking_dare extends AppCompatActivity {
                                                     friend_walking_finish_distance_data.setVisibility(View.INVISIBLE);
                                                     text_VS.setVisibility(View.INVISIBLE);
                                                     text_winner.setVisibility(View.INVISIBLE);
+                                                    win_arrow.setVisibility(View.INVISIBLE);
                                                     myDatabase.child("walking_dare").child("time").setValue(0);
                                                     myDatabase.child("walking_dare").child("distance").setValue(0);
                                                     if (walking_dare_data.getWalking_dare_myFinishTime() > FriendFinishTimeLong) {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Walking_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        friend_win_icon.setVisibility(View.INVISIBLE);
+                                                        my_win_icon.setVisibility(View.INVISIBLE);
                                                         Intent intent = new Intent(Walking_dare.this, Exercise_main.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -230,6 +245,8 @@ public class Walking_dare extends AppCompatActivity {
                                                     } else if (walking_dare_data.getWalking_dare_myFinishTime() < FriendFinishTimeLong) {
                                                         Log.i("你之前的friend_pint", "" + walking_dare_data.getWalking_dare_friend_point());
                                                         friend_point_database.child("friend_point").setValue(walking_dare_data.getWalking_dare_friend_point() + 10);
+                                                        friend_win_icon.setVisibility(View.INVISIBLE);
+                                                        my_win_icon.setVisibility(View.INVISIBLE);
                                                         Log.i("勝利方是:", "你");
                                                         Toast.makeText(Walking_dare.this, "你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
                                                         Intent intent = new Intent(Walking_dare.this, Exercise_main.class);

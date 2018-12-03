@@ -47,6 +47,7 @@ public class DiarySelect extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference food_note_database;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +99,8 @@ public class DiarySelect extends AppCompatActivity {
                 Food_note food_note =(Food_note) parent.getItemAtPosition(position);
                 //Toast.makeText(getApplicationContext(),"clicked on row:"+states.getName(),Toast.LENGTH_SHORT).show();
                 Log.i("我在這裡1",""+position+""+food_note.getFood_name());
+
+
             }
         });
 

@@ -266,6 +266,7 @@
                         android:layout_below="@+id/user_single_image"
                         android:textSize="18sp"
                         android:visibility="invisible"
+                        android:layout_weight="1"
                         />
 
 

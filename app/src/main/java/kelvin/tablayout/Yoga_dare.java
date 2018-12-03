@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,7 @@ public class Yoga_dare extends AppCompatActivity {
     private static long Long_exercise_week_dat;
     private String myID;
     private DatabaseReference yoga_dare_database;
+    private ImageView my_win_icon,friend_win_icon,win_arrow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +122,9 @@ public class Yoga_dare extends AppCompatActivity {
         friend_yoga_finish_calorie=(TextView)findViewById(R.id.friend_yoga_finish_calorie);
 
         confirm_dare=(Button)findViewById(R.id.confirm_dare);
-
+        my_win_icon=findViewById(R.id.my_win_icon);
+        friend_win_icon=findViewById(R.id.friend_win_icon);
+        win_arrow=findViewById(R.id.win_arrow);
         mDisplayImage = (CircleImageView) findViewById(R.id.user_single_image);
         friend_single_image = (CircleImageView) findViewById(R.id.friend_single_image);
         exercise_week_data.setText("20");
@@ -198,11 +202,19 @@ public class Yoga_dare extends AppCompatActivity {
                                             if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
-                                                text_winner.setText("勝利方是朋友");
+
+                                                friend_win_icon.setVisibility(View.VISIBLE);
+                                                friend_win_icon.animate().rotation(friend_win_icon.getRotation()+720).setDuration(5000).start();
+                                                win_arrow.setVisibility(View.VISIBLE);
+                                                win_arrow.setImageResource(R.drawable.right_arrow);
                                             } else if (yoga_dare_data.getYoga_dare_myCalorie() > FriendCalorieInt&&yoga_dare_data.getYoga_dare_myCalorie()!=0&&FriendCalorieInt!=0) {
                                                 text_winner.setVisibility(View.VISIBLE);
                                                 confirm_dare.setVisibility(View.VISIBLE);
-                                                text_winner.setText("勝利方是你");
+                                                friend_win_icon.setVisibility(View.INVISIBLE);
+                                                my_win_icon.setVisibility(View.VISIBLE);
+                                                my_win_icon.animate().rotation(my_win_icon.getRotation()+720).setDuration(5000).start();
+                                                win_arrow.setVisibility(View.VISIBLE);
+                                                win_arrow.setImageResource(R.drawable.left_arrow);
                                                 Log.i("你之前的friend_pint", "" + yoga_dare_data.getYoga_dare_friend_point());
                                             }
 
@@ -219,11 +231,14 @@ public class Yoga_dare extends AppCompatActivity {
                                                     friend_yoga_finish_calorie_data.setVisibility(View.INVISIBLE);
                                                     text_VS.setVisibility(View.INVISIBLE);
                                                     text_winner.setVisibility(View.INVISIBLE);
+                                                    win_arrow.setVisibility(View.INVISIBLE);
                                                     myDatabase.child("yoga_dare").child("time").setValue(0);
                                                     myDatabase.child("yoga_dare").child("calorie").setValue(0);
                                                     if (yoga_dare_data.getYoga_dare_myCalorie() < FriendCalorieInt) {
                                                         Log.i("勝利方是:", "朋友");
                                                         Toast.makeText(Yoga_dare.this, "朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        friend_win_icon.setVisibility(View.INVISIBLE);
+                                                        my_win_icon.setVisibility(View.INVISIBLE);
                                                         Intent intent = new Intent(Yoga_dare.this, Exercise_main.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -233,6 +248,8 @@ public class Yoga_dare extends AppCompatActivity {
                                                         friend_point_database.child("friend_point").setValue(yoga_dare_data.getYoga_dare_friend_point() + 10);
                                                         Log.i("勝利方是:", "你");
                                                         Toast.makeText(Yoga_dare.this, "你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
+                                                        friend_win_icon.setVisibility(View.INVISIBLE);
+                                                        my_win_icon.setVisibility(View.INVISIBLE);
                                                         Intent intent = new Intent(Yoga_dare.this, Exercise_main.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
