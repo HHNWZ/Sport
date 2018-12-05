@@ -1,7 +1,14 @@
 package kelvin.tablayout;
 
+import android.app.Application;
+import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,6 +30,7 @@ import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +39,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onesignal.OneSignal;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -86,14 +96,22 @@ public class PhotoBlog extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
 
+
+
+
+
+
+
+
+
+
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         DisplayAllUsersPosts();
-
-
-
-
-
-
-
     }
 
 
@@ -218,6 +236,7 @@ public class PhotoBlog extends AppCompatActivity {
 
     public static class PostsViewHolder extends RecyclerView.ViewHolder
     {
+
         View mView;
 
         ImageButton LikePostButton,CommentPostButton;
@@ -271,7 +290,8 @@ public class PhotoBlog extends AppCompatActivity {
         public void setProfileimage(String profileimage)
         {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.post_profile_image);
-            Picasso.get().load(profileimage).into(image);
+            Picasso.get().load(profileimage).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).fit().centerCrop().noFade().into(image);
+
         }
 
         public void setTime(String time)
@@ -295,7 +315,8 @@ public class PhotoBlog extends AppCompatActivity {
         public void setPostimage(String postimage)
         {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.click_post_image);
-            Picasso.get().load(postimage).into(PostImage);
+            Picasso.get().load(postimage).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).fit().centerCrop().noFade().into(PostImage);
+            Picasso.get().setIndicatorsEnabled(true);
         }
     }
 
@@ -353,4 +374,9 @@ public class PhotoBlog extends AppCompatActivity {
 
 
 
+
+
+
+
 }
+

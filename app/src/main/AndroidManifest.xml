@@ -275,20 +275,12 @@
         <activity
             android:name="kelvin.tablayout.YogaTaskFriendProfile"
             android:screenOrientation="portrait" />
-        <activity android:name="kelvin.tablayout.Live" />
-        <activity
-            android:name="kelvin.tablayout.YT_Player"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="nosensor" />
-        <activity
-            android:name="kelvin.tablayout.PlayerActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="nosensor" />
-        <activity android:name="kelvin.tablayout.VideoPlayer" />
         <activity
             android:name="kelvin.tablayout.WebView2"
             android:configChanges="orientation|screenSize" />
-        <activity android:name="kelvin.tablayout.ExerciseTeaching"></activity>
+        <activity
+            android:name="kelvin.tablayout.ExerciseTeaching"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,17 +1,15 @@
 package com.example.a888888888.sport;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,12 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -55,8 +48,6 @@ import com.onesignal.OneSignal;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
@@ -65,8 +56,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 
 import kelvin.tablayout.ChatActivity;
@@ -77,11 +66,9 @@ import kelvin.tablayout.CrunchesTaskFriendProfile;
 import kelvin.tablayout.ExerciseTeaching;
 import kelvin.tablayout.Exercise_main;
 import kelvin.tablayout.GlobalVariable;
-import kelvin.tablayout.Live;
 import kelvin.tablayout.LoginActivity;
 import kelvin.tablayout.MainActivityFireBase;
 import kelvin.tablayout.PhotoBlog;
-import kelvin.tablayout.PlayerActivity;
 import kelvin.tablayout.ProfileActivity;
 import kelvin.tablayout.RegisterActivity;
 import kelvin.tablayout.RunningDareFriendProfile;
@@ -91,22 +78,19 @@ import kelvin.tablayout.SettingsActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.SquatsTaskFriendProfile;
-import kelvin.tablayout.Squats_dare;
 import kelvin.tablayout.TaskProfile;
 import kelvin.tablayout.Time;
 import kelvin.tablayout.TimerTaskTest;
-import kelvin.tablayout.VideoPlayer;
 import kelvin.tablayout.WalkingDareFriendProfile;
 import kelvin.tablayout.WalkingTaskFriendProfile;
 import kelvin.tablayout.Walking_monitor;
-import kelvin.tablayout.WebView2;
 import kelvin.tablayout.YogaDareFriendProfile;
 import kelvin.tablayout.YogaMonitor;
 import kelvin.tablayout.YogaTaskFriendProfile;
 
 
 public class  MainActivity extends AppCompatActivity
-        implements Over.OnFragmentInteractionListener,
+        implements
          NavigationView.OnNavigationItemSelectedListener,OnChartValueSelectedListener {
 
 
@@ -115,45 +99,45 @@ public class  MainActivity extends AppCompatActivity
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
     public CalendarDay seleDAY=Today;//選擇預設為今天
     private String showUri = "http://172.30.4.170:1335/getusersport.php";//連至資料庫
-    public static TextView rundata;
-    public static TextView walkdata;
-    public static TextView airdata;
-    public static TextView pushdata;
-    public static TextView sitdata;
+    public  TextView rundata;
+    public TextView walkdata;
+    public TextView airdata;
+    public  TextView pushdata;
+    public TextView sitdata;
     private TextView username;
-    private TextView username1;
+    //private TextView username1;
     private ImageView userImage;
-    private MyDBHelper dbHelper; //內建資料庫
+    //private MyDBHelper dbHelper; //內建資料庫
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolboar;
 
-    private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
+    //private Float frun=null,fwalk=null,fair=null,fpush=null,fsit=null;
     private static DatabaseReference mUserRef;
     private FirebaseAuth mAuth;
-    private String mCurrent_state,onesignal_email,device_token;
-    String channelId = "love";
-    String channelName = "我的最愛";
+    //private String mCurrent_state,onesignal_email,device_token;
+    //String channelId = "love";
+    //String channelName = "我的最愛";
     private static Context context;
     public Date dt2=null;
     public Button kel,hal,del,over,sport;
     private static String crunches_week_record;
     public static int count=0;
-    public static int count2=0;
-    public static TextView textView6;
-    public static TextView textView7;
-    public static TextView textView8;
-    public static TextView textView10;
-    public static TextView textView9;
-    public static CircleLayout circleLayout;
-    public static NavigationView navigationView;
+    //public static int count2=0;
+    public  TextView textView6;
+    public  TextView textView7;
+    public  TextView textView8;
+    public  TextView textView10;
+    public  TextView textView9;
+    public CircleLayout circleLayout;
+    public  NavigationView navigationView;
     public static Menu menu;
     public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout;
-    public static View hView;
+    public  View hView;
 
-    public static Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
+    public  Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
 
-    public static TextView main_title;
+    public  TextView main_title;
     public static ActionBar actionBar;
     public static DatabaseReference Task_walking;
     public static DatabaseReference Task_req_walking;
@@ -172,7 +156,9 @@ public class  MainActivity extends AppCompatActivity
     private PieEntry running,walking,yoga,squats,crunches;
     private PieDataSet pieDataSet;
     private PieData pieData;
-    private String exercise_main;
+    //private String exercise_main;
+    private double control=0;
+    private DatabaseReference control_database;
 
 
 
@@ -182,14 +168,14 @@ public class  MainActivity extends AppCompatActivity
     //private DatabaseReference mUsersDatabase;
 
 
-    SwipeRefreshLayout mSwipeLayout;
+    //SwipeRefreshLayout mSwipeLayout;
 
     com.android.volley.RequestQueue requestQueue;
 
     public MainActivity() {
     }
 
-    private void getData() {
+    /*private void getData() {
 
         StringRequest jsonObjectRequest = new StringRequest
                 (Request.Method.POST,showUri, new Response.Listener<String>() {
@@ -228,7 +214,7 @@ public class  MainActivity extends AppCompatActivity
 
         };
         requestQueue.add(jsonObjectRequest);
-    }
+    }*/
 
 
 
@@ -266,8 +252,20 @@ public class  MainActivity extends AppCompatActivity
         Date firstTime=null;
         clear=y+"/"+m+"/"+d+" 23:59:00";
         //Toast.makeText(MainActivity.this,clear,Toast.LENGTH_LONG).show();
-        SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        control_database=FirebaseDatabase.getInstance().getReference().child("Users");
+        /*for (int a=0;a<=1500;a++){
 
+            if(a % 10 == 0&&a!=0){
+                control_database.child("RvWxCy62bcYQyyrLDJJlcVYKUvu1").child("exercise_count").child("running").child("today_record").setValue(control);
+                control_database.child("ex3AsUMtndVbkZcyUvzXUC9obiS2").child("exercise_count").child("running").child("today_record").setValue(control);
+                control=control+0.1;
+                Log.i("回圈c",""+control);
+            }
+
+            Log.i("回圈a",""+a);
+
+        }*/
 
         try {
             firstTime = dateFormatter.parse(clear);
@@ -419,6 +417,8 @@ public class  MainActivity extends AppCompatActivity
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
             String to_date= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
+
+
 
             if(to_date.equals("一")){
                 Task_running.removeValue();
@@ -872,7 +872,7 @@ public class  MainActivity extends AppCompatActivity
         airdata =(TextView)findViewById(R.id.textView8);
         pushdata =(TextView)findViewById(R.id.textView10);
         sitdata =(TextView)findViewById(R.id.textView9);
-        getData();
+        //getData();
         //writAllDiaryDATA();
 
         kel.setOnClickListener(new View.OnClickListener() {
@@ -887,7 +887,7 @@ public class  MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, PhotoBlog.class);
+                intent.setClass(MainActivity.this,PhotoBlog.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -1073,10 +1073,7 @@ public class  MainActivity extends AppCompatActivity
         Log.i("我在MainActivity的","onDestroy");
     }
 
-    @Override
-    public void onFragmentInteraction(String Tag, String number) {
 
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

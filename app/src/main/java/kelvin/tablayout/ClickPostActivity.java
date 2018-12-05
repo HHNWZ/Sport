@@ -32,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class ClickPostActivity extends AppCompatActivity {
@@ -69,7 +71,7 @@ public class ClickPostActivity extends AppCompatActivity {
 
         DeletePostButton.setVisibility(View.INVISIBLE);
         EditPostButton.setVisibility(View.INVISIBLE);
-        PostDescription.setVisibility(View.INVISIBLE);
+        //PostDescription.setVisibility(View.INVISIBLE);
 
         PostKey=getIntent().getExtras().get("PostKey").toString();
         ClickPostRef=FirebaseDatabase.getInstance().getReference().child("Posts").child(PostKey);
@@ -87,14 +89,15 @@ public class ClickPostActivity extends AppCompatActivity {
                     Log.i("文件名稱",file_name);
                     PostDescription.setText(description);
                     User.setFile_name(file_name);
-                    Picasso.get().load(image).into(PostImage);
+                    Picasso.get().load(image).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).networkPolicy(NetworkPolicy.OFFLINE).fit().centerCrop().into(PostImage);
+                    Picasso.get().setIndicatorsEnabled(true);
 
 
                     if(currentUserID.equals(databaseUserID))
                     {
                         DeletePostButton.setVisibility(View.VISIBLE);
                         EditPostButton.setVisibility(View.VISIBLE);
-                        PostDescription.setVisibility(View.VISIBLE);
+                        //PostDescription.setVisibility(View.VISIBLE);
                     }
 
                     EditPostButton.setOnClickListener(new View.OnClickListener() {

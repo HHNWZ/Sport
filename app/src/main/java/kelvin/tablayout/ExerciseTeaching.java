@@ -11,6 +11,9 @@ import android.view.MenuItem;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -146,7 +149,9 @@ public class ExerciseTeaching extends AppCompatActivity {
                 holder=(ViewHolder)convertView.getTag();
             }
             ExerciseTitle food_note=food_notes_list.get(position);
-            holder.exercise_image.setImageResource(food_note.getExercise_image());
+            //holder.exercise_image.setImageResource(food_note.getExercise_image());
+            Picasso.get().load(food_note.getExercise_image()).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).fit().centerCrop().into(holder.exercise_image);
+            Picasso.get().setIndicatorsEnabled(true);
             holder.exercise_title.setText(food_note.getExercise_name());
             holder.exercise_video_lenght.setText(food_note.getExercise_video_length());
             return convertView;

@@ -30,6 +30,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,6 +48,7 @@ public class Running_task extends AppCompatActivity {
     private DatabaseReference running_task_myDatabase;
     private DatabaseReference running_task_confirm_database;
     private DatabaseReference running_task_friend_point_database;
+
 
     private TextView running_task_data;
     private TextView running_susses_text_view;
@@ -87,6 +89,8 @@ public class Running_task extends AppCompatActivity {
     private String myID;
     private TextView running_susses_text_view_data;
     private DatabaseReference kelvin_running_today_count_database;
+    //private double control=0.1;
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class Running_task extends AppCompatActivity {
         running_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
         mAuth = FirebaseAuth.getInstance();
         myID = mAuth.getCurrentUser().getUid();
+
         running_task_myDatabase=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         running_task_friend_point_database=FirebaseDatabase.getInstance().getReference().child("Users").child(myID);
         running_task_Database=FirebaseDatabase.getInstance().getReference();
@@ -139,6 +144,9 @@ public class Running_task extends AppCompatActivity {
         running_susses_text_view_data.setVisibility(View.GONE);
         running_susses_text_view.setText("目前沒有朋友");
 
+
+
+
         running_task_myDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -154,7 +162,7 @@ public class Running_task extends AppCompatActivity {
                 running_data.setMy_task_double_exercise_data(running_task_my_count_double);
 
                 my_running_task_name.setText(running_task_my_name);
-                my_running_task_finish_count_data.setText(running_task_my_count+"公里");
+                my_running_task_finish_count_data.setText(df.format(running_task_my_count_double)+"公里");
 
                 if(running_task_my_image.equals("default")){
                     Picasso.get().load(R.drawable.default_avatar).into(my_running_task_image);
@@ -184,7 +192,7 @@ public class Running_task extends AppCompatActivity {
                                         running_task_friend_count_double = Double.parseDouble(running_task_friend_count);
 
                                         friend_running_task_name.setText(running_task_friend_name);
-                                        friend_running_task_finish_count_data.setText(running_task_friend_count + "公里");
+                                        friend_running_task_finish_count_data.setText(df.format(running_task_friend_count_double)+ "公里");
 
 
                                         if (running_task_friend_image.equals("default")) {
@@ -235,7 +243,7 @@ public class Running_task extends AppCompatActivity {
                                         } else if (running_progress < running_task_data_double) {
                                             running_susses_text_view.setText("你們目前完成");
                                             running_susses_text_view_data.setVisibility(View.VISIBLE);
-                                            running_susses_text_view_data.setText(running_progress +"公里");
+                                            running_susses_text_view_data.setText(df.format(running_progress)+"公里");
                                             running_task_seek_bar.setProgress((float) running_progress);
                                         }
 
