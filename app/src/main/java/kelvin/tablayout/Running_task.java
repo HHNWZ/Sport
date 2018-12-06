@@ -90,7 +90,7 @@ public class Running_task extends AppCompatActivity {
     private TextView running_susses_text_view_data;
     private DatabaseReference kelvin_running_today_count_database;
     //private double control=0.1;
-    DecimalFormat df = new DecimalFormat("0.00");
+    DecimalFormat df = new DecimalFormat("0.0");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

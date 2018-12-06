@@ -75,6 +75,7 @@ import kelvin.tablayout.RunningDareFriendProfile;
 import kelvin.tablayout.RunningMonitor;
 import kelvin.tablayout.RunningTaskFriendProfile;
 import kelvin.tablayout.SettingsActivity;
+import kelvin.tablayout.SimpleMainActivity;
 import kelvin.tablayout.SquatsDareFriendProfile;
 import kelvin.tablayout.SquatsMonitor;
 import kelvin.tablayout.SquatsTaskFriendProfile;
@@ -132,7 +133,7 @@ public class  MainActivity extends AppCompatActivity
     public CircleLayout circleLayout;
     public  NavigationView navigationView;
     public static Menu menu;
-    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout;
+    public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout,simple_main_activity,complex_main_activity;
     public  View hView;
 
     public  Button button_of_walking_monitoring,button_of_running_monitoring,button_of_yoga_monitoring,button_of_squats_monitoring,button_of_crunches_monitoring;
@@ -306,6 +307,8 @@ public class  MainActivity extends AppCompatActivity
         menu_chat_room = menu.findItem(R.id.chat_room);
          menu_setting_account = menu.findItem(R.id.setting_account);
          menu_Logout = menu.findItem(R.id.Logout);
+         simple_main_activity=menu.findItem(R.id.simple_main_activity);
+         complex_main_activity=menu.findItem(R.id.complex_main_activity);
         final String user_id = getIntent().getStringExtra("user_id");
 
          kel = (Button)findViewById(R.id.button); //連至書輝的按鈕
@@ -420,7 +423,7 @@ public class  MainActivity extends AppCompatActivity
 
 
 
-            if(to_date.equals("一")){
+            /*if(to_date.equals("一")){
                 Task_running.removeValue();
                 Task_req_running.removeValue();
                 mUserRef.child("running_task_status").setValue("還沒完成");
@@ -512,7 +515,7 @@ public class  MainActivity extends AppCompatActivity
                 mUserRef.child("squats_task_status").setValue("還沒完成");
                 mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
 
-            }
+            }*/
 
             Log.i("數據crunches_week_record1",""+crunches_week_record);
             timer.schedule(new TimerTaskTest(), firstTime);
@@ -523,6 +526,8 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(true);
             menu_setting_account.setVisible(true);
             menu_Logout.setVisible(true);
+            simple_main_activity.setVisible(true);
+            complex_main_activity.setVisible(false);
             kel.setVisibility(View.VISIBLE);
             hal.setVisibility(View.VISIBLE);
             over.setVisibility(View.VISIBLE);
@@ -813,7 +818,7 @@ public class  MainActivity extends AppCompatActivity
                     }
 
                     Picasso.get().load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
-                }
+            }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -830,6 +835,8 @@ public class  MainActivity extends AppCompatActivity
             menu_chat_room.setVisible(false);
             menu_setting_account.setVisible(false);
             menu_Logout.setVisible(false);
+            simple_main_activity.setVisible(false);
+            complex_main_activity.setVisible(false);
             kel.setVisibility(View.INVISIBLE);
             hal.setVisibility(View.INVISIBLE);
             button_of_walking_monitoring.setVisibility(View.INVISIBLE);
@@ -1098,6 +1105,12 @@ public class  MainActivity extends AppCompatActivity
         }
         else if(id==R.id.chat_room){
             Intent i = new Intent(MainActivity.this,MainActivityFireBase.class);
+            startActivity(i);
+        }
+        else if(id==R.id.simple_main_activity){
+            Intent i = new Intent(MainActivity.this,SimpleMainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
         }
         else if(id==R.id.setting_account){

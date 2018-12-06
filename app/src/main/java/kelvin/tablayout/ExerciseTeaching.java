@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,7 @@ public class ExerciseTeaching extends AppCompatActivity {
 
     FoodAdapter dataAdapter = null;
     private String url;
+    private String exercise_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +72,23 @@ public class ExerciseTeaching extends AppCompatActivity {
 
     private void displaylistView() {
         ArrayList<ExerciseTitle> food_notes_list = new ArrayList<ExerciseTitle>();
-        ExerciseTitle food_note = new ExerciseTitle(R.drawable.walk_image, "跑步運動教學影片","5分鐘");
+        ExerciseTitle food_note = new ExerciseTitle(R.drawable.walk_image, "跑步教學影片","26秒");
         food_notes_list.add(food_note);
-        food_note = new ExerciseTitle(R.drawable.squats_image, "深蹲運動教學影片","10分鐘");
+        food_note = new ExerciseTitle(R.drawable.et1, "暖身操教學影片","3分鐘44秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et2, "平板支撐教學影片","1分鐘45秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et3, "仰臥起坐教學影片","1分鐘16秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et4, "俯臥撐1教學影片","1分鐘16秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et5, "俯臥撐2教學影片","1分鐘10秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et6, "舉腳教學影片","1分鐘09秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et7, "橋式教學影片","1分鐘09秒");
+        food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et8, "空氣椅教學影片","51秒");
         food_notes_list.add(food_note);
 
 
@@ -88,14 +104,45 @@ public class ExerciseTeaching extends AppCompatActivity {
                 Log.i("我點擊",""+position+""+food_note.getExercise_name());
                 switch (position){
                     case 0:
-                        url="https://www.youtube.com/watch?v=vqBSrp7Y4hA";
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇跑步教學影片";
                         break;
                     case 1:
-                        url="https://www.youtube.com/watch?v=oXmyb_QJUFk";
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇暖身操教學影片教學影片";
+                        break;
+                    case 2:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇平板支撐教學影片教學影片";
+                        break;
+                    case 3:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇仰臥起坐教學影片教學影片";
+                        break;
+                    case 4:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇俯臥撐1教學影片教學影片";
+                        break;
+                    case 5:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇俯臥撐2教學影片教學影片";
+                        break;
+                    case 6:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇舉腳教學影片教學影片";
+                        break;
+                    case 7:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇橋式教學影片教學影片";
+                        break;
+                    case 8:
+                        url="http://140.127.22.198:5500/video_feed";
+                        exercise_name="你選擇空氣椅教學影片教學影片";
                         break;
                     default:
                         break;
                 }
+                Toast.makeText(ExerciseTeaching.this,exercise_name,Toast.LENGTH_LONG).show();
                 Intent intent = new Intent();
                 intent.setClass(ExerciseTeaching.this, WebView2.class);
                 Bundle bundle =new Bundle();

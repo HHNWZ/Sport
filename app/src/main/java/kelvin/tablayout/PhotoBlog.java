@@ -66,6 +66,7 @@ public class PhotoBlog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_blog);
+        Log.i("我在PhotoBlog的","onCreate");
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
@@ -74,10 +75,16 @@ public class PhotoBlog extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
+
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
         LikesRef=FirebaseDatabase.getInstance().getReference().child("Likes");
         FileNameRef=FirebaseDatabase.getInstance().getReference().child("Posts");
+
+        UsersRef.keepSynced(true);
+        PostsRef.keepSynced(true);
+        LikesRef.keepSynced(true);
+        FileNameRef.keepSynced(true);
 
 
         mToolbar = (Toolbar) findViewById(R.id.activity_photo_blog_toolbar);
@@ -95,7 +102,7 @@ public class PhotoBlog extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PhotoBlog.this,LinearLayoutManager.VERTICAL,true);
         linearLayoutManager.setStackFromEnd(true);
         postList.setLayoutManager(linearLayoutManager);
-
+        DisplayAllUsersPosts();
 
 
 
@@ -108,10 +115,42 @@ public class PhotoBlog extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onStart() {
+     @Override
+    protected void onStart(){
         super.onStart();
-        DisplayAllUsersPosts();
+        Log.i("我在PhotoBlog的","onStart");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i("我在PhotoBlog的","onResume");
+    }
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        GlobalVariable User = (GlobalVariable)getApplicationContext();
+        Log.i("我在PhotoBlog的","onRestart");
+
+        User.setWord("haha");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Log.i("我在PhotoBlog的","onPause");
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Log.i("我在PhotoBlog的","onStop");
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Log.i("我在PhotoBlog的","onDestroy");
     }
 
 

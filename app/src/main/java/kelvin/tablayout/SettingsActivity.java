@@ -36,6 +36,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.onesignal.OneSignal;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -131,7 +132,9 @@ public class SettingsActivity extends AppCompatActivity {
                         if(image.equals("default")) {
                             Picasso.get().load(R.drawable.default_avatar).into(mDisplayImage);
                         }else{
-                            Picasso.get().load(image).into(mDisplayImage);
+                            //Picasso.get().load(image).into(mDisplayImage);
+                            Picasso.get().load(image).memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE).fit().centerCrop().noFade().into(mDisplayImage);
+                            Picasso.get().setIndicatorsEnabled(true);
                         }
                     }
                     if(dataSnapshot.hasChild("name")){

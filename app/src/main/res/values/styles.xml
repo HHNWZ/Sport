@@ -28,10 +28,10 @@
             backward-compatibility can go here.
         -->
     </style>
+
     <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox</item>
     </style>
-
 
 
     <!-- Application theme. -->

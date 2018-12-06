@@ -30,6 +30,18 @@
     </group>
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/simple_main_activity"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="簡單主頁面" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/complex_main_activity"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="複雜主頁面" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
             android:id="@+id/Logout"
             android:icon="@drawable/logout"
             android:title="登出"

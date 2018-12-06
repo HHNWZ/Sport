@@ -223,7 +223,7 @@ public class BmiCalculation extends Fragment {
 
                         exercise_plan_database.child("crunches").setValue(20);
                         exercise_plan_database.child("running").setValue(2);
-                        exercise_plan_database.child("squats").setValue(40);
+                        exercise_plan_database.child("squats").setValue(50);
                         exercise_plan_database.child("walking").setValue(4);
                         exercise_plan_database.child("yoga").setValue(6);
 

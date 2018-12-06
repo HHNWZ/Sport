@@ -287,7 +287,11 @@ public class RegisterActivity extends AppCompatActivity {
                                                                                         exercise_plan_map.put("running",""+0);
                                                                                         exercise_plan_map.put("squats",""+0);
                                                                                         exercise_plan_map.put("walking",""+0);
-                                                                                        exercise_plan_map.put("yoga",""+0);
+                                                                                        exercise_plan_map.put("crunches_check_time",""+0);
+                                                                                        exercise_plan_map.put("running_check_time",""+0);
+                                                                                        exercise_plan_map.put("squats_check_time",""+0);
+                                                                                        exercise_plan_map.put("walking_check_time",""+0);
+                                                                                        exercise_plan_map.put("yoga_check_time",""+0);
                                                                                         exercise_plan_database.setValue(exercise_plan_map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                             @Override
                                                                                             public void onComplete(@NonNull Task<Void> task) {
