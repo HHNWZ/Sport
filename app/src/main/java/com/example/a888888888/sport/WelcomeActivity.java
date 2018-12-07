@@ -12,7 +12,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WelcomeActivity extends AppCompatActivity implements Animation.AnimationListener{
     private CircleImageView welcome_image;
-    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

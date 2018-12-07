@@ -98,13 +98,13 @@ public class  MainActivity extends AppCompatActivity
 
     public int dateID;//
     public final CalendarDay Today = CalendarDay.today();//取得今天日期
-    public CalendarDay seleDAY=Today;//選擇預設為今天
-    private String showUri = "http://172.30.4.170:1335/getusersport.php";//連至資料庫
-    public  TextView rundata;
-    public TextView walkdata;
-    public TextView airdata;
-    public  TextView pushdata;
-    public TextView sitdata;
+    //public CalendarDay seleDAY=Today;//選擇預設為今天
+   // private String showUri = "http://172.30.4.170:1335/getusersport.php";//連至資料庫
+    //public  TextView rundata;
+    //public TextView walkdata;
+    //public TextView airdata;
+    //public  TextView pushdata;
+    //public TextView sitdata;
     private TextView username;
     //private TextView username1;
     private ImageView userImage;
@@ -120,7 +120,7 @@ public class  MainActivity extends AppCompatActivity
     //String channelId = "love";
     //String channelName = "我的最愛";
     private static Context context;
-    public Date dt2=null;
+    //public Date dt2=null;
     public Button kel,hal,del,over,sport;
     private static String crunches_week_record;
     public static int count=0;
@@ -133,6 +133,7 @@ public class  MainActivity extends AppCompatActivity
     public CircleLayout circleLayout;
     public  NavigationView navigationView;
     public static Menu menu;
+
     public static MenuItem menu_email_login,menu_email_register,menu_chat_room,menu_setting_account,menu_Logout,simple_main_activity,complex_main_activity;
     public  View hView;
 
@@ -140,16 +141,7 @@ public class  MainActivity extends AppCompatActivity
 
     public  TextView main_title;
     public static ActionBar actionBar;
-    public static DatabaseReference Task_walking;
-    public static DatabaseReference Task_req_walking;
-    public static DatabaseReference Task_running;
-    public static DatabaseReference Task_req_running;
-    public static DatabaseReference Task_yoga;
-    public static DatabaseReference Task_req_yoga;
-    public static DatabaseReference Task_squats;
-    public static DatabaseReference Task_req_squats;
-    public static DatabaseReference Task_crunches;
-    public static DatabaseReference Task_req_crunches;
+
     private PieChart mChart;
     private Legend l;
     private ArrayList<PieEntry> pieEntryList;
@@ -157,8 +149,6 @@ public class  MainActivity extends AppCompatActivity
     private PieEntry running,walking,yoga,squats,crunches;
     private PieDataSet pieDataSet;
     private PieData pieData;
-    //private String exercise_main;
-    private double control=0;
     private DatabaseReference control_database;
 
 
@@ -406,16 +396,7 @@ public class  MainActivity extends AppCompatActivity
             Log.i("我在這裡1234","2");
 
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
-            Task_walking=FirebaseDatabase.getInstance().getReference().child("Task_walking").child(mAuth.getCurrentUser().getUid());
-            Task_req_walking=FirebaseDatabase.getInstance().getReference().child("Task_req_walking").child(mAuth.getCurrentUser().getUid());
-            Task_running=FirebaseDatabase.getInstance().getReference().child("Task_running").child(mAuth.getCurrentUser().getUid());
-            Task_req_running=FirebaseDatabase.getInstance().getReference().child("Task_req_running").child(mAuth.getCurrentUser().getUid());
-            Task_yoga=FirebaseDatabase.getInstance().getReference().child("Task_yoga").child(mAuth.getCurrentUser().getUid());
-            Task_req_yoga=FirebaseDatabase.getInstance().getReference().child("Task_req_yoga").child(mAuth.getCurrentUser().getUid());
-            Task_squats=FirebaseDatabase.getInstance().getReference().child("Task_squats").child(mAuth.getCurrentUser().getUid());
-            Task_req_squats=FirebaseDatabase.getInstance().getReference().child("Task_req_squats").child(mAuth.getCurrentUser().getUid());
-            Task_crunches=FirebaseDatabase.getInstance().getReference().child("Task_crunches").child(mAuth.getCurrentUser().getUid());
-            Task_req_crunches=FirebaseDatabase.getInstance().getReference().child("Task_req_crunches").child(mAuth.getCurrentUser().getUid());
+
 
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
             Timer timer = new Timer();
@@ -423,101 +404,9 @@ public class  MainActivity extends AppCompatActivity
 
 
 
-            /*if(to_date.equals("一")){
-                Task_running.removeValue();
-                Task_req_running.removeValue();
-                mUserRef.child("running_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
-                Task_yoga.removeValue();
-                Task_req_yoga.removeValue();
-                mUserRef.child("yoga_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
-                Task_squats.removeValue();
-                Task_req_squats.removeValue();
-                mUserRef.child("squats_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
-                Task_crunches.removeValue();
-                Task_req_crunches.removeValue();
-                mUserRef.child("crunches_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
-            }
 
-            if(to_date.equals("二")){
-                Task_walking.removeValue();
-                Task_req_walking.removeValue();
-                mUserRef.child("walking_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
-                Task_yoga.removeValue();
-                Task_req_yoga.removeValue();
-                mUserRef.child("yoga_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
-                Task_squats.removeValue();
-                Task_req_squats.removeValue();
-                mUserRef.child("squats_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
-                Task_crunches.removeValue();
-                Task_req_crunches.removeValue();
-                mUserRef.child("crunches_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
-            }
-            if(to_date.equals("三")){
-                Task_running.removeValue();
-                Task_req_running.removeValue();
-                mUserRef.child("running_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
-                Task_walking.removeValue();
-                Task_req_walking.removeValue();
-                mUserRef.child("walking_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
-                Task_squats.removeValue();
-                Task_req_squats.removeValue();
-                mUserRef.child("squats_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
-                Task_crunches.removeValue();
-                Task_req_crunches.removeValue();
-                mUserRef.child("crunches_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
-            }
-            if(to_date.equals("四")){
-                Task_running.removeValue();
-                Task_req_running.removeValue();
-                mUserRef.child("running_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
-                Task_walking.removeValue();
-                Task_req_walking.removeValue();
-                mUserRef.child("walking_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
-                Task_yoga.removeValue();
-                Task_req_yoga.removeValue();
-                mUserRef.child("yoga_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
-                Task_crunches.removeValue();
-                Task_req_crunches.removeValue();
-                mUserRef.child("crunches_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("crunches").child("task_record").setValue(0);
 
-            }
-            if(to_date.equals("五")){
-                Task_running.removeValue();
-                Task_req_running.removeValue();
-                mUserRef.child("running_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("running").child("task_record").setValue(0);
-                Task_walking.removeValue();
-                Task_req_walking.removeValue();
-                mUserRef.child("walking_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("walking").child("task_record").setValue(0);
-                Task_yoga.removeValue();
-                Task_req_yoga.removeValue();
-                mUserRef.child("yoga_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("yoga").child("task_record").setValue(0);
-                Task_squats.removeValue();
-                Task_req_squats.removeValue();
-                mUserRef.child("squats_task_status").setValue("還沒完成");
-                mUserRef.child("exercise_count").child("squats").child("task_record").setValue(0);
-
-            }*/
-
-            Log.i("數據crunches_week_record1",""+crunches_week_record);
+            //Log.i("數據crunches_week_record1",""+crunches_week_record);
             timer.schedule(new TimerTaskTest(), firstTime);
             main_title.setText("運動監控");
             menu_email_login.setVisible(false);
@@ -604,9 +493,9 @@ public class  MainActivity extends AppCompatActivity
                     String nowDate=Time.getToDate(System.currentTimeMillis());
                     Log.i("現在是1",DateCheck);
                     Log.i("現在是",nowDate);
-                    float crunches_week_record_float=Float.parseFloat(crunches_week_record);
+                    //float crunches_week_record_float=Float.parseFloat(crunches_week_record);
                     float running_week_record_float=Float.parseFloat(running_week_record);
-                    float squats_week_record_float=Float.parseFloat(squats_week_record);
+                    //float squats_week_record_float=Float.parseFloat(squats_week_record);
                     float walking_week_record_float=Float.parseFloat(walking_week_record);
                     long yoga_week_record_long=Long.parseLong(yoga_week_record);
                     float crunches_week_calorie_float=Float.parseFloat(crunches_week_calorie);
@@ -825,7 +714,7 @@ public class  MainActivity extends AppCompatActivity
 
                 }
             });
-            Log.i("數據crunches_week_record2",""+crunches_week_record);
+            //Log.i("數據crunches_week_record2",""+crunches_week_record);
 
 
 
@@ -868,17 +757,17 @@ public class  MainActivity extends AppCompatActivity
 
 
 
-        Log.i("數據crunches_week_record3",""+crunches_week_record);
+        //Log.i("數據crunches_week_record3",""+crunches_week_record);
 
 
 
 
         requestQueue = Volley.newRequestQueue(getApplicationContext());
-        rundata =(TextView)findViewById(R.id.textView6);
-        walkdata =(TextView)findViewById(R.id.textView7);
-        airdata =(TextView)findViewById(R.id.textView8);
-        pushdata =(TextView)findViewById(R.id.textView10);
-        sitdata =(TextView)findViewById(R.id.textView9);
+        //rundata =(TextView)findViewById(R.id.textView6);
+        //walkdata =(TextView)findViewById(R.id.textView7);
+        //airdata =(TextView)findViewById(R.id.textView8);
+        //pushdata =(TextView)findViewById(R.id.textView10);
+        //sitdata =(TextView)findViewById(R.id.textView9);
         //getData();
         //writAllDiaryDATA();
 
