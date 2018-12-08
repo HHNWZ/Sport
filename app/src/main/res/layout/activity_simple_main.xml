@@ -33,17 +33,35 @@
 
                     android:padding="10dp"
                     android:background="@drawable/main_border">
-                    <Button
-                        android:id="@+id/button"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                        android:background="@color/colorPrimary"
-                        android:drawableTop="@drawable/rank1"
-                        android:paddingTop="100dp"
-                        android:gravity="center_horizontal"
-                        android:text="排行榜"
-                        android:textColor="#ffffff" />
+                        <Button
+                            android:id="@+id/button_task"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:drawableTop="@drawable/rank1"
+
+
+                            android:text="任務執行"
+                            android:textColor="#ffffff" />
+                        <Button
+                            android:id="@+id/button_dare"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:drawableTop="@drawable/rank1"
+                            android:text="邀請朋友運動"
+                            android:textColor="#ffffff" />
+
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
                 <LinearLayout
@@ -77,7 +95,19 @@
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
-                <LinearLayout
+                <android.support.v4.widget.SwipeRefreshLayout
+                    android:id="@+id/squats_swipe_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/squats_list"
+                        android:background="@color/colorPrimary"/>
+                </android.support.v4.widget.SwipeRefreshLayout>
+
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -232,7 +262,7 @@
                             android:layout_weight="1"/>
 
                     </LinearLayout>
-                </LinearLayout>
+                </LinearLayout>-->
 
 
             </LinearLayout>

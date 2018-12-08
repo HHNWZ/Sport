@@ -3,9 +3,13 @@ package kelvin.tablayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -44,6 +49,8 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SimpleMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnChartValueSelectedListener {
     private static DatabaseReference mUserRef;
@@ -63,13 +70,12 @@ public class SimpleMainActivity extends AppCompatActivity
     private PieEntry running,walking,yoga,squats,crunches;
     private PieDataSet pieDataSet;
     private PieData pieData;
-    public  TextView textView6;
-    public  TextView textView7;
-    public  TextView textView8;
-    public  TextView textView10;
-    public  TextView textView9;
-    private static String crunches_week_record;
 
+    private static String crunches_week_record;
+    private DatabaseReference mUsersDatabase,mDatabase;
+    private RecyclerView mUsersList1;
+    private SwipeRefreshLayout mRefreshLayout;
+    public static CircleImageView userImageView,first_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,11 +111,8 @@ public class SimpleMainActivity extends AppCompatActivity
         simple_main_activity=menu.findItem(R.id.simple_main_activity);
         complex_main_activity=menu.findItem(R.id.complex_main_activity);
         mChart=findViewById(R.id.chart1);
-        textView6=(TextView)findViewById(R.id.textView6);
-        textView7=(TextView)findViewById(R.id.textView7);
-        textView8=(TextView)findViewById(R.id.textView8);
-        textView10=(TextView)findViewById(R.id.textView10);
-        textView9=(TextView)findViewById(R.id.textView9);
+
+        mUsersList1=(RecyclerView)findViewById(R.id.squats_list);
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             OneSignal.sendTag("Uid",mAuth.getCurrentUser().getUid());
@@ -120,268 +123,34 @@ public class SimpleMainActivity extends AppCompatActivity
             menu_Logout.setVisible(true);
             simple_main_activity.setVisible(false);
             complex_main_activity.setVisible(true);
-            mChart.setVisibility(View.VISIBLE);
-            textView6.setVisibility(View.VISIBLE);
-            textView7.setVisibility(View.VISIBLE);
-            textView8.setVisibility(View.VISIBLE);
-            textView10.setVisibility(View.VISIBLE);
-            textView9.setVisibility(View.VISIBLE);
-            // 设置 pieChart 图表基本属性
-            mChart.setUsePercentValues(true);            //使用百分比显示
-            mChart.getDescription().setEnabled(false);    //设置pieChart图表的描述
-            mChart.setBackgroundColor(android.graphics.Color.rgb(50,61,77));      //设置pieChart图表背景色
-            mChart.setDragDecelerationFrictionCoef(0.95f);//设置pieChart图表转动阻力摩擦系数[0,1]
-            mChart.setRotationAngle(0);                   //设置pieChart图表起始角度
-            mChart.setRotationEnabled(true);              //设置pieChart图表是否可以手动旋转
-            mChart.setHighlightPerTapEnabled(true);       //设置piecahrt图表点击Item高亮是否可用
-            mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);// 设置pieChart图表展示动画效果
 
-            // 设置 pieChart 图表Item文本属性
-            mChart.setDrawEntryLabels(true);              //设置pieChart是否只显示饼图上百分比不显示文字（true：下面属性才有效果）
-            mChart.setEntryLabelColor(Color.WHITE);       //设置pieChart图表文本字体颜色
-            //mChart.setEntryLabelTypeface(mItalic);
-            mChart.setEntryLabelTextSize(10f);            //设置pieChart图表文本字体大小
-
-            mChart.setDrawHoleEnabled(true);              //是否显示PieChart内部圆环(true:下面属性才有意义)
-            mChart.setHoleRadius(31f);                    //设置PieChart内部圆的半径(这里设置28.0f)
-            mChart.setTransparentCircleRadius(31f);       //设置PieChart内部透明圆的半径(这里设置31.0f)
-            mChart.setTransparentCircleColor(Color.BLACK);//设置PieChart内部透明圆与内部圆间距(31f-28f)填充颜色
-            mChart.setTransparentCircleAlpha(0);         //设置PieChart内部透明圆与内部圆间距(31f-28f)透明度[0~255]数值越小越透明
-            mChart.setHoleColor(Color.rgb(50,61,77));             //设置PieChart内部圆的颜色
-            mChart.setDrawCenterText(true);               //是否绘制PieChart内部中心文本（true：下面属性才有意义）
-
-            mChart.setCenterText("每週\n總消耗\n卡路里");                 //设置PieChart内部圆文字的内容
-            mChart.setCenterTextSize(10f);                //设置PieChart内部圆文字的大小
-            mChart.setCenterTextColor(Color.WHITE);         //设置PieChart内部圆文字的颜色
-
-            l = mChart.getLegend();
-            l.setEnabled(false);                    //是否启用图列（true：下面属性才有意义）
-
-            mChart.setOnChartValueSelectedListener(this);
             mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+            mUsersDatabase.keepSynced(true);
+            mRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.squats_swipe_layout);
+            mRefreshLayout.setColorSchemeColors(Color.rgb(115,196,217));
+            mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable(){
+                        @Override
+                        public void run() {
+                            mRefreshLayout.setRefreshing(false);
+                            onStart();
+                        }}, 1000);
+                }
+            });
+            mUsersList1.setHasFixedSize(true);
+            mUsersList1.setLayoutManager(new LinearLayoutManager(SimpleMainActivity.this));
             mUserRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.hasChildren()){
                         String user_name = dataSnapshot.child("name").getValue().toString();
                         String user_image = dataSnapshot.child("thumb_image").getValue().toString();
-                        crunches_week_record=dataSnapshot.child("exercise_count").child("crunches").child("week_record").getValue().toString();
-                        String running_week_record=dataSnapshot.child("exercise_count").child("running").child("week_record").getValue().toString();
-                        String squats_week_record=dataSnapshot.child("exercise_count").child("squats").child("week_record").getValue().toString();
-                        String walking_week_record=dataSnapshot.child("exercise_count").child("walking").child("week_record").getValue().toString();
-                        String yoga_week_record=dataSnapshot.child("exercise_count").child("yoga").child("week_record").getValue().toString();
-                        String crunches_week_calorie=dataSnapshot.child("exercise_count").child("crunches").child("week_calorie").getValue().toString();
-                        String running_week_calorie=dataSnapshot.child("exercise_count").child("running").child("week_calorie").getValue().toString();
-                        String squats_week_calorie=dataSnapshot.child("exercise_count").child("squats").child("week_calorie").getValue().toString();
-                        String walking_week_calorie=dataSnapshot.child("exercise_count").child("walking").child("week_calorie").getValue().toString();
-                        String yoga_week_calorie=dataSnapshot.child("exercise_count").child("yoga").child("week_calorie").getValue().toString();
-                        String DateCheck=dataSnapshot.child("DateCheck").getValue().toString();
-                        String Week= kelvin.tablayout.Week.getWeek(System.currentTimeMillis());
-                        String nowDate=Time.getToDate(System.currentTimeMillis());
-                        //float crunches_week_record_float=Float.parseFloat(crunches_week_record);
-                        float running_week_record_float=Float.parseFloat(running_week_record);
-                        //float squats_week_record_float=Float.parseFloat(squats_week_record);
-                        float walking_week_record_float=Float.parseFloat(walking_week_record);
-                        long yoga_week_record_long=Long.parseLong(yoga_week_record);
-                        float crunches_week_calorie_float=Float.parseFloat(crunches_week_calorie);
-                        float running_week_calorie_float=Float.parseFloat(running_week_calorie);
-                        float squats_week_calorie_float=Float.parseFloat(squats_week_calorie);
-                        float walking_week_calorie_float=Float.parseFloat(walking_week_calorie);
-                        float yoga_week_calorie_float=Float.parseFloat(yoga_week_calorie);
 
-                        DecimalFormat df = new DecimalFormat("#");
-                        if(Week.equals("一")){
-                            if(DateCheck.equals(nowDate)){
-
-                                pieEntryList = new ArrayList<PieEntry>();
-                                colors = new ArrayList<Integer>();
-                                colors.add(Color.parseColor("#38b048"));
-                                colors.add(Color.parseColor("#189428"));
-                                colors.add(Color.parseColor("#349bb3"));
-                                colors.add(Color.parseColor("#2671ab"));
-                                colors.add(Color.parseColor("#2c618a"));
-
-                                //饼图实体 PieEntry
-                                if(running_week_calorie_float!=0){
-                                    running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
-                                }else {
-                                    running = new PieEntry(running_week_calorie_float, "");
-                                }
-                                if(walking_week_calorie_float!=0){
-                                    walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
-                                }else {
-                                    walking = new PieEntry(walking_week_calorie_float, "");
-                                }
-                                if(yoga_week_calorie_float!=0){
-                                    yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
-                                }else {
-                                    yoga = new PieEntry(yoga_week_calorie_float, "");
-                                }
-                                if(squats_week_calorie_float!=0){
-                                    squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
-                                }else {
-                                    squats = new PieEntry(squats_week_calorie_float, "");
-                                }
-                                if(crunches_week_calorie_float!=0){
-                                    crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
-                                }else {
-                                    crunches = new PieEntry(crunches_week_calorie_float, "");
-                                }
-                                pieEntryList.add(running);
-                                pieEntryList.add(walking);
-                                pieEntryList.add(yoga);
-                                pieEntryList.add(squats);
-                                pieEntryList.add(crunches);
-                                //饼状图数据集 PieDataSet
-                                pieDataSet = new PieDataSet(pieEntryList, "每週總消耗卡路里");
-                                pieDataSet.setSliceSpace(3f);           //设置饼状Item之间的间隙
-                                pieDataSet.setSelectionShift(10f);      //设置饼状Item被选中时变化的距离
-                                pieDataSet.setColors(colors);           //为DataSet中的数据匹配上颜色集(饼图Item颜色)
-                                //最终数据 PieData
-                                pieData = new PieData(pieDataSet);
-                                pieData.setDrawValues(false);            //设置是否显示数据实体(百分比，true:以下属性才有意义)
-                                pieData.setValueTextColor(Color.BLUE);  //设置所有DataSet内数据实体（百分比）的文本颜色
-                                pieData.setValueTextSize(20f);          //设置所有DataSet内数据实体（百分比）的文本字体大小
-                                //pieData.setValueTypeface(mTfLight);     //设置所有DataSet内数据实体（百分比）的文本字体样式
-                                pieData.setValueFormatter(new PercentFormatter());//设置所有DataSet内数据实体（百分比）的文本字体格式
-                                mChart.setData(pieData);
-                                mChart.highlightValues(null);
-                                mChart.invalidate();                    //将图表重绘以显示设置的属性和数据
-
-
-                                textView6.setText(""+running_week_record_float+"公里");
-                                textView7.setText(""+walking_week_record_float+"公里");
-                                textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
-                                textView10.setText(""+squats_week_record+"次");
-                                textView9.setText(""+crunches_week_record+"次");
-                            }else{
-
-
-                                pieEntryList = new ArrayList<PieEntry>();
-                                colors = new ArrayList<Integer>();
-                                colors.add(Color.parseColor("#38b048"));
-                                colors.add(Color.parseColor("#189428"));
-                                colors.add(Color.parseColor("#349bb3"));
-                                colors.add(Color.parseColor("#2671ab"));
-                                colors.add(Color.parseColor("#2c618a"));
-
-                                //饼图实体 PieEntry
-                                running = new PieEntry(0, "跑步:0大卡");
-                                walking = new PieEntry(0, "步行:0大卡");
-                                yoga = new PieEntry(0, "瑜伽:0大卡");
-                                squats = new PieEntry(0, "深蹲:0大卡");
-                                crunches = new PieEntry(0, "仰臥起坐:0大卡");
-                                pieEntryList.add(running);
-                                pieEntryList.add(walking);
-                                pieEntryList.add(yoga);
-                                pieEntryList.add(squats);
-                                pieEntryList.add(crunches);
-                                //饼状图数据集 PieDataSet
-                                pieDataSet = new PieDataSet(pieEntryList, "每週總消耗卡路里");
-                                pieDataSet.setSliceSpace(3f);           //设置饼状Item之间的间隙
-                                pieDataSet.setSelectionShift(10f);      //设置饼状Item被选中时变化的距离
-                                pieDataSet.setColors(colors);           //为DataSet中的数据匹配上颜色集(饼图Item颜色)
-                                //最终数据 PieData
-                                pieData = new PieData(pieDataSet);
-                                pieData.setDrawValues(false);            //设置是否显示数据实体(百分比，true:以下属性才有意义)
-                                pieData.setValueTextColor(Color.BLUE);  //设置所有DataSet内数据实体（百分比）的文本颜色
-                                pieData.setValueTextSize(20f);          //设置所有DataSet内数据实体（百分比）的文本字体大小
-                                //pieData.setValueTypeface(mTfLight);     //设置所有DataSet内数据实体（百分比）的文本字体样式
-                                pieData.setValueFormatter(new PercentFormatter());//设置所有DataSet内数据实体（百分比）的文本字体格式
-                                mChart.setData(pieData);
-                                mChart.highlightValues(null);
-                                mChart.invalidate();                    //将图表重绘以显示设置的属性和数据
-
-
-
-                                //pieChart 选择监听
-
-
-                                textView6.setText("0公里");
-                                textView7.setText("0公里");
-                                textView8.setText("0秒");
-                                textView10.setText("0次");
-                                textView9.setText("0次");
-                                mUserRef.child("DateCheck").setValue(nowDate);
-                                mUserRef.child("exercise_count").child("crunches").child("week_record").setValue(0);
-                                mUserRef.child("exercise_count").child("running").child("week_record").setValue(0);
-                                mUserRef.child("exercise_count").child("squats").child("week_record").setValue(0);
-                                mUserRef.child("exercise_count").child("walking").child("week_record").setValue(0);
-                                mUserRef.child("exercise_count").child("yoga").child("week_record").setValue(0);
-                                mUserRef.child("exercise_count").child("crunches").child("week_calorie").setValue(0);
-                                mUserRef.child("exercise_count").child("running").child("week_calorie").setValue(0);
-                                mUserRef.child("exercise_count").child("squats").child("week_calorie").setValue(0);
-                                mUserRef.child("exercise_count").child("walking").child("week_calorie").setValue(0);
-                                mUserRef.child("exercise_count").child("yoga").child("week_calorie").setValue(0);
-
-                            }
-
-                        }else {
-                            pieEntryList = new ArrayList<PieEntry>();
-                            colors = new ArrayList<Integer>();
-                            colors.add(Color.parseColor("#38b048"));
-                            colors.add(Color.parseColor("#189428"));
-                            colors.add(Color.parseColor("#349bb3"));
-                            colors.add(Color.parseColor("#2671ab"));
-                            colors.add(Color.parseColor("#2c618a"));
-
-                            //饼图实体 PieEntry
-                            if(running_week_calorie_float!=0){
-                                running = new PieEntry(running_week_calorie_float, "跑步:"+df.format(running_week_calorie_float)+"大卡");
-                            }else {
-                                running = new PieEntry(running_week_calorie_float, "");
-                            }
-                            if(walking_week_calorie_float!=0){
-                                walking = new PieEntry(walking_week_calorie_float, "步行:"+df.format(walking_week_calorie_float)+"大卡");
-                            }else {
-                                walking = new PieEntry(walking_week_calorie_float, "");
-                            }
-                            if(yoga_week_calorie_float!=0){
-                                yoga = new PieEntry(yoga_week_calorie_float, "瑜伽:"+df.format(yoga_week_calorie_float)+"大卡");
-                            }else {
-                                yoga = new PieEntry(yoga_week_calorie_float, "");
-                            }
-                            if(squats_week_calorie_float!=0){
-                                squats = new PieEntry(squats_week_calorie_float, "深蹲:"+df.format(squats_week_calorie_float)+"大卡");
-                            }else {
-                                squats = new PieEntry(squats_week_calorie_float, "");
-                            }
-                            if(crunches_week_calorie_float!=0){
-                                crunches = new PieEntry(crunches_week_calorie_float, "仰臥起坐:"+df.format(crunches_week_calorie_float)+"大卡");
-                            }else {
-                                crunches = new PieEntry(crunches_week_calorie_float, "");
-                            }
-
-
-
-
-                            pieEntryList.add(running);
-                            pieEntryList.add(walking);
-                            pieEntryList.add(yoga);
-                            pieEntryList.add(squats);
-                            pieEntryList.add(crunches);
-                            //饼状图数据集 PieDataSet
-                            pieDataSet = new PieDataSet(pieEntryList, "每週總消耗卡路里");
-                            pieDataSet.setSliceSpace(3f);           //设置饼状Item之间的间隙
-                            pieDataSet.setSelectionShift(10f);      //设置饼状Item被选中时变化的距离
-                            pieDataSet.setColors(colors);           //为DataSet中的数据匹配上颜色集(饼图Item颜色)
-                            //最终数据 PieData
-                            pieData = new PieData(pieDataSet);
-                            pieData.setDrawValues(false);            //设置是否显示数据实体(百分比，true:以下属性才有意义)
-                            pieData.setValueTextColor(Color.BLUE);  //设置所有DataSet内数据实体（百分比）的文本颜色
-                            pieData.setValueTextSize(20f);          //设置所有DataSet内数据实体（百分比）的文本字体大小
-                            //pieData.setValueTypeface(mTfLight);     //设置所有DataSet内数据实体（百分比）的文本字体样式
-                            pieData.setValueFormatter(new PercentFormatter());//设置所有DataSet内数据实体（百分比）的文本字体格式
-                            mChart.setData(pieData);
-                            mChart.highlightValues(null);
-                            mChart.invalidate();                    //将图表重绘以显示设置的属性和数据
-                            textView6.setText(""+running_week_record_float+"公里");
-                            textView7.setText(""+walking_week_record_float+"公里");
-                            textView8.setText(""+Time.changeYogaTime(yoga_week_record_long));
-                            textView10.setText(""+squats_week_record+"次");
-                            textView9.setText(""+crunches_week_record+"次");
-
-                        }
                         username.setText(user_name);
                         Picasso.get().load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                     }
@@ -403,13 +172,7 @@ public class SimpleMainActivity extends AppCompatActivity
             menu_Logout.setVisible(false);
             simple_main_activity.setVisible(false);
             complex_main_activity.setVisible(false);
-            mChart.setVisibility(View.INVISIBLE);
-            mChart.setVisibility(View.INVISIBLE);
-            textView6.setVisibility(View.INVISIBLE);
-            textView7.setVisibility(View.INVISIBLE);
-            textView8.setVisibility(View.INVISIBLE);
-            textView10.setVisibility(View.INVISIBLE);
-            textView9.setVisibility(View.INVISIBLE);
+
         }
     }
 
@@ -502,5 +265,84 @@ public class SimpleMainActivity extends AppCompatActivity
     @Override
     public void onNothingSelected() {
         Log.i("PieChart", "nothing selected");
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        FirebaseRecyclerAdapter<Users,SquatsNewUsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, SquatsNewUsersViewHolder>(
+                Users.class,
+                R.layout.users_single_layout,
+                SquatsNewUsersViewHolder.class,
+                mUsersDatabase.orderByChild("squats_all_count_sort")
+        ) {
+            @Override
+            protected void populateViewHolder(SquatsNewUsersViewHolder squatsNewUsersViewHolder, Users users, int position) {
+                squatsNewUsersViewHolder.setDisplayName(users.getName());
+                squatsNewUsersViewHolder.setUserStatus("深蹲全部記錄:");
+                squatsNewUsersViewHolder.setUserImage(users.getThumb_image());
+                squatsNewUsersViewHolder.setCrunchesAllCount(users.getSquats_all_count());
+                first_image=(CircleImageView)squatsNewUsersViewHolder.mView.findViewById(R.id.first_image);
+                if(position==0){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.goldmedal);
+                }else if(position==1){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.secondprize);
+                }else if(position==2){
+                    first_image.setVisibility(View.VISIBLE);
+                    first_image.setImageResource(R.drawable.bronzemedal);
+                } else{
+                    first_image.setVisibility(View.INVISIBLE);
+                }
+                Log.i("代號",""+position);
+
+            }
+        };
+
+        mUsersList1.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    public static class SquatsNewUsersViewHolder extends RecyclerView.ViewHolder {
+
+        View mView;
+
+        public SquatsNewUsersViewHolder(View itemView) {
+            super(itemView);
+
+            mView = itemView;
+
+        }
+
+        public void setDisplayName(String name){
+
+            TextView userNameView = (TextView) mView.findViewById(R.id.user_single_name);
+            userNameView.setText(name);
+
+        }
+
+        public void setUserStatus(String status){
+
+            TextView userStatusView = (TextView) mView.findViewById(R.id.user_single_status);
+            userStatusView.setText(status);
+
+
+        }
+
+        public void setUserImage(String thumb_image){
+
+            userImageView = (CircleImageView) mView.findViewById(R.id.user_single_image);
+
+            Picasso.get().load(thumb_image).placeholder(R.drawable.default_avatar).into(userImageView);
+
+        }
+
+        public void setCrunchesAllCount(int crunches_all_count){
+            TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
+            crunches_all_count_view.setText(""+crunches_all_count+"次");
+
+        }
+
+
     }
 }

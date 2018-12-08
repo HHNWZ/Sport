@@ -277,14 +277,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="kelvin.tablayout.WebView2"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="kelvin.tablayout.ExerciseTeaching"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name="kelvin.tablayout.SimpleMainActivity"
             android:label="@string/title_activity_simple_main"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

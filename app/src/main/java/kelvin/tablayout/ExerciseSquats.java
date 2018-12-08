@@ -36,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ExerciseSquats extends Fragment {
     private DatabaseReference mUsersDatabase,mDatabase;
     private static FirebaseAuth mAuth;
-    private LinearLayoutManager mLayoutManager;
+
     private View mMainView;
     private RecyclerView mUsersList1;
     public Button button_of_task_execution,button_of_sports_monitoring,button_of_invitation;

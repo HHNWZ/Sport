@@ -150,6 +150,7 @@ public class  MainActivity extends AppCompatActivity
     private PieDataSet pieDataSet;
     private PieData pieData;
     private DatabaseReference control_database;
+    private DatabaseReference kelvin_squats_today_count_database;
 
 
 
@@ -935,6 +936,8 @@ public class  MainActivity extends AppCompatActivity
     protected void onStart(){
         super.onStart();
         Log.i("我在MainActivity的","onStart");
+        kelvin_squats_today_count_database = FirebaseDatabase.getInstance().getReference().child("Users");
+        kelvin_squats_today_count_database.child("1jZbs9r78DM54p5FkzANcPruYSG3").child("exercise_count").child("squats").child("today_count").setValue(47);
     }
 
     @Override
