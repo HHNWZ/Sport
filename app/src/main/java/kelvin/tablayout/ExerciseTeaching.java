@@ -105,39 +105,39 @@ public class ExerciseTeaching extends AppCompatActivity {
                 switch (position){
                     case 0:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇跑步教學影片";
+                        exercise_name="sport00";
                         break;
                     case 1:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇暖身操教學影片教學影片";
+                        exercise_name="sport01";
                         break;
                     case 2:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇平板支撐教學影片教學影片";
+                        exercise_name="sport02";
                         break;
                     case 3:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇仰臥起坐教學影片教學影片";
+                        exercise_name="sport03";
                         break;
                     case 4:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇俯臥撐1教學影片教學影片";
+                        exercise_name="sport04";
                         break;
                     case 5:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇俯臥撐2教學影片教學影片";
+                        exercise_name="sport05";
                         break;
                     case 6:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇舉腳教學影片教學影片";
+                        exercise_name="sport06";
                         break;
                     case 7:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇橋式教學影片教學影片";
+                        exercise_name="sport07";
                         break;
                     case 8:
                         url="http://140.127.22.198:5500/video_feed";
-                        exercise_name="你選擇空氣椅教學影片教學影片";
+                        exercise_name="sport08";
                         break;
                     default:
                         break;

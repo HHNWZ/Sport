@@ -38,7 +38,7 @@
                 android:background="@drawable/main_border"
                 android:padding="5sp"
                 android:drawableTop="@drawable/check1"
-                android:text="任務執行"
+                android:text="共同任務"
                 android:textSize="16sp"
                 android:textColor="#ffffff" />
 
@@ -50,7 +50,7 @@
                 android:background="@drawable/main_border"
                 android:padding="5sp"
                 android:drawableTop="@drawable/play1"
-                android:text="邀請朋友運動"
+                android:text="運動競賽"
                 android:textSize="16sp"
                 android:textColor="#ffffff" />
 
