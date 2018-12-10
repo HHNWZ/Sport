@@ -12,6 +12,8 @@ public class Users {
     public long yoga_all_count;
     public double walking_to_day_count;
     public double running_to_day_count;
+    public double calorie;
+    public double calorie_sort;
 
     public int i;
 
@@ -21,7 +23,7 @@ public class Users {
 
     }
 
-    public Users(String name, String image, String status, String thumb_image,int crunches_all_count,int squats_all_count,int running_all_count,int walking_all_count,long yoga_all_count,int i,double walking_to_day_count,double running_to_day_count) {
+    public Users(String name, String image, String status, String thumb_image,int crunches_all_count,int squats_all_count,int running_all_count,int walking_all_count,long yoga_all_count,int i,double walking_to_day_count,double running_to_day_count,double calorie,double calorie_sort) {
         this.name = name;
         this.image = image;
         this.status = status;
@@ -34,6 +36,8 @@ public class Users {
         this.i=i;
         this.walking_to_day_count=walking_to_day_count;
         this.running_to_day_count=running_to_day_count;
+        this.calorie=calorie;
+        this.calorie_sort=calorie_sort;
 
     }
 
@@ -129,5 +133,29 @@ public class Users {
 
     public void setRunning_to_day_count(double running_to_day_count) {
         this.running_to_day_count = running_to_day_count;
+    }
+
+    public double getToday_calorie() {
+        return calorie;
+    }
+
+    public void setToday_calorie(double calorie) {
+        this.calorie = calorie;
+    }
+
+    public double getCalorie() {
+        return calorie;
+    }
+
+    public void setCalorie(double calorie) {
+        this.calorie = calorie;
+    }
+
+    public double getCalorie_sort() {
+        return calorie_sort;
+    }
+
+    public void setCalorie_sort(double calorie_sort) {
+        this.calorie_sort = calorie_sort;
     }
 }

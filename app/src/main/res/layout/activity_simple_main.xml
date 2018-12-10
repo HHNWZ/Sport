@@ -31,33 +31,44 @@
                     android:orientation="vertical"
                     android:layout_weight="1"
 
-                    android:padding="10dp"
+
                     android:background="@drawable/main_border">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/button_task"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@color/colorPrimary"
-                            android:drawableTop="@drawable/rank1"
-
-
-                            android:text="任務執行"
-                            android:textColor="#ffffff" />
-                        <Button
-                            android:id="@+id/button_dare"
+                            android:padding="10dp"
+                            android:background="@drawable/main_border">
+                            <Button
+                                android:id="@+id/button_task"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/simple_same"
+                                android:textColor="#ffffff" />
+                        </LinearLayout>
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@color/colorPrimary"
-                            android:drawableTop="@drawable/rank1"
-                            android:text="邀請朋友運動"
-                            android:textColor="#ffffff" />
+                            android:padding="10dp"
+                            android:background="@drawable/main_border">
+
+                            <Button
+                                android:id="@+id/button_dare"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/simple_fin"
+                                android:textColor="#ffffff" />
+
+
+                        </LinearLayout>
+
+
 
 
                     </LinearLayout>
@@ -75,12 +86,7 @@
                         android:id="@+id/button3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
-                        android:background="@color/colorPrimary"
-                        android:drawableTop="@drawable/stream1"
-                        android:paddingTop="100dp"
-                        android:gravity="center_horizontal"
-                        android:text="運動教學"
+                        android:background="@drawable/simple_learnning"
                         android:textColor="#ffffff" />
 
                 </LinearLayout>

@@ -72,7 +72,7 @@ public class SimpleMainActivity extends AppCompatActivity
     private PieData pieData;
 
     private static String crunches_week_record;
-    private DatabaseReference mUsersDatabase,mDatabase;
+    private DatabaseReference mUsersDatabase,mDatabase,today_calorie;
     private RecyclerView mUsersList1;
     private SwipeRefreshLayout mRefreshLayout;
     public static CircleImageView userImageView,first_image;
@@ -128,6 +128,9 @@ public class SimpleMainActivity extends AppCompatActivity
             mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
             mUsersDatabase.keepSynced(true);
+
+            today_calorie=FirebaseDatabase.getInstance().getReference().child("Users");
+            today_calorie.keepSynced(true);
             mRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.squats_swipe_layout);
             mRefreshLayout.setColorSchemeColors(Color.rgb(115,196,217));
             mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -274,14 +277,14 @@ public class SimpleMainActivity extends AppCompatActivity
                 Users.class,
                 R.layout.users_single_layout,
                 SquatsNewUsersViewHolder.class,
-                mUsersDatabase.orderByChild("squats_all_count_sort")
+                today_calorie.orderByChild("calorie_sort")
         ) {
             @Override
             protected void populateViewHolder(SquatsNewUsersViewHolder squatsNewUsersViewHolder, Users users, int position) {
                 squatsNewUsersViewHolder.setDisplayName(users.getName());
-                squatsNewUsersViewHolder.setUserStatus("深蹲全部記錄:");
+                squatsNewUsersViewHolder.setUserStatus("總消耗卡路里:");
                 squatsNewUsersViewHolder.setUserImage(users.getThumb_image());
-                squatsNewUsersViewHolder.setCrunchesAllCount(users.getSquats_all_count());
+                squatsNewUsersViewHolder.setCalorie(users.getCalorie());
                 first_image=(CircleImageView)squatsNewUsersViewHolder.mView.findViewById(R.id.first_image);
                 if(position==0){
                     first_image.setVisibility(View.VISIBLE);
@@ -337,9 +340,9 @@ public class SimpleMainActivity extends AppCompatActivity
 
         }
 
-        public void setCrunchesAllCount(int crunches_all_count){
+        public void setCalorie(double todayCalorie){
             TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
-            crunches_all_count_view.setText(""+crunches_all_count+"次");
+            crunches_all_count_view.setText(""+todayCalorie+"大卡");
 
         }
 
