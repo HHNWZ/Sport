@@ -74,15 +74,15 @@ public class ExerciseTeaching extends AppCompatActivity {
         ArrayList<ExerciseTitle> food_notes_list = new ArrayList<ExerciseTitle>();
         ExerciseTitle food_note = new ExerciseTitle(R.drawable.walk_image, "跑步教學影片","26秒");
         food_notes_list.add(food_note);
-        food_note = new ExerciseTitle(R.drawable.et1, "暖身操教學影片","3分鐘44秒");
-        food_notes_list.add(food_note);
+        //food_note = new ExerciseTitle(R.drawable.et1, "暖身操教學影片","3分鐘44秒");
+        //food_notes_list.add(food_note);
         food_note = new ExerciseTitle(R.drawable.et2, "平板支撐教學影片","1分鐘45秒");
         food_notes_list.add(food_note);
         food_note = new ExerciseTitle(R.drawable.et3, "仰臥起坐教學影片","1分鐘16秒");
         food_notes_list.add(food_note);
-        food_note = new ExerciseTitle(R.drawable.et4, "俯臥撐1教學影片","1分鐘16秒");
-        food_notes_list.add(food_note);
-        food_note = new ExerciseTitle(R.drawable.et5, "俯臥撐2教學影片","1分鐘10秒");
+        //food_note = new ExerciseTitle(R.drawable.et4, "俯臥撐1教學影片","1分鐘16秒");
+        //food_notes_list.add(food_note);
+        food_note = new ExerciseTitle(R.drawable.et5, "俯臥撐教學影片","1分鐘10秒");
         food_notes_list.add(food_note);
         food_note = new ExerciseTitle(R.drawable.et6, "舉腳教學影片","1分鐘09秒");
         food_notes_list.add(food_note);
@@ -131,14 +131,14 @@ public class ExerciseTeaching extends AppCompatActivity {
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport06";
                         break;
-                    case 7:
+                    /*case 7:
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport07";
                         break;
                     case 8:
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport08";
-                        break;
+                        break;*/
                     default:
                         break;
                 }
