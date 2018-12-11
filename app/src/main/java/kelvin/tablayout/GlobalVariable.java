@@ -85,7 +85,7 @@ public class GlobalVariable  extends Application {
         return friend_squats_count;
     }
 
-    public void setFriend_squats_count(int friend_squats_count) {
+    public void setFriend_squats_count(int friend_squats_count) {///
         this.friend_squats_count = friend_squats_count;
     }
 
