@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -77,6 +78,7 @@ public class SimpleMainActivity extends AppCompatActivity
     private RecyclerView mUsersList1;
     private SwipeRefreshLayout mRefreshLayout;
     public static CircleImageView userImageView,first_image;
+    public Button button_task,button_dare,button_learn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,9 @@ public class SimpleMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         username=(TextView)hView.findViewById(R.id.text_user_name);
         userImage=(ImageView)hView.findViewById(R.id.user_image);
+        button_dare=findViewById(R.id.button_dare);
+        button_learn=findViewById(R.id.button_learn);
+        button_task=findViewById(R.id.button_task);
 
         menu = navigationView.getMenu();
         menu_email_login = menu.findItem(R.id.email_login);
@@ -169,8 +174,7 @@ public class SimpleMainActivity extends AppCompatActivity
                     }
                 }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                @Override                public void onCancelled(DatabaseError databaseError) {
 
                 }
             });
@@ -179,41 +183,91 @@ public class SimpleMainActivity extends AppCompatActivity
                 public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.walking:
-                            Toast.makeText(SimpleMainActivity.this, "步行", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SimpleMainActivity.this, "步行消耗卡路里13.3大卡", Toast.LENGTH_SHORT).show();
                             GlobalVariable walking=(GlobalVariable)getApplicationContext();
                             Log.i("資料庫卡路里",""+walking.getCalorie());
                             Log.i("資料庫排序卡路里",""+walking.getCalorie_sort());
-                            double walking_clorie=walking.getCalorie()+13.3;
+                            double walking_calorie=walking.getCalorie()+13.3;
                             double walking_calorie_sort=walking.getCalorie_sort()-13.3;
-                            my_calorie.setValue(walking_clorie);
+                            my_calorie.setValue(walking_calorie);
                             my_calorie_sort.setValue(walking_calorie_sort);
                             break;
                         case R.id.running:
-                            Toast.makeText(SimpleMainActivity.this, "跑步", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SimpleMainActivity.this, "跑步消耗卡路里20.1大卡", Toast.LENGTH_SHORT).show();
                             GlobalVariable running=(GlobalVariable)getApplicationContext();
                             Log.i("資料庫卡路里",""+running.getCalorie());
                             Log.i("資料庫排序卡路里",""+running.getCalorie_sort());
+                            double running_calorie=running.getCalorie()+20.1;
+                            double running_calorie_sort=running.getCalorie_sort()-20.1;
+                            my_calorie.setValue(running_calorie);
+                            my_calorie_sort.setValue(running_calorie_sort);
                             break;
                         case R.id.yoga:
-                            Toast.makeText(SimpleMainActivity.this, "瑜伽", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SimpleMainActivity.this, "瑜伽消耗卡路里9.9大卡", Toast.LENGTH_SHORT).show();
                             GlobalVariable yoga=(GlobalVariable)getApplicationContext();
                             Log.i("資料庫卡路里",""+yoga.getCalorie());
                             Log.i("資料庫排序卡路里",""+yoga.getCalorie_sort());
+                            double yoga_calorie=yoga.getCalorie()+9.9;
+                            double yoga_calorie_sort=yoga.getCalorie_sort()-9.9;
+                            my_calorie.setValue(yoga_calorie);
+                            my_calorie_sort.setValue(yoga_calorie_sort);
                             break;
                         case R.id.squats:
-                            Toast.makeText(SimpleMainActivity.this, "深蹲", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SimpleMainActivity.this, "深蹲消耗卡路里7.3大卡", Toast.LENGTH_SHORT).show();
                             GlobalVariable squats=(GlobalVariable)getApplicationContext();
                             Log.i("資料庫卡路里",""+squats.getCalorie());
                             Log.i("資料庫排序卡路里",""+squats.getCalorie_sort());
+                            double squats_calorie=squats.getCalorie()+7.3;
+                            double squats_calorie_sort=squats.getCalorie_sort()-7.3;
+                            my_calorie.setValue(squats_calorie);
+                            my_calorie_sort.setValue(squats_calorie_sort);
+
                             break;
                         case R.id.crunches:
-                            Toast.makeText(SimpleMainActivity.this, "仰臥起坐", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SimpleMainActivity.this, "仰臥起坐消耗卡路里5.5大卡", Toast.LENGTH_SHORT).show();
                             GlobalVariable crunches=(GlobalVariable)getApplicationContext();
                             Log.i("資料庫卡路里",""+crunches.getCalorie());
                             Log.i("資料庫排序卡路里",""+crunches.getCalorie_sort());
+                            double crunches_calorie=crunches.getCalorie()+5.5;
+                            double crunches_calorie_sort=crunches.getCalorie_sort()-5.5;
+                            my_calorie.setValue(crunches_calorie);
+                            my_calorie_sort.setValue(crunches_calorie_sort);
                             break;
                     }
                     return true;
+                }
+            });
+            button_task.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(SimpleMainActivity.this, Squats_task.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            button_dare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(SimpleMainActivity.this, Squats_dare.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            button_learn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(SimpleMainActivity.this, ExerciseTeaching.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
 
@@ -400,8 +454,9 @@ public class SimpleMainActivity extends AppCompatActivity
         }
 
         public void setCalorie(double todayCalorie){
+            DecimalFormat df = new DecimalFormat("0.0");
             TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
-            crunches_all_count_view.setText(""+todayCalorie+"大卡");
+            crunches_all_count_view.setText(""+df.format(todayCalorie)+"大卡");
 
         }
 

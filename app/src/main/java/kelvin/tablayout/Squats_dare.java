@@ -83,6 +83,7 @@ public class Squats_dare extends AppCompatActivity {
     private static int Int_friend_point;
     private String myID;
     private ImageView my_win_icon,friend_win_icon,win_arrow;
+    private String from_page="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +95,9 @@ public class Squats_dare extends AppCompatActivity {
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
                 .init();
-
+        Bundle bundle=getIntent().getExtras();
+        from_page=bundle.getString("from_page");
+        Log.i("OnCreate的From_page",from_page);
         squats_dare_app_bar = (Toolbar) findViewById(R.id.squats_dare_app_bar);
         setSupportActionBar(squats_dare_app_bar);
         actionBar = getSupportActionBar();
@@ -341,10 +344,19 @@ public class Squats_dare extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
+            if(from_page.equals("ExerciseActivity")){
+                Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+            if(from_page.equals("SimpleActivity")){
+                Intent intent = new Intent(Squats_dare.this, SimpleMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+
 
         }
         return super.onOptionsItemSelected(item);
@@ -352,10 +364,18 @@ public class Squats_dare extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        if(from_page.equals("ExerciseActivity")){
+            Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+        if(from_page.equals("SimpleActivity")){
+            Intent intent = new Intent(Squats_dare.this, SimpleMainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
     }
 
     private final Toolbar.OnMenuItemClickListener onMenuItemClickListener;

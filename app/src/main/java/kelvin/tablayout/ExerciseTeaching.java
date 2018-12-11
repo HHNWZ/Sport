@@ -35,6 +35,7 @@ public class ExerciseTeaching extends AppCompatActivity {
     FoodAdapter dataAdapter = null;
     private String url;
     private String exercise_name;
+    private String from_page="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,9 @@ public class ExerciseTeaching extends AppCompatActivity {
             exercise_teaching_actionbar.setDisplayHomeAsUpEnabled(true);
             exercise_teaching_actionbar.setTitle("選擇運動教學影片");
         }
+        Bundle bundle=getIntent().getExtras();
+        from_page=bundle.getString("from_page");
+        Log.i("OnCreate的From_page",from_page);
         displaylistView();
 
     }
@@ -54,20 +58,38 @@ public class ExerciseTeaching extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent(ExerciseTeaching.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            startActivity(intent);
+            if (from_page.equals("MainActivity")){
+                Intent intent = new Intent(ExerciseTeaching.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+            if (from_page.equals("SimpleActivity")){
+                Intent intent = new Intent(ExerciseTeaching.this, SimpleMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(ExerciseTeaching.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        if (from_page.equals("MainActivity")){
+            Intent intent = new Intent(ExerciseTeaching.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
+
+        if (from_page.equals("SimpleActivity")){
+            Intent intent = new Intent(ExerciseTeaching.this, SimpleMainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+        }
     }
 
     private void displaylistView() {
