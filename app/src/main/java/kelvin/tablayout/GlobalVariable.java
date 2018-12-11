@@ -14,6 +14,7 @@ public class GlobalVariable  extends Application {
     private int friend_squats_count;
     private  String friend_id;
     private String food_note;
+    private String sport;
     private int squats_today_count;
     private double calorie;
     private double calorie_sort;
@@ -86,7 +87,7 @@ public class GlobalVariable  extends Application {
         return friend_squats_count;
     }
 
-    public void setFriend_squats_count(int friend_squats_count) {
+    public void setFriend_squats_count(int friend_squats_count) {///
         this.friend_squats_count = friend_squats_count;
     }
 
@@ -112,6 +113,14 @@ public class GlobalVariable  extends Application {
 
     public void setSquats_today_count(int squats_today_count) {
         this.squats_today_count = squats_today_count;
+    }
+
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
     }
 
     public double getCalorie() {
