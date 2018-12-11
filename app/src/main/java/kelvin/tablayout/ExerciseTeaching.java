@@ -16,6 +16,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
+import com.onesignal.OneSignal;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -55,6 +56,11 @@ public class ExerciseTeaching extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_teaching);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .init();
         Toolbar exercise_teaching_toolbar = findViewById(R.id.exercise_teaching_toolbar);
         requestQueue = Volley.newRequestQueue(ExerciseTeaching.this.getApplicationContext());
         setSupportActionBar(exercise_teaching_toolbar);
@@ -69,7 +75,7 @@ public class ExerciseTeaching extends AppCompatActivity {
         displaylistView();
 
     }
-    private String showUri = "http://140.127.22.198:1335/login.php";
+    private String showUri = "http://192.168.0.4:1335/login.php";
     com.android.volley.RequestQueue requestQueue;
     private void getData() {
         StringRequest jsonObjectRequest = new StringRequest
@@ -182,53 +188,53 @@ public class ExerciseTeaching extends AppCompatActivity {
                     case 0:
                         update = "00";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport00";
 
                         break;
                     case 1:
                         update = "01";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport01";
 
                         break;
                     case 2:
                         update = "02";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport02";
                         break;
                     case 3:
                         update = "03";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport03";
                         break;
                     case 4:
                         update = "04";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport04";
                         break;
                     case 5:
                         update = "05";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport05";
                         break;
                     case 6:
                         update = "06";
                         getData();
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport06";
                         break;
                     /*case 7:
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport07";
                         break;
                     case 8:
-                        url="http://140.127.22.198:5500/video_feed";
+                        url="http://192.168.0.4:5500/video_feed";
                         exercise_name="sport08";
                         break;*/////
                     default:

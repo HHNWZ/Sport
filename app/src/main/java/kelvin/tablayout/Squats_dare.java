@@ -257,24 +257,42 @@ public class Squats_dare extends AppCompatActivity {
                                                     if(squats_dare_data.getSquats_dare_myFinishTime()>FriendFinishTimeLong){
                                                         Log.i("勝利方是:","朋友");
                                                         Toast.makeText(Squats_dare.this,"朋友獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
-                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        if(from_page.equals("ExerciseActivity")){
+                                                            Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                            startActivity(intent);
+                                                        }
+                                                        if(from_page.equals("SimpleActivity")){
+                                                            Intent intent = new Intent(Squats_dare.this, SimpleMainActivity.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                            startActivity(intent);
+                                                        }
                                                         friend_win_icon.setVisibility(View.INVISIBLE);
                                                         my_win_icon.setVisibility(View.INVISIBLE);
-                                                        startActivity(intent);
+
 
                                                     }else if(squats_dare_data.getSquats_dare_myFinishTime()<FriendFinishTimeLong){
                                                         Log.i("你之前的friend_pint",""+squats_dare_data.getSquats_dare_friend_point());
                                                         friend_point_database.child("friend_point").setValue(squats_dare_data.getSquats_dare_friend_point()+10);
                                                         Log.i("勝利方是:","你");
                                                         Toast.makeText(Squats_dare.this,"你獲得10點friendpoint", Toast.LENGTH_SHORT).show();
-                                                        Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
-                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        if(from_page.equals("ExerciseActivity")){
+                                                            Intent intent = new Intent(Squats_dare.this, Exercise_main.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                            startActivity(intent);
+                                                        }
+                                                        if(from_page.equals("SimpleActivity")){
+                                                            Intent intent = new Intent(Squats_dare.this, SimpleMainActivity.class);
+                                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                            startActivity(intent);
+                                                        }
                                                         friend_win_icon.setVisibility(View.INVISIBLE);
                                                         my_win_icon.setVisibility(View.INVISIBLE);
-                                                        startActivity(intent);
+
                                                     }
 
 

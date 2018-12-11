@@ -172,6 +172,10 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
                     squats_dare_database.child(friend_id).child("squats_dare").child("count").setValue(20);
                     squats_dare_database.child(friend_id).child("squats_dare").child("time").setValue(120000);
                     Intent intent = new Intent(SquatsDareFriendProfile.this,Squats_dare.class);
+                    Bundle bundle =new Bundle();
+                    Log.i("我被執行","yes");
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     finish();
@@ -379,6 +383,10 @@ public class SquatsDareFriendProfile extends AppCompatActivity {
                                 squats_dare_database.child(friend_id).child("squats_dare").child("count").setValue(20);
                                 squats_dare_database.child(friend_id).child("squats_dare").child("time").setValue(120000);
                                 Intent intent = new Intent(SquatsDareFriendProfile.this,Squats_dare.class);
+                                Bundle bundle =new Bundle();
+                                bundle.putString("from_page","ExerciseActivity");
+                                Log.i("我被執行","no");
+                                intent.putExtras(bundle);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 finish();

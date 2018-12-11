@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.mikephil.charting.animation.Easing;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataService;
@@ -111,6 +113,11 @@ public class Squats_task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squats_task);
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .setNotificationOpenedHandler(new MainActivity.ExampleNotificationOpenedHandler())
+                .init();
         Bundle bundle=getIntent().getExtras();
         from_page=bundle.getString("from_page");
         Log.i("OnCreate的From_page",from_page);
@@ -254,10 +261,18 @@ public class Squats_task extends AppCompatActivity {
 
                                                     squats_task_toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
                                                     confirm_squats_task_button.setVisibility(View.INVISIBLE);
-                                                    Intent intent = new Intent(Squats_task.this, Exercise_main.class);
-                                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                    startActivity(intent);
+                                                    if(from_page.equals("ExerciseActivity")){
+                                                        Intent intent = new Intent(Squats_task.this, Exercise_main.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        startActivity(intent);
+                                                    }
+                                                    if(from_page.equals("SimpleActivity")){
+                                                        Intent intent = new Intent(Squats_task.this, SimpleMainActivity.class);
+                                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                                        startActivity(intent);
+                                                    }
                                                 }
                                             });
                                         } else if (squats_progress < squats_task_data_int) {

@@ -170,6 +170,10 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                     mProfileSendReqBtn.setText("已接受深蹲共同任務");
 
                     Intent intent = new Intent(SquatsTaskFriendProfile.this,Squats_task.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    Log.i("我被執行","yes");
+                    intent.putExtras(bundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     finish();
@@ -375,6 +379,9 @@ public class SquatsTaskFriendProfile extends AppCompatActivity {
                                 mProfileSendReqBtn.setText("已接受深蹲共同任務");
 
                                 Intent intent = new Intent(SquatsTaskFriendProfile.this,Squats_task.class);
+                                Bundle bundle =new Bundle();
+                                bundle.putString("from_page","ExerciseActivity");
+                                intent.putExtras(bundle);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                 finish();
