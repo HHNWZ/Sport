@@ -44,6 +44,7 @@ public class ExerciseSquats extends Fragment {
     public static CircleImageView userImageView,first_image;
     private SwipeRefreshLayout mRefreshLayout;
 
+
     public ExerciseSquats() {
         // Required empty public constructor
     }
@@ -53,6 +54,7 @@ public class ExerciseSquats extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mMainView = inflater.inflate(R.layout.fragment_exercise_squats, container, false);
@@ -119,6 +121,9 @@ public class ExerciseSquats extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Squats_dare.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExerciseActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
 
@@ -133,6 +138,9 @@ public class ExerciseSquats extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),Squats_task.class);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","ExerciseActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }

@@ -804,6 +804,9 @@ public class  MainActivity extends AppCompatActivity
                 Intent intent = new Intent(MainActivity.this,ExerciseTeaching.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                Bundle bundle =new Bundle();
+                bundle.putString("from_page","MainActivity");
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }

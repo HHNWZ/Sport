@@ -127,4 +127,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="crunches">仰卧起坐</string>
+    <string name="running">跑步</string>
+    <string name="squats">深蹲</string>
+    <string name="walking">步行</string>
+    <string name="yoga">瑜伽</string>
 </resources>

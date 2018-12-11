@@ -20,8 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -72,10 +74,11 @@ public class SimpleMainActivity extends AppCompatActivity
     private PieData pieData;
 
     private static String crunches_week_record;
-    private DatabaseReference mUsersDatabase,mDatabase,today_calorie;
+    private DatabaseReference mUsersDatabase,mDatabase,today_calorie,my_calorie,my_calorie_sort;
     private RecyclerView mUsersList1;
     private SwipeRefreshLayout mRefreshLayout;
     public static CircleImageView userImageView,first_image;
+    public Button button_task,button_dare,button_learn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,8 @@ public class SimpleMainActivity extends AppCompatActivity
         ActionBar actionBar =getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("不再邊緣運動");
+
+
 
 
          drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -100,6 +105,9 @@ public class SimpleMainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         username=(TextView)hView.findViewById(R.id.text_user_name);
         userImage=(ImageView)hView.findViewById(R.id.user_image);
+        button_dare=findViewById(R.id.button_dare);
+        button_learn=findViewById(R.id.button_learn);
+        button_task=findViewById(R.id.button_task);
 
         menu = navigationView.getMenu();
         menu_email_login = menu.findItem(R.id.email_login);
@@ -128,7 +136,8 @@ public class SimpleMainActivity extends AppCompatActivity
             mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
             mUsersDatabase.keepSynced(true);
-
+            my_calorie=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("calorie");
+            my_calorie_sort=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("calorie_sort");
             today_calorie=FirebaseDatabase.getInstance().getReference().child("Users");
             today_calorie.keepSynced(true);
             mRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.squats_swipe_layout);
@@ -153,15 +162,112 @@ public class SimpleMainActivity extends AppCompatActivity
                     if (dataSnapshot.hasChildren()){
                         String user_name = dataSnapshot.child("name").getValue().toString();
                         String user_image = dataSnapshot.child("thumb_image").getValue().toString();
-
+                        String calorie_sort=dataSnapshot.child("calorie_sort").getValue().toString();
+                        String calorie=dataSnapshot.child("calorie").getValue().toString();
+                        double calorie_sort_double=Double.parseDouble(calorie_sort);
+                        double calorie_double=Double.parseDouble(calorie);
+                        GlobalVariable database_calorie=(GlobalVariable)getApplicationContext();
+                        database_calorie.setCalorie(calorie_double);
+                        database_calorie.setCalorie_sort(calorie_sort_double);
                         username.setText(user_name);
                         Picasso.get().load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                     }
                 }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+                @Override                public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.walking:
+                            Toast.makeText(SimpleMainActivity.this, "步行消耗卡路里13.3大卡", Toast.LENGTH_SHORT).show();
+                            GlobalVariable walking=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+walking.getCalorie());
+                            Log.i("資料庫排序卡路里",""+walking.getCalorie_sort());
+                            double walking_calorie=walking.getCalorie()+13.3;
+                            double walking_calorie_sort=walking.getCalorie_sort()-13.3;
+                            my_calorie.setValue(walking_calorie);
+                            my_calorie_sort.setValue(walking_calorie_sort);
+                            break;
+                        case R.id.running:
+                            Toast.makeText(SimpleMainActivity.this, "跑步消耗卡路里20.1大卡", Toast.LENGTH_SHORT).show();
+                            GlobalVariable running=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+running.getCalorie());
+                            Log.i("資料庫排序卡路里",""+running.getCalorie_sort());
+                            double running_calorie=running.getCalorie()+20.1;
+                            double running_calorie_sort=running.getCalorie_sort()-20.1;
+                            my_calorie.setValue(running_calorie);
+                            my_calorie_sort.setValue(running_calorie_sort);
+                            break;
+                        case R.id.yoga:
+                            Toast.makeText(SimpleMainActivity.this, "瑜伽消耗卡路里9.9大卡", Toast.LENGTH_SHORT).show();
+                            GlobalVariable yoga=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+yoga.getCalorie());
+                            Log.i("資料庫排序卡路里",""+yoga.getCalorie_sort());
+                            double yoga_calorie=yoga.getCalorie()+9.9;
+                            double yoga_calorie_sort=yoga.getCalorie_sort()-9.9;
+                            my_calorie.setValue(yoga_calorie);
+                            my_calorie_sort.setValue(yoga_calorie_sort);
+                            break;
+                        case R.id.squats:
+                            Toast.makeText(SimpleMainActivity.this, "深蹲消耗卡路里7.3大卡", Toast.LENGTH_SHORT).show();
+                            GlobalVariable squats=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+squats.getCalorie());
+                            Log.i("資料庫排序卡路里",""+squats.getCalorie_sort());
+                            double squats_calorie=squats.getCalorie()+7.3;
+                            double squats_calorie_sort=squats.getCalorie_sort()-7.3;
+                            my_calorie.setValue(squats_calorie);
+                            my_calorie_sort.setValue(squats_calorie_sort);
+
+                            break;
+                        case R.id.crunches:
+                            Toast.makeText(SimpleMainActivity.this, "仰臥起坐消耗卡路里5.5大卡", Toast.LENGTH_SHORT).show();
+                            GlobalVariable crunches=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+crunches.getCalorie());
+                            Log.i("資料庫排序卡路里",""+crunches.getCalorie_sort());
+                            double crunches_calorie=crunches.getCalorie()+5.5;
+                            double crunches_calorie_sort=crunches.getCalorie_sort()-5.5;
+                            my_calorie.setValue(crunches_calorie);
+                            my_calorie_sort.setValue(crunches_calorie_sort);
+                            break;
+                    }
+                    return true;
+                }
+            });
+            button_task.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(SimpleMainActivity.this, Squats_task.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            button_dare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(SimpleMainActivity.this, Squats_dare.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            button_learn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(SimpleMainActivity.this, ExerciseTeaching.class);
+                    Bundle bundle =new Bundle();
+                    bundle.putString("from_page","SimpleActivity");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
 
@@ -201,6 +307,13 @@ public class SimpleMainActivity extends AppCompatActivity
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main2, menu);
+        return true;
+    }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -341,8 +454,9 @@ public class SimpleMainActivity extends AppCompatActivity
         }
 
         public void setCalorie(double todayCalorie){
+            DecimalFormat df = new DecimalFormat("0.0");
             TextView crunches_all_count_view=(TextView) mView.findViewById(R.id.crunches_all_count);
-            crunches_all_count_view.setText(""+todayCalorie+"大卡");
+            crunches_all_count_view.setText(""+df.format(todayCalorie)+"大卡");
 
         }
 
