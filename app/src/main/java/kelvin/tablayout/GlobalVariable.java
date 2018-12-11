@@ -128,5 +128,5 @@ public class GlobalVariable  extends Application {
 
     public void setCalorie_sort(double calorie_sort) {
         this.calorie_sort = calorie_sort;
-    }
+    }////
 }
