@@ -160,7 +160,7 @@ public class ExerciseTeaching extends AppCompatActivity {
                     case 8:
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport08";
-                        break;*/
+                        break;*/////
                     default:
                         break;
                 }
