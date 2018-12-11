@@ -2,8 +2,30 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/walking"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/walking"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/running"
+        android:orderInCategory="100"
+        android:title="@string/running"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/yoga"
+        android:orderInCategory="100"
+        android:title="@string/yoga"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/squats"
+        android:orderInCategory="100"
+        android:title="@string/squats"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/crunches"
+        android:orderInCategory="100"
+        android:title="@string/crunches"
+        app:showAsAction="never" />
+
+
 </menu>

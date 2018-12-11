@@ -15,6 +15,8 @@ public class GlobalVariable  extends Application {
     private  String friend_id;
     private String food_note;
     private int squats_today_count;
+    private double calorie;
+    private double calorie_sort;
     //修改 變數字串
     public void setWord(String word){
         this.Word = word;
@@ -110,5 +112,21 @@ public class GlobalVariable  extends Application {
 
     public void setSquats_today_count(int squats_today_count) {
         this.squats_today_count = squats_today_count;
+    }
+
+    public double getCalorie() {
+        return calorie;
+    }
+
+    public void setCalorie(double calorie) {
+        this.calorie = calorie;
+    }
+
+    public double getCalorie_sort() {
+        return calorie_sort;
+    }
+
+    public void setCalorie_sort(double calorie_sort) {
+        this.calorie_sort = calorie_sort;
     }
 }

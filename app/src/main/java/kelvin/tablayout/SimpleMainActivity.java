@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
@@ -72,7 +73,7 @@ public class SimpleMainActivity extends AppCompatActivity
     private PieData pieData;
 
     private static String crunches_week_record;
-    private DatabaseReference mUsersDatabase,mDatabase,today_calorie;
+    private DatabaseReference mUsersDatabase,mDatabase,today_calorie,my_calorie,my_calorie_sort;
     private RecyclerView mUsersList1;
     private SwipeRefreshLayout mRefreshLayout;
     public static CircleImageView userImageView,first_image;
@@ -86,6 +87,8 @@ public class SimpleMainActivity extends AppCompatActivity
         ActionBar actionBar =getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("不再邊緣運動");
+
+
 
 
          drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -128,7 +131,8 @@ public class SimpleMainActivity extends AppCompatActivity
             mDatabase= FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
             mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
             mUsersDatabase.keepSynced(true);
-
+            my_calorie=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("calorie");
+            my_calorie_sort=FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid()).child("calorie_sort");
             today_calorie=FirebaseDatabase.getInstance().getReference().child("Users");
             today_calorie.keepSynced(true);
             mRefreshLayout=(SwipeRefreshLayout)findViewById(R.id.squats_swipe_layout);
@@ -153,7 +157,13 @@ public class SimpleMainActivity extends AppCompatActivity
                     if (dataSnapshot.hasChildren()){
                         String user_name = dataSnapshot.child("name").getValue().toString();
                         String user_image = dataSnapshot.child("thumb_image").getValue().toString();
-
+                        String calorie_sort=dataSnapshot.child("calorie_sort").getValue().toString();
+                        String calorie=dataSnapshot.child("calorie").getValue().toString();
+                        double calorie_sort_double=Double.parseDouble(calorie_sort);
+                        double calorie_double=Double.parseDouble(calorie);
+                        GlobalVariable database_calorie=(GlobalVariable)getApplicationContext();
+                        database_calorie.setCalorie(calorie_double);
+                        database_calorie.setCalorie_sort(calorie_sort_double);
                         username.setText(user_name);
                         Picasso.get().load(user_image).placeholder(R.drawable.default_avatar).into(userImage);
                     }
@@ -162,6 +172,48 @@ public class SimpleMainActivity extends AppCompatActivity
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+            toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.walking:
+                            Toast.makeText(SimpleMainActivity.this, "步行", Toast.LENGTH_SHORT).show();
+                            GlobalVariable walking=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+walking.getCalorie());
+                            Log.i("資料庫排序卡路里",""+walking.getCalorie_sort());
+                            double walking_clorie=walking.getCalorie()+13.3;
+                            double walking_calorie_sort=walking.getCalorie_sort()-13.3;
+                            my_calorie.setValue(walking_clorie);
+                            my_calorie_sort.setValue(walking_calorie_sort);
+                            break;
+                        case R.id.running:
+                            Toast.makeText(SimpleMainActivity.this, "跑步", Toast.LENGTH_SHORT).show();
+                            GlobalVariable running=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+running.getCalorie());
+                            Log.i("資料庫排序卡路里",""+running.getCalorie_sort());
+                            break;
+                        case R.id.yoga:
+                            Toast.makeText(SimpleMainActivity.this, "瑜伽", Toast.LENGTH_SHORT).show();
+                            GlobalVariable yoga=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+yoga.getCalorie());
+                            Log.i("資料庫排序卡路里",""+yoga.getCalorie_sort());
+                            break;
+                        case R.id.squats:
+                            Toast.makeText(SimpleMainActivity.this, "深蹲", Toast.LENGTH_SHORT).show();
+                            GlobalVariable squats=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+squats.getCalorie());
+                            Log.i("資料庫排序卡路里",""+squats.getCalorie_sort());
+                            break;
+                        case R.id.crunches:
+                            Toast.makeText(SimpleMainActivity.this, "仰臥起坐", Toast.LENGTH_SHORT).show();
+                            GlobalVariable crunches=(GlobalVariable)getApplicationContext();
+                            Log.i("資料庫卡路里",""+crunches.getCalorie());
+                            Log.i("資料庫排序卡路里",""+crunches.getCalorie_sort());
+                            break;
+                    }
+                    return true;
                 }
             });
 
@@ -201,6 +253,13 @@ public class SimpleMainActivity extends AppCompatActivity
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main2, menu);
+        return true;
+    }
+
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
