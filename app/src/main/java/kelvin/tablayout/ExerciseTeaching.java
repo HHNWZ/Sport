@@ -9,6 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.a888888888.sport.MainActivity;
 import com.example.a888888888.sport.R;
 import com.squareup.picasso.MemoryPolicy;
@@ -27,6 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,11 +49,13 @@ public class ExerciseTeaching extends AppCompatActivity {
     private String url;
     private String exercise_name;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_teaching);
         Toolbar exercise_teaching_toolbar = findViewById(R.id.exercise_teaching_toolbar);
+        requestQueue = Volley.newRequestQueue(ExerciseTeaching.this.getApplicationContext());
         setSupportActionBar(exercise_teaching_toolbar);
         ActionBar exercise_teaching_actionbar = getSupportActionBar();
         if (exercise_teaching_actionbar != null) {
@@ -50,6 +65,44 @@ public class ExerciseTeaching extends AppCompatActivity {
         displaylistView();
 
     }
+    private String showUri = "http://140.127.22.198:1335/login.php";
+    com.android.volley.RequestQueue requestQueue;
+    private void getData() {
+        StringRequest jsonObjectRequest = new StringRequest
+                (Request.Method.POST,showUri, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject= new JSONObject(response.toString());
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            JSONObject jasondata;
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(ExerciseTeaching.this,"", Toast.LENGTH_SHORT).show();//?唾???靘?ㄐ
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.append(error.getMessage());
+                    }
+                }
+
+                )
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("login", update);
+                return params;
+            }
+
+        };
+        requestQueue.add(jsonObjectRequest);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -70,6 +123,7 @@ public class ExerciseTeaching extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private String update;
     private void displaylistView() {
         ArrayList<ExerciseTitle> food_notes_list = new ArrayList<ExerciseTitle>();
         ExerciseTitle food_note = new ExerciseTitle(R.drawable.walk_image, "跑步教學影片","26秒");
@@ -104,30 +158,46 @@ public class ExerciseTeaching extends AppCompatActivity {
                 Log.i("我點擊",""+position+""+food_note.getExercise_name());
                 switch (position){
                     case 0:
+                        update = "00";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport00";
+
                         break;
                     case 1:
+                        update = "01";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport01";
+
                         break;
                     case 2:
+                        update = "02";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport02";
                         break;
                     case 3:
+                        update = "03";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport03";
                         break;
                     case 4:
+                        update = "04";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport04";
                         break;
                     case 5:
+                        update = "05";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport05";
                         break;
                     case 6:
+                        update = "06";
+                        getData();
                         url="http://140.127.22.198:5500/video_feed";
                         exercise_name="sport06";
                         break;
