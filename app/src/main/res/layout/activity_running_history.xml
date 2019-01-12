@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.RunningHistory"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/running_history_toolbar"
+        layout="@layout/app_bar_layout" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/running_history_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/distance_running_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/suagatsbackground"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/distance_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="距離:"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/duration_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/duration_time"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/duration_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="運動時間:"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/calorie_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/calories_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/calorie_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="消耗的卡路里:"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mean_HeartRat_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/mean_heart_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/mean_HeartRat_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="平均心跳:"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_weight="1">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/max_heart_rate_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/max_heart_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/max_heart_rate_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="最高心跳:"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/incline_distance_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/incline_distance_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/incline_distance_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="總上坡距離:"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_color"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/decline_distance_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/decline_distance_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/decline_distance_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="總下坡距離:"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_color"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/max_altitude_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/max_mountain_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/max_altitude_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="最高坡度:"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_color"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/min_altitude_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/min_altitude_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/min_altitude_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="最低坡度:"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_color"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/mean_speed_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/mean_speed_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/mean_speed_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="平均速度:"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_color"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/post_border"
+                android:padding="5dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/max_speed_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/max_speed_icon"
+                    app:civ_border_color="@color/object_color"
+                    app:civ_border_width="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:id="@+id/max_speed_of_running_history_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="最高速度:"
+                    android:layout_gravity="right"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_color"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

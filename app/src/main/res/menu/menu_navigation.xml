@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/email_login"
+            android:icon="@drawable/login"
+            android:title="@string/Login"
+            />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/email_register"
+            android:icon="@drawable/account_plus"
+            android:title="@string/close" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/chat_room"
+            android:icon="@drawable/chatroom"
+            android:title="@string/chat_room"
+            android:actionLayout="@layout/activity_chat"/>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/setting_account"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="會員資料設定" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/simple_main_activity"
+            android:icon="@drawable/menu_pager"
+            android:title="簡單主頁面" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/complex_main_activity"
+            android:icon="@drawable/menu_pager"
+            android:title="複雜主頁面" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Logout"
+            android:icon="@drawable/logout"
+            android:title="登出"
+            />
+    </group>
+
+
+</menu>

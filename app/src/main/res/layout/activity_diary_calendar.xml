@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.DiaryCalendar"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/diary_calendar_toolbar"
+        layout="@layout/app_bar_layout"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/diary_calendar_toolbar"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/main_border"
+            android:padding="5dp">
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/text_color"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/breakfast_data"
+
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data1"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data2"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data3"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data4"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data5"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data6"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data7"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data8"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="早餐數據"
+                        android:id="@+id/breakfast_data9"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/calorie_background"
+                        android:gravity="center"
+                        android:text="早餐卡路里"
+                        android:id="@+id/breakfast_cal"
+                        android:textColor="#73c4d9"
+                        android:layout_marginTop="5dp"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐"
+                        android:id="@+id/lunch_data"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data1"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data2"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data3"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data4"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data5"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data6"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data7"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data8"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="午餐數據"
+                        android:id="@+id/lunch_data9"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/calorie_background"
+                        android:gravity="center"
+                        android:text="午餐卡路里"
+                        android:id="@+id/lunch_cal"
+                        android:textColor="#73c4d9"
+                        android:layout_marginTop="5dp"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐"
+                        android:id="@+id/dinner_data"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data1"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data2"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data3"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data4"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data5"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data6"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data7"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data8"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/main_border"
+                        android:gravity="center"
+                        android:text="晚餐數據"
+                        android:id="@+id/dinner_data9"
+                        android:textColor="@color/text_color"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/calorie_background"
+                        android:gravity="center"
+                        android:text="晚餐卡路里"
+                        android:id="@+id/dinner_cal"
+                        android:textColor="#73c4d9"
+                        android:layout_marginTop="5dp"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/calorie_background"
+                        android:gravity="center"
+                        android:text="今天所攝取的總卡路里"
+                        android:id="@+id/total_cal"
+                        android:textColor="#73c4d9"
+                        android:layout_marginTop="10dp"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="5dp"
+                        android:background="@drawable/calorie_background"
+                        android:gravity="center"
+                        android:text="今天所攝取的總卡路里"
+                        android:id="@+id/consumption_cal"
+                        android:textColor="#73c4d9"
+                        android:layout_marginTop="10dp"
+                        android:textSize="20sp"
+                        android:visibility="gone" />
+
+
+
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

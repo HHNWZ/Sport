@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.Squats_dare"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/squats_dare_app_bar"
+        layout="@layout/app_bar_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/squats_dare_app_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/over_background2">
+
+                <TextView
+                    android:id="@+id/exercise_week_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="深蹲"
+                    android:textSize="40sp"
+
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:id="@+id/exercise_week_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/exercise_week_title"
+                    android:text="0"
+                    android:layout_centerHorizontal="true"
+
+                    android:textColor="@color/object_color"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/exercise_week_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/exercise_week_data"
+                    android:layout_centerHorizontal="true"
+                    android:text="次"
+                    android:textColor="@color/text_color"
+
+                    android:textSize="40sp" />
+
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/main_border"
+                android:padding="5dp"
+                android:gravity="center">
+
+
+              <RelativeLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="64dp"
+                  android:layout_weight="1"
+                  >
+                  <de.hdodenhof.circleimageview.CircleImageView
+                      android:id="@+id/user_single_image"
+                      android:layout_width="64dp"
+                      android:layout_height="64dp"
+                      android:src="@drawable/default_avatar"
+                      android:layout_centerHorizontal="true"
+                      android:layout_marginTop="5dp"
+
+                      />
+
+                  <ImageView
+                      android:id="@+id/my_win_icon"
+                      android:layout_width="45dp"
+                      android:layout_height="45dp"
+                      android:layout_alignParentRight="true"
+                      android:layout_alignParentBottom="true"
+                      android:layout_marginRight="0dp"
+                      android:layout_marginBottom="0dp"
+                      android:src="@drawable/win_icon"
+                      android:visibility="invisible" />
+
+              </RelativeLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/user_single_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="你的名字"
+                        android:textColor="@color/text_color"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        />
+
+
+
+
+                <TextView
+                    android:id="@+id/squats_finish_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:text="完成時間"/>
+                <TextView
+                    android:id="@+id/squats_finish_time_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0分0秒"
+
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/object_color"/>
+                <TextView
+                    android:id="@+id/squats_finish_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="次數"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color"/>
+                <TextView
+                    android:id="@+id/squats_finish_count_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="18sp"
+                    android:textColor="@color/object_color"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/main_border"
+                android:padding="5dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_VS"
+                    android:text="VS"
+
+                    android:textSize="70sp"
+                    android:visibility="invisible"
+                    android:gravity="center"
+                    android:textColor="@color/text_color"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_winner"
+                    android:text="勝利方"
+                    android:textSize="25sp"
+                    android:visibility="invisible"
+                    android:textColor="@color/text_color"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/win_arrow"
+                    android:src="@drawable/right_arrow"
+                    android:visibility="invisible"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/confirm_dare"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="確認"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:background="@drawable/button"
+                    android:backgroundTint="@color/object_color"
+                    android:textColor="@color/text_color"
+
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:background="@drawable/main_border"
+                android:padding="5dp"
+                android:gravity="center">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    >
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/friend_single_image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/default_avatar"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/friend_win_icon"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/win_icon"
+                        android:visibility="invisible"/>
+
+                </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/friend_single_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="朋友的名字"
+                        android:textColor="@color/text_color"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_below="@+id/user_single_image"
+                        android:textSize="18sp"
+                        android:visibility="invisible"
+                        android:layout_weight="1"
+                        />
+
+
+
+
+                <TextView
+                    android:id="@+id/friend_finish_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_single_name"
+                    android:text="完成時間"
+                    android:visibility="invisible"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color"/>
+                <TextView
+                    android:id="@+id/friend_finish_time_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_single_name"
+                    android:layout_toRightOf="@+id/squats_finish_time"
+                    android:text="0分0秒"
+
+                    android:visibility="invisible"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/object_color"/>
+                <TextView
+                    android:id="@+id/friend_squats_finish_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_single_name"
+                    android:layout_toRightOf="@+id/squats_finish_time"
+                    android:text="次數"
+                    android:visibility="invisible"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color"/>
+                <TextView
+                    android:id="@+id/friend_squats_finish_count_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_single_name"
+                    android:layout_toRightOf="@+id/squats_finish_time"
+                    android:text="0"
+                    android:textColor="@color/object_color"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

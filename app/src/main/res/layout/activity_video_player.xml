@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.VideoPlayer"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/activity_video_player_toolbar"
+        layout="@layout/app_bar_layout" />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_below="@+id/activity_video_player_toolbar"
+        android:layout_above="@+id/btn_play_pause"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </VideoView>
+
+    <Button
+        android:id="@+id/btn_play_pause"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:backgroundTint="@color/object_color"
+        android:text="播放"
+        android:textColor="@color/text_color" />
+
+</RelativeLayout>

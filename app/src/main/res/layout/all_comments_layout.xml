@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/post_border">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/comment_username_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/default_avatar" />
+
+
+
+        <TextView
+            android:id="@+id/comment_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/comment_username_image"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/comment_username_image"
+            android:text="使用者名稱"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/simple_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/comment_username"
+            android:layout_below="@+id/comment_username"
+            android:layout_marginTop="5dp"
+            android:text="留言時間"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/comment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="日期"
+            android:layout_toRightOf="@+id/simple_text"
+            android:layout_below="@+id/comment_username"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/comment_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="留言內容"
+            android:layout_below="@id/simple_text"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignStart="@+id/comment_username"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/comment_text"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentEnd="true"
+            android:text="時間："
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

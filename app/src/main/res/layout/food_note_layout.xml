@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_single_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/post_border"
+        android:padding="10dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/food_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:civ_border_color="@color/object_color"
+            android:layout_gravity="center"
+            app:civ_border_width="5dp"
+            android:src="@drawable/default_avatar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/food_id"
+            android:layout_weight="4"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="食物名稱"
+                android:textSize="20sp"
+                android:id="@+id/food_name"
+                android:textColor="@color/text_color"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/food_calorie_data"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:text="食物熱量"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/food_calorie_unit"
+                    android:textColor="@color/text_color"
+                    android:textSize="20sp"
+                    android:text="大卡"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="3">
+
+            <Button
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/add_food_component"
+                android:background="@drawable/add_food_component_icon"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/number_food_component"
+                android:text="數量"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                android:gravity="center"
+
+                android:layout_gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/number_food_component_unit"
+                android:text="單位"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                android:layout_marginLeft="3dp"
+
+                android:layout_gravity="center"
+                />
+            <Button
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/sub_food_component"
+                android:background="@drawable/sub_food_component_icon"
+                android:layout_gravity="center"
+                android:layout_marginLeft="3dp"
+                />
+
+            <CheckBox
+                android:id="@+id/food_check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:layout_gravity="center"
+                style="@style/MyCheckBox"
+                android:layout_marginLeft="3dp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

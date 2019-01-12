@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="kelvin.tablayout.SettingsActivity">
+
+    <include
+
+        layout="@layout/app_bar_layout"
+        android:id="@+id/user_setting_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/settings_image"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_below="@+id/user_setting_Toolbar"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/default_avatar"
+        android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="修改用戶名"
+            android:id="@+id/edit_username"
+            android:layout_marginLeft="7dp"
+            android:layout_below="@+id/settings_image"
+            android:textColor="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/setting_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_username"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/inputs"
+            android:inputType="text"
+            android:hint="修改用戶名"
+
+            android:padding="8dp"
+            />
+
+
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="修改用戶動態"
+            android:id="@+id/edit_country_name"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/setting_username"
+            android:textColor="@android:color/white"/>
+
+        <EditText
+            android:id="@+id/setting_country_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_country_name"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/inputs"
+            android:hint="修改用戶動態 "
+            android:inputType="text"
+            android:padding="8dp"
+             />
+
+
+
+    <Button
+        android:id="@+id/setting_information_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_country_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button"
+        android:backgroundTint="#73c4d9"
+        android:textColor="@android:color/white"
+        android:text="儲存" />
+
+
+
+</RelativeLayout>

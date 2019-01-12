@@ -1,0 +1,316 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="kelvin.tablayout.ExerciseRunning"
+    android:background="@color/colorPrimary">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="#323d4d"
+           android:layout_alignParentBottom="true"
+           android:id="@+id/buttonLinear"
+           >
+
+           <Button
+               android:id="@+id/button_of_sports_monitoring"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:background="@drawable/main_border"
+               android:padding="5sp"
+               android:textSize="16sp"
+               android:drawableTop="@drawable/alert1"
+               android:text="運動記錄"
+               android:textColor="#ffffff" />
+
+           <Button
+               android:id="@+id/button_of_task_execution"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:background="@drawable/main_border"
+               android:padding="5sp"
+               android:drawableTop="@drawable/check1"
+               android:text="共同任務"
+               android:textSize="16sp"
+               android:textColor="#ffffff" />
+
+           <Button
+               android:id="@+id/button_of_invitation"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:background="@drawable/main_border"
+               android:padding="5sp"
+               android:drawableTop="@drawable/play1"
+               android:text="運動競賽"
+               android:textSize="16sp"
+               android:textColor="#ffffff" />
+
+
+
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_above="@+id/buttonLinear"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="horizontal"
+               android:layout_weight="1">
+
+               <android.support.v4.widget.SwipeRefreshLayout
+                   android:id="@+id/running_swipe_layout"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+
+                   <android.support.v7.widget.RecyclerView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:id="@+id/running_list"
+                       android:background="@color/colorPrimary"/>
+               </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+           </LinearLayout>
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:layout_weight="1.6"
+               android:background="#1e2b3d">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="horizontal"
+                   android:padding="5sp"
+                   android:background="@drawable/main_border"
+                   android:layout_weight="2"
+                   android:gravity="center">
+
+                   <TextView
+                       android:id="@+id/exercise_title"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="跑步個人記錄"
+                       android:textColor="@color/text_color"
+                       android:textSize="30sp"
+                       android:textStyle="bold" />
+
+               </LinearLayout>
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="horizontal"
+                   android:background="@drawable/main_border"
+                   android:layout_weight="1">
+
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical"
+                       android:background="@drawable/main_border"
+                       android:layout_weight="1">
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1.5"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_lowest_record"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="最低記錄"
+                               android:textColor="@color/text_color" />
+
+
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_lowest_record_data"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="0"
+                               android:textColor="#73c4d9"
+                               android:textSize="40sp" />
+
+
+
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1.5"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_lowest_record_unit"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="公里"
+                               android:textColor="@color/text_color" />
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical"
+                       android:background="@drawable/main_border"
+                       android:layout_weight="1">
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1.5"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_Of_today_record"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="今日記錄"
+                               android:textColor="@color/text_color"
+
+                               />
+
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_today_record_data"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="0"
+                               android:textColor="#73c4d9"
+                               android:textSize="40sp" />
+
+
+
+
+
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1.5"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_today_record_unit"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="公里"
+                               android:textColor="@color/text_color"
+                               />
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:orientation="vertical"
+                       android:background="@drawable/main_border"
+                       android:layout_weight="1">
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1.5"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_highest_record"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="最高記錄"
+                               android:textColor="@color/text_color" />
+
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_highest_record_data"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="0"
+                               android:textColor="#73c4d9"
+                               android:textSize="40sp" />
+
+
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:background="@drawable/main_border"
+                           android:orientation="horizontal"
+                           android:layout_weight="1.5"
+                           android:gravity="center">
+
+                           <TextView
+                               android:id="@+id/text_view_of_highest_record_unit"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="公里"
+                               android:textColor="@color/text_color"
+                                />
+
+
+                       </LinearLayout>
+
+                   </LinearLayout>
+
+               </LinearLayout>
+
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+   </RelativeLayout>
+</FrameLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kelvin.tablayout.DiarySelect"
+    android:background="@color/colorPrimary">
+
+    <include
+        android:id="@+id/diary_select_toolbar"
+        layout="@layout/app_bar_layout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_ead_time_slot"
+        android:textColor="@color/object_color"
+        android:text="@string/select_ead_time_slot"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/diary_select_toolbar"
+        android:layout_marginTop="5dp"/>
+    <RadioGroup
+        android:id="@+id/select_ead_time_slot_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/select_ead_time_slot"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/post_border">
+
+        <RadioButton
+            android:id="@+id/breakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:buttonTint="@color/object_color"
+            android:text="@string/breakfast" />
+
+        <RadioButton
+            android:id="@+id/lunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:buttonTint="@color/object_color"
+            android:text="@string/lunch" />
+
+        <RadioButton
+            android:id="@+id/dinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="25sp"
+            android:buttonTint="@color/object_color"
+            android:text="@string/dinner" />
+    </RadioGroup>
+
+    <ListView
+        android:id="@+id/food_list"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_above="@+id/confirm_food_note_button"
+        android:layout_below="@+id/select_ead_time_slot_radio_group" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirm_food_note_button"
+        android:background="@color/object_color"
+        android:text="@string/confirm"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/text_color"/>
+
+</RelativeLayout>
